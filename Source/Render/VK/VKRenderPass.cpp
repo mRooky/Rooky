@@ -6,6 +6,7 @@
  */
 
 #include "VKRenderPass.h"
+#include "VKFrameBuffer.h"
 #include "VKContext.h"
 
 #include "VulkanRenderPass.h"
@@ -22,6 +23,13 @@ RenderPass::RenderPass(Context* context):
 RenderPass::~RenderPass(void)
 {
 	Vulkan::Release(mRenderPass);
+}
+
+Render::FrameBuffer* RenderPass::CreateFrameBuffer(void)
+{
+	FrameBuffer* frame_buffer = new FrameBuffer(this);
+	mFrameBuffers.push_back(frame_buffer);
+	return frame_buffer;
 }
 
 } /* namespace VK */

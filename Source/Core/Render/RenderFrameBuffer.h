@@ -8,23 +8,27 @@
 #ifndef SOURCE_CORE_RENDER_RENDERFRAMEBUFFER_H_
 #define SOURCE_CORE_RENDER_RENDERFRAMEBUFFER_H_
 
-#include "RenderObject.h"
 #include <vector>
 
 namespace Render
 {
+class Pass;
 class Image;
-class FrameBuffer: public Object
+class FrameBuffer
 {
 public:
-	explicit FrameBuffer(Context* context);
-	virtual ~FrameBuffer(void) override;
+	explicit FrameBuffer(Pass* pass);
+	virtual ~FrameBuffer(void);
+
+public:
+	inline Pass* GetPass(void) const { return mPass; }
 
 public:
 	inline size_t GetAttachmentCount(void) const { return mAttachments.size(); }
 	inline Image* GetAttachment(size_t index) const { return mAttachments.at(index); }
 
 protected:
+	Pass* mPass = nullptr;
 	std::vector<Image*> mAttachments;
 };
 

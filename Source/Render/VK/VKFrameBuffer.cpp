@@ -6,6 +6,7 @@
  */
 
 #include "VKFrameBuffer.h"
+#include "VKRenderPass.h"
 #include "VKContext.h"
 
 #include "VulkanFrameBuffer.h"
@@ -14,8 +15,8 @@
 namespace VK
 {
 
-FrameBuffer::FrameBuffer(Context* context):
-		Render::FrameBuffer(context)
+FrameBuffer::FrameBuffer(RenderPass* pass):
+		Render::FrameBuffer(pass)
 {
 }
 

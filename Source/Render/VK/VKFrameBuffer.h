@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class RenderPass;
 class FrameBuffer: public Render::FrameBuffer
 {
 public:
-	explicit FrameBuffer(Context* context);
+	explicit FrameBuffer(RenderPass* pass);
 	virtual ~FrameBuffer(void) override;
 
 public:

@@ -10,8 +10,8 @@
 namespace Render
 {
 
-FrameBuffer::FrameBuffer(Context* context):
-		Object(context)
+FrameBuffer::FrameBuffer(Pass* pass):
+		mPass(pass)
 {
 }
 

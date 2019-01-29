@@ -10,10 +10,11 @@
 
 namespace Platform
 {
-
+class Mouse;
+class Keyboard;
 class Window
 {
-public:
+protected:
 	Window(void);
 	virtual ~Window(void);
 
@@ -21,6 +22,14 @@ public:
 	virtual void Create(int width, int height) = 0;
 	virtual bool HandleEvent(void) = 0;
 	virtual void SetTitle(const char* title) = 0;
+
+public:
+	inline Mouse* GetMouse(void) const { return mMouse; }
+	inline Keyboard* GetKeyboard(void) const { return mKeyboard; }
+
+protected:
+	Mouse* mMouse = nullptr;
+	Keyboard* mKeyboard = nullptr;
 };
 
 } /* namespace IO */

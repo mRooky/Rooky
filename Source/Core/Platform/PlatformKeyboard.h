@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_PLATFORM_PLATFORMKEYBOARD_H_
 #define SOURCE_CORE_PLATFORM_PLATFORMKEYBOARD_H_
 
+#include "PlatformInput.h"
+
 namespace Platform
 {
 
-class Keyboard
+class Keyboard : public Input
 {
 public:
-	Keyboard();
-	virtual ~Keyboard();
+	Keyboard(void);
+	virtual ~Keyboard(void) override;
 };
 
 } /* namespace IO */

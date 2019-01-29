@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_PLATFORM_PLATFORMMOUSE_H_
 #define SOURCE_CORE_PLATFORM_PLATFORMMOUSE_H_
 
+#include "PlatformInput.h"
+
 namespace Platform
 {
 
-class Mouse
+class Mouse : public Input
 {
 public:
-	Mouse();
-	virtual ~Mouse();
+	Mouse(void);
+	virtual ~Mouse(void) override;
 };
 
 } /* namespace IO */

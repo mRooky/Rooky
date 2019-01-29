@@ -16,11 +16,15 @@ namespace Render
 class FrameBuffer;
 class Pass: public Object
 {
-public:
+protected:
 	explicit Pass(Context* context);
 	virtual ~Pass(void) override;
 
 public:
+	virtual FrameBuffer* CreateFrameBuffer(void) = 0;
+
+public:
+	inline size_t GetFrameBufferCount(void) const { return mFrameBuffers.size(); }
 	inline FrameBuffer* GetFrameBuffer(size_t index) const { return mFrameBuffers.at(index); }
 
 protected:

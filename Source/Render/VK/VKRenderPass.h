@@ -21,6 +21,9 @@ public:
 	virtual ~RenderPass(void) override;
 
 public:
+	virtual Render::FrameBuffer* CreateFrameBuffer(void) override;
+
+public:
 	inline Vulkan::RenderPass* GetRenderPassVK(void) const { return mRenderPass; }
 
 protected:

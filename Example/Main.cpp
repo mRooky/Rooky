@@ -5,11 +5,18 @@
  *      Author: rookyma
  */
 
-#include <iostream>
+#include "Platform/XCB/XCBWindow.h"
 
 int main(void)
 {
-	std::cout << "Rooky" << std::endl;
+	XCB::Window window;
+	window.Create(1280, 800);
+	window.SetTitle("Rooky Window");
+	bool done = false;
+	while (!done)
+	{
+		done = window.HandleEvent();
+	}
 	return 0;
 }
 
