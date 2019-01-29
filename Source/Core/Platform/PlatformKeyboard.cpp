@@ -10,15 +10,12 @@
 namespace Platform
 {
 
-Keyboard::Keyboard()
+Keyboard::Keyboard(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Keyboard::~Keyboard()
+Keyboard::~Keyboard(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace IO */

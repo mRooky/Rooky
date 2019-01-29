@@ -8,14 +8,22 @@
 #ifndef SOURCE_CORE_PLATFORM_PLATFORMINPUT_H_
 #define SOURCE_CORE_PLATFORM_PLATFORMINPUT_H_
 
+#include "PlatformEvent.h"
+#include <vector>
+
 namespace Platform
 {
-
 class Input
 {
-public:
+protected:
 	Input(void);
 	virtual ~Input(void);
+
+public:
+	inline size_t GetEventCount(void) const { return mEvents.size(); }
+
+protected:
+	std::vector<Event> mEvents;
 };
 
 } /* namespace Platform */

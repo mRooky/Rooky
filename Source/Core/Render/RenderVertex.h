@@ -17,9 +17,12 @@ namespace Render
 
 class Vertex: public Buffer
 {
-public:
+protected:
 	explicit Vertex(Context* context);
 	virtual ~Vertex(void) override;
+
+public:
+	virtual void Initialize(void) = 0;
 
 protected:
 	std::vector<Format> mFormats;

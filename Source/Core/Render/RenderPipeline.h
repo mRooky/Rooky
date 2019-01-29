@@ -20,7 +20,7 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	inline Pass* GetPass(void) const { return mRenderPass; }
+	inline Pass* GetRenderPass(void) const { return mRenderPass; }
 
 protected:
 	Pass* mRenderPass = nullptr;

@@ -10,15 +10,12 @@
 namespace Platform
 {
 
-Mouse::Mouse()
+Mouse::Mouse(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Mouse::~Mouse()
+Mouse::~Mouse(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace IO */

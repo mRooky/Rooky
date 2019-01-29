@@ -5,20 +5,17 @@
  *      Author: rookyma
  */
 
-#include <PlatformInput.h>
+#include "PlatformInput.h"
 
 namespace Platform
 {
 
-Input::Input()
+Input::Input(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Input::~Input()
+Input::~Input(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Platform */
