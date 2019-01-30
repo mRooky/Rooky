@@ -26,6 +26,20 @@ Viewport::~Viewport(void)
 
 void Viewport::Initailize(Platform::Window* window, bool depthStencil)
 {
+	CreateSwapChain(window);
+	if (depthStencil)
+	{
+		CreateDepthStencil();
+	}
+}
+
+void Viewport::CreateSwapChain(Platform::Window* window)
+{
+
+}
+
+void Viewport::CreateDepthStencil(void)
+{
 
 }
 

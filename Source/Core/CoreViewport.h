@@ -24,6 +24,10 @@ public:
 	void Initailize(Platform::Window* window, bool depthStencil);
 
 public:
+	void CreateSwapChain(Platform::Window* window);
+	void CreateDepthStencil(void);
+
+public:
 	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
 
