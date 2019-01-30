@@ -6,6 +6,7 @@
  */
 
 #include "RenderCommandList.h"
+#include <cassert>
 
 namespace Render
 {
@@ -13,6 +14,7 @@ namespace Render
 CommandList::CommandList(CommandPool* pool):
 		mCommandPool(pool)
 {
+	assert(mCommandPool != nullptr);
 }
 
 CommandList::~CommandList(void)

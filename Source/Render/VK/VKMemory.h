@@ -24,6 +24,10 @@ public:
 	virtual void Initialize(size_t size, uint32_t index, uint32_t property) override;
 
 public:
+	virtual void* Mapped(size_t offset, size_t range) override;
+	virtual void UnMap(size_t offset, size_t range) override;
+
+public:
 	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
 
 protected:

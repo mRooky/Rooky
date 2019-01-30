@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Pipeline::Pipeline(Context* context):
-		Object(context)
+Pipeline::Pipeline(Pass* pass):
+		mRenderPass(pass)
 {
 }
 

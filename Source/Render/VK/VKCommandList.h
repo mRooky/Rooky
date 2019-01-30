@@ -24,7 +24,7 @@ public:
 	virtual void Initialize(bool primary) override;
 
 public:
-	inline Vulkan::CommandBuffer* GetBufferVK(void) const { return mCommandBuffer; }
+	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
 
 protected:
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;

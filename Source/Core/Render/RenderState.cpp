@@ -10,7 +10,8 @@
 namespace Render
 {
 
-State::State(void)
+State::State(Context* context):
+		Object(context)
 {
 }
 

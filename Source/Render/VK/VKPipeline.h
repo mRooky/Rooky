@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class RenderPass;
 class Pipeline: public Render::Pipeline
 {
 public:
-	explicit Pipeline(Context* context);
+	explicit Pipeline(RenderPass* pass);
 	virtual ~Pipeline(void) override;
 
 public:

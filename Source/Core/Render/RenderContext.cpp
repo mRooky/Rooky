@@ -10,15 +10,12 @@
 namespace Render
 {
 
-Context::Context()
+Context::Context(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Context::~Context()
+Context::~Context(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Render */

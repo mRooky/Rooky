@@ -21,7 +21,7 @@ public:
 	virtual ~FrameBuffer(void);
 
 public:
-	inline Pass* GetPass(void) const { return mPass; }
+	inline Pass* GetRenderPass(void) const { return mPass; }
 
 public:
 	inline size_t GetAttachmentCount(void) const { return mAttachments.size(); }

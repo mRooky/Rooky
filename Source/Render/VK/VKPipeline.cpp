@@ -7,6 +7,7 @@
 
 #include "VKPipeline.h"
 #include "VKContext.h"
+#include "VKRenderPass.h"
 
 #include "VulkanPipeline.h"
 #include "VulkanInline.h"
@@ -14,8 +15,8 @@
 namespace VK
 {
 
-Pipeline::Pipeline(Context* context):
-		Render::Pipeline(context)
+Pipeline::Pipeline(RenderPass* pass):
+		Render::Pipeline(pass)
 {
 }
 

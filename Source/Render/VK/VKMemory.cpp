@@ -35,4 +35,19 @@ void Memory::Initialize(size_t size, uint32_t index, uint32_t property)
 	mMemory->Allocate(size, index, property);
 }
 
+void* Memory::Mapped(size_t offset, size_t range)
+{
+	assert(mMemory != nullptr);
+	void* ptr = mMemory->Map(offset, range);
+	assert(ptr != nullptr);
+	return ptr;
+}
+
+void Memory::UnMap(size_t offset, size_t range)
+{
+	assert(mMemory != nullptr);
+	mMemory->Flush(offset, range);
+	mMemory->Unmap();
+}
+
 } /* namespace VK */

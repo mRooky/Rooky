@@ -8,12 +8,13 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSTATE_H_
 #define SOURCE_CORE_RENDER_RENDERSTATE_H_
 
+#include "RenderObject.h"
 #include <cstdint>
 
 namespace Render
 {
 
-class State
+class State : public Object
 {
 
 public:
@@ -84,8 +85,8 @@ public:
 	};
 
 public:
-	State(void);
-	virtual ~State(void);
+	explicit State(Context* context);
+	virtual ~State(void) override;
 
 protected:
 	bool mCullFaceEnabled = false;
