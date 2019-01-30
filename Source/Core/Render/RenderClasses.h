@@ -21,6 +21,7 @@ class Shader;
 class Index;
 class Vertex;
 class Queue;
+class SwapChain;
 
 }
 

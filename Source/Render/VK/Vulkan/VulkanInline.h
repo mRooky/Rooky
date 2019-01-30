@@ -24,13 +24,6 @@ static inline void Release(T*& ptr)
 	ptr = nullptr;
 }
 
-template<typename T>
-static inline auto Find(const std::vector<T>& container, T& value)
-{
-	auto iterator = std::find(container.begin(), container.end(), value);
-	return iterator != container.end();
-}
-
 }
 
 #endif /* VULKAN_VULKANINLINE_H_ */

@@ -60,8 +60,8 @@ VkResult Instance::Create(const char* name, bool debug)
 void Instance::EnableLayer(const char* layer)
 {
 	std::string name = layer;
-	bool find = Find(m_layers, name);
-	if (find == false)
+	auto iterator = std::find(m_layers.begin(), m_layers.end(), name);
+	if (iterator == m_layers.end())
 	{
 		m_layers.push_back(name);
 	}
@@ -70,8 +70,8 @@ void Instance::EnableLayer(const char* layer)
 void Instance::EnableExtension(const char* extension)
 {
 	std::string name = extension;
-	bool find = Find(m_extensions, name);
-	if (find == false)
+	auto iterator = std::find(m_extensions.begin(), m_extensions.end(), name);
+	if (iterator == m_extensions.end())
 	{
 		m_extensions.push_back(name);
 	}

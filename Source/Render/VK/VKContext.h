@@ -23,6 +23,9 @@ public:
 	virtual ~Context(void) override;
 
 public:
+	virtual void Initialize(bool debug) override;
+
+public:
 	void Create(VkQueueFlags flags, bool debug);
 
 public:

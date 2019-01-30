@@ -5,18 +5,12 @@
  *      Author: rookyma
  */
 
-#include "Platform/XCB/XCBWindow.h"
+#include "Base/ExampleBase.h"
 
 int main(void)
 {
-	XCB::Window window;
-	window.Create(1280, 800);
-	window.SetTitle("Rooky Window");
-	bool done = false;
-	while (!done)
-	{
-		done = window.HandleEvent();
-	}
-	return 0;
+	Example::Base base;
+	base.CreateWindow("Rooky Window");
+	base.ShowModal();
 }
 

@@ -18,8 +18,6 @@ SwapChain::SwapChain(Context* context):
 
 SwapChain::~SwapChain(void)
 {
-	delete mDepthStencil;
-	mDepthStencil = nullptr;
 }
 
 } /* namespace Render */

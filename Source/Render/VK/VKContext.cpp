@@ -31,9 +31,9 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-
-void Context::Create(VkQueueFlags flags, bool debug)
+void Context::Initialize(bool debug)
 {
+	VkQueueFlags flags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
 	CreateVendor();
 	CreateInstance(debug);
 	CreatePhysical(flags);

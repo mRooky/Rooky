@@ -16,6 +16,8 @@ class Window
 {
 protected:
 	Window(void);
+
+public:
 	virtual ~Window(void);
 
 public:

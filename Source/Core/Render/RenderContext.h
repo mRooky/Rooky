@@ -13,10 +13,18 @@ namespace Render
 
 class Context
 {
-public:
+protected:
 	Context(void);
+
+public:
 	virtual ~Context(void);
+
+public:
+	virtual void Initialize(bool debug) = 0;
 };
+
+Context* CreateContext(void);
+void DestroyContext(Context* context);
 
 } /* namespace Render */
 
