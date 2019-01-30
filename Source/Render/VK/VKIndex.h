@@ -8,12 +8,13 @@
 #ifndef SOURCE_RENDER_VK_VKINDEX_H_
 #define SOURCE_RENDER_VK_VKINDEX_H_
 
-#include "VKBuffer.h"
+#include "RenderIndex.h"
+#include "VKRender.h"
 
 namespace VK
 {
-
-class Index : public Buffer
+class Context;
+class Index : public Render::Index
 {
 public:
 	explicit Index(Context* context);
@@ -21,6 +22,9 @@ public:
 
 public:
 	inline VkIndexType GetType(void) const { return mType; }
+
+public:
+	static VkIndexType ConvertType(const Render::Index::Type& type);
 
 protected:
 	VkIndexType mType = VK_INDEX_TYPE_UINT16;

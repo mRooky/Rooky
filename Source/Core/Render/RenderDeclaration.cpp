@@ -22,11 +22,4 @@ Declaration::~Declaration(void)
 	mFormats.clear();
 }
 
-uint32_t Declaration::GetStride(void) const
-{
-	uint32_t stride = 0;
-	assert(false);
-	return stride;
-}
-
 } /* namespace Render */

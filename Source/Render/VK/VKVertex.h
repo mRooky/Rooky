@@ -8,16 +8,19 @@
 #ifndef SOURCE_RENDER_VK_VKVERTEX_H_
 #define SOURCE_RENDER_VK_VKVERTEX_H_
 
-#include "VKBuffer.h"
+#include "RenderVertex.h"
 
 namespace VK
 {
-
-class Vertex: public Buffer
+class Context;
+class Vertex: public Render::Vertex
 {
 public:
 	explicit Vertex(Context* context);
 	virtual ~Vertex(void) override;
+
+public:
+	virtual void Initialize(Render::Declaration* decl, size_t count) override;
 };
 
 } /* namespace VK */

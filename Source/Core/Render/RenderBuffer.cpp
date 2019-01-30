@@ -11,7 +11,7 @@ namespace Render
 {
 
 Buffer::Buffer(Context* context):
-		Resource(context)
+		Object(context)
 {
 }
 

@@ -10,10 +10,11 @@
 
 #include "RenderBuffer.h"
 #include <vector>
+#include <cstdint>
 
 namespace Render
 {
-
+class Declaration;
 class Vertex: public Buffer
 {
 protected:
@@ -21,7 +22,17 @@ protected:
 	virtual ~Vertex(void) override;
 
 public:
-	virtual void Initialize(void) = 0;
+	virtual void Initialize(Declaration* decl, size_t count) = 0;
+
+public:
+	inline size_t GetCount(void) const { return mCount; }
+	inline uint32_t GetStride(void) const { return mStride; }
+	inline Declaration* GetDeclaration(void) const { return mDeclaration; }
+
+protected:
+	size_t mCount = 0;
+	uint32_t mStride = 0;
+	Declaration* mDeclaration = nullptr;
 };
 
 } /* namespace Render */

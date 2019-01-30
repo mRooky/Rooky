@@ -25,6 +25,20 @@ Declaration::~Declaration(void)
 {
 }
 
+uint32_t Declaration::GetStride(void) const
+{
+	uint32_t stride = 0;
+	const uint32_t count = mFormats.size();
+	assert(count > 0);
+	for (uint32_t index = 0; index < count; ++index)
+	{
+		auto format = mFormats.at(index);
+		VkFormat vk_format = ConvertFormat(format);
+		stride += Vulkan::Format::GetFormatSize(vk_format);
+	}
+	return stride;
+}
+
 std::vector<VkVertexInputAttributeDescription> Declaration::GetInputAttributeDescription(uint32_t binding) const
 {
 	std::vector<VkVertexInputAttributeDescription> input_attribute_descriptions;

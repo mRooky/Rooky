@@ -8,25 +8,22 @@
 #ifndef SOURCE_CORE_RENDER_RENDERBUFFER_H_
 #define SOURCE_CORE_RENDER_RENDERBUFFER_H_
 
-#include "RenderResource.h"
+#include "RenderObject.h"
 
 namespace Render
 {
-
-class Buffer : public Resource
+class HardwareBuffer;
+class Buffer : public Object
 {
 public:
 	explicit Buffer(Context* context);
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Initialize(size_t size, uint32_t usage) = 0;
-
-public:
-	inline uint32_t GetStride(void) const { return mStride; }
+	inline HardwareBuffer* GetHardwareBuffer(void) const { return mHardwareBuffer; }
 
 protected:
-	uint32_t mStride = 0;
+	HardwareBuffer* mHardwareBuffer = nullptr;
 };
 
 } /* namespace Render */

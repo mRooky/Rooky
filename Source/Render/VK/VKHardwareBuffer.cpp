@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKBuffer.h"
+#include "VKHardwareBuffer.h"
 #include "VKContext.h"
 #include "VKMemory.h"
 
@@ -17,17 +17,17 @@
 namespace VK
 {
 
-Buffer::Buffer(Context* context):
-		Render::Buffer(context)
+HardwareBuffer::HardwareBuffer(Context* context):
+		Render::HardwareBuffer(context)
 {
 }
 
-Buffer::~Buffer(void)
+HardwareBuffer::~HardwareBuffer(void)
 {
 	Vulkan::Release(mBuffer);
 }
 
-void Buffer::Initialize(size_t size, uint32_t usage)
+void HardwareBuffer::Initialize(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
 	assert(mBuffer == nullptr);
@@ -38,7 +38,7 @@ void Buffer::Initialize(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void Buffer::BindMemory(Render::Memory* memory, size_t offset)
+void HardwareBuffer::BindMemory(Render::Memory* memory, size_t offset)
 {
 	assert(memory != nullptr);
 	assert(mMemory == nullptr);
@@ -48,7 +48,7 @@ void Buffer::BindMemory(Render::Memory* memory, size_t offset)
 	mBuffer->BindMemory(vk_memory->GetMemoryVK(), offset);
 }
 
-VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
+VkDescriptorBufferInfo HardwareBuffer::GetDescriptorInfo(void) const
 {
 	assert(mBuffer != nullptr);
 	assert(mMemory != nullptr);

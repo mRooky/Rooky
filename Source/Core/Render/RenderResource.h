@@ -34,6 +34,8 @@ protected:
 	size_t mSize = 0;
 	size_t mOffset = 0;
 	uint32_t mUsage = 0;
+
+protected:
 	Memory* mMemory = nullptr;
 };
 

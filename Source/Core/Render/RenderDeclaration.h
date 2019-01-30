@@ -23,7 +23,7 @@ public:
 	virtual ~Declaration(void) override;
 
 public:
-	uint32_t GetStride(void) const;
+	virtual uint32_t GetStride(void) const = 0;
 
 public:
 	inline size_t GetElementCount(void) const { return mFormats.size(); }
