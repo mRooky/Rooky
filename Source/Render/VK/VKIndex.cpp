@@ -28,12 +28,14 @@ void Index::Initialize(Render::Index::Type type, size_t count)
 {
 	assert(count > 0);
 	assert(mHardwareBuffer == nullptr);
+	mType = type;
 	mCount = count;
-	mVKType = ConvertType(type);
 	VkDeviceSize size = Render::Index::GetTypeSize(mType) * mCount;
 	VkBufferUsageFlags usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 	mHardwareBuffer = new HardwareBuffer(static_cast<Context*>(mContext));
 	mHardwareBuffer->Initialize(size, usage);
+	//VK internal type
+	mVKType = ConvertType(type);
 }
 
 VkIndexType Index::ConvertType(const Render::Index::Type& type)
@@ -47,6 +49,20 @@ VkIndexType Index::ConvertType(const Render::Index::Type& type)
 	default:
 		assert(false);
 		return VK_INDEX_TYPE_MAX_ENUM;
+	}
+}
+
+Render::Index::Type Index::ConvertType(const VkIndexType& type)
+{
+	switch(type)
+	{
+	case VK_INDEX_TYPE_UINT16:
+		return Render::Index::Type::UINT16;
+	case VK_INDEX_TYPE_UINT32:
+		return Render::Index::Type::UINT32;
+	default:
+		assert(false);
+		return Render::Index::Type::UNKNOWN;
 	}
 }
 

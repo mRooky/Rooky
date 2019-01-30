@@ -26,6 +26,7 @@ public:
 		IMAGE_1D_ARRAY,
 		IMAGE_2D_ARRAY,
 		IMAGE_CUBE_ARRAY,
+		IMAGE_UNKNOWN = ~0u
 	};
 
 public:
@@ -40,7 +41,7 @@ public:
 
 public:
 	virtual void Initialize(Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage) = 0;
-	virtual void CreateView(void) = 0;
+	virtual void CreateView(Type type) = 0;
 
 public:
 	inline Sampler* GetSampler(void) const { return mSampler; }

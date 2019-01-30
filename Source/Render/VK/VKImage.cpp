@@ -59,10 +59,11 @@ void Image::BindMemory(Render::Memory* memory, size_t offset)
 	mImage->BindMemory(vk_memory->GetMemoryVK(), mOffset);
 }
 
-void Image::CreateView(void)
+void Image::CreateView(Render::Image::Type type)
 {
 	assert(mMemory != nullptr);
-	mImage->CreateView(VK_IMAGE_VIEW_TYPE_2D);
+	VkImageViewType vk_type = ConverType(type);
+	mImage->CreateView(vk_type);
 }
 
 VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
@@ -78,6 +79,54 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	descriptor_info.imageView = mImage->GetView()->GetHandle();
 	descriptor_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 	return descriptor_info;
+}
+
+VkImageViewType Image::ConverType(const Render::Image::Type& type)
+{
+	switch (type)
+	{
+	case Render::Image::Type::IMAGE_1D:
+		return VK_IMAGE_VIEW_TYPE_1D;
+	case Render::Image::Type::IMAGE_2D:
+		return VK_IMAGE_VIEW_TYPE_2D;
+	case Render::Image::Type::IMAGE_3D:
+		return VK_IMAGE_VIEW_TYPE_3D;
+	case Render::Image::Type::IMAGE_CUBE:
+		return VK_IMAGE_VIEW_TYPE_CUBE;
+	case Render::Image::Type::IMAGE_1D_ARRAY:
+		return VK_IMAGE_VIEW_TYPE_1D_ARRAY;
+	case Render::Image::Type::IMAGE_2D_ARRAY:
+		return VK_IMAGE_VIEW_TYPE_2D_ARRAY;
+	case Render::Image::Type::IMAGE_CUBE_ARRAY:
+		return VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
+	default:
+		assert(false);
+		return VK_IMAGE_VIEW_TYPE_MAX_ENUM;
+	}
+}
+
+Render::Image::Type Image::ConverType(const VkImageViewType& type)
+{
+	switch (type)
+	{
+	case VK_IMAGE_VIEW_TYPE_1D:
+		return Render::Image::Type::IMAGE_1D;
+	case VK_IMAGE_VIEW_TYPE_2D:
+		return Render::Image::Type::IMAGE_2D;
+	case VK_IMAGE_VIEW_TYPE_3D:
+		return Render::Image::Type::IMAGE_3D;
+	case VK_IMAGE_VIEW_TYPE_CUBE:
+		return Render::Image::Type::IMAGE_CUBE;
+	case VK_IMAGE_VIEW_TYPE_1D_ARRAY:
+		return Render::Image::Type::IMAGE_1D_ARRAY;
+	case VK_IMAGE_VIEW_TYPE_2D_ARRAY:
+		return Render::Image::Type::IMAGE_2D_ARRAY;
+	case VK_IMAGE_VIEW_TYPE_CUBE_ARRAY:
+		return Render::Image::Type::IMAGE_CUBE_ARRAY;
+	default:
+		assert(false);
+		return Render::Image::Type::IMAGE_UNKNOWN;
+	}
 }
 
 } /* namespace VK */

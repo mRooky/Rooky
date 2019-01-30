@@ -28,6 +28,7 @@ public:
 
 public:
 	static VkIndexType ConvertType(const Render::Index::Type& type);
+	static Render::Index::Type ConvertType(const VkIndexType& type);
 
 protected:
 	VkIndexType mVKType = VK_INDEX_TYPE_UINT16;

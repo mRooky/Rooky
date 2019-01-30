@@ -23,13 +23,17 @@ public:
 public:
 	virtual void Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage) override;
 	virtual void BindMemory(Render::Memory* memory, size_t offset) override;
-	virtual void CreateView(void) override;
+	virtual void CreateView(Render::Image::Type type) override;
 
 public:
 	inline Vulkan::Image* GetImageVK(void) const { return mImage; }
 
 public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
+
+public:
+	static VkImageViewType ConverType(const Render::Image::Type& type);
+	static Render::Image::Type ConverType(const VkImageViewType& type);
 
 protected:
 	Vulkan::Image* mImage = nullptr;
