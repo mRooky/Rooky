@@ -10,10 +10,11 @@
 
 #include "RenderObject.h"
 #include <cstdint>
+#include <vector>
 
 namespace Render
 {
-
+class Shader;
 class State : public Object
 {
 
@@ -87,6 +88,9 @@ public:
 public:
 	explicit State(Context* context);
 	virtual ~State(void) override;
+
+protected:
+	std::vector<Shader*> mShaders;
 
 protected:
 	bool mCullFaceEnabled = false;

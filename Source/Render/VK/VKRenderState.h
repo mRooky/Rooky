@@ -9,6 +9,7 @@
 #define SOURCE_RENDER_VK_VKRENDERSTATE_H_
 
 #include "RenderState.h"
+#include "VKRender.h"
 
 namespace VK
 {
@@ -18,6 +19,9 @@ class RenderState: public Render::State
 public:
 	explicit RenderState(Context* context);
 	virtual ~RenderState(void) override;
+
+protected:
+
 };
 
 } /* namespace VK */
