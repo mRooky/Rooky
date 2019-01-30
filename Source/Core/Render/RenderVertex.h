@@ -9,7 +9,6 @@
 #define SOURCE_CORE_RENDER_RENDERVERTEX_H_
 
 #include "RenderBuffer.h"
-#include "RenderFormat.h"
 #include <vector>
 
 namespace Render
@@ -23,9 +22,6 @@ protected:
 
 public:
 	virtual void Initialize(void) = 0;
-
-protected:
-	std::vector<Format> mFormats;
 };
 
 } /* namespace Render */
