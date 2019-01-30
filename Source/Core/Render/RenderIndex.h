@@ -10,6 +10,7 @@
 
 #include "RenderBuffer.h"
 #include <cstdint>
+#include <cstddef>
 
 namespace Render
 {
@@ -28,9 +29,17 @@ public:
 	virtual ~Index(void) override;
 
 public:
+	virtual void Initialize(Type type, size_t count) = 0;
+
+public:
+	inline size_t GetCount(void) const { return mCount; }
 	inline Type GetType(void) const { return mType; }
 
+public:
+	static size_t GetTypeSize(const Type& type);
+
 protected:
+	size_t mCount = 0;
 	Type mType = Type::UNKNOWN;
 };
 

@@ -21,13 +21,16 @@ public:
 	virtual ~Index(void) override;
 
 public:
-	inline VkIndexType GetType(void) const { return mType; }
+	virtual void Initialize(Render::Index::Type type, size_t count) override;
+
+public:
+	inline VkIndexType GetTypeVK(void) const { return mVKType; }
 
 public:
 	static VkIndexType ConvertType(const Render::Index::Type& type);
 
 protected:
-	VkIndexType mType = VK_INDEX_TYPE_UINT16;
+	VkIndexType mVKType = VK_INDEX_TYPE_UINT16;
 };
 
 } /* namespace VK */

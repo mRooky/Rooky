@@ -21,7 +21,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t usage) override;
+	virtual void Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage) override;
 	virtual void BindMemory(Render::Memory* memory, size_t offset) override;
 	virtual void CreateView(void) override;
 

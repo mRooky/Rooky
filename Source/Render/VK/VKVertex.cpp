@@ -29,12 +29,13 @@ Vertex::~Vertex(void)
 
 void Vertex::Initialize(Render::Declaration* decl, size_t count)
 {
+	assert(count > 0);
+	assert(decl == nullptr);
 	assert(mHardwareBuffer == nullptr);
 	mDeclaration = decl;
 	mCount = count;
 	mStride = mDeclaration->GetStride();
-	VkBufferUsageFlags usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
-				| VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 	uint32_t size = mStride * mCount;
 	mHardwareBuffer = new HardwareBuffer(static_cast<Context*>(mContext));
 	mHardwareBuffer->Initialize(size, usage);

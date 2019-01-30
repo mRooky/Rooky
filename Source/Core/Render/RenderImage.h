@@ -17,11 +17,29 @@ class Sampler;
 class Image : public Resource
 {
 public:
+	enum class Type : uint32_t
+	{
+		IMAGE_1D,
+		IMAGE_2D,
+		IMAGE_3D,
+		IMAGE_CUBE,
+		IMAGE_1D_ARRAY,
+		IMAGE_2D_ARRAY,
+		IMAGE_CUBE_ARRAY,
+	};
+
+public:
 	explicit Image(Context* context);
 	virtual ~Image(void) override;
 
 public:
-	virtual void Initialize(Format format, uint32_t width, uint32_t height, uint32_t usage) = 0;
+	inline void Initialize(Format format, uint32_t width, uint32_t height, uint32_t usage)
+	{
+		Initialize(format, width, height, 1, usage);
+	}
+
+public:
+	virtual void Initialize(Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage) = 0;
 	virtual void CreateView(void) = 0;
 
 public:
@@ -39,7 +57,7 @@ public:
 protected:
 	uint32_t mWidth = 0;
 	uint32_t mHeight = 0;
-	uint32_t mDepth = 0;
+	uint32_t mDepth = 1;
 
 protected:
 	Sampler* mSampler = nullptr;

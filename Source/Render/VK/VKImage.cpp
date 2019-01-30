@@ -31,14 +31,14 @@ Image::~Image(void)
 	Vulkan::Release(mImage);
 }
 
-void Image::Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t usage)
+void Image::Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage)
 {
 	mFormat = format;
 	mWidth = width;
 	mHeight = height;
 	mUsage = usage;
 
-	VkExtent3D extent = { width, height, 1};
+	VkExtent3D extent = { width, height, depth};
 	VkFormat vk_format = ConvertFormat(format);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
