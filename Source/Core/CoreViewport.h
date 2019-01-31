@@ -21,7 +21,7 @@ public:
 	virtual ~Viewport(void);
 
 public:
-	void Initailize(Platform::Window* window, bool depthStencil);
+	void Initialize(Platform::Window* window, bool depthStencil);
 
 public:
 	void CreateSwapChain(Platform::Window* window);

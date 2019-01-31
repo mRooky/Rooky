@@ -8,7 +8,8 @@
 #ifndef EXAMPLE_BASE_EXAMPLEBASE_H_
 #define EXAMPLE_BASE_EXAMPLEBASE_H_
 
-#include "RenderContext.h"
+#include "RenderClasses.h"
+#include "CoreViewport.h"
 #include "PlatformWindow.h"
 #include <cstdint>
 
@@ -26,10 +27,12 @@ public:
 
 public:
 	void CreateWindow(const char* title);
+	void CreateViewport(bool depthStencil);
 
 protected:
 	Platform::Window* mWindow = nullptr;
 	Render::Context* mContext = nullptr;
+	Core::Viewport* mViewport = nullptr;
 };
 
 } /* namespace Example */

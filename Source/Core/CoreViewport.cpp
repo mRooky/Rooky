@@ -24,7 +24,7 @@ Viewport::~Viewport(void)
 	mDepthStencil = nullptr;
 }
 
-void Viewport::Initailize(Platform::Window* window, bool depthStencil)
+void Viewport::Initialize(Platform::Window* window, bool depthStencil)
 {
 	CreateSwapChain(window);
 	if (depthStencil)
@@ -35,12 +35,10 @@ void Viewport::Initailize(Platform::Window* window, bool depthStencil)
 
 void Viewport::CreateSwapChain(Platform::Window* window)
 {
-
 }
 
 void Viewport::CreateDepthStencil(void)
 {
-
 }
 
 } /* namespace Core */
