@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class BufferManager;
 class Index : public Render::Index
 {
 public:
-	explicit Index(Context* context);
+	explicit Index(BufferManager* manager);
 	virtual ~Index(void) override;
 
 public:

@@ -8,6 +8,7 @@
 #include "VKVertex.h"
 #include "VKContext.h"
 #include "VKHardwareBuffer.h"
+#include "VKBufferManager.h"
 
 #include "RenderDeclaration.h"
 
@@ -16,8 +17,8 @@
 namespace VK
 {
 
-Vertex::Vertex(Context* context):
-		Render::Vertex(context)
+Vertex::Vertex(BufferManager* manager):
+		Render::Vertex(manager)
 {
 }
 
@@ -37,7 +38,10 @@ void Vertex::Initialize(Render::Declaration* decl, size_t count)
 	mStride = mDeclaration->GetStride();
 	VkBufferUsageFlags usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 	uint32_t size = mStride * mCount;
-	mHardwareBuffer = new HardwareBuffer(static_cast<Context*>(mContext));
+
+	Render::Context* context = mManager->GetContext();
+	Context* vk_context = static_cast<Context*>(context);
+	mHardwareBuffer = new HardwareBuffer(vk_context);
 	mHardwareBuffer->Initialize(size, usage);
 }
 

@@ -18,7 +18,7 @@ class Declaration;
 class Vertex: public Buffer
 {
 protected:
-	explicit Vertex(Context* context);
+	explicit Vertex(BufferManager* manager);
 	virtual ~Vertex(void) override;
 
 public:

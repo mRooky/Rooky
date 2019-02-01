@@ -25,7 +25,7 @@ public:
 	};
 
 public:
-	explicit Index(Context* context);
+	explicit Index(BufferManager* manager);
 	virtual ~Index(void) override;
 
 public:

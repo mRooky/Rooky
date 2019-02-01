@@ -12,11 +12,11 @@
 
 namespace VK
 {
-class Context;
+class BufferManager;
 class Vertex: public Render::Vertex
 {
 public:
-	explicit Vertex(Context* context);
+	explicit Vertex(BufferManager* manager);
 	virtual ~Vertex(void) override;
 
 public:

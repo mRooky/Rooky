@@ -11,8 +11,8 @@
 namespace Render
 {
 
-Index::Index(Context* context):
-		Buffer(context)
+Index::Index(BufferManager* manager):
+		Buffer(manager)
 {
 }
 

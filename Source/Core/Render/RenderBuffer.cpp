@@ -6,13 +6,15 @@
  */
 
 #include "RenderBuffer.h"
+#include <cassert>
 
 namespace Render
 {
 
-Buffer::Buffer(Context* context):
-		Object(context)
+Buffer::Buffer(BufferManager* manager):
+		mManager(manager)
 {
+	assert(mManager != nullptr);
 }
 
 Buffer::~Buffer(void)

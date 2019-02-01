@@ -12,17 +12,19 @@
 
 namespace Render
 {
+class BufferManager;
 class HardwareBuffer;
-class Buffer : public Object
+class Buffer
 {
 public:
-	explicit Buffer(Context* context);
-	virtual ~Buffer(void) override;
+	explicit Buffer(BufferManager* manager);
+	virtual ~Buffer(void);
 
 public:
 	inline HardwareBuffer* GetHardwareBuffer(void) const { return mHardwareBuffer; }
 
 protected:
+	BufferManager* mManager = nullptr;
 	HardwareBuffer* mHardwareBuffer = nullptr;
 };
 

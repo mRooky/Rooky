@@ -22,6 +22,7 @@ class Index;
 class Vertex;
 class Queue;
 class SwapChain;
+class Uniform;
 
 }
 

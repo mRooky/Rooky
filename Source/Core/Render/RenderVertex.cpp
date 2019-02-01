@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Vertex::Vertex(Context* context):
-		Buffer(context)
+Vertex::Vertex(BufferManager* manager):
+		Buffer(manager)
 {
 }
 

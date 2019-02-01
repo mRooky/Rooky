@@ -7,6 +7,7 @@
 
 #include "VKIndex.h"
 #include "VKContext.h"
+#include "VKBufferManager.h"
 
 #include "VKHardwareBuffer.h"
 
@@ -15,8 +16,8 @@
 namespace VK
 {
 
-Index::Index(Context* context):
-		Render::Index(context)
+Index::Index(BufferManager* manager):
+		Render::Index(manager)
 {
 }
 
@@ -32,7 +33,10 @@ void Index::Initialize(Render::Index::Type type, size_t count)
 	mCount = count;
 	VkDeviceSize size = Render::Index::GetTypeSize(mType) * mCount;
 	VkBufferUsageFlags usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-	mHardwareBuffer = new HardwareBuffer(static_cast<Context*>(mContext));
+
+	Render::Context* context = mManager->GetContext();
+	Context* vk_context = static_cast<Context*>(context);
+	mHardwareBuffer = new HardwareBuffer(vk_context);
 	mHardwareBuffer->Initialize(size, usage);
 	//VK internal type
 	mVKType = ConvertType(type);
