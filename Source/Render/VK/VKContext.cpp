@@ -6,6 +6,7 @@
  */
 
 #include "VKContext.h"
+#include "VKBufferManager.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -16,6 +17,8 @@
 #include "VulkanCommon.h"
 #include "VulkanInline.h"
 #include "VulkanCommandPool.h"
+
+#include <cassert>
 
 namespace VK
 {
@@ -41,6 +44,13 @@ void Context::Initialize(bool debug)
 	CreatePhysical(flags);
 	CreateDevice();
 	CreateCommandPool();
+	CreateBufferManager();
+}
+
+void Context::CreateBufferManager(void)
+{
+	assert(mBufferManager == nullptr);
+	mBufferManager = new BufferManager(this);
 }
 
 void Context::CreateVendor(void)

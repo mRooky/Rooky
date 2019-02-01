@@ -43,7 +43,7 @@ private:
 	void CreatePhysical(VkQueueFlags flags);
 	void CreateDevice(void);
 	void CreateCommandPool(void);
-
+	void CreateBufferManager(void);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;

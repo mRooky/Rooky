@@ -38,6 +38,7 @@ void Index::Initialize(Render::Index::Type type, size_t count)
 	Context* vk_context = static_cast<Context*>(context);
 	mHardwareBuffer = new HardwareBuffer(vk_context);
 	mHardwareBuffer->Initialize(size, usage);
+
 	//VK internal type
 	mVKType = ConvertType(type);
 }

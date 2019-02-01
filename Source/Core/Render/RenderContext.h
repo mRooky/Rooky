@@ -10,7 +10,7 @@
 
 namespace Render
 {
-
+class BufferManager;
 class Context
 {
 protected:
@@ -21,6 +21,12 @@ public:
 
 public:
 	virtual void Initialize(bool debug) = 0;
+
+public:
+	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
+
+protected:
+	BufferManager* mBufferManager = nullptr;
 };
 
 Context* CreateContext(void);
