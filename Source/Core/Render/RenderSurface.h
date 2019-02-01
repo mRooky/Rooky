@@ -13,13 +13,13 @@
 
 namespace Render
 {
-class SwapChain: public Object
+class Surface: public Object
 {
 protected:
-	explicit SwapChain(Context* context);
+	explicit Surface(Context* context);
 
 public:
-	virtual ~SwapChain(void) override;
+	virtual ~Surface(void) override;
 
 public:
 	virtual void Initialize(Platform::Window* window) = 0;

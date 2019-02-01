@@ -9,9 +9,7 @@
 
 int main(void)
 {
-	Example::Base base;
-	base.CreateWindow("Rooky Window");
-	base.CreateViewport(false);
+	Example::Base base("Rooky Window");
 	base.ShowModal();
 }
 

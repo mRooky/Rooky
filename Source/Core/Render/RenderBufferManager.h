@@ -18,6 +18,8 @@ class BufferManager: public Object
 {
 protected:
 	explicit BufferManager(Context* context);
+
+public:
 	virtual ~BufferManager(void) override;
 
 public:

@@ -7,6 +7,7 @@
 
 #include "VKContext.h"
 #include "VKBufferManager.h"
+#include "VKSurface.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -17,6 +18,10 @@
 #include "VulkanCommon.h"
 #include "VulkanInline.h"
 #include "VulkanCommandPool.h"
+
+#ifdef VK_USE_PLATFORM_XCB_KHR
+#include "Platform/XCB/XCBWindow.h"
+#endif
 
 #include <cassert>
 
@@ -29,6 +34,12 @@ Context::Context(void)
 
 Context::~Context(void)
 {
+	delete mWindow;
+	mWindow = nullptr;
+	delete mSurface;
+	mSurface = nullptr;
+	delete mBufferManager;
+	mBufferManager = nullptr;
 	Vulkan::Release(m_commandPool);
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
@@ -36,15 +47,32 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-void Context::Initialize(bool debug)
+void Context::Initialize(const char* title)
 {
-	VkQueueFlags flags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
 	CreateVendor();
-	CreateInstance(debug);
-	CreatePhysical(flags);
+	CreateInstance();
+	CreatePhysical();
 	CreateDevice();
 	CreateCommandPool();
+	CreateWindow(title);
+	CreateSurface();
 	CreateBufferManager();
+}
+
+void Context::CreateWindow(const char* title)
+{
+	assert(mWindow == nullptr);
+	mWindow = new XCB::Window;
+	mWindow->Create(1280, 800);
+	mWindow->SetTitle(title);
+}
+
+void Context::CreateSurface(void)
+{
+	assert(mWindow != nullptr);
+	assert(mSurface == nullptr);
+	mSurface = new Surface(this);
+	mSurface->Initialize(mWindow);
 }
 
 void Context::CreateBufferManager(void)
@@ -85,8 +113,9 @@ void Context::CreateInstance(bool debug)
 	m_instance->Create("Vulkan", debug);
 }
 
-void Context::CreatePhysical(VkQueueFlags flags)
+void Context::CreatePhysical(void)
 {
+	VkQueueFlags flags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
 	m_physical = Vulkan::PhysicalDevice::New(m_instance);
 	m_physical->Create(flags);
 	Vulkan::DumpLimits(m_physical);

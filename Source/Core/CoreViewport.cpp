@@ -7,7 +7,6 @@
 
 #include "CoreViewport.h"
 #include "RenderImage.h"
-#include "RenderSwapChain.h"
 
 namespace Core
 {
@@ -18,23 +17,16 @@ Viewport::Viewport(void)
 
 Viewport::~Viewport(void)
 {
-	delete mSwapChain;
-	mSwapChain = nullptr;
 	delete mDepthStencil;
 	mDepthStencil = nullptr;
 }
 
-void Viewport::Initialize(Platform::Window* window, bool depthStencil)
+void Viewport::Initialize(bool depthStencil)
 {
-	CreateSwapChain(window);
 	if (depthStencil)
 	{
 		CreateDepthStencil();
 	}
-}
-
-void Viewport::CreateSwapChain(Platform::Window* window)
-{
 }
 
 void Viewport::CreateDepthStencil(void)

@@ -19,20 +19,14 @@ namespace Example
 class Base
 {
 public:
-	Base(void);
+	explicit Base(const char* title);
 	virtual ~Base(void);
 
 public:
 	int32_t ShowModal(void);
 
-public:
-	void CreateWindow(const char* title);
-	void CreateViewport(bool depthStencil);
-
 protected:
-	Platform::Window* mWindow = nullptr;
 	Render::Context* mContext = nullptr;
-	Core::Viewport* mViewport = nullptr;
 };
 
 } /* namespace Example */

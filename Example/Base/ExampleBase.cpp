@@ -8,52 +8,35 @@
 #include "ExampleBase.h"
 #include "RenderContext.h"
 #include "CoreViewport.h"
-#include "Platform/XCB/XCBWindow.h"
 #include <cassert>
 
 namespace Example
 {
 
-Base::Base(void)
+Base::Base(const char* title)
 {
+	assert(title != nullptr);
 	mContext = Render::CreateContext();
 	assert(mContext != nullptr);
-	mContext->Initialize(true);
+	mContext->Initialize(title);
 }
 
 Base::~Base(void)
 {
-	delete mWindow;
-	mWindow = nullptr;
-	delete mViewport;
-	mViewport = nullptr;
 	Render::DestroyContext(mContext);
 }
 
 int32_t Base::ShowModal(void)
 {
-	assert(mWindow != nullptr);
 	assert(mContext != nullptr);
+	Platform::Window* window = mContext->GetWindow();
+	assert(window != nullptr);
 	bool done = false;
 	while (!done)
 	{
-		done = mWindow->HandleEvent();
+		done = window->HandleEvent();
 	}
 	return 0;
-}
-
-void Base::CreateWindow(const char* title)
-{
-	mWindow = new XCB::Window;
-	mWindow->Create(1280, 800);
-	mWindow->SetTitle(title);
-}
-
-void Base::CreateViewport(bool depthStencil)
-{
-	assert(mWindow != nullptr);
-	mViewport = new Core::Viewport;
-	mViewport->Initialize(mWindow, depthStencil);
 }
 
 } /* namespace Example */
