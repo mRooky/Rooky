@@ -20,13 +20,17 @@ public:
 	virtual ~Viewport(void);
 
 public:
-	void Initialize(bool depthStencil);
+	void Initialize(Render::Surface* surface, bool depthStencil);
 
 public:
 	void CreateDepthStencil(void);
 
 public:
+	inline Render::Surface* GetSurface(void) const { return mSurface; }
 	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
+
+protected:
+	Render::Surface* mSurface = nullptr;
 
 protected:
 	Render::Image* mDepthStencil = nullptr;

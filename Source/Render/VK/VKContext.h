@@ -23,7 +23,7 @@ public:
 	virtual ~Context(void) override;
 
 public:
-	virtual void Initialize(const char* title) override;
+	virtual void Initialize(Platform::Window* mWindow) override;
 
 public:
 	void Create(VkQueueFlags flags, bool debug);
@@ -43,8 +43,7 @@ private:
 	void CreatePhysical(void);
 	void CreateDevice(void);
 	void CreateCommandPool(void);
-	void CreateWindow(const char* title);
-	void CreateSurface(void);
+	void CreateSurface(Platform::Window* mWindow);
 	void CreateBufferManager(void);
 
 private:

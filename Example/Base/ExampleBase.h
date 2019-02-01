@@ -19,14 +19,19 @@ namespace Example
 class Base
 {
 public:
-	explicit Base(const char* title);
+	Base(void);
 	virtual ~Base(void);
+
+public:
+	void CreateWindow(const char* title);
+	void CreateContext(void);
 
 public:
 	int32_t ShowModal(void);
 
 protected:
 	Render::Context* mContext = nullptr;
+	Platform::Window* mWindow = nullptr;
 };
 
 } /* namespace Example */

@@ -19,10 +19,6 @@
 #include "VulkanInline.h"
 #include "VulkanCommandPool.h"
 
-#ifdef VK_USE_PLATFORM_XCB_KHR
-#include "Platform/XCB/XCBWindow.h"
-#endif
-
 #include <cassert>
 
 namespace VK
@@ -34,8 +30,6 @@ Context::Context(void)
 
 Context::~Context(void)
 {
-	delete mWindow;
-	mWindow = nullptr;
 	delete mSurface;
 	mSurface = nullptr;
 	delete mBufferManager;
@@ -47,32 +41,23 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-void Context::Initialize(const char* title)
+void Context::Initialize(Platform::Window* window)
 {
 	CreateVendor();
 	CreateInstance();
 	CreatePhysical();
 	CreateDevice();
 	CreateCommandPool();
-	CreateWindow(title);
-	CreateSurface();
+	CreateSurface(window);
 	CreateBufferManager();
 }
 
-void Context::CreateWindow(const char* title)
+void Context::CreateSurface(Platform::Window* window)
 {
-	assert(mWindow == nullptr);
-	mWindow = new XCB::Window;
-	mWindow->Create(1280, 800);
-	mWindow->SetTitle(title);
-}
-
-void Context::CreateSurface(void)
-{
-	assert(mWindow != nullptr);
+	assert(window != nullptr);
 	assert(mSurface == nullptr);
 	mSurface = new Surface(this);
-	mSurface->Initialize(mWindow);
+	mSurface->Initialize(window);
 }
 
 void Context::CreateBufferManager(void)

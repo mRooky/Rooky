@@ -24,16 +24,14 @@ public:
 	virtual ~Context(void);
 
 public:
-	virtual void Initialize(const char* title) = 0;
+	virtual void Initialize(Platform::Window* mWindow) = 0;
 
 public:
 	inline Surface* GetSurface(void) const { return mSurface; }
-	inline Platform::Window* GetWindow(void) const { return mWindow ;}
 	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
 
 protected:
 	Surface* mSurface = nullptr;
-	Platform::Window* mWindow = nullptr;
 	BufferManager* mBufferManager = nullptr;
 };
 

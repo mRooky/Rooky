@@ -17,12 +17,14 @@ Viewport::Viewport(void)
 
 Viewport::~Viewport(void)
 {
+	mSurface = nullptr;
 	delete mDepthStencil;
 	mDepthStencil = nullptr;
 }
 
-void Viewport::Initialize(bool depthStencil)
+void Viewport::Initialize(Render::Surface* surface, bool depthStencil)
 {
+	mSurface = surface;
 	if (depthStencil)
 	{
 		CreateDepthStencil();
