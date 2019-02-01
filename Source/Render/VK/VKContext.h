@@ -29,16 +29,20 @@ public:
 	void Create(VkQueueFlags flags, bool debug);
 
 public:
-	Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
-	Vulkan::Device* GetDeviceVK(void) const { return m_device; }
-	Vulkan::Instance* GetInstanceVK(void) const { return m_instance; }
-	Vulkan::PhysicalDevice* GetPhysicalDeviceVK(void) const { return m_physical; }
+	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
+	inline Vulkan::Device* GetDeviceVK(void) const { return m_device; }
+	inline Vulkan::Instance* GetInstanceVK(void) const { return m_instance; }
+	inline Vulkan::PhysicalDevice* GetPhysicalDeviceVK(void) const { return m_physical; }
+
+public:
+	inline Vulkan::CommandPool* GetCommandPoolVK(void) const { return m_commandPool; }
 
 private:
 	void CreateVendor(void);
 	void CreateInstance(bool debug);
 	void CreatePhysical(VkQueueFlags flags);
 	void CreateDevice(void);
+	void CreateCommandPool(void);
 
 
 private:
@@ -46,6 +50,9 @@ private:
 	Vulkan::Device* m_device = nullptr;
 	Vulkan::Instance* m_instance = nullptr;
 	Vulkan::PhysicalDevice* m_physical = nullptr;
+
+private:
+	Vulkan::CommandPool* m_commandPool = nullptr;
 
 private:
 	std::vector<std::string> m_layers;

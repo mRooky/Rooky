@@ -15,6 +15,7 @@
 #include "VulkanDevice.h"
 #include "VulkanCommon.h"
 #include "VulkanInline.h"
+#include "VulkanCommandPool.h"
 
 namespace VK
 {
@@ -25,6 +26,7 @@ Context::Context(void)
 
 Context::~Context(void)
 {
+	Vulkan::Release(m_commandPool);
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
 	Vulkan::Release(m_instance);
@@ -38,6 +40,7 @@ void Context::Initialize(bool debug)
 	CreateInstance(debug);
 	CreatePhysical(flags);
 	CreateDevice();
+	CreateCommandPool();
 }
 
 void Context::CreateVendor(void)
@@ -106,6 +109,14 @@ void Context::CreateDevice(void)
 	device_create_info.pEnabledFeatures = &features;
 
 	m_device->Create(&device_create_info);
+}
+
+void Context::CreateCommandPool(void)
+{
+	uint32_t family = m_physical->GetFamily();
+	m_commandPool = Vulkan::CommandPool::New(m_device);
+	m_commandPool->Create(family);
+	m_commandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY); //default command buffer
 }
 
 } /* namespace VK */

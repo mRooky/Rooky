@@ -31,6 +31,10 @@ public:
 	inline uint32_t GetFamily(void) const { return m_family; }
 
 public:
+	inline size_t GetCommandBufferCount(void) const { return m_buffers.size(); }
+	inline CommandBuffer* GetCommandBuffer(size_t index) const { return m_buffers.at(index); }
+
+public:
 	static inline CommandPool* New(Device* device) { return new CommandPool(device); }
 
 public:
