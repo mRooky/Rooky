@@ -23,6 +23,9 @@ class Vertex;
 class Queue;
 class Surface;
 class Uniform;
+class Pass;
+class FrameBuffer;
+class Pipeline;
 
 }
 
