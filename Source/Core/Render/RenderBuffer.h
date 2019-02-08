@@ -23,7 +23,7 @@ public:
 	virtual void Initialize(size_t size, uint32_t usage) = 0;
 
 public:
-	virtual void CopyFrom(const Buffer& other) = 0;
+	virtual void Copy(const Buffer& other) = 0;
 };
 
 } /* namespace Render */

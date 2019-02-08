@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_COREINDEX_H_
 #define SOURCE_CORE_COREINDEX_H_
 
+#include "CoreBuffer.h"
+
 namespace Core
 {
 
-class Index
+class Index : public Buffer
 {
-public:
-	Index();
-	virtual ~Index();
+private:
+	Index(void);
+	virtual ~Index(void) override;
 };
 
 } /* namespace Core */

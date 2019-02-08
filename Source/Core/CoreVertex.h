@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_COREVERTEX_H_
 #define SOURCE_CORE_COREVERTEX_H_
 
+#include "CoreBuffer.h"
+
 namespace Core
 {
 
-class Vertex
+class Vertex : public Buffer
 {
 public:
-	Vertex();
-	virtual ~Vertex();
+	Vertex(void);
+	virtual ~Vertex(void) override;
 };
 
 } /* namespace Core */

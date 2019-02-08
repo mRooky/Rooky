@@ -43,6 +43,7 @@ class Surface;
 class SwapChain;
 class DrawCall;
 class Debug;
+class Resource;
 
 }
 

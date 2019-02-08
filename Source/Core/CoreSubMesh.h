@@ -13,6 +13,8 @@
 namespace Core
 {
 class Mesh;
+class Index;
+class Vertex;
 class Material;
 class SubMesh
 {
@@ -26,16 +28,16 @@ public:
 	inline Material* GetMaterial(void) const { return  m_material; }
 
 public:
-	inline Render::Index* GetIndex(void) const { return m_index; };
-	inline Render::Vertex* GetVertex(void) const { return m_vertex; }
+	inline Index* GetIndex(void) const { return m_index; };
+	inline Vertex* GetVertex(void) const { return m_vertex; }
 
 private:
 	Mesh* m_parent = nullptr;
 	Material* m_material = nullptr;
 
 private:
-	Render::Index* m_index = nullptr;
-	Render::Vertex* m_vertex = nullptr;
+	Index* m_index = nullptr;
+	Vertex* m_vertex = nullptr;
 };
 
 } /* namespace Core */

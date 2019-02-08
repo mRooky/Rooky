@@ -34,7 +34,7 @@ Buffer::~Buffer(void)
 void Buffer::Initialize(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
-	assert(mBuffer == nullptr);
+	assert(mMemory == nullptr);
 	mSize = size;
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -42,17 +42,16 @@ void Buffer::Initialize(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void Buffer::BindMemory(Render::Memory* memory, size_t offset)
+void Buffer::AllocateMemory(uint32_t properties)
 {
-	assert(memory != nullptr);
-	assert(mMemory == nullptr);
-	mMemory = memory;
-	mOffset = offset;
-	Memory* vk_memory = static_cast<Memory*>(mMemory);
-	mBuffer->BindMemory(vk_memory->GetMemoryVK(), offset);
+	Context* context = static_cast<Context*>(mContext);
+	Memory* vk_memory = new Memory(context);
+	vk_memory->Allocate(mBuffer, properties);
+	mBuffer->BindMemory(vk_memory->GetMemoryVK(), 0);
+	mMemory = vk_memory;
 }
 
-void Buffer::CopyFrom(const Render::Buffer& other)
+void Buffer::Copy(const Render::Buffer& other)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
@@ -78,7 +77,7 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	assert(mMemory != nullptr);
 	VkDescriptorBufferInfo descriptor_info = {};
 	descriptor_info.buffer = mBuffer->GetHandle();
-	descriptor_info.offset = mOffset;
+	descriptor_info.offset = 0;
 	descriptor_info.range = mSize;
 	return descriptor_info;
 }

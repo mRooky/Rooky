@@ -31,12 +31,10 @@ Image::~Image(void)
 	Vulkan::Release(mImage);
 }
 
-void Image::Initialize(Render::Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage)
+void Image::Initialize(Render::Format format, const Render::Extent3& extent, uint32_t usage)
 {
 	mFormat = format;
-	mExtent.width = width;
-	mExtent.height = height;
-	mExtent.depth = depth;
+	mExtent = extent;
 	mUsage = usage;
 
 	assert(mImage == nullptr);
@@ -44,22 +42,21 @@ void Image::Initialize(Render::Format format, uint32_t width, uint32_t height, u
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, width, height, depth, usage);
-
+	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, usage);
 }
 
-void Image::BindMemory(Render::Memory* memory, size_t offset)
+void Image::AllocateMemory(uint32_t properties)
 {
-	assert(memory != nullptr);
-	assert(mMemory == nullptr);
-	mMemory = memory;
-	mOffset = offset;
-	Memory* vk_memory = static_cast<Memory*>(memory);
-	mImage->BindMemory(vk_memory->GetMemoryVK(), mOffset);
+	Context* context = static_cast<Context*>(mContext);
+	Memory* vk_memory = new Memory(context);
+	vk_memory->Allocate(mImage, properties);
+	mImage->BindMemory(vk_memory->GetMemoryVK(), 0);
+	mMemory = vk_memory;
 }
 
 void Image::CreateView(Render::Image::Type type)
 {
+	mType = type;
 	assert(mMemory != nullptr);
 	VkImageViewType vk_type = ConverType(type);
 	mImage->CreateView(vk_type);

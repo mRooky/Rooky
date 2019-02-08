@@ -21,7 +21,7 @@ public:
 	virtual ~Memory(void) override;
 
 public:
-	virtual void Initialize(size_t size, uint32_t index, uint32_t property) override;
+	void Allocate(Vulkan::Resource* resource, uint32_t properties);
 
 public:
 	virtual void* Mapped(size_t offset, size_t range) override;

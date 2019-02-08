@@ -35,13 +35,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	inline void Initialize(Format format, uint32_t width, uint32_t height, uint32_t usage)
-	{
-		Initialize(format, width, height, 1, usage);
-	}
-
-public:
-	virtual void Initialize(Format format, uint32_t width, uint32_t height, uint32_t depth, uint32_t usage) = 0;
+	virtual void Initialize(Format format, const Extent3& extent, uint32_t usage) = 0;
 	virtual void CreateView(Type type) = 0;
 
 public:
@@ -49,15 +43,15 @@ public:
 	inline void SetSampler(Sampler* sampler) { mSampler = sampler; }
 
 public:
-	inline const Extent3& GetExtent(void) const { return mExtent; }
-
-public:
+	inline Type GetType(void) const { return mType; }
 	inline Format GetFormat(void) const { return mFormat; }
+	inline const Extent3& GetExtent(void) const { return mExtent; }
 
 protected:
 	Extent3 mExtent = {};
 
 protected:
+	Type mType = Type::IMAGE_UNKNOWN;
 	Sampler* mSampler = nullptr;
 	Format mFormat = Format::UNDEFINED;
 };

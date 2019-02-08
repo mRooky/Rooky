@@ -18,14 +18,14 @@ class Memory;
 class Object;
 class Resource;
 class Shader;
-class Index;
-class Vertex;
 class Queue;
 class Surface;
 class Uniform;
 class Pass;
 class FrameBuffer;
 class Pipeline;
+class CommandPool;
+class CommandList;
 
 }
 

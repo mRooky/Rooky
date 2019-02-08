@@ -22,8 +22,8 @@ public:
 
 public:
 	virtual void Initialize(size_t size, uint32_t usage) override;
-	virtual void BindMemory(Render::Memory* memory, size_t offset) override;
-	virtual void CopyFrom(const Render::Buffer& other) override;
+	virtual void AllocateMemory(uint32_t properties) override;
+	virtual void Copy(const Render::Buffer& other) override;
 
 public:
 	VkDescriptorBufferInfo GetDescriptorInfo(void) const;

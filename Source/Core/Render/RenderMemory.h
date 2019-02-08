@@ -22,9 +22,6 @@ protected:
 	virtual ~Memory(void) override;
 
 public:
-	virtual void Initialize(size_t size, uint32_t index, uint32_t property) = 0;
-
-public:
 	virtual void* Mapped(size_t offset, size_t range) = 0;
 	virtual void UnMap(size_t offset, size_t range) = 0;
 

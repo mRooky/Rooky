@@ -26,13 +26,13 @@ Memory::~Memory(void)
 	Vulkan::Release(mMemory);
 }
 
-void Memory::Initialize(size_t size, uint32_t index, uint32_t property)
+void Memory::Allocate(Vulkan::Resource* resource, uint32_t properties)
 {
 	assert(mMemory == nullptr);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mMemory = Vulkan::DeviceMemory::New(device);
-	mMemory->Allocate(size, index, property);
+	mMemory->Allocate(resource, properties);
 }
 
 void* Memory::Mapped(size_t offset, size_t range)
