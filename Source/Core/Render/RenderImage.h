@@ -10,6 +10,7 @@
 
 #include "RenderResource.h"
 #include "RenderFormat.h"
+#include "RenderMath.h"
 
 namespace Render
 {
@@ -48,17 +49,13 @@ public:
 	inline void SetSampler(Sampler* sampler) { mSampler = sampler; }
 
 public:
-	inline uint32_t GetWidth(void) const { return mWidth; }
-	inline uint32_t GetHeight(void) const { return mHeight; }
-	inline uint32_t GetDepth(void) const { return mDepth; }
+	inline const Extent3& GetExtent(void) const { return mExtent; }
 
 public:
 	inline Format GetFormat(void) const { return mFormat; }
 
 protected:
-	uint32_t mWidth = 0;
-	uint32_t mHeight = 0;
-	uint32_t mDepth = 1;
+	Extent3 mExtent = {};
 
 protected:
 	Sampler* mSampler = nullptr;

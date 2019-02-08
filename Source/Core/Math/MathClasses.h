@@ -8,11 +8,10 @@
 #ifndef SOURCE_CORE_MATH_MATHCLASSES_H_
 #define SOURCE_CORE_MATH_MATHCLASSES_H_
 
-#include <glm/glm.hpp>
+#include "MathExtent2.hpp"
+#include "MathExtent3.hpp"
+#include "MathVector2.hpp"
+#include "MathVector3.hpp"
 
-namespace Math
-{
-
-}
 
 #endif /* SOURCE_CORE_MATH_MATHCLASSES_H_ */

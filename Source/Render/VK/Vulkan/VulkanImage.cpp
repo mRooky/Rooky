@@ -48,6 +48,12 @@ VkResult Image::Create(VkFormat format, const VkExtent3D& extent, VkImageUsageFl
 	return Create(format, extent, mipmap, array, usage);
 }
 
+VkResult Image::Create(VkFormat format, uint32_t width, uint32_t height, uint32_t depth, VkImageUsageFlags usage)
+{
+	VkExtent3D extent = { width, height, depth};
+	return Create(format, extent, usage);
+}
+
 VkResult Image::Create(VkFormat format, const VkExtent3D& extent, uint32_t mipmap, uint32_t array, VkImageUsageFlags usage)
 {
 	PhysicalDevice* physical = mDevice->GetPhysicalDevice();

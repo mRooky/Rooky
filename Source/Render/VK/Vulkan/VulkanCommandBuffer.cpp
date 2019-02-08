@@ -57,12 +57,6 @@ VkResult CommandBuffer::Create(const VkCommandBufferAllocateInfo* info)
 	return mResult;
 }
 
-void CommandBuffer::Destroy(void)
-{
-	std::cout<< "Vulkan Destroy : " << GetClassName() << std::endl;
-	delete this;
-}
-
 void CommandBuffer::Begin(VkCommandBufferUsageFlags flags)
 {
 	VkCommandBufferBeginInfo command_buffer_begin_info = CommandBuffer::BeginInfo();

@@ -69,7 +69,7 @@ public:
 	static VkCommandBufferBeginInfo BeginInfo(void);
 
 protected:
-	virtual void Destroy(void) override;
+	virtual void Destroy(void) override { Object::Destroy(); }
 
 private:
 	VkResult Create(const VkCommandBufferAllocateInfo* info);

@@ -22,6 +22,7 @@ protected:
 
 public:
 	VkResult Create(VkFormat format, const VkExtent3D& extent, VkImageUsageFlags usage);
+	VkResult Create(VkFormat format, uint32_t width, uint32_t height, uint32_t depth, VkImageUsageFlags usage);
 	VkResult Create(VkFormat format, const VkExtent3D& extent, uint32_t mipmap, uint32_t array, VkImageUsageFlags usage);
 
 public:

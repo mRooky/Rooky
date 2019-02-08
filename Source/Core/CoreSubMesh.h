@@ -13,6 +13,7 @@
 namespace Core
 {
 class Mesh;
+class Material;
 class SubMesh
 {
 	friend class Mesh;
@@ -22,6 +23,7 @@ private:
 
 public:
 	inline Mesh* GetParent(void) const { return m_parent; }
+	inline Material* GetMaterial(void) const { return  m_material; }
 
 public:
 	inline Render::Index* GetIndex(void) const { return m_index; };
@@ -29,6 +31,7 @@ public:
 
 private:
 	Mesh* m_parent = nullptr;
+	Material* m_material = nullptr;
 
 private:
 	Render::Index* m_index = nullptr;
