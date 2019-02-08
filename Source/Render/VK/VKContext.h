@@ -44,7 +44,6 @@ private:
 	void CreateDevice(void);
 	void CreateCommandPool(void);
 	void CreateSurface(Platform::Window* mWindow);
-	void CreateBufferManager(void);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;

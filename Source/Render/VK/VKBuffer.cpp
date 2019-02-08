@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKHardwareBuffer.h"
+#include "VKBuffer.h"
 #include "VKContext.h"
 #include "VKMemory.h"
 
@@ -21,17 +21,17 @@
 namespace VK
 {
 
-HardwareBuffer::HardwareBuffer(Context* context):
-		Render::HardwareBuffer(context)
+Buffer::Buffer(Context* context):
+		Render::Buffer(context)
 {
 }
 
-HardwareBuffer::~HardwareBuffer(void)
+Buffer::~Buffer(void)
 {
 	Vulkan::Release(mBuffer);
 }
 
-void HardwareBuffer::Initialize(size_t size, uint32_t usage)
+void Buffer::Initialize(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
 	assert(mBuffer == nullptr);
@@ -42,7 +42,7 @@ void HardwareBuffer::Initialize(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void HardwareBuffer::BindMemory(Render::Memory* memory, size_t offset)
+void Buffer::BindMemory(Render::Memory* memory, size_t offset)
 {
 	assert(memory != nullptr);
 	assert(mMemory == nullptr);
@@ -52,7 +52,7 @@ void HardwareBuffer::BindMemory(Render::Memory* memory, size_t offset)
 	mBuffer->BindMemory(vk_memory->GetMemoryVK(), offset);
 }
 
-void HardwareBuffer::CopyFrom(const Render::HardwareBuffer& other)
+void Buffer::CopyFrom(const Render::Buffer& other)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
@@ -62,7 +62,7 @@ void HardwareBuffer::CopyFrom(const Render::HardwareBuffer& other)
 	VkBufferCopy buffer_copy_range = {};
 	buffer_copy_range.size = other.GetSize();
 
-	const HardwareBuffer& buffer = static_cast<const HardwareBuffer&>(other);
+	const Buffer& buffer = static_cast<const Buffer&>(other);
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 	command_buffer->CopyResource(buffer.GetBufferVK(), mBuffer, 1, &buffer_copy_range);
 	command_buffer->End();
@@ -72,7 +72,7 @@ void HardwareBuffer::CopyFrom(const Render::HardwareBuffer& other)
 	queue->FlushCommandBuffer(command_buffer);
 }
 
-VkDescriptorBufferInfo HardwareBuffer::GetDescriptorInfo(void) const
+VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 {
 	assert(mBuffer != nullptr);
 	assert(mMemory != nullptr);

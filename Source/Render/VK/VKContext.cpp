@@ -6,7 +6,6 @@
  */
 
 #include "VKContext.h"
-#include "VKBufferManager.h"
 #include "VKSurface.h"
 
 #include "VulkanVendor.h"
@@ -32,8 +31,6 @@ Context::~Context(void)
 {
 	delete mSurface;
 	mSurface = nullptr;
-	delete mBufferManager;
-	mBufferManager = nullptr;
 	Vulkan::Release(m_commandPool);
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
@@ -49,7 +46,6 @@ void Context::Initialize(Platform::Window* window)
 	CreateDevice();
 	CreateCommandPool();
 	CreateSurface(window);
-	CreateBufferManager();
 }
 
 void Context::CreateSurface(Platform::Window* window)
@@ -58,12 +54,6 @@ void Context::CreateSurface(Platform::Window* window)
 	assert(mSurface == nullptr);
 	mSurface = new Surface(this);
 	mSurface->Initialize(window);
-}
-
-void Context::CreateBufferManager(void)
-{
-	assert(mBufferManager == nullptr);
-	mBufferManager = new BufferManager(this);
 }
 
 void Context::CreateVendor(void)

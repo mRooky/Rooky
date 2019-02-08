@@ -1,31 +1,29 @@
 /*
- * RenderBuffer.h
+ * HardwareBuffer.h
  *
- *  Created on: Jan 21, 2019
+ *  Created on: Jan 30, 2019
  *      Author: rookyma
  */
 
 #ifndef SOURCE_CORE_RENDER_RENDERBUFFER_H_
 #define SOURCE_CORE_RENDER_RENDERBUFFER_H_
 
-#include "RenderObject.h"
+#include "RenderResource.h"
 
 namespace Render
 {
-class BufferManager;
-class HardwareBuffer;
-class Buffer
+
+class Buffer : public Resource
 {
 public:
-	explicit Buffer(BufferManager* manager);
-	virtual ~Buffer(void);
+	explicit Buffer(Context* context);
+	virtual ~Buffer(void) override;
 
 public:
-	inline HardwareBuffer* GetHardwareBuffer(void) const { return mHardwareBuffer; }
+	virtual void Initialize(size_t size, uint32_t usage) = 0;
 
-protected:
-	BufferManager* mManager = nullptr;
-	HardwareBuffer* mHardwareBuffer = nullptr;
+public:
+	virtual void CopyFrom(const Buffer& other) = 0;
 };
 
 } /* namespace Render */

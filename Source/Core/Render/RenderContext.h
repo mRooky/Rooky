@@ -14,7 +14,6 @@
 namespace Render
 {
 class Surface;
-class BufferManager;
 class Context
 {
 protected:
@@ -28,11 +27,9 @@ public:
 
 public:
 	inline Surface* GetSurface(void) const { return mSurface; }
-	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
 
 protected:
 	Surface* mSurface = nullptr;
-	BufferManager* mBufferManager = nullptr;
 };
 
 Context* CreateContext(void);

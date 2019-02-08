@@ -1,20 +1,18 @@
 /*
- * RenderBuffer.cpp
+ * HardwareBuffer.cpp
  *
- *  Created on: Jan 21, 2019
+ *  Created on: Jan 30, 2019
  *      Author: rookyma
  */
 
-#include "RenderBuffer.h"
-#include <cassert>
+#include <RenderBuffer.h>
 
 namespace Render
 {
 
-Buffer::Buffer(BufferManager* manager):
-		mManager(manager)
+Buffer::Buffer(Context* context):
+		Resource(context)
 {
-	assert(mManager != nullptr);
 }
 
 Buffer::~Buffer(void)
