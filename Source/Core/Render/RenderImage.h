@@ -11,39 +11,22 @@
 #include "RenderResource.h"
 #include "RenderFormat.h"
 #include "RenderMath.h"
+#include "RenderTypes.h"
 
 namespace Render
 {
-class Sampler;
 class Image : public Resource
 {
-public:
-	enum class Type : uint32_t
-	{
-		IMAGE_1D,
-		IMAGE_2D,
-		IMAGE_3D,
-		IMAGE_CUBE,
-		IMAGE_1D_ARRAY,
-		IMAGE_2D_ARRAY,
-		IMAGE_CUBE_ARRAY,
-		IMAGE_UNKNOWN = ~0u
-	};
-
 public:
 	explicit Image(Context* context);
 	virtual ~Image(void) override;
 
 public:
 	virtual void Initialize(Format format, const Extent3& extent, uint32_t usage) = 0;
-	virtual void CreateView(Type type) = 0;
+	virtual void CreateView(ImageType type) = 0;
 
 public:
-	inline Sampler* GetSampler(void) const { return mSampler; }
-	inline void SetSampler(Sampler* sampler) { mSampler = sampler; }
-
-public:
-	inline Type GetType(void) const { return mType; }
+	inline ImageType GetType(void) const { return mType; }
 	inline Format GetFormat(void) const { return mFormat; }
 	inline const Extent3& GetExtent(void) const { return mExtent; }
 
@@ -51,9 +34,8 @@ protected:
 	Extent3 mExtent = {};
 
 protected:
-	Type mType = Type::IMAGE_UNKNOWN;
-	Sampler* mSampler = nullptr;
 	Format mFormat = Format::UNDEFINED;
+	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
 };
 
 } /* namespace Render */

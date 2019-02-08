@@ -14,8 +14,8 @@ namespace Core
 class Thread
 {
 public:
-	Thread();
-	virtual ~Thread();
+	Thread(void);
+	virtual ~Thread(void);
 };
 
 } /* namespace Core */

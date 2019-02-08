@@ -20,12 +20,12 @@ class Resource;
 class Shader;
 class Queue;
 class Surface;
-class Uniform;
 class Pass;
 class FrameBuffer;
 class Pipeline;
 class CommandPool;
 class CommandList;
+class Sampler;
 
 }
 

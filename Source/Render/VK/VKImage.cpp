@@ -9,7 +9,6 @@
 #include "VKContext.h"
 #include "VKFormat.h"
 #include "VKMemory.h"
-#include "VKSampler.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -54,7 +53,7 @@ void Image::AllocateMemory(uint32_t properties)
 	mMemory = vk_memory;
 }
 
-void Image::CreateView(Render::Image::Type type)
+void Image::CreateView(Render::ImageType type)
 {
 	mType = type;
 	assert(mMemory != nullptr);
@@ -68,32 +67,29 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	assert(mMemory != nullptr);
 	auto view = mImage->GetView();
 	assert(view != nullptr);
-	assert(mSampler != nullptr);
-	auto sampler = static_cast<Sampler*>(mSampler);
 	VkDescriptorImageInfo descriptor_info = {};
-	descriptor_info.sampler = sampler->GetSamplerVK()->GetHandle();
 	descriptor_info.imageView = mImage->GetView()->GetHandle();
 	descriptor_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 	return descriptor_info;
 }
 
-VkImageViewType Image::ConverType(const Render::Image::Type& type)
+VkImageViewType Image::ConverType(const Render::ImageType& type)
 {
 	switch (type)
 	{
-	case Render::Image::Type::IMAGE_1D:
+	case Render::ImageType::IMAGE_TYPE_1D:
 		return VK_IMAGE_VIEW_TYPE_1D;
-	case Render::Image::Type::IMAGE_2D:
+	case Render::ImageType::IMAGE_TYPE_2D:
 		return VK_IMAGE_VIEW_TYPE_2D;
-	case Render::Image::Type::IMAGE_3D:
+	case Render::ImageType::IMAGE_TYPE_3D:
 		return VK_IMAGE_VIEW_TYPE_3D;
-	case Render::Image::Type::IMAGE_CUBE:
+	case Render::ImageType::IMAGE_TYPE_CUBE:
 		return VK_IMAGE_VIEW_TYPE_CUBE;
-	case Render::Image::Type::IMAGE_1D_ARRAY:
+	case Render::ImageType::IMAGE_TYPE_1D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_1D_ARRAY;
-	case Render::Image::Type::IMAGE_2D_ARRAY:
+	case Render::ImageType::IMAGE_TYPE_2D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_2D_ARRAY;
-	case Render::Image::Type::IMAGE_CUBE_ARRAY:
+	case Render::ImageType::IMAGE_TYPE_CUBE_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
 	default:
 		assert(false);
@@ -101,27 +97,27 @@ VkImageViewType Image::ConverType(const Render::Image::Type& type)
 	}
 }
 
-Render::Image::Type Image::ConverType(const VkImageViewType& type)
+Render::ImageType Image::ConverType(const VkImageViewType& type)
 {
 	switch (type)
 	{
 	case VK_IMAGE_VIEW_TYPE_1D:
-		return Render::Image::Type::IMAGE_1D;
+		return Render::ImageType::IMAGE_TYPE_1D;
 	case VK_IMAGE_VIEW_TYPE_2D:
-		return Render::Image::Type::IMAGE_2D;
+		return Render::ImageType::IMAGE_TYPE_2D;
 	case VK_IMAGE_VIEW_TYPE_3D:
-		return Render::Image::Type::IMAGE_3D;
+		return Render::ImageType::IMAGE_TYPE_3D;
 	case VK_IMAGE_VIEW_TYPE_CUBE:
-		return Render::Image::Type::IMAGE_CUBE;
+		return Render::ImageType::IMAGE_TYPE_CUBE;
 	case VK_IMAGE_VIEW_TYPE_1D_ARRAY:
-		return Render::Image::Type::IMAGE_1D_ARRAY;
+		return Render::ImageType::IMAGE_TYPE_1D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_2D_ARRAY:
-		return Render::Image::Type::IMAGE_2D_ARRAY;
+		return Render::ImageType::IMAGE_TYPE_2D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_CUBE_ARRAY:
-		return Render::Image::Type::IMAGE_CUBE_ARRAY;
+		return Render::ImageType::IMAGE_TYPE_CUBE_ARRAY;
 	default:
 		assert(false);
-		return Render::Image::Type::IMAGE_UNKNOWN;
+		return Render::ImageType::IMAGE_TYPE_UNKNOWN;
 	}
 }
 

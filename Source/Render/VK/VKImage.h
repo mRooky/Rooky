@@ -23,7 +23,7 @@ public:
 public:
 	virtual void Initialize(Render::Format format, const Render::Extent3& extent, uint32_t usage) override;
 	virtual void AllocateMemory(uint32_t properties) override;
-	virtual void CreateView(Render::Image::Type type) override;
+	virtual void CreateView(Render::ImageType type) override;
 
 public:
 	inline Vulkan::Image* GetImageVK(void) const { return mImage; }
@@ -32,8 +32,8 @@ public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
 
 public:
-	static VkImageViewType ConverType(const Render::Image::Type& type);
-	static Render::Image::Type ConverType(const VkImageViewType& type);
+	static VkImageViewType ConverType(const Render::ImageType& type);
+	static Render::ImageType ConverType(const VkImageViewType& type);
 
 protected:
 	Vulkan::Image* mImage = nullptr;
