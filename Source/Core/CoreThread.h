@@ -21,6 +21,9 @@ public:
 	virtual ~Thread(void);
 
 public:
+	virtual Render::CommandList* Allocate(bool level) = 0;
+
+public:
 	inline Render::CommandPool* GetCommandPool(void) const { return mCommandPool; }
 	inline Render::CommandList* GetCommandList(size_t index) const { return mCommandLists.at(index); }
 
