@@ -14,8 +14,8 @@ namespace Core
 class Event
 {
 public:
-	Event();
-	virtual ~Event();
+	Event(void);
+	virtual ~Event(void);
 };
 
 } /* namespace Core */

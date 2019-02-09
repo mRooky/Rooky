@@ -10,15 +10,12 @@
 namespace Core
 {
 
-Event::Event()
+Event::Event(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Event::~Event()
+Event::~Event(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */
