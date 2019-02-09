@@ -31,7 +31,7 @@ Surface::~Surface(void)
 	Vulkan::Release(mSwapChain);
 }
 
-void Surface::Initialize(Platform::Window* window)
+void Surface::Create(Platform::Window* window)
 {
 	auto context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();

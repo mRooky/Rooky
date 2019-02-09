@@ -53,7 +53,7 @@ void Context::CreateSurface(Platform::Window* window)
 	assert(window != nullptr);
 	assert(mSurface == nullptr);
 	mSurface = new Surface(this);
-	mSurface->Initialize(window);
+	mSurface->Create(window);
 }
 
 void Context::CreateVendor(void)

@@ -26,7 +26,7 @@ CommandPool::~CommandPool(void)
 	Vulkan::Release(mCommandPool);
 }
 
-void CommandPool::Initialize(void)
+void CommandPool::Create(void)
 {
 	auto context = static_cast<Context*>(mContext);
 	auto device = context->GetDeviceVK();

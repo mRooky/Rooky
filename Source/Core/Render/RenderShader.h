@@ -32,7 +32,7 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Initialize(const char* file) = 0;
+	virtual void Create(const char* file) = 0;
 
 public:
 	inline Type GetType(void) const { return mType; }

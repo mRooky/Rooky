@@ -26,7 +26,7 @@ Shader::~Shader(void)
 	Vulkan::Release(mShader);
 }
 
-void Shader::Initialize(const char* file)
+void Shader::Create(const char* file)
 {
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)

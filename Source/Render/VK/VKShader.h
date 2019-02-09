@@ -21,7 +21,7 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Initialize(const char* file) override;
+	virtual void Create(const char* file) override;
 
 public:
 	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }

@@ -21,9 +21,6 @@ public:
 	virtual ~Element(void) override;
 
 public:
-	virtual uint32_t GetStride(void) const override;
-
-public:
 	std::vector<VkVertexInputAttributeDescription> GetInputAttributeDescription(uint32_t binding) const;
 };
 

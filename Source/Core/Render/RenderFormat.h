@@ -9,6 +9,7 @@
 #define SOURCE_CORE_BASE_BASEH_
 
 #include <cstdint>
+#include <cstddef>
 
 namespace Render
 {
@@ -244,6 +245,8 @@ enum class Format : uint32_t
 	G16_B16_R16_3PLANE_444_UNORM,
 	MAX_SIZE
 };
+
+size_t GetFormatSize(Format format);
 
 }
 

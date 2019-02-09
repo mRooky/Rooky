@@ -22,7 +22,7 @@ public:
 	virtual ~Surface(void) override;
 
 public:
-	virtual void Initialize(Platform::Window* window) = 0;
+	virtual void Create(Platform::Window* window) = 0;
 };
 
 } /* namespace Render */

@@ -21,7 +21,7 @@ public:
 	virtual ~Surface(void) override;
 
 public:
-	virtual void Initialize(Platform::Window* window) override;
+	virtual void Create(Platform::Window* window) override;
 
 public:
 	inline Vulkan::Surface* GetSurfaceVK(void) const { return mSurface; }

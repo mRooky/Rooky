@@ -21,7 +21,7 @@ public:
 	virtual ~CommandPool(void) override;
 
 public:
-	virtual void Initialize(void) override;
+	virtual void Create(void) override;
 
 public:
 	virtual Render::CommandList* Allocate(bool level) override;

@@ -23,13 +23,15 @@ public:
 	virtual ~Element(void) override;
 
 public:
-	virtual uint32_t GetStride(void) const = 0;
+	void Create(const std::vector<Format>& formats);
 
 public:
+	inline size_t GetStride(void) const { return mStride; }
 	inline size_t GetElementCount(void) const { return mFormats.size(); }
 	inline Format GetElementFormat(uint32_t index) const { return mFormats.at(index); }
 
 protected:
+	size_t mStride = 0;
 	std::vector<Format> mFormats;
 };
 

@@ -22,7 +22,7 @@ public:
 	virtual ~CommandPool(void) override;
 
 public:
-	virtual void Initialize(void) = 0;
+	virtual void Create(void) = 0;
 	virtual CommandList* Allocate(bool primary) = 0;
 
 protected:
