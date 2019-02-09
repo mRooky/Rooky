@@ -19,6 +19,8 @@ class Memory : public Object
 {
 protected:
 	explicit Memory(Context* context);
+
+public:
 	virtual ~Memory(void) override;
 
 public:

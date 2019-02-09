@@ -5,20 +5,20 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_VKDECLARATION_H_
-#define SOURCE_RENDER_VK_VKDECLARATION_H_
+#ifndef SOURCE_RENDER_VK_VKELEMENT_H_
+#define SOURCE_RENDER_VK_VKELEMENT_H_
 
-#include "RenderDeclaration.h"
+#include "RenderElement.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Context;
-class Declaration: public Render::Declaration
+class Element: public Render::Element
 {
 public:
-	explicit Declaration(Context* context);
-	virtual ~Declaration(void) override;
+	explicit Element(Context* context);
+	virtual ~Element(void) override;
 
 public:
 	virtual uint32_t GetStride(void) const override;
@@ -29,4 +29,4 @@ public:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_VKDECLARATION_H_ */
+#endif /* SOURCE_RENDER_VK_VKELEMENT_H_ */

@@ -21,7 +21,7 @@ public:
 	virtual ~CommandList(void) override;
 
 public:
-	virtual void Initialize(bool primary) override;
+	virtual void Create(bool primary) override;
 
 public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }

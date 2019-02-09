@@ -41,7 +41,7 @@ void Base::CreateContext(void)
 	assert(mWindow != nullptr);
 	mContext = Render::CreateContext();
 	assert(mContext != nullptr);
-	mContext->Initialize(mWindow);
+	mContext->Create(mWindow);
 }
 
 int32_t Base::ShowModal(void)

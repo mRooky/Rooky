@@ -22,7 +22,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Initialize(Format format, const Extent3& extent, uint32_t usage) = 0;
+	virtual void Create(Format format, const Extent3& extent, uint32_t usage) = 0;
 	virtual void CreateView(ImageType type) = 0;
 
 public:

@@ -23,10 +23,7 @@ public:
 	virtual ~Context(void) override;
 
 public:
-	virtual void Initialize(Platform::Window* mWindow) override;
-
-public:
-	void Create(VkQueueFlags flags, bool debug);
+	virtual void Create(Platform::Window* mWindow) override;
 
 public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }

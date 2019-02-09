@@ -20,7 +20,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Initialize(size_t size, uint32_t usage) = 0;
+	virtual void Create(size_t size, uint32_t usage) = 0;
 
 public:
 	virtual void Copy(const Buffer& other) = 0;

@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKDeclaration.h"
+#include "VKElement.h"
 #include "VKContext.h"
 #include "VKFormat.h"
 
@@ -16,16 +16,16 @@
 namespace VK
 {
 
-Declaration::Declaration(Context* context):
-		Render::Declaration(context)
+Element::Element(Context* context):
+		Render::Element(context)
 {
 }
 
-Declaration::~Declaration(void)
+Element::~Element(void)
 {
 }
 
-uint32_t Declaration::GetStride(void) const
+uint32_t Element::GetStride(void) const
 {
 	uint32_t stride = 0;
 	const uint32_t count = mFormats.size();
@@ -39,7 +39,7 @@ uint32_t Declaration::GetStride(void) const
 	return stride;
 }
 
-std::vector<VkVertexInputAttributeDescription> Declaration::GetInputAttributeDescription(uint32_t binding) const
+std::vector<VkVertexInputAttributeDescription> Element::GetInputAttributeDescription(uint32_t binding) const
 {
 	std::vector<VkVertexInputAttributeDescription> input_attribute_descriptions;
 	input_attribute_descriptions.reserve(mFormats.size());

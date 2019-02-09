@@ -23,7 +23,7 @@ public:
 	virtual ~Context(void);
 
 public:
-	virtual void Initialize(Platform::Window* mWindow) = 0;
+	virtual void Create(Platform::Window* mWindow) = 0;
 
 public:
 	inline Surface* GetSurface(void) const { return mSurface; }

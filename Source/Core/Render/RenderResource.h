@@ -22,7 +22,7 @@ protected:
 	virtual ~Resource(void) override;
 
 public:
-	virtual void AllocateMemory(uint32_t properties) = 0;
+	virtual void Allocate(uint32_t properties) = 0;
 
 public:
 	inline size_t GetSize(void) const { return mSize; }

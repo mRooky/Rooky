@@ -38,7 +38,7 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-void Context::Initialize(Platform::Window* window)
+void Context::Create(Platform::Window* window)
 {
 	CreateVendor();
 	CreateInstance();

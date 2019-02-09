@@ -36,10 +36,10 @@ void CommandPool::Initialize(void)
 	mCommandPool->Create(family);
 }
 
-Render::CommandList* CommandPool::Allocate(bool primary)
+Render::CommandList* CommandPool::Allocate(bool level)
 {
 	CommandList* command_list = new CommandList(this);
-	command_list->Initialize(primary);
+	command_list->Create(level);
 	mCommandLists.push_back(command_list);
 	return command_list;
 }

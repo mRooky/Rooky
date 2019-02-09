@@ -31,7 +31,7 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mBuffer);
 }
 
-void Buffer::Initialize(size_t size, uint32_t usage)
+void Buffer::Create(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
 	assert(mMemory == nullptr);
@@ -42,7 +42,7 @@ void Buffer::Initialize(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void Buffer::AllocateMemory(uint32_t properties)
+void Buffer::Allocate(uint32_t properties)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Memory* vk_memory = new Memory(context);

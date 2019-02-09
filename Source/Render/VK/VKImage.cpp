@@ -30,7 +30,7 @@ Image::~Image(void)
 	Vulkan::Release(mImage);
 }
 
-void Image::Initialize(Render::Format format, const Render::Extent3& extent, uint32_t usage)
+void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_t usage)
 {
 	mFormat = format;
 	mExtent = extent;
@@ -44,7 +44,7 @@ void Image::Initialize(Render::Format format, const Render::Extent3& extent, uin
 	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, usage);
 }
 
-void Image::AllocateMemory(uint32_t properties)
+void Image::Allocate(uint32_t properties)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Memory* vk_memory = new Memory(context);

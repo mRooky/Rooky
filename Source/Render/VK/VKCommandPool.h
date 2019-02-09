@@ -24,7 +24,7 @@ public:
 	virtual void Initialize(void) override;
 
 public:
-	virtual Render::CommandList* Allocate(bool primary) override;
+	virtual Render::CommandList* Allocate(bool level) override;
 
 public:
 	inline Vulkan::CommandPool* GetCommandPoolVK(void) const { return mCommandPool; }

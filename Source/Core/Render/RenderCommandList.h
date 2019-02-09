@@ -19,7 +19,7 @@ protected:
 	virtual ~CommandList(void);
 
 public:
-	virtual void Initialize(bool primary) = 0;
+	virtual void Create(bool level) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }

@@ -25,7 +25,7 @@ CommandList::~CommandList(void)
 	mCommandBuffer = nullptr;
 }
 
-void CommandList::Initialize(bool primary)
+void CommandList::Create(bool primary)
 {
 	assert(mCommandPool != nullptr);
 	VkCommandBufferLevel level =  primary ? VK_COMMAND_BUFFER_LEVEL_PRIMARY : VK_COMMAND_BUFFER_LEVEL_SECONDARY;

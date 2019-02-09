@@ -21,8 +21,8 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Initialize(size_t size, uint32_t usage) override;
-	virtual void AllocateMemory(uint32_t properties) override;
+	virtual void Create(size_t size, uint32_t usage) override;
+	virtual void Allocate(uint32_t properties) override;
 	virtual void Copy(const Render::Buffer& other) override;
 
 public:

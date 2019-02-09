@@ -5,19 +5,18 @@
  *      Author: rookyma
  */
 
-#include "RenderDeclaration.h"
-
+#include "RenderElement.h"
 #include <cassert>
 
 namespace Render
 {
 
-Declaration::Declaration(Context* context):
+Element::Element(Context* context):
 		Object(context)
 {
 }
 
-Declaration::~Declaration(void)
+Element::~Element(void)
 {
 	mFormats.clear();
 }

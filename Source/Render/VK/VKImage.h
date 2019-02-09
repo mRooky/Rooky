@@ -21,8 +21,8 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Initialize(Render::Format format, const Render::Extent3& extent, uint32_t usage) override;
-	virtual void AllocateMemory(uint32_t properties) override;
+	virtual void Create(Render::Format format, const Render::Extent3& extent, uint32_t usage) override;
+	virtual void Allocate(uint32_t properties) override;
 	virtual void CreateView(Render::ImageType type) override;
 
 public:

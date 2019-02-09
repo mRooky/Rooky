@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERDECLARATION_H_
-#define SOURCE_CORE_RENDER_RENDERDECLARATION_H_
+#ifndef SOURCE_CORE_RENDER_RENDERELEMENT_H_
+#define SOURCE_CORE_RENDER_RENDERELEMENT_H_
 
 #include "RenderObject.h"
 #include "RenderFormat.h"
@@ -16,11 +16,11 @@
 namespace Render
 {
 
-class Declaration : public Object
+class Element : public Object
 {
 public:
-	explicit Declaration(Context* context);
-	virtual ~Declaration(void) override;
+	explicit Element(Context* context);
+	virtual ~Element(void) override;
 
 public:
 	virtual uint32_t GetStride(void) const = 0;
@@ -35,4 +35,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERDECLARATION_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERELEMENT_H_ */

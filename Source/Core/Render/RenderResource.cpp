@@ -6,6 +6,7 @@
  */
 
 #include "RenderResource.h"
+#include "RenderMemory.h"
 #include <cassert>
 
 namespace Render
@@ -18,6 +19,8 @@ Resource::Resource(Context* context):
 
 Resource::~Resource(void)
 {
+	delete mMemory;
+	mMemory = nullptr;
 }
 
 } /* namespace Render */
