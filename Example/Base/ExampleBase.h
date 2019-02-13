@@ -8,7 +8,7 @@
 #ifndef EXAMPLE_BASE_EXAMPLEBASE_H_
 #define EXAMPLE_BASE_EXAMPLEBASE_H_
 
-#include "RenderClasses.h"
+#include "CoreSystem.h"
 #include "CoreViewport.h"
 #include "PlatformWindow.h"
 #include <cstdint>
@@ -24,13 +24,13 @@ public:
 
 public:
 	void CreateWindow(const char* title);
-	void CreateContext(void);
+	void CreateSystem(void);
 
 public:
 	int32_t ShowModal(void);
 
 protected:
-	Render::Context* mContext = nullptr;
+	Core::System* mSystem = nullptr;
 	Platform::Window* mWindow = nullptr;
 };
 

@@ -5,20 +5,18 @@
  *      Author: rookyma
  */
 
-#include <CoreIndex.h>
+#include "CoreIndex.h"
 
 namespace Core
 {
 
-Index::Index()
+Index::Index(BufferManager* creator):
+		Buffer(creator)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Index::~Index()
+Index::~Index(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

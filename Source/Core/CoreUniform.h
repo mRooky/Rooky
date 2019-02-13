@@ -16,7 +16,7 @@ namespace Core
 class Uniform: public Buffer
 {
 public:
-	Uniform(void);
+	explicit Uniform(BufferManager* creator);
 	virtual ~Uniform(void) override;
 };
 

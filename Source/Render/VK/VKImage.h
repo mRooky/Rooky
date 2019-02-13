@@ -26,6 +26,9 @@ public:
 	virtual void CreateView(Render::ImageType type) override;
 
 public:
+	virtual void CopyFrom(const Render::Buffer* other) override;
+
+public:
 	inline Vulkan::Image* GetImageVK(void) const { return mImage; }
 	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
 

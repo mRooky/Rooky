@@ -5,20 +5,21 @@
  *      Author: rookyma
  */
 
-#include <CoreBuffer.h>
+#include "CoreBuffer.h"
+#include <cassert>
 
 namespace Core
 {
 
-Buffer::Buffer()
+Buffer::Buffer(BufferManager* creator):
+		mCreator(creator)
 {
-	// TODO Auto-generated constructor stub
-
+	assert(mCreator != nullptr);
 }
 
-Buffer::~Buffer()
+Buffer::~Buffer(void)
 {
-	// TODO Auto-generated destructor stub
+	mCreator = nullptr;
 }
 
 } /* namespace Core */

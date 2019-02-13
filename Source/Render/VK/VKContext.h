@@ -46,8 +46,6 @@ private:
 	Vulkan::Device* m_device = nullptr;
 	Vulkan::Instance* m_instance = nullptr;
 	Vulkan::PhysicalDevice* m_physical = nullptr;
-
-private:
 	Vulkan::CommandPool* m_commandPool = nullptr;
 
 private:

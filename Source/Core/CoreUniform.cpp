@@ -5,20 +5,18 @@
  *      Author: rookyma
  */
 
-#include <CoreUniform.h>
+#include "CoreUniform.h"
 
 namespace Core
 {
 
-Uniform::Uniform()
+Uniform::Uniform(BufferManager* creator):
+		Buffer(creator)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Uniform::~Uniform()
+Uniform::~Uniform(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

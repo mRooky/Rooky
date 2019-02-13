@@ -8,12 +8,17 @@
 #include "VKImage.h"
 #include "VKContext.h"
 #include "VKFormat.h"
+#include "VKBuffer.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
 #include "VulkanSampler.h"
 #include "VulkanInline.h"
 #include "VulkanDeviceMemory.h"
+#include "VulkanCommandPool.h"
+#include "VulkanCommandBuffer.h"
+#include "VulkanDevice.h"
+#include "VulkanQueue.h"
 
 #include <cassert>
 
@@ -71,6 +76,31 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	descriptor_info.imageView = mImage->GetView()->GetHandle();
 	descriptor_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 	return descriptor_info;
+}
+
+void Image::CopyFrom(const Render::Buffer* other)
+{
+	Context* context = static_cast<Context*>(mContext);
+	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
+
+	VkBufferImageCopy copy_region = {};
+	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	copy_region.imageSubresource.layerCount = 1;
+	copy_region.imageExtent.width = mExtent.width;
+	copy_region.imageExtent.height = mExtent.height;
+	copy_region.imageExtent.depth = mExtent.depth;
+
+	const Buffer* buffer = static_cast<const Buffer*>(other);
+	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
+
+	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+	command_buffer->CopyResource(vk_buffer, mImage, 1, &copy_region);
+	command_buffer->End();
+
+	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
+	queue->FlushCommandBuffer(command_buffer);
 }
 
 VkImageViewType Image::ConverType(const Render::ImageType& type)

@@ -12,17 +12,20 @@
 
 namespace Core
 {
-
+class BufferManager;
 class Buffer
 {
-public:
-	Buffer(void);
+	friend class BufferManager;
+protected:
+	explicit Buffer(BufferManager* creator);
 	virtual ~Buffer(void);
 
 public:
+	inline BufferManager* GetCreator(void) const {return mCreator; }
 	inline Render::Buffer* GetBuffer(void) const { return mBuffer; }
 
 protected:
+	BufferManager* mCreator = nullptr;
 	Render::Buffer* mBuffer = nullptr;
 };
 

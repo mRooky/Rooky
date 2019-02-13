@@ -5,20 +5,18 @@
  *      Author: rookyma
  */
 
-#include <CoreVertex.h>
+#include "CoreVertex.h"
 
 namespace Core
 {
 
-Vertex::Vertex()
+Vertex::Vertex(BufferManager* creator):
+		Buffer(creator)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Vertex::~Vertex()
+Vertex::~Vertex(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

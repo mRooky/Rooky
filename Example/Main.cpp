@@ -11,7 +11,7 @@ int main(void)
 {
 	Example::Base base;
 	base.CreateWindow("Rooky Window");
-	base.CreateContext();
+	base.CreateSystem();
 	base.ShowModal();
 }
 

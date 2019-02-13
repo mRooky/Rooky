@@ -22,8 +22,6 @@ public:
 public:
 	virtual void Create(size_t size, uint32_t usage) = 0;
 
-public:
-	virtual void Copy(const Buffer& other) = 0;
 };
 
 } /* namespace Render */

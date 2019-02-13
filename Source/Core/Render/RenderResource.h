@@ -14,6 +14,7 @@
 
 namespace Render
 {
+class Buffer;
 class Resource : public Object
 {
 protected:
@@ -22,6 +23,9 @@ protected:
 
 public:
 	virtual void Allocate(uint32_t properties) = 0;
+
+public:
+	virtual void CopyFrom(const Buffer* buffer) = 0;
 
 public:
 	inline size_t GetSize(void) const { return mSize; }

@@ -23,7 +23,9 @@ public:
 public:
 	virtual void Create(size_t size, uint32_t usage) override;
 	virtual void Allocate(uint32_t properties) override;
-	virtual void Copy(const Render::Buffer& other) override;
+
+public:
+	virtual void CopyFrom(const Render::Buffer* other) override;
 
 public:
 	VkDescriptorBufferInfo GetDescriptorInfo(void) const;

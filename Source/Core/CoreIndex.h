@@ -16,7 +16,7 @@ namespace Core
 class Index : public Buffer
 {
 private:
-	Index(void);
+	explicit Index(BufferManager* creator);
 	virtual ~Index(void) override;
 };
 

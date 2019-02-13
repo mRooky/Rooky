@@ -50,19 +50,21 @@ void Buffer::Allocate(uint32_t properties)
 	mBuffer->BindMemory(mMemory, 0);
 }
 
-void Buffer::Copy(const Render::Buffer& other)
+void Buffer::CopyFrom(const Render::Buffer* other)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	assert(mSize >= other.GetSize());
+	assert(mSize >= other->GetSize());
 	VkBufferCopy buffer_copy_range = {};
-	buffer_copy_range.size = other.GetSize();
+	buffer_copy_range.size = other->GetSize();
 
-	const Buffer& buffer = static_cast<const Buffer&>(other);
+	const Buffer* buffer = static_cast<const Buffer*>(other);
+	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
+
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
-	command_buffer->CopyResource(buffer.GetBufferVK(), mBuffer, 1, &buffer_copy_range);
+	command_buffer->CopyResource(vk_buffer, mBuffer, 1, &buffer_copy_range);
 	command_buffer->End();
 
 	Vulkan::Device* device = context->GetDeviceVK();

@@ -6,7 +6,6 @@
  */
 
 #include "ExampleBase.h"
-#include "RenderContext.h"
 
 #ifdef VK_USE_PLATFORM_XCB_KHR
 #include "Platform/XCB/XCBWindow.h"
@@ -25,7 +24,8 @@ Base::~Base(void)
 {
 	delete mWindow;
 	mWindow = nullptr;
-	Render::DestroyContext(mContext);
+	delete mSystem;
+	mSystem = nullptr;
 }
 
 void Base::CreateWindow(const char* title)
@@ -36,12 +36,11 @@ void Base::CreateWindow(const char* title)
 	mWindow->SetTitle("Rooky Vulkan");
 }
 
-void Base::CreateContext(void)
+void Base::CreateSystem(void)
 {
-	assert(mWindow != nullptr);
-	mContext = Render::CreateContext();
-	assert(mContext != nullptr);
-	mContext->Create();
+	mSystem = new Core::System;
+	assert(mSystem != nullptr);
+	mSystem->Create();
 }
 
 int32_t Base::ShowModal(void)

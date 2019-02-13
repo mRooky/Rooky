@@ -25,6 +25,7 @@ class Pipeline;
 class CommandPool;
 class CommandList;
 class Sampler;
+class Element;
 
 }
 
