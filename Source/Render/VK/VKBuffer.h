@@ -22,7 +22,7 @@ public:
 
 public:
 	virtual void Create(size_t size, uint32_t usage) override;
-	virtual void Allocate(uint32_t properties) override;
+	virtual void Allocate(bool mappable) override;
 
 public:
 	virtual void CopyFrom(const Render::Buffer* other) override;
@@ -33,6 +33,9 @@ public:
 public:
 	inline Vulkan::Buffer* GetBufferVK(void) const { return mBuffer; }
 	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
+
+public:
+	static VkBufferUsageFlags ConvertUsageFlag(Render::BufferUsage usage);
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;

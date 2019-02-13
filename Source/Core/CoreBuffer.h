@@ -15,10 +15,12 @@ namespace Core
 class BufferManager;
 class Buffer
 {
-	friend class BufferManager;
 protected:
 	explicit Buffer(BufferManager* creator);
 	virtual ~Buffer(void);
+
+public:
+
 
 public:
 	inline BufferManager* GetCreator(void) const {return mCreator; }

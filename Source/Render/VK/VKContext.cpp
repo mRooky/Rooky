@@ -7,6 +7,8 @@
 
 #include "VKContext.h"
 #include "VKSurface.h"
+#include "VKBuffer.h"
+#include "VKImage.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -43,6 +45,35 @@ void Context::Create(void)
 	CreatePhysical();
 	CreateDevice();
 	CreateCommandPool();
+}
+
+Render::Image* Context::CreateImage(void)
+{
+	return new Image(this);
+}
+
+Render::Buffer* Context::CreateBuffer(void)
+{
+	return new Buffer(this);
+}
+
+void Context::DestroyObject(Render::Object* object)
+{
+	delete object;
+}
+
+uint32_t Context::GetUsageFlag(Render::BufferUsage usage, bool read, bool write)
+{
+	uint32_t flag = Buffer::ConvertUsageFlag(usage);
+	if (read)
+	{
+		flag |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	}
+	if (read)
+	{
+		flag |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	}
+	return flag;
 }
 
 void Context::CreateVendor(void)

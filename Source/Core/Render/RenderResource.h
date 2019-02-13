@@ -22,7 +22,7 @@ protected:
 	virtual ~Resource(void) override;
 
 public:
-	virtual void Allocate(uint32_t properties) = 0;
+	virtual void Allocate(bool mappable) = 0;
 
 public:
 	virtual void CopyFrom(const Buffer* buffer) = 0;

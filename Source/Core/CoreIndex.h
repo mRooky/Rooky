@@ -9,15 +9,28 @@
 #define SOURCE_CORE_COREINDEX_H_
 
 #include "CoreBuffer.h"
+#include "RenderTypes.h"
 
 namespace Core
 {
 
 class Index : public Buffer
 {
+	friend class BufferManager;
 private:
 	explicit Index(BufferManager* creator);
 	virtual ~Index(void) override;
+
+public:
+	void Create(Render::IndexType type, uint32_t count);
+
+public:
+	inline uint32_t GetCount(void) const { return mCount; }
+	inline Render::IndexType GetType(void) const { return mType; }
+
+protected:
+	uint32_t mCount = 0;
+	Render::IndexType mType = Render::IndexType::INDEX_TYPE_U16;
 };
 
 } /* namespace Core */

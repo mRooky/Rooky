@@ -22,6 +22,9 @@ public:
 public:
 	void Create(void);
 
+public:
+	inline Render::Context* GetContext(void) const { return mContext; }
+
 protected:
 	Render::Context* mContext = nullptr;
 };

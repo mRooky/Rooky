@@ -9,6 +9,7 @@
 #include "VKContext.h"
 #include "VKFormat.h"
 #include "VKBuffer.h"
+#include "VKInline.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -49,12 +50,13 @@ void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_
 	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, usage);
 }
 
-void Image::Allocate(uint32_t properties)
+void Image::Allocate(bool mappable)
 {
 	assert(mImage != nullptr);
+	auto flags = GetMemoryPropertyFlags(mappable);
 	Vulkan::Device* device = mImage->GetDevice();
 	mMemory = Vulkan::DeviceMemory::New(device);
-	mMemory->Allocate(mImage, properties);
+	mMemory->Allocate(mImage, flags);
 	mImage->BindMemory(mMemory, 0);
 }
 

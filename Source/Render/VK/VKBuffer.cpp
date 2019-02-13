@@ -7,6 +7,7 @@
 
 #include "VKBuffer.h"
 #include "VKContext.h"
+#include "VKInline.h"
 
 #include "VulkanBuffer.h"
 #include "VulkanInline.h"
@@ -41,12 +42,13 @@ void Buffer::Create(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void Buffer::Allocate(uint32_t properties)
+void Buffer::Allocate(bool mappable)
 {
 	assert(mBuffer != nullptr);
+	auto flags = GetMemoryPropertyFlags(mappable);
 	Vulkan::Device* device = mBuffer->GetDevice();
 	mMemory = Vulkan::DeviceMemory::New(device);
-	mMemory->Allocate(mBuffer, properties);
+	mMemory->Allocate(mBuffer, flags);
 	mBuffer->BindMemory(mMemory, 0);
 }
 
@@ -81,6 +83,29 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	descriptor_info.offset = 0;
 	descriptor_info.range = mSize;
 	return descriptor_info;
+}
+
+VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsage usage)
+{
+	switch(usage)
+	{
+	case Render::BufferUsage::BUFFER_USAGE_INDEX:
+		return VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_VERTEX:
+		return VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_UNIFORM:
+		return VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_STORAGE:
+		return VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_INDIRECT:
+		return VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_UNIFORM_TEXEL:
+		return VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT;
+	case Render::BufferUsage::BUFFER_USAGE_STORAGE_TEXEL:
+		return VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
+	default:
+		return 0;
+	}
 }
 
 } /* namespace VK */

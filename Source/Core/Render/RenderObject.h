@@ -15,6 +15,8 @@ class Object
 {
 protected:
 	explicit Object(Context* context);
+
+public:
 	virtual ~Object(void);
 
 public:

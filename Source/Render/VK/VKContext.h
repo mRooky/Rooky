@@ -26,6 +26,16 @@ public:
 	virtual void Create(void) override;
 
 public:
+	virtual Render::Image* CreateImage(void) override;
+	virtual Render::Buffer* CreateBuffer(void) override;
+
+public:
+	virtual void DestroyObject(Render::Object* object) override;
+
+public:
+	virtual uint32_t GetUsageFlag(Render::BufferUsage usage, bool read, bool write) override;
+
+public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
 	inline Vulkan::Device* GetDeviceVK(void) const { return m_device; }
 	inline Vulkan::Instance* GetInstanceVK(void) const { return m_instance; }

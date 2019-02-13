@@ -15,13 +15,23 @@ namespace Core
 class Index;
 class Vertex;
 class Uniform;
+class System;
 class BufferManager
 {
 public:
-	BufferManager(void);
+	explicit BufferManager(System* system);
 	virtual ~BufferManager(void);
 
 public:
+	Index* CreateIndex(void);
+	Vertex* CreateVertex(void);
+	Uniform* CreateUniform(void);
+
+public:
+	inline System* GetSystem(void) const { return mSystem; }
+
+protected:
+	System* mSystem = nullptr;
 
 protected:
 	std::vector<Index*> mIndexes;

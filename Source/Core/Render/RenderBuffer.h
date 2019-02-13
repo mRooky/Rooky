@@ -9,13 +9,15 @@
 #define SOURCE_CORE_RENDER_RENDERBUFFER_H_
 
 #include "RenderResource.h"
+#include "RenderTypes.h"
 
 namespace Render
 {
 
 class Buffer : public Resource
 {
-public:
+	friend class Context;
+protected:
 	explicit Buffer(Context* context);
 	virtual ~Buffer(void) override;
 
