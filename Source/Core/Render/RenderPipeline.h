@@ -30,6 +30,8 @@ public:
 
 protected:
 	uint32_t mIndex = 0;
+
+protected:
 	Pass* mRenderPass = nullptr;
 	State* mRenderState = nullptr;
 };

@@ -21,6 +21,9 @@ public:
 	virtual ~Queue(void) override;
 
 public:
+	virtual void Submit(Render::CommandList* command) override;
+
+public:
 	inline Vulkan::Queue* GetQueueVK(void) const { return mQueue; }
 
 protected:

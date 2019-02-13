@@ -23,7 +23,7 @@ public:
 	virtual ~Context(void) override;
 
 public:
-	virtual void Create(Platform::Window* mWindow) override;
+	virtual void Create(void) override;
 
 public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
@@ -40,7 +40,6 @@ private:
 	void CreatePhysical(void);
 	void CreateDevice(void);
 	void CreateCommandPool(void);
-	void CreateSurface(Platform::Window* mWindow);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;

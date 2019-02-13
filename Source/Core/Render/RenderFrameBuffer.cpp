@@ -17,6 +17,7 @@ FrameBuffer::FrameBuffer(Pass* pass):
 
 FrameBuffer::~FrameBuffer(void)
 {
+	mAttachments.clear();
 }
 
 } /* namespace Render */

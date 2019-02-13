@@ -29,8 +29,6 @@ Context::Context(void)
 
 Context::~Context(void)
 {
-	delete mSurface;
-	mSurface = nullptr;
 	Vulkan::Release(m_commandPool);
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
@@ -38,22 +36,13 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-void Context::Create(Platform::Window* window)
+void Context::Create(void)
 {
 	CreateVendor();
 	CreateInstance();
 	CreatePhysical();
 	CreateDevice();
 	CreateCommandPool();
-	CreateSurface(window);
-}
-
-void Context::CreateSurface(Platform::Window* window)
-{
-	assert(window != nullptr);
-	assert(mSurface == nullptr);
-	mSurface = new Surface(this);
-	mSurface->Create(window);
 }
 
 void Context::CreateVendor(void)

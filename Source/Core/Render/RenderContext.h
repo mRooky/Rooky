@@ -23,13 +23,7 @@ public:
 	virtual ~Context(void);
 
 public:
-	virtual void Create(Platform::Window* mWindow) = 0;
-
-public:
-	inline Surface* GetSurface(void) const { return mSurface; }
-
-protected:
-	Surface* mSurface = nullptr;
+	virtual void Create(void) = 0;
 };
 
 Context* CreateContext(void);

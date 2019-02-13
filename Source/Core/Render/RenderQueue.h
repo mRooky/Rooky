@@ -12,12 +12,15 @@
 
 namespace Render
 {
-
+class CommandList;
 class Queue : public Object
 {
 public:
 	explicit Queue(Context* context);
 	virtual ~Queue(void) override;
+
+public:
+	virtual void Submit(CommandList* command) = 0;
 };
 
 } /* namespace Render */

@@ -7,6 +7,13 @@
 
 #include "VKQueue.h"
 #include "VKContext.h"
+#include "VKCommandList.h"
+
+#include "VulkanCommandBuffer.h"
+#include "VulkanSemaphore.h"
+#include "VulkanQueue.h"
+
+#include <cassert>
 
 namespace VK
 {
@@ -19,6 +26,25 @@ Queue::Queue(Context* context):
 Queue::~Queue(void)
 {
 	mQueue = nullptr;
+}
+
+void Queue::Submit(Render::CommandList* command)
+{
+	assert(mQueue != nullptr);
+	auto command_list = static_cast<CommandList*>(command);
+	auto command_buffer = command_list->GetCommandBufferVK();
+	auto vk_command = command_buffer->GetHandle();
+	auto vk_semaphore = command_buffer->GetSemaphore()->GetHandle();
+	VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+
+	VkSubmitInfo submit_info = Vulkan::Queue::SubmitInfo();
+	submit_info.commandBufferCount = 1;
+	submit_info.pCommandBuffers = &vk_command;
+	submit_info.waitSemaphoreCount = 1;
+	submit_info.pWaitSemaphores = &vk_semaphore;
+	submit_info.pWaitDstStageMask = &wait_stage_mask;
+
+	mQueue->Submit(1, &submit_info);
 }
 
 } /* namespace VK */
