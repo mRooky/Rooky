@@ -27,6 +27,7 @@ public:
 
 public:
 	inline Vulkan::Image* GetImageVK(void) const { return mImage; }
+	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
 
 public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
@@ -37,6 +38,7 @@ public:
 
 protected:
 	Vulkan::Image* mImage = nullptr;
+	Vulkan::DeviceMemory* mMemory = nullptr;
 };
 
 } /* namespace VK */

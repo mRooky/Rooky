@@ -8,12 +8,12 @@
 #include "VKImage.h"
 #include "VKContext.h"
 #include "VKFormat.h"
-#include "VKMemory.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
 #include "VulkanSampler.h"
 #include "VulkanInline.h"
+#include "VulkanDeviceMemory.h"
 
 #include <cassert>
 
@@ -46,11 +46,11 @@ void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_
 
 void Image::Allocate(uint32_t properties)
 {
-	Context* context = static_cast<Context*>(mContext);
-	Memory* vk_memory = new Memory(context);
-	vk_memory->Allocate(mImage, properties);
-	mImage->BindMemory(vk_memory->GetMemoryVK(), 0);
-	mMemory = vk_memory;
+	assert(mImage != nullptr);
+	Vulkan::Device* device = mImage->GetDevice();
+	mMemory = Vulkan::DeviceMemory::New(device);
+	mMemory->Allocate(mImage, properties);
+	mImage->BindMemory(mMemory, 0);
 }
 
 void Image::CreateView(Render::ImageType type)

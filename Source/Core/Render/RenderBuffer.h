@@ -1,5 +1,5 @@
 /*
- * HardwareBuffer.h
+ * Buffer.h
  *
  *  Created on: Jan 30, 2019
  *      Author: rookyma

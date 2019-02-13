@@ -14,7 +14,6 @@
 
 namespace Render
 {
-class Memory;
 class Resource : public Object
 {
 protected:
@@ -27,14 +26,10 @@ public:
 public:
 	inline size_t GetSize(void) const { return mSize; }
 	inline uint32_t GetUsage(void) const { return mUsage; }
-	inline Memory* GetMemory(void) const { return mMemory; }
 
 protected:
 	size_t mSize = 0;
 	uint32_t mUsage = 0;
-
-protected:
-	Memory* mMemory = nullptr;
 };
 
 } /* namespace Render */

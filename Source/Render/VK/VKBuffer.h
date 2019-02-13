@@ -30,9 +30,11 @@ public:
 
 public:
 	inline Vulkan::Buffer* GetBufferVK(void) const { return mBuffer; }
+	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;
+	Vulkan::DeviceMemory* mMemory = nullptr;
 };
 
 } /* namespace VK */

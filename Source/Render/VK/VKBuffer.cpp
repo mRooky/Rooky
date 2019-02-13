@@ -7,7 +7,6 @@
 
 #include "VKBuffer.h"
 #include "VKContext.h"
-#include "VKMemory.h"
 
 #include "VulkanBuffer.h"
 #include "VulkanInline.h"
@@ -15,6 +14,7 @@
 #include "VulkanCommandBuffer.h"
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
+#include "VulkanDeviceMemory.h"
 
 #include <cassert>
 
@@ -34,7 +34,6 @@ Buffer::~Buffer(void)
 void Buffer::Create(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
-	assert(mMemory == nullptr);
 	mSize = size;
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -44,11 +43,11 @@ void Buffer::Create(size_t size, uint32_t usage)
 
 void Buffer::Allocate(uint32_t properties)
 {
-	Context* context = static_cast<Context*>(mContext);
-	Memory* vk_memory = new Memory(context);
-	vk_memory->Allocate(mBuffer, properties);
-	mBuffer->BindMemory(vk_memory->GetMemoryVK(), 0);
-	mMemory = vk_memory;
+	assert(mBuffer != nullptr);
+	Vulkan::Device* device = mBuffer->GetDevice();
+	mMemory = Vulkan::DeviceMemory::New(device);
+	mMemory->Allocate(mBuffer, properties);
+	mBuffer->BindMemory(mMemory, 0);
 }
 
 void Buffer::Copy(const Render::Buffer& other)

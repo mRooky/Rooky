@@ -14,7 +14,6 @@ namespace Render
 class Buffer;
 class Context;
 class Image;
-class Memory;
 class Object;
 class Resource;
 class Shader;
