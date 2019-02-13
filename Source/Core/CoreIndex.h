@@ -30,7 +30,7 @@ public:
 
 protected:
 	uint32_t mCount = 0;
-	Render::IndexType mType = Render::IndexType::INDEX_TYPE_U16;
+	Render::IndexType mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 };
 
 } /* namespace Core */

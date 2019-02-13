@@ -25,6 +25,10 @@ public:
 	virtual void Allocate(bool mappable) override;
 
 public:
+	virtual void* Map(size_t offset, size_t size) override;
+	virtual void Unmap(size_t offset, size_t size) override;
+
+public:
 	virtual void CopyFrom(const Render::Buffer* other) override;
 
 public:

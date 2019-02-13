@@ -5,13 +5,14 @@
  *      Author: rookyma
  */
 
-#include "Base/ExampleBase.h"
+#include "Base/ExampleBuffer.h"
 
 int main(void)
 {
-	Example::Base base;
-	base.CreateWindow("Rooky Window");
-	base.CreateSystem();
-	base.ShowModal();
+	Example::Buffer buffer;
+	buffer.CreateWindow("Rooky Window");
+	buffer.CreateSystem();
+	buffer.CreateBuffer();
+	buffer.ShowModal();
 }
 

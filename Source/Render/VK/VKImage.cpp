@@ -34,15 +34,17 @@ Image::Image(Context* context):
 Image::~Image(void)
 {
 	Vulkan::Release(mImage);
+	Vulkan::Release(mMemory);
 }
 
 void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_t usage)
 {
+	assert(mImage == nullptr);
+
 	mFormat = format;
 	mExtent = extent;
 	mUsage = usage;
 
-	assert(mImage == nullptr);
 	VkFormat vk_format = ConvertFormat(format);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -78,6 +80,19 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	descriptor_info.imageView = mImage->GetView()->GetHandle();
 	descriptor_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 	return descriptor_info;
+}
+
+void* Image::Map(size_t offset, size_t size)
+{
+	assert(mMemory != nullptr);
+	return mMemory->Map(offset, size);
+}
+
+void Image::Unmap(size_t offset, size_t size)
+{
+	assert(mMemory != nullptr);
+	mMemory->Unmap();
+	mMemory->Flush(offset, size);
 }
 
 void Image::CopyFrom(const Render::Buffer* other)

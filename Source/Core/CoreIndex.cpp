@@ -24,19 +24,21 @@ Index::Index(BufferManager* creator):
 
 Index::~Index(void)
 {
+	mCount = 0;
+	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
 void Index::Create(Render::IndexType type, uint32_t count)
 {
+	mType = type;
+	mCount = count;
+
 	size_t size = Render::GetIndexTypeSize(type) * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
-	mBuffer = context->CreateBuffer();
-
 	auto usage = Render::BufferUsage::BUFFER_USAGE_INDEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	mBuffer->Create(size, flags);
-	mBuffer->Allocate(false);
+	Buffer::Create(size, flags, false);
 }
 
 } /* namespace Core */

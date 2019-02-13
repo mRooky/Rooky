@@ -25,22 +25,21 @@ Vertex::Vertex(BufferManager* creator):
 
 Vertex::~Vertex(void)
 {
-	auto context = mCreator->GetSystem()->GetContext();
-	context->DestroyObject(mBuffer);
-	mBuffer = nullptr;
+	mCount = 0;
+	mElement = nullptr;
 }
 
 void Vertex::Create(Render::Element* element, uint32_t count)
 {
+	mCount = count;
+	mElement = element;
+
 	size_t size = element->GetStride() * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
-	mBuffer = context->CreateBuffer();
-
 	auto usage = Render::BufferUsage::BUFFER_USAGE_VERTEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	mBuffer->Create(size, flags);
-	mBuffer->Allocate(false);
+	Buffer::Create(size, flags, false);
 }
 
 } /* namespace Core */

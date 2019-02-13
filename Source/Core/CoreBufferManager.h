@@ -18,7 +18,8 @@ class Uniform;
 class System;
 class BufferManager
 {
-public:
+	friend class System;
+private:
 	explicit BufferManager(System* system);
 	virtual ~BufferManager(void);
 

@@ -9,6 +9,8 @@
 #define SOURCE_CORE_COREBUFFER_H_
 
 #include "RenderClasses.h"
+#include <cstdint>
+#include <cstddef>
 
 namespace Core
 {
@@ -20,7 +22,11 @@ protected:
 	virtual ~Buffer(void);
 
 public:
+	void Create(size_t size, uint32_t usage, bool mappable);
 
+public:
+	void Read(void* dst, size_t offset, size_t size);
+	void Write(const void* src, size_t offset, size_t size);
 
 public:
 	inline BufferManager* GetCreator(void) const {return mCreator; }

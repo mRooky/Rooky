@@ -12,7 +12,7 @@
 
 namespace Core
 {
-
+class BufferManager;
 class System
 {
 public:
@@ -24,9 +24,11 @@ public:
 
 public:
 	inline Render::Context* GetContext(void) const { return mContext; }
+	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
 
 protected:
 	Render::Context* mContext = nullptr;
+	BufferManager* mBufferManager = nullptr;
 };
 
 } /* namespace Core */

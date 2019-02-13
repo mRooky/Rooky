@@ -23,11 +23,11 @@ public:
 	virtual ~Base(void);
 
 public:
-	void CreateWindow(const char* title);
-	void CreateSystem(void);
+	virtual void CreateWindow(const char* title);
+	virtual void CreateSystem(void);
 
 public:
-	int32_t ShowModal(void);
+	virtual int32_t ShowModal(void);
 
 protected:
 	Core::System* mSystem = nullptr;

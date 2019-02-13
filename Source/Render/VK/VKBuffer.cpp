@@ -30,6 +30,7 @@ Buffer::Buffer(Context* context):
 Buffer::~Buffer(void)
 {
 	Vulkan::Release(mBuffer);
+	Vulkan::Release(mMemory);
 }
 
 void Buffer::Create(size_t size, uint32_t usage)
@@ -50,6 +51,19 @@ void Buffer::Allocate(bool mappable)
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(mBuffer, flags);
 	mBuffer->BindMemory(mMemory, 0);
+}
+
+void* Buffer::Map(size_t offset, size_t size)
+{
+	assert(mMemory != nullptr);
+	return mMemory->Map(offset, size);
+}
+
+void Buffer::Unmap(size_t offset, size_t size)
+{
+	assert(mMemory != nullptr);
+	mMemory->Unmap();
+	mMemory->Flush(offset, size);
 }
 
 void Buffer::CopyFrom(const Render::Buffer* other)

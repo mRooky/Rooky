@@ -25,6 +25,10 @@ public:
 	virtual void Allocate(bool mappable) = 0;
 
 public:
+	virtual void* Map(size_t offset, size_t size) = 0;
+	virtual void Unmap(size_t offset, size_t size) = 0;
+
+public:
 	virtual void CopyFrom(const Buffer* buffer) = 0;
 
 public:

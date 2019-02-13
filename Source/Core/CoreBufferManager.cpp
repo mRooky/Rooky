@@ -23,7 +23,6 @@ BufferManager::BufferManager(System* system):
 
 BufferManager::~BufferManager(void)
 {
-	mSystem = nullptr;
 	for (auto index : mIndexes)
 	{
 		delete index;
@@ -39,6 +38,7 @@ BufferManager::~BufferManager(void)
 		delete uniform;
 	}
 	mUniforms.clear();
+	mSystem = nullptr;
 }
 
 Index* BufferManager::CreateIndex(void)
