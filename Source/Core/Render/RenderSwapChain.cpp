@@ -5,18 +5,18 @@
  *      Author: rookyma
  */
 
-#include "RenderSurface.h"
+#include "RenderSwapChain.h"
 #include "RenderImage.h"
 
 namespace Render
 {
 
-Surface::Surface(Context* context):
+SwapChain::SwapChain(Context* context):
 		Object(context)
 {
 }
 
-Surface::~Surface(void)
+SwapChain::~SwapChain(void)
 {
 }
 

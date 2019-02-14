@@ -6,7 +6,6 @@
  */
 
 #include "VKContext.h"
-#include "VKSurface.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
 

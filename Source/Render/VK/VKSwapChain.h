@@ -8,17 +8,17 @@
 #ifndef SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 #define SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 
-#include "RenderSurface.h"
+#include "RenderSwapChain.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Context;
-class Surface: public Render::Surface
+class SwapChain: public Render::SwapChain
 {
 public:
-	explicit Surface(Context* context);
-	virtual ~Surface(void) override;
+	explicit SwapChain(Context* context);
+	virtual ~SwapChain(void) override;
 
 public:
 	virtual void Create(Platform::Window* window) override;

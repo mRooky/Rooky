@@ -17,7 +17,6 @@ class Pass;
 class Image;
 class FrameBuffer
 {
-	friend class Pass;
 protected:
 	explicit FrameBuffer(Pass* pass);
 	virtual ~FrameBuffer(void);

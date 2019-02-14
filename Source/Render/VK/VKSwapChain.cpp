@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKSurface.h"
+#include "VKSwapChain.h"
 #include "VKContext.h"
 
 #include "VulkanInline.h"
@@ -20,18 +20,18 @@
 namespace VK
 {
 
-Surface::Surface(Context* context):
-		Render::Surface(context)
+SwapChain::SwapChain(Context* context):
+		Render::SwapChain(context)
 {
 }
 
-Surface::~Surface(void)
+SwapChain::~SwapChain(void)
 {
 	Vulkan::Release(mSurface);
 	Vulkan::Release(mSwapChain);
 }
 
-void Surface::Create(Platform::Window* window)
+void SwapChain::Create(Platform::Window* window)
 {
 	auto context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
