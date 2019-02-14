@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERFRAMEBUFFER_H_
 #define SOURCE_CORE_RENDER_RENDERFRAMEBUFFER_H_
 
+#include "RenderMath.h"
 #include <vector>
 
 namespace Render
@@ -16,12 +17,21 @@ class Pass;
 class Image;
 class FrameBuffer
 {
-public:
+	friend class Pass;
+protected:
 	explicit FrameBuffer(Pass* pass);
 	virtual ~FrameBuffer(void);
 
 public:
+	virtual void Create(const Extent2& extent) = 0;
+
+public:
+	void AppendAttachment(Image* attachment);
+	void SetDepthStencil(Image* attachment);
+
+public:
 	inline Pass* GetRenderPass(void) const { return mPass; }
+	inline Image* GetDepthStencil(void) const { return mDepthStencil; }
 
 public:
 	inline size_t GetAttachmentCount(void) const { return mAttachments.size(); }
@@ -29,6 +39,7 @@ public:
 
 protected:
 	Pass* mPass = nullptr;
+	Image* mDepthStencil = nullptr;
 	std::vector<Image*> mAttachments;
 };
 

@@ -6,6 +6,13 @@
  */
 
 #include "CoreUniform.h"
+#include "CoreSystem.h"
+#include "CoreBufferManager.h"
+
+#include "RenderTypes.h"
+#include "RenderContext.h"
+
+#include <cassert>
 
 namespace Core
 {
@@ -17,6 +24,15 @@ Uniform::Uniform(BufferManager* creator):
 
 Uniform::~Uniform(void)
 {
+}
+
+void Uniform::Create(size_t size)
+{
+	assert(size > 0);
+	auto context = mCreator->GetSystem()->GetContext();
+	auto usage = Render::BufferUsage::BUFFER_USAGE_UNIFORM;
+	uint32_t flags = context->GetUsageFlag(usage, true, true);
+	Buffer::Create(size, flags, true);
 }
 
 } /* namespace Core */

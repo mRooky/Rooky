@@ -21,6 +21,9 @@ public:
 	virtual ~FrameBuffer(void) override;
 
 public:
+	virtual void Create(const Render::Extent2& extent) override;
+
+public:
 	inline Vulkan::FrameBuffer* GetFrameBufferVK(void) const { return mFrameBuffer; }
 
 protected:

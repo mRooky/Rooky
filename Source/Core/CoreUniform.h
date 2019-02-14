@@ -19,6 +19,9 @@ class Uniform: public Buffer
 private:
 	explicit Uniform(BufferManager* creator);
 	virtual ~Uniform(void) override;
+
+public:
+	void Create(size_t size);
 };
 
 } /* namespace Core */

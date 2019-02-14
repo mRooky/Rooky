@@ -6,6 +6,8 @@
  */
 
 #include "RenderPass.h"
+#include "RenderFrameBuffer.h"
+#include <cassert>
 
 namespace Render
 {
@@ -17,6 +19,22 @@ Pass::Pass(Context* context):
 
 Pass::~Pass(void)
 {
+}
+
+void Pass::AppendFormat(Format format)
+{
+	mFormats.push_back(format);
+}
+
+void Pass::RemoveFormat(size_t index)
+{
+	assert(index < mFormats.size());
+	auto iterator = mFormats.begin();
+	for (size_t i = 0; i < index; ++i)
+	{
+		++iterator;
+	}
+	mFormats.erase(iterator);
 }
 
 } /* namespace Render */

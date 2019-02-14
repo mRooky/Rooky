@@ -30,6 +30,9 @@ public:
 	inline Format GetFormat(void) const { return mFormat; }
 	inline const Extent3& GetExtent(void) const { return mExtent; }
 
+public:
+	static bool IsDepthStencilFormat(Format format);
+
 protected:
 	Extent3 mExtent = {};
 

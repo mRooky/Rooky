@@ -32,7 +32,7 @@ void Storage::Create(size_t size)
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsage::BUFFER_USAGE_COMMON;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, false);
+	Buffer::Create(size, flags, true);
 }
 
 } /* namespace Core */

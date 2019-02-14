@@ -13,6 +13,7 @@
 namespace Render
 {
 
+typedef Math::Extent2<int32_t> Extent2;
 typedef Math::Extent3<int32_t> Extent3;
 
 }

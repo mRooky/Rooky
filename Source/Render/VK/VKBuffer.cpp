@@ -37,6 +37,8 @@ void Buffer::Create(size_t size, uint32_t usage)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
+	mUsage = usage;
+
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mBuffer = Vulkan::Buffer::New(device);
