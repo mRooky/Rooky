@@ -24,6 +24,10 @@ public:
 	virtual void Create(Platform::Window* window) override;
 
 public:
+	virtual void SwapBuffer(uint32_t index) override;
+	virtual uint32_t AcquireNextImage(void) override;
+
+public:
 	inline Vulkan::Surface* GetSurfaceVK(void) const { return mSurface; }
 	inline Vulkan::SwapChain* GetSwapChainVK(void) const { return mSwapChain; }
 

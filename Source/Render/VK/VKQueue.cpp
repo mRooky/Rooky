@@ -12,6 +12,8 @@
 #include "VulkanCommandBuffer.h"
 #include "VulkanSemaphore.h"
 #include "VulkanQueue.h"
+#include "VulkanPhysicalDevice.h"
+#include "VulkanDevice.h"
 
 #include <cassert>
 
@@ -26,6 +28,15 @@ Queue::Queue(Context* context):
 Queue::~Queue(void)
 {
 	mQueue = nullptr;
+}
+
+void Queue::Create(uint32_t mIndex)
+{
+	auto context = static_cast<Context*>(mContext);
+	auto device = context->GetDeviceVK();
+	auto physical = context->GetPhysicalDeviceVK();
+	uint32_t family = physical->GetFamily();
+	mQueue = device->GetQueue(family, mIndex);
 }
 
 void Queue::Submit(Render::CommandList* command)

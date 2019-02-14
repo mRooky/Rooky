@@ -9,6 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERQUEUE_H_
 
 #include "RenderObject.h"
+#include <cstdint>
 
 namespace Render
 {
@@ -20,7 +21,13 @@ public:
 	virtual ~Queue(void) override;
 
 public:
+	virtual void Create(uint32_t mIndex) = 0;
+
+public:
 	virtual void Submit(CommandList* command) = 0;
+
+protected:
+	uint32_t mIndex = 0;
 };
 
 } /* namespace Render */

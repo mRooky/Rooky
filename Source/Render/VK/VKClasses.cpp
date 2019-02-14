@@ -11,6 +11,7 @@
 #include "VKSwapChain.h"
 #include "VKRenderPass.h"
 #include "VKCommandPool.h"
+#include "VKQueue.h"
 
 namespace VK
 {
@@ -23,6 +24,11 @@ Render::Pass* Context::CreatePass(void)
 Render::Image* Context::CreateImage(void)
 {
 	return new Image(this);
+}
+
+Render::Queue* Context::CreateQueue(void)
+{
+	return new Queue(this);
 }
 
 Render::Buffer* Context::CreateBuffer(void)

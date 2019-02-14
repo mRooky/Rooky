@@ -49,15 +49,4 @@ void Base::CreateSystem(void)
 	mSystem->Create();
 }
 
-int32_t Base::ShowModal(void)
-{
-	assert(mWindow != nullptr);
-	bool done = false;
-	while (!done)
-	{
-		done = mWindow->HandleEvent();
-	}
-	return 0;
-}
-
 } /* namespace Example */

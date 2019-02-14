@@ -21,6 +21,9 @@ public:
 	virtual ~Queue(void) override;
 
 public:
+	virtual void Create(uint32_t mIndex) override;
+
+public:
 	virtual void Submit(Render::CommandList* command) override;
 
 public:

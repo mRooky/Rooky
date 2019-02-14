@@ -27,6 +27,7 @@ public:
 
 public:
 	virtual Render::Pass* CreatePass(void) override;
+	virtual Render::Queue* CreateQueue(void) override;
 	virtual Render::Image* CreateImage(void) override;
 	virtual Render::Buffer* CreateBuffer(void) override;
 	virtual Render::SwapChain* CreateSwapChain(void) override;

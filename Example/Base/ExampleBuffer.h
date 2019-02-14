@@ -26,6 +26,10 @@ public:
 	virtual void Initialize(void) override;
 
 public:
+	virtual int32_t ShowModal(void) override;
+	virtual void RecordCommands(void) override;
+
+public:
 	virtual void CreateBuffer(void);
 
 protected:

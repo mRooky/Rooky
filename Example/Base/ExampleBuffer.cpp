@@ -11,9 +11,12 @@
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
+#include "CorePass.h"
 
+#include "RenderCommandList.h"
 #include "RenderImage.h"
 #include "RenderSwapChain.h"
+#include "RenderPass.h"
 
 #include <cassert>
 
@@ -56,6 +59,72 @@ void Buffer::Initialize(void)
 	}
 
 	CreateBuffer();
+}
+
+void Buffer::RecordCommands(void)
+{
+	auto pass = mPath->GetPass(0);
+
+	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::Image* attachment = swap_chain->GetRenderBuffer(0);
+
+	auto& extent = attachment->GetExtent();
+
+	Render::Extent2 extent2 =
+	{
+			extent.width,
+			extent.height
+	};
+
+	Render::Rect2D area =
+	{
+			Render::Offset2(0.0f, 0.0f),
+			extent2
+	};
+
+	Render::Viewport viewport =
+	{
+			0.0f,
+			0.0f,
+			static_cast<float>(extent.width),
+			static_cast<float>(extent.height),
+			0.0f,
+			1.0f
+	};
+
+	Render::Rect2D scissor = area;
+
+	const size_t count = mThread->GetCommandListCount();
+	for (uint32_t i = 0; i < count; ++i)
+	{
+		auto render_pass = pass->GetRenderPass();
+		auto frame_buffer = render_pass->GetFrameBuffer(i);
+		auto command_list = mThread->GetCommandList(i);
+		command_list->BeginRecord();
+		command_list->BeginPass(0, render_pass);
+		command_list->BindFrameBuffer(frame_buffer, area);
+		command_list->SetViewport(0, 1, &viewport);
+		command_list->SetScissor(0, 1, &scissor);
+		command_list->EndPass();
+		command_list->EndRecord();
+		if (true)
+		{
+			command_list->Submit(0);
+		}
+	}
+}
+
+int32_t Buffer::ShowModal(void)
+{
+	assert(mWindow != nullptr);
+	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	bool done = false;
+	while (!done)
+	{
+		done = mWindow->HandleEvent();
+		swap_chain->SwapBuffer(0);
+	}
+	return 0;
 }
 
 void Buffer::CreateBuffer(void)

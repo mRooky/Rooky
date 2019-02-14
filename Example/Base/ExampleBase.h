@@ -30,7 +30,10 @@ public:
 	virtual void CreateSystem(void);
 
 public:
-	virtual int32_t ShowModal(void);
+	virtual void RecordCommands(void) = 0;
+
+public:
+	virtual int32_t ShowModal(void) = 0;
 
 protected:
 	Core::System* mSystem = nullptr;

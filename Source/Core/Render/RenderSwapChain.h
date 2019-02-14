@@ -11,6 +11,7 @@
 #include "RenderObject.h"
 #include "PlatformWindow.h"
 
+#include <cstdint>
 #include <vector>
 
 namespace Render
@@ -26,6 +27,10 @@ public:
 
 public:
 	virtual void Create(Platform::Window* window) = 0;
+
+public:
+	virtual void SwapBuffer(uint32_t index) = 0;
+	virtual uint32_t AcquireNextImage(void) = 0;
 
 public:
 	inline size_t GetRenderBufferCount(void) const { return mRenderBuffers.size(); }

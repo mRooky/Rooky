@@ -8,9 +8,11 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 
+#include "RenderClasses.h"
+#include "RenderMath.h"
+
 namespace Render
 {
-class CommandPool;
 class CommandList
 {
 	friend class CommandPool;
@@ -20,11 +22,23 @@ protected:
 
 public:
 	virtual void Create(bool level) = 0;
+	virtual void Submit(uint32_t index) = 0;
+
+public:
+	virtual void BeginRecord(void) = 0;
+	virtual void BeginPass(uint32_t index, Pass* pass) = 0;
+	virtual void BindFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
+	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
+	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
+	virtual void EndPass(void) = 0;
+	virtual void EndRecord(void) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }
 
 protected:
+	uint32_t mIndex = 0;
+	Pass* mCurrentPass = nullptr;
 	CommandPool* mCommandPool = nullptr;
 };
 

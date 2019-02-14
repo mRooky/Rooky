@@ -11,6 +11,7 @@ int main(void)
 {
 	Example::Buffer buffer;
 	buffer.Initialize();
+	buffer.RecordCommands();
 	buffer.ShowModal();
 }
 
