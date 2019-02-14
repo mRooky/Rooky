@@ -28,15 +28,15 @@ Element::~Element(void)
 std::vector<VkVertexInputAttributeDescription> Element::GetInputAttributeDescription(uint32_t binding) const
 {
 	std::vector<VkVertexInputAttributeDescription> input_attribute_descriptions;
-	input_attribute_descriptions.reserve(mFormats.size());
+	input_attribute_descriptions.reserve(mSemantics.size());
 
 	uint32_t offset = 0;
-	const uint32_t count = mFormats.size();
+	const uint32_t count = mSemantics.size();
 	assert(count > 0);
 	VkVertexInputAttributeDescription description = {};
 	for (uint32_t index = 0; index < count; ++index)
 	{
-		auto format = mFormats.at(index);
+		auto format = mSemantics.at(index);
 		VkFormat vk_format = ConvertFormat(format);
 		description.binding = binding;
 		description.location = index;

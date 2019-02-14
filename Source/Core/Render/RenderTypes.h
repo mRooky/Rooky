@@ -33,6 +33,7 @@ namespace Render
 
 	enum class BufferUsage : uint32_t
 	{
+		BUFFER_USAGE_COMMON,
 		BUFFER_USAGE_INDEX,
 		BUFFER_USAGE_VERTEX,
 		BUFFER_USAGE_UNIFORM,

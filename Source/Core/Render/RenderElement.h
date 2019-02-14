@@ -23,16 +23,17 @@ public:
 	virtual ~Element(void) override;
 
 public:
-	void Create(const std::vector<Format>& formats);
+	void AppendSemantic(Format semantic);
+	void RemoveSemantic(size_t index);
 
 public:
 	inline size_t GetStride(void) const { return mStride; }
-	inline size_t GetElementCount(void) const { return mFormats.size(); }
-	inline Format GetElementFormat(uint32_t index) const { return mFormats.at(index); }
+	inline size_t GetCount(void) const { return mSemantics.size(); }
+	inline Format GetSemantic(uint32_t index) const { return mSemantics.at(index); }
 
 protected:
 	size_t mStride = 0;
-	std::vector<Format> mFormats;
+	std::vector<Format> mSemantics;
 };
 
 } /* namespace Render */

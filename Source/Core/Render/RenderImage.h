@@ -34,7 +34,7 @@ protected:
 	Extent3 mExtent = {};
 
 protected:
-	Format mFormat = Format::UNDEFINED;
+	Format mFormat = Format::FORMAT_UNDEFINED;
 	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
 };
 

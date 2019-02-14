@@ -18,18 +18,25 @@ Element::Element(Context* context):
 
 Element::~Element(void)
 {
-	mFormats.clear();
+	mSemantics.clear();
 }
 
-void Element::Create(const std::vector<Format>& formats)
+void Element::AppendSemantic(Format semantic)
 {
-	assert(formats.size() > 0);
-	for (auto format : formats)
+	mSemantics.push_back(semantic);
+	mStride += GetFormatSize(semantic);
+}
+
+void Element::RemoveSemantic(size_t index)
+{
+	assert(index < mSemantics.size());
+	auto iterator = mSemantics.begin();
+	for (size_t i = 0; i < index; ++i)
 	{
-		mFormats.push_back(format);
-		mStride += GetFormatSize(format);
+		++iterator;
 	}
-	assert(mStride > 0);
+	mSemantics.erase(iterator);
+	mStride -= GetFormatSize(*iterator);
 }
 
 } /* namespace Render */
