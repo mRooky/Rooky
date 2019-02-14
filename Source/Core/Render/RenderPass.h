@@ -19,6 +19,8 @@ class Pass: public Object
 {
 protected:
 	explicit Pass(Context* context);
+
+public:
 	virtual ~Pass(void) override;
 
 public:

@@ -28,6 +28,12 @@ Base::~Base(void)
 	mSystem = nullptr;
 }
 
+void Base::Initialize(void)
+{
+	CreateWindow("Rooky Window");
+	CreateSystem();
+}
+
 void Base::CreateWindow(const char* title)
 {
 	assert(mWindow == nullptr);

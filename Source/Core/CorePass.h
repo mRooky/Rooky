@@ -9,24 +9,37 @@
 #define SOURCE_CORE_COREPASS_H_
 
 #include "RenderClasses.h"
+#include "RenderFormat.h"
 #include <vector>
 
 namespace Core
 {
-
+class Path;
 class Pass
 {
+	friend class Path;
+protected:
+	explicit Pass(Path* parent);
+
 public:
-	Pass(void);
 	virtual ~Pass(void);
 
 public:
+	void Create(const std::vector<Render::Format>& formats);
+
+public:
+	inline Path* GetParent(void) const { return mParent; }
+
+public:
 	inline Render::Pipeline* GetPipeline(void) const { return mPipeline; }
-	inline Render::FrameBuffer* GetFrameBuffer(void) const { return mFrameBuffer; }
+	inline Render::Pass* GetRenderPass(void) const { return mRenderPass; }
 
 protected:
+	Path* mParent = nullptr;
+
+protected:
+	Render::Pass* mRenderPass = nullptr;
 	Render::Pipeline* mPipeline = nullptr;
-	Render::FrameBuffer* mFrameBuffer = nullptr;
 };
 
 } /* namespace Core */

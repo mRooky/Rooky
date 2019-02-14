@@ -26,8 +26,11 @@ public:
 	virtual void Create(void) override;
 
 public:
+	virtual Render::Pass* CreatePass(void) override;
 	virtual Render::Image* CreateImage(void) override;
 	virtual Render::Buffer* CreateBuffer(void) override;
+	virtual Render::SwapChain* CreateSwapChain(void) override;
+	virtual Render::CommandPool* CreateCommandPool(void) override;
 
 public:
 	virtual Render::Format GetBestDepthStencilFormat(void) override;
@@ -50,7 +53,7 @@ private:
 	void CreateInstance(bool debug = true);
 	void CreatePhysical(void);
 	void CreateDevice(void);
-	void CreateCommandPool(void);
+	void CreateDefaultPool(void);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;

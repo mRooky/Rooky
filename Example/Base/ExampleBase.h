@@ -23,6 +23,9 @@ public:
 	virtual ~Base(void);
 
 public:
+	virtual void Initialize(void);
+
+public:
 	virtual void CreateWindow(const char* title);
 	virtual void CreateSystem(void);
 

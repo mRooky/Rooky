@@ -13,6 +13,8 @@
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
 
+#include <cassert>
+
 namespace VK
 {
 
@@ -38,6 +40,7 @@ void CommandPool::Create(void)
 
 Render::CommandList* CommandPool::Allocate(bool level)
 {
+	assert(mCommandPool != nullptr);
 	CommandList* command_list = new CommandList(this);
 	command_list->Create(level);
 	mCommandLists.push_back(command_list);

@@ -5,20 +5,42 @@
  *      Author: rookyma
  */
 
-#include <Core/CoreThread.h>
+#include "CoreThread.h"
+#include "CoreSystem.h"
+
+#include "RenderCommandPool.h"
+#include "RenderContext.h"
+
+#include <cassert>
 
 namespace Core
 {
 
-Thread::Thread()
+Thread::Thread(System* system):
+		Object(system)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Thread::~Thread()
+Thread::~Thread(void)
 {
-	// TODO Auto-generated destructor stub
+	delete mCommandPool;
+	mCommandPool = nullptr;
+	mCommandLists.clear();
+}
+
+void Thread::Create(void)
+{
+	auto context = mSystem->GetContext();
+	mCommandPool = context->CreateCommandPool();
+	mCommandPool->Create();
+}
+
+Render::CommandList* Thread::Allocate(bool primary)
+{
+	assert(mCommandPool != nullptr);
+	Render::CommandList* command = mCommandPool->Allocate(primary);
+	mCommandLists.push_back(command);
+	return command;
 }
 
 } /* namespace Core */

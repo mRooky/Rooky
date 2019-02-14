@@ -8,22 +8,28 @@
 #ifndef SOURCE_CORE_CORETHREAD_H_
 #define SOURCE_CORE_CORETHREAD_H_
 
+#include "CoreObject.h"
+
 #include "RenderClasses.h"
 #include <vector>
 
 namespace Core
 {
 
-class Thread
+class Thread : public Object
 {
 public:
-	Thread(void);
-	virtual ~Thread(void);
+	explicit Thread(System* system);
+	virtual ~Thread(void) override;
 
 public:
-	virtual Render::CommandList* Allocate(bool level) = 0;
+	void Create(void);
 
 public:
+	Render::CommandList* Allocate(bool primary);
+
+public:
+	inline size_t GetCommandListCount(void) const { return mCommandLists.size(); }
 	inline Render::CommandPool* GetCommandPool(void) const { return mCommandPool; }
 	inline Render::CommandList* GetCommandList(size_t index) const { return mCommandLists.at(index); }
 

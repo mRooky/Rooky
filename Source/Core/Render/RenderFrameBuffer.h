@@ -24,6 +24,9 @@ public:
 	virtual ~FrameBuffer(void);
 
 public:
+	void Create(void);
+
+public:
 	virtual void Create(const Extent2& extent) = 0;
 
 public:

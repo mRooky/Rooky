@@ -8,22 +8,23 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
+#include "CoreObject.h"
+
 #include "RenderClasses.h"
 #include "RenderMath.h"
+#include "PlatformWindow.h"
 
 namespace Core
 {
-
-class Viewport
+class System;
+class Viewport : public Object
 {
 public:
-	Viewport(void);
+	explicit Viewport(System* system);
 	virtual ~Viewport(void);
 
 public:
-	void Initialize(Render::SwapChain* chain);
-
-public:
+	void Create(Platform::Window* window);
 	void CreateDepthStencil(const Render::Extent2& extent);
 
 public:

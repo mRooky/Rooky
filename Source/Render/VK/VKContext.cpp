@@ -45,17 +45,7 @@ void Context::Create(void)
 	CreateInstance();
 	CreatePhysical();
 	CreateDevice();
-	CreateCommandPool();
-}
-
-Render::Image* Context::CreateImage(void)
-{
-	return new Image(this);
-}
-
-Render::Buffer* Context::CreateBuffer(void)
-{
-	return new Buffer(this);
+	CreateDefaultPool();
 }
 
 uint32_t Context::GetImageUsageFlag(uint32_t usage, bool read, bool write)
@@ -162,7 +152,7 @@ void Context::CreateDevice(void)
 	m_device->Create(&device_create_info);
 }
 
-void Context::CreateCommandPool(void)
+void Context::CreateDefaultPool(void)
 {
 	uint32_t family = m_physical->GetFamily();
 	m_commandPool = Vulkan::CommandPool::New(m_device);

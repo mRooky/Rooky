@@ -5,20 +5,31 @@
  *      Author: rookyma
  */
 
-#include <Core/CorePath.h>
+#include "CorePath.h"
+#include "CorePass.h"
 
 namespace Core
 {
 
-Path::Path()
+Path::Path(System* system):
+		Object(system)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Path::~Path()
+Path::~Path(void)
 {
-	// TODO Auto-generated destructor stub
+	for (auto pass : mPasses)
+	{
+		delete pass;
+	}
+	mPasses.clear();
+}
+
+Pass* Path::CreatePass(void)
+{
+	Pass* pass = new Pass(this);
+	mPasses.push_back(pass);
+	return pass;
 }
 
 } /* namespace Core */

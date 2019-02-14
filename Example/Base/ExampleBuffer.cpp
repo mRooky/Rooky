@@ -12,6 +12,9 @@
 #include "CoreVertex.h"
 #include "CoreUniform.h"
 
+#include "RenderImage.h"
+#include "RenderSwapChain.h"
+
 #include <cassert>
 
 namespace Example
@@ -26,6 +29,33 @@ Buffer::~Buffer(void)
 	mIndex = nullptr;
 	mVertex = nullptr;
 	mUniform = nullptr;
+}
+
+void Buffer::Initialize(void)
+{
+	CreateWindow("Rooky Window");
+	CreateSystem();
+	CreateViewport();
+	CreateRenderPath();
+
+	{
+		Core::Viewport* viewport = GetViewport();
+		Render::SwapChain* swap_chain = viewport->GetSwapChain();
+		Render::Image* attachment = swap_chain->GetRenderBuffer(0);
+		auto format = attachment->GetFormat();
+		std::vector<Render::Format> formats = { format };
+		CreateRenderPass(formats, Render::Format::FORMAT_UNDEFINED);
+
+		std::vector<Render::Image*> attachments = { attachment };
+		CreateFrameBuffer(attachments, nullptr);
+
+		attachments[0] = swap_chain->GetRenderBuffer(1);
+		CreateFrameBuffer(attachments, nullptr);
+
+		CreateRenderThread(2);
+	}
+
+	CreateBuffer();
 }
 
 void Buffer::CreateBuffer(void)

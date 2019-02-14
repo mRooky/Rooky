@@ -27,15 +27,27 @@ FrameBuffer::~FrameBuffer(void)
 	mDepthStencil = nullptr;
 }
 
+void FrameBuffer::Create(void)
+{
+	assert(mAttachments.size() > 0);
+	auto attachment = mAttachments.at(0);
+	auto& extent = attachment->GetExtent();
+	Extent2 extent2 = { extent.width, extent.height };
+	Create(extent2);
+	std::cout << "Width:" << extent.width << " Height:" << extent.height << std::endl;
+}
+
 void FrameBuffer::SetDepthStencil(Image* attachment)
 {
-	assert(mDepthStencil == nullptr);
-	Format format = attachment->GetFormat();
-	bool valid = Image::IsDepthStencilFormat(format);
-	assert(valid);
-	if (valid)
+	if(mDepthStencil != nullptr)
 	{
-		mDepthStencil = attachment;
+		Format format = attachment->GetFormat();
+		bool valid = Image::IsDepthStencilFormat(format);
+		assert(valid);
+		if (valid)
+		{
+			mDepthStencil = attachment;
+		}
 	}
 }
 

@@ -10,9 +10,7 @@
 int main(void)
 {
 	Example::Buffer buffer;
-	buffer.CreateWindow("Rooky Window");
-	buffer.CreateSystem();
-	buffer.CreateBuffer();
+	buffer.Initialize();
 	buffer.ShowModal();
 }
 
