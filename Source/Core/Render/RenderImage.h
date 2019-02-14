@@ -17,8 +17,10 @@ namespace Render
 {
 class Image : public Resource
 {
-public:
+protected:
 	explicit Image(Context* context);
+
+public:
 	virtual ~Image(void) override;
 
 public:

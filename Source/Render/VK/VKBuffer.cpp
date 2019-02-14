@@ -101,23 +101,23 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsage usage)
+VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsageFlags usage)
 {
 	switch(usage)
 	{
-	case Render::BufferUsage::BUFFER_USAGE_INDEX:
+	case Render::BufferUsageFlags::BUFFER_USAGE_INDEX:
 		return VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_VERTEX:
+	case Render::BufferUsageFlags::BUFFER_USAGE_VERTEX:
 		return VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_UNIFORM:
+	case Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM:
 		return VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_STORAGE:
+	case Render::BufferUsageFlags::BUFFER_USAGE_STORAGE:
 		return VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_INDIRECT:
+	case Render::BufferUsageFlags::BUFFER_USAGE_INDIRECT:
 		return VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_UNIFORM_TEXEL:
+	case Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM_TEXEL:
 		return VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT;
-	case Render::BufferUsage::BUFFER_USAGE_STORAGE_TEXEL:
+	case Render::BufferUsageFlags::BUFFER_USAGE_STORAGE_TEXEL:
 		return VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
 	default:
 		return 0;

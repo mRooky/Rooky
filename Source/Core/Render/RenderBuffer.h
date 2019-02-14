@@ -19,6 +19,8 @@ class Buffer : public Resource
 	friend class Context;
 protected:
 	explicit Buffer(Context* context);
+
+public:
 	virtual ~Buffer(void) override;
 
 public:

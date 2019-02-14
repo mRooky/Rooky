@@ -39,7 +39,7 @@ public:
 	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
 
 public:
-	static VkBufferUsageFlags ConvertUsageFlag(Render::BufferUsage usage);
+	static VkBufferUsageFlags ConvertUsageFlag(Render::BufferUsageFlags usage);
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;

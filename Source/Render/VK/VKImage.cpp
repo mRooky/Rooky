@@ -21,8 +21,6 @@
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
 
-#include <cassert>
-
 namespace VK
 {
 
@@ -166,6 +164,66 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 		assert(false);
 		return Render::ImageType::IMAGE_TYPE_UNKNOWN;
 	}
+}
+
+VkImageUsageFlags Image::ConvertUsageFlag(uint32_t usage)
+{
+	VkImageUsageFlags flags = 0;
+	Render::ImageUsageFlags usage_flags[] =
+	{
+			Render::ImageUsageFlags::IMAGE_USAGE_SAMPLED,
+			Render::ImageUsageFlags::IMAGE_USAGE_STORAGE,
+			Render::ImageUsageFlags::IMAGE_USAGE_COLOR_ATTACHMENT,
+			Render::ImageUsageFlags::IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT,
+			Render::ImageUsageFlags::IMAGE_USAGE_TRANSIENT_ATTACHMENT,
+			Render::ImageUsageFlags::IMAGE_USAGE_INPUT_ATTACHMENT
+	};
+
+	VkImageUsageFlags vk_flags[] =
+	{
+			VK_IMAGE_USAGE_SAMPLED_BIT,
+			VK_IMAGE_USAGE_STORAGE_BIT,
+			VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+			VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
+			VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
+			VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT
+	};
+
+	const size_t count = 6;
+	for (size_t index = 0; index < count; ++index)
+	{
+		auto flag = usage_flags[index];
+		uint32_t code = static_cast<uint32_t>(flag);
+		if ((usage & code) != 0)
+		{
+			flags |= vk_flags[index];
+		}
+	}
+
+	return flags;
+}
+
+SwapChainImage::SwapChainImage(Context* context):
+		Image(context)
+{
+}
+
+SwapChainImage::~SwapChainImage(void)
+{
+	mImage = nullptr;
+	mMemory = nullptr;
+}
+
+void SwapChainImage::Create(Vulkan::Image* image)
+{
+	assert(image != nullptr);
+	mImage = image;
+	VkExtent2D extent = image->GetExtent();
+	mExtent.width = static_cast<int32_t>(extent.width);
+	mExtent.height = static_cast<int32_t>(extent.height);
+	VkFormat format = image->GetFormat();
+	mFormat = ConvertFormat(format);
+	mType = Render::ImageType::IMAGE_TYPE_2D;
 }
 
 } /* namespace VK */

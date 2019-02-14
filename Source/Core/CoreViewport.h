@@ -9,6 +9,7 @@
 #define SOURCE_CORE_COREVIEWPORT_H_
 
 #include "RenderClasses.h"
+#include "RenderMath.h"
 
 namespace Core
 {
@@ -20,17 +21,17 @@ public:
 	virtual ~Viewport(void);
 
 public:
-	void Initialize(Render::Surface* surface, bool depthStencil);
+	void Initialize(Render::SwapChain* chain);
 
 public:
-	void CreateDepthStencil(void);
+	void CreateDepthStencil(const Render::Extent2& extent);
 
 public:
-	inline Render::Surface* GetSurface(void) const { return mSurface; }
+	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
 
 protected:
-	Render::Surface* mSurface = nullptr;
+	Render::SwapChain* mSwapChain = nullptr;
 
 protected:
 	Render::Image* mDepthStencil = nullptr;

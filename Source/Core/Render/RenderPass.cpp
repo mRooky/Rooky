@@ -19,6 +19,11 @@ Pass::Pass(Context* context):
 
 Pass::~Pass(void)
 {
+	for (auto frame : mFrameBuffers)
+	{
+		delete frame;
+	}
+	mFrameBuffers.clear();
 }
 
 void Pass::AppendFormat(Format format)

@@ -19,6 +19,8 @@ class FrameBuffer
 {
 protected:
 	explicit FrameBuffer(Pass* pass);
+
+public:
 	virtual ~FrameBuffer(void);
 
 public:

@@ -30,7 +30,7 @@ void Uniform::Create(size_t size)
 {
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
-	auto usage = Render::BufferUsage::BUFFER_USAGE_UNIFORM;
+	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
 	Buffer::Create(size, flags, true);
 }

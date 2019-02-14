@@ -28,7 +28,7 @@ Buffer::~Buffer(void)
 {
 	auto context = mCreator->GetSystem()->GetContext();
 	assert(context != nullptr);
-	context->DestroyObject(mBuffer);
+	delete mBuffer;
 	mBuffer = nullptr;
 	mCreator = nullptr;
 }

@@ -30,10 +30,11 @@ public:
 	virtual Render::Buffer* CreateBuffer(void) override;
 
 public:
-	virtual void DestroyObject(Render::Object* object) override;
+	virtual Render::Format GetBestDepthStencilFormat(void) override;
 
 public:
-	virtual uint32_t GetUsageFlag(Render::BufferUsage usage, bool read, bool write) override;
+	virtual uint32_t GetImageUsageFlag(uint32_t usage, bool read, bool write) override;
+	virtual uint32_t GetUsageFlag(Render::BufferUsageFlags usage, bool read, bool write) override;
 
 public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }

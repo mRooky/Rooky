@@ -36,7 +36,7 @@ void Index::Create(Render::IndexType type, uint32_t count)
 	size_t size = Render::GetIndexTypeSize(type) * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
-	auto usage = Render::BufferUsage::BUFFER_USAGE_INDEX;
+	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_INDEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
 	Buffer::Create(size, flags, false);
 }

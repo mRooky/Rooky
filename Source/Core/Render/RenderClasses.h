@@ -18,7 +18,7 @@ class Object;
 class Resource;
 class Shader;
 class Queue;
-class Surface;
+class SwapChain;
 class Pass;
 class FrameBuffer;
 class Pipeline;

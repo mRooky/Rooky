@@ -18,6 +18,11 @@ SwapChain::SwapChain(Context* context):
 
 SwapChain::~SwapChain(void)
 {
+	for (auto buffer : mRenderBuffers)
+	{
+		delete buffer;
+	}
+	mRenderBuffers.clear();
 }
 
 } /* namespace Render */

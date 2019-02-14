@@ -27,6 +27,9 @@ public:
 	inline Vulkan::Surface* GetSurfaceVK(void) const { return mSurface; }
 	inline Vulkan::SwapChain* GetSwapChainVK(void) const { return mSwapChain; }
 
+private:
+	void GetSwapChainRenderBuffer(void);
+
 protected:
 	Vulkan::Surface* mSurface = nullptr;
 	Vulkan::SwapChain* mSwapChain = nullptr;

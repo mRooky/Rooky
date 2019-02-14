@@ -26,11 +26,6 @@ RenderPass::RenderPass(Context* context):
 
 RenderPass::~RenderPass(void)
 {
-	for (auto frame : mFrameBuffers)
-	{
-		delete static_cast<FrameBuffer*>(frame);
-	}
-	mFrameBuffers.clear();
 	Vulkan::Release(mRenderPass);
 }
 

@@ -11,8 +11,11 @@
 #include "RenderObject.h"
 #include "PlatformWindow.h"
 
+#include <vector>
+
 namespace Render
 {
+class Image;
 class SwapChain: public Object
 {
 protected:
@@ -23,6 +26,13 @@ public:
 
 public:
 	virtual void Create(Platform::Window* window) = 0;
+
+public:
+	inline size_t GetRenderBufferCount(void) const { return mRenderBuffers.size(); }
+	inline Image* GetRenderBuffer(size_t index) const { return mRenderBuffers.at(index); }
+
+protected:
+	std::vector<Image*> mRenderBuffers;
 };
 
 } /* namespace Render */

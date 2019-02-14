@@ -8,6 +8,8 @@
 #include "VKContext.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
+#include "VKFormat.h"
+#include "VKInline.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -56,12 +58,21 @@ Render::Buffer* Context::CreateBuffer(void)
 	return new Buffer(this);
 }
 
-void Context::DestroyObject(Render::Object* object)
+uint32_t Context::GetImageUsageFlag(uint32_t usage, bool read, bool write)
 {
-	delete object;
+	uint32_t flag = ConvertImageUsageFlag(usage);
+	if (read)
+	{
+		flag |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+	}
+	if (read)
+	{
+		flag |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+	}
+	return flag;
 }
 
-uint32_t Context::GetUsageFlag(Render::BufferUsage usage, bool read, bool write)
+uint32_t Context::GetUsageFlag(Render::BufferUsageFlags usage, bool read, bool write)
 {
 	uint32_t flag = Buffer::ConvertUsageFlag(usage);
 	if (read)
@@ -73,6 +84,13 @@ uint32_t Context::GetUsageFlag(Render::BufferUsage usage, bool read, bool write)
 		flag |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 	}
 	return flag;
+}
+
+Render::Format Context::GetBestDepthStencilFormat(void)
+{
+	VkFormat vk_format = m_physical->GetDepthStencilFormat();
+	Render::Format format = ConvertFormat(vk_format);
+	return format;
 }
 
 void Context::CreateVendor(void)

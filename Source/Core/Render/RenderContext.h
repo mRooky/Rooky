@@ -10,6 +10,7 @@
 
 #include "PlatformWindow.h"
 #include "RenderTypes.h"
+#include "RenderFormat.h"
 #include <vector>
 
 namespace Render
@@ -33,10 +34,9 @@ public:
 	virtual Buffer* CreateBuffer(void) = 0;
 
 public:
-	virtual void DestroyObject(Object* object) = 0;
-
-public:
-	virtual uint32_t GetUsageFlag(BufferUsage usage, bool read, bool write) = 0;
+	virtual Format GetBestDepthStencilFormat(void) = 0;
+	virtual uint32_t GetImageUsageFlag(uint32_t usage, bool read, bool write) = 0;
+	virtual uint32_t GetUsageFlag(BufferUsageFlags usage, bool read, bool write) = 0;
 
 };
 

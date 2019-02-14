@@ -37,7 +37,7 @@ void Vertex::Create(Render::Element* element, uint32_t count)
 	size_t size = element->GetStride() * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
-	auto usage = Render::BufferUsage::BUFFER_USAGE_VERTEX;
+	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_VERTEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
 	Buffer::Create(size, flags, false);
 }
