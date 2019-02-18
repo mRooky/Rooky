@@ -18,8 +18,10 @@ namespace Render
 
 class Element : public Object
 {
-public:
+protected:
 	explicit Element(Context* context);
+
+public:
 	virtual ~Element(void) override;
 
 public:

@@ -59,7 +59,9 @@ void Buffer::Initialize(void)
 		CreateRenderThread(2);
 	}
 
-	CreateBuffer();
+	CreateIndexBuffer();
+	CreateVertexBuffer();
+	CreateUniformBuffer();
 }
 
 void Buffer::RecordCommands(void)
@@ -128,17 +130,28 @@ int32_t Buffer::ShowModal(void)
 	return 0;
 }
 
-void Buffer::CreateBuffer(void)
+void Buffer::CreateIndexBuffer(void)
 {
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
-
 	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mIndex = manager->CreateIndex();
 	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, access);
+}
 
+void Buffer::CreateVertexBuffer(void)
+{
+	assert(mSystem != nullptr);
+	auto manager = mSystem->GetBufferManager();
+	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mVertex = manager->CreateVertex();
+}
 
+void Buffer::CreateUniformBuffer(void)
+{
+	assert(mSystem != nullptr);
+	auto manager = mSystem->GetBufferManager();
+	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mUniform = manager->CreateUniform();
 }
 

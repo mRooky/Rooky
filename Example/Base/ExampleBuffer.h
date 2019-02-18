@@ -30,12 +30,17 @@ public:
 	virtual void RecordCommands(void) override;
 
 public:
-	virtual void CreateBuffer(void);
+	virtual void CreateIndexBuffer(void);
+	virtual void CreateVertexBuffer(void);
+	virtual void CreateUniformBuffer(void);
 
 protected:
 	Core::Index* mIndex = nullptr;
 	Core::Vertex* mVertex = nullptr;
 	Core::Uniform* mUniform = nullptr;
+
+protected:
+
 };
 
 } /* namespace Example */

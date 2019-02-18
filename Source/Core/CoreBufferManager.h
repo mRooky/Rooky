@@ -8,6 +8,8 @@
 #ifndef SOURCE_CORE_COREBUFFERMANAGER_H_
 #define SOURCE_CORE_COREBUFFERMANAGER_H_
 
+#include "RenderClasses.h"
+#include "RenderFormat.h"
 #include <vector>
 
 namespace Core
@@ -29,6 +31,9 @@ public:
 	Uniform* CreateUniform(void);
 
 public:
+	Render::Element* GetOrCreateElement(const std::vector<Render::Format>& formats);
+
+public:
 	inline System* GetSystem(void) const { return mSystem; }
 
 protected:
@@ -38,6 +43,9 @@ protected:
 	std::vector<Index*> mIndexes;
 	std::vector<Vertex*> mVertexes;
 	std::vector<Uniform*> mUniforms;
+
+protected:
+	std::vector<Render::Element*> mElements;
 
 };
 
