@@ -11,6 +11,8 @@
 #include "RenderShader.h"
 #include "VKRender.h"
 
+#include "VKPipelineState.h"
+
 namespace VK
 {
 class Context;
@@ -25,6 +27,9 @@ public:
 
 public:
 	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }
+
+public:
+	ShaderStageCreateInfo GetStageCreateInfo(VkShaderStageFlagBits stage) const;
 
 protected:
 	Vulkan::ShaderModule* mShader = nullptr;

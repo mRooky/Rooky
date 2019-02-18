@@ -42,4 +42,11 @@ void Shader::Create(const char* file)
 	}
 }
 
+ShaderStageCreateInfo Shader::GetStageCreateInfo(VkShaderStageFlagBits stage) const
+{
+	ShaderStageCreateInfo stage_create_info = {};
+	stage_create_info.SetContent(mShader->GetHandle(), stage);
+	return stage_create_info;
+}
+
 } /* namespace VK */
