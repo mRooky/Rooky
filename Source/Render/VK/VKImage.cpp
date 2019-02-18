@@ -37,23 +37,27 @@ Image::~Image(void)
 
 void Image::Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage)
 {
-	assert(mImage == nullptr);
-
 	mType = type;
 	mFormat = format;
 	mExtent = extent;
 	mUsage = usage;
 	mAccess = Render::HeapAccess::HEAP_ACCESS_GPU_ONLY;
-
-	VkFormat vk_format = ConvertFormat(format);
-	Context* context = static_cast<Context*>(mContext);
-	Vulkan::Device* device = context->GetDeviceVK();
-	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, usage);
+	CreateImage();
+	AllocateMemory();
 	CreateView();
 }
 
-void Image::Allocate(void)
+void Image::CreateImage(void)
+{
+	assert(mImage == nullptr);
+	VkFormat vk_format = ConvertFormat(mFormat);
+	Context* context = static_cast<Context*>(mContext);
+	Vulkan::Device* device = context->GetDeviceVK();
+	mImage = Vulkan::Image::New(device);
+	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, mUsage);
+}
+
+void Image::AllocateMemory(void)
 {
 	assert(mImage != nullptr);
 	auto flags = GetMemoryPropertyFlags(mAccess);

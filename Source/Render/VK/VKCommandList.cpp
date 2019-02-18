@@ -9,6 +9,7 @@
 #include "VKCommandPool.h"
 #include "VKRenderPass.h"
 #include "VKFrameBuffer.h"
+#include "VKPipeline.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -84,6 +85,13 @@ void CommandList::BindFrameBuffer(Render::FrameBuffer* frame, const Render::Rect
 	vk_area.extent.width = area.extent.width;
 	vk_area.extent.height = area.extent.height;
 	mCommandBuffer->BeginRenderPass(render_pass->GetRenderPassVK(), frame_buffer->GetFrameBufferVK(), vk_area);
+}
+
+void CommandList::BindPipeline(Render::Pipeline* pipeline)
+{
+	assert(mCommandBuffer != nullptr);
+	Pipeline* vk_pipeline = static_cast<Pipeline*>(pipeline);
+	mCommandBuffer->BindPipeline(vk_pipeline->GetPipelineVK());
 }
 
 void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports)

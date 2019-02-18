@@ -41,7 +41,8 @@ public:
 	static VkBufferUsageFlags ConvertUsageFlag(Render::BufferUsageFlags usage);
 
 protected:
-	void Allocate(void);
+	void CreateBuffer(void);
+	void AllocateMemory(void);
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;

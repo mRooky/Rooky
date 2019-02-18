@@ -16,13 +16,11 @@
 namespace Render
 {
 
-class Element : public Object
+class Element
 {
-protected:
-	explicit Element(Context* context);
-
 public:
-	virtual ~Element(void) override;
+	Element(void);
+	virtual ~Element(void);
 
 public:
 	void AppendSemantic(Format semantic);

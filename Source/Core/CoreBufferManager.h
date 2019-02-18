@@ -31,9 +31,6 @@ public:
 	Uniform* CreateUniform(void);
 
 public:
-	Render::Element* GetOrCreateElement(const std::vector<Render::Format>& formats);
-
-public:
 	inline System* GetSystem(void) const { return mSystem; }
 
 protected:
@@ -43,9 +40,6 @@ protected:
 	std::vector<Index*> mIndexes;
 	std::vector<Vertex*> mVertexes;
 	std::vector<Uniform*> mUniforms;
-
-protected:
-	std::vector<Render::Element*> mElements;
 
 };
 

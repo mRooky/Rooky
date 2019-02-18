@@ -25,11 +25,6 @@ BufferManager::BufferManager(System* system):
 
 BufferManager::~BufferManager(void)
 {
-	for (auto element : mElements)
-	{
-		delete element;
-	}
-	mElements.clear();
 	for (auto index : mIndexes)
 	{
 		delete index;
@@ -67,13 +62,6 @@ Uniform* BufferManager::CreateUniform(void)
 	Uniform* uniform = new Uniform(this);
 	mUniforms.push_back(uniform);
 	return uniform;
-}
-
-Render::Element* BufferManager::GetOrCreateElement(const std::vector<Render::Format>& formats)
-{
-	Render::Element* element = nullptr;
-	assert(false);
-	return element;
 }
 
 } /* namespace Core */

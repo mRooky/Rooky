@@ -45,7 +45,8 @@ public:
 	static VkImageUsageFlags ConvertUsageFlag(uint32_t usage);
 
 protected:
-	void Allocate(void);
+	void CreateImage(void);
+	void AllocateMemory(void);
 	void CreateView(void);
 
 protected:

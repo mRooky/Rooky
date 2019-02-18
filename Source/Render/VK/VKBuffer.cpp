@@ -35,18 +35,24 @@ Buffer::~Buffer(void)
 
 void Buffer::Create(size_t size, uint32_t usage, Render::HeapAccess access)
 {
-	assert(mBuffer == nullptr);
 	mSize = size;
 	mUsage = usage;
 	mAccess = access;
 
+	CreateBuffer();
+	AllocateMemory();
+}
+
+void Buffer::CreateBuffer(void)
+{
+	assert(mBuffer == nullptr);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mBuffer = Vulkan::Buffer::New(device);
-	mBuffer->Create(size, usage);
+	mBuffer->Create(mSize, mUsage);
 }
 
-void Buffer::Allocate(void)
+void Buffer::AllocateMemory(void)
 {
 	assert(mBuffer != nullptr);
 	auto flags = GetMemoryPropertyFlags(mAccess);

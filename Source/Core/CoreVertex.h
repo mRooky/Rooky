@@ -9,7 +9,12 @@
 #define SOURCE_CORE_COREVERTEX_H_
 
 #include "CoreBuffer.h"
+
+#include "RenderFormat.h"
+
+
 #include <cstdint>
+#include <vector>
 
 namespace Core
 {
@@ -22,7 +27,7 @@ private:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(Render::Element* element, uint32_t count, Render::HeapAccess access);
+	void Create(std::vector<Render::Format> semantics, uint32_t count, Render::HeapAccess access);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

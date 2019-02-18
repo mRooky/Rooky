@@ -26,15 +26,21 @@ Vertex::Vertex(BufferManager* creator):
 Vertex::~Vertex(void)
 {
 	mCount = 0;
+	delete mElement;
 	mElement = nullptr;
 }
 
-void Vertex::Create(Render::Element* element, uint32_t count, Render::HeapAccess access)
+void Vertex::Create(std::vector<Render::Format> semantics, uint32_t count, Render::HeapAccess access)
 {
 	mCount = count;
-	mElement = element;
+	mElement = new Render::Element;
 
-	size_t size = element->GetStride() * count;
+	for (auto semantic : semantics)
+	{
+		mElement->AppendSemantic(semantic);
+	}
+
+	size_t size = mElement->GetStride() * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_VERTEX;

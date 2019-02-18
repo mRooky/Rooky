@@ -29,6 +29,7 @@ public:
 	// Draw Commands
 	virtual void BeginPass(uint32_t index, Render::Pass* pass) override;
 	virtual void BindFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area) override;
+	virtual void BindPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
 	virtual void EndPass(void) override;

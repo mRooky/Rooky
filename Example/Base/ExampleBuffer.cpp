@@ -18,8 +18,14 @@
 #include "RenderSwapChain.h"
 #include "RenderPass.h"
 #include "RenderTypes.h"
+#include "RenderBuffer.h"
 
 #include <cassert>
+
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Example
 {
@@ -137,6 +143,11 @@ void Buffer::CreateIndexBuffer(void)
 	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mIndex = manager->CreateIndex();
 	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, access);
+
+	std::vector<uint16_t> indexes = { 0, 1, 2, 0, 2, 3 };
+
+	size_t size = sizeof(uint16_t) * indexes.size();
+	mIndex->Write(indexes.data(), 0, size);
 }
 
 void Buffer::CreateVertexBuffer(void)
@@ -145,6 +156,29 @@ void Buffer::CreateVertexBuffer(void)
 	auto manager = mSystem->GetBufferManager();
 	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mVertex = manager->CreateVertex();
+
+	struct Vertex { float position[3]; float color[3]; };
+
+	const float x = 1150.0f / 2.0f; //2.3f;
+	const float y = 326.0f / 2.0f; //0.652f;
+	const float z = 1.0f;
+	const float o = 0.0f;
+
+	std::vector<Vertex> vertex_buffer =
+	{
+			{ { x, y, z }, { 0.0f, 0.0f, 1.0f } },
+			{ { o, y, z }, { 0.0f, 1.0f, 0.0f } },
+			{ { o, o, z }, { 0.0f, 0.0f, 1.0f } },
+			{ { x, o, z }, { 1.0f, 1.0f, 0.0f } }
+	};
+
+	std::vector<Render::Format> semantics;
+	semantics.push_back(Render::Format::FORMAT_R32G32B32_SFLOAT);
+	semantics.push_back(Render::Format::FORMAT_R32G32B32_SFLOAT);
+	mVertex->Create(semantics, vertex_buffer.size(), access);
+
+	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
+	mVertex->Write(vertex_buffer.data(), 0, size);
 }
 
 void Buffer::CreateUniformBuffer(void)
@@ -153,6 +187,14 @@ void Buffer::CreateUniformBuffer(void)
 	auto manager = mSystem->GetBufferManager();
 	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mUniform = manager->CreateUniform();
+
+	glm::mat4 scale = glm::scale(glm::mat4(1.0f) ,glm::vec3(1.0f / 1280.f, 1.0f / 800.0f, 0.0f));
+	glm::mat4 trans = glm::translate(glm::mat4(1.0f) ,glm::vec3(-1.0f, -1.0f, 0.0f));
+	glm::mat4 matrix = trans * scale;
+
+	uint32_t size = sizeof(matrix);
+	mUniform->Create(size, access);
+	mVertex->Write(&matrix, 0, size);
 }
 
 } /* namespace Example */

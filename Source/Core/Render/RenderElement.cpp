@@ -11,8 +11,7 @@
 namespace Render
 {
 
-Element::Element(Context* context):
-		Object(context)
+Element::Element(void)
 {
 }
 

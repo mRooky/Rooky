@@ -28,6 +28,7 @@ public:
 	virtual void BeginRecord(void) = 0;
 	virtual void BeginPass(uint32_t index, Pass* pass) = 0;
 	virtual void BindFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
+	virtual void BindPipeline(Pipeline* pipeline) = 0;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
 	virtual void EndPass(void) = 0;
