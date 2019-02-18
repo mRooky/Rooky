@@ -14,6 +14,7 @@ namespace VK
 
 ColorBlendAttachmentState::ColorBlendAttachmentState(void)
 {
+
 }
 
 ColorBlendAttachmentState::~ColorBlendAttachmentState(void)

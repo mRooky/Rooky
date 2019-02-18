@@ -10,6 +10,7 @@
 
 #include "RenderState.h"
 #include "VKRender.h"
+#include "VKPipelineState.h"
 
 namespace VK
 {
@@ -39,21 +40,17 @@ private:
 	std::vector<Vulkan::DescriptorSetLayout*> m_descriptorSetLayouts;
 
 private:
-	VkPipelineInputAssemblyStateCreateInfo m_inputAssemblyState = {};
-	VkPipelineRasterizationStateCreateInfo m_rasterizationState = {};
-	VkPipelineColorBlendStateCreateInfo m_colorBlendState = {};
-	VkPipelineViewportStateCreateInfo m_viewportState = {};
-	VkPipelineDynamicStateCreateInfo m_dynamicState = {};
-	VkPipelineDepthStencilStateCreateInfo m_depthStencilState = {};
-	VkPipelineMultisampleStateCreateInfo m_multisampleState = {};
-	VkPipelineVertexInputStateCreateInfo m_vertexInputState = {};
+	InputAssemblyStateInfo m_inputAssemblyState = {};
+	RasterizationStateInfo m_rasterizationState = {};
+	ColorBlendStateInfo m_colorBlendState = {};
+	ViewportStateInfo m_viewportState = {};
+	DynamicStateInfo m_dynamicState = {};
+	DepthStencilStateInfo m_depthStencilState = {};
+	MultisampleStateInfo m_multisampleState = {};
+	VertexInputStateInfo m_vertexInputState = {};
 
 private:
-	std::vector<VkPipelineColorBlendAttachmentState> m_blendAttachmentStates;
-	std::vector<VkDynamicState> m_dynamicStateEnables;
-	std::vector<VkVertexInputBindingDescription> m_vertexInputBindings;
-	std::vector<VkVertexInputAttributeDescription> m_vertexInputAttributes;
-	std::vector<VkPipelineShaderStageCreateInfo> m_shaderStages;
+	std::vector<ShaderStageInfo> m_shaderStages;
 
 private:
 	std::vector<VkPushConstantRange> m_constantRanges;

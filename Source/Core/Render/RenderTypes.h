@@ -180,6 +180,18 @@ namespace Render
 		SHADER_STAGE_ALL_GRAPHICS,
 		SHADER_STAGE_UNKNOWN = ~0u
 	};
+
+	enum class CompareOperation : uint32_t
+	{
+	    COMPARE_OP_NEVER = 0,
+	    COMPARE_OP_LESS = 1,
+	    COMPARE_OP_EQUAL = 2,
+	    COMPARE_OP_LESS_OR_EQUAL = 3,
+	    COMPARE_OP_GREATER = 4,
+	    COMPARE_OP_NOT_EQUAL = 5,
+	    COMPARE_OP_GREATER_OR_EQUAL = 6,
+	    COMPARE_OP_ALWAYS = 7
+	};
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERTYPES_H_ */
