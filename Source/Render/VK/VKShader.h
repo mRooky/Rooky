@@ -23,13 +23,13 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(const char* file) override;
+	virtual void Create(Render::ShaderStage stage, const char* file) override;
 
 public:
 	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }
 
 public:
-	ShaderStageCreateInfo GetStageCreateInfo(VkShaderStageFlagBits stage) const;
+	ShaderStageInfo GetStageCreateInfo(void) const;
 
 protected:
 	Vulkan::ShaderModule* mShader = nullptr;

@@ -9,6 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERSHADER_H_
 
 #include "RenderObject.h"
+#include "RenderTypes.h"
 #include <string>
 
 namespace Render
@@ -32,15 +33,17 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(const char* file) = 0;
+	virtual void Create(ShaderStage stage, const char* file) = 0;
 
 public:
 	inline Type GetType(void) const { return mType; }
+	inline ShaderStage GetStage(void) const { return mStage; }
 	inline const char* GetName(void) const { return mName.c_str(); }
 
 protected:
 	std::string mName;
 	Type mType = Type::UNKNOWN;
+	ShaderStage mStage = ShaderStage::SHADER_STAGE_UNKNOWN;
 };
 
 } /* namespace Render */

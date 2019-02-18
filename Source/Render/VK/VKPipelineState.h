@@ -8,6 +8,6 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 #define SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 
-#include "Pipeline/VKShaderStageCreateInfo.h"
+#include "Pipeline/VKShaderStageInfo.h"
 
 #endif /* SOURCE_RENDER_VK_VKPIPELINESTATE_H_ */

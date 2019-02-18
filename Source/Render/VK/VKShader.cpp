@@ -26,8 +26,9 @@ Shader::~Shader(void)
 	Vulkan::Release(mShader);
 }
 
-void Shader::Create(const char* file)
+void Shader::Create(Render::ShaderStage stage, const char* file)
 {
+	mStage = stage;
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
@@ -42,10 +43,10 @@ void Shader::Create(const char* file)
 	}
 }
 
-ShaderStageCreateInfo Shader::GetStageCreateInfo(VkShaderStageFlagBits stage) const
+ShaderStageInfo Shader::GetStageCreateInfo(void) const
 {
-	ShaderStageCreateInfo stage_create_info = {};
-	stage_create_info.SetContent(mShader->GetHandle(), stage);
+	ShaderStageInfo stage_create_info = {};
+	stage_create_info.SetContent(mShader->GetHandle(), mStage);
 	return stage_create_info;
 }
 

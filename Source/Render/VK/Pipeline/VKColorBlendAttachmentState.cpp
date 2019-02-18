@@ -20,21 +20,7 @@ ColorBlendAttachmentState::~ColorBlendAttachmentState(void)
 {
 }
 
-void ColorBlendAttachmentState::SetColor(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation)
-{
-	this->srcColorBlendFactor = ColorBlendAttachmentState::ConvertBlendFactor(src);
-	this->dstColorBlendFactor = ColorBlendAttachmentState::ConvertBlendFactor(dst);
-	this->colorBlendOp = ColorBlendAttachmentState::ConverBlendOperation(operation);
-}
-
-void ColorBlendAttachmentState::SetAlpha(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation)
-{
-	this->srcAlphaBlendFactor = ColorBlendAttachmentState::ConvertBlendFactor(src);
-	this->dstAlphaBlendFactor = ColorBlendAttachmentState::ConvertBlendFactor(dst);
-	this->alphaBlendOp = ColorBlendAttachmentState::ConverBlendOperation(operation);
-}
-
-VkBlendFactor ColorBlendAttachmentState::ConvertBlendFactor(Render::BlendFactor factor)
+VkBlendFactor ColorBlendAttachmentState::Convert(Render::BlendFactor factor)
 {
 	switch(factor)
 	{
@@ -70,7 +56,7 @@ VkBlendFactor ColorBlendAttachmentState::ConvertBlendFactor(Render::BlendFactor 
 	}
 }
 
-VkBlendOp ColorBlendAttachmentState::ConverBlendOperation(Render::BlendOperation operaion)
+VkBlendOp ColorBlendAttachmentState::Convert(Render::BlendOperation operaion)
 {
 	switch(operaion)
 	{

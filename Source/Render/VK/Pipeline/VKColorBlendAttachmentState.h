@@ -22,8 +22,19 @@ public:
 	~ColorBlendAttachmentState(void);
 
 public:
-	void SetColor(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation);
-	void SetAlpha(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation);
+	inline void SetColor(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation)
+	{
+		this->srcColorBlendFactor = ColorBlendAttachmentState::Convert(src);
+		this->dstColorBlendFactor = ColorBlendAttachmentState::Convert(dst);
+		this->colorBlendOp = ColorBlendAttachmentState::Convert(operation);
+	}
+
+	inline void SetAlpha(Render::BlendFactor src, Render::BlendFactor dst, Render::BlendOperation operation)
+	{
+		this->srcAlphaBlendFactor = ColorBlendAttachmentState::Convert(src);
+		this->dstAlphaBlendFactor = ColorBlendAttachmentState::Convert(dst);
+		this->alphaBlendOp = ColorBlendAttachmentState::Convert(operation);
+	}
 
 public:
 	inline void Enable(bool enabled)
@@ -32,8 +43,8 @@ public:
 	}
 
 public:
-	static VkBlendFactor ConvertBlendFactor(Render::BlendFactor factor);
-	static VkBlendOp ConverBlendOperation(Render::BlendOperation operaion);
+	static VkBlendFactor Convert(Render::BlendFactor factor);
+	static VkBlendOp Convert(Render::BlendOperation operaion);
 };
 
 } /* namespace VK */
