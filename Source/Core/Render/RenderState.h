@@ -38,8 +38,8 @@ protected:
 	uint32_t mStencilFunctionMask = 0;
 
 protected:
-	Blend mBlendSrc = Blend::BLEND_SRC_ALPHA;
-	Blend mBlendDst = Blend::BLEND_ONE_MINUS_SRC_ALPHA;
+	BlendFactor mBlendSrc = BlendFactor::BLEND_FACTOR_SRC_ALPHA;
+	BlendFactor mBlendDst = BlendFactor::BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
 	DepthFunction mDepthFunction = DepthFunction::DEPTH_FUNCTION_LEQUAL;
 	CullFaceSide mCullFaceSide = CullFaceSide::CULL_FACE_SIDE_FRONT_AND_BACK;
 	FrontFace mFrontFace = FrontFace::FRONT_FACE_CW;
