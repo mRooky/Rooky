@@ -55,6 +55,7 @@ namespace Render
 	    IMAGE_USAGE_INPUT_ATTACHMENT = 1 << 5,
 	    IMAGE_USAGE_UNKNOWN = ~0u
 	};
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERTYPES_H_ */

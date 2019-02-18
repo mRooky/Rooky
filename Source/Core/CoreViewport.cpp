@@ -45,13 +45,14 @@ void Viewport::CreateDepthStencil(const Render::Extent2& extent)
 
 	Render::Context* context = mSwapChain->GetContext();
 	Render::Format format = context->GetBestDepthStencilFormat();
+	Render::ImageType type = Render::ImageType::IMAGE_TYPE_2D;
 	uint32_t flags = 0;
 	flags |= static_cast<uint32_t>(Render::ImageUsageFlags::IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT);
 	uint32_t usage = context->GetImageUsageFlag(flags, true, false);
 	Render::Extent3 extent3 = { extent.width, extent.height, 1 };
 
 	mDepthStencil = context->CreateImage();
-	mDepthStencil->Create(format, extent3, usage);
+	mDepthStencil->Create(type, format, extent3, usage);
 }
 
 } /* namespace Core */

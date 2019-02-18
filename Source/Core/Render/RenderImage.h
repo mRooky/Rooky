@@ -24,8 +24,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(Format format, const Extent3& extent, uint32_t usage) = 0;
-	virtual void CreateView(ImageType type) = 0;
+	virtual void Create(ImageType type, Format format, const Extent3& extent, uint32_t usage) = 0;
 
 public:
 	inline ImageType GetType(void) const { return mType; }

@@ -35,10 +35,11 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_t usage)
+void Image::Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage)
 {
 	assert(mImage == nullptr);
 
+	mType = type;
 	mFormat = format;
 	mExtent = extent;
 	mUsage = usage;
@@ -48,6 +49,7 @@ void Image::Create(Render::Format format, const Render::Extent3& extent, uint32_
 	Vulkan::Device* device = context->GetDeviceVK();
 	mImage = Vulkan::Image::New(device);
 	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, usage);
+	CreateView();
 }
 
 void Image::Allocate(bool mappable)
@@ -60,11 +62,11 @@ void Image::Allocate(bool mappable)
 	mImage->BindMemory(mMemory, 0);
 }
 
-void Image::CreateView(Render::ImageType type)
+void Image::CreateView()
 {
-	mType = type;
+	assert(mType != Render::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
-	VkImageViewType vk_type = ConverType(type);
+	VkImageViewType vk_type = ConverType(mType);
 	mImage->CreateView(vk_type);
 }
 
