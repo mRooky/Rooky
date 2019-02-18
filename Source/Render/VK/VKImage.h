@@ -11,8 +11,6 @@
 #include "RenderImage.h"
 #include "VKRender.h"
 
-#include <cassert>
-
 namespace VK
 {
 class Context;
@@ -24,7 +22,6 @@ public:
 
 public:
 	virtual void Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage) override;
-	virtual void Allocate(bool mappable) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;
@@ -48,6 +45,7 @@ public:
 	static VkImageUsageFlags ConvertUsageFlag(uint32_t usage);
 
 protected:
+	void Allocate(void);
 	void CreateView(void);
 
 protected:
@@ -55,7 +53,7 @@ protected:
 	Vulkan::DeviceMemory* mMemory = nullptr;
 };
 
-class SwapChainImage final : public Image
+class SwapChainImage final : private Image
 {
 	friend class SwapChain;
 private:
@@ -64,13 +62,6 @@ private:
 
 private:
 	virtual void Create(Vulkan::Image* image);
-
-public:
-	virtual void Create(void) { assert(false); }
-	virtual void Allocate(bool mappable) override { assert(false); }
-	virtual void* Map(size_t offset, size_t size) override { assert(false); return nullptr; }
-	virtual void Unmap(size_t offset, size_t size) override { assert(false); }
-	virtual void CopyFrom(const Render::Buffer* other) override { assert(false); }
 };
 
 } /* namespace VK */

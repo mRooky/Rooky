@@ -21,7 +21,7 @@ private:
 	virtual ~Uniform(void) override;
 
 public:
-	void Create(size_t size);
+	void Create(size_t size, Render::HeapAccess access);
 };
 
 } /* namespace Core */

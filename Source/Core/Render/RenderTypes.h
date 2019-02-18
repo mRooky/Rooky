@@ -56,6 +56,13 @@ namespace Render
 	    IMAGE_USAGE_UNKNOWN = ~0u
 	};
 
+	enum class HeapAccess : uint32_t
+	{
+		HEAP_ACCESS_GPU_ONLY,
+		HEAP_ACCESS_CPU_VISIBLE,
+		HEAP_ACCESS_UNKNOWN
+	};
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERTYPES_H_ */

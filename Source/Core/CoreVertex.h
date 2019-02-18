@@ -22,7 +22,7 @@ private:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(Render::Element* element, uint32_t count);
+	void Create(Render::Element* element, uint32_t count, Render::HeapAccess access);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

@@ -9,7 +9,6 @@
 #define SOURCE_CORE_RENDER_RENDERBUFFER_H_
 
 #include "RenderResource.h"
-#include "RenderTypes.h"
 
 namespace Render
 {
@@ -23,7 +22,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, uint32_t usage) = 0;
+	virtual void Create(size_t size, uint32_t usage, HeapAccess access) = 0;
 
 };
 

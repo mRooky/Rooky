@@ -17,6 +17,7 @@
 #include "RenderImage.h"
 #include "RenderSwapChain.h"
 #include "RenderPass.h"
+#include "RenderTypes.h"
 
 #include <cassert>
 
@@ -132,8 +133,9 @@ void Buffer::CreateBuffer(void)
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
 
+	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mIndex = manager->CreateIndex();
-	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6);
+	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, access);
 
 	mVertex = manager->CreateVertex();
 

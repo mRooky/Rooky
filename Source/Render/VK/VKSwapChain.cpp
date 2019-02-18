@@ -21,6 +21,8 @@
 #include "Platform/XCB/XCBWindow.h"
 #endif
 
+#include <cassert>
+
 namespace VK
 {
 

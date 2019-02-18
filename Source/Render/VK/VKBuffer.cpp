@@ -33,11 +33,12 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, uint32_t usage)
+void Buffer::Create(size_t size, uint32_t usage, Render::HeapAccess access)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
 	mUsage = usage;
+	mAccess = access;
 
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -45,10 +46,10 @@ void Buffer::Create(size_t size, uint32_t usage)
 	mBuffer->Create(size, usage);
 }
 
-void Buffer::Allocate(bool mappable)
+void Buffer::Allocate(void)
 {
 	assert(mBuffer != nullptr);
-	auto flags = GetMemoryPropertyFlags(mappable);
+	auto flags = GetMemoryPropertyFlags(mAccess);
 	Vulkan::Device* device = mBuffer->GetDevice();
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(mBuffer, flags);

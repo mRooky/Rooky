@@ -26,13 +26,13 @@ Uniform::~Uniform(void)
 {
 }
 
-void Uniform::Create(size_t size)
+void Uniform::Create(size_t size, Render::HeapAccess access)
 {
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, true);
+	Buffer::Create(size, flags, access);
 }
 
 } /* namespace Core */

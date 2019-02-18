@@ -9,6 +9,7 @@
 #define SOURCE_CORE_COREBUFFER_H_
 
 #include "RenderClasses.h"
+#include "RenderTypes.h"
 #include <cstdint>
 #include <cstddef>
 
@@ -22,7 +23,7 @@ protected:
 	virtual ~Buffer(void);
 
 public:
-	void Create(size_t size, uint32_t usage, bool mappable);
+	void Create(size_t size, uint32_t usage, Render::HeapAccess access);
 
 public:
 	void Read(void* dst, size_t offset, size_t size);

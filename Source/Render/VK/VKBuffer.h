@@ -21,8 +21,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, uint32_t usage) override;
-	virtual void Allocate(bool mappable) override;
+	virtual void Create(size_t size, uint32_t usage, Render::HeapAccess access) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;
@@ -40,6 +39,9 @@ public:
 
 public:
 	static VkBufferUsageFlags ConvertUsageFlag(Render::BufferUsageFlags usage);
+
+protected:
+	void Allocate(void);
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;

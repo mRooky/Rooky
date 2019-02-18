@@ -32,7 +32,8 @@ void Storage::Create(size_t size)
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_COMMON;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, true);
+	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+	Buffer::Create(size, flags, access);
 }
 
 } /* namespace Core */

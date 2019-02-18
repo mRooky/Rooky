@@ -9,13 +9,23 @@
 #define SOURCE_RENDER_VK_VKINLINE_H_
 
 #include "VKDefine.h"
+#include <cassert>
 
 namespace VK
 {
 
-static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(bool mappable)
+static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::HeapAccess access)
 {
-	return (mappable ? VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT : VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+	switch(access)
+	{
+	case Render::HeapAccess::HEAP_ACCESS_GPU_ONLY:
+		return VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+	case Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE:
+		return VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
+	default:
+		assert(false);
+		return VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+	}
 }
 
 static inline VkBufferUsageFlags ConvertBufferUsageFlag(uint32_t usage)

@@ -43,6 +43,7 @@ void Image::Create(Render::ImageType type, Render::Format format, const Render::
 	mFormat = format;
 	mExtent = extent;
 	mUsage = usage;
+	mAccess = Render::HeapAccess::HEAP_ACCESS_GPU_ONLY;
 
 	VkFormat vk_format = ConvertFormat(format);
 	Context* context = static_cast<Context*>(mContext);
@@ -52,14 +53,28 @@ void Image::Create(Render::ImageType type, Render::Format format, const Render::
 	CreateView();
 }
 
-void Image::Allocate(bool mappable)
+void Image::Allocate(void)
 {
 	assert(mImage != nullptr);
-	auto flags = GetMemoryPropertyFlags(mappable);
+	auto flags = GetMemoryPropertyFlags(mAccess);
 	Vulkan::Device* device = mImage->GetDevice();
+
+	VkMemoryRequirements requirements = mImage->GetMemoryRequirements();
+	mSize = requirements.size;
+
 	mMemory = Vulkan::DeviceMemory::New(device);
-	mMemory->Allocate(mImage, flags);
+	mMemory->Allocate(requirements, flags);
 	mImage->BindMemory(mMemory, 0);
+}
+
+void* Image::Map(size_t offset, size_t size)
+{
+	assert(false);
+	return nullptr;
+}
+void Image::Unmap(size_t offset, size_t size)
+{
+	assert(false);
 }
 
 void Image::CreateView()
@@ -80,19 +95,6 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	descriptor_info.imageView = mImage->GetView()->GetHandle();
 	descriptor_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 	return descriptor_info;
-}
-
-void* Image::Map(size_t offset, size_t size)
-{
-	assert(mMemory != nullptr);
-	return mMemory->Map(offset, size);
-}
-
-void Image::Unmap(size_t offset, size_t size)
-{
-	assert(mMemory != nullptr);
-	mMemory->Unmap();
-	mMemory->Flush(offset, size);
 }
 
 void Image::CopyFrom(const Render::Buffer* other)

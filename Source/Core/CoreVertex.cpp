@@ -29,7 +29,7 @@ Vertex::~Vertex(void)
 	mElement = nullptr;
 }
 
-void Vertex::Create(Render::Element* element, uint32_t count)
+void Vertex::Create(Render::Element* element, uint32_t count, Render::HeapAccess access)
 {
 	mCount = count;
 	mElement = element;
@@ -39,7 +39,7 @@ void Vertex::Create(Render::Element* element, uint32_t count)
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_VERTEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, false);
+	Buffer::Create(size, flags, access);
 }
 
 } /* namespace Core */

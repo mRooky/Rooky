@@ -22,7 +22,7 @@ private:
 	virtual ~Index(void) override;
 
 public:
-	void Create(Render::IndexType type, uint32_t count);
+	void Create(Render::IndexType type, uint32_t count, Render::HeapAccess access);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

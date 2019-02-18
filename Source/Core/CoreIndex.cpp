@@ -28,7 +28,7 @@ Index::~Index(void)
 	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
-void Index::Create(Render::IndexType type, uint32_t count)
+void Index::Create(Render::IndexType type, uint32_t count, Render::HeapAccess access)
 {
 	mType = type;
 	mCount = count;
@@ -38,7 +38,7 @@ void Index::Create(Render::IndexType type, uint32_t count)
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_INDEX;
 	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, false);
+	Buffer::Create(size, flags, access);
 }
 
 } /* namespace Core */
