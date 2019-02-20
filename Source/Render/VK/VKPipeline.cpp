@@ -8,9 +8,11 @@
 #include "VKPipeline.h"
 #include "VKContext.h"
 #include "VKPipelineState.h"
+#include "VKRenderPass.h"
 
 #include "VulkanPipeline.h"
 #include "VulkanInline.h"
+#include "VulkanRenderPass.h"
 
 #include <cassert>
 
@@ -29,7 +31,20 @@ Pipeline::~Pipeline(void)
 
 void Pipeline::Initialize(Render::Pass* pass, uint32_t index)
 {
-	assert(false);
+	auto render_pass = static_cast<RenderPass*>(pass);
+	auto pipeline_state = static_cast<PipelineState*>(mPipelineState);
+
+	auto vk_render_pass = render_pass->GetRenderPassVK();
+	auto vk_pipeline_cache = pipeline_state->GetCache();
+	auto vk_pipeline_layout = pipeline_state->GetLayout();
+
+	auto pipeline_create_info = pipeline_state->GetGraphicsInfo();
+	pipeline_create_info->SetContent(vk_pipeline_layout, vk_render_pass, index);
+
+	auto device = vk_render_pass->GetDevice();
+	mPipeline = Vulkan::Pipeline::New(device);
+	mPipeline->Create(vk_pipeline_cache, pipeline_create_info);
+
 }
 
 } /* namespace VK */

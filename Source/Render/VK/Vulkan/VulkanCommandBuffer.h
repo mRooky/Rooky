@@ -79,8 +79,8 @@ private:
 
 private:
 	CommandPool* m_pool = nullptr;
-	VkCommandBuffer m_buffer = VK_NULL_HANDLE;
 	Semaphore* m_semaphore = nullptr;
+	VkCommandBuffer m_buffer = VK_NULL_HANDLE;
 };
 
 } /* namespace Vulkan */

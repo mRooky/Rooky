@@ -5,8 +5,9 @@
  *      Author: rookyma
  */
 
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_INTERFACES_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_INTERFACES_H_
 
-#include "VulkanColorBlendAttachmentState.h"
 #include "VulkanColorBlendStateInfo.h"
 #include "VulkanDepthStencilStateInfo.h"
 #include "VulkanDynamicStateInfo.h"
@@ -15,7 +16,7 @@
 #include "VulkanMultisampleStateInfo.h"
 #include "VulkanRasterizationStateInfo.h"
 #include "VulkanShaderStageInfo.h"
-#include "VulkanVertexInputAttribute.hpp"
-#include "VulkanVertexInputBinding.hpp"
 #include "VulkanVertexInputStateInfo.h"
 #include "VulkanViewportStateInfo.h"
+
+#endif

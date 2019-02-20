@@ -211,7 +211,7 @@ VkPipelineMultisampleStateCreateInfo Pipeline::MultisampleStateCreateInfo(void)
 	return pipeline_multisample_state_create_info;
 }
 
-VkGraphicsPipelineCreateInfo Pipeline::CreateInfo(void)
+VkGraphicsPipelineCreateInfo Pipeline::GraphicsCreateInfo(void)
 {
 	VkGraphicsPipelineCreateInfo graphics_pipeline_create_info = {};
 	graphics_pipeline_create_info.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;

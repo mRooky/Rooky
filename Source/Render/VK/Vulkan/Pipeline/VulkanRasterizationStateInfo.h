@@ -20,6 +20,11 @@ public:
 	~RasterizationStateInfo(void);
 
 public:
+	inline void SetLineWidth(float width)
+	{
+		this->lineWidth = width;
+	}
+
 	inline void SetContent(bool clamp, bool discard, VkPolygonMode polygon, VkCullModeFlags cull, VkFrontFace front)
 	{
 		this->depthClampEnable = clamp ? VK_TRUE : VK_FALSE;
@@ -36,7 +41,6 @@ public:
 		this->depthBiasClamp = clamp;
 		this->depthBiasSlopeFactor = slope;
 	}
-	inline void SetLineWidth(float width) { this->lineWidth = width; }
 };
 
 } /* namespace VK */

@@ -10,6 +10,7 @@
 
 #include "RenderPipelineState.h"
 #include "VKRender.h"
+#include "Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {
@@ -27,12 +28,14 @@ public:
 public:
 	inline Vulkan::PipelineCache* GetCache(void) const { return m_pipelineCache; }
 	inline Vulkan::PipelineLayout* GetLayout(void) const { return  m_pipelineLayout; }
+	inline Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) { return &mGraphicsInfo; }
 
 private:
 	Vulkan::PipelineCache* m_pipelineCache = nullptr;
 	Vulkan::PipelineLayout* m_pipelineLayout = nullptr;
 
 protected:
+	Vulkan::GraphicsPipelineInfo mGraphicsInfo;
 	std::vector<VkPushConstantRange> m_constantRanges;
 };
 

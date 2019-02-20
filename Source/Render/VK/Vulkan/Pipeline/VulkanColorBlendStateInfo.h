@@ -21,7 +21,7 @@ public:
 	~ColorBlendStateInfo(void);
 
 public:
-	ColorBlendAttachmentState* CreateState(void);
+	ColorBlendAttachmentState* CreateAttachmentState(void);
 
 public:
 	inline size_t GetStateCount(void) const { return mStates.size(); }

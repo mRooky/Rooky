@@ -8,7 +8,7 @@
 #ifndef VULKAN_VULKANCOMMON_H_
 #define VULKAN_VULKANCOMMON_H_
 
-#include "Common/VulkanDumpFormat.h"
-#include "Common/VulkanDumpLimit.h"
+#include "Utility/VulkanDumpLimit.h"
+#include "Utility/VulkanDumpFormat.h"
 
 #endif /* VULKAN_VULKANCOMMON_H_ */

@@ -24,5 +24,15 @@ PipelineState::~PipelineState(void)
 {
 }
 
+void PipelineState::CreateCache(void)
+{
+	assert(false);
+}
+
+void PipelineState::CreateLayout(void)
+{
+	assert(false);
+}
+
 }
 

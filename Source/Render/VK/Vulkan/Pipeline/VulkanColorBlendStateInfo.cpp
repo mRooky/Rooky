@@ -23,7 +23,7 @@ ColorBlendStateInfo::~ColorBlendStateInfo(void)
 {
 }
 
-ColorBlendAttachmentState* ColorBlendStateInfo::CreateState(void)
+ColorBlendAttachmentState* ColorBlendStateInfo::CreateAttachmentState(void)
 {
 	mStates.push_back(ColorBlendAttachmentState());
 	this->pAttachments = mStates.data();

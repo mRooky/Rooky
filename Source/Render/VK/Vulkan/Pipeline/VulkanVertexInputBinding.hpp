@@ -28,8 +28,6 @@ public:
 	}
 };
 
-static_assert(sizeof(VertexInputBinding) == sizeof(VkVertexInputBindingDescription), "VertexInputBinding");
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTBINDING_HPP_ */

@@ -33,7 +33,7 @@ public:
 	static inline Pipeline* New(Device* device) { return new Pipeline(device); }
 
 public:
-	static VkGraphicsPipelineCreateInfo CreateInfo(void);
+	static VkGraphicsPipelineCreateInfo GraphicsCreateInfo(void);
 
 public:
 	static VkPipelineShaderStageCreateInfo ShaderStageCreateInfo(void);
