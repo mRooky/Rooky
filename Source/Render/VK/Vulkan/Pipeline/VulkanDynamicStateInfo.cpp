@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#include "VKDynamicStateInfo.h"
+#include "VulkanDynamicStateInfo.h"
 #include "VulkanPipeline.h"
 
-namespace VK
+namespace Vulkan
 {
 
 DynamicStateInfo::DynamicStateInfo(void)

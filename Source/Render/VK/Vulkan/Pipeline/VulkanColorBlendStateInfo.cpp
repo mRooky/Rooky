@@ -5,13 +5,12 @@
  *      Author: rookyma
  */
 
-#include "VKColorBlendStateInfo.h"
-
+#include "VulkanColorBlendStateInfo.h"
 #include "VulkanPipeline.h"
 
 #include <cassert>
 
-namespace VK
+namespace Vulkan
 {
 
 ColorBlendStateInfo::ColorBlendStateInfo(void)

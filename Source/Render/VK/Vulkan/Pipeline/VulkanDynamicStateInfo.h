@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKDYNAMICSTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKDYNAMICSTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANDYNAMICSTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANDYNAMICSTATEINFO_H_
 
 #include <vulkan/vulkan_core.h>
 #include <vector>
 
-namespace VK
+namespace Vulkan
 {
 
 class DynamicStateInfo: public VkPipelineDynamicStateCreateInfo
@@ -36,4 +36,4 @@ private:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKDYNAMICSTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANDYNAMICSTATEINFO_H_ */

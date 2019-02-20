@@ -8,44 +8,31 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 #define SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 
-#include "RenderState.h"
-
-#include "Pipeline/VKPipelineStateInterfaces.h"
+#include "RenderPipelineState.h"
+#include "VKRender.h"
 
 namespace VK
 {
 class Context;
-class PipelineState : public Render::State
+class PipelineState : public Render::PipelineState
 {
 public:
 	explicit PipelineState(Context* context);
 	virtual ~PipelineState(void) override;
 
 public:
-	VkGraphicsPipelineCreateInfo GetGraphicsCreateInfo(void) const;
+	void CreateCache(void);
+	void CreateLayout(void);
 
 public:
-	inline DynamicStateInfo* GetDynamicStateInfo(void) { return &mDynamicState; }
-	inline ViewportStateInfo* GetViewportStateInfo(void) { return &mViewportState; }
-	inline ColorBlendStateInfo* GetColorBlendStateInfo(void) { return &mColorBlendState; }
-	inline MultisampleStateInfo* GetMultisampleStateInfo(void) { return &mMultisampleState; }
-	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputState; }
-	inline DepthStencilStateInfo* GetDepthStencilStateInfo(void) { return &mDepthStencilState; }
-	inline InputAssemblyStateInfo* GetInputAssemblyStateInfo(void) { return &mInputAssemblyState; }
-	inline RasterizationStateInfo* GetRasterizationStateInfo(void) { return &mRasterizationState; }
+	inline Vulkan::PipelineCache* GetCache(void) const { return m_pipelineCache; }
+	inline Vulkan::PipelineLayout* GetLayout(void) const { return  m_pipelineLayout; }
+
+private:
+	Vulkan::PipelineCache* m_pipelineCache = nullptr;
+	Vulkan::PipelineLayout* m_pipelineLayout = nullptr;
 
 protected:
-	DynamicStateInfo mDynamicState = {};
-	ViewportStateInfo mViewportState = {};
-	ColorBlendStateInfo mColorBlendState = {};
-	MultisampleStateInfo mMultisampleState = {};
-	VertexInputStateInfo mVertexInputState = {};
-	DepthStencilStateInfo mDepthStencilState = {};
-	InputAssemblyStateInfo mInputAssemblyState = {};
-	RasterizationStateInfo mRasterizationState = {};
-
-protected:
-	std::vector<ShaderStageInfo> m_shaderStages;
 	std::vector<VkPushConstantRange> m_constantRanges;
 };
 

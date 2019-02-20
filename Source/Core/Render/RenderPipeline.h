@@ -13,27 +13,27 @@
 namespace Render
 {
 class Pass;
-class State;
+class PipelineState;
 class Pipeline
 {
 public:
-	explicit Pipeline(Pass* pass);
+	explicit Pipeline(PipelineState* state);
 	virtual ~Pipeline(void);
 
 public:
-	virtual void Initialize(State* state, uint32_t index) = 0;
+	virtual void Initialize(Pass* pass, uint32_t index) = 0;
 
 public:
 	inline uint32_t GetIndex(void) const { return mIndex; }
 	inline Pass* GetRenderPass(void) const { return mRenderPass; }
-	inline State* GetRenderState(void) const { return mRenderState; }
+	inline PipelineState* GetPipelineState(void) const { return mPipelineState; }
 
 protected:
 	uint32_t mIndex = 0;
 
 protected:
 	Pass* mRenderPass = nullptr;
-	State* mRenderState = nullptr;
+	PipelineState* mPipelineState = nullptr;
 };
 
 } /* namespace Render */

@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#include "VKVertexInputStateInfo.h"
+#include "VulkanVertexInputStateInfo.h"
 #include "VulkanPipeline.h"
 
-namespace VK
+namespace Vulkan
 {
 
 VertexInputStateInfo::VertexInputStateInfo(void)

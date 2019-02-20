@@ -8,12 +8,15 @@
 
 #include "VKPipelineState.h"
 #include "VKContext.h"
+#include "VKPipeline.h"
+
+#include <cassert>
 
 namespace VK
 {
 
 PipelineState::PipelineState(Context* context):
-		Render::State(context)
+		Render::PipelineState(context)
 {
 }
 

@@ -1,38 +1,36 @@
 /*
- * RenderState.h
+ * CorePipelineState.h
  *
- *  Created on: Jan 30, 2019
+ *  Created on: Feb 20, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERSTATE_H_
-#define SOURCE_CORE_RENDER_RENDERSTATE_H_
+#ifndef SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_
+#define SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_
 
 #include "RenderObject.h"
 #include "RenderTypes.h"
-#include <cstdint>
 #include <vector>
 
 namespace Render
 {
 class Shader;
 class Element;
-class State : public Object
+class PipelineState : public Object
 {
-
 public:
-	explicit State(Context* context);
-	virtual ~State(void) override;
+	PipelineState(Context* context);
+	virtual ~PipelineState(void) override;
 
 protected:
 	Element* mElement = nullptr;
 	std::vector<Shader*> mShaders;
 
 protected:
+	bool mBlendEnabled = true;
 	bool mCullFaceEnabled = false;
 	bool mDepthTestEnabled = true;
 	bool mDepthWriteEnabled = true;
-	bool mBlendEnabled = true;
 	bool mStencilTestEnabled = false;
 	uint32_t mStencilWrite = 0;
 	uint32_t mStencilFunctionMask = 0;
@@ -49,6 +47,6 @@ protected:
 	StencilOperation mStencilOpDppass = StencilOperation::STENCIL_OPERATION_KEEP;
 };
 
-} /* namespace Render */
+} /* namespace Core */
 
-#endif /* SOURCE_CORE_RENDER_RENDERSTATE_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_ */

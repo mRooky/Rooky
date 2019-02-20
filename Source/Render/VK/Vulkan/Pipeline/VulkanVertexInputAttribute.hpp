@@ -5,16 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTATTRIBUTE_HPP_
-#define SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTATTRIBUTE_HPP_
-
-#include "RenderFormat.h"
-
-#include "VKFormat.h"
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTATTRIBUTE_HPP_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTATTRIBUTE_HPP_
 
 #include <vulkan/vulkan_core.h>
 
-namespace VK
+namespace Vulkan
 {
 
 class VertexInputAttribute: public VkVertexInputAttributeDescription
@@ -24,15 +20,15 @@ public:
 	~VertexInputAttribute(void) = default;
 
 public:
-	inline void SetContent(uint32_t location, uint32_t binding, Render::Format format, uint32_t offset)
+	inline void SetContent(uint32_t location, uint32_t binding, VkFormat format, uint32_t offset)
 	{
 		this->location = location;
 		this->binding = binding;
-		this->format = ConvertFormat(format);
+		this->format = format;
 		this->offset = offset;
 	}
 };
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTATTRIBUTE_HPP_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTATTRIBUTE_HPP_ */

@@ -5,15 +5,14 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTSTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTSTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTSTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTSTATEINFO_H_
 
-#include "VKVertexInputBinding.hpp"
-#include "VKVertexInputAttribute.hpp"
-#include <vulkan/vulkan_core.h>
+#include "VulkanVertexInputAttribute.hpp"
+#include "VulkanVertexInputBinding.hpp"
 #include <vector>
 
-namespace VK
+namespace Vulkan
 {
 
 class VertexInputStateInfo: public VkPipelineVertexInputStateCreateInfo
@@ -33,4 +32,4 @@ private:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKVERTEXINPUTSTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTSTATEINFO_H_ */

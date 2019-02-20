@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Pipeline::Pipeline(Pass* pass):
-		mRenderPass(pass)
+Pipeline::Pipeline(PipelineState* state):
+		mPipelineState(state)
 {
 }
 

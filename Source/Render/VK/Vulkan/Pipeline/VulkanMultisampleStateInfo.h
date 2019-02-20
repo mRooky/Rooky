@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKMULTISAMPLESTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKMULTISAMPLESTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANMULTISAMPLESTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANMULTISAMPLESTATEINFO_H_
 
 #include <vulkan/vulkan_core.h>
 
-namespace VK
+namespace Vulkan
 {
 
 class MultisampleStateInfo: public VkPipelineMultisampleStateCreateInfo
@@ -28,4 +28,4 @@ public:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKMULTISAMPLESTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANMULTISAMPLESTATEINFO_H_ */

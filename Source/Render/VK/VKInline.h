@@ -60,20 +60,6 @@ static inline VkImageUsageFlags ConvertImageUsageFlag(uint32_t usage)
 	return flags;
 }
 
-static inline VkVertexInputRate ConvertRate(Render::VertexInputRate rate)
-{
-	switch(rate)
-	{
-	case Render::VertexInputRate::VERTEX_INPUT_RATE_VERTEX:
-		return VK_VERTEX_INPUT_RATE_VERTEX;
-	case Render::VertexInputRate::VERTEX_INPUT_RATE_INSTANCE:
-		return VK_VERTEX_INPUT_RATE_INSTANCE;
-	default:
-		assert(false);
-		return VK_VERTEX_INPUT_RATE_VERTEX;
-	}
-}
-
 }
 
 #endif /* SOURCE_RENDER_VK_VKINLINE_H_ */

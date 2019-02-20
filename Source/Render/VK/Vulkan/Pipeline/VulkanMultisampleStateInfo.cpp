@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#include "VKMultisampleStateInfo.h"
+#include "VulkanMultisampleStateInfo.h"
 #include <VulkanPipeline.h>
 #include <cassert>
 
-namespace VK
+namespace Vulkan
 {
 
 MultisampleStateInfo::MultisampleStateInfo(void)

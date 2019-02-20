@@ -43,11 +43,4 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	}
 }
 
-ShaderStageInfo Shader::GetStageCreateInfo(void) const
-{
-	ShaderStageInfo stage_create_info = {};
-	stage_create_info.SetContent(mShader->GetHandle(), mStage);
-	return stage_create_info;
-}
-
 } /* namespace VK */

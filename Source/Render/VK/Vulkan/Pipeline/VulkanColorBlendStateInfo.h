@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKCOLORBLENDSTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKCOLORBLENDSTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANCOLORBLENDSTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANCOLORBLENDSTATEINFO_H_
 
-#include "VKColorBlendAttachmentState.h"
+#include "VulkanColorBlendAttachmentState.h"
 #include <vector>
 
-namespace VK
+namespace Vulkan
 {
 
 class ColorBlendStateInfo: public VkPipelineColorBlendStateCreateInfo
@@ -33,4 +33,4 @@ private:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKCOLORBLENDSTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANCOLORBLENDSTATEINFO_H_ */

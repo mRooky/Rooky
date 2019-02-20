@@ -28,9 +28,6 @@ public:
 public:
 	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }
 
-public:
-	ShaderStageInfo GetStageCreateInfo(void) const;
-
 protected:
 	Vulkan::ShaderModule* mShader = nullptr;
 };

@@ -5,14 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKVIEWPORTSTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKVIEWPORTSTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVIEWPORTSTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVIEWPORTSTATEINFO_H_
 
-#include "RenderMath.h"
 #include <vulkan/vulkan_core.h>
 #include <vector>
 
-namespace VK
+namespace Vulkan
 {
 
 class ViewportStateInfo: public VkPipelineViewportStateCreateInfo
@@ -22,8 +21,8 @@ public:
 	~ViewportStateInfo(void);
 
 public:
-	void SetScissor(Render::Rect2D scissor);
-	void SetViewport(Render::Viewport viewport);
+	void AppendScissor(VkRect2D scissor);
+	void AppendViewport(VkViewport viewport);
 
 private:
 	std::vector<VkRect2D> mScissors;
@@ -33,4 +32,4 @@ private:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKVIEWPORTSTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVIEWPORTSTATEINFO_H_ */

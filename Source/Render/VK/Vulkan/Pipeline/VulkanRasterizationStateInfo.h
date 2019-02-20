@@ -5,13 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_PIPELINE_VKRASTERIZATIONSTATEINFO_H_
-#define SOURCE_RENDER_VK_PIPELINE_VKRASTERIZATIONSTATEINFO_H_
+#ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANRASTERIZATIONSTATEINFO_H_
+#define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANRASTERIZATIONSTATEINFO_H_
 
-#include "RenderTypes.h"
 #include <vulkan/vulkan_core.h>
 
-namespace VK
+namespace Vulkan
 {
 
 class RasterizationStateInfo: public VkPipelineRasterizationStateCreateInfo
@@ -21,13 +20,13 @@ public:
 	~RasterizationStateInfo(void);
 
 public:
-	inline void SetContent(bool clamp, bool discard, Render::PolygonMode polygon, Render::CullFaceSide cull, Render::FrontFace front)
+	inline void SetContent(bool clamp, bool discard, VkPolygonMode polygon, VkCullModeFlags cull, VkFrontFace front)
 	{
 		this->depthClampEnable = clamp ? VK_TRUE : VK_FALSE;
 		this->rasterizerDiscardEnable = discard ? VK_TRUE : VK_FALSE;
-		this->polygonMode = RasterizationStateInfo::Convert(polygon);
-		this->cullMode = RasterizationStateInfo::Convert(cull);
-		this->frontFace = RasterizationStateInfo::Convert(front);
+		this->polygonMode = polygon;
+		this->cullMode = cull;
+		this->frontFace = front;
 	}
 
 	inline void SetDepthBias(bool bias, float constant, float clamp, float slope)
@@ -38,13 +37,8 @@ public:
 		this->depthBiasSlopeFactor = slope;
 	}
 	inline void SetLineWidth(float width) { this->lineWidth = width; }
-
-public:
-	static VkFrontFace Convert(Render::FrontFace front);
-	static VkCullModeFlags Convert(Render::CullFaceSide cull);
-	static VkPolygonMode Convert(Render::PolygonMode polygon);
 };
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_PIPELINE_VKRASTERIZATIONSTATEINFO_H_ */
+#endif /* SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANRASTERIZATIONSTATEINFO_H_ */
