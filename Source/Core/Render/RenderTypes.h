@@ -192,6 +192,7 @@ namespace Render
 	    COMPARE_OP_GREATER_OR_EQUAL = 6,
 	    COMPARE_OP_ALWAYS = 7
 	};
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERTYPES_H_ */
