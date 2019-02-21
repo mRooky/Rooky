@@ -20,15 +20,13 @@ public:
 	virtual ~ComputePipelineInfo(void);
 
 public:
-	ShaderStageInfo* CreateShaderStage(void);
+	void SetLayout(PipelineLayout* layout);
 
 public:
-	inline size_t GetShaderStageCount(void) { return m_shaderStages.size(); }
-	inline const ShaderStageInfo& GetShaderStageInfo(size_t index) { return m_shaderStages.at(index); }
+	inline void SetShaderStage(const ShaderStageInfo& stage) { m_createInfo.stage = stage; }
 	inline const VkComputePipelineCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
-	std::vector<ShaderStageInfo> m_shaderStages;
 	VkComputePipelineCreateInfo m_createInfo = {};
 };
 
