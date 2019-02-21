@@ -25,14 +25,14 @@ public:
 	ShaderStageInfo* CreateShaderStage(void);
 
 public:
-	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputState; }
-	inline InputAssemblyStateInfo* GetInputAssemblyStateInfo(void) { return &mInputAssemblyState; }
-	inline ViewportStateInfo* GetViewportStateInfo(void) { return &mViewportState; }
-	inline RasterizationStateInfo* GetRasterizationStateInfo(void) { return &mRasterizationState; }
-	inline MultisampleStateInfo* GetMultisampleStateInfo(void) { return &mMultisampleState; }
-	inline DepthStencilStateInfo* GetDepthStencilStateInfo(void) { return &mDepthStencilState; }
-	inline ColorBlendStateInfo* GetColorBlendStateInfo(void) { return &mColorBlendState; }
-	inline DynamicStateInfo* GetDynamicStateInfo(void) { return &mDynamicState; }
+	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputStateInfo; }
+	inline InputAssemblyStateInfo* GetInputAssemblyStateInfo(void) { return &mInputAssemblyStateInfo; }
+	inline ViewportStateInfo* GetViewportStateInfo(void) { return &mViewportStateInfo; }
+	inline RasterizationStateInfo* GetRasterizationStateInfo(void) { return &mRasterizationStateInfo; }
+	inline MultisampleStateInfo* GetMultisampleStateInfo(void) { return &mMultisampleStateInfo; }
+	inline DepthStencilStateInfo* GetDepthStencilStateInfo(void) { return &mDepthStencilStateInfo; }
+	inline ColorBlendStateInfo* GetColorBlendStateInfo(void) { return &mColorBlendStateInfo; }
+	inline DynamicStateInfo* GetDynamicStateInfo(void) { return &mDynamicStateInfo; }
 
 public:
 	inline size_t GetShaderStageCount(void) { return mShaderStages.size(); }
@@ -40,14 +40,14 @@ public:
 	inline const VkGraphicsPipelineCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 protected:
-	VertexInputStateInfo mVertexInputState;
-	InputAssemblyStateInfo mInputAssemblyState;
-	ViewportStateInfo mViewportState;
-	RasterizationStateInfo mRasterizationState ;
-	MultisampleStateInfo mMultisampleState;
-	DepthStencilStateInfo mDepthStencilState;
-	ColorBlendStateInfo mColorBlendState;
-	DynamicStateInfo mDynamicState;
+	VertexInputStateInfo mVertexInputStateInfo;
+	InputAssemblyStateInfo mInputAssemblyStateInfo;
+	ViewportStateInfo mViewportStateInfo;
+	RasterizationStateInfo mRasterizationStateInfo;
+	MultisampleStateInfo mMultisampleStateInfo;
+	DepthStencilStateInfo mDepthStencilStateInfo;
+	ColorBlendStateInfo mColorBlendStateInfo;
+	DynamicStateInfo mDynamicStateInfo;
 
 protected:
 	std::vector<ShaderStageInfo> mShaderStages;

@@ -21,14 +21,14 @@ GraphicsPipelineInfo::GraphicsPipelineInfo(void)
 	m_createInfo = Vulkan::Pipeline::GraphicsCreateInfo();
 	m_createInfo.pStages = mShaderStages.data();
 	m_createInfo.stageCount = mShaderStages.size();
-	m_createInfo.pVertexInputState = mVertexInputState.CreateInfo();
-	m_createInfo.pInputAssemblyState = mInputAssemblyState.CreateInfo();
-	m_createInfo.pViewportState = mViewportState.CreateInfo();
-	m_createInfo.pRasterizationState = mRasterizationState.CreateInfo();
-	m_createInfo.pMultisampleState = mMultisampleState.CreateInfo();
-	m_createInfo.pDepthStencilState = mDepthStencilState.CreateInfo();
-	m_createInfo.pColorBlendState = mColorBlendState.CreateInfo();
-	m_createInfo.pDynamicState = mDynamicState.CreateInfo();
+	m_createInfo.pVertexInputState = mVertexInputStateInfo.CreateInfo();
+	m_createInfo.pInputAssemblyState = mInputAssemblyStateInfo.CreateInfo();
+	m_createInfo.pViewportState = mViewportStateInfo.CreateInfo();
+	m_createInfo.pRasterizationState = mRasterizationStateInfo.CreateInfo();
+	m_createInfo.pMultisampleState = mMultisampleStateInfo.CreateInfo();
+	m_createInfo.pDepthStencilState = mDepthStencilStateInfo.CreateInfo();
+	m_createInfo.pColorBlendState = mColorBlendStateInfo.CreateInfo();
+	m_createInfo.pDynamicState = mDynamicStateInfo.CreateInfo();
 }
 
 GraphicsPipelineInfo::~GraphicsPipelineInfo(void)
