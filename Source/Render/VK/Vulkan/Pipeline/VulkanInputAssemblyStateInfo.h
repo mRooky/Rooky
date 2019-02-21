@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 
-class InputAssemblyStateInfo: public VkPipelineInputAssemblyStateCreateInfo
+class InputAssemblyStateInfo
 {
 public:
 	InputAssemblyStateInfo(void);
@@ -22,9 +22,14 @@ public:
 public:
 	inline void SetContent(VkPrimitiveTopology topology, bool restart)
 	{
-		this->primitiveRestartEnable = restart ? VK_TRUE : VK_FALSE;
-		this->topology = topology;
+		m_createInfo.topology = topology;
+		m_createInfo.primitiveRestartEnable = restart ? VK_TRUE : VK_FALSE;
 	}
+
+	inline const VkPipelineInputAssemblyStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
+private:
+	VkPipelineInputAssemblyStateCreateInfo m_createInfo = {};
 
 };
 

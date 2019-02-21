@@ -13,34 +13,36 @@
 namespace Vulkan
 {
 
-class RasterizationStateInfo: public VkPipelineRasterizationStateCreateInfo
+class RasterizationStateInfo
 {
 public:
 	RasterizationStateInfo(void);
 	~RasterizationStateInfo(void);
 
 public:
-	inline void SetLineWidth(float width)
-	{
-		this->lineWidth = width;
-	}
+	inline void SetLineWidth(float width) { m_createInfo.lineWidth = width; }
+	inline const VkPipelineRasterizationStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
+public:
 	inline void SetContent(bool clamp, bool discard, VkPolygonMode polygon, VkCullModeFlags cull, VkFrontFace front)
 	{
-		this->depthClampEnable = clamp ? VK_TRUE : VK_FALSE;
-		this->rasterizerDiscardEnable = discard ? VK_TRUE : VK_FALSE;
-		this->polygonMode = polygon;
-		this->cullMode = cull;
-		this->frontFace = front;
+		m_createInfo.depthClampEnable = clamp ? VK_TRUE : VK_FALSE;
+		m_createInfo.rasterizerDiscardEnable = discard ? VK_TRUE : VK_FALSE;
+		m_createInfo.polygonMode = polygon;
+		m_createInfo.cullMode = cull;
+		m_createInfo.frontFace = front;
 	}
 
 	inline void SetDepthBias(bool bias, float constant, float clamp, float slope)
 	{
-		this->depthBiasEnable = bias ? VK_TRUE : VK_FALSE;
-		this->depthBiasConstantFactor = constant;
-		this->depthBiasClamp = clamp;
-		this->depthBiasSlopeFactor = slope;
+		m_createInfo.depthBiasEnable = bias ? VK_TRUE : VK_FALSE;
+		m_createInfo.depthBiasConstantFactor = constant;
+		m_createInfo.depthBiasClamp = clamp;
+		m_createInfo.depthBiasSlopeFactor = slope;
 	}
+
+private:
+	VkPipelineRasterizationStateCreateInfo m_createInfo = {};
 };
 
 } /* namespace VK */

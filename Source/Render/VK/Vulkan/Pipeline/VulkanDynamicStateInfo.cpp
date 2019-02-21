@@ -13,7 +13,7 @@ namespace Vulkan
 
 DynamicStateInfo::DynamicStateInfo(void)
 {
-	*static_cast<VkPipelineDynamicStateCreateInfo*>(this) = Vulkan::Pipeline::DynamicStateCreateInfo();
+	m_createInfo = Vulkan::Pipeline::DynamicStateCreateInfo();
 }
 
 DynamicStateInfo::~DynamicStateInfo(void)

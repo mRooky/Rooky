@@ -15,7 +15,7 @@
 namespace Vulkan
 {
 
-class VertexInputStateInfo: public VkPipelineVertexInputStateCreateInfo
+class VertexInputStateInfo
 {
 public:
 	VertexInputStateInfo(void);
@@ -25,9 +25,15 @@ public:
 	VertexInputBinding* CreateBinding(void);
 	VertexInputAttribute* CreateAttribute(void);
 
+public:
+	inline const VkPipelineVertexInputStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
 private:
 	std::vector<VertexInputBinding> m_vertexInputBindings;
 	std::vector<VertexInputAttribute> m_vertexInputAttributes;
+
+private:
+	VkPipelineVertexInputStateCreateInfo m_createInfo = {};
 };
 
 } /* namespace VK */

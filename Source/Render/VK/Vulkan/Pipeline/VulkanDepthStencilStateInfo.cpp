@@ -14,7 +14,7 @@ namespace Vulkan
 
 DepthStencilStateInfo::DepthStencilStateInfo(void)
 {
-	*static_cast<VkPipelineDepthStencilStateCreateInfo*>(this) = Vulkan::Pipeline::DepthStencilStateCreateInfo();
+	m_createInfo = Vulkan::Pipeline::DepthStencilStateCreateInfo();
 }
 
 DepthStencilStateInfo::~DepthStencilStateInfo(void)

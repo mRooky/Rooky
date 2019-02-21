@@ -13,20 +13,26 @@
 namespace Vulkan
 {
 
-class DepthStencilStateInfo: public VkPipelineDepthStencilStateCreateInfo
+class DepthStencilStateInfo
 {
 public:
 	DepthStencilStateInfo(void);
 	~DepthStencilStateInfo(void);
 
 public:
+	inline const VkPipelineDepthStencilStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
+public:
 	inline void SetDepth(bool test, bool write, VkCompareOp operation, bool bound)
 	{
-		this->depthTestEnable = test ? VK_TRUE : VK_FALSE;
-		this->depthWriteEnable = write ? VK_TRUE : VK_FALSE;
-		this->depthCompareOp = operation;
-		this->depthBoundsTestEnable = bound ? VK_TRUE : VK_FALSE;
+		m_createInfo.depthTestEnable = test ? VK_TRUE : VK_FALSE;
+		m_createInfo.depthWriteEnable = write ? VK_TRUE : VK_FALSE;
+		m_createInfo.depthCompareOp = operation;
+		m_createInfo.depthBoundsTestEnable = bound ? VK_TRUE : VK_FALSE;
 	}
+
+private:
+	VkPipelineDepthStencilStateCreateInfo m_createInfo = {};
 
 };
 

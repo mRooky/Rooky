@@ -6,7 +6,6 @@
  */
 
 #include "VulkanShaderStageInfo.h"
-#include "VulkanPipeline.h"
 #include <cassert>
 
 namespace Vulkan
@@ -14,7 +13,12 @@ namespace Vulkan
 
 ShaderStageInfo::ShaderStageInfo(void)
 {
-	*static_cast<VkPipelineShaderStageCreateInfo*>(this) = Vulkan::Pipeline::ShaderStageCreateInfo();
+	this->sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+	this->pNext = nullptr;
+	this->pSpecializationInfo = nullptr;
+	this->flags = 0;
+	this->stage = VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
+	this->pName = "main";
 }
 
 ShaderStageInfo::~ShaderStageInfo(void)

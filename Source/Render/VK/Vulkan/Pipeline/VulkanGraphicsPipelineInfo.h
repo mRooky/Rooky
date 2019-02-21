@@ -14,7 +14,7 @@ namespace Vulkan
 {
 class RenderPass;
 class PipelineLayout;
-class GraphicsPipelineInfo: public VkGraphicsPipelineCreateInfo
+class GraphicsPipelineInfo
 {
 public:
 	GraphicsPipelineInfo(void);
@@ -22,9 +22,9 @@ public:
 
 public:
 	void SetContent(PipelineLayout* layout, RenderPass* pass, uint32_t index);
+	ShaderStageInfo* CreateShaderStage(void);
 
 public:
-	inline ShaderStageInfo* GetShaderStageInfo(void) { return &mShaderStage; }
 	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputState; }
 	inline InputAssemblyStateInfo* GetInputAssemblyStateInfo(void) { return &mInputAssemblyState; }
 	inline ViewportStateInfo* GetViewportStateInfo(void) { return &mViewportState; }
@@ -34,8 +34,12 @@ public:
 	inline ColorBlendStateInfo* GetColorBlendStateInfo(void) { return &mColorBlendState; }
 	inline DynamicStateInfo* GetDynamicStateInfo(void) { return &mDynamicState; }
 
+public:
+	inline size_t GetShaderStageCount(void) { return mShaderStages.size(); }
+	inline const ShaderStageInfo& GetShaderStageInfo(size_t index) { return mShaderStages.at(index); }
+	inline const VkGraphicsPipelineCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
 protected:
-	ShaderStageInfo mShaderStage;
 	VertexInputStateInfo mVertexInputState;
 	InputAssemblyStateInfo mInputAssemblyState;
 	ViewportStateInfo mViewportState;
@@ -46,7 +50,10 @@ protected:
 	DynamicStateInfo mDynamicState;
 
 protected:
+	std::vector<ShaderStageInfo> mShaderStages;
 
+private:
+	VkGraphicsPipelineCreateInfo m_createInfo = {};
 };
 
 } /* namespace VK */

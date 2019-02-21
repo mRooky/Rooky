@@ -15,7 +15,7 @@ namespace Vulkan
 
 InputAssemblyStateInfo::InputAssemblyStateInfo(void)
 {
-	*static_cast<VkPipelineInputAssemblyStateCreateInfo*>(this) = Vulkan::Pipeline::InputAssemblyStateCreateInfo();
+	m_createInfo = Vulkan::Pipeline::InputAssemblyStateCreateInfo();
 }
 
 InputAssemblyStateInfo::~InputAssemblyStateInfo(void)

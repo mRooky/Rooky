@@ -14,7 +14,7 @@ namespace Vulkan
 
 MultisampleStateInfo::MultisampleStateInfo(void)
 {
-	*static_cast<VkPipelineMultisampleStateCreateInfo*>(this) = Vulkan::Pipeline::MultisampleStateCreateInfo();
+	m_createInfo = Vulkan::Pipeline::MultisampleStateCreateInfo();
 }
 
 MultisampleStateInfo::~MultisampleStateInfo(void)

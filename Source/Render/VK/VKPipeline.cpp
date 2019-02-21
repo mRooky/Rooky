@@ -43,7 +43,7 @@ void Pipeline::Initialize(Render::Pass* pass, uint32_t index)
 
 	auto device = vk_render_pass->GetDevice();
 	mPipeline = Vulkan::Pipeline::New(device);
-	mPipeline->Create(vk_pipeline_cache, pipeline_create_info);
+	mPipeline->Create(vk_pipeline_cache, pipeline_create_info->CreateInfo());
 
 }
 

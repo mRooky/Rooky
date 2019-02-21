@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 
-class ColorBlendStateInfo: public VkPipelineColorBlendStateCreateInfo
+class ColorBlendStateInfo
 {
 public:
 	ColorBlendStateInfo(void);
@@ -24,11 +24,13 @@ public:
 	ColorBlendAttachmentState* CreateAttachmentState(void);
 
 public:
-	inline size_t GetStateCount(void) const { return mStates.size(); }
-	inline const ColorBlendAttachmentState* GetStateData(void) const { return mStates.data(); }
+	inline size_t GetStateCount(void) const { return m_states.size(); }
+	inline const ColorBlendAttachmentState* GetStateData(void) const { return m_states.data(); }
+	inline const VkPipelineColorBlendStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
-	std::vector<ColorBlendAttachmentState> mStates;
+	std::vector<ColorBlendAttachmentState> m_states;
+	VkPipelineColorBlendStateCreateInfo m_createInfo = {};
 };
 
 } /* namespace VK */

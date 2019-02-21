@@ -15,7 +15,7 @@ namespace Vulkan
 
 RasterizationStateInfo::RasterizationStateInfo(void)
 {
-	*static_cast<VkPipelineRasterizationStateCreateInfo*>(this) = Vulkan::Pipeline::RasterizationStateCreateInfo();
+	m_createInfo = Vulkan::Pipeline::RasterizationStateCreateInfo();
 }
 
 RasterizationStateInfo::~RasterizationStateInfo(void)

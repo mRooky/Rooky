@@ -17,16 +17,18 @@ namespace Vulkan
 
 GraphicsPipelineInfo::GraphicsPipelineInfo(void)
 {
-	*static_cast<VkGraphicsPipelineCreateInfo*>(this) = Vulkan::Pipeline::GraphicsCreateInfo();
-	this->pStages = &mShaderStage;
-	this->pVertexInputState = &mVertexInputState;
-	this->pInputAssemblyState = &mInputAssemblyState;
-	this->pViewportState = &mViewportState;
-	this->pRasterizationState = &mRasterizationState;
-	this->pMultisampleState = &mMultisampleState;
-	this->pDepthStencilState = &mDepthStencilState;
-	this->pColorBlendState = &mColorBlendState;
-	this->pDynamicState = &mDynamicState;
+	mShaderStages.reserve(5);
+	m_createInfo = Vulkan::Pipeline::GraphicsCreateInfo();
+	m_createInfo.pStages = mShaderStages.data();
+	m_createInfo.stageCount = mShaderStages.size();
+	m_createInfo.pVertexInputState = mVertexInputState.CreateInfo();
+	m_createInfo.pInputAssemblyState = mInputAssemblyState.CreateInfo();
+	m_createInfo.pViewportState = mViewportState.CreateInfo();
+	m_createInfo.pRasterizationState = mRasterizationState.CreateInfo();
+	m_createInfo.pMultisampleState = mMultisampleState.CreateInfo();
+	m_createInfo.pDepthStencilState = mDepthStencilState.CreateInfo();
+	m_createInfo.pColorBlendState = mColorBlendState.CreateInfo();
+	m_createInfo.pDynamicState = mDynamicState.CreateInfo();
 }
 
 GraphicsPipelineInfo::~GraphicsPipelineInfo(void)
@@ -38,9 +40,17 @@ void GraphicsPipelineInfo::SetContent(PipelineLayout* layout, RenderPass* pass, 
 	assert(pass != nullptr);
 	assert(layout != nullptr);
 
-	this->layout = layout->GetHandle();
-	this->renderPass = pass->GetHandle();
-	this->subpass = index;
+	m_createInfo.layout = layout->GetHandle();
+	m_createInfo.renderPass = pass->GetHandle();
+	m_createInfo.subpass = index;
+}
+
+ShaderStageInfo* GraphicsPipelineInfo::CreateShaderStage(void)
+{
+	mShaderStages.push_back(ShaderStageInfo());
+	m_createInfo.pStages = mShaderStages.data();
+	m_createInfo.stageCount = mShaderStages.size();
+	return &mShaderStages.back();
 }
 
 } /* namespace VK */

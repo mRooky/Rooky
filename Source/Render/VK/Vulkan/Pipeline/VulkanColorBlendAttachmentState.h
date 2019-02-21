@@ -20,11 +20,9 @@ public:
 	~ColorBlendAttachmentState(void);
 
 public:
-	inline void BlendEnable(bool enabled)
-	{
-		this->blendEnable = enabled ? VK_TRUE : VK_FALSE;
-	}
+	void BlendEnable(bool enabled);
 
+public:
 	inline void SetColor(VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation)
 	{
 		this->srcColorBlendFactor = src;

@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 
-class MultisampleStateInfo: public VkPipelineMultisampleStateCreateInfo
+class MultisampleStateInfo
 {
 public:
 	MultisampleStateInfo(void);
@@ -22,8 +22,13 @@ public:
 public:
 	inline void SetContent(uint32_t count)
 	{
-		this->rasterizationSamples = static_cast<VkSampleCountFlagBits>(count);
+		m_createInfo.rasterizationSamples = static_cast<VkSampleCountFlagBits>(count);
 	}
+
+	inline const VkPipelineMultisampleStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
+private:
+	VkPipelineMultisampleStateCreateInfo m_createInfo = {};
 };
 
 } /* namespace VK */

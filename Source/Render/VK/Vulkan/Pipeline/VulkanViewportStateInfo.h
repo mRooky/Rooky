@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 
-class ViewportStateInfo: public VkPipelineViewportStateCreateInfo
+class ViewportStateInfo
 {
 public:
 	ViewportStateInfo(void);
@@ -24,9 +24,15 @@ public:
 	void AppendScissor(VkRect2D scissor);
 	void AppendViewport(VkViewport viewport);
 
+public:
+	inline const VkPipelineViewportStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
+
 private:
-	std::vector<VkRect2D> mScissors;
-	std::vector<VkViewport> mViewports;
+	std::vector<VkRect2D> m_scissors;
+	std::vector<VkViewport> m_viewports;
+
+private:
+	VkPipelineViewportStateCreateInfo m_createInfo = {};
 
 };
 

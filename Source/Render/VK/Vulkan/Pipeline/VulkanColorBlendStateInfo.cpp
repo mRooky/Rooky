@@ -15,8 +15,8 @@ namespace Vulkan
 
 ColorBlendStateInfo::ColorBlendStateInfo(void)
 {
-	mStates.reserve(8);
-	*static_cast<VkPipelineColorBlendStateCreateInfo*>(this) = Vulkan::Pipeline::ColorBlendStateCreateInfo();
+	m_states.reserve(8);
+	m_createInfo = Vulkan::Pipeline::ColorBlendStateCreateInfo();
 }
 
 ColorBlendStateInfo::~ColorBlendStateInfo(void)
@@ -25,10 +25,10 @@ ColorBlendStateInfo::~ColorBlendStateInfo(void)
 
 ColorBlendAttachmentState* ColorBlendStateInfo::CreateAttachmentState(void)
 {
-	mStates.push_back(ColorBlendAttachmentState());
-	this->pAttachments = mStates.data();
-	this->attachmentCount = mStates.size();
-	return &mStates.back();
+	m_states.push_back(ColorBlendAttachmentState());
+	m_createInfo.pAttachments = m_states.data();
+	m_createInfo.attachmentCount = m_states.size();
+	return &m_states.back();
 }
 
 } /* namespace VK */
