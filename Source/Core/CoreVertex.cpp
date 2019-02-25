@@ -9,7 +9,7 @@
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
-#include "RenderElement.h"
+#include "RenderDeclaration.h"
 #include "RenderContext.h"
 #include "RenderBuffer.h"
 
@@ -26,21 +26,16 @@ Vertex::Vertex(BufferManager* creator):
 Vertex::~Vertex(void)
 {
 	mCount = 0;
-	delete mElement;
-	mElement = nullptr;
+	delete mDeclaration;
+	mDeclaration = nullptr;
 }
 
-void Vertex::Create(std::vector<Render::Format> semantics, uint32_t count, Render::HeapAccess access)
+void Vertex::Create(std::vector<Render::Element> elements, uint32_t count, Render::HeapAccess access)
 {
 	mCount = count;
-	mElement = new Render::Element;
-
-	for (auto semantic : semantics)
-	{
-		mElement->AppendSemantic(semantic);
-	}
-
-	size_t size = mElement->GetStride() * count;
+	mDeclaration = new Render::Declaration;
+	mDeclaration->Create(elements);
+	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
 	auto context = mCreator->GetSystem()->GetContext();
 	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_VERTEX;

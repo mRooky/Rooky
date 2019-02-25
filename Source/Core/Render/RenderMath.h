@@ -8,16 +8,32 @@
 #ifndef SOURCE_CORE_RENDER_RENDERMATH_H_
 #define SOURCE_CORE_RENDER_RENDERMATH_H_
 
-#include "MathClasses.h"
+#include <cstdint>
 
 namespace Render
 {
 
-typedef Math::Extent2<int32_t> Extent2;
-typedef Math::Extent3<int32_t> Extent3;
-typedef Math::Vector2<int32_t> Offset2;
+typedef struct Extent2
+{
+	int32_t width;
+	int32_t height;
+}Extent2;
 
-typedef struct Viewport {
+typedef struct Extent3
+{
+	int32_t width;
+	int32_t height;
+	int32_t depth;
+}Extent3;
+
+typedef struct Offset2
+{
+	float x;
+	float y;
+}Offset2;
+
+typedef struct Viewport
+{
     float    x;
     float    y;
     float    width;
@@ -26,7 +42,8 @@ typedef struct Viewport {
     float    maxDepth;
 } Viewport;
 
-typedef struct Rect2D {
+typedef struct Rect2D
+{
 	Offset2    offset;
     Extent2    extent;
 } Rect2D;

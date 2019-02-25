@@ -79,26 +79,16 @@ void Buffer::RecordCommands(void)
 
 	auto& extent = attachment->GetExtent();
 
-	Render::Extent2 extent2 =
-	{
-			extent.width,
-			extent.height
-	};
-
-	Render::Rect2D area =
-	{
-			Render::Offset2(0.0f, 0.0f),
-			extent2
-	};
+	Render::Extent2 extent2 = { extent.width, extent.height };
+	Render::Offset2 offset2 = {0.0f, 0.0f};
+	Render::Rect2D area = { offset2, extent2 };
 
 	Render::Viewport viewport =
 	{
-			0.0f,
-			0.0f,
+			0.0f, 0.0f,
 			static_cast<float>(extent.width),
 			static_cast<float>(extent.height),
-			0.0f,
-			1.0f
+			0.0f, 1.0f
 	};
 
 	Render::Rect2D scissor = area;
@@ -172,10 +162,10 @@ void Buffer::CreateVertexBuffer(void)
 			{ { x, o, z }, { 1.0f, 1.0f, 0.0f } }
 	};
 
-	std::vector<Render::Format> semantics;
-	semantics.push_back(Render::Format::FORMAT_R32G32B32_SFLOAT);
-	semantics.push_back(Render::Format::FORMAT_R32G32B32_SFLOAT);
-	mVertex->Create(semantics, vertex_buffer.size(), access);
+	std::vector<Render::Element> elements;
+	elements.push_back(Render::Element(0, Render::Format::FORMAT_R32G32B32_SFLOAT));
+	elements.push_back(Render::Element(0, Render::Format::FORMAT_R32G32B32_SFLOAT));
+	mVertex->Create(elements, vertex_buffer.size(), access);
 
 	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
 	mVertex->Write(vertex_buffer.data(), 0, size);

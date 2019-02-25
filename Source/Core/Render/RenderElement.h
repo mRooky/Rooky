@@ -19,21 +19,19 @@ namespace Render
 class Element
 {
 public:
-	Element(void);
-	virtual ~Element(void);
+	Element(uint32_t binding, Format format);
+	~Element(void);
 
 public:
-	void AppendSemantic(Format semantic);
-	void RemoveSemantic(size_t index);
+	void Create(uint32_t binding, Format format);
 
 public:
-	inline size_t GetStride(void) const { return mStride; }
-	inline size_t GetCount(void) const { return mSemantics.size(); }
-	inline Format GetSemantic(uint32_t index) const { return mSemantics.at(index); }
+	inline Format GetFormat(void) const { return mFormat; }
+	inline uint32_t GetBinding(void) const { return mBinding; }
 
 protected:
-	size_t mStride = 0;
-	std::vector<Format> mSemantics;
+	uint32_t mBinding = 0;
+	Format mFormat = Format::FORMAT_UNDEFINED;
 };
 
 } /* namespace Render */

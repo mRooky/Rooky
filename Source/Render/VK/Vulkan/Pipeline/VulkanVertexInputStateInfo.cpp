@@ -20,17 +20,26 @@ VertexInputStateInfo::~VertexInputStateInfo(void)
 {
 }
 
-VertexInputBinding* VertexInputStateInfo::CreateBinding(void)
+VkVertexInputBindingDescription* VertexInputStateInfo::CreateBinding(uint32_t binding, uint32_t stride, VkVertexInputRate rate)
 {
-	m_vertexInputBindings.push_back(VertexInputBinding());
+	VkVertexInputBindingDescription input_binding = {};
+	input_binding.binding  = binding;
+	input_binding.stride = stride;
+	input_binding.inputRate = rate;
+	m_vertexInputBindings.push_back(input_binding);
 	m_createInfo.vertexBindingDescriptionCount = m_vertexInputBindings.size();
 	m_createInfo.pVertexBindingDescriptions = m_vertexInputBindings.data();
 	return &m_vertexInputBindings.back();
 }
 
-VertexInputAttribute* VertexInputStateInfo::CreateAttribute(void)
+VkVertexInputAttributeDescription* VertexInputStateInfo::CreateAttribute(uint32_t location, uint32_t binding, VkFormat format, uint32_t offset)
 {
-	m_vertexInputAttributes.push_back(VertexInputAttribute());
+	VkVertexInputAttributeDescription input_attribute = {};
+	input_attribute.location = location;
+	input_attribute.binding = binding;
+	input_attribute.format = format;
+	input_attribute.offset = offset;
+	m_vertexInputAttributes.push_back(input_attribute);
 	m_createInfo.vertexAttributeDescriptionCount = m_vertexInputAttributes.size();
 	m_createInfo.pVertexAttributeDescriptions = m_vertexInputAttributes.data();
 	return &m_vertexInputAttributes.back();

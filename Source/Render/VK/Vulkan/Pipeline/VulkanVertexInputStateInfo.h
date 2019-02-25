@@ -8,8 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTSTATEINFO_H_
 #define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANVERTEXINPUTSTATEINFO_H_
 
-#include "VulkanVertexInputAttribute.hpp"
-#include "VulkanVertexInputBinding.hpp"
+#include <vulkan/vulkan_core.h>
 #include <vector>
 
 namespace Vulkan
@@ -22,15 +21,15 @@ public:
 	~VertexInputStateInfo(void);
 
 public:
-	VertexInputBinding* CreateBinding(void);
-	VertexInputAttribute* CreateAttribute(void);
+	VkVertexInputBindingDescription* CreateBinding(uint32_t binding, uint32_t stride, VkVertexInputRate rate);
+	VkVertexInputAttributeDescription* CreateAttribute(uint32_t location, uint32_t binding, VkFormat format, uint32_t offset);
 
 public:
 	inline const VkPipelineVertexInputStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
-	std::vector<VertexInputBinding> m_vertexInputBindings;
-	std::vector<VertexInputAttribute> m_vertexInputAttributes;
+	std::vector<VkVertexInputBindingDescription> m_vertexInputBindings;
+	std::vector<VkVertexInputAttributeDescription> m_vertexInputAttributes;
 
 private:
 	VkPipelineVertexInputStateCreateInfo m_createInfo = {};

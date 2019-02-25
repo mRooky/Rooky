@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANCOLORBLENDSTATEINFO_H_
 #define SOURCE_RENDER_VK_VULKAN_PIPELINE_VULKANCOLORBLENDSTATEINFO_H_
 
-#include "VulkanColorBlendAttachmentState.h"
+#include <vulkan/vulkan_core.h>
 #include <vector>
 
 namespace Vulkan
@@ -21,15 +21,20 @@ public:
 	~ColorBlendStateInfo(void);
 
 public:
-	ColorBlendAttachmentState* CreateAttachmentState(void);
+	VkPipelineColorBlendAttachmentState* CreateAttachmentState(bool blend);
+
+public:
+	void SetColor(size_t index, VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation);
+	void SetAlpha(size_t index,VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation);
 
 public:
 	inline size_t GetStateCount(void) const { return m_states.size(); }
-	inline const ColorBlendAttachmentState* GetStateData(void) const { return m_states.data(); }
+	inline VkPipelineColorBlendAttachmentState& GetState(size_t index) { return m_states.at(index); }
+	inline const VkPipelineColorBlendAttachmentState* GetStateData(void) const { return m_states.data(); }
 	inline const VkPipelineColorBlendStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
-	std::vector<ColorBlendAttachmentState> m_states;
+	std::vector<VkPipelineColorBlendAttachmentState> m_states;
 	VkPipelineColorBlendStateCreateInfo m_createInfo = {};
 };
 

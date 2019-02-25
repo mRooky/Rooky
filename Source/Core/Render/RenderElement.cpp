@@ -11,31 +11,19 @@
 namespace Render
 {
 
-Element::Element(void)
+Element::Element(uint32_t binding, Format format):
+		mBinding(binding), mFormat(format)
 {
 }
 
 Element::~Element(void)
 {
-	mSemantics.clear();
 }
 
-void Element::AppendSemantic(Format semantic)
+void Element::Create(uint32_t binding, Format format)
 {
-	mSemantics.push_back(semantic);
-	mStride += GetFormatSize(semantic);
-}
-
-void Element::RemoveSemantic(size_t index)
-{
-	assert(index < mSemantics.size());
-	auto iterator = mSemantics.begin();
-	for (size_t i = 0; i < index; ++i)
-	{
-		++iterator;
-	}
-	mSemantics.erase(iterator);
-	mStride -= GetFormatSize(*iterator);
+	mFormat = format;
+	mBinding = binding;
 }
 
 } /* namespace Render */

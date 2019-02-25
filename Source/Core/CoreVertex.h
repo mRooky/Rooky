@@ -9,8 +9,8 @@
 #define SOURCE_CORE_COREVERTEX_H_
 
 #include "CoreBuffer.h"
-
 #include "RenderFormat.h"
+#include "RenderElement.h"
 
 
 #include <cstdint>
@@ -18,7 +18,6 @@
 
 namespace Core
 {
-
 class Vertex : public Buffer
 {
 	friend class BufferManager;
@@ -27,15 +26,15 @@ private:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(std::vector<Render::Format> semantics, uint32_t count, Render::HeapAccess access);
+	void Create(std::vector<Render::Element> elements, uint32_t count, Render::HeapAccess access);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
-	inline Render::Element* GetElement(void) const { return mElement; }
+	inline Render::Declaration* GetDeclaration(void) const { return mDeclaration; }
 
 protected:
 	uint32_t mCount = 0;
-	Render::Element* mElement = nullptr;
+	Render::Declaration* mDeclaration = nullptr;
 };
 
 } /* namespace Core */
