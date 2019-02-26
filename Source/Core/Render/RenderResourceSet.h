@@ -13,20 +13,20 @@
 
 namespace Render
 {
-class Object;
+class Resource;
 
 class ResourceDesc
 {
 public:
-	ResourceDesc(Object* object, ResourceType type): m_object(object), m_type(type) {}
+	ResourceDesc(Resource* resource, ResourceType type): m_resource(resource), m_type(type) {}
 	~ResourceDesc(void) = default;
 
 public:
-	inline Object* GetResource(void) const { return m_object; }
+	inline Resource* GetResource(void) const { return m_resource; }
 	inline ResourceType GetType(void) const { return m_type; }
 
 private:
-	Object* m_object = nullptr;
+	Resource* m_resource = nullptr;
 	ResourceType m_type = ResourceType::RESOURCE_TYPE_UNKNOWN;
 };
 
@@ -37,7 +37,7 @@ public:
 	virtual ~ResourceSet(void);
 
 public:
-	void AppendResource(Object* object, ResourceType type);
+	void AppendResource(Resource* resource, ResourceType type);
 
 public:
 	inline void ClearResource(void) { m_resourceDescs.clear(); }

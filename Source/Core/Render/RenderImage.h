@@ -8,14 +8,14 @@
 #ifndef SOURCE_CORE_RENDER_RENDERIMAGE_H_
 #define SOURCE_CORE_RENDER_RENDERIMAGE_H_
 
-#include "RenderResource.h"
+#include "RenderMemory.h"
 #include "RenderFormat.h"
 #include "RenderMath.h"
 #include "RenderTypes.h"
 
 namespace Render
 {
-class Image : public Resource
+class Image : public Memory
 {
 protected:
 	explicit Image(Context* context);

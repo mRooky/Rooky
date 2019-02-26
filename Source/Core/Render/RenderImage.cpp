@@ -13,7 +13,7 @@ namespace Render
 {
 
 Image::Image(Context* context):
-		Resource(context)
+		Memory(context)
 {
 }
 

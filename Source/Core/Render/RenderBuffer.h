@@ -8,12 +8,12 @@
 #ifndef SOURCE_CORE_RENDER_RENDERBUFFER_H_
 #define SOURCE_CORE_RENDER_RENDERBUFFER_H_
 
-#include "RenderResource.h"
+#include "RenderMemory.h"
 
 namespace Render
 {
 
-class Buffer : public Resource
+class Buffer : public Memory
 {
 protected:
 	explicit Buffer(Context* context);
