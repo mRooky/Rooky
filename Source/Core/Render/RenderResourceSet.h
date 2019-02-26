@@ -18,12 +18,13 @@ class Resource;
 class ResourceDesc
 {
 public:
-	ResourceDesc(Resource* resource, ResourceType type): m_resource(resource), m_type(type) {}
+	ResourceDesc(Resource* resource, ResourceType type):
+		m_resource(resource), m_type(type) {}
 	~ResourceDesc(void) = default;
 
 public:
-	inline Resource* GetResource(void) const { return m_resource; }
 	inline ResourceType GetType(void) const { return m_type; }
+	inline Resource* GetResource(void) const { return m_resource; }
 
 private:
 	Resource* m_resource = nullptr;
