@@ -136,6 +136,9 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
+	assert(mResourceSet != nullptr);
+	auto vk_resource_set = static_cast<ResourceSet*>(mResourceSet);
+	vk_resource_set->Binding(this);
 	assert(false);
 }
 

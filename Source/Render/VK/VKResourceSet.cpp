@@ -6,6 +6,7 @@
  */
 
 #include "VKResourceSet.h"
+#include <cassert>
 
 namespace VK
 {
@@ -19,9 +20,15 @@ ResourceSet::~ResourceSet(void)
 	mDescriptorSet = nullptr;
 }
 
+void ResourceSet::Binding(CommandList* list)
+{
+	UpdateDescriptorSet();
+	assert(false);
+}
+
 void ResourceSet::UpdateDescriptorSet(void)
 {
-
+	assert(false);
 }
 
 } /* namespace VK */

@@ -13,7 +13,7 @@
 
 namespace VK
 {
-
+class CommandList;
 class ResourceSet: public Render::ResourceSet
 {
 	friend class CommandList;
@@ -22,10 +22,13 @@ protected:
 	virtual ~ResourceSet(void) override;
 
 public:
-	void UpdateDescriptorSet(void);
+	void Binding(CommandList* list);
 
 public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
+
+protected:
+	void UpdateDescriptorSet(void);
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
