@@ -32,6 +32,7 @@ public:
 	virtual void BindPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
+	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;
 	// Draw Commands
 	virtual void EndRecord(void) override;

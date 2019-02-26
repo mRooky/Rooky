@@ -16,12 +16,13 @@ ResourceSet::ResourceSet(void)
 
 ResourceSet::~ResourceSet(void)
 {
+	ClearResource();
 }
 
 void ResourceSet::AppendResource(Resource* resource, ResourceType type)
 {
 	ResourceDesc desc = ResourceDesc(resource, type);
-	m_resourceDescs.push_back(desc);
+	mResourceDescs.push_back(desc);
 }
 
 } /* namespace Render */

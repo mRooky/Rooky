@@ -33,22 +33,24 @@ private:
 
 class ResourceSet
 {
-public:
+protected:
 	ResourceSet(void);
+
+public:
 	virtual ~ResourceSet(void);
 
 public:
 	void AppendResource(Resource* resource, ResourceType type);
 
 public:
-	inline void ClearResource(void) { m_resourceDescs.clear(); }
+	inline void ClearResource(void) { mResourceDescs.clear(); }
 
 public:
-	inline size_t GetDescCount(void) const { return m_resourceDescs.size(); }
-	inline const ResourceDesc& GetDesc(size_t index) const { return m_resourceDescs.at(index); }
+	inline size_t GetDescCount(void) const { return mResourceDescs.size(); }
+	inline const ResourceDesc& GetDesc(size_t index) const { return mResourceDescs.at(index); }
 
-private:
-	std::vector<ResourceDesc> m_resourceDescs;
+protected:
+	std::vector<ResourceDesc> mResourceDescs;
 };
 
 } /* namespace Render */

@@ -10,6 +10,7 @@
 #include "VKRenderPass.h"
 #include "VKFrameBuffer.h"
 #include "VKPipeline.h"
+#include "VKResourceSet.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -25,6 +26,7 @@ namespace VK
 CommandList::CommandList(CommandPool* pool):
 		Render::CommandList(pool)
 {
+	mResourceSet = new ResourceSet;
 }
 
 CommandList::~CommandList(void)
@@ -130,6 +132,11 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 		vk_scissors.push_back(vk_scissor);
 	}
 	mCommandBuffer->SetScissor(first, count, vk_scissors.data());
+}
+
+void CommandList::Draw(Render::DrawCall* draw)
+{
+	assert(false);
 }
 
 void CommandList::EndPass(void)

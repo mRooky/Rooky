@@ -6,6 +6,7 @@
  */
 
 #include "RenderCommandList.h"
+#include "RenderResourceSet.h"
 #include <cassert>
 
 namespace Render
@@ -19,6 +20,8 @@ CommandList::CommandList(CommandPool* pool):
 
 CommandList::~CommandList(void)
 {
+	delete mResourceSet;
+	mResourceSet = nullptr;
 }
 
 } /* namespace Render */

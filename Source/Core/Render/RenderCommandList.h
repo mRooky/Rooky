@@ -31,16 +31,19 @@ public:
 	virtual void BindPipeline(Pipeline* pipeline) = 0;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
+	virtual void Draw(DrawCall* draw) = 0;
 	virtual void EndPass(void) = 0;
 	virtual void EndRecord(void) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }
+	inline ResourceSet* GetResourceSet(void) const { return mResourceSet; }
 
 protected:
 	uint32_t mIndex = 0;
 	Pass* mCurrentPass = nullptr;
 	CommandPool* mCommandPool = nullptr;
+	ResourceSet* mResourceSet = nullptr;
 };
 
 } /* namespace Render */

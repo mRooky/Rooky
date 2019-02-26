@@ -26,7 +26,9 @@ class CommandPool;
 class CommandList;
 class Sampler;
 class Element;
-class Declaration;;
+class Declaration;
+class DrawCall;
+class ResourceSet;
 
 }
 
