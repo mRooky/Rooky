@@ -16,22 +16,35 @@
 namespace Render
 {
 
+enum class ElementType : uint32_t
+{
+	ELEMENT_TYPE_FLOAT1,
+	ELEMENT_TYPE_FLOAT2,
+	ELEMENT_TYPE_FLOAT3,
+	ELEMENT_TYPE_FLOAT4,
+	ELEMENT_TYPE_UNKNOWN = ~0u
+};
+
 class Element
 {
 public:
-	Element(uint32_t binding, Format format);
+	explicit Element(uint32_t binding, uint32_t location, uint32_t offset, ElementType type);
 	~Element(void);
 
 public:
-	void Create(uint32_t binding, Format format);
+	inline ElementType GetType(void) const { return mType; }
+	inline uint32_t GetOffset(void) const { return mOffset; }
+	inline uint32_t GetBinding(void) const { return mBinding; }
+	inline uint32_t GetLocation(void) const { return mLocation; }
 
 public:
-	inline Format GetFormat(void) const { return mFormat; }
-	inline uint32_t GetBinding(void) const { return mBinding; }
+	static size_t GetTypeSize(ElementType type);
 
 protected:
+	uint32_t mOffset = 0;
 	uint32_t mBinding = 0;
-	Format mFormat = Format::FORMAT_UNDEFINED;
+	uint32_t mLocation = 0;
+	ElementType mType = ElementType::ELEMENT_TYPE_UNKNOWN;
 };
 
 } /* namespace Render */

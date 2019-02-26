@@ -24,9 +24,14 @@ void Declaration::Create(const std::vector<Element>& elements)
 {
 	for (auto& element : elements)
 	{
-		mElements.push_back(element);
-		mStride += GetFormatSize(element.GetFormat());
+		AppendElement(element);
 	}
+}
+
+void Declaration::AppendElement(const Element& element)
+{
+	mElements.push_back(element);
+	mStride += Element::GetTypeSize(element.GetType());
 }
 
 } /* namespace Render */

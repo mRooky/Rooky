@@ -10,7 +10,7 @@
 
 #include "CoreBuffer.h"
 #include "RenderFormat.h"
-#include "RenderElement.h"
+#include "RenderDeclaration.h"
 
 
 #include <cstdint>

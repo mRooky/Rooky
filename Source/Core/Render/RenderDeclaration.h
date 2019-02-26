@@ -23,6 +23,9 @@ public:
 	void Create(const std::vector<Element>& elements);
 
 public:
+	void AppendElement(const Element& element);
+
+public:
 	inline size_t GetStride(void) const { return mStride; }
 	inline size_t GetCount(void) const { return mElements.size(); }
 	inline const Element& GetElement(uint32_t index) const { return mElements.at(index); }

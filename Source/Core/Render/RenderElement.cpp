@@ -11,8 +11,8 @@
 namespace Render
 {
 
-Element::Element(uint32_t binding, Format format):
-		mBinding(binding), mFormat(format)
+Element::Element(uint32_t binding, uint32_t location, uint32_t offset, ElementType type):
+		mBinding(binding), mLocation(location), mOffset(offset), mType(type)
 {
 }
 
@@ -20,10 +20,22 @@ Element::~Element(void)
 {
 }
 
-void Element::Create(uint32_t binding, Format format)
+size_t Element::GetTypeSize(ElementType type)
 {
-	mFormat = format;
-	mBinding = binding;
+	switch(type)
+	{
+	case ElementType::ELEMENT_TYPE_FLOAT1:
+		return 1 * sizeof(float);
+	case ElementType::ELEMENT_TYPE_FLOAT2:
+		return 2 * sizeof(float);
+	case ElementType::ELEMENT_TYPE_FLOAT3:
+		return 3 * sizeof(float);
+	case ElementType::ELEMENT_TYPE_FLOAT4:
+		return 4 * sizeof(float);
+	default:
+		assert(false);
+		return 0;
+	}
 }
 
 } /* namespace Render */
