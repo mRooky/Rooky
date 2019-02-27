@@ -24,10 +24,12 @@ public:
 public:
 	virtual void Create(size_t size, uint32_t usage) = 0;
 
-protected:
+public:
+	inline size_t GetSize(void) const { return mSize; }
 	inline BufferUsage GetUsage(void) const { return mUsage; }
 
 protected:
+	size_t mSize = 0;
 	BufferUsage mUsage = {};
 
 };

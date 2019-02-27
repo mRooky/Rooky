@@ -11,12 +11,17 @@
 #include "VKFrameBuffer.h"
 #include "VKPipeline.h"
 #include "VKResourceSet.h"
+#include "VKImage.h"
+#include "VKSampler.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
 #include "VulkanDevice.h"
 #include "VulkanPhysicalDevice.h"
 #include "VulkanQueue.h"
+#include "VulkanImage.h"
+#include "VulkanImageView.h"
+#include "VulkanSampler.h"
 
 #include <cassert>
 
@@ -26,7 +31,6 @@ namespace VK
 CommandList::CommandList(CommandPool* pool):
 		Render::CommandList(pool)
 {
-	mResourceSet = new ResourceSet;
 }
 
 CommandList::~CommandList(void)
@@ -136,9 +140,6 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
-	assert(mResourceSet != nullptr);
-	auto vk_resource_set = static_cast<ResourceSet*>(mResourceSet);
-	vk_resource_set->Binding(this);
 	assert(false);
 }
 
@@ -155,5 +156,23 @@ void CommandList::EndRecord(void)
 	mCommandBuffer->End();
 }
 
+void CommandList::SetBuffer(Render::ShaderStage stage, uint32_t index, Render::Buffer* image)
+{
+
+}
+
+void CommandList::SetImage(Render::ShaderStage stage, uint32_t index, Render::Image* image, Render::Sampler* sampler)
+{
+	Image* vk_image = static_cast<Image*>(image);
+	VkDescriptorImageInfo* image_info = nullptr;
+	assert(false);
+	image_info->imageView = vk_image->GetImageVK()->GetView()->GetHandle();
+	image_info->imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+	if (sampler != nullptr)
+	{
+		Sampler* vk_sampler = static_cast<Sampler*>(sampler);
+		image_info->sampler = vk_sampler->GetSamplerVK()->GetHandle();
+	}
+}
 
 } /* namespace VK */

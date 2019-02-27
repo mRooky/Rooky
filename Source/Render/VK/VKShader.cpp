@@ -12,6 +12,7 @@
 #include "VulkanInline.h"
 
 #include <iostream>
+#include <cassert>
 
 namespace VK
 {
@@ -40,6 +41,28 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	{
 		std::cerr << "Create Shader Error !" << std::endl;
 		std::cerr << "Shader File : " << file << std::endl;
+	}
+}
+
+VkShaderStageFlagBits Shader::ConvertStage(Render::ShaderStage stage)
+{
+	switch(stage)
+	{
+	case Render::ShaderStage::SHADER_STAGE_VERTEX:
+		return VK_SHADER_STAGE_VERTEX_BIT;
+	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_CONTROL:
+		return VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
+	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_EVALUATION:
+		return VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
+	case Render::ShaderStage::SHADER_STAGE_GEOMETRY:
+		return VK_SHADER_STAGE_GEOMETRY_BIT;
+	case Render::ShaderStage::SHADER_STAGE_FRAGMENT:
+		return VK_SHADER_STAGE_FRAGMENT_BIT;
+	case Render::ShaderStage::SHADER_STAGE_COMPUTE:
+		return VK_SHADER_STAGE_COMPUTE_BIT;
+	default:
+		assert(false);
+		return VK_SHADER_STAGE_ALL_GRAPHICS;
 	}
 }
 

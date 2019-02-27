@@ -10,6 +10,7 @@
 
 #include "RenderClasses.h"
 #include "RenderMath.h"
+#include "RenderEnum.h"
 
 namespace Render
 {
@@ -35,15 +36,17 @@ public:
 	virtual void EndPass(void) = 0;
 	virtual void EndRecord(void) = 0;
 
+public: // Resource Setup
+	virtual void SetBuffer(ShaderStage stage, uint32_t index, Buffer* image) = 0;
+	virtual void SetImage(ShaderStage stage, uint32_t index, Image* image, Sampler* sampler = nullptr) = 0;
+
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }
-	inline ResourceSet* GetResourceSet(void) const { return mResourceSet; }
 
 protected:
 	uint32_t mIndex = 0;
 	Pass* mCurrentPass = nullptr;
 	CommandPool* mCommandPool = nullptr;
-	ResourceSet* mResourceSet = nullptr;
 };
 
 } /* namespace Render */

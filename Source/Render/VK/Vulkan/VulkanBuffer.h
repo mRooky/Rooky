@@ -26,6 +26,9 @@ public:
 	void ReadData(VkDeviceSize offset, VkDeviceSize size, void* dst);
 
 public:
+	VkDescriptorBufferInfo GetDescriptorInfo(void) const;
+
+public:
 	virtual VkResult BindMemory(DeviceMemory* memory, VkDeviceSize offset) override;
 
 public:

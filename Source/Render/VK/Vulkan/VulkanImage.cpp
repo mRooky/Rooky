@@ -172,6 +172,7 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 {
 	VkDescriptorImageInfo descriptor_image_info = {};
 	descriptor_image_info.imageView = m_view->GetHandle();
+	descriptor_image_info.imageLayout = mInfo.initialLayout;
 	return descriptor_image_info;
 }
 

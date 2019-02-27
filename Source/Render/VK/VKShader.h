@@ -28,6 +28,9 @@ public:
 public:
 	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }
 
+public:
+	static VkShaderStageFlagBits ConvertStage(Render::ShaderStage stage);
+
 protected:
 	Vulkan::ShaderModule* mShader = nullptr;
 };

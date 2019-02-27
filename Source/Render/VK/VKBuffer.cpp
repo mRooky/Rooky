@@ -41,7 +41,7 @@ void Buffer::Create(size_t size, uint32_t usage)
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mBuffer = Vulkan::Buffer::New(device);
-	mBuffer->Create(mSize, mUsage.BufferUsageFlags);
+	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
 }
 
 void Buffer::Allocate(Render::HeapAccess access)
@@ -50,8 +50,10 @@ void Buffer::Allocate(Render::HeapAccess access)
 	assert(mBuffer != nullptr);
 	auto flags = GetMemoryPropertyFlags(mAccess);
 	Vulkan::Device* device = mBuffer->GetDevice();
+	const VkMemoryRequirements& requires = mBuffer->GetMemoryRequirements();
+	mHeapSize = requires.size;
 	mMemory = Vulkan::DeviceMemory::New(device);
-	mMemory->Allocate(mBuffer, flags);
+	mMemory->Allocate(requires, flags);
 	mBuffer->BindMemory(mMemory, 0);
 }
 
@@ -101,27 +103,44 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsageFlags usage)
+VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsage usage)
 {
-	switch(usage)
+	VkBufferUsageFlags flags = 0;
+	if (usage.BufferUsageCommon == 1)
 	{
-	case Render::BufferUsageFlags::BUFFER_USAGE_INDEX:
-		return VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_VERTEX:
-		return VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM:
-		return VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_STORAGE:
-		return VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_INDIRECT:
-		return VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM_TEXEL:
-		return VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT;
-	case Render::BufferUsageFlags::BUFFER_USAGE_STORAGE_TEXEL:
-		return VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
-	default:
-		return 0;
+		flags |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+		flags |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 	}
+	if (usage.BufferUsageIndex == 1)
+	{
+		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
+	}
+	if (usage.BufferUsageVertex == 1)
+	{
+		flags |= VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+	}
+	if (usage.BufferUsageUniform == 1)
+	{
+		flags |= VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
+	}
+	if (usage.BufferUsageStorage == 1)
+	{
+		flags |= VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+	}
+	if (usage.BufferUsageIndirect == 1)
+	{
+		flags |= VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
+	}
+	if (usage.BufferUsageUniformTexel == 1)
+	{
+		flags |= VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT;
+	}
+	if (usage.BufferUsageStorageTexel == 1)
+	{
+		flags |= VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
+	}
+
+	return flags;
 }
 
 } /* namespace VK */

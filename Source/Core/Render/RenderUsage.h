@@ -20,11 +20,12 @@ namespace Render
 			uint32_t BufferUsageIndex			: 1;
 			uint32_t BufferUsageVertex			: 1;
 			uint32_t BufferUsageUniform			: 1;
+			uint32_t BufferUsageUniformDynamic	: 1;
 			uint32_t BufferUsageStorage			: 1;
 			uint32_t BufferUsageIndirect		: 1;
 			uint32_t BufferUsageUniformTexel	: 1;
 			uint32_t BufferUsageStorageTexel	: 1;
-			uint32_t BufferUsageReserved		: 24;
+			uint32_t BufferUsageReserved		: 23;
 		};
 		uint32_t BufferUsageFlags;
 	};

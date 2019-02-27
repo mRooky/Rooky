@@ -81,6 +81,13 @@ VkResult Buffer::BindMemory(DeviceMemory* memory, VkDeviceSize offset)
 	return result;
 }
 
+VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
+{
+	VkDescriptorBufferInfo descriptor_buffer_info = {};
+	descriptor_buffer_info.buffer = m_buffer;
+	return descriptor_buffer_info;
+}
+
 VkBufferCreateInfo Buffer::CreateInfo(void)
 {
 	VkBufferCreateInfo buffer_create_info = {};

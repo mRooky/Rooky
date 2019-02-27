@@ -12,7 +12,7 @@ namespace Render
 {
 
 Element::Element(uint32_t binding, uint32_t location, uint32_t offset, ElementType type):
-		mBinding(binding), mLocation(location), mOffset(offset), mType(type)
+		mOffset(offset), mBinding(binding), mLocation(location), mType(type)
 {
 }
 

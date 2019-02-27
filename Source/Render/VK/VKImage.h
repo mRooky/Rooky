@@ -44,7 +44,7 @@ public:
 	static Render::ImageType ConverType(const VkImageViewType& type);
 
 public:
-	static VkImageUsageFlags ConvertUsageFlag(uint32_t usage);
+	static VkImageUsageFlags ConvertUsageFlag(Render::ImageUsage usage);
 
 protected:
 	Vulkan::Image* mImage = nullptr;

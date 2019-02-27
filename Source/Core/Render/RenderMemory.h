@@ -30,11 +30,11 @@ public:
 	virtual void CopyFrom(const Buffer* buffer) = 0;
 
 public:
-	inline size_t GetSize(void) const { return mSize; }
+	inline size_t GetHeapSize(void) const { return mHeapSize; }
 	inline HeapAccess GetAccess(void) const { return mAccess; }
 
 protected:
-	size_t mSize = 0;
+	size_t mHeapSize = 0;
 	HeapAccess mAccess = HeapAccess::HEAP_ACCESS_UNKNOWN;
 };
 

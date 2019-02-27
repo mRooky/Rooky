@@ -46,8 +46,13 @@ void Image::Create(Render::ImageType type, Render::Format format, const Render::
 	VkFormat vk_format = ConvertFormat(mFormat);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
+
+	VkExtent3D vk_extent = {};
+	vk_extent.width = static_cast<uint32_t>(mExtent.width);
+	vk_extent.height = static_cast<uint32_t>(mExtent.height);
+	vk_extent.depth = static_cast<uint32_t>(mExtent.depth);
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, mUsage.ImageUsageFlags);
+	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mUsage));
 }
 
 void Image::Allocate(Render::HeapAccess access)
@@ -58,7 +63,7 @@ void Image::Allocate(Render::HeapAccess access)
 	Vulkan::Device* device = mImage->GetDevice();
 
 	VkMemoryRequirements requirements = mImage->GetMemoryRequirements();
-	mSize = requirements.size;
+	mHeapSize = requirements.size;
 
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(requirements, flags);
@@ -169,40 +174,38 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 	}
 }
 
-VkImageUsageFlags Image::ConvertUsageFlag(uint32_t usage)
+VkImageUsageFlags Image::ConvertUsageFlag(Render::ImageUsage usage)
 {
 	VkImageUsageFlags flags = 0;
-	Render::ImageUsageFlags usage_flags[] =
+	if (usage.ImageUsageCommon == 1)
 	{
-			Render::ImageUsageFlags::IMAGE_USAGE_SAMPLED,
-			Render::ImageUsageFlags::IMAGE_USAGE_STORAGE,
-			Render::ImageUsageFlags::IMAGE_USAGE_COLOR_ATTACHMENT,
-			Render::ImageUsageFlags::IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT,
-			Render::ImageUsageFlags::IMAGE_USAGE_TRANSIENT_ATTACHMENT,
-			Render::ImageUsageFlags::IMAGE_USAGE_INPUT_ATTACHMENT
-	};
-
-	VkImageUsageFlags vk_flags[] =
-	{
-			VK_IMAGE_USAGE_SAMPLED_BIT,
-			VK_IMAGE_USAGE_STORAGE_BIT,
-			VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-			VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-			VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
-			VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT
-	};
-
-	const size_t count = 6;
-	for (size_t index = 0; index < count; ++index)
-	{
-		auto flag = usage_flags[index];
-		uint32_t code = static_cast<uint32_t>(flag);
-		if ((usage & code) != 0)
-		{
-			flags |= vk_flags[index];
-		}
+		flags |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+		flags |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 	}
-
+	if (usage.ImageUsageSampled == 1)
+	{
+		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;
+	}
+	if (usage.ImageUsageStorage == 1)
+	{
+		flags |= VK_IMAGE_USAGE_STORAGE_BIT;
+	}
+	if (usage.ImageUsageColorAttachment == 1)
+	{
+		flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+	}
+	if (usage.ImageUsageDepthStencilAttachment == 1)
+	{
+		flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+	}
+	if (usage.ImageUsageTransientAttachment == 1)
+	{
+		flags |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
+	}
+	if (usage.ImageUsageInputAttachment == 1)
+	{
+		flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
+	}
 	return flags;
 }
 

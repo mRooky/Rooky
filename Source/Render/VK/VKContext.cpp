@@ -62,20 +62,6 @@ uint32_t Context::GetImageUsageFlag(uint32_t usage, bool read, bool write)
 	return flag;
 }
 
-uint32_t Context::GetUsageFlag(Render::BufferUsageFlags usage, bool read, bool write)
-{
-	uint32_t flag = Buffer::ConvertUsageFlag(usage);
-	if (read)
-	{
-		flag |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-	}
-	if (read)
-	{
-		flag |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-	}
-	return flag;
-}
-
 Render::Format Context::GetBestDepthStencilFormat(void)
 {
 	VkFormat vk_format = m_physical->GetDepthStencilFormat();

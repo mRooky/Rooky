@@ -37,10 +37,9 @@ void Vertex::Create(std::vector<Render::Element> elements, uint32_t count, Rende
 	mDeclaration->Create(elements);
 	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
-	auto context = mCreator->GetSystem()->GetContext();
-	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_VERTEX;
-	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, access);
+	Render::BufferUsage usage = {};
+	usage.BufferUsageVertex = 1;
+	Buffer::Create(size, usage.BufferUsageFlags, access);
 }
 
 } /* namespace Core */

@@ -10,7 +10,7 @@
 #include "CoreBufferManager.h"
 
 #include "RenderContext.h"
-#include "RenderEnum.h"
+#include "RenderUsage.h"
 
 #include <cassert>
 
@@ -29,10 +29,9 @@ Uniform::~Uniform(void)
 void Uniform::Create(size_t size, Render::HeapAccess access)
 {
 	assert(size > 0);
-	auto context = mCreator->GetSystem()->GetContext();
-	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_UNIFORM;
-	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Buffer::Create(size, flags, access);
+	Render::BufferUsage usage = {};
+	usage.BufferUsageUniform = 1;
+	Buffer::Create(size, usage.BufferUsageFlags, access);
 }
 
 } /* namespace Core */

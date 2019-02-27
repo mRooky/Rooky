@@ -38,6 +38,10 @@ public:
 	virtual void EndRecord(void) override;
 
 public:
+	virtual void SetBuffer(Render::ShaderStage stage, uint32_t index, Render::Buffer* image) override;
+	virtual void SetImage(Render::ShaderStage stage, uint32_t index, Render::Image* image, Render::Sampler* sampler = nullptr) override;
+
+public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
 
 protected:

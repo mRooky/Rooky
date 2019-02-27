@@ -38,7 +38,6 @@ public:
 public:
 	virtual Format GetBestDepthStencilFormat(void) = 0;
 	virtual uint32_t GetImageUsageFlag(uint32_t usage, bool read, bool write) = 0;
-	virtual uint32_t GetUsageFlag(BufferUsageFlags usage, bool read, bool write) = 0;
 
 };
 

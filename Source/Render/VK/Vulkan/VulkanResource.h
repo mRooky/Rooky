@@ -26,7 +26,7 @@ public:
 public:
 	inline DeviceMemory* GetBindMemory(void) const { return mMemory; }
 	inline VkDeviceSize GetBindOffset(void) const { return mOffset; }
-	inline VkMemoryRequirements GetMemoryRequirements(void) const { return mRequirement; }
+	inline const VkMemoryRequirements& GetMemoryRequirements(void) const { return mRequirement; }
 
 protected:
 	VkDeviceSize mOffset = 0;

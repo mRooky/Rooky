@@ -38,7 +38,6 @@ public:
 
 public:
 	virtual uint32_t GetImageUsageFlag(uint32_t usage, bool read, bool write) override;
-	virtual uint32_t GetUsageFlag(Render::BufferUsageFlags usage, bool read, bool write) override;
 
 public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
