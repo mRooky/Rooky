@@ -9,7 +9,7 @@
 #define SOURCE_CORE_COREINDEX_H_
 
 #include "CoreBuffer.h"
-#include "RenderTypes.h"
+#include "RenderEnum.h"
 
 namespace Core
 {

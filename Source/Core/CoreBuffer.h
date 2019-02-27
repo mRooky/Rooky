@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREBUFFER_H_
 #define SOURCE_CORE_COREBUFFER_H_
 
+#include <RenderEnum.h>
 #include "RenderClasses.h"
-#include "RenderTypes.h"
 #include <cstdint>
 #include <cstddef>
 

@@ -31,6 +31,7 @@ protected:
 	void UpdateDescriptorSet(void);
 
 protected:
+	std::vector<VkWriteDescriptorSet> mWrites;
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
 };
 

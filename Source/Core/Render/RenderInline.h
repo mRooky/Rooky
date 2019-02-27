@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERINLINE_H_
 #define SOURCE_CORE_RENDER_RENDERINLINE_H_
 
-#include "RenderTypes.h"
+#include <RenderEnum.h>
 #include <cstddef>
 #include <cassert>
 

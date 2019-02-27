@@ -37,7 +37,8 @@ void Buffer::Create(size_t size, uint32_t usage, Render::HeapAccess access)
 {
 	auto context = mCreator->GetSystem()->GetContext();
 	mBuffer = context->CreateBuffer();
-	mBuffer->Create(size, usage, access);
+	mBuffer->Create(size, usage);
+	mBuffer->Allocate(access);
 }
 
 void Buffer::Read(void* dst, size_t offset, size_t size)

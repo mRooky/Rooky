@@ -28,11 +28,12 @@ void DrawIndirect::Create(Context* context, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
-	auto usage = Render::BufferUsageFlags::BUFFER_USAGE_INDIRECT;
-	uint32_t flags = context->GetUsageFlag(usage, true, true);
-	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+	BufferUsage usage = {};
+	usage.BufferUsageIndirect = 1;
 	mBuffer = context->CreateBuffer();
-	mBuffer->Create(size, flags, access);
+	mBuffer->Create(size, usage.BufferUsageFlags);
+	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+	mBuffer->Allocate(access);
 }
 
 } /* namespace Render */

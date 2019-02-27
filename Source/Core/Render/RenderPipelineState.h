@@ -9,7 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_
 
 #include "RenderObject.h"
-#include "RenderTypes.h"
+#include "RenderEnum.h"
 #include <vector>
 
 namespace Render

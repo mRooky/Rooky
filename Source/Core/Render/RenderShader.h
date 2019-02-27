@@ -9,7 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERSHADER_H_
 
 #include "RenderObject.h"
-#include "RenderTypes.h"
+#include "RenderEnum.h"
 #include <string>
 
 namespace Render

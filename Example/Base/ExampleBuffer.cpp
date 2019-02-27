@@ -7,6 +7,7 @@
 
 #include "ExampleBuffer.h"
 
+#include <RenderEnum.h>
 #include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -17,7 +18,6 @@
 #include "RenderImage.h"
 #include "RenderSwapChain.h"
 #include "RenderPass.h"
-#include "RenderTypes.h"
 #include "RenderBuffer.h"
 
 #include <cassert>

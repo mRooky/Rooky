@@ -9,8 +9,8 @@
 #include "CoreSystem.h"
 #include "CoreBufferManager.h"
 
-#include "RenderTypes.h"
 #include "RenderContext.h"
+#include "RenderEnum.h"
 
 #include <cassert>
 

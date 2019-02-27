@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCONTEXT_H_
 #define SOURCE_CORE_RENDER_RENDERCONTEXT_H_
 
+#include "RenderEnum.h"
 #include "PlatformWindow.h"
-#include "RenderTypes.h"
 #include "RenderFormat.h"
 #include "RenderClasses.h"
 #include <vector>

@@ -22,6 +22,8 @@ public:
 
 public:
 	virtual void Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage) override;
+	virtual void Allocate(Render::HeapAccess access) override;
+	virtual void CreateView(Render::ImageType type) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;
@@ -43,11 +45,6 @@ public:
 
 public:
 	static VkImageUsageFlags ConvertUsageFlag(uint32_t usage);
-
-protected:
-	void CreateImage(void);
-	void AllocateMemory(void);
-	void CreateView(void);
 
 protected:
 	Vulkan::Image* mImage = nullptr;

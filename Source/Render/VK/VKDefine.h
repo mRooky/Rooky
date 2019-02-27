@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKDEFINE_H_
 #define SOURCE_RENDER_VK_VKDEFINE_H_
 
+#include "RenderEnum.h"
 #include "VulkanClasses.h"
-#include "RenderTypes.h"
 
 namespace VK
 {

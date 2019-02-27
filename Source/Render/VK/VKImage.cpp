@@ -40,25 +40,19 @@ void Image::Create(Render::ImageType type, Render::Format format, const Render::
 	mType = type;
 	mFormat = format;
 	mExtent = extent;
-	mUsage = usage;
-	mAccess = Render::HeapAccess::HEAP_ACCESS_GPU_ONLY;
-	CreateImage();
-	AllocateMemory();
-	CreateView();
-}
+	mUsage.ImageUsageFlags = usage;
 
-void Image::CreateImage(void)
-{
 	assert(mImage == nullptr);
 	VkFormat vk_format = ConvertFormat(mFormat);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, mUsage);
+	mImage->Create(vk_format, mExtent.width, mExtent.height, mExtent.depth, mUsage.ImageUsageFlags);
 }
 
-void Image::AllocateMemory(void)
+void Image::Allocate(Render::HeapAccess access)
 {
+	mAccess = access;
 	assert(mImage != nullptr);
 	auto flags = GetMemoryPropertyFlags(mAccess);
 	Vulkan::Device* device = mImage->GetDevice();
@@ -71,6 +65,15 @@ void Image::AllocateMemory(void)
 	mImage->BindMemory(mMemory, 0);
 }
 
+void Image::CreateView(Render::ImageType type)
+{
+	assert(mType == type);
+	assert(mType != Render::ImageType::IMAGE_TYPE_UNKNOWN);
+	assert(mMemory != nullptr);
+	VkImageViewType vk_type = ConverType(mType);
+	mImage->CreateView(vk_type);
+}
+
 void* Image::Map(size_t offset, size_t size)
 {
 	assert(false);
@@ -79,14 +82,6 @@ void* Image::Map(size_t offset, size_t size)
 void Image::Unmap(size_t offset, size_t size)
 {
 	assert(false);
-}
-
-void Image::CreateView()
-{
-	assert(mType != Render::ImageType::IMAGE_TYPE_UNKNOWN);
-	assert(mMemory != nullptr);
-	VkImageViewType vk_type = ConverType(mType);
-	mImage->CreateView(vk_type);
 }
 
 VkDescriptorImageInfo Image::GetDescriptorInfo(void) const

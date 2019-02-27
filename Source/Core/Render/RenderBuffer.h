@@ -22,7 +22,13 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, uint32_t usage, HeapAccess access) = 0;
+	virtual void Create(size_t size, uint32_t usage) = 0;
+
+protected:
+	inline BufferUsage GetUsage(void) const { return mUsage; }
+
+protected:
+	BufferUsage mUsage = {};
 
 };
 

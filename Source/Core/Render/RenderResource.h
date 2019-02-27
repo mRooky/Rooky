@@ -9,7 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERRESOURCE_H_
 
 #include "RenderObject.h"
-#include "RenderTypes.h"
+#include "RenderUsage.h"
 #include <cstddef>
 #include <cstdint>
 

@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERTYPES_H_
-#define SOURCE_CORE_RENDER_RENDERTYPES_H_
+#ifndef SOURCE_CORE_RENDER_RENDERENUM_H_
+#define SOURCE_CORE_RENDER_RENDERENUM_H_
 
 #include <cstdint>
 
@@ -195,4 +195,4 @@ namespace Render
 
 }
 
-#endif /* SOURCE_CORE_RENDER_RENDERTYPES_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERENUM_H_ */

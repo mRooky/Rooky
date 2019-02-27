@@ -33,27 +33,20 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, uint32_t usage, Render::HeapAccess access)
+void Buffer::Create(size_t size, uint32_t usage)
 {
 	mSize = size;
-	mUsage = usage;
-	mAccess = access;
-
-	CreateBuffer();
-	AllocateMemory();
-}
-
-void Buffer::CreateBuffer(void)
-{
+	mUsage.BufferUsageFlags = usage;
 	assert(mBuffer == nullptr);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mBuffer = Vulkan::Buffer::New(device);
-	mBuffer->Create(mSize, mUsage);
+	mBuffer->Create(mSize, mUsage.BufferUsageFlags);
 }
 
-void Buffer::AllocateMemory(void)
+void Buffer::Allocate(Render::HeapAccess access)
 {
+	mAccess = access;
 	assert(mBuffer != nullptr);
 	auto flags = GetMemoryPropertyFlags(mAccess);
 	Vulkan::Device* device = mBuffer->GetDevice();
