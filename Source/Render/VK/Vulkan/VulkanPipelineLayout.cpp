@@ -75,6 +75,16 @@ VkResult PipelineLayout::Create(const std::vector<DescriptorSetLayout*>& layouts
 	return Create(&pipeline_layout_create_info);
 }
 
+VkResult PipelineLayout::Create(uint32_t num, const VkDescriptorSetLayout* layouts, uint32_t count, const VkPushConstantRange* ranges)
+{
+	VkPipelineLayoutCreateInfo pipeline_layout_create_info = PipelineLayout::CreateInfo();
+	pipeline_layout_create_info.setLayoutCount = num;
+	pipeline_layout_create_info.pSetLayouts = layouts;
+	pipeline_layout_create_info.pushConstantRangeCount = count;
+	pipeline_layout_create_info.pPushConstantRanges = ranges;
+	return Create(&pipeline_layout_create_info);
+}
+
 VkResult PipelineLayout::Create(const VkPipelineLayoutCreateInfo* info)
 {
 	mResult = vkCreatePipelineLayout(mDevice->GetHandle(), info, nullptr, &m_layout);

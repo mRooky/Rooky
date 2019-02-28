@@ -23,7 +23,6 @@ public:
 
 public:
 	void CreateCache(void);
-	void CreateLayout(void);
 
 public:
 	inline Vulkan::PipelineCache* GetCache(void) const { return m_pipelineCache; }

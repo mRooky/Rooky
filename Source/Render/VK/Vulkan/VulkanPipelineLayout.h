@@ -25,6 +25,7 @@ public:
 	VkResult Create(const std::vector<VkDescriptorSetLayout>& layouts);
 	VkResult Create(const std::vector<VkDescriptorSetLayout>& layouts, const std::vector<VkPushConstantRange>& ranges);
 	VkResult Create(const std::vector<DescriptorSetLayout*>& layouts, uint32_t count, const VkPushConstantRange* ranges);
+	VkResult Create(uint32_t num, const VkDescriptorSetLayout* layouts, uint32_t count, const VkPushConstantRange* ranges);
 
 public:
 	inline VkPipelineLayout GetHandle(void) const { return m_layout; }
