@@ -13,6 +13,9 @@
 #include "VKResourceSet.h"
 #include "VKImage.h"
 #include "VKSampler.h"
+#include "VKShader.h"
+#include "VKResourceContainer.h"
+#include "VKContext.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -31,11 +34,15 @@ namespace VK
 CommandList::CommandList(CommandPool* pool):
 		Render::CommandList(pool)
 {
+	Context* context = static_cast<Context*>(mCommandPool->GetContext());
+	mResourceContainer = new ResourceContainer(context);
 }
 
 CommandList::~CommandList(void)
 {
 	mCommandBuffer = nullptr;
+	delete mResourceContainer;
+	mResourceContainer = nullptr;
 }
 
 void CommandList::Create(bool primary)
@@ -156,23 +163,9 @@ void CommandList::EndRecord(void)
 	mCommandBuffer->End();
 }
 
-void CommandList::SetBuffer(Render::ShaderStage stage, uint32_t index, Render::Buffer* image)
+void CommandList::SetResourceSet(uint32_t index, uint32_t bind, const Render::Binding& binding)
 {
 
-}
-
-void CommandList::SetImage(Render::ShaderStage stage, uint32_t index, Render::Image* image, Render::Sampler* sampler)
-{
-	Image* vk_image = static_cast<Image*>(image);
-	VkDescriptorImageInfo* image_info = nullptr;
-	assert(false);
-	image_info->imageView = vk_image->GetImageVK()->GetView()->GetHandle();
-	image_info->imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-	if (sampler != nullptr)
-	{
-		Sampler* vk_sampler = static_cast<Sampler*>(sampler);
-		image_info->sampler = vk_sampler->GetSamplerVK()->GetHandle();
-	}
 }
 
 } /* namespace VK */

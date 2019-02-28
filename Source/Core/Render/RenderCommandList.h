@@ -11,6 +11,7 @@
 #include "RenderClasses.h"
 #include "RenderMath.h"
 #include "RenderEnum.h"
+#include "RenderBinding.h"
 
 namespace Render
 {
@@ -37,8 +38,7 @@ public:
 	virtual void EndRecord(void) = 0;
 
 public: // Resource Setup
-	virtual void SetBuffer(ShaderStage stage, uint32_t index, Buffer* image) = 0;
-	virtual void SetImage(ShaderStage stage, uint32_t index, Image* image, Sampler* sampler = nullptr) = 0;
+	virtual void SetResourceSet(uint32_t index, uint32_t bind, const Binding& binding) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }

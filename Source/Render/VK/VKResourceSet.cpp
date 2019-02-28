@@ -202,6 +202,10 @@ void ResourceSet::UpdateDescriptorSet(void)
 		assert(mLayoutbindings.size() > 0);
 		mDescriptorSet = mWriter->AllocateDescriptorSet(mLayoutbindings.size(), mLayoutbindings.data());
 		assert(mWrites.size() > 0);
+		for(auto& write : mWrites)
+		{
+			write.dstSet = mDescriptorSet->GetHandle();
+		}
 		Vulkan::DescriptorSet::UpdateSets(mDescriptorSet->GetDevice(), mWrites.size(), mWrites.data());
 		mDirty = false;
 	}

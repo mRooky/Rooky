@@ -85,6 +85,7 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 {
 	VkDescriptorBufferInfo descriptor_buffer_info = {};
 	descriptor_buffer_info.buffer = m_buffer;
+	descriptor_buffer_info.range = m_size;
 	return descriptor_buffer_info;
 }
 
