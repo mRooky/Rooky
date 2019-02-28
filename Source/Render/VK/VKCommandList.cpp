@@ -147,6 +147,7 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
+	mResourceContainer->Binding(this);
 	assert(false);
 }
 
@@ -165,7 +166,8 @@ void CommandList::EndRecord(void)
 
 void CommandList::SetResourceSet(uint32_t index, uint32_t bind, const Render::Binding& binding)
 {
-
+	ResourceList* list = mResourceContainer->GetResourceList(index);
+	list->SetBinding(bind, binding);
 }
 
 } /* namespace VK */

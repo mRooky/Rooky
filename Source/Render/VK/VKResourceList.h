@@ -8,24 +8,38 @@
 #ifndef SOURCE_RENDER_VK_VKRESOURCELIST_H_
 #define SOURCE_RENDER_VK_VKRESOURCELIST_H_
 
-#include "RenderResourceList.h"
+#include "RenderBinding.h"
 #include "VKRender.h"
+
+#include <map>
 #include <vector>
 
 namespace VK
 {
-class ResourceContainer;
-class ResourceList: public Render::ResourceList
+
+enum class DirtyState : uint32_t
 {
-	friend class ResourceContainer;
+	DIRTY_STATE_NONE,
+	DIRTY_STATE_LAYOUT,
+	DIRTY_STATE_RESOURCE,
+	DIRTY_STATE_UNKNOWN = ~0U
+};
+
+class ResourceContainer;
+class ResourceList
+{
 public:
 	explicit ResourceList(ResourceContainer* container);
-	virtual ~ResourceList(void) override;
+	virtual ~ResourceList(void);
 
 public:
-	void Update(void);
+	void SetBinding(uint32_t bind, const Render::Binding& binding);
 
 public:
+	DirtyState Update(void);
+
+public:
+	inline bool IsDirty(void) const { return mDirty; }
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
 
 public:
@@ -37,10 +51,12 @@ public:
 
 protected:
 	void WriteDescriptorSet(void);
-	void UpdateDescriptorSet(void);
+	DirtyState UpdateDescriptorSet(void);
 
 protected:
+	bool mDirty = true;
 	ResourceContainer* mContainer = nullptr;
+	std::map<uint32_t, Render::Binding> mResourceBindings;
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

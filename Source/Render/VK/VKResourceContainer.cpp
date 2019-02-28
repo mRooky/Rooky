@@ -43,21 +43,32 @@ void ResourceContainer::Binding(CommandList* list)
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
 	descriptor_sets.reserve(mResourceLists.size());
-
+	bool dirty = false;
 	for(auto& set : mResourceLists)
 	{
-		set.UpdateDescriptorSet();
+		DirtyState state = set.Update();
+		dirty = (state == DirtyState::DIRTY_STATE_LAYOUT);
 		descriptor_sets.push_back(set.GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
 	vk_cmd->BindDescriptorSets(mPipelineLayout, descriptor_sets, offset);
+
+	if (dirty)
+	{
+		UpdatePipelineLayout();
+	}
 }
 
-ResourceList* ResourceContainer::CreateResourceList(void)
+ResourceList* ResourceContainer::GetResourceList(size_t index)
 {
-	mResourceLists.push_back(ResourceList(this));
-	return &mResourceLists.back();
+	const size_t size = mResourceLists.size();
+	assert(index <= size);
+	if (index == size)
+	{
+		mResourceLists.push_back(ResourceList(this));
+	}
+	return &mResourceLists.at(index);
 }
 
 void ResourceContainer::CreateDescriptorPool(size_t max)
@@ -88,6 +99,11 @@ Vulkan::DescriptorSet* ResourceContainer::AllocateDescriptorSet(uint32_t count, 
 	std::memcpy(layout_bindings.data(), bindings, size);
 	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(layout_bindings);
 	return mDescriptorPool->Allocate(layout);
+}
+
+void ResourceContainer::UpdatePipelineLayout(void)
+{
+
 }
 
 } /* namespace VK */

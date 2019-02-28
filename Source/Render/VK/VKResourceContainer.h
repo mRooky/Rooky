@@ -28,20 +28,23 @@ public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
-	ResourceList* CreateResourceList(void);
+	ResourceList* GetResourceList(size_t index);
 
 public:
 	inline size_t GetResourceListCount(void) const { return mResourceLists.size(); }
-	inline ResourceList* GetResourceList(size_t index) { return &mResourceLists.at(index); }
 
 protected:
+	void UpdatePipelineLayout(void);
 	void CreateDescriptorPool(size_t max);
 
 protected:
 	Context* mContext = nullptr;
 	std::vector<ResourceList> mResourceLists;
+
+protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
 	Vulkan::PipelineLayout* mPipelineLayout = nullptr;
+	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
 } /* namespace VK */
