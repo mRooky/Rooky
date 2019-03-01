@@ -19,6 +19,7 @@ Pipeline::Pipeline(PipelineState* state):
 
 Pipeline::~Pipeline(void)
 {
+	mPipelineState = nullptr;
 }
 
 } /* namespace Render */

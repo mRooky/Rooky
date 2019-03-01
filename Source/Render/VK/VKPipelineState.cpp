@@ -24,10 +24,5 @@ PipelineState::~PipelineState(void)
 {
 }
 
-void PipelineState::CreateCache(void)
-{
-	assert(false);
-}
-
 }
 

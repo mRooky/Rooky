@@ -22,16 +22,11 @@ public:
 	virtual ~PipelineState(void) override;
 
 public:
-	void CreateCache(void);
-
-public:
-	inline Vulkan::PipelineCache* GetCache(void) const { return m_pipelineCache; }
-	inline Vulkan::PipelineLayout* GetLayout(void) const { return  m_pipelineLayout; }
 	inline Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) { return &mGraphicsInfo; }
+	inline Vulkan::PipelineLayout* GetPipelineLayout(size_t index) const { return  mPipelineLayouts.at(index); }
 
-private:
-	Vulkan::PipelineCache* m_pipelineCache = nullptr;
-	Vulkan::PipelineLayout* m_pipelineLayout = nullptr;
+protected:
+	std::vector<Vulkan::PipelineLayout*> mPipelineLayouts;
 
 protected:
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;

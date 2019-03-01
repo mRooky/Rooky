@@ -25,9 +25,16 @@ public:
 
 public:
 	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mPipeline; }
+	inline Vulkan::PipelineCache* GetPipelineCache(void) const { return mPipelineCache; }
+	inline Vulkan::PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
+
+public:
+	void CreateCache(Vulkan::PipelineCache* cache = nullptr);
 
 protected:
 	Vulkan::Pipeline* mPipeline = nullptr;
+	Vulkan::PipelineCache* mPipelineCache = nullptr;
+	Vulkan::PipelineLayout* mPipelineLayout = nullptr;
 };
 
 } /* namespace VK */
