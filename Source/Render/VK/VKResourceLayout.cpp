@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKResourceContainer.h"
+#include "VKResourceLayout.h"
 #include "VKContext.h"
 #include "VKCommandList.h"
 
@@ -20,7 +20,7 @@
 namespace VK
 {
 
-ResourceContainer::ResourceContainer(Context* context):
+ResourceLayout::ResourceLayout(Context* context):
 		mContext(context)
 {
 	assert(mContext != nullptr);
@@ -28,14 +28,14 @@ ResourceContainer::ResourceContainer(Context* context):
 	CreateDescriptorPool(max);
 }
 
-ResourceContainer::~ResourceContainer(void)
+ResourceLayout::~ResourceLayout(void)
 {
 	mContext = nullptr;
 	Vulkan::Release(mDescriptorPool);
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
 
-void ResourceContainer::Binding(CommandList* list)
+void ResourceLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
 	assert(mPipelineLayout != nullptr);
@@ -60,7 +60,7 @@ void ResourceContainer::Binding(CommandList* list)
 	}
 }
 
-ResourceList* ResourceContainer::GetResourceList(size_t index)
+ResourceList* ResourceLayout::GetResourceList(size_t index)
 {
 	const size_t size = mResourceLists.size();
 	assert(index <= size);
@@ -71,7 +71,7 @@ ResourceList* ResourceContainer::GetResourceList(size_t index)
 	return &mResourceLists.at(index);
 }
 
-void ResourceContainer::CreateDescriptorPool(size_t max)
+void ResourceLayout::CreateDescriptorPool(size_t max)
 {
 	std::vector<VkDescriptorPoolSize> descriptor_pool_sizes;
 
@@ -90,7 +90,7 @@ void ResourceContainer::CreateDescriptorPool(size_t max)
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }
 
-Vulkan::DescriptorSet* ResourceContainer::AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
 {
 	assert(mDescriptorPool != nullptr);
 	std::vector<VkDescriptorSetLayoutBinding> layout_bindings;
@@ -101,7 +101,7 @@ Vulkan::DescriptorSet* ResourceContainer::AllocateDescriptorSet(uint32_t count, 
 	return mDescriptorPool->Allocate(layout);
 }
 
-void ResourceContainer::UpdatePipelineLayout(void)
+void ResourceLayout::UpdatePipelineLayout(void)
 {
 
 }

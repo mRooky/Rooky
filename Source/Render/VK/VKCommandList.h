@@ -14,7 +14,7 @@
 namespace VK
 {
 class CommandPool;
-class ResourceContainer;
+class ResourceLayout;
 class CommandList: public Render::CommandList
 {
 public:
@@ -39,13 +39,13 @@ public:
 	virtual void EndRecord(void) override;
 
 public:
-	virtual void SetResourceSet(uint32_t index, uint32_t bind, const Render::Binding& binding) override;
+	virtual void SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource) override;
 
 public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
 
 protected:
-	ResourceContainer* mResourceContainer = nullptr;
+	ResourceLayout* mResourceLayout = nullptr;
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;
 };
 

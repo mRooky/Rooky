@@ -8,12 +8,14 @@
 #ifndef SOURCE_CORE_RENDER_RENDERMEMORY_H_
 #define SOURCE_CORE_RENDER_RENDERMEMORY_H_
 
-#include "RenderResource.h"
+#include "RenderObject.h"
+#include "RenderUsage.h"
+#include <cstddef>
 
 namespace Render
 {
 class Buffer;
-class Memory: public Resource
+class Memory: public Object
 {
 public:
 	Memory(Context* context);

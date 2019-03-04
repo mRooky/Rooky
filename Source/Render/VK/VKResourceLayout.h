@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_VKRESOURCECONTAINER_H_
-#define SOURCE_RENDER_VK_VKRESOURCECONTAINER_H_
+#ifndef SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
+#define SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
 
 #include "VKResourceList.h"
 #include <vector>
@@ -15,11 +15,11 @@ namespace VK
 {
 class Context;
 class CommandList;
-class ResourceContainer
+class ResourceLayout
 {
 public:
-	explicit ResourceContainer(Context* context);
-	virtual ~ResourceContainer(void);
+	explicit ResourceLayout(Context* context);
+	virtual ~ResourceLayout(void);
 
 public:
 	void Binding(CommandList* list);
@@ -49,4 +49,4 @@ protected:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_VKRESOURCECONTAINER_H_ */
+#endif /* SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_ */

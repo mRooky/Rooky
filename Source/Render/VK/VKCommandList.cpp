@@ -14,8 +14,8 @@
 #include "VKImage.h"
 #include "VKSampler.h"
 #include "VKShader.h"
-#include "VKResourceContainer.h"
 #include "VKContext.h"
+#include "VKResourceLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -35,14 +35,14 @@ CommandList::CommandList(CommandPool* pool):
 		Render::CommandList(pool)
 {
 	Context* context = static_cast<Context*>(mCommandPool->GetContext());
-	mResourceContainer = new ResourceContainer(context);
+	mResourceLayout = new ResourceLayout(context);
 }
 
 CommandList::~CommandList(void)
 {
 	mCommandBuffer = nullptr;
-	delete mResourceContainer;
-	mResourceContainer = nullptr;
+	delete mResourceLayout;
+	mResourceLayout = nullptr;
 }
 
 void CommandList::Create(bool primary)
@@ -147,7 +147,7 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
-	mResourceContainer->Binding(this);
+	mResourceLayout->Binding(this);
 	assert(false);
 }
 
@@ -164,10 +164,10 @@ void CommandList::EndRecord(void)
 	mCommandBuffer->End();
 }
 
-void CommandList::SetResourceSet(uint32_t index, uint32_t bind, const Render::Binding& binding)
+void CommandList::SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource)
 {
-	ResourceList* list = mResourceContainer->GetResourceList(index);
-	list->SetBinding(bind, binding);
+	ResourceList* list = mResourceLayout->GetResourceList(index);
+	list->SetBinding(bind, resource);
 }
 
 } /* namespace VK */

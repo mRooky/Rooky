@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKRESOURCELIST_H_
 #define SOURCE_RENDER_VK_VKRESOURCELIST_H_
 
-#include "RenderBinding.h"
+#include "RenderResource.h"
 #include "VKRender.h"
 
 #include <map>
@@ -25,15 +25,15 @@ enum class DirtyState : uint32_t
 	DIRTY_STATE_UNKNOWN = ~0U
 };
 
-class ResourceContainer;
+class ResourceLayout;
 class ResourceList
 {
 public:
-	explicit ResourceList(ResourceContainer* container);
+	explicit ResourceList(ResourceLayout* layout);
 	virtual ~ResourceList(void);
 
 public:
-	void SetBinding(uint32_t bind, const Render::Binding& binding);
+	void SetBinding(uint32_t bind, const Render::Resource& resource);
 
 public:
 	DirtyState Update(void);
@@ -46,8 +46,8 @@ public:
 	static VkDescriptorType GetDescriptorType(Render::ResourceType type);
 
 public:
-	static void SetImageInfo(Render::Resource* resource, VkDescriptorImageInfo* info);
-	static void SetBufferInfo(Render::Resource* resource, VkDescriptorBufferInfo* info);
+	static void SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info);
+	static void SetUniformInfo(const Render::Resource& resource, VkDescriptorBufferInfo* info);
 
 protected:
 	void WriteDescriptorSet(void);
@@ -55,8 +55,8 @@ protected:
 
 protected:
 	bool mDirty = true;
-	ResourceContainer* mContainer = nullptr;
-	std::map<uint32_t, Render::Binding> mResourceBindings;
+	ResourceLayout* mLayout = nullptr;
+	std::map<uint32_t, Render::Resource> mResources;
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

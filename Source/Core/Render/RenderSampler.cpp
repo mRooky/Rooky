@@ -11,7 +11,7 @@ namespace Render
 {
 
 Sampler::Sampler(Context* context):
-		Resource(context)
+		Object(context)
 {
 }
 

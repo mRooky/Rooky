@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include <VKResourceLayout.h>
 #include "VKResourceList.h"
-#include "VKResourceContainer.h"
 #include "VKShader.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
@@ -24,10 +24,10 @@
 namespace VK
 {
 
-ResourceList::ResourceList(ResourceContainer* container):
-		mContainer(container)
+ResourceList::ResourceList(ResourceLayout* layout):
+		mLayout(layout)
 {
-	assert(mContainer != nullptr);
+	assert(mLayout != nullptr);
 }
 
 ResourceList::~ResourceList(void)
@@ -35,22 +35,22 @@ ResourceList::~ResourceList(void)
 	std::cout << "VK Destroy Resource List" << std::endl;
 }
 
-void ResourceList::SetBinding(uint32_t bind, const Render::Binding& binding)
+void ResourceList::SetBinding(uint32_t bind, const Render::Resource& resource)
 {
-	assert(binding.IsValid());
-	auto iterator = mResourceBindings.find(bind);
-	if (iterator != mResourceBindings.end())
+	assert(resource.IsValid());
+	auto iterator = mResources.find(bind);
+	if (iterator != mResources.end())
 	{
-		if (iterator->second != binding)
+		if (iterator->second != resource)
 		{
 			mDirty = true;
-			iterator->second = binding;
+			iterator->second = resource;
 		}
 	}
 	else
 	{
 		mDirty = true;
-		mResourceBindings.insert(std::make_pair(bind, binding));
+		mResources.insert(std::make_pair(bind, resource));
 	}
 }
 
@@ -68,7 +68,7 @@ DirtyState ResourceList::Update(void)
 
 void ResourceList::WriteDescriptorSet(void)
 {
-	const size_t size = mResourceBindings.size();
+	const size_t size = mResources.size();
 	assert(size > 0);
 
 	std::vector<VkWriteDescriptorSet> descriptor_writes;
@@ -79,9 +79,8 @@ void ResourceList::WriteDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& binding = mResourceBindings.at(bind);
-		Render::Resource* resource = binding.GetResource();
-		Render::ResourceType type = binding.GetResourceType();
+		auto& resource = mResources.at(bind);
+		Render::ResourceType type = resource.GetResourceType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
 		write.dstSet = mDescriptorSet->GetHandle();
@@ -91,12 +90,12 @@ void ResourceList::WriteDescriptorSet(void)
 
 		switch(type)
 		{
-		case Render::ResourceType::RESOURCE_TYPE_TEXTURE:
+		case Render::ResourceType::RESOURCE_TYPE_IMAGE:
 			ResourceList::SetImageInfo(resource, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			break;
 		case Render::ResourceType::RESOURCE_TYPE_UNIFORM:
-			ResourceList::SetBufferInfo(resource, &buffer_infos.at(bind));
+			ResourceList::SetUniformInfo(resource, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			break;
 		default:
@@ -110,7 +109,7 @@ void ResourceList::WriteDescriptorSet(void)
 
 DirtyState ResourceList::UpdateDescriptorSet(void)
 {
-	const size_t size = mResourceBindings.size();
+	const size_t size = mResources.size();
 	assert(size > 0);
 
 	std::vector<VkDescriptorSetLayoutBinding> layout_bindings;
@@ -118,9 +117,9 @@ DirtyState ResourceList::UpdateDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& binding = mResourceBindings.at(bind);
-		Render::ShaderStage stage = binding.GetShaderStage();
-		Render::ResourceType type = binding.GetResourceType();
+		auto& resource = mResources.at(bind);
+		Render::ShaderStage stage = resource.GetShaderStage();
+		Render::ResourceType type = resource.GetResourceType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;
@@ -136,7 +135,7 @@ DirtyState ResourceList::UpdateDescriptorSet(void)
 		set_layout = mDescriptorSet->GetLayout();
 	}
 	assert(layout_bindings.size() > 0);
-	mDescriptorSet = mContainer->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
+	mDescriptorSet = mLayout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 
 	DirtyState dirty_state = DirtyState::DIRTY_STATE_RESOURCE;
 	if (set_layout != mDescriptorSet->GetLayout())
@@ -146,19 +145,17 @@ DirtyState ResourceList::UpdateDescriptorSet(void)
 	return dirty_state;
 }
 
-void ResourceList::SetImageInfo(Render::Resource* resource, VkDescriptorImageInfo* info)
+void ResourceList::SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)
 {
 	assert(info != nullptr);
-	assert(resource != nullptr);
-	Image* image = static_cast<Image*>(resource);
+	Image* image = static_cast<Image*>(resource.GetImage());
 	*info = image->GetImageVK()->GetDescriptorInfo();
 }
 
-void ResourceList::SetBufferInfo(Render::Resource* resource, VkDescriptorBufferInfo* info)
+void ResourceList::SetUniformInfo(const Render::Resource& resource, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
-	assert(resource != nullptr);
-	Buffer* buffer = static_cast<Buffer*>(resource);
+	Buffer* buffer = static_cast<Buffer*>(resource.GetUniform());
 	*info = buffer->GetBufferVK()->GetDescriptorInfo();
 }
 
@@ -170,7 +167,7 @@ VkDescriptorType ResourceList::GetDescriptorType(Render::ResourceType type)
 		return VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
 	case Render::ResourceType::RESOURCE_TYPE_BUFFER:
 		return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-	case Render::ResourceType::RESOURCE_TYPE_TEXTURE:
+	case Render::ResourceType::RESOURCE_TYPE_IMAGE:
 		return VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
 	case Render::ResourceType::RESOURCE_TYPE_UNIFORM:
 		return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
