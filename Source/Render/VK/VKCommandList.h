@@ -33,13 +33,13 @@ public:
 	virtual void BindPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
+	// Resource Setting
+	virtual void SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource) override;
+	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;
-	// Draw Commands
+	// End Draw Commands
 	virtual void EndRecord(void) override;
-
-public:
-	virtual void SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource) override;
 
 public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }

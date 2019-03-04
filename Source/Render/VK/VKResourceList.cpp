@@ -159,6 +159,11 @@ void ResourceList::SetUniformInfo(const Render::Resource& resource, VkDescriptor
 	*info = buffer->GetBufferVK()->GetDescriptorInfo();
 }
 
+void ResourceList::SetSamplerInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)
+{
+	assert(false);
+}
+
 VkDescriptorType ResourceList::GetDescriptorType(Render::ResourceType type)
 {
 	switch(type)

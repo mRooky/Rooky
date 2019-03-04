@@ -10,7 +10,6 @@
 #include "VKRenderPass.h"
 #include "VKFrameBuffer.h"
 #include "VKPipeline.h"
-#include "VKResourceSet.h"
 #include "VKImage.h"
 #include "VKSampler.h"
 #include "VKShader.h"

@@ -38,26 +38,20 @@ ResourceLayout::~ResourceLayout(void)
 void ResourceLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
-	assert(mPipelineLayout != nullptr);
 	assert(mResourceLists.size() > 0);
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
 	descriptor_sets.reserve(mResourceLists.size());
-	bool dirty = false;
-	for(auto& set : mResourceLists)
+	for(auto& list : mResourceLists)
 	{
-		DirtyState state = set.Update();
-		dirty = (state == DirtyState::DIRTY_STATE_LAYOUT);
-		descriptor_sets.push_back(set.GetDescriptorSet());
+		DirtyState state = list.Update();
+		mDirty = mDirty || (state == DirtyState::DIRTY_STATE_LAYOUT);
+		descriptor_sets.push_back(list.GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
 	vk_cmd->BindDescriptorSets(mPipelineLayout, descriptor_sets, offset);
-
-	if (dirty)
-	{
-		UpdatePipelineLayout();
-	}
+	UpdatePipelineLayout();
 }
 
 ResourceList* ResourceLayout::GetResourceList(size_t index)
@@ -103,7 +97,12 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 
 void ResourceLayout::UpdatePipelineLayout(void)
 {
-
+	assert(mPipelineLayout != nullptr);
+	if (mDirty)
+	{
+		UpdatePipelineLayout();
+		mDirty = false;
+	}
 }
 
 } /* namespace VK */

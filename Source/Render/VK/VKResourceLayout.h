@@ -33,11 +33,16 @@ public:
 public:
 	inline size_t GetResourceListCount(void) const { return mResourceLists.size(); }
 
+public:
+	inline Vulkan::DescriptorPool* GetDescriptorPool(void) const { return mDescriptorPool; }
+	inline Vulkan::PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
+
 protected:
 	void UpdatePipelineLayout(void);
 	void CreateDescriptorPool(size_t max);
 
 protected:
+	bool mDirty = true;
 	Context* mContext = nullptr;
 	std::vector<ResourceList> mResourceLists;
 

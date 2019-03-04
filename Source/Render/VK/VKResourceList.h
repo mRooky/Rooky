@@ -48,6 +48,7 @@ public:
 public:
 	static void SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info);
 	static void SetUniformInfo(const Render::Resource& resource, VkDescriptorBufferInfo* info);
+	static void SetSamplerInfo(const Render::Resource& resource, VkDescriptorImageInfo* info);
 
 protected:
 	void WriteDescriptorSet(void);
