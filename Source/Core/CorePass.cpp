@@ -11,6 +11,7 @@
 
 #include "RenderContext.h"
 #include "RenderPass.h"
+#include "RenderFactory.h"
 
 #include <cassert>
 
@@ -33,7 +34,7 @@ void Pass::Create(const std::vector<Render::Format>& formats)
 {
 	auto system = mParent->GetSystem();
 	auto context = system->GetContext();
-	mRenderPass = context->CreatePass();
+	mRenderPass = context->GetFactory()->CreatePass();
 	for (auto format : formats)
 	{
 		mRenderPass->AppendFormat(format);

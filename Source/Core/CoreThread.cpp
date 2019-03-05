@@ -10,6 +10,7 @@
 
 #include "RenderCommandPool.h"
 #include "RenderContext.h"
+#include "RenderFactory.h"
 
 #include <cassert>
 
@@ -31,7 +32,7 @@ Thread::~Thread(void)
 void Thread::Create(void)
 {
 	auto context = mSystem->GetContext();
-	mCommandPool = context->CreateCommandPool();
+	mCommandPool = context->GetFactory()->CreateCommandPool();
 	mCommandPool->Create();
 }
 

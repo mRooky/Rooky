@@ -8,6 +8,7 @@
 #include "RenderDrawIndirect.h"
 #include "RenderBuffer.h"
 #include "RenderContext.h"
+#include "RenderFactory.h"
 #include <cassert>
 
 namespace Render
@@ -30,7 +31,7 @@ void DrawIndirect::Create(Context* context, size_t size)
 	mSize = size;
 	BufferUsage usage = {};
 	usage.BufferUsageIndirect = 1;
-	mBuffer = context->CreateBuffer();
+	mBuffer = context->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, usage.BufferUsageFlags);
 	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
 	mBuffer->Allocate(access);

@@ -11,6 +11,7 @@
 
 #include "RenderContext.h"
 #include "RenderBuffer.h"
+#include "RenderFactory.h"
 
 #include <cassert>
 #include <cstring>
@@ -36,7 +37,7 @@ Buffer::~Buffer(void)
 void Buffer::Create(size_t size, uint32_t usage, Render::HeapAccess access)
 {
 	auto context = mCreator->GetSystem()->GetContext();
-	mBuffer = context->CreateBuffer();
+	mBuffer = context->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, usage);
 	mBuffer->Allocate(access);
 }

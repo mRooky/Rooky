@@ -10,6 +10,7 @@
 #include "VKImage.h"
 #include "VKFormat.h"
 #include "VKInline.h"
+#include "VKFactory.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -46,6 +47,7 @@ void Context::Create(void)
 	CreatePhysical();
 	CreateDevice();
 	CreateDefaultPool();
+	mFactory = new Factory(this);
 }
 
 uint32_t Context::GetImageUsageFlag(uint32_t usage, bool read, bool write)

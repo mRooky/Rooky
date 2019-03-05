@@ -8,14 +8,12 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCONTEXT_H_
 #define SOURCE_CORE_RENDER_RENDERCONTEXT_H_
 
-#include "RenderEnum.h"
-#include "PlatformWindow.h"
 #include "RenderFormat.h"
-#include "RenderClasses.h"
 #include <vector>
 
 namespace Render
 {
+class Factory;
 class Context
 {
 protected:
@@ -28,12 +26,10 @@ public:
 	virtual void Create(void) = 0;
 
 public:
-	virtual Pass* CreatePass(void) = 0;
-	virtual Queue* CreateQueue(void) = 0;
-	virtual Image* CreateImage(void) = 0;
-	virtual Buffer* CreateBuffer(void) = 0;
-	virtual SwapChain* CreateSwapChain(void) = 0;
-	virtual CommandPool* CreateCommandPool(void) = 0;
+	inline Factory* GetFactory(void) const { return mFactory; }
+
+protected:
+	Factory* mFactory = nullptr;
 
 public:
 	virtual Format GetBestDepthStencilFormat(void) = 0;

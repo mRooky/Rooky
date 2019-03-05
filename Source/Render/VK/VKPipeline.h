@@ -25,8 +25,8 @@ public:
 
 public:
 	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mPipeline; }
-	inline Vulkan::PipelineCache* GetPipelineCache(void) const { return mPipelineCache; }
-	inline Vulkan::PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
+	inline Vulkan::PipelineCache* GetPipelineCacheVK(void) const { return mPipelineCache; }
+	inline Vulkan::PipelineLayout* GetPipelineLayoutVK(void) const { return mPipelineLayout; }
 
 public:
 	void CreateCache(Vulkan::PipelineCache* cache = nullptr);

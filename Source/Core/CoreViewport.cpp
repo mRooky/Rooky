@@ -12,6 +12,7 @@
 #include "RenderSwapChain.h"
 #include "RenderImage.h"
 #include "RenderContext.h"
+#include "RenderFactory.h"
 
 #include <cassert>
 
@@ -34,7 +35,7 @@ Viewport::~Viewport(void)
 void Viewport::Create(Platform::Window* window)
 {
 	auto context = mSystem->GetContext();
-	mSwapChain = context->CreateSwapChain();
+	mSwapChain = context->GetFactory()->CreateSwapChain();
 	mSwapChain->Create(window);
 }
 
@@ -51,7 +52,7 @@ void Viewport::CreateDepthStencil(const Render::Extent2& extent)
 	uint32_t usage = context->GetImageUsageFlag(flags, true, false);
 	Render::Extent3 extent3 = { extent.width, extent.height, 1 };
 
-	mDepthStencil = context->CreateImage();
+	mDepthStencil = context->GetFactory()->CreateImage();
 	mDepthStencil->Create(type, format, extent3, usage);
 }
 
