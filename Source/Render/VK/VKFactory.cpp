@@ -13,6 +13,7 @@
 #include "VKRenderPass.h"
 #include "VKCommandPool.h"
 #include "VKQueue.h"
+#include "VKShader.h"
 
 namespace VK
 {
@@ -48,6 +49,12 @@ Render::Buffer* Factory::CreateBuffer(void)
 {
 	Context* context = static_cast<Context*>(mContext);
 	return new Buffer(context);
+}
+
+Render::Shader* Factory::CreateShader(void)
+{
+	Context* context = static_cast<Context*>(mContext);
+	return new Shader(context);
 }
 
 Render::SwapChain* Factory::CreateSwapChain(void)

@@ -32,6 +32,8 @@ protected:
 	bool mDepthTestEnabled = true;
 	bool mDepthWriteEnabled = true;
 	bool mStencilTestEnabled = false;
+
+protected:
 	uint32_t mStencilWrite = 0;
 	uint32_t mStencilFunctionMask = 0;
 

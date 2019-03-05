@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKRESOURCELIST_H_
 #define SOURCE_RENDER_VK_VKRESOURCELIST_H_
 
-#include "RenderResource.h"
+#include "RenderResourceList.h"
 #include "VKRender.h"
 
 #include <map>
@@ -26,11 +26,11 @@ enum class DirtyState : uint32_t
 };
 
 class ResourceLayout;
-class ResourceList
+class ResourceList : public Render::ResourceList
 {
 public:
 	explicit ResourceList(ResourceLayout* layout);
-	virtual ~ResourceList(void);
+	virtual ~ResourceList(void) override;
 
 public:
 	void SetBinding(uint32_t bind, const Render::Resource& resource);

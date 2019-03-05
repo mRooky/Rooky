@@ -24,6 +24,7 @@ public:
 	virtual Render::Queue* CreateQueue(void) override;
 	virtual Render::Image* CreateImage(void) override;
 	virtual Render::Buffer* CreateBuffer(void) override;
+	virtual Render::Shader* CreateShader(void) override;
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
 };
