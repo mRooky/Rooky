@@ -22,7 +22,7 @@ public:
 
 public:
 	void SetContent(PipelineLayout* layout, RenderPass* pass, uint32_t index);
-	ShaderStageInfo* CreateShaderStage(void);
+	VkPipelineShaderStageCreateInfo* CreateShaderStage(void);
 
 public:
 	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputStateInfo; }
@@ -36,7 +36,9 @@ public:
 
 public:
 	inline size_t GetShaderStageCount(void) { return mShaderStages.size(); }
-	inline const ShaderStageInfo& GetShaderStageInfo(size_t index) { return mShaderStages.at(index); }
+	inline const VkPipelineShaderStageCreateInfo& GetShaderStageInfo(size_t index) { return mShaderStages.at(index); }
+
+public:
 	inline const VkGraphicsPipelineCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 protected:
@@ -50,7 +52,7 @@ protected:
 	DynamicStateInfo mDynamicStateInfo;
 
 protected:
-	std::vector<ShaderStageInfo> mShaderStages;
+	std::vector<VkPipelineShaderStageCreateInfo> mShaderStages;
 
 private:
 	VkGraphicsPipelineCreateInfo m_createInfo = {};

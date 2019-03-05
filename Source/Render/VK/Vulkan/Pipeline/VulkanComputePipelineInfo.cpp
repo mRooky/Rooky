@@ -7,6 +7,7 @@
 
 #include "VulkanComputePipelineInfo.h"
 #include "VulkanPipelineLayout.h"
+#include "VulkanShaderModule.h"
 #include <cassert>
 
 namespace Vulkan
@@ -25,7 +26,17 @@ ComputePipelineInfo::~ComputePipelineInfo(void)
 void ComputePipelineInfo::SetLayout(PipelineLayout* layout)
 {
 	assert(layout != nullptr);
+	m_pipelineLayout = layout;
 	m_createInfo.layout = layout->GetHandle();
+}
+
+void ComputePipelineInfo::SetShader(ShaderModule* shader, const char* entry)
+{
+	assert(shader != nullptr);
+	VkPipelineShaderStageCreateInfo& shader_stage = m_createInfo.stage;
+	shader_stage.module = shader->GetHandle();
+	shader_stage.pName = entry;
+	shader_stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
 }
 
 } /* namespace Vulkan */

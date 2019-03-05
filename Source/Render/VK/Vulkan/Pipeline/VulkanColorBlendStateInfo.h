@@ -25,17 +25,19 @@ public:
 
 public:
 	void SetColor(size_t index, VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation);
-	void SetAlpha(size_t index,VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation);
+	void SetAlpha(size_t index, VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation);
+
+public:
+	inline const VkPipelineColorBlendStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 public:
 	inline size_t GetStateCount(void) const { return m_states.size(); }
-	inline VkPipelineColorBlendAttachmentState& GetState(size_t index) { return m_states.at(index); }
+	inline const VkPipelineColorBlendAttachmentState& GetState(size_t index) const { return m_states.at(index); }
 	inline const VkPipelineColorBlendAttachmentState* GetStateData(void) const { return m_states.data(); }
-	inline const VkPipelineColorBlendStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
-	std::vector<VkPipelineColorBlendAttachmentState> m_states;
 	VkPipelineColorBlendStateCreateInfo m_createInfo = {};
+	std::vector<VkPipelineColorBlendAttachmentState> m_states;
 };
 
 } /* namespace VK */

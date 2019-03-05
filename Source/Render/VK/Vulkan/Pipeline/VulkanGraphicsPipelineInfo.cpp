@@ -45,9 +45,9 @@ void GraphicsPipelineInfo::SetContent(PipelineLayout* layout, RenderPass* pass, 
 	m_createInfo.subpass = index;
 }
 
-ShaderStageInfo* GraphicsPipelineInfo::CreateShaderStage(void)
+VkPipelineShaderStageCreateInfo* GraphicsPipelineInfo::CreateShaderStage(void)
 {
-	mShaderStages.push_back(ShaderStageInfo());
+	mShaderStages.push_back(VkPipelineShaderStageCreateInfo());
 	m_createInfo.pStages = mShaderStages.data();
 	m_createInfo.stageCount = mShaderStages.size();
 	return &mShaderStages.back();

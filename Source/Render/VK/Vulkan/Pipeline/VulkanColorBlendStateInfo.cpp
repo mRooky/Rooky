@@ -40,7 +40,7 @@ void ColorBlendStateInfo::SetColor(size_t index, VkBlendFactor src, VkBlendFacto
 	state.colorBlendOp = operation;
 }
 
-void ColorBlendStateInfo::SetAlpha(size_t index,VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation)
+void ColorBlendStateInfo::SetAlpha(size_t index, VkBlendFactor src, VkBlendFactor dst, VkBlendOp operation)
 {
 	VkPipelineColorBlendAttachmentState& state = m_states.at(index);
 	state.srcAlphaBlendFactor = src;

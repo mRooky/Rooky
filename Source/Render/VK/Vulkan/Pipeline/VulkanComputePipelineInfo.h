@@ -12,7 +12,7 @@
 
 namespace Vulkan
 {
-
+class ShaderModule;
 class ComputePipelineInfo
 {
 public:
@@ -21,12 +21,13 @@ public:
 
 public:
 	void SetLayout(PipelineLayout* layout);
+	void SetShader(ShaderModule* shader, const char* entry);
 
 public:
-	inline void SetShaderStage(const ShaderStageInfo& stage) { m_createInfo.stage = stage; }
 	inline const VkComputePipelineCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:
+	PipelineLayout* m_pipelineLayout = nullptr;
 	VkComputePipelineCreateInfo m_createInfo = {};
 };
 

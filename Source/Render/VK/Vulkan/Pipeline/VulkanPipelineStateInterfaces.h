@@ -12,6 +12,5 @@
 #include "VulkanInputAssemblyStateInfo.h"
 #include "VulkanMultisampleStateInfo.h"
 #include "VulkanRasterizationStateInfo.h"
-#include "VulkanShaderStageInfo.h"
 #include "VulkanVertexInputStateInfo.h"
 #include "VulkanViewportStateInfo.h"
