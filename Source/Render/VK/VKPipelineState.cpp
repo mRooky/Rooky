@@ -24,5 +24,10 @@ PipelineState::~PipelineState(void)
 {
 }
 
+void PipelineState::Initialize(void)
+{
+	assert(false);
+}
+
 }
 

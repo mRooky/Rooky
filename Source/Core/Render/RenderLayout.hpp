@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERLAYOUT_H_
-#define SOURCE_CORE_RENDER_RENDERLAYOUT_H_
+#ifndef SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_
+#define SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_
 
 #include "RenderEnum.h"
 #include "RenderMath.h"
@@ -34,4 +34,4 @@ public:
 
 }
 
-#endif /* SOURCE_CORE_RENDER_RENDERLAYOUT_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_ */

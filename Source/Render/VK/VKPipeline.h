@@ -13,28 +13,29 @@
 
 namespace VK
 {
-class PipelineState;
+class Context;
 class Pipeline: public Render::Pipeline
 {
 public:
-	explicit Pipeline(PipelineState* state);
+	explicit Pipeline(Context* context);
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(Render::Pass* pass, uint32_t index) override;
+	virtual void Initialize(const Render::PipelineDetail& detail) override;
 
 public:
 	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mPipeline; }
 	inline Vulkan::PipelineCache* GetPipelineCacheVK(void) const { return mPipelineCache; }
-	inline Vulkan::PipelineLayout* GetPipelineLayoutVK(void) const { return mPipelineLayout; }
 
 public:
 	void CreateCache(Vulkan::PipelineCache* cache = nullptr);
 
 protected:
+	bool mOwnCache = false;
+
+protected:
 	Vulkan::Pipeline* mPipeline = nullptr;
 	Vulkan::PipelineCache* mPipelineCache = nullptr;
-	Vulkan::PipelineLayout* mPipelineLayout = nullptr;
 };
 
 } /* namespace VK */

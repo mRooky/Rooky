@@ -6,20 +6,17 @@
  */
 
 #include "RenderPipeline.h"
-#include <cassert>
 
 namespace Render
 {
 
-Pipeline::Pipeline(PipelineState* state):
-		mPipelineState(state)
+Pipeline::Pipeline(Context* context):
+		Object(context)
 {
-	assert(mPipelineState != nullptr);
 }
 
 Pipeline::~Pipeline(void)
 {
-	mPipelineState = nullptr;
 }
 
 } /* namespace Render */

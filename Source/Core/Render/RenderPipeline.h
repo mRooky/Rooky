@@ -8,32 +8,25 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 
-#include <cstdint>
+#include "RenderObject.h"
+#include "RenderPipelineDetail.h"
 
 namespace Render
 {
-class Pass;
-class PipelineState;
-class Pipeline
+class Pipeline : public Object
 {
 public:
-	explicit Pipeline(PipelineState* state);
-	virtual ~Pipeline(void);
+	explicit Pipeline(Context* context);
+	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(Pass* pass, uint32_t index) = 0;
+	virtual void Initialize(const PipelineDetail& detail) = 0;
 
 public:
-	inline uint32_t GetIndex(void) const { return mIndex; }
-	inline Pass* GetRenderPass(void) const { return mRenderPass; }
-	inline PipelineState* GetPipelineState(void) const { return mPipelineState; }
+	inline const PipelineDetail& GetDetail(void) const { return mDetail; }
 
 protected:
-	uint32_t mIndex = 0;
-
-protected:
-	Pass* mRenderPass = nullptr;
-	PipelineState* mPipelineState = nullptr;
+	PipelineDetail mDetail;
 };
 
 } /* namespace Render */

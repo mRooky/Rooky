@@ -9,7 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERIMAGE_H_
 
 #include "RenderMemory.h"
-#include "RenderLayout.h"
+#include "RenderLayout.hpp"
 
 namespace Render
 {

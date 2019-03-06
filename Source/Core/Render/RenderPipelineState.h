@@ -22,9 +22,8 @@ public:
 	PipelineState(Context* context);
 	virtual ~PipelineState(void) override;
 
-protected:
-	Element* mElement = nullptr;
-	std::vector<Shader*> mShaders;
+public:
+	virtual void Initialize(void) = 0;
 
 protected:
 	bool mBlendEnabled = true;

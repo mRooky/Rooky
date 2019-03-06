@@ -22,15 +22,13 @@ public:
 	virtual ~PipelineState(void) override;
 
 public:
-	inline Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) { return &mGraphicsInfo; }
-	inline Vulkan::PipelineLayout* GetPipelineLayout(size_t index) const { return  mPipelineLayouts.at(index); }
+	virtual void Initialize(void) override;
 
-protected:
-	std::vector<Vulkan::PipelineLayout*> mPipelineLayouts;
+public:
+	inline Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) { return &mGraphicsInfo; }
 
 protected:
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;
-	std::vector<VkPushConstantRange> m_constantRanges;
 };
 
 }
