@@ -15,18 +15,9 @@
 namespace Render
 {
 
-static inline size_t GetIndexTypeSize(IndexType type)
+static inline uint32_t Bit(uint32_t pos)
 {
-	switch(type)
-	{
-	case IndexType::INDEX_TYPE_U16:
-		return 2;
-	case IndexType::INDEX_TYPE_U32:
-		return 4;
-	default:
-		assert(false);
-		return 0;
-	}
+	return 1u << pos;
 }
 
 }

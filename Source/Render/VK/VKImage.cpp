@@ -35,24 +35,40 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage)
+void Image::Create(const Render::ImageLayout& layout)
 {
-	mType = type;
-	mFormat = format;
-	mExtent = extent;
-	mUsage.ImageUsageFlags = usage;
-
 	assert(mImage == nullptr);
-	VkFormat vk_format = ConvertFormat(mFormat);
+	mLayout = layout;
+	VkFormat vk_format = ConvertFormat(mLayout.format);
 	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 
 	VkExtent3D vk_extent = {};
-	vk_extent.width = static_cast<uint32_t>(mExtent.width);
-	vk_extent.height = static_cast<uint32_t>(mExtent.height);
-	vk_extent.depth = static_cast<uint32_t>(mExtent.depth);
+	vk_extent.width = static_cast<uint32_t>(mLayout.extent.width);
+	vk_extent.height = static_cast<uint32_t>(mLayout.extent.height);
+	vk_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mUsage));
+	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mLayout.usage));
+}
+
+void Image::Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage)
+{
+	mLayout.type = type;
+	mLayout.format = format;
+	mLayout.extent = extent;
+	mLayout.usage.ImageUsageFlags = usage;
+
+	assert(mImage == nullptr);
+	VkFormat vk_format = ConvertFormat(format);
+	Context* context = static_cast<Context*>(mContext);
+	Vulkan::Device* device = context->GetDeviceVK();
+
+	VkExtent3D vk_extent = {};
+	vk_extent.width = static_cast<uint32_t>(extent.width);
+	vk_extent.height = static_cast<uint32_t>(extent.height);
+	vk_extent.depth = static_cast<uint32_t>(extent.depth);
+	mImage = Vulkan::Image::New(device);
+	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mLayout.usage));
 }
 
 void Image::Allocate(Render::HeapAccess access)
@@ -72,10 +88,10 @@ void Image::Allocate(Render::HeapAccess access)
 
 void Image::CreateView(Render::ImageType type)
 {
-	assert(mType == type);
-	assert(mType != Render::ImageType::IMAGE_TYPE_UNKNOWN);
+	assert(mLayout.type == type);
+	assert(mLayout.type != Render::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
-	VkImageViewType vk_type = ConverType(mType);
+	VkImageViewType vk_type = ConverType(mLayout.type);
 	mImage->CreateView(vk_type);
 }
 
@@ -110,9 +126,9 @@ void Image::CopyFrom(const Render::Buffer* other)
 	VkBufferImageCopy copy_region = {};
 	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 	copy_region.imageSubresource.layerCount = 1;
-	copy_region.imageExtent.width = mExtent.width;
-	copy_region.imageExtent.height = mExtent.height;
-	copy_region.imageExtent.depth = mExtent.depth;
+	copy_region.imageExtent.width = mLayout.extent.width;
+	copy_region.imageExtent.height = mLayout.extent.height;
+	copy_region.imageExtent.depth = mLayout.extent.depth;
 
 	const Buffer* buffer = static_cast<const Buffer*>(other);
 	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
@@ -225,11 +241,11 @@ void SwapChainImage::Create(Vulkan::Image* image)
 	assert(image != nullptr);
 	mImage = image;
 	VkExtent2D extent = image->GetExtent();
-	mExtent.width = static_cast<int32_t>(extent.width);
-	mExtent.height = static_cast<int32_t>(extent.height);
+	mLayout.extent.width = static_cast<int32_t>(extent.width);
+	mLayout.extent.height = static_cast<int32_t>(extent.height);
 	VkFormat format = image->GetFormat();
-	mFormat = ConvertFormat(format);
-	mType = Render::ImageType::IMAGE_TYPE_2D;
+	mLayout.format = ConvertFormat(format);
+	mLayout.type = Render::ImageType::IMAGE_TYPE_2D;
 }
 
 } /* namespace VK */

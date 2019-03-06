@@ -12,7 +12,7 @@
 #include "RenderElement.h"
 #include "RenderContext.h"
 #include "RenderBuffer.h"
-#include "RenderInline.h"
+#include "RenderUtility.h"
 
 namespace Core
 {

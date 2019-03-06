@@ -20,6 +20,9 @@ public:
 	virtual ~Texture(void) override;
 
 public:
+
+
+public:
 	inline Render::Sampler* GetSampler(void) const { return mSampler; }
 
 protected:

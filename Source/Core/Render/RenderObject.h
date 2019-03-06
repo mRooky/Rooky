@@ -22,6 +22,9 @@ public:
 public:
 	inline Context* GetContext(void) const { return mContext; }
 
+public:
+	virtual inline void Destroy(void) { delete this; }
+
 protected:
 	Context* mContext = nullptr;
 };

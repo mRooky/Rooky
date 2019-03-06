@@ -33,8 +33,11 @@ public:
 
 public:
 	inline VkBuffer GetHandle(void) const { return m_buffer; }
-	inline VkDeviceSize GetSize(void) const { return m_size; }
-	inline VkBufferUsageFlags GetUsage(void) const { return m_usage; }
+	inline VkDeviceSize GetSize(void) const { return m_info.size; }
+	inline VkBufferUsageFlags GetUsage(void) const { return m_info.usage; }
+
+public:
+	inline const VkBufferCreateInfo& GetInfo(void) const { return m_info; }
 
 public:
 	static inline Buffer* New(Device* device) { return new Buffer(device); }
@@ -47,8 +50,7 @@ private:
 
 private:
 	VkBuffer m_buffer = VK_NULL_HANDLE;
-	VkDeviceSize m_size = 0;
-	VkBufferUsageFlags m_usage = VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM;
+	VkBufferCreateInfo m_info = {};
 };
 
 } /* namespace Vulkan */

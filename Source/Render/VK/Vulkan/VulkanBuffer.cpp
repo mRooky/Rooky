@@ -31,15 +31,13 @@ Buffer::~Buffer(void)
 
 VkResult Buffer::Create(VkDeviceSize size, VkBufferUsageFlags usage)
 {
-	m_size = size;
-	m_usage = usage;
 	uint32_t family = mDevice->GetPhysicalDevice()->GetFamily();
-	VkBufferCreateInfo buffer_create_info = Vulkan::Buffer::CreateInfo();
-	buffer_create_info.size = size;
-	buffer_create_info.usage = usage;
-	buffer_create_info.queueFamilyIndexCount = 1;
-	buffer_create_info.pQueueFamilyIndices = &family;
-	return Create(&buffer_create_info);
+	m_info = Vulkan::Buffer::CreateInfo();
+	m_info.size = size;
+	m_info.usage = usage;
+	m_info.queueFamilyIndexCount = 1;
+	m_info.pQueueFamilyIndices = &family;
+	return Create(&m_info);
 }
 
 VkResult Buffer::Create(const VkBufferCreateInfo* info)
@@ -85,7 +83,7 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 {
 	VkDescriptorBufferInfo descriptor_buffer_info = {};
 	descriptor_buffer_info.buffer = m_buffer;
-	descriptor_buffer_info.range = m_size;
+	descriptor_buffer_info.range = m_info.size;
 	return descriptor_buffer_info;
 }
 
