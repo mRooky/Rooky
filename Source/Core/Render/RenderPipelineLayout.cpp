@@ -10,7 +10,8 @@
 namespace Render
 {
 
-PipelineLayout::PipelineLayout(void)
+PipelineLayout::PipelineLayout(Context* context):
+		Object(context)
 {
 }
 

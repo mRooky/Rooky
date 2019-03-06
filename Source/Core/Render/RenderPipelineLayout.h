@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINELAYOUT_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINELAYOUT_H_
 
+#include "RenderObject.h"
+
 namespace Render
 {
 
-class PipelineLayout
+class PipelineLayout : public Object
 {
 public:
-	PipelineLayout(void);
-	virtual ~PipelineLayout(void);
+	explicit PipelineLayout(Context* context);
+	virtual ~PipelineLayout(void) override;
 };
 
 } /* namespace Render */

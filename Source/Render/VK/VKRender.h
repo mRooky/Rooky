@@ -10,4 +10,6 @@
 
 #include "VulkanClasses.h"
 
+#define VK_EXPORT_API
+
 #endif /* SOURCE_RENDER_VK_VKRENDER_H_ */

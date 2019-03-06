@@ -8,6 +8,7 @@
 #include "VKResourceLayout.h"
 #include "VKContext.h"
 #include "VKCommandList.h"
+#include "VKPipelineLayout.h"
 
 #include "VulkanDescriptorPool.h"
 #include "VulkanInline.h"
@@ -50,7 +51,8 @@ void ResourceLayout::Binding(CommandList* list)
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
-	vk_cmd->BindDescriptorSets(mPipelineLayout, descriptor_sets, offset);
+	auto vk_layout = mCurrentLayout->GetPipelineLayoutVK();
+	vk_cmd->BindDescriptorSets(vk_layout, descriptor_sets, offset);
 	UpdatePipelineLayout();
 }
 
@@ -95,14 +97,21 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 	return mDescriptorPool->Allocate(layout);
 }
 
-void ResourceLayout::UpdatePipelineLayout(void)
+PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
 {
-	assert(mPipelineLayout != nullptr);
-	if (mDirty)
+	for (auto layout : mPipelineLayouts)
 	{
-		UpdatePipelineLayout();
-		mDirty = false;
+		auto& set_layouts = layout->GetDescriptorSetLayout();
+		if (set_layouts == mDescriptorSetLayouts)
+		{
+			mCurrentLayout = layout;
+			return mCurrentLayout;
+		}
 	}
+	mCurrentLayout = new PipelineLayout(mContext);
+	mPipelineLayouts.push_back(mCurrentLayout);
+	mCurrentLayout->Create(mDescriptorSetLayouts);
+	return mCurrentLayout;
 }
 
 } /* namespace VK */
