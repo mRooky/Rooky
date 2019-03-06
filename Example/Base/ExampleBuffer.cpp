@@ -101,7 +101,7 @@ void Buffer::RecordCommands(void)
 		auto command_list = mThread->GetCommandList(i);
 		command_list->BeginRecord();
 		command_list->BeginPass(0, render_pass);
-		command_list->BindFrameBuffer(frame_buffer, area);
+		command_list->SetFrameBuffer(frame_buffer, area);
 		command_list->SetViewport(0, 1, &viewport);
 		command_list->SetScissor(0, 1, &scissor);
 		command_list->EndPass();

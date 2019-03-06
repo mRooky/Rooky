@@ -12,11 +12,15 @@
 
 namespace Render
 {
+class ResourceLayout;
 class ResourceList
 {
 public:
-	ResourceList(void);
+	ResourceList(ResourceLayout* layout);
 	virtual ~ResourceList(void);
+
+protected:
+	ResourceLayout* mLayout = nullptr;
 };
 
 } /* namespace Render */

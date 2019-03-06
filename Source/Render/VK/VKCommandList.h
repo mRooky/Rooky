@@ -14,7 +14,6 @@
 namespace VK
 {
 class CommandPool;
-class ResourceLayout;
 class CommandList: public Render::CommandList
 {
 public:
@@ -29,12 +28,14 @@ public:
 	virtual void BeginRecord(void) override;
 	// Draw Commands
 	virtual void BeginPass(uint32_t index, Render::Pass* pass) override;
-	virtual void BindFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area) override;
-	virtual void BindPipeline(Render::Pipeline* pipeline) override;
+	// Fix Setup
+	virtual void SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area) override;
+	virtual void SetPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
+	// End Fix Setup
 	// Resource Setting
-	virtual void SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource) override;
+	virtual void SetResourceLayout(Render::ResourceLayout* layout) override;
 	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;
@@ -45,7 +46,6 @@ public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
 
 protected:
-	ResourceLayout* mResourceLayout = nullptr;
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;
 };
 

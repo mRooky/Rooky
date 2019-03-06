@@ -38,6 +38,11 @@ public:
 		return *this;
 	}
 
+	inline bool operator == (const ShaderList& other) const
+	{
+		return ((mShaders == other.mShaders) && (mShaderMask == other.mShaderMask));
+	}
+
 protected:
 	std::bitset<5> mShaderMask;
 	std::array<Shader*, 5> mShaders;

@@ -56,7 +56,6 @@ protected:
 
 protected:
 	bool mDirty = true;
-	ResourceLayout* mLayout = nullptr;
 	std::map<uint32_t, Render::Resource> mResources;
 
 protected:

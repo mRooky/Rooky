@@ -24,6 +24,9 @@ public:
 
 public:
 	bool IsValid(void) const;
+
+public:
+	bool operator == (const PipelineDetail& other) const;
 	PipelineDetail& operator = (const PipelineDetail& other);
 
 public:

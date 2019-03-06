@@ -22,16 +22,14 @@ namespace VK
 {
 
 ResourceLayout::ResourceLayout(Context* context):
-		mContext(context)
+		Render::ResourceLayout(context)
 {
-	assert(mContext != nullptr);
 	static const size_t max = 32;
 	CreateDescriptorPool(max);
 }
 
 ResourceLayout::~ResourceLayout(void)
 {
-	mContext = nullptr;
 	Vulkan::Release(mDescriptorPool);
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
@@ -51,7 +49,8 @@ void ResourceLayout::Binding(CommandList* list)
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
-	auto vk_layout = mCurrentLayout->GetPipelineLayoutVK();
+	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mCurrentLayout);
+	auto vk_layout = vk_pipeline_layout->GetPipelineLayoutVK();
 	vk_cmd->BindDescriptorSets(vk_layout, descriptor_sets, offset);
 	UpdatePipelineLayout();
 }
@@ -97,7 +96,7 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 	return mDescriptorPool->Allocate(layout);
 }
 
-PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
+Render::PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
 {
 	for (auto layout : mPipelineLayouts)
 	{
@@ -108,9 +107,12 @@ PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
 			return mCurrentLayout;
 		}
 	}
-	mCurrentLayout = new PipelineLayout(mContext);
-	mPipelineLayouts.push_back(mCurrentLayout);
-	mCurrentLayout->Create(mDescriptorSetLayouts);
+	auto context = static_cast<Context*>(mContext);
+	auto pipeline_layout = new PipelineLayout(context);
+	mPipelineLayouts.push_back(pipeline_layout);
+	pipeline_layout->Create(mDescriptorSetLayouts);
+
+	mCurrentLayout = pipeline_layout;
 	return mCurrentLayout;
 }
 

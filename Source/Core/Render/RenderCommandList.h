@@ -12,6 +12,8 @@
 #include "RenderMath.h"
 #include "RenderEnum.h"
 #include "RenderResource.h"
+#include "RenderPipelineDetail.h"
+#include "RenderResourceLayout.h"
 
 namespace Render
 {
@@ -29,24 +31,27 @@ public:
 public:
 	virtual void BeginRecord(void) = 0;
 	virtual void BeginPass(uint32_t index, Pass* pass) = 0;
-	virtual void BindFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
-	virtual void BindPipeline(Pipeline* pipeline) = 0;
+	// Fix Setup
+	virtual void SetFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
+	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
 	virtual void Draw(DrawCall* draw) = 0;
+	// End Fix Setup
 	virtual void EndPass(void) = 0;
 	virtual void EndRecord(void) = 0;
 
 public: // Resource Setup
-	virtual void SetResource(uint32_t index, uint32_t bind, const Resource& resource) = 0;
+	virtual void SetResourceLayout(ResourceLayout* layout) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }
 
 protected:
-	uint32_t mIndex = 0;
-	Pass* mCurrentPass = nullptr;
 	CommandPool* mCommandPool = nullptr;
+
+protected:
+	PipelineDetail mPipelineDetail = {};
 };
 
 } /* namespace Render */

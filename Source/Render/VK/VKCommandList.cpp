@@ -15,6 +15,7 @@
 #include "VKShader.h"
 #include "VKContext.h"
 #include "VKResourceLayout.h"
+#include "VKInline.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -33,15 +34,11 @@ namespace VK
 CommandList::CommandList(CommandPool* pool):
 		Render::CommandList(pool)
 {
-	Context* context = static_cast<Context*>(mCommandPool->GetContext());
-	mResourceLayout = new ResourceLayout(context);
 }
 
 CommandList::~CommandList(void)
 {
 	mCommandBuffer = nullptr;
-	delete mResourceLayout;
-	mResourceLayout = nullptr;
 }
 
 void CommandList::Create(bool primary)
@@ -80,16 +77,15 @@ void CommandList::BeginRecord(void)
 
 void CommandList::BeginPass(uint32_t index, Render::Pass* pass)
 {
-	assert(mCurrentPass == nullptr);
-	mIndex = index;
-	mCurrentPass = pass;
+	mPipelineDetail.index = index;
+	mPipelineDetail.pRenderPass = pass;
 }
 
-void CommandList::BindFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area)
+void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area)
 {
-	assert(mCurrentPass != nullptr);
+	assert(mPipelineDetail.pRenderPass != nullptr);
 	assert(mCommandBuffer != nullptr);
-	RenderPass* render_pass = static_cast<RenderPass*>(mCurrentPass);
+	RenderPass* render_pass = static_cast<RenderPass*>(mPipelineDetail.pRenderPass);
 	FrameBuffer* frame_buffer = static_cast<FrameBuffer*>(frame);
 	VkRect2D vk_area = {};
 	vk_area.offset.x = area.offset.x;
@@ -99,7 +95,7 @@ void CommandList::BindFrameBuffer(Render::FrameBuffer* frame, const Render::Rect
 	mCommandBuffer->BeginRenderPass(render_pass->GetRenderPassVK(), frame_buffer->GetFrameBufferVK(), vk_area);
 }
 
-void CommandList::BindPipeline(Render::Pipeline* pipeline)
+void CommandList::SetPipeline(Render::Pipeline* pipeline)
 {
 	assert(mCommandBuffer != nullptr);
 	Pipeline* vk_pipeline = static_cast<Pipeline*>(pipeline);
@@ -146,7 +142,6 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
-	mResourceLayout->Binding(this);
 	assert(false);
 }
 
@@ -154,7 +149,7 @@ void CommandList::EndPass(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->EndRenderPass();
-	mCurrentPass = nullptr;
+	mPipelineDetail.pRenderPass = nullptr;
 }
 
 void CommandList::EndRecord(void)
@@ -163,10 +158,10 @@ void CommandList::EndRecord(void)
 	mCommandBuffer->End();
 }
 
-void CommandList::SetResource(uint32_t index, uint32_t bind, const Render::Resource& resource)
+void CommandList::SetResourceLayout(Render::ResourceLayout* layout)
 {
-	ResourceList* list = mResourceLayout->GetResourceList(index);
-	list->SetBinding(bind, resource);
+	auto vk_layout = static_cast<ResourceLayout*>(layout);
+	vk_layout->Binding(this);
 }
 
 } /* namespace VK */

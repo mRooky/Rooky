@@ -6,11 +6,13 @@
  */
 
 #include "RenderResourceList.h"
+#include <cassert>
 
 namespace Render
 {
 
-ResourceList::ResourceList(void)
+ResourceList::ResourceList(ResourceLayout* layout):
+		mLayout(layout)
 {
 }
 

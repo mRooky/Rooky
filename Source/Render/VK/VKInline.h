@@ -14,6 +14,11 @@
 namespace VK
 {
 
+static inline void NotImplemented(void)
+{
+	assert(false);
+}
+
 static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::HeapAccess access)
 {
 	switch(access)

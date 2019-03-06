@@ -8,6 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
 #define SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
 
+#include "RenderResourceLayout.h"
 #include "VKResourceList.h"
 #include <vector>
 
@@ -16,7 +17,7 @@ namespace VK
 class Context;
 class CommandList;
 class PipelineLayout;
-class ResourceLayout
+class ResourceLayout : public Render::ResourceLayout
 {
 public:
 	explicit ResourceLayout(Context* context);
@@ -30,7 +31,9 @@ public:
 
 public:
 	ResourceList* GetResourceList(size_t index);
-	PipelineLayout* UpdatePipelineLayout(void);
+
+public:
+	virtual Render::PipelineLayout* UpdatePipelineLayout(void) override;
 
 public:
 	inline size_t GetResourceListCount(void) const { return mResourceLists.size(); }
@@ -42,10 +45,7 @@ protected:
 	void CreateDescriptorPool(size_t max);
 
 protected:
-	bool mDirty = true;
-	Context* mContext = nullptr;
 	std::vector<ResourceList> mResourceLists;
-	PipelineLayout* mCurrentLayout = nullptr;
 
 protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;

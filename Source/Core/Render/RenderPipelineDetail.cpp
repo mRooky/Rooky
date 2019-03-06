@@ -20,12 +20,23 @@ PipelineDetail::~PipelineDetail(void)
 
 bool PipelineDetail::IsValid(void) const
 {
-	bool valid = shaderList.IsValid()
-			&& pRenderPass != nullptr
-			&& pDeclaration != nullptr
-			&& pPipelineState != nullptr
-			&& pPipelineLayout != nullptr;
+	bool valid = shaderList.IsValid();
+	valid = valid && (pRenderPass != nullptr);
+	valid = valid && (pDeclaration != nullptr);
+	valid = valid && (pPipelineState != nullptr);
+	valid = valid && (pPipelineLayout != nullptr);
 	return valid;
+}
+
+bool PipelineDetail::operator == (const PipelineDetail& other) const
+{
+	bool equal = (index == other.index);
+	equal = equal && (shaderList == other.shaderList);
+	equal = equal && (pRenderPass == other.pRenderPass);
+	equal = equal && (pDeclaration == other.pDeclaration);
+	equal = equal && (pPipelineState == other.pPipelineState);
+	equal = equal && (pPipelineLayout == other.pPipelineLayout);
+	return equal;
 }
 
 PipelineDetail& PipelineDetail::operator =(const PipelineDetail& other)

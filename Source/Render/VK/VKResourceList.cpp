@@ -25,9 +25,8 @@ namespace VK
 {
 
 ResourceList::ResourceList(ResourceLayout* layout):
-		mLayout(layout)
+		Render::ResourceList(layout)
 {
-	assert(mLayout != nullptr);
 }
 
 ResourceList::~ResourceList(void)
@@ -135,7 +134,8 @@ DirtyState ResourceList::UpdateDescriptorSet(void)
 		set_layout = mDescriptorSet->GetLayout();
 	}
 	assert(layout_bindings.size() > 0);
-	mDescriptorSet = mLayout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
+	auto layout = static_cast<ResourceLayout*>(mLayout);
+	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 
 	DirtyState dirty_state = DirtyState::DIRTY_STATE_RESOURCE;
 	if (set_layout != mDescriptorSet->GetLayout())
