@@ -25,6 +25,9 @@ public:
 	virtual PipelineLayout* UpdatePipelineLayout(void) = 0;
 	virtual ResourceList* GetResourceList(size_t index) = 0;
 
+public:
+	inline PipelineLayout* GetCurrentLayout(void) const { return mCurrentLayout; }
+
 protected:
 	bool mDirty = true;
 	PipelineLayout* mCurrentLayout = nullptr;

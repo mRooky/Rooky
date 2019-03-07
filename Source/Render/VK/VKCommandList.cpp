@@ -143,7 +143,15 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 
 void CommandList::Draw(Render::DrawCall* draw)
 {
-	assert(false);
+	assert(mPipeline != nullptr);
+	assert(mResourceLayout != nullptr);
+	auto& detail = mPipeline->GetDetail();
+	auto layout = mResourceLayout->GetCurrentLayout();
+	assert(detail.pPipelineLayout == layout);
+	if (detail.pPipelineLayout == layout)
+	{
+		assert(false);
+	}
 }
 
 void CommandList::EndPass(void)
