@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINEDETAIL_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINEDETAIL_H_
 
-#include "RenderShaderList.hpp"
+#include "RenderShaderState.h"
 
 namespace Render
 {
@@ -31,9 +31,8 @@ public:
 
 public:
 	uint32_t index = 0;
-	ShaderList shaderList;
+	ShaderState shaderState;
 	Pass* pRenderPass = nullptr;
-	Declaration* pDeclaration = nullptr;
 	PipelineState* pPipelineState = nullptr;
 	PipelineLayout* pPipelineLayout = nullptr;
 };

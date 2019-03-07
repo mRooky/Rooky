@@ -80,7 +80,7 @@ void Buffer::CopyFrom(const Render::Buffer* other)
 	VkBufferCopy buffer_copy_range = {};
 	buffer_copy_range.size = other->GetSize();
 
-	const Buffer* buffer = static_cast<const Buffer*>(other);
+	const Buffer* buffer = StaticCast(other);
 	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
 
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);

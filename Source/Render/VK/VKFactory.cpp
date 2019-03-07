@@ -14,6 +14,7 @@
 #include "VKCommandPool.h"
 #include "VKQueue.h"
 #include "VKShader.h"
+#include "VKDeclaration.h"
 
 namespace VK
 {
@@ -67,6 +68,11 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 {
 	Context* context = StaticCast(mContext);
 	return new CommandPool(context);
+}
+
+Render::Declaration* Factory::CreateDeclaration(void)
+{
+	return new Declaration;
 }
 
 } /* namespace VK */

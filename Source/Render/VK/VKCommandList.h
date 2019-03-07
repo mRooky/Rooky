@@ -30,11 +30,11 @@ public:
 	virtual void BeginPass(uint32_t index, Render::Pass* pass) override;
 	// Fix Setup
 	virtual void SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area) override;
-	virtual void SetPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
 	// End Fix Setup
 	// Resource Setting
+	virtual void SetPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetResourceLayout(Render::ResourceLayout* layout) override;
 	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
@@ -44,6 +44,10 @@ public:
 
 public:
 	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
+
+protected:
+	Render::Pipeline* mPipeline = nullptr;
+	Render::ResourceLayout* mResourceLayout = nullptr;
 
 protected:
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;

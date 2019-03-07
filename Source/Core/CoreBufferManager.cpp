@@ -9,8 +9,14 @@
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
+#include "CoreSystem.h"
 
 #include "RenderElement.h"
+#include "RenderDeclaration.h"
+#include "RenderContext.h"
+#include "RenderFactory.h"
+
+#include "UtilRelease.h"
 
 #include <cassert>
 
@@ -25,22 +31,11 @@ BufferManager::BufferManager(System* system):
 
 BufferManager::~BufferManager(void)
 {
-	for (auto index : mIndexes)
-	{
-		delete index;
-	}
-	mIndexes.clear();
-	for (auto vertex : mVertexes)
-	{
-		delete vertex;
-	}
-	mVertexes.clear();
-	for (auto uniform : mUniforms)
-	{
-		delete uniform;
-	}
-	mUniforms.clear();
 	mSystem = nullptr;
+	Util::Release(mIndexes);
+	Util::Release(mVertexes);
+	Util::Release(mUniforms);
+	Util::Release(mDeclarations);
 }
 
 Index* BufferManager::CreateIndex(void)
@@ -62,6 +57,24 @@ Uniform* BufferManager::CreateUniform(void)
 	Uniform* uniform = new Uniform(this);
 	mUniforms.push_back(uniform);
 	return uniform;
+}
+
+Render::Declaration* BufferManager::CreateDeclaration(const std::vector<Render::Element>& elements)
+{
+	for (auto decl : mDeclarations)
+	{
+		auto& list = decl->GetElements();
+		if (elements == list)
+		{
+			return decl;
+		}
+	}
+	auto context = mSystem->GetContext();
+	auto factory = context->GetFactory();
+	Render::Declaration* decl = factory->CreateDeclaration();
+	decl->Create(elements);
+	mDeclarations.push_back(decl);
+	return decl;
 }
 
 } /* namespace Core */

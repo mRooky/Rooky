@@ -10,6 +10,7 @@
 
 #include "RenderClasses.h"
 #include "RenderFormat.h"
+#include "RenderElement.h"
 #include <vector>
 
 namespace Core
@@ -31,6 +32,9 @@ public:
 	Uniform* CreateUniform(void);
 
 public:
+	Render::Declaration* CreateDeclaration(const std::vector<Render::Element>& elements);
+
+public:
 	inline System* GetSystem(void) const { return mSystem; }
 
 protected:
@@ -40,6 +44,9 @@ protected:
 	std::vector<Index*> mIndexes;
 	std::vector<Vertex*> mVertexes;
 	std::vector<Uniform*> mUniforms;
+
+protected:
+	std::vector<Render::Declaration*> mDeclarations;
 
 };
 

@@ -30,6 +30,7 @@ public:
 	virtual Shader* CreateShader(void) = 0;
 	virtual SwapChain* CreateSwapChain(void) = 0;
 	virtual CommandPool* CreateCommandPool(void) = 0;
+	virtual Declaration* CreateDeclaration(void) = 0;
 };
 
 } /* namespace Render */

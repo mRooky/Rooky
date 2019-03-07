@@ -27,6 +27,7 @@ public:
 	virtual Render::Shader* CreateShader(void) override;
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
+	virtual Render::Declaration* CreateDeclaration(void) override;
 };
 
 } /* namespace VK */

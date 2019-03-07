@@ -20,6 +20,9 @@ public:
 	VertexInputStateInfo(void);
 	~VertexInputStateInfo(void);
 
+	VkVertexInputBindingDescription* CreateBinding(void);
+	VkVertexInputAttributeDescription* CreateAttribute(void);
+
 public:
 	VkVertexInputBindingDescription* CreateBinding(uint32_t binding, uint32_t stride, VkVertexInputRate rate);
 	VkVertexInputAttributeDescription* CreateAttribute(uint32_t location, uint32_t binding, VkFormat format, uint32_t offset);

@@ -30,11 +30,10 @@ Vertex::~Vertex(void)
 	mDeclaration = nullptr;
 }
 
-void Vertex::Create(std::vector<Render::Element> elements, uint32_t count, Render::HeapAccess access)
+void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::HeapAccess access)
 {
 	mCount = count;
-	mDeclaration = new Render::Declaration;
-	mDeclaration->Create(elements);
+	mDeclaration = decl;
 	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
 	Render::BufferUsage usage = {};

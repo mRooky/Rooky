@@ -40,6 +40,15 @@ public:
 public:
 	static size_t GetTypeSize(ElementType type);
 
+public:
+	inline bool operator == (const Element& other) const
+	{
+		return mOffset == other.mOffset
+			&& mBinding == other.mBinding
+			&& mLocation == other.mLocation
+			&& mType == other.mType;
+	}
+
 protected:
 	uint32_t mOffset = 0;
 	uint32_t mBinding = 0;

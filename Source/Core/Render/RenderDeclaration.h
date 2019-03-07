@@ -20,10 +20,16 @@ public:
 	virtual ~Declaration(void);
 
 public:
+	virtual void Create(void) = 0;
+
+public:
 	void Create(const std::vector<Element>& elements);
 
 public:
 	void AppendElement(const Element& element);
+
+public:
+	inline const std::vector<Element>& GetElements(void) const { return mElements; }
 
 public:
 	inline size_t GetStride(void) const { return mStride; }

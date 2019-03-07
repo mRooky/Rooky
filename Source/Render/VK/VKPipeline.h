@@ -38,6 +38,16 @@ protected:
 	Vulkan::PipelineCache* mPipelineCache = nullptr;
 };
 
+static inline Pipeline* StaticCast(Render::Pipeline* pipeline)
+{
+	return static_cast<Pipeline*>(pipeline);
+}
+
+static inline Pipeline* SaftyCast(Render::Pipeline* pipeline)
+{
+	return dynamic_cast<Pipeline*>(pipeline);
+}
+
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKPIPELINE_H_ */

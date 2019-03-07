@@ -23,10 +23,12 @@ class Vertex : public Buffer
 	friend class BufferManager;
 private:
 	explicit Vertex(BufferManager* creator);
+
+public:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(std::vector<Render::Element> elements, uint32_t count, Render::HeapAccess access);
+	void Create(Render::Declaration* decl, uint32_t count, Render::HeapAccess access);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

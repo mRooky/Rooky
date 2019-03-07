@@ -98,7 +98,8 @@ void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2
 void CommandList::SetPipeline(Render::Pipeline* pipeline)
 {
 	assert(mCommandBuffer != nullptr);
-	Pipeline* vk_pipeline = static_cast<Pipeline*>(pipeline);
+	mPipeline = pipeline;
+	Pipeline* vk_pipeline = StaticCast(pipeline);
 	mCommandBuffer->BindPipeline(vk_pipeline->GetPipelineVK());
 }
 
@@ -160,7 +161,8 @@ void CommandList::EndRecord(void)
 
 void CommandList::SetResourceLayout(Render::ResourceLayout* layout)
 {
-	auto vk_layout = static_cast<ResourceLayout*>(layout);
+	mResourceLayout = layout;
+	auto vk_layout = StaticCast(layout);
 	vk_layout->Binding(this);
 }
 

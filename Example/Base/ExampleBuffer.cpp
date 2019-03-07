@@ -165,7 +165,8 @@ void Buffer::CreateVertexBuffer(void)
 	std::vector<Render::Element> elements;
 	elements.push_back(Render::Element(0, 0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3));
 	elements.push_back(Render::Element(0, 1, 4, Render::ElementType::ELEMENT_TYPE_FLOAT3));
-	mVertex->Create(elements, vertex_buffer.size(), access);
+	auto decl = manager->CreateDeclaration(elements);
+	mVertex->Create(decl, vertex_buffer.size(), access);
 
 	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
 	mVertex->Write(vertex_buffer.data(), 0, size);

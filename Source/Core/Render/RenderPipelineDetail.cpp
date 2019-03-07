@@ -20,9 +20,8 @@ PipelineDetail::~PipelineDetail(void)
 
 bool PipelineDetail::IsValid(void) const
 {
-	bool valid = shaderList.IsValid();
+	bool valid = shaderState.IsValid();
 	valid = valid && (pRenderPass != nullptr);
-	valid = valid && (pDeclaration != nullptr);
 	valid = valid && (pPipelineState != nullptr);
 	valid = valid && (pPipelineLayout != nullptr);
 	return valid;
@@ -31,9 +30,8 @@ bool PipelineDetail::IsValid(void) const
 bool PipelineDetail::operator == (const PipelineDetail& other) const
 {
 	bool equal = (index == other.index);
-	equal = equal && (shaderList == other.shaderList);
+	equal = equal && (shaderState == other.shaderState);
 	equal = equal && (pRenderPass == other.pRenderPass);
-	equal = equal && (pDeclaration == other.pDeclaration);
 	equal = equal && (pPipelineState == other.pPipelineState);
 	equal = equal && (pPipelineLayout == other.pPipelineLayout);
 	return equal;
@@ -42,9 +40,8 @@ bool PipelineDetail::operator == (const PipelineDetail& other) const
 PipelineDetail& PipelineDetail::operator =(const PipelineDetail& other)
 {
 	index = other.index;
-	shaderList = other.shaderList;
+	shaderState = other.shaderState;
 	pRenderPass = other.pRenderPass;
-	pDeclaration = other.pDeclaration;
 	pPipelineState = other.pPipelineState;
 	pPipelineLayout = other.pPipelineLayout;
 	return *this;

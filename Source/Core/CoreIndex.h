@@ -19,6 +19,8 @@ class Index : public Buffer
 	friend class BufferManager;
 private:
 	explicit Index(BufferManager* creator);
+
+public:
 	virtual ~Index(void) override;
 
 public:

@@ -18,6 +18,8 @@ class Uniform: public Buffer
 	friend class BufferManager;
 private:
 	explicit Uniform(BufferManager* creator);
+
+public:
 	virtual ~Uniform(void) override;
 
 public:

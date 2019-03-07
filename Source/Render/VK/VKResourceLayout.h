@@ -55,6 +55,16 @@ protected:
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
+static inline ResourceLayout* StaticCast(Render::ResourceLayout* layout)
+{
+	return static_cast<ResourceLayout*>(layout);
+}
+
+static inline ResourceLayout* SaftyCast(Render::ResourceLayout* layout)
+{
+	return dynamic_cast<ResourceLayout*>(layout);
+}
+
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_ */
