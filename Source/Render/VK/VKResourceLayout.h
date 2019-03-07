@@ -30,7 +30,7 @@ public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
-	ResourceList* GetResourceList(size_t index);
+	virtual Render::ResourceList* GetResourceList(size_t index) override;
 
 public:
 	virtual Render::PipelineLayout* UpdatePipelineLayout(void) override;

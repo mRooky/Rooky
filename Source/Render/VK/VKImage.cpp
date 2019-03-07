@@ -40,7 +40,7 @@ void Image::Create(const Render::ImageLayout& layout)
 	assert(mImage == nullptr);
 	mLayout = layout;
 	VkFormat vk_format = ConvertFormat(mLayout.format);
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 
 	VkExtent3D vk_extent = {};
@@ -60,7 +60,7 @@ void Image::Create(Render::ImageType type, Render::Format format, const Render::
 
 	assert(mImage == nullptr);
 	VkFormat vk_format = ConvertFormat(format);
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 
 	VkExtent3D vk_extent = {};
@@ -119,7 +119,7 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 
 void Image::CopyFrom(const Render::Buffer* other)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 

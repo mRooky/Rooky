@@ -80,7 +80,7 @@ void RenderPass::Create(void)
 	renderpass_create_info.dependencyCount = subpass_dependencies.size();
 	renderpass_create_info.pDependencies = subpass_dependencies.data();
 
-	auto device = static_cast<Context*>(mContext)->GetDeviceVK();
+	auto device = StaticCast(mContext)->GetDeviceVK();
 	mRenderPass = Vulkan::RenderPass::New(device);
 	mRenderPass->Create(&renderpass_create_info);
 }

@@ -38,7 +38,7 @@ void Buffer::Create(size_t size, uint32_t usage)
 	mSize = size;
 	mUsage.BufferUsageFlags = usage;
 	assert(mBuffer == nullptr);
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mBuffer = Vulkan::Buffer::New(device);
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
@@ -72,7 +72,7 @@ void Buffer::Unmap(size_t offset, size_t size)
 
 void Buffer::CopyFrom(const Render::Buffer* other)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 

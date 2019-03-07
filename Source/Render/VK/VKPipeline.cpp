@@ -79,7 +79,7 @@ void Pipeline::CreateCache(Vulkan::PipelineCache* cache)
 	if (cache == nullptr)
 	{
 		mOwnCache = true;
-		auto vk_context = static_cast<Context*>(mContext);
+		auto vk_context = StaticCast(mContext);
 		Vulkan::Device* device = vk_context->GetDeviceVK();
 		mPipelineCache = Vulkan::PipelineCache::New(device);
 		mPipelineCache->Create(0, nullptr);

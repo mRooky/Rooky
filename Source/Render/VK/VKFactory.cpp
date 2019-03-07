@@ -29,43 +29,43 @@ Factory::~Factory(void)
 
 Render::Pass* Factory::CreatePass(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new RenderPass(context);
 }
 
 Render::Queue* Factory::CreateQueue(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new Queue(context);
 }
 
 Render::Image* Factory::CreateImage(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new Image(context);
 }
 
 Render::Buffer* Factory::CreateBuffer(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new Buffer(context);
 }
 
 Render::Shader* Factory::CreateShader(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new Shader(context);
 }
 
 Render::SwapChain* Factory::CreateSwapChain(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new SwapChain(context);
 }
 
 Render::CommandPool* Factory::CreateCommandPool(void)
 {
-	Context* context = static_cast<Context*>(mContext);
+	Context* context = StaticCast(mContext);
 	return new CommandPool(context);
 }
 

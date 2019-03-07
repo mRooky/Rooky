@@ -33,7 +33,7 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		auto device = static_cast<Context*>(mContext)->GetDeviceVK();
+		auto device = StaticCast(mContext)->GetDeviceVK();
 		mShader = Vulkan::ShaderModule::New(device);
 		mShader->Create(code.size(), code.data());
 	}
@@ -50,9 +50,9 @@ VkShaderStageFlagBits Shader::ConvertStage(Render::ShaderStage stage)
 	{
 	case Render::ShaderStage::SHADER_STAGE_VERTEX:
 		return VK_SHADER_STAGE_VERTEX_BIT;
-	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_CONTROL:
+	case Render::ShaderStage::SHADER_STAGE_HULL:
 		return VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
-	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_EVALUATION:
+	case Render::ShaderStage::SHADER_STAGE_DOMAIN:
 		return VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
 	case Render::ShaderStage::SHADER_STAGE_GEOMETRY:
 		return VK_SHADER_STAGE_GEOMETRY_BIT;

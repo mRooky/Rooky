@@ -26,7 +26,7 @@ ShaderModule::~ShaderModule(void)
 	m_shaderModule = VK_NULL_HANDLE;
 }
 
-VkResult ShaderModule::Create(size_t size, void* code)
+VkResult ShaderModule::Create(size_t size, const void* code)
 {
 	VkShaderModuleCreateInfo shader_modult_create_info = ShaderModule::CreateInfo();
 	shader_modult_create_info.codeSize = size;

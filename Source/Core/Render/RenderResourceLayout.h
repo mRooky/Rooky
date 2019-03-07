@@ -9,9 +9,11 @@
 #define SOURCE_CORE_RENDER_RENDERRESOURCELAYOUT_H_
 
 #include "RenderObject.h"
+#include <cstddef>
 
 namespace Render
 {
+class ResourceList;
 class PipelineLayout;
 class ResourceLayout : public Object
 {
@@ -21,6 +23,7 @@ public:
 
 public:
 	virtual PipelineLayout* UpdatePipelineLayout(void) = 0;
+	virtual ResourceList* GetResourceList(size_t index) = 0;
 
 protected:
 	bool mDirty = true;

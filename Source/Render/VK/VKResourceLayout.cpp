@@ -55,7 +55,7 @@ void ResourceLayout::Binding(CommandList* list)
 	UpdatePipelineLayout();
 }
 
-ResourceList* ResourceLayout::GetResourceList(size_t index)
+Render::ResourceList* ResourceLayout::GetResourceList(size_t index)
 {
 	const size_t size = mResourceLists.size();
 	assert(index <= size);
@@ -80,7 +80,7 @@ void ResourceLayout::CreateDescriptorPool(size_t max)
 	}
 
 	size_t max_allocate = VK_DESCRIPTOR_TYPE_RANGE_SIZE * max;
-	auto device = static_cast<Context*>(mContext)->GetDeviceVK();
+	auto device = StaticCast(mContext)->GetDeviceVK();
 	mDescriptorPool = Vulkan::DescriptorPool::New(device);
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }
@@ -107,7 +107,7 @@ Render::PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
 			return mCurrentLayout;
 		}
 	}
-	auto context = static_cast<Context*>(mContext);
+	auto context = StaticCast(mContext);
 	auto pipeline_layout = new PipelineLayout(context);
 	mPipelineLayouts.push_back(pipeline_layout);
 	pipeline_layout->Create(mDescriptorSetLayouts);

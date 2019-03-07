@@ -32,7 +32,7 @@ Queue::~Queue(void)
 
 void Queue::Create(uint32_t mIndex)
 {
-	auto context = static_cast<Context*>(mContext);
+	auto context = StaticCast(mContext);
 	auto device = context->GetDeviceVK();
 	auto physical = context->GetPhysicalDeviceVK();
 	uint32_t family = physical->GetFamily();

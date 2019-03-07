@@ -34,9 +34,9 @@ static inline VkShaderStageFlagBits Convert(Render::ShaderStage stage)
 	{
 	case Render::ShaderStage::SHADER_STAGE_VERTEX:
 		return VK_SHADER_STAGE_VERTEX_BIT;
-	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_CONTROL:
+	case Render::ShaderStage::SHADER_STAGE_HULL:
 		return VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
-	case Render::ShaderStage::SHADER_STAGE_TESSELLATION_EVALUATION:
+	case Render::ShaderStage::SHADER_STAGE_DOMAIN:
 		return VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
 	case Render::ShaderStage::SHADER_STAGE_GEOMETRY:
 		return VK_SHADER_STAGE_GEOMETRY_BIT;

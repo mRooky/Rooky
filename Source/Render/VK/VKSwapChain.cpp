@@ -39,7 +39,7 @@ SwapChain::~SwapChain(void)
 
 void SwapChain::Create(Platform::Window* window)
 {
-	auto context = static_cast<Context*>(mContext);
+	auto context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
 	mSurface = Vulkan::Surface::New(device->GetPhysicalDevice());
 
@@ -82,7 +82,7 @@ uint32_t SwapChain::AcquireNextImage(void)
 void SwapChain::GetSwapChainRenderBuffer(void)
 {
 	assert(mSwapChain != nullptr);
-	auto context = static_cast<Context*>(mContext);
+	auto context = StaticCast(mContext);
 	const size_t count = 2;
 	for (size_t index = 0; index < count; ++index)
 	{

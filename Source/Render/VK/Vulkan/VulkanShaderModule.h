@@ -21,7 +21,7 @@ private:
 	virtual ~ShaderModule(void) override;
 
 public:
-	VkResult Create(size_t size, void* code);
+	VkResult Create(size_t size, const void* code);
 
 public:
 	inline VkShaderModule GetHandle(void) const { return m_shaderModule; }
