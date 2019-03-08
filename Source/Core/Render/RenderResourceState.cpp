@@ -6,6 +6,7 @@
  */
 
 #include "RenderResourceState.h"
+#include "UtilSearch.h"
 #include <cassert>
 #include <algorithm>
 
@@ -24,7 +25,7 @@ ResourceState::~ResourceState(void)
 void ResourceState::AppendResource(const Resource& resource)
 {
 	assert(resource.IsValid());
-	auto iterator = std::find(mResources.begin(), mResources.end(), resource);
+	auto iterator = Util::Find(mResources, resource);
 	assert(iterator == mResources.end());
 	if (iterator == mResources.end())
 	{

@@ -12,12 +12,18 @@
 
 namespace Render
 {
-
-class PipelineLayout : public Object
+class ResourceLayout;
+class PipelineLayout
 {
 public:
-	explicit PipelineLayout(Context* context);
-	virtual ~PipelineLayout(void) override;
+	explicit PipelineLayout(ResourceLayout* layout);
+	virtual ~PipelineLayout(void);
+
+public:
+	inline ResourceLayout* GetResourceLayout(void) const { return mResourceLayout; }
+
+protected:
+	ResourceLayout* mResourceLayout = nullptr;
 };
 
 } /* namespace Render */

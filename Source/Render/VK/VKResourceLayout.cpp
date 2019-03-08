@@ -124,8 +124,7 @@ PipelineLayout* ResourceLayout::GetPipelineLayout(const std::vector<Vulkan::Desc
 		}
 	}
 
-	auto context = StaticCast(mContext);
-	auto pipeline_layout = new PipelineLayout(context);
+	auto pipeline_layout = new PipelineLayout(this);
 	pipeline_layout->Create(layouts);
 	mPipelineLayouts.push_back(pipeline_layout);
 	return pipeline_layout;

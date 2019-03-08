@@ -14,11 +14,11 @@
 
 namespace VK
 {
-class Context;
+class ResourceLayout;
 class PipelineLayout: public Render::PipelineLayout
 {
 public:
-	explicit PipelineLayout(Context* context);
+	explicit PipelineLayout(ResourceLayout* layout);
 	virtual ~PipelineLayout(void) override;
 
 public:

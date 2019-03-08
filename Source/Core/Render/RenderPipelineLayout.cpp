@@ -6,12 +6,13 @@
  */
 
 #include "RenderPipelineLayout.h"
+#include <cassert>
 
 namespace Render
 {
 
-PipelineLayout::PipelineLayout(Context* context):
-		Object(context)
+PipelineLayout::PipelineLayout(ResourceLayout* layout):
+		mResourceLayout(layout)
 {
 }
 
