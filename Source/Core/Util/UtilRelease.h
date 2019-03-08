@@ -12,6 +12,7 @@
 
 namespace Util
 {
+
 template<typename T>
 static inline void Release(std::vector<T*>& list)
 {
