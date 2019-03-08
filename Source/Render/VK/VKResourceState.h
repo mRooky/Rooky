@@ -5,21 +5,21 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_VKRESOURCELIST_H_
-#define SOURCE_RENDER_VK_VKRESOURCELIST_H_
+#ifndef SOURCE_RENDER_VK_VKRESOURCESTATE_H_
+#define SOURCE_RENDER_VK_VKRESOURCESTATE_H_
 
-#include "RenderResourceList.h"
+#include "RenderResourceState.h"
 #include "VKRender.h"
 
 namespace VK
 {
 
 class ResourceLayout;
-class ResourceList : public Render::ResourceList
+class ResourceState : public Render::ResourceState
 {
 public:
-	explicit ResourceList(ResourceLayout* layout);
-	virtual ~ResourceList(void) override;
+	explicit ResourceState(ResourceLayout* layout);
+	virtual ~ResourceState(void) override;
 
 public:
 	virtual void Update(void) override;
@@ -43,16 +43,16 @@ protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
 };
 
-static inline ResourceList* StaticCast(Render::ResourceList* list)
+static inline ResourceState* StaticCast(Render::ResourceState* list)
 {
-	return static_cast<ResourceList*>(list);
+	return static_cast<ResourceState*>(list);
 }
 
-static inline ResourceList* SaftyCast(Render::ResourceList* list)
+static inline ResourceState* SaftyCast(Render::ResourceState* list)
 {
-	return dynamic_cast<ResourceList*>(list);
+	return dynamic_cast<ResourceState*>(list);
 }
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_VKRESOURCELIST_H_ */
+#endif /* SOURCE_RENDER_VK_VKRESOURCESTATE_H_ */

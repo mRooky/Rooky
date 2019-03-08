@@ -14,7 +14,7 @@
 
 namespace Render
 {
-class ResourceList;
+class ResourceState;
 class PipelineLayout;
 class ResourceLayout : public Object
 {
@@ -23,19 +23,22 @@ public:
 	virtual ~ResourceLayout(void) override;
 
 public:
-	void AppendResourceList(ResourceList* list);
+	void AppendResourceState(ResourceState* state);
 
 public:
 	virtual PipelineLayout* Update(void) = 0;
 
 public:
 	inline PipelineLayout* GetCurrentLayout(void) const { return mCurrentLayout; }
-	inline ResourceList* GetResourceList(size_t index) const { return mResourceLists.at(index); }
+
+public:
+	inline size_t GetResourceListCount(void) const { return mResourceStates.size(); }
+	inline ResourceState* GetResourceList(size_t index) const { return mResourceStates.at(index); }
 
 protected:
 	bool mDirty = true;
 	PipelineLayout* mCurrentLayout = nullptr;
-	std::vector<ResourceList*> mResourceLists;
+	std::vector<ResourceState*> mResourceStates;
 };
 
 } /* namespace Render */

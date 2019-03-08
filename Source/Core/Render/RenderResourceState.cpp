@@ -5,23 +5,23 @@
  *      Author: rookyma
  */
 
-#include "RenderResourceList.h"
+#include "RenderResourceState.h"
 #include <cassert>
 #include <algorithm>
 
 namespace Render
 {
 
-ResourceList::ResourceList(ResourceLayout* layout):
+ResourceState::ResourceState(ResourceLayout* layout):
 		mLayout(layout)
 {
 }
 
-ResourceList::~ResourceList(void)
+ResourceState::~ResourceState(void)
 {
 }
 
-void ResourceList::AppendResource(const Resource& resource)
+void ResourceState::AppendResource(const Resource& resource)
 {
 	assert(resource.IsValid());
 	auto iterator = std::find(mResources.begin(), mResources.end(), resource);

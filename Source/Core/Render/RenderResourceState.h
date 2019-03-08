@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERRESOURCELIST_H_
-#define SOURCE_CORE_RENDER_RENDERRESOURCELIST_H_
+#ifndef SOURCE_CORE_RENDER_RENDERRESOURCESTATE_H_
+#define SOURCE_CORE_RENDER_RENDERRESOURCESTATE_H_
 
 #include "RenderResource.h"
 #include <vector>
@@ -15,11 +15,11 @@ namespace Render
 {
 
 class ResourceLayout;
-class ResourceList
+class ResourceState
 {
 public:
-	ResourceList(ResourceLayout* layout);
-	virtual ~ResourceList(void);
+	ResourceState(ResourceLayout* layout);
+	virtual ~ResourceState(void);
 
 public:
 	virtual void Update(void) = 0;
@@ -34,4 +34,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERRESOURCELIST_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERRESOURCESTATE_H_ */

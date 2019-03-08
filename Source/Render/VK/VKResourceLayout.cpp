@@ -41,15 +41,15 @@ ResourceLayout::~ResourceLayout(void)
 void ResourceLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
-	assert(mResourceLists.size() > 0);
+	assert(mResourceStates.size() > 0);
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(mResourceLists.size());
+	descriptor_sets.reserve(mResourceStates.size());
 
-	for(auto& list : mResourceLists)
+	for(auto& state : mResourceStates)
 	{
-		auto vk_list = StaticCast(list);
-		descriptor_sets.push_back(vk_list->GetDescriptorSet());
+		auto vk_state = StaticCast(state);
+		descriptor_sets.push_back(vk_state->GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
@@ -90,15 +90,15 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 
 void ResourceLayout::UpdatePipelineLayout(void)
 {
-	assert(mResourceLists.size() > 0);
+	assert(mResourceStates.size() > 0);
 	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
-	descriptor_layouts.reserve(mResourceLists.size());
+	descriptor_layouts.reserve(mResourceStates.size());
 
-	for(auto& list : mResourceLists)
+	for(auto& state : mResourceStates)
 	{
-		auto vk_list = StaticCast(list);
-		vk_list->Update();
-		Vulkan::DescriptorSetLayout* layout = vk_list->GetDescriptorSet()->GetLayout();
+		auto vk_state = StaticCast(state);
+		vk_state->Update();
+		Vulkan::DescriptorSetLayout* layout = vk_state->GetDescriptorSet()->GetLayout();
 		descriptor_layouts.push_back(layout);
 	}
 

@@ -21,16 +21,16 @@ ResourceLayout::~ResourceLayout(void)
 {
 }
 
-void ResourceLayout::AppendResourceList(ResourceList* list)
+void ResourceLayout::AppendResourceState(ResourceState* state)
 {
-	auto iterator = std::find(mResourceLists.begin(), mResourceLists.end(), list);
-	if (iterator != mResourceLists.end())
+	auto iterator = std::find(mResourceStates.begin(), mResourceStates.end(), state);
+	if (iterator != mResourceStates.end())
 	{
 		assert(false);
 	}
 	else
 	{
-		mResourceLists.push_back(list);
+		mResourceStates.push_back(state);
 	}
 }
 

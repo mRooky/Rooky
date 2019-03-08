@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
 #define SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
 
+#include <VKResourceState.h>
 #include "RenderResourceLayout.h"
-#include "VKResourceList.h"
 #include <vector>
 
 namespace VK
@@ -31,9 +31,6 @@ public:
 
 public:
 	void UpdatePipelineLayout(void);
-
-public:
-	inline size_t GetResourceListCount(void) const { return mResourceLists.size(); }
 
 public:
 	inline Vulkan::DescriptorPool* GetDescriptorPool(void) const { return mDescriptorPool; }
