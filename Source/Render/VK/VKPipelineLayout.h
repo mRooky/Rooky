@@ -39,6 +39,16 @@ protected:
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
+static inline PipelineLayout* StaticCast(Render::PipelineLayout* layout)
+{
+	return static_cast<PipelineLayout*>(layout);
+}
+
+static inline PipelineLayout* SaftyCast(Render::PipelineLayout* layout)
+{
+	return dynamic_cast<PipelineLayout*>(layout);
+}
+
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKPIPELINELAYOUT_H_ */

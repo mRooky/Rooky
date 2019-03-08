@@ -21,7 +21,7 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(const Render::PipelineDetail& detail) override;
+	virtual void Initialize(const Render::PipelineTraits& traits) override;
 
 public:
 	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mPipeline; }

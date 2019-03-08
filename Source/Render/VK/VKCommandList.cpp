@@ -77,15 +77,15 @@ void CommandList::BeginRecord(void)
 
 void CommandList::BeginPass(uint32_t index, Render::Pass* pass)
 {
-	mPipelineDetail.index = index;
-	mPipelineDetail.pRenderPass = pass;
+	mPipelineTraits.index = index;
+	mPipelineTraits.pRenderPass = pass;
 }
 
 void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area)
 {
-	assert(mPipelineDetail.pRenderPass != nullptr);
+	assert(mPipelineTraits.pRenderPass != nullptr);
 	assert(mCommandBuffer != nullptr);
-	RenderPass* render_pass = static_cast<RenderPass*>(mPipelineDetail.pRenderPass);
+	RenderPass* render_pass = static_cast<RenderPass*>(mPipelineTraits.pRenderPass);
 	FrameBuffer* frame_buffer = static_cast<FrameBuffer*>(frame);
 	VkRect2D vk_area = {};
 	vk_area.offset.x = area.offset.x;
@@ -145,10 +145,10 @@ void CommandList::Draw(Render::DrawCall* draw)
 {
 	assert(mPipeline != nullptr);
 	assert(mResourceLayout != nullptr);
-	auto& detail = mPipeline->GetDetail();
+	auto& traits = mPipeline->GetTraits();
 	auto layout = mResourceLayout->GetCurrentLayout();
-	assert(detail.pPipelineLayout == layout);
-	if (detail.pPipelineLayout == layout)
+	assert(traits.pPipelineLayout == layout);
+	if (traits.pPipelineLayout == layout)
 	{
 		assert(false);
 	}
@@ -158,7 +158,7 @@ void CommandList::EndPass(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->EndRenderPass();
-	mPipelineDetail.pRenderPass = nullptr;
+	mPipelineTraits.pRenderPass = nullptr;
 }
 
 void CommandList::EndRecord(void)

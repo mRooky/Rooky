@@ -16,7 +16,7 @@ namespace Vulkan
 PhysicalDevice::PhysicalDevice(Instance* instance):
 		m_instance(instance)
 {
-
+	assert(m_instance != nullptr);
 }
 
 PhysicalDevice::~PhysicalDevice(void)
@@ -40,38 +40,28 @@ VkResult PhysicalDevice::Create(VkQueueFlags flags)
 		physical_devices.resize(count);
 		mResult = vkEnumeratePhysicalDevices(handle, &count, physical_devices.data());
 		assert(mResult == VK_SUCCESS);
-		for (auto physical : physical_devices)
+		for (VkPhysicalDevice physical : physical_devices)
 		{
-			bool find = QueryQueueFlags(physical);
-			if(find == true)
+			uint32_t count = 0;
+			vkGetPhysicalDeviceQueueFamilyProperties(physical, &count, NULL);
+			assert(count > 0);
+			m_familyProperties.resize(count);
+			vkGetPhysicalDeviceQueueFamilyProperties(physical, &count, m_familyProperties.data());
+			for (uint32_t index = 0; index < count; ++index)
 			{
-				InitializeProperties();
-				break;
+				auto flags = m_familyProperties.at(index).queueFlags;
+				if ((m_flags & flags) == m_flags)
+				{
+					m_family = index;
+					m_physicalDevice = physical;
+					InitializeProperties();
+					return mResult;
+				}
 			}
 			assert(false);
 		}
 	}
-	return mResult;
-}
-
-bool PhysicalDevice::QueryQueueFlags(VkPhysicalDevice physical)
-{
-	uint32_t count = 0;
-	vkGetPhysicalDeviceQueueFamilyProperties(physical, &count, NULL);
-	assert(count > 0);
-	m_familyProperties.resize(count);
-	vkGetPhysicalDeviceQueueFamilyProperties(physical, &count, m_familyProperties.data());
-	for (uint32_t index = 0; index < count; ++index)
-	{
-		const auto& flags = m_familyProperties[index].queueFlags;
-		if ((m_flags & flags) == m_flags)
-		{
-			m_family = index;
-			m_physicalDevice = physical;
-			return true;
-		}
-	}
-	return false;
+	return VK_INCOMPLETE;
 }
 
 void PhysicalDevice::InitializeProperties(void)

@@ -31,35 +31,26 @@ Pipeline::Pipeline(Context* context):
 Pipeline::~Pipeline(void)
 {
 	Vulkan::Release(mPipeline);
-	if (mOwnCache == true)
-	{
-		Vulkan::Release(mPipelineCache);
-	}
-	else
-	{
-		mPipelineCache = nullptr;
-	}
+	Vulkan::Release(mPipelineCache, mOwnCache);
 }
 
-void Pipeline::Initialize(const Render::PipelineDetail& detail)
+void Pipeline::Initialize(const Render::PipelineTraits& traits)
 {
 	assert(mPipeline == nullptr);
 	assert(mPipelineCache != nullptr);
-	bool valid = detail.IsValid();
+	bool valid = traits.IsValid();
 	assert(valid == true);
 	if (valid == true)
 	{
-		mDetail = detail;
-		auto render_pass = static_cast<RenderPass*>(mDetail.pRenderPass);
+		mTraits = traits;
+		auto render_pass = StaticCast(mTraits.pRenderPass);
 		auto vk_pass = render_pass->GetRenderPassVK();
-
-		auto pipeline_state = static_cast<PipelineState*>(mDetail.pPipelineState);
-
-		auto pipeline_layout = static_cast<PipelineLayout*>(mDetail.pPipelineLayout);
+		auto pipeline_state = StaticCast(mTraits.pPipelineState);
+		auto pipeline_layout = StaticCast(mTraits.pPipelineLayout);
 		auto vk_layout = pipeline_layout->GetPipelineLayoutVK();
 
 		auto pipeline_create_info = pipeline_state->GetGraphicsInfo();
-		pipeline_create_info->SetContent(vk_layout, vk_pass, mDetail.index);
+		pipeline_create_info->SetContent(vk_layout, vk_pass, mTraits.index);
 
 		assert(false);
 
@@ -69,7 +60,7 @@ void Pipeline::Initialize(const Render::PipelineDetail& detail)
 	}
 	else
 	{
-		std::cout << "Pipeline Detail Is not Valid !" << std::endl;
+		std::cout << "Pipeline Traits Is not Valid !" << std::endl;
 		assert(false);
 	}
 }

@@ -24,6 +24,16 @@ static inline void Release(T*& ptr)
 	ptr = nullptr;
 }
 
+template<class T>
+static inline void Release(T*& ptr, bool flag)
+{
+	if(ptr != nullptr && flag)
+	{
+		ptr->Destroy();
+	}
+	ptr = nullptr;
+}
+
 }
 
 #endif /* VULKAN_VULKANINLINE_H_ */

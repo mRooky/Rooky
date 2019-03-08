@@ -46,7 +46,6 @@ public:
 
 private:
 	void InitializeProperties(void);
-	bool QueryQueueFlags(VkPhysicalDevice physical);
 
 private:
 	Instance* m_instance = nullptr;
