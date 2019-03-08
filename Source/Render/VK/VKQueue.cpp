@@ -42,7 +42,7 @@ void Queue::Create(uint32_t mIndex)
 void Queue::Submit(Render::CommandList* command)
 {
 	assert(mQueue != nullptr);
-	auto command_list = static_cast<CommandList*>(command);
+	auto command_list = StaticCast(command);
 	auto command_buffer = command_list->GetCommandBufferVK();
 	auto vk_command = command_buffer->GetHandle();
 	auto vk_semaphore = command_buffer->GetSemaphore()->GetHandle();

@@ -53,6 +53,16 @@ protected:
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;
 };
 
+static inline CommandList* StaticCast(Render::CommandList* list)
+{
+	return static_cast<CommandList*>(list);
+}
+
+static inline CommandList* SaftyCast(Render::CommandList* list)
+{
+	return dynamic_cast<CommandList*>(list);
+}
+
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKCOMMANDLIST_H_ */
