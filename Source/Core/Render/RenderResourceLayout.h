@@ -10,6 +10,7 @@
 
 #include "RenderObject.h"
 #include <cstddef>
+#include <vector>
 
 namespace Render
 {
@@ -22,15 +23,19 @@ public:
 	virtual ~ResourceLayout(void) override;
 
 public:
-	virtual PipelineLayout* UpdatePipelineLayout(void) = 0;
-	virtual ResourceList* GetResourceList(size_t index) = 0;
+	void AppendResourceList(ResourceList* list);
+
+public:
+	virtual PipelineLayout* Update(void) = 0;
 
 public:
 	inline PipelineLayout* GetCurrentLayout(void) const { return mCurrentLayout; }
+	inline ResourceList* GetResourceList(size_t index) const { return mResourceLists.at(index); }
 
 protected:
 	bool mDirty = true;
 	PipelineLayout* mCurrentLayout = nullptr;
+	std::vector<ResourceList*> mResourceLists;
 };
 
 } /* namespace Render */

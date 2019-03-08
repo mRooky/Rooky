@@ -11,8 +11,11 @@
 #include "VKPipelineLayout.h"
 
 #include "VulkanDescriptorPool.h"
+#include "VulkanDescriptorSet.h"
 #include "VulkanInline.h"
 #include "VulkanCommandBuffer.h"
+
+#include "UtilRelease.h"
 
 #include <cassert>
 #include <iostream>
@@ -30,6 +33,7 @@ ResourceLayout::ResourceLayout(Context* context):
 
 ResourceLayout::~ResourceLayout(void)
 {
+	Util::Release(mPipelineLayouts);
 	Vulkan::Release(mDescriptorPool);
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
@@ -41,29 +45,17 @@ void ResourceLayout::Binding(CommandList* list)
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
 	descriptor_sets.reserve(mResourceLists.size());
+
 	for(auto& list : mResourceLists)
 	{
-		DirtyState state = list.Update();
-		mDirty = mDirty || (state == DirtyState::DIRTY_STATE_LAYOUT);
-		descriptor_sets.push_back(list.GetDescriptorSet());
+		auto vk_list = StaticCast(list);
+		descriptor_sets.push_back(vk_list->GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
 	auto vk_cmd = list->GetCommandBufferVK();
-	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mCurrentLayout);
+	auto vk_pipeline_layout = StaticCast(mCurrentLayout);
 	auto vk_layout = vk_pipeline_layout->GetPipelineLayoutVK();
 	vk_cmd->BindDescriptorSets(vk_layout, descriptor_sets, offset);
-	UpdatePipelineLayout();
-}
-
-Render::ResourceList* ResourceLayout::GetResourceList(size_t index)
-{
-	const size_t size = mResourceLists.size();
-	assert(index <= size);
-	if (index == size)
-	{
-		mResourceLists.push_back(ResourceList(this));
-	}
-	return &mResourceLists.at(index);
 }
 
 void ResourceLayout::CreateDescriptorPool(size_t max)
@@ -96,24 +88,47 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 	return mDescriptorPool->Allocate(layout);
 }
 
-Render::PipelineLayout* ResourceLayout::UpdatePipelineLayout(void)
+void ResourceLayout::UpdatePipelineLayout(void)
 {
-	for (auto layout : mPipelineLayouts)
+	assert(mResourceLists.size() > 0);
+	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
+	descriptor_layouts.reserve(mResourceLists.size());
+
+	for(auto& list : mResourceLists)
 	{
-		auto& set_layouts = layout->GetDescriptorSetLayout();
-		if (set_layouts == mDescriptorSetLayouts)
+		auto vk_list = StaticCast(list);
+		vk_list->Update();
+		Vulkan::DescriptorSetLayout* layout = vk_list->GetDescriptorSet()->GetLayout();
+		descriptor_layouts.push_back(layout);
+	}
+
+	if (mCurrentLayout != nullptr)
+	{
+		auto& current_layouts = StaticCast(mCurrentLayout)->GetLayouts();
+		if (current_layouts == descriptor_layouts)
 		{
-			mCurrentLayout = layout;
-			return mCurrentLayout;
+			return;
 		}
 	}
+	mCurrentLayout = GetPipelineLayout(descriptor_layouts);
+}
+
+PipelineLayout* ResourceLayout::GetPipelineLayout(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
+{
+	for (auto pipeline_layout : mPipelineLayouts)
+	{
+		auto& current_layouts = pipeline_layout->GetLayouts();
+		if (current_layouts == layouts)
+		{
+			return pipeline_layout;
+		}
+	}
+
 	auto context = StaticCast(mContext);
 	auto pipeline_layout = new PipelineLayout(context);
+	pipeline_layout->Create(layouts);
 	mPipelineLayouts.push_back(pipeline_layout);
-	pipeline_layout->Create(mDescriptorSetLayouts);
-
-	mCurrentLayout = pipeline_layout;
-	return mCurrentLayout;
+	return pipeline_layout;
 }
 
 } /* namespace VK */

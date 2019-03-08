@@ -34,35 +34,10 @@ ResourceList::~ResourceList(void)
 	std::cout << "VK Destroy Resource List" << std::endl;
 }
 
-void ResourceList::SetBinding(uint32_t bind, const Render::Resource& resource)
+void ResourceList::Update(void)
 {
-	assert(resource.IsValid());
-	auto iterator = mResources.find(bind);
-	if (iterator != mResources.end())
-	{
-		if (iterator->second != resource)
-		{
-			mDirty = true;
-			iterator->second = resource;
-		}
-	}
-	else
-	{
-		mDirty = true;
-		mResources.insert(std::make_pair(bind, resource));
-	}
-}
-
-DirtyState ResourceList::Update(void)
-{
-	DirtyState dirty_state = DirtyState::DIRTY_STATE_NONE;
-	if (mDirty == true)
-	{
-		dirty_state = UpdateDescriptorSet();
-		WriteDescriptorSet();
-		mDirty = false;
-	}
-	return dirty_state;
+	UpdateDescriptorSet();
+	WriteDescriptorSet();
 }
 
 void ResourceList::WriteDescriptorSet(void)
@@ -106,7 +81,7 @@ void ResourceList::WriteDescriptorSet(void)
 	Vulkan::DescriptorSet::UpdateSets(mDescriptorSet->GetDevice(), descriptor_writes.size(), descriptor_writes.data());
 }
 
-DirtyState ResourceList::UpdateDescriptorSet(void)
+void ResourceList::UpdateDescriptorSet(void)
 {
 	const size_t size = mResources.size();
 	assert(size > 0);
@@ -128,21 +103,8 @@ DirtyState ResourceList::UpdateDescriptorSet(void)
 		layout_bindings.push_back(layout_bind);
 	}
 
-	Vulkan::DescriptorSetLayout* set_layout = nullptr;
-	if (mDescriptorSet != nullptr)
-	{
-		set_layout = mDescriptorSet->GetLayout();
-	}
-	assert(layout_bindings.size() > 0);
-	auto layout = static_cast<ResourceLayout*>(mLayout);
+	auto layout = StaticCast(mLayout);
 	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
-
-	DirtyState dirty_state = DirtyState::DIRTY_STATE_RESOURCE;
-	if (set_layout != mDescriptorSet->GetLayout())
-	{
-		dirty_state = DirtyState::DIRTY_STATE_LAYOUT;
-	}
-	return dirty_state;
 }
 
 void ResourceList::SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)

@@ -30,10 +30,7 @@ public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
-	virtual Render::ResourceList* GetResourceList(size_t index) override;
-
-public:
-	virtual Render::PipelineLayout* UpdatePipelineLayout(void) override;
+	void UpdatePipelineLayout(void);
 
 public:
 	inline size_t GetResourceListCount(void) const { return mResourceLists.size(); }
@@ -43,9 +40,7 @@ public:
 
 protected:
 	void CreateDescriptorPool(size_t max);
-
-protected:
-	std::vector<ResourceList> mResourceLists;
+	PipelineLayout* GetPipelineLayout(const std::vector<Vulkan::DescriptorSetLayout*>& layouts);
 
 protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;

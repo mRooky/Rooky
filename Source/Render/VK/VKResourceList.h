@@ -11,19 +11,8 @@
 #include "RenderResourceList.h"
 #include "VKRender.h"
 
-#include <map>
-#include <vector>
-
 namespace VK
 {
-
-enum class DirtyState : uint32_t
-{
-	DIRTY_STATE_NONE,
-	DIRTY_STATE_LAYOUT,
-	DIRTY_STATE_RESOURCE,
-	DIRTY_STATE_UNKNOWN = ~0U
-};
 
 class ResourceLayout;
 class ResourceList : public Render::ResourceList
@@ -33,13 +22,9 @@ public:
 	virtual ~ResourceList(void) override;
 
 public:
-	void SetBinding(uint32_t bind, const Render::Resource& resource);
+	virtual void Update(void) override;
 
 public:
-	DirtyState Update(void);
-
-public:
-	inline bool IsDirty(void) const { return mDirty; }
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
 
 public:
@@ -52,15 +37,21 @@ public:
 
 protected:
 	void WriteDescriptorSet(void);
-	DirtyState UpdateDescriptorSet(void);
-
-protected:
-	bool mDirty = true;
-	std::map<uint32_t, Render::Resource> mResources;
+	void UpdateDescriptorSet(void);
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
 };
+
+static inline ResourceList* StaticCast(Render::ResourceList* list)
+{
+	return static_cast<ResourceList*>(list);
+}
+
+static inline ResourceList* SaftyCast(Render::ResourceList* list)
+{
+	return dynamic_cast<ResourceList*>(list);
+}
 
 } /* namespace VK */
 

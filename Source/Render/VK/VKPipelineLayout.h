@@ -28,10 +28,7 @@ public:
 	inline Vulkan::PipelineLayout* GetPipelineLayoutVK(void) const { return mPipelineLayout; }
 
 public:
-	inline const std::vector<Vulkan::DescriptorSetLayout*>& GetDescriptorSetLayout(void) const
-	{
-		return mDescriptorSetLayouts;
-	}
+	inline const std::vector<Vulkan::DescriptorSetLayout*>& GetLayouts(void) const { return mDescriptorSetLayouts; }
 
 protected:
 	Vulkan::PipelineLayout* mPipelineLayout = nullptr;
