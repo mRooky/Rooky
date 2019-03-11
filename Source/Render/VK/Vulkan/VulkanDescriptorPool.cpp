@@ -9,6 +9,8 @@
 #include "VulkanDevice.h"
 #include "VulkanDescriptorSet.h"
 #include "VulkanDescriptorSetLayout.h"
+
+#include <cstring>
 #include <cassert>
 
 namespace Vulkan
@@ -62,18 +64,31 @@ DescriptorSet* DescriptorPool::Allocate(DescriptorSetLayout* layout)
 
 DescriptorSetLayout* DescriptorPool::GetLayout(const std::vector<VkDescriptorSetLayoutBinding>& bindings)
 {
+	return GetLayout(bindings.size() ,bindings.data());
+}
+
+DescriptorSetLayout* DescriptorPool::GetLayout(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+{
+	auto layout = FindLayout(count, bindings);
+	if (layout == nullptr)
+	{
+		layout = Vulkan::DescriptorSetLayout::New(mDevice);
+		layout->Create(count, bindings);
+		m_layouts.push_back(layout);
+	}
+	return layout;
+}
+
+DescriptorSetLayout* DescriptorPool::FindLayout(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+{
 	for (auto layout : m_layouts)
 	{
-		if(layout->IsCreateBy(bindings))
+		if(layout->IsCreateBy(count, bindings))
 		{
 			return layout;
 		}
 	}
-
-	DescriptorSetLayout* layout = Vulkan::DescriptorSetLayout::New(mDevice);
-	layout->Create(bindings);
-	m_layouts.push_back(layout);
-	return layout;
+	return nullptr;
 }
 
 VkDescriptorPoolCreateInfo DescriptorPool::CreateInfo(void)

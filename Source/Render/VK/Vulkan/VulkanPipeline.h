@@ -21,13 +21,16 @@ private:
 	virtual ~Pipeline(void) override;
 
 public:
-	VkResult Create(PipelineCache* cache, const VkComputePipelineCreateInfo* info);
-	VkResult Create(PipelineCache* cache, const VkGraphicsPipelineCreateInfo* info);
+	VkResult Create(const PipelineCache* cache, const VkComputePipelineCreateInfo* info);
+	VkResult Create(const PipelineCache* cache, const VkGraphicsPipelineCreateInfo* info);
 
 public:
 	inline VkPipeline GetHandle(void) const { return m_pipeline; }
 	inline VkPipelineBindPoint GetBindPoint(void) const { return m_point; }
 	inline VkPipelineLayout GetLayout(void) const { return m_layout; }
+
+public:
+	inline const PipelineCache* GetCache(void) const { return m_cache; }
 
 public:
 	static inline Pipeline* New(Device* device) { return new Pipeline(device); }
@@ -48,9 +51,15 @@ public:
 	static VkPipelineMultisampleStateCreateInfo MultisampleStateCreateInfo(void);
 
 private:
+	void CreateCache(const PipelineCache* cache);
+
+private:
 	VkPipeline m_pipeline = VK_NULL_HANDLE;
 	VkPipelineLayout m_layout = VK_NULL_HANDLE;
 	VkPipelineBindPoint m_point = VK_PIPELINE_BIND_POINT_GRAPHICS;
+
+private:
+	PipelineCache* m_cache = nullptr;
 };
 
 } /* namespace Vulkan */

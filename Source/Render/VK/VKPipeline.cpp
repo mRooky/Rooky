@@ -30,14 +30,13 @@ Pipeline::Pipeline(Context* context):
 
 Pipeline::~Pipeline(void)
 {
-	Vulkan::Release(mPipeline);
-	Vulkan::Release(mPipelineCache, mOwnCache);
+	mCurrent = nullptr;
+	Vulkan::Release(mPipelines);
 }
 
 void Pipeline::Initialize(const Render::PipelineTraits& traits)
 {
-	assert(mPipeline == nullptr);
-	assert(mPipelineCache != nullptr);
+	assert(mCurrent == nullptr);
 	bool valid = traits.IsValid();
 	assert(valid == true);
 	if (valid == true)
@@ -55,26 +54,20 @@ void Pipeline::Initialize(const Render::PipelineTraits& traits)
 		assert(false);
 
 		auto device = vk_pass->GetDevice();
-		mPipeline = Vulkan::Pipeline::New(device);
-		mPipeline->Create(mPipelineCache, pipeline_create_info->CreateInfo());
+		mCurrent = Vulkan::Pipeline::New(device);
+		mCurrent->Create(nullptr, pipeline_create_info->CreateInfo());
 	}
 	else
 	{
 		std::cout << "Pipeline Traits Is not Valid !" << std::endl;
 		assert(false);
 	}
+	mPipelines.push_back(mCurrent);
 }
 
-void Pipeline::CreateCache(Vulkan::PipelineCache* cache)
+void Pipeline::Update(void)
 {
-	if (cache == nullptr)
-	{
-		mOwnCache = true;
-		auto vk_context = StaticCast(mContext);
-		Vulkan::Device* device = vk_context->GetDeviceVK();
-		mPipelineCache = Vulkan::PipelineCache::New(device);
-		mPipelineCache->Create(0, nullptr);
-	}
+
 }
 
 } /* namespace VK */

@@ -9,6 +9,7 @@
 #define VULKAN_VULKANPIPELINECACHE_H_
 
 #include "VulkanDeviceObject.h"
+#include <vector>
 
 namespace Vulkan
 {
@@ -23,6 +24,8 @@ public:
 
 public:
 	inline VkPipelineCache GetHandle(void) const { return m_cache; }
+	inline size_t GetSize(void) const { return m_data.size(); }
+	inline const uint8_t* GetData(void) const { return m_data.data(); }
 
 public:
 	static inline PipelineCache* New(Device* device) { return new PipelineCache(device); }
@@ -35,6 +38,9 @@ private:
 
 private:
 	VkPipelineCache m_cache = VK_NULL_HANDLE;
+
+private:
+	std::vector<uint8_t> m_data;
 };
 
 } /* namespace Vulkan */

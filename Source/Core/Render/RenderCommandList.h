@@ -43,6 +43,7 @@ public:
 
 public: // Resource Setup
 	virtual void SetResourceLayout(ResourceLayout* layout) = 0;
+	virtual void SetResourceState(uint32_t index, ResourceState* state) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }

@@ -150,6 +150,8 @@ void CommandList::Draw(Render::DrawCall* draw)
 	assert(traits.pPipelineLayout == layout);
 	if (traits.pPipelineLayout == layout)
 	{
+		auto layout = StaticCast(mResourceLayout);
+		layout->Binding(this);
 		assert(false);
 	}
 }
@@ -169,9 +171,18 @@ void CommandList::EndRecord(void)
 
 void CommandList::SetResourceLayout(Render::ResourceLayout* layout)
 {
-	mResourceLayout = layout;
-	auto vk_layout = StaticCast(layout);
-	vk_layout->Binding(this);
+	if (mResourceLayout != layout)
+	{
+		mResourceLayout = layout;
+		// some states trace future
+	}
+}
+
+void CommandList::SetResourceState(uint32_t index, Render::ResourceState* state)
+{
+	assert(mResourceLayout != nullptr);
+	auto layout = StaticCast(mResourceLayout);
+	layout->SetResourceState(index, StaticCast(state));
 }
 
 } /* namespace VK */

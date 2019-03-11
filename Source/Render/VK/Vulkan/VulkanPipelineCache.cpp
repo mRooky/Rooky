@@ -34,7 +34,14 @@ VkResult PipelineCache::Create(uint32_t size, const void* data)
 
 VkResult PipelineCache::Create(const VkPipelineCacheCreateInfo* info)
 {
-	mResult = vkCreatePipelineCache(mDevice->GetHandle(), info, nullptr, &m_cache);
+	auto device = mDevice->GetHandle();
+	mResult = vkCreatePipelineCache(device, info, nullptr, &m_cache);
+	assert(mResult == VK_SUCCESS);
+	size_t size = 0;
+	mResult = vkGetPipelineCacheData(device, m_cache, &size, nullptr);
+	assert(mResult == VK_SUCCESS && size > 0);
+	m_data.resize(size);
+	mResult = vkGetPipelineCacheData(device, m_cache, &size, m_data.data());
 	assert(mResult == VK_SUCCESS);
 	return mResult;
 }

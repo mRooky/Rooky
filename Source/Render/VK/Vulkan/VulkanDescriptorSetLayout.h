@@ -22,9 +22,11 @@ private:
 
 public:
 	VkResult Create(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
+	VkResult Create(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
 	bool IsCreateBy(const std::vector<VkDescriptorSetLayoutBinding>& bindings) const;
+	bool IsCreateBy(uint32_t count, const VkDescriptorSetLayoutBinding* bindings) const;
 
 public:
 	inline VkDescriptorSetLayout GetHandle(void) const { return m_layout; }

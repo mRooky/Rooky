@@ -25,13 +25,13 @@ static inline void Release(T*& ptr)
 }
 
 template<class T>
-static inline void Release(T*& ptr, bool flag)
+static inline void Release(std::vector<T*>& list)
 {
-	if(ptr != nullptr && flag)
+	for(auto ptr : list)
 	{
-		ptr->Destroy();
+		Release(ptr);
 	}
-	ptr = nullptr;
+	list.clear();
 }
 
 }

@@ -10,6 +10,7 @@
 
 #include "RenderPipeline.h"
 #include "VKRender.h"
+#include <vector>
 
 namespace VK
 {
@@ -24,18 +25,14 @@ public:
 	virtual void Initialize(const Render::PipelineTraits& traits) override;
 
 public:
-	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mPipeline; }
-	inline Vulkan::PipelineCache* GetPipelineCacheVK(void) const { return mPipelineCache; }
+	void Update(void);
 
 public:
-	void CreateCache(Vulkan::PipelineCache* cache = nullptr);
+	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mCurrent; }
 
 protected:
-	bool mOwnCache = false;
-
-protected:
-	Vulkan::Pipeline* mPipeline = nullptr;
-	Vulkan::PipelineCache* mPipelineCache = nullptr;
+	Vulkan::Pipeline* mCurrent = nullptr;
+	std::vector<Vulkan::Pipeline*> mPipelines;
 };
 
 static inline Pipeline* StaticCast(Render::Pipeline* pipeline)

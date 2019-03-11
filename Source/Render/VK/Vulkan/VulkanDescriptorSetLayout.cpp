@@ -8,6 +8,8 @@
 #include "VulkanDescriptorSetLayout.h"
 #include "VulkanDevice.h"
 #include "VulkanUtility.h"
+
+#include <cstring>
 #include <cassert>
 
 namespace Vulkan
@@ -27,13 +29,24 @@ DescriptorSetLayout::~DescriptorSetLayout(void)
 
 VkResult DescriptorSetLayout::Create(const std::vector<VkDescriptorSetLayoutBinding>& bindings)
 {
-	for (auto binding : bindings)
-	{
-		mBindings.push_back(binding);
-	}
-	VkDescriptorSetLayoutCreateInfo descriptor_set_layout_create_info = DescriptorSetLayout::CreateInfo();
+	assert(m_layout == VK_NULL_HANDLE);
+	mBindings = bindings;
+	auto descriptor_set_layout_create_info = DescriptorSetLayout::CreateInfo();
 	descriptor_set_layout_create_info.bindingCount = bindings.size();
 	descriptor_set_layout_create_info.pBindings = bindings.data();
+	return Create(&descriptor_set_layout_create_info);
+}
+
+VkResult DescriptorSetLayout::Create(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+{
+	assert(mBindings.size() == 0);
+	assert(m_layout == VK_NULL_HANDLE);
+	mBindings.resize(count);
+	size_t size = sizeof(VkDescriptorSetLayoutBinding) * count;
+	std::memcpy(mBindings.data(), bindings, size);
+	auto descriptor_set_layout_create_info = DescriptorSetLayout::CreateInfo();
+	descriptor_set_layout_create_info.bindingCount = mBindings.size();
+	descriptor_set_layout_create_info.pBindings = mBindings.data();
 	return Create(&descriptor_set_layout_create_info);
 }
 
@@ -47,13 +60,18 @@ VkResult DescriptorSetLayout::Create(const VkDescriptorSetLayoutCreateInfo* info
 bool DescriptorSetLayout::IsCreateBy(const std::vector<VkDescriptorSetLayoutBinding>& bindings) const
 {
 	assert(mBindings.size() > 0);
-	if (bindings.size() == mBindings.size())
+	return IsCreateBy(bindings.size(), bindings.data());
+}
+
+bool DescriptorSetLayout::IsCreateBy(uint32_t count, const VkDescriptorSetLayoutBinding* bindings) const
+{
+	assert(count > 0);
+	if (count == mBindings.size())
 	{
-		const size_t count = bindings.size();
 		for (size_t index = 0; index < count; ++index)
 		{
-			bool equal = mBindings.at(index) == bindings.at(index);
-			if (!equal)
+			auto& binding = *(bindings + index);
+			if (!(mBindings.at(index) == binding))
 			{
 				return false;
 			}

@@ -27,6 +27,7 @@ public:
 public:
 	DescriptorSet* Allocate(DescriptorSetLayout* layout);
 	DescriptorSetLayout* GetLayout(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
+	DescriptorSetLayout* GetLayout(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
 	inline VkDescriptorPool GetHandle(void) const { return m_pool; }
@@ -39,6 +40,7 @@ public:
 
 private:
 	VkResult Create(const VkDescriptorPoolCreateInfo* info);
+	DescriptorSetLayout* FindLayout(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 private:
 	VkDescriptorPool m_pool = VK_NULL_HANDLE;

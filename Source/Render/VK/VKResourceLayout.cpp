@@ -58,6 +58,24 @@ void ResourceLayout::Binding(CommandList* list)
 	vk_cmd->BindDescriptorSets(vk_layout, descriptor_sets, offset);
 }
 
+void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
+{
+	assert(index < mResourceStates.size());
+	auto layout = mDescriptorSetLayouts.at(index);
+	auto vk_state = StaticCast(state);
+	auto state_layout = vk_state->GetDescriptorSet()->GetLayout();
+	if (layout == state_layout)
+	{
+		mResourceStates.at(index) = state;
+	}
+	else
+	{
+		// log message future
+		std::cout << "ResourceState does not match ResourceLayout !" << std::endl;
+		assert(false);
+	}
+}
+
 void ResourceLayout::CreateDescriptorPool(size_t max)
 {
 	std::vector<VkDescriptorPoolSize> descriptor_pool_sizes;
@@ -80,11 +98,8 @@ void ResourceLayout::CreateDescriptorPool(size_t max)
 Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
 {
 	assert(mDescriptorPool != nullptr);
-	std::vector<VkDescriptorSetLayoutBinding> layout_bindings;
-	layout_bindings.resize(count);
-	size_t size = count * sizeof(VkDescriptorSetLayoutBinding);
-	std::memcpy(layout_bindings.data(), bindings, size);
-	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(layout_bindings);
+	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(count, bindings);
+	mDescriptorSetLayouts.push_back(layout);
 	return mDescriptorPool->Allocate(layout);
 }
 

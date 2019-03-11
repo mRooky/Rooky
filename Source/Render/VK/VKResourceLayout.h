@@ -25,6 +25,7 @@ public:
 
 public:
 	void Binding(CommandList* list);
+	void SetResourceState(uint32_t index, ResourceState* state);
 
 public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);

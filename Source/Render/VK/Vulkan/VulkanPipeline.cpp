@@ -8,6 +8,7 @@
 #include "VulkanPipeline.h"
 #include "VulkanDevice.h"
 #include "VulkanPipelineCache.h"
+#include "VulkanInline.h"
 #include <cassert>
 
 namespace Vulkan
@@ -20,30 +21,46 @@ Pipeline::Pipeline(Device* device):
 
 Pipeline::~Pipeline(void)
 {
+	Vulkan::Release(m_cache);
 	VkDevice device = mDevice->GetHandle();
 	vkDestroyPipeline(device, m_pipeline, nullptr);
 	m_pipeline = VK_NULL_HANDLE;
 	m_layout = VK_NULL_HANDLE;
 }
 
-VkResult Pipeline::Create(PipelineCache* cache, const VkComputePipelineCreateInfo* info)
+VkResult Pipeline::Create(const PipelineCache* cache, const VkComputePipelineCreateInfo* info)
+{
+	assert(false);
+	return VK_INCOMPLETE;
+}
+
+VkResult Pipeline::Create(const PipelineCache* cache, const VkGraphicsPipelineCreateInfo* info)
 {
 	assert(m_pipeline == VK_NULL_HANDLE);
-	mResult = vkCreateComputePipelines(mDevice->GetHandle(), cache->GetHandle(), 1, info, nullptr, &m_pipeline);
+	CreateCache(cache);
+	auto device = mDevice->GetHandle();
+	m_point = VK_PIPELINE_BIND_POINT_GRAPHICS;
+	auto pipeline_cache = m_cache->GetHandle();
+	mResult = vkCreateGraphicsPipelines(device, pipeline_cache, 1, info, nullptr, &m_pipeline);
 	assert(mResult == VK_SUCCESS);
-	m_point = VK_PIPELINE_BIND_POINT_COMPUTE;
 	m_layout = info->layout;
 	return mResult;
 }
 
-VkResult Pipeline::Create(PipelineCache* cache, const VkGraphicsPipelineCreateInfo* info)
+void Pipeline::CreateCache(const PipelineCache* cache)
 {
-	assert(m_pipeline == VK_NULL_HANDLE);
-	m_point = VK_PIPELINE_BIND_POINT_GRAPHICS;
-	mResult = vkCreateGraphicsPipelines(mDevice->GetHandle(), cache->GetHandle(), 1, info, nullptr, &m_pipeline);
-	assert(mResult == VK_SUCCESS);
-	m_layout = info->layout;
-	return mResult;
+	assert(m_cache == nullptr);
+	m_cache = PipelineCache::New(mDevice);
+	VkResult result = VK_INCOMPLETE;
+	size_t size = 0;
+	const void* data = nullptr;
+	if (cache != nullptr)
+	{
+		size = cache->GetSize();
+		data = cache->GetData();
+	}
+	result = m_cache->Create(size, data);
+	assert(result == VK_SUCCESS);
 }
 
 VkPipelineShaderStageCreateInfo Pipeline::ShaderStageCreateInfo(void)
