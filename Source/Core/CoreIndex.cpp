@@ -35,7 +35,7 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::ResourceHeap 
 	size_t size = Render::GetIndexTypeSize(type);
 	size *= count;
 	assert(size > 0);
-	auto buffer_usage = Render::GetBufferUsage(true);
+	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.heap = heap;
 	buffer_usage.binding.IndexBuffer = 1;
 	Buffer::Create(size, buffer_usage);

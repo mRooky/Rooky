@@ -47,16 +47,21 @@ namespace Render
 		uint32_t Flags = 0;
 	};
 
-	struct ResourceUsage
-	{
-		ResourceHeap heap;
-		ResourceBinding binding;
-	};
+class ResourceUsage
+{
+public:
+	ResourceUsage(void) = default;
+	~ResourceUsage(void) = default;
 
-	static_assert(sizeof(ResourceUsage) == sizeof(uint32_t) * 2, "ResourceUsage Size : 5");
+public:
+	ResourceHeap heap;
+	ResourceBinding binding;
 
-	ResourceUsage GetImageUsage(bool access);
-	ResourceUsage GetBufferUsage(bool access);
+public:
+	static ResourceUsage GetImageUsage(bool access);
+	static ResourceUsage GetBufferUsage(bool access);
+};
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERUSAGE_H_ */

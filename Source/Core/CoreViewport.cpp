@@ -48,7 +48,7 @@ void Viewport::CreateDepthStencil(const Render::Extent2& extent)
 	Render::ImageLayout image_layout = {};
 
 	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-	image_layout.usage = Render::GetImageUsage(false);
+	image_layout.usage = Render::ResourceUsage::GetImageUsage(false);
 	image_layout.extent = { extent.width, extent.height, 1 };
 	image_layout.format = context->GetBestDepthStencilFormat();
 

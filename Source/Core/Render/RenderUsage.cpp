@@ -10,7 +10,7 @@
 namespace Render
 {
 
-ResourceUsage GetImageUsage(bool access)
+ResourceUsage ResourceUsage::GetImageUsage(bool access)
 {
 	Render::ResourceUsage resource_usage = {};
 	resource_usage.heap.Image = 1;
@@ -18,12 +18,14 @@ ResourceUsage GetImageUsage(bool access)
 	return resource_usage;
 }
 
-ResourceUsage GetBufferUsage(bool access)
+ResourceUsage ResourceUsage::GetBufferUsage(bool access)
 {
 	Render::ResourceUsage resource_usage = {};
 	resource_usage.heap.Buffer = 1;
 	resource_usage.heap.CPUAccess = access ? 1 : 0;
 	return resource_usage;
 }
+
+static_assert(sizeof(ResourceUsage) == sizeof(uint32_t) * 2, "ResourceUsage Size : 5");
 
 }

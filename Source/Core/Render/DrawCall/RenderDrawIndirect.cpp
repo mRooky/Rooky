@@ -30,7 +30,7 @@ void DrawIndirect::Create(Context* context, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
-	auto resource_usage = Render::GetBufferUsage(true);
+	auto resource_usage = Render::ResourceUsage::GetBufferUsage(true);
 	resource_usage.binding.IndirectBuffer = 1;
 	mBuffer = context->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, resource_usage);

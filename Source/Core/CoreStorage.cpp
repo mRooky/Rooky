@@ -29,7 +29,7 @@ Storage::~Storage(void)
 void Storage::Create(size_t size)
 {
 	assert(size > 0);
-	Render::ResourceUsage buffer_usage = Render::GetBufferUsage(true);
+	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.binding.StorageBuffer = 1;
 	Buffer::Create(size, buffer_usage);
 }

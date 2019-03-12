@@ -36,7 +36,7 @@ void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::ResourceH
 	mDeclaration = decl;
 	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
-	auto buffer_usage = Render::GetBufferUsage(true);
+	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.heap = heap;
 	buffer_usage.binding.VertexBuffer = 1;
 	Buffer::Create(size, buffer_usage);

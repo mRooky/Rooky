@@ -29,7 +29,7 @@ Uniform::~Uniform(void)
 void Uniform::Create(size_t size, Render::ResourceHeap heap)
 {
 	assert(size > 0);
-	auto buffer_usage = Render::GetBufferUsage(true);
+	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.heap = heap;
 	buffer_usage.binding.UniformBuffer = 1;
 	Buffer::Create(size, buffer_usage);
