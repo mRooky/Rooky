@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 
-#include "RenderPipelineTraits.h"
 #include "RenderObject.h"
+#include "RenderPipelineDescription.h"
 
 namespace Render
 {
@@ -20,13 +20,13 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(const PipelineTraits& detail) = 0;
+	virtual void Initialize(const PipelineDescription& desc) = 0;
 
 public:
-	inline const PipelineTraits& GetTraits(void) const { return mTraits; }
+	inline const PipelineDescription& GetTraits(void) const { return mDescription; }
 
 protected:
-	PipelineTraits mTraits;
+	PipelineDescription mDescription;
 };
 
 } /* namespace Render */

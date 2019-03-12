@@ -77,16 +77,16 @@ void CommandList::BeginRecord(void)
 
 void CommandList::BeginPass(uint32_t index, Render::Pass* pass)
 {
-	mPipelineTraits.index = index;
-	mPipelineTraits.pRenderPass = pass;
+	mPipelineDescription.index = index;
+	mPipelineDescription.pRenderPass = pass;
 }
 
 void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area)
 {
-	assert(mPipelineTraits.pRenderPass != nullptr);
+	assert(mPipelineDescription.pRenderPass != nullptr);
 	assert(mCommandBuffer != nullptr);
-	RenderPass* render_pass = static_cast<RenderPass*>(mPipelineTraits.pRenderPass);
-	FrameBuffer* frame_buffer = static_cast<FrameBuffer*>(frame);
+	RenderPass* render_pass = StaticCast(mPipelineDescription.pRenderPass);
+	FrameBuffer* frame_buffer = StaticCast(frame);
 	VkRect2D vk_area = {};
 	vk_area.offset.x = area.offset.x;
 	vk_area.offset.y = area.offset.y;
@@ -160,7 +160,7 @@ void CommandList::EndPass(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->EndRenderPass();
-	mPipelineTraits.pRenderPass = nullptr;
+	mPipelineDescription.pRenderPass = nullptr;
 }
 
 void CommandList::EndRecord(void)

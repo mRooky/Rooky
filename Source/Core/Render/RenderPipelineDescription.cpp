@@ -5,20 +5,20 @@
  *      Author: rookyma
  */
 
-#include "RenderPipelineTraits.h"
+#include "RenderPipelineDescription.h"
 
 namespace Render
 {
 
-PipelineTraits::PipelineTraits(void)
+PipelineDescription::PipelineDescription(void)
 {
 }
 
-PipelineTraits::~PipelineTraits(void)
+PipelineDescription::~PipelineDescription(void)
 {
 }
 
-bool PipelineTraits::IsValid(void) const
+bool PipelineDescription::IsValid(void) const
 {
 	bool valid = shaderState.IsValid();
 	valid = valid && (pRenderPass != nullptr);
@@ -27,7 +27,7 @@ bool PipelineTraits::IsValid(void) const
 	return valid;
 }
 
-bool PipelineTraits::operator == (const PipelineTraits& other) const
+bool PipelineDescription::operator == (const PipelineDescription& other) const
 {
 	bool equal = (index == other.index);
 	equal = equal && (shaderState == other.shaderState);
@@ -37,7 +37,7 @@ bool PipelineTraits::operator == (const PipelineTraits& other) const
 	return equal;
 }
 
-PipelineTraits& PipelineTraits::operator =(const PipelineTraits& other)
+PipelineDescription& PipelineDescription::operator =(const PipelineDescription& other)
 {
 	index = other.index;
 	shaderState = other.shaderState;

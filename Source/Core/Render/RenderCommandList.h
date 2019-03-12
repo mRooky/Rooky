@@ -8,12 +8,12 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 
-#include <RenderPipelineTraits.h>
 #include "RenderClasses.h"
 #include "RenderMath.h"
 #include "RenderEnum.h"
 #include "RenderResource.h"
 #include "RenderResourceLayout.h"
+#include "RenderPipelineDescription.h"
 
 namespace Render
 {
@@ -52,7 +52,7 @@ protected:
 	CommandPool* mCommandPool = nullptr;
 
 protected:
-	PipelineTraits mPipelineTraits = {};
+	PipelineDescription mPipelineDescription = {};
 };
 
 } /* namespace Render */
