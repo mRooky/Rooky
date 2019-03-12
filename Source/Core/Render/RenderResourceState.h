@@ -29,7 +29,7 @@ public:
 
 protected:
 	ResourceLayout* mLayout = nullptr;
-	std::vector<Render::Resource> mResources;
+	std::vector<Resource> mResources;
 };
 
 } /* namespace Render */
