@@ -21,17 +21,11 @@ ResourceLayout::~ResourceLayout(void)
 {
 }
 
-void ResourceLayout::AppendResourceState(ResourceState* state)
+void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
 {
-	auto iterator = std::find(mResourceStates.begin(), mResourceStates.end(), state);
-	if (iterator != mResourceStates.end())
-	{
-		assert(false);
-	}
-	else
-	{
-		mResourceStates.push_back(state);
-	}
+	assert(index < 8);
+	mResourceMask.set(index);
+	mResourceStates.at(index) = state;
 }
 
 } /* namespace Render */

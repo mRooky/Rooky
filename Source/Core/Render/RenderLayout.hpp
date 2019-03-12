@@ -23,11 +23,16 @@ public:
 	~ImageLayout(void) = default;
 
 public:
+	uint32_t mClearColor = 0;
+
+public:
 	uint32_t array = 1;
 	Extent3 extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
 	ImageUsage usage = {};
+
+public:
 	Format format = Format::FORMAT_UNDEFINED;
 	ImageType type = ImageType::IMAGE_TYPE_UNKNOWN;
 };

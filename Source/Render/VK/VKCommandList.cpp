@@ -95,14 +95,6 @@ void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2
 	mCommandBuffer->BeginRenderPass(render_pass->GetRenderPassVK(), frame_buffer->GetFrameBufferVK(), vk_area);
 }
 
-void CommandList::SetPipeline(Render::Pipeline* pipeline)
-{
-	assert(mCommandBuffer != nullptr);
-	mPipeline = pipeline;
-	Pipeline* vk_pipeline = StaticCast(pipeline);
-	mCommandBuffer->BindPipeline(vk_pipeline->GetPipelineVK());
-}
-
 void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports)
 {
 	assert(mCommandBuffer != nullptr);
@@ -167,6 +159,15 @@ void CommandList::EndRecord(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->End();
+}
+
+// ----------------- Main Resource Setup ------------------//
+void CommandList::SetPipeline(Render::Pipeline* pipeline)
+{
+	assert(mCommandBuffer != nullptr);
+	mPipeline = pipeline;
+	Pipeline* vk_pipeline = StaticCast(pipeline);
+	mCommandBuffer->BindPipeline(vk_pipeline->GetPipelineVK());
 }
 
 void CommandList::SetResourceLayout(Render::ResourceLayout* layout)

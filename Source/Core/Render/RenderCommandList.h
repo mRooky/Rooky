@@ -33,17 +33,17 @@ public:
 	virtual void BeginPass(uint32_t index, Pass* pass) = 0;
 	// Fix Setup
 	virtual void SetFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
-	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
-	virtual void Draw(DrawCall* draw) = 0;
 	// End Fix Setup
-	virtual void EndPass(void) = 0;
-	virtual void EndRecord(void) = 0;
-
-public: // Resource Setup
+	// Resource Setup
+	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetResourceLayout(ResourceLayout* layout) = 0;
 	virtual void SetResourceState(uint32_t index, ResourceState* state) = 0;
+	virtual void Draw(DrawCall* draw) = 0;
+	// End Resource Setup
+	virtual void EndPass(void) = 0;
+	virtual void EndRecord(void) = 0;
 
 public:
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }

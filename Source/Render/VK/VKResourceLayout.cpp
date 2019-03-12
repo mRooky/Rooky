@@ -38,6 +38,19 @@ ResourceLayout::~ResourceLayout(void)
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
 
+Render::PipelineLayout* ResourceLayout::Update(void)
+{
+	UpdatePipelineLayout();
+	return mCurrentLayout;
+}
+
+Render::ResourceState* ResourceLayout::CreateState(void)
+{
+	ResourceState * state = new ResourceState(this);
+	mResourceStates.push_back(state);
+	return state;
+}
+
 void ResourceLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);

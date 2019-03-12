@@ -24,6 +24,10 @@ public:
 	virtual ~ResourceLayout(void);
 
 public:
+	virtual Render::PipelineLayout* Update(void) override;
+	virtual Render::ResourceState* CreateState(void) override;
+
+public:
 	void Binding(CommandList* list);
 	void SetResourceState(uint32_t index, ResourceState* state);
 
@@ -44,6 +48,7 @@ protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
 
 protected:
+	std::vector<ResourceState*> mResourceStates;
 	std::vector<PipelineLayout*> mPipelineLayouts;
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };

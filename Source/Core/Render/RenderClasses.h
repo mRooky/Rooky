@@ -28,6 +28,7 @@ class Sampler;
 class Element;
 class Declaration;
 class DrawCall;
+class ResourceState;
 
 }
 

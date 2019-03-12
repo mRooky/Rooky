@@ -10,7 +10,8 @@
 
 #include "RenderObject.h"
 #include <cstddef>
-#include <vector>
+#include <array>
+#include <bitset>
 
 namespace Render
 {
@@ -23,12 +24,14 @@ public:
 	virtual ~ResourceLayout(void) override;
 
 public:
-	void AppendResourceState(ResourceState* state);
+	void SetResourceState(uint32_t index, ResourceState* state);
 
 public:
 	virtual PipelineLayout* Update(void) = 0;
+	virtual ResourceState* CreateState(void) = 0;
 
 public:
+	inline void ClearState(void) { mResourceMask.reset(); }
 	inline PipelineLayout* GetCurrentLayout(void) const { return mCurrentLayout; }
 
 public:
@@ -38,7 +41,8 @@ public:
 protected:
 	bool mDirty = true;
 	PipelineLayout* mCurrentLayout = nullptr;
-	std::vector<ResourceState*> mResourceStates;
+	std::bitset<8> mResourceMask = 0;
+	std::array<ResourceState*, 8> mResourceStates;
 };
 
 } /* namespace Render */
