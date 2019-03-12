@@ -5,20 +5,24 @@
  *      Author: rookyma
  */
 
-#include <CoreTexture.h>
+#include "CoreTexture.h"
 
 namespace Core
 {
 
-Texture::Texture()
+Texture::Texture(System* system):
+		Target(system)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Texture::~Texture()
+Texture::~Texture(void)
 {
-	// TODO Auto-generated destructor stub
+	mSampler = nullptr;
+}
+
+void Texture::Create(const char* file)
+{
+
 }
 
 } /* namespace Core */

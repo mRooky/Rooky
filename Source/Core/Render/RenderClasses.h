@@ -29,6 +29,7 @@ class Element;
 class Declaration;
 class DrawCall;
 class ResourceState;
+class ImageLayout;
 
 }
 

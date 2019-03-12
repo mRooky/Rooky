@@ -28,6 +28,13 @@ static inline VkBufferUsageFlags ConvertBufferUsageFlag(const Render::ResourceUs
 {
 	assert(usage.heap.Buffer == 1);
 	VkBufferUsageFlags flags = 0;
+
+	if (usage.heap.Transform == 1)
+	{
+		flags |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+		flags |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	}
+
 	if (usage.binding.IndexBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
@@ -59,6 +66,13 @@ static inline VkImageUsageFlags ConvertImageUsageFlag(const Render::ResourceUsag
 {
 	assert(usage.heap.Image == 1);
 	VkImageUsageFlags flags = 0;
+
+	if (usage.heap.Transform == 1)
+	{
+		flags |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+		flags |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+	}
+
 	if (usage.binding.SampledImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;

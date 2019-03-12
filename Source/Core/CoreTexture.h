@@ -16,11 +16,11 @@ namespace Core
 class Texture : public Target
 {
 public:
-	Texture(void);
+	explicit Texture(System* system);
 	virtual ~Texture(void) override;
 
 public:
-
+	void Create(const char* file);
 
 public:
 	inline Render::Sampler* GetSampler(void) const { return mSampler; }

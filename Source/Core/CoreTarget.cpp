@@ -5,20 +5,23 @@
  *      Author: rookyma
  */
 
-#include <CoreTarget.h>
+#include "CoreTarget.h"
 
 namespace Core
 {
 
-Target::Target()
+Target::Target(System* system):
+		Object(system)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Target::~Target()
+Target::~Target(void)
 {
-	// TODO Auto-generated destructor stub
+}
+
+void Target::Create(const Render::ImageLayout& layout)
+{
+
 }
 
 } /* namespace Core */

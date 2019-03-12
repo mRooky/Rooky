@@ -8,16 +8,20 @@
 #ifndef SOURCE_CORE_CORETARGET_H_
 #define SOURCE_CORE_CORETARGET_H_
 
+#include "CoreObject.h"
 #include "RenderClasses.h"
 
 namespace Core
 {
 
-class Target
+class Target : public Object
 {
 public:
-	Target(void);
-	virtual ~Target(void);
+	explicit Target(System* system);
+	virtual ~Target(void) override;
+
+public:
+	void Create(const Render::ImageLayout& layout);
 
 public:
 	inline Render::Image* GetImage(void) const { return mImage; }

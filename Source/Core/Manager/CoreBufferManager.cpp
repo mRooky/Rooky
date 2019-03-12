@@ -24,14 +24,12 @@ namespace Core
 {
 
 BufferManager::BufferManager(System* system):
-		mSystem(system)
+		Object(system)
 {
-	assert(mSystem != nullptr);
 }
 
 BufferManager::~BufferManager(void)
 {
-	mSystem = nullptr;
 	Util::Release(mIndexes);
 	Util::Release(mVertexes);
 	Util::Release(mUniforms);
