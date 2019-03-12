@@ -19,47 +19,74 @@ static inline void NotImplemented(void)
 	assert(false);
 }
 
-static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::HeapAccess access)
+static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::ResourceHeap heap)
 {
-	switch(access)
-	{
-	case Render::HeapAccess::HEAP_ACCESS_GPU_ONLY:
-		return VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
-	case Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE:
-		return VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
-	default:
-		assert(false);
-		return VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
-	}
+	return (heap.CPUAccess == 1) ? VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT : VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 }
 
-static inline VkBufferUsageFlags ConvertBufferUsageFlag(uint32_t usage)
+static inline VkBufferUsageFlags ConvertBufferUsageFlag(const Render::ResourceUsage& usage)
 {
+	assert(usage.heap.Buffer == 1);
 	VkBufferUsageFlags flags = 0;
-	for (size_t index = 0; index < 7; ++index)
+	if (usage.binding.IndexBuffer == 1)
 	{
-		auto flag = RenderBufferUsages[index];
-		uint32_t code = static_cast<uint32_t>(flag);
-		if (usage & code)
-		{
-			flags |= VulkanBufferUsages[index];
-		}
+		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
 	}
 
+	if (usage.binding.VertexBuffer == 1)
+	{
+		flags |= VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+	}
+
+	if (usage.binding.UniformBuffer == 1)
+	{
+		flags |= VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
+	}
+
+	if (usage.binding.StorageBuffer == 1)
+	{
+		flags |= VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
+	}
+
+	if (usage.binding.IndirectBuffer == 1)
+	{
+		flags |= VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
+	}
 	return flags;
 }
 
-static inline VkImageUsageFlags ConvertImageUsageFlag(uint32_t usage)
+static inline VkImageUsageFlags ConvertImageUsageFlag(const Render::ResourceUsage&  usage)
 {
+	assert(usage.heap.Image == 1);
 	VkImageUsageFlags flags = 0;
-	for (size_t index = 0; index < 6; ++index)
+	if (usage.binding.SampledImage == 1)
 	{
-		auto flag = RenderImageUsages[index];
-		uint32_t code = static_cast<uint32_t>(flag);
-		if (usage & code)
-		{
-			flags |= VulkanImageUsages[index];
-		}
+		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;
+	}
+
+	if (usage.binding.StorageImage == 1)
+	{
+		flags |= VK_IMAGE_USAGE_STORAGE_BIT;
+	}
+
+	if (usage.binding.ColorImage == 1)
+	{
+		flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+	}
+
+	if (usage.binding.DepthStencil == 1)
+	{
+		flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+	}
+
+	if (usage.binding.TransientImage == 1)
+	{
+		flags |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
+	}
+
+	if (usage.binding.InputImage == 1)
+	{
+		flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
 	}
 
 	return flags;

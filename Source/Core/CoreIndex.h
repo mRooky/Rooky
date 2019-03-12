@@ -10,6 +10,7 @@
 
 #include "CoreBuffer.h"
 #include "RenderEnum.h"
+#include "RenderUsage.h"
 
 namespace Core
 {
@@ -24,7 +25,7 @@ public:
 	virtual ~Index(void) override;
 
 public:
-	void Create(Render::IndexType type, uint32_t count, Render::HeapAccess access);
+	void Create(Render::IndexType type, uint32_t count, Render::ResourceHeap heap);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

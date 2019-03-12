@@ -29,9 +29,6 @@ public:
 	virtual Render::Format GetBestDepthStencilFormat(void) override;
 
 public:
-	virtual uint32_t GetImageUsageFlag(uint32_t usage, bool read, bool write) override;
-
-public:
 	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
 	inline Vulkan::Device* GetDeviceVK(void) const { return m_device; }
 	inline Vulkan::Instance* GetInstanceVK(void) const { return m_instance; }

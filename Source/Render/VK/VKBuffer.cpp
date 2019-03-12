@@ -33,10 +33,16 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, uint32_t usage)
+void Buffer::Create(size_t size, const Render::ResourceUsage& usage)
 {
 	mSize = size;
-	mUsage.BufferUsageFlags = usage;
+	mUsage = usage;
+	CreateBuffer();
+	AllocateMemory();
+}
+
+void Buffer::CreateBuffer(void)
+{
 	assert(mBuffer == nullptr);
 	Context* context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -44,11 +50,10 @@ void Buffer::Create(size_t size, uint32_t usage)
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
 }
 
-void Buffer::Allocate(Render::HeapAccess access)
+void Buffer::AllocateMemory(void)
 {
-	mAccess = access;
 	assert(mBuffer != nullptr);
-	auto flags = GetMemoryPropertyFlags(mAccess);
+	auto flags = GetMemoryPropertyFlags(mUsage.heap);
 	Vulkan::Device* device = mBuffer->GetDevice();
 	const VkMemoryRequirements& requires = mBuffer->GetMemoryRequirements();
 	mHeapSize = requires.size;
@@ -103,43 +108,29 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::BufferUsage usage)
+VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkBufferUsageFlags flags = 0;
-	if (usage.BufferUsageCommon == 1)
-	{
-		flags |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-		flags |= VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-	}
-	if (usage.BufferUsageIndex == 1)
+	VkBufferUsageFlags flags = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	if (usage.binding.IndexBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
 	}
-	if (usage.BufferUsageVertex == 1)
+	if (usage.binding.VertexBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
 	}
-	if (usage.BufferUsageUniform == 1)
+	if (usage.binding.UniformBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
 	}
-	if (usage.BufferUsageStorage == 1)
+	if (usage.binding.StorageBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
 	}
-	if (usage.BufferUsageIndirect == 1)
+	if (usage.binding.IndirectBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
 	}
-	if (usage.BufferUsageUniformTexel == 1)
-	{
-		flags |= VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT;
-	}
-	if (usage.BufferUsageStorageTexel == 1)
-	{
-		flags |= VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
-	}
-
 	return flags;
 }
 

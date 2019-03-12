@@ -42,38 +42,6 @@ namespace Render
 		INDEX_TYPE_UNKNOWN = ~0u
 	};
 
-	enum class BufferUsageFlags : uint32_t
-	{
-		BUFFER_USAGE_COMMON = 0 << 0,
-		BUFFER_USAGE_INDEX = 1 << 0,
-		BUFFER_USAGE_VERTEX = 1 << 1,
-		BUFFER_USAGE_UNIFORM = 1 << 2,
-		BUFFER_USAGE_STORAGE = 1 << 3,
-		BUFFER_USAGE_INDIRECT = 1 << 4,
-		BUFFER_USAGE_UNIFORM_TEXEL = 1 << 5,
-		BUFFER_USAGE_STORAGE_TEXEL = 1 << 6,
-		BUFFER_USAGE_UNKNOWN = ~0u
-	};
-
-	enum class ImageUsageFlags : uint32_t
-	{
-		IMAGE_USAGE_COMMON = 0 << 0,
-	    IMAGE_USAGE_SAMPLED = 1 << 0,
-	    IMAGE_USAGE_STORAGE = 1 << 1,
-	    IMAGE_USAGE_COLOR_ATTACHMENT = 1 << 2,
-	    IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT = 1 << 3,
-	    IMAGE_USAGE_TRANSIENT_ATTACHMENT = 1 << 4,
-	    IMAGE_USAGE_INPUT_ATTACHMENT = 1 << 5,
-	    IMAGE_USAGE_UNKNOWN = ~0u
-	};
-
-	enum class HeapAccess : uint32_t
-	{
-		HEAP_ACCESS_GPU_ONLY,
-		HEAP_ACCESS_CPU_VISIBLE,
-		HEAP_ACCESS_UNKNOWN
-	};
-
 	enum ShaderStage : uint32_t
 	{
 		SHADER_STAGE_VERTEX,

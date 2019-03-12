@@ -30,15 +30,16 @@ Vertex::~Vertex(void)
 	mDeclaration = nullptr;
 }
 
-void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::HeapAccess access)
+void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::ResourceHeap heap)
 {
 	mCount = count;
 	mDeclaration = decl;
 	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
-	Render::BufferUsage usage = {};
-	usage.BufferUsageVertex = 1;
-	Buffer::Create(size, usage.BufferUsageFlags, access);
+	auto buffer_usage = Render::GetBufferUsage(true);
+	buffer_usage.heap = heap;
+	buffer_usage.binding.VertexBuffer = 1;
+	Buffer::Create(size, buffer_usage);
 }
 
 } /* namespace Core */

@@ -54,7 +54,7 @@ void ResourceState::WriteDescriptorSet(void)
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& resource = mResources.at(bind);
-		Render::ResourceType type = resource.GetResourceType();
+		Render::ResourceFlag type = resource.GetResourceType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
 		write.dstSet = mDescriptorSet->GetHandle();
@@ -64,11 +64,11 @@ void ResourceState::WriteDescriptorSet(void)
 
 		switch(type)
 		{
-		case Render::ResourceType::RESOURCE_TYPE_IMAGE:
+		case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
 			ResourceState::SetImageInfo(resource, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			break;
-		case Render::ResourceType::RESOURCE_TYPE_UNIFORM:
+		case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
 			ResourceState::SetUniformInfo(resource, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			break;
@@ -93,7 +93,7 @@ void ResourceState::UpdateDescriptorSet(void)
 	{
 		auto& resource = mResources.at(bind);
 		Render::ShaderStage stage = resource.GetShaderStage();
-		Render::ResourceType type = resource.GetResourceType();
+		Render::ResourceFlag type = resource.GetResourceType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;
@@ -126,21 +126,21 @@ void ResourceState::SetSamplerInfo(const Render::Resource& resource, VkDescripto
 	assert(false);
 }
 
-VkDescriptorType ResourceState::GetDescriptorType(Render::ResourceType type)
+VkDescriptorType ResourceState::GetDescriptorType(Render::ResourceFlag type)
 {
 	switch(type)
 	{
-	case Render::ResourceType::RESOURCE_TYPE_COMMON:
+	case Render::ResourceFlag::RESOURCE_TYPE_COMMON:
 		return VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	case Render::ResourceType::RESOURCE_TYPE_BUFFER:
+	case Render::ResourceFlag::RESOURCE_TYPE_BUFFER:
 		return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-	case Render::ResourceType::RESOURCE_TYPE_IMAGE:
+	case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
 		return VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
-	case Render::ResourceType::RESOURCE_TYPE_UNIFORM:
+	case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
 		return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	case Render::ResourceType::RESOURCE_TYPE_SAMPLER:
+	case Render::ResourceFlag::RESOURCE_TYPE_SAMPLER:
 		return VK_DESCRIPTOR_TYPE_SAMPLER;
-	case Render::ResourceType::RESOURCE_TYPE_TARGET:
+	case Render::ResourceFlag::RESOURCE_TYPE_TARGET:
 		return VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
 	default:
 		assert(false);

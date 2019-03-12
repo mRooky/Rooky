@@ -23,7 +23,6 @@ public:
 
 public:
 	virtual void Create(const ImageLayout& layout) = 0;
-	virtual void Create(ImageType type, Format format, const Extent3& extent, uint32_t usage) = 0;
 	virtual void CreateView(ImageType type) = 0;
 
 public:

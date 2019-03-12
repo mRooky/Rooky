@@ -28,7 +28,7 @@ public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
 
 public:
-	static VkDescriptorType GetDescriptorType(Render::ResourceType type);
+	static VkDescriptorType GetDescriptorType(Render::ResourceFlag type);
 
 public:
 	static void SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info);

@@ -22,15 +22,15 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, uint32_t usage) = 0;
+	virtual void Create(size_t size, const ResourceUsage& usage) = 0;
 
 public:
 	inline size_t GetSize(void) const { return mSize; }
-	inline BufferUsage GetUsage(void) const { return mUsage; }
+	inline ResourceUsage GetUsage(void) const { return mUsage; }
 
 protected:
 	size_t mSize = 0;
-	BufferUsage mUsage = {};
+	ResourceUsage mUsage = {};
 
 };
 

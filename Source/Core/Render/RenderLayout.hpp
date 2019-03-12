@@ -30,7 +30,7 @@ public:
 	Extent3 extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
-	ImageUsage usage = {};
+	ResourceUsage usage = {};
 
 public:
 	Format format = Format::FORMAT_UNDEFINED;

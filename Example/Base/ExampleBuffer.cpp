@@ -130,9 +130,13 @@ void Buffer::CreateIndexBuffer(void)
 {
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
-	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+
+	Render::ResourceHeap heap_access;
+	heap_access.Buffer = 1;
+	heap_access.CPUAccess = 1;
+
 	mIndex = manager->CreateIndex();
-	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, access);
+	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, heap_access);
 
 	std::vector<uint16_t> indexes = { 0, 1, 2, 0, 2, 3 };
 
@@ -144,7 +148,11 @@ void Buffer::CreateVertexBuffer(void)
 {
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
-	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+
+	Render::ResourceHeap heap_access;
+	heap_access.Buffer = 1;
+	heap_access.CPUAccess = 1;
+
 	mVertex = manager->CreateVertex();
 
 	struct Vertex { float position[3]; float color[3]; };
@@ -166,7 +174,7 @@ void Buffer::CreateVertexBuffer(void)
 	elements.push_back(Render::Element(0, 0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3));
 	elements.push_back(Render::Element(0, 1, 4, Render::ElementType::ELEMENT_TYPE_FLOAT3));
 	auto decl = manager->CreateDeclaration(elements);
-	mVertex->Create(decl, vertex_buffer.size(), access);
+	mVertex->Create(decl, vertex_buffer.size(), heap_access);
 
 	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
 	mVertex->Write(vertex_buffer.data(), 0, size);
@@ -176,7 +184,11 @@ void Buffer::CreateUniformBuffer(void)
 {
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
-	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
+
+	Render::ResourceHeap heap_access;
+	heap_access.Buffer = 1;
+	heap_access.CPUAccess = 1;
+
 	mUniform = manager->CreateUniform();
 
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f) ,glm::vec3(1.0f / 1280.f, 1.0f / 800.0f, 0.0f));
@@ -184,7 +196,7 @@ void Buffer::CreateUniformBuffer(void)
 	glm::mat4 matrix = trans * scale;
 
 	uint32_t size = sizeof(matrix);
-	mUniform->Create(size, access);
+	mUniform->Create(size, heap_access);
 	mVertex->Write(&matrix, 0, size);
 }
 

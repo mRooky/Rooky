@@ -23,7 +23,7 @@ public:
 	virtual ~Uniform(void) override;
 
 public:
-	void Create(size_t size, Render::HeapAccess access);
+	void Create(size_t size, Render::ResourceHeap heap);
 };
 
 } /* namespace Core */

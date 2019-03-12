@@ -8,8 +8,9 @@
 #ifndef SOURCE_CORE_COREBUFFER_H_
 #define SOURCE_CORE_COREBUFFER_H_
 
-#include <RenderEnum.h>
+#include "RenderEnum.h"
 #include "RenderClasses.h"
+#include "RenderUsage.h"
 #include <cstdint>
 #include <cstddef>
 
@@ -23,7 +24,7 @@ protected:
 	virtual ~Buffer(void);
 
 public:
-	void Create(size_t size, uint32_t usage, Render::HeapAccess access);
+	void Create(size_t size, Render::ResourceUsage usage);
 
 public:
 	void Read(void* dst, size_t offset, size_t size);

@@ -26,12 +26,13 @@ Uniform::~Uniform(void)
 {
 }
 
-void Uniform::Create(size_t size, Render::HeapAccess access)
+void Uniform::Create(size_t size, Render::ResourceHeap heap)
 {
 	assert(size > 0);
-	Render::BufferUsage usage = {};
-	usage.BufferUsageUniform = 1;
-	Buffer::Create(size, usage.BufferUsageFlags, access);
+	auto buffer_usage = Render::GetBufferUsage(true);
+	buffer_usage.heap = heap;
+	buffer_usage.binding.UniformBuffer = 1;
+	Buffer::Create(size, buffer_usage);
 }
 
 } /* namespace Core */

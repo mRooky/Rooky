@@ -28,16 +28,17 @@ Index::~Index(void)
 	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
-void Index::Create(Render::IndexType type, uint32_t count, Render::HeapAccess access)
+void Index::Create(Render::IndexType type, uint32_t count, Render::ResourceHeap heap)
 {
 	mType = type;
 	mCount = count;
-
-	size_t size = Render::GetIndexTypeSize(type) * count;
+	size_t size = Render::GetIndexTypeSize(type);
+	size *= count;
 	assert(size > 0);
-	Render::BufferUsage usage = {};
-	usage.BufferUsageIndex = 1;
-	Buffer::Create(size, usage.BufferUsageFlags, access);
+	auto buffer_usage = Render::GetBufferUsage(true);
+	buffer_usage.heap = heap;
+	buffer_usage.binding.IndexBuffer = 1;
+	Buffer::Create(size, buffer_usage);
 }
 
 } /* namespace Core */

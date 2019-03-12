@@ -9,6 +9,7 @@
 #include "RenderBuffer.h"
 #include "RenderContext.h"
 #include "RenderFactory.h"
+#include "RenderUsage.h"
 #include <cassert>
 
 namespace Render
@@ -29,12 +30,10 @@ void DrawIndirect::Create(Context* context, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
-	BufferUsage usage = {};
-	usage.BufferUsageIndirect = 1;
+	auto resource_usage = Render::GetBufferUsage(true);
+	resource_usage.binding.IndirectBuffer = 1;
 	mBuffer = context->GetFactory()->CreateBuffer();
-	mBuffer->Create(size, usage.BufferUsageFlags);
-	Render::HeapAccess access = Render::HeapAccess::HEAP_ACCESS_CPU_VISIBLE;
-	mBuffer->Allocate(access);
+	mBuffer->Create(size, resource_usage);
 }
 
 } /* namespace Render */

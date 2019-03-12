@@ -15,7 +15,7 @@
 namespace Render
 {
 
-enum class ResourceType : uint32_t
+enum class ResourceFlag : uint32_t
 {
 	RESOURCE_TYPE_COMMON,
 	RESOURCE_TYPE_IMAGE,
@@ -59,7 +59,7 @@ public:
 
 public:
 	inline ShaderStage GetShaderStage(void) const { return mStage; }
-	inline ResourceType GetResourceType(void) const { return mType; }
+	inline ResourceFlag GetResourceType(void) const { return mType; }
 
 protected:
 	union
@@ -70,7 +70,7 @@ protected:
 		Object* mObject = nullptr;
 	};
 	ShaderStage mStage = ShaderStage::SHADER_STAGE_UNKNOWN;
-	ResourceType mType = ResourceType::RESOURCE_TYPE_COMMON;
+	ResourceFlag mType = ResourceFlag::RESOURCE_TYPE_COMMON;
 
 };
 

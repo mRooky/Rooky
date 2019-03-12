@@ -37,8 +37,14 @@ Image::~Image(void)
 
 void Image::Create(const Render::ImageLayout& layout)
 {
-	assert(mImage == nullptr);
 	mLayout = layout;
+	CreateImage();
+	AllocateMemory();
+}
+
+void Image::CreateImage(void)
+{
+	assert(mImage == nullptr);
 	VkFormat vk_format = ConvertFormat(mLayout.format);
 	Context* context = StaticCast(mContext);
 	Vulkan::Device* device = context->GetDeviceVK();
@@ -51,31 +57,10 @@ void Image::Create(const Render::ImageLayout& layout)
 	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mLayout.usage));
 }
 
-void Image::Create(Render::ImageType type, Render::Format format, const Render::Extent3& extent, uint32_t usage)
+void Image::AllocateMemory(void)
 {
-	mLayout.type = type;
-	mLayout.format = format;
-	mLayout.extent = extent;
-	mLayout.usage.ImageUsageFlags = usage;
-
-	assert(mImage == nullptr);
-	VkFormat vk_format = ConvertFormat(format);
-	Context* context = StaticCast(mContext);
-	Vulkan::Device* device = context->GetDeviceVK();
-
-	VkExtent3D vk_extent = {};
-	vk_extent.width = static_cast<uint32_t>(extent.width);
-	vk_extent.height = static_cast<uint32_t>(extent.height);
-	vk_extent.depth = static_cast<uint32_t>(extent.depth);
-	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mLayout.usage));
-}
-
-void Image::Allocate(Render::HeapAccess access)
-{
-	mAccess = access;
 	assert(mImage != nullptr);
-	auto flags = GetMemoryPropertyFlags(mAccess);
+	auto flags = GetMemoryPropertyFlags(mLayout.usage.heap);
 	Vulkan::Device* device = mImage->GetDevice();
 
 	VkMemoryRequirements requirements = mImage->GetMemoryRequirements();
@@ -190,35 +175,30 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 	}
 }
 
-VkImageUsageFlags Image::ConvertUsageFlag(Render::ImageUsage usage)
+VkImageUsageFlags Image::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkImageUsageFlags flags = 0;
-	if (usage.ImageUsageCommon == 1)
-	{
-		flags |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
-		flags |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-	}
-	if (usage.ImageUsageSampled == 1)
+	VkImageUsageFlags flags = VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+	if (usage.binding.SampledImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;
 	}
-	if (usage.ImageUsageStorage == 1)
+	if (usage.binding.StorageImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_STORAGE_BIT;
 	}
-	if (usage.ImageUsageColorAttachment == 1)
+	if (usage.binding.ColorImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 	}
-	if (usage.ImageUsageDepthStencilAttachment == 1)
+	if (usage.binding.DepthStencil == 1)
 	{
 		flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
 	}
-	if (usage.ImageUsageTransientAttachment == 1)
+	if (usage.binding.TransientImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
 	}
-	if (usage.ImageUsageInputAttachment == 1)
+	if (usage.binding.InputImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
 	}
