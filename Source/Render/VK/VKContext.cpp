@@ -92,8 +92,8 @@ void Context::CreatePhysical(void)
 	VkQueueFlags flags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
 	m_physical = Vulkan::PhysicalDevice::New(m_instance);
 	m_physical->Create(flags);
-	Vulkan::DumpLimits(m_physical);
-	Vulkan::DumpFormatsProperties(m_physical);
+//	Vulkan::DumpLimits(m_physical);
+//	Vulkan::DumpFormatsProperties(m_physical);
 }
 
 void Context::CreateDevice(void)

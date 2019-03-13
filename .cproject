@@ -97,6 +97,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="xcb"/>
                                     									
+                                    <listOptionValue builtIn="false" value="freeimage"/>
+                                    									
                                     <listOptionValue builtIn="false" value="png"/>
                                     									
                                     <listOptionValue builtIn="false" value="vulkan"/>

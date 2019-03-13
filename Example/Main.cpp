@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#include "ExampleBuffer.h"
+#include "ExampleTexture.h"
 
 int main(void)
 {
-	Example::Buffer buffer;
-	buffer.Initialize();
-	buffer.RecordCommands();
-	buffer.ShowModal();
+	Example::Texture texture;
+	texture.Initialize();
+	texture.RecordCommands();
+	texture.ShowModal();
 }
 

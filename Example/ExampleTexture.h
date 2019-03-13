@@ -20,6 +20,9 @@ public:
 	virtual ~Texture(void) override;
 
 public:
+	virtual void Initialize(void) override;
+
+public:
 	virtual void CreateTexture(const char* file);
 
 public:
