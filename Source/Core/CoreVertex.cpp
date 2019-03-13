@@ -26,7 +26,6 @@ Vertex::Vertex(BufferManager* creator):
 Vertex::~Vertex(void)
 {
 	mCount = 0;
-	delete mDeclaration;
 	mDeclaration = nullptr;
 }
 

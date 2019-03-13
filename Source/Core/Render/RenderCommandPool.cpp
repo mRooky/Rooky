@@ -18,6 +18,7 @@ CommandPool::CommandPool(Context* context):
 
 CommandPool::~CommandPool(void)
 {
+	mCommandLists.clear();
 }
 
 } /* namespace Render */

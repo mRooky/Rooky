@@ -33,6 +33,8 @@ Context::Context(void)
 
 Context::~Context(void)
 {
+	delete mFactory;
+	mFactory = nullptr;
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
 	Vulkan::Release(m_instance);
