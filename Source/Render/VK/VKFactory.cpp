@@ -15,6 +15,12 @@
 #include "VKQueue.h"
 #include "VKShader.h"
 #include "VKDeclaration.h"
+#include "VKResourceHeap.h"
+
+#include "VulkanCommandPool.h"
+#include "VulkanInline.h"
+#include "VulkanDevice.h"
+#include "VulkanPhysicalDevice.h"
 
 namespace VK
 {
@@ -22,10 +28,24 @@ namespace VK
 Factory::Factory(Context* context):
 		Render::Factory(context)
 {
+	CreateDefaultPool();
+	mResourceHeap = new ResourceHeap(context);
 }
 
 Factory::~Factory(void)
 {
+	delete mResourceHeap;
+	mResourceHeap = nullptr;
+	Vulkan::Release(mCommandPool);
+}
+
+void Factory::CreateDefaultPool(void)
+{
+	auto device = StaticCast(mContext)->GetVulkanDevice();
+	uint32_t family = device->GetPhysicalDevice()->GetFamily();
+	mCommandPool = Vulkan::CommandPool::New(device);
+	mCommandPool->Create(family);
+	mCommandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 }
 
 Render::Pass* Factory::CreatePass(void)

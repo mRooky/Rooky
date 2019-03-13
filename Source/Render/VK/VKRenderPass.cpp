@@ -41,13 +41,13 @@ void RenderPass::Create(void)
 
 	for (auto format : mFormats)
 	{
-		VkFormat vk_format = ConvertFormat(format);
+		VkFormat vulkan_format = ConvertFormat(format);
 
-		VkAttachmentReference reference = Vulkan::Image::GetReference(vk_format);
+		VkAttachmentReference reference = Vulkan::Image::GetReference(vulkan_format);
 		reference.attachment = attachment_references.size();
 		attachment_references.push_back(reference);
 
-		VkAttachmentDescription description = Vulkan::Image::GetDescription(vk_format);
+		VkAttachmentDescription description = Vulkan::Image::GetDescription(vulkan_format);
 		attachment_descriptions.push_back(description);
 	}
 
@@ -80,7 +80,7 @@ void RenderPass::Create(void)
 	renderpass_create_info.dependencyCount = subpass_dependencies.size();
 	renderpass_create_info.pDependencies = subpass_dependencies.data();
 
-	auto device = StaticCast(mContext)->GetDeviceVK();
+	auto device = StaticCast(mContext)->GetVulkanDevice();
 	mRenderPass = Vulkan::RenderPass::New(device);
 	mRenderPass->Create(&renderpass_create_info);
 }

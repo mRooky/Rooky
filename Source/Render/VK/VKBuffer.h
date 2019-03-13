@@ -24,6 +24,8 @@ public:
 	virtual void Create(size_t size, const Render::ResourceUsage& usage) override;
 
 public:
+	virtual void Download(void* dst) override;
+	virtual void Upload(const void* src) override;
 	virtual void* Map(size_t offset, size_t size) override;
 	virtual void Unmap(size_t offset, size_t size) override;
 
@@ -34,8 +36,8 @@ public:
 	VkDescriptorBufferInfo GetDescriptorInfo(void) const;
 
 public:
-	inline Vulkan::Buffer* GetBufferVK(void) const { return mBuffer; }
-	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
+	inline Vulkan::Buffer* GetVulkanBuffer(void) const { return mBuffer; }
+	inline Vulkan::DeviceMemory* GetVulkanMemory(void) const { return mMemory; }
 
 public:
 	static VkBufferUsageFlags ConvertUsageFlag(Render::ResourceUsage usage);

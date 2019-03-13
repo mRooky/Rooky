@@ -9,10 +9,12 @@
 #define SOURCE_RENDER_VK_VKFACTORY_H_
 
 #include "RenderFactory.h"
+#include "VKRender.h"
 
 namespace VK
 {
 class Context;
+class ResourceHeap;
 class Factory: public Render::Factory
 {
 public:
@@ -28,7 +30,28 @@ public:
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
 	virtual Render::Declaration* CreateDeclaration(void) override;
+
+public:
+	inline ResourceHeap* GetResourceHeap(void) const { return mResourceHeap; }
+	inline Vulkan::CommandPool* GetVulkanCommandPool(void) const { return mCommandPool; }
+
+protected:
+	void CreateDefaultPool(void);
+
+protected:
+	ResourceHeap* mResourceHeap = nullptr;
+	Vulkan::CommandPool* mCommandPool = nullptr;
 };
+
+static inline Factory* StaticCast(Render::Factory* factory)
+{
+	return static_cast<Factory*>(factory);
+}
+
+static inline Factory* SaftyCast(Render::Factory* factory)
+{
+	return dynamic_cast<Factory*>(factory);
+}
 
 } /* namespace VK */
 

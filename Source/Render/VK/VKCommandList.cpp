@@ -46,8 +46,8 @@ void CommandList::Create(bool primary)
 	assert(mCommandPool != nullptr);
 	VkCommandBufferLevel level =  primary ? VK_COMMAND_BUFFER_LEVEL_PRIMARY : VK_COMMAND_BUFFER_LEVEL_SECONDARY;
 	auto command_pool = static_cast<CommandPool*>(mCommandPool);
-	auto vk_command_pool = command_pool->GetCommandPoolVK();
-	mCommandBuffer = vk_command_pool->Allocate(level);
+	auto vulkan_command_pool = command_pool->GetVulkanCommandPool();
+	mCommandBuffer = vulkan_command_pool->Allocate(level);
 }
 
 void CommandList::Submit(uint32_t index)
@@ -87,50 +87,52 @@ void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2
 	assert(mCommandBuffer != nullptr);
 	RenderPass* render_pass = StaticCast(mPipelineDescription.pRenderPass);
 	FrameBuffer* frame_buffer = StaticCast(frame);
-	VkRect2D vk_area = {};
-	vk_area.offset.x = area.offset.x;
-	vk_area.offset.y = area.offset.y;
-	vk_area.extent.width = area.extent.width;
-	vk_area.extent.height = area.extent.height;
-	mCommandBuffer->BeginRenderPass(render_pass->GetRenderPassVK(), frame_buffer->GetFrameBufferVK(), vk_area);
+	VkRect2D vulkan_area = {};
+	vulkan_area.offset.x = area.offset.x;
+	vulkan_area.offset.y = area.offset.y;
+	vulkan_area.extent.width = area.extent.width;
+	vulkan_area.extent.height = area.extent.height;
+	auto vulkan_pass = render_pass->GetVulkanRenderPass();
+	auto vulkan_frame = frame_buffer->GetVulkanFrameBuffer();
+	mCommandBuffer->BeginRenderPass(vulkan_pass, vulkan_frame, vulkan_area);
 }
 
 void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports)
 {
 	assert(mCommandBuffer != nullptr);
-	std::vector<VkViewport> vk_viewports;
-	vk_viewports.reserve(count);
+	std::vector<VkViewport> vulkan_viewports;
+	vulkan_viewports.reserve(count);
 	for (uint32_t i = 0; i < count; ++i)
 	{
 		auto current = viewports + i;
-		VkViewport vk_viewport = {};
-		vk_viewport.x = current->x;
-		vk_viewport.y = current->y;
-		vk_viewport.width = current->width;
-		vk_viewport.height = current->height;
-		vk_viewport.minDepth = current->minDepth;
-		vk_viewport.maxDepth = current->maxDepth;
-		vk_viewports.push_back(vk_viewport);
+		VkViewport vulkan_viewport = {};
+		vulkan_viewport.x = current->x;
+		vulkan_viewport.y = current->y;
+		vulkan_viewport.width = current->width;
+		vulkan_viewport.height = current->height;
+		vulkan_viewport.minDepth = current->minDepth;
+		vulkan_viewport.maxDepth = current->maxDepth;
+		vulkan_viewports.push_back(vulkan_viewport);
 	}
-	mCommandBuffer->SetViewport(first, count, vk_viewports.data());
+	mCommandBuffer->SetViewport(first, count, vulkan_viewports.data());
 }
 
 void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects)
 {
 	assert(mCommandBuffer != nullptr);
-	std::vector<VkRect2D> vk_scissors;
-	vk_scissors.reserve(count);
+	std::vector<VkRect2D> vulkan_scissors;
+	vulkan_scissors.reserve(count);
 	for (uint32_t i = 0; i < count; ++i)
 	{
 		auto current = rects + i;
-		VkRect2D vk_scissor = {};
-		vk_scissor.offset.x = current->offset.x;
-		vk_scissor.offset.y = current->offset.y;
-		vk_scissor.extent.width = current->extent.width;
-		vk_scissor.extent.height = current->extent.height;
-		vk_scissors.push_back(vk_scissor);
+		VkRect2D vulkan_scissor = {};
+		vulkan_scissor.offset.x = current->offset.x;
+		vulkan_scissor.offset.y = current->offset.y;
+		vulkan_scissor.extent.width = current->extent.width;
+		vulkan_scissor.extent.height = current->extent.height;
+		vulkan_scissors.push_back(vulkan_scissor);
 	}
-	mCommandBuffer->SetScissor(first, count, vk_scissors.data());
+	mCommandBuffer->SetScissor(first, count, vulkan_scissors.data());
 }
 
 void CommandList::Draw(Render::DrawCall* draw)
@@ -167,7 +169,8 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 	assert(mCommandBuffer != nullptr);
 	mPipeline = pipeline;
 	Pipeline* vk_pipeline = StaticCast(pipeline);
-	mCommandBuffer->BindPipeline(vk_pipeline->GetPipelineVK());
+	auto vulkan_pipeline = vk_pipeline->GetVulkanPipeline();
+	mCommandBuffer->BindPipeline(vulkan_pipeline);
 }
 
 void CommandList::SetResourceLayout(Render::ResourceLayout* layout)

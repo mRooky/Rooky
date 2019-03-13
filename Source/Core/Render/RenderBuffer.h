@@ -26,7 +26,7 @@ public:
 
 public:
 	inline size_t GetSize(void) const { return mSize; }
-	inline ResourceUsage GetUsage(void) const { return mUsage; }
+	inline const ResourceUsage& GetUsage(void) const { return mUsage; }
 
 protected:
 	size_t mSize = 0;

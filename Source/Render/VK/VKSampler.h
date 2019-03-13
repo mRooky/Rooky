@@ -21,7 +21,7 @@ public:
 	virtual ~Sampler(void) override;
 
 public:
-	inline Vulkan::Sampler* GetSamplerVK(void) const { return mSampler; }
+	inline Vulkan::Sampler* GetVulkanSampler(void) const { return mSampler; }
 
 protected:
 	Vulkan::Sampler* mSampler = nullptr;

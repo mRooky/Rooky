@@ -25,7 +25,7 @@ public:
 	void Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts);
 
 public:
-	inline Vulkan::PipelineLayout* GetPipelineLayoutVK(void) const { return mPipelineLayout; }
+	inline Vulkan::PipelineLayout* GetVulkanPipelineLayout(void) const { return mPipelineLayout; }
 
 public:
 	inline const std::vector<Vulkan::DescriptorSetLayout*>& GetLayouts(void) const { return mDescriptorSetLayouts; }

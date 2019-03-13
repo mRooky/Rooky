@@ -10,6 +10,7 @@
 #include "VKFormat.h"
 #include "VKBuffer.h"
 #include "VKInline.h"
+#include "VKFactory.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -45,16 +46,16 @@ void Image::Create(const Render::ImageLayout& layout)
 void Image::CreateImage(void)
 {
 	assert(mImage == nullptr);
-	VkFormat vk_format = ConvertFormat(mLayout.format);
+	VkFormat vulkan_format = ConvertFormat(mLayout.format);
 	Context* context = StaticCast(mContext);
-	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Device* device = context->GetVulkanDevice();
 
-	VkExtent3D vk_extent = {};
-	vk_extent.width = static_cast<uint32_t>(mLayout.extent.width);
-	vk_extent.height = static_cast<uint32_t>(mLayout.extent.height);
-	vk_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
+	VkExtent3D vulkan_extent = {};
+	vulkan_extent.width = static_cast<uint32_t>(mLayout.extent.width);
+	vulkan_extent.height = static_cast<uint32_t>(mLayout.extent.height);
+	vulkan_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vk_format, vk_extent, Image::ConvertUsageFlag(mLayout.usage));
+	mImage->Create(vulkan_format, vulkan_extent, Image::ConvertUsageFlag(mLayout.usage));
 }
 
 void Image::AllocateMemory(void)
@@ -76,8 +77,8 @@ void Image::CreateView(Render::ImageType type)
 	assert(mLayout.type == type);
 	assert(mLayout.type != Render::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
-	VkImageViewType vk_type = ConverType(mLayout.type);
-	mImage->CreateView(vk_type);
+	VkImageViewType vulkan_type = ConverType(mLayout.type);
+	mImage->CreateView(vulkan_type);
 }
 
 void* Image::Map(size_t offset, size_t size)
@@ -88,6 +89,16 @@ void* Image::Map(size_t offset, size_t size)
 void Image::Unmap(size_t offset, size_t size)
 {
 	assert(false);
+}
+
+void Image::Download(void* dst)
+{
+
+}
+
+void Image::Upload(const void* src)
+{
+
 }
 
 VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
@@ -105,7 +116,8 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 void Image::CopyFrom(const Render::Buffer* other)
 {
 	Context* context = StaticCast(mContext);
-	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
+	Factory* factory = StaticCast(mContext->GetFactory());
+	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	VkBufferImageCopy copy_region = {};
@@ -116,13 +128,13 @@ void Image::CopyFrom(const Render::Buffer* other)
 	copy_region.imageExtent.depth = mLayout.extent.depth;
 
 	const Buffer* buffer = static_cast<const Buffer*>(other);
-	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
+	Vulkan::Buffer* vulkan_buffer = buffer->GetVulkanBuffer();
 
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
-	command_buffer->CopyResource(vk_buffer, mImage, 1, &copy_region);
+	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
 	command_buffer->End();
 
-	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Device* device = context->GetVulkanDevice();
 	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
 	queue->FlushCommandBuffer(command_buffer);
 }

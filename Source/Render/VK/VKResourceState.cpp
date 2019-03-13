@@ -111,14 +111,14 @@ void ResourceState::SetImageInfo(const Render::Resource& resource, VkDescriptorI
 {
 	assert(info != nullptr);
 	Image* image = StaticCast(resource.GetImage());
-	*info = image->GetImageVK()->GetDescriptorInfo();
+	*info = image->GetVulkanImage()->GetDescriptorInfo();
 }
 
 void ResourceState::SetUniformInfo(const Render::Resource& resource, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
 	Buffer* buffer = StaticCast(resource.GetUniform());
-	*info = buffer->GetBufferVK()->GetDescriptorInfo();
+	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
 }
 
 void ResourceState::SetSamplerInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)

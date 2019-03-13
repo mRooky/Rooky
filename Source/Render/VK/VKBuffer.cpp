@@ -8,6 +8,7 @@
 #include "VKBuffer.h"
 #include "VKContext.h"
 #include "VKInline.h"
+#include "VKFactory.h"
 
 #include "VulkanBuffer.h"
 #include "VulkanInline.h"
@@ -45,7 +46,7 @@ void Buffer::CreateBuffer(void)
 {
 	assert(mBuffer == nullptr);
 	Context* context = StaticCast(mContext);
-	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Device* device = context->GetVulkanDevice();
 	mBuffer = Vulkan::Buffer::New(device);
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
 }
@@ -75,10 +76,21 @@ void Buffer::Unmap(size_t offset, size_t size)
 	mMemory->Flush(offset, size);
 }
 
+void Buffer::Download(void* dst)
+{
+
+}
+
+void Buffer::Upload(const void* src)
+{
+
+}
+
 void Buffer::CopyFrom(const Render::Buffer* other)
 {
 	Context* context = StaticCast(mContext);
-	Vulkan::CommandPool* command_pool = context->GetCommandPoolVK();
+	Factory* factory = StaticCast(mContext->GetFactory());
+	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	assert(mSize >= other->GetSize());
@@ -86,13 +98,13 @@ void Buffer::CopyFrom(const Render::Buffer* other)
 	buffer_copy_range.size = other->GetSize();
 
 	const Buffer* buffer = StaticCast(other);
-	Vulkan::Buffer* vk_buffer = buffer->GetBufferVK();
+	Vulkan::Buffer* vk_buffer = buffer->GetVulkanBuffer();
 
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 	command_buffer->CopyResource(vk_buffer, mBuffer, 1, &buffer_copy_range);
 	command_buffer->End();
 
-	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Device* device = context->GetVulkanDevice();
 	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
 	queue->FlushCommandBuffer(command_buffer);
 }
@@ -110,7 +122,11 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 
 VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkBufferUsageFlags flags = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	VkBufferUsageFlags flags = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	if (usage.heap.Transform == 1)
+	{
+		flags |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	}
 	if (usage.binding.IndexBuffer == 1)
 	{
 		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;

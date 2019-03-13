@@ -26,7 +26,7 @@ public:
 	virtual void Create(Render::ShaderStage stage, const char* file) override;
 
 public:
-	inline Vulkan::ShaderModule* GetModuleVK(void) const { return mShader; }
+	inline Vulkan::ShaderModule* GetVulkanModule(void) const { return mShader; }
 
 public:
 	static VkShaderStageFlagBits ConvertStage(Render::ShaderStage stage);

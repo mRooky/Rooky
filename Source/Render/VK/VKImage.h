@@ -25,6 +25,8 @@ public:
 	virtual void CreateView(Render::ImageType type) override;
 
 public:
+	virtual void Download(void* dst) override;
+	virtual void Upload(const void* src) override;
 	virtual void* Map(size_t offset, size_t size) override;
 	virtual void Unmap(size_t offset, size_t size) override;
 
@@ -32,8 +34,8 @@ public:
 	virtual void CopyFrom(const Render::Buffer* other) override;
 
 public:
-	inline Vulkan::Image* GetImageVK(void) const { return mImage; }
-	inline Vulkan::DeviceMemory* GetMemoryVK(void) const { return mMemory; }
+	inline Vulkan::Image* GetVulkanImage(void) const { return mImage; }
+	inline Vulkan::DeviceMemory* GetVulkanMemory(void) const { return mMemory; }
 
 public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;

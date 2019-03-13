@@ -33,7 +33,6 @@ Context::Context(void)
 
 Context::~Context(void)
 {
-	Vulkan::Release(m_commandPool);
 	Vulkan::Release(m_device);
 	Vulkan::Release(m_physical);
 	Vulkan::Release(m_instance);
@@ -46,7 +45,6 @@ void Context::Create(void)
 	CreateInstance();
 	CreatePhysical();
 	CreateDevice();
-	CreateDefaultPool();
 	mFactory = new Factory(this);
 }
 
@@ -124,14 +122,6 @@ void Context::CreateDevice(void)
 	device_create_info.pEnabledFeatures = &features;
 
 	m_device->Create(&device_create_info);
-}
-
-void Context::CreateDefaultPool(void)
-{
-	uint32_t family = m_physical->GetFamily();
-	m_commandPool = Vulkan::CommandPool::New(m_device);
-	m_commandPool->Create(family);
-	m_commandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY); //default command buffer
 }
 
 } /* namespace VK */

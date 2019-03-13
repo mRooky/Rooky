@@ -29,27 +29,22 @@ public:
 	virtual Render::Format GetBestDepthStencilFormat(void) override;
 
 public:
-	inline Vulkan::Vendor* GetVendorVK(void) const { return m_vendor; }
-	inline Vulkan::Device* GetDeviceVK(void) const { return m_device; }
-	inline Vulkan::Instance* GetInstanceVK(void) const { return m_instance; }
-	inline Vulkan::PhysicalDevice* GetPhysicalDeviceVK(void) const { return m_physical; }
-
-public:
-	inline Vulkan::CommandPool* GetCommandPoolVK(void) const { return m_commandPool; }
+	inline Vulkan::Vendor* GetVulkanVendor(void) const { return m_vendor; }
+	inline Vulkan::Device* GetVulkanDevice(void) const { return m_device; }
+	inline Vulkan::Instance* GetVulkanInstance(void) const { return m_instance; }
+	inline Vulkan::PhysicalDevice* GetVulkanPhysicalDevice(void) const { return m_physical; }
 
 private:
 	void CreateVendor(void);
 	void CreateInstance(bool debug = true);
 	void CreatePhysical(void);
 	void CreateDevice(void);
-	void CreateDefaultPool(void);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;
 	Vulkan::Device* m_device = nullptr;
 	Vulkan::Instance* m_instance = nullptr;
 	Vulkan::PhysicalDevice* m_physical = nullptr;
-	Vulkan::CommandPool* m_commandPool = nullptr;
 
 private:
 	std::vector<std::string> m_layers;

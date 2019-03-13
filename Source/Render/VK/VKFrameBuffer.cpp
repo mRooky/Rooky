@@ -33,30 +33,30 @@ void FrameBuffer::Create(const Render::Extent2& extent)
 {
 	assert(mAttachments.size() > 0);
 
-	VkExtent2D vk_extent = {};
-	vk_extent.width = static_cast<uint32_t>(extent.width);
-	vk_extent.height = static_cast<uint32_t>(extent.height);
+	VkExtent2D vulkan_extent = {};
+	vulkan_extent.width = static_cast<uint32_t>(extent.width);
+	vulkan_extent.height = static_cast<uint32_t>(extent.height);
 
 	std::vector<Vulkan::Image*> attachments;
 	attachments.reserve(mAttachments.size());
 	for (auto attachment : mAttachments)
 	{
 		Image* image = StaticCast(attachment);
-		auto vk_image = image->GetImageVK();
-		attachments.push_back(vk_image);
+		auto vulkan_image = image->GetVulkanImage();
+		attachments.push_back(vulkan_image);
 	}
 
 	if (mDepthStencil != nullptr)
 	{
 		Image* image = StaticCast(mDepthStencil);
-		auto vk_image = image->GetImageVK();
-		attachments.push_back(vk_image);
+		auto vulkan_image = image->GetVulkanImage();
+		attachments.push_back(vulkan_image);
 	}
 
 	RenderPass* pass = StaticCast(mPass);
-	auto vk_pass = pass->GetRenderPassVK();
-	mFrameBuffer = Vulkan::FrameBuffer::New(vk_pass->GetDevice());
-	mFrameBuffer->Create(vk_pass, attachments, vk_extent);
+	auto vulkan_pass = pass->GetVulkanRenderPass();
+	mFrameBuffer = Vulkan::FrameBuffer::New(vulkan_pass->GetDevice());
+	mFrameBuffer->Create(vulkan_pass, attachments, vulkan_extent);
 }
 
 } /* namespace VK */

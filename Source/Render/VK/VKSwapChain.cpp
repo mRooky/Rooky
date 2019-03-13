@@ -40,7 +40,7 @@ SwapChain::~SwapChain(void)
 void SwapChain::Create(Platform::Window* window)
 {
 	auto context = StaticCast(mContext);
-	Vulkan::Device* device = context->GetDeviceVK();
+	Vulkan::Device* device = context->GetVulkanDevice();
 	mSurface = Vulkan::Surface::New(device->GetPhysicalDevice());
 
 #ifdef VK_USE_PLATFORM_XCB_KHR

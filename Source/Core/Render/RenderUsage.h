@@ -58,6 +58,9 @@ public:
 	ResourceBinding binding;
 
 public:
+	inline bool AccessCPU(void) const { return heap.CPUAccess == 1; }
+
+public:
 	static ResourceUsage GetImageUsage(bool access);
 	static ResourceUsage GetBufferUsage(bool access);
 };

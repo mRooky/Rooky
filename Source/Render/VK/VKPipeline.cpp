@@ -43,17 +43,17 @@ void Pipeline::Initialize(const Render::PipelineDescription& desc)
 	{
 		mDescription = desc;
 		auto render_pass = StaticCast(mDescription.pRenderPass);
-		auto vk_pass = render_pass->GetRenderPassVK();
+		auto vulkan_pass = render_pass->GetVulkanRenderPass();
 		auto pipeline_state = StaticCast(mDescription.pPipelineState);
 		auto pipeline_layout = StaticCast(mDescription.pPipelineLayout);
-		auto vk_layout = pipeline_layout->GetPipelineLayoutVK();
+		auto vulkan_layout = pipeline_layout->GetVulkanPipelineLayout();
 
 		auto pipeline_create_info = pipeline_state->GetGraphicsInfo();
-		pipeline_create_info->SetContent(vk_layout, vk_pass, mDescription.index);
+		pipeline_create_info->SetContent(vulkan_layout, vulkan_pass, mDescription.index);
 
 		assert(false);
 
-		auto device = vk_pass->GetDevice();
+		auto device = vulkan_pass->GetDevice();
 		mCurrent = Vulkan::Pipeline::New(device);
 		mCurrent->Create(nullptr, pipeline_create_info->CreateInfo());
 	}

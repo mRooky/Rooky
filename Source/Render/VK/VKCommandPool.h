@@ -27,7 +27,7 @@ public:
 	virtual Render::CommandList* Allocate(bool level) override;
 
 public:
-	inline Vulkan::CommandPool* GetCommandPoolVK(void) const { return mCommandPool; }
+	inline Vulkan::CommandPool* GetVulkanCommandPool(void) const { return mCommandPool; }
 
 protected:
 	Vulkan::CommandPool* mCommandPool = nullptr;

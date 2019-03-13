@@ -44,7 +44,7 @@ public:
 	virtual void EndRecord(void) override;
 
 public:
-	inline Vulkan::CommandBuffer* GetCommandBufferVK(void) const { return mCommandBuffer; }
+	inline Vulkan::CommandBuffer* GetVulkanCommandBuffer(void) const { return mCommandBuffer; }
 
 protected:
 	Render::Pipeline* mPipeline = nullptr;

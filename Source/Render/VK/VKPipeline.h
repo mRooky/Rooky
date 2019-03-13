@@ -28,7 +28,7 @@ public:
 	void Update(void);
 
 public:
-	inline Vulkan::Pipeline* GetPipelineVK(void) const { return mCurrent; }
+	inline Vulkan::Pipeline* GetVulkanPipeline(void) const { return mCurrent; }
 
 protected:
 	Vulkan::Pipeline* mCurrent = nullptr;

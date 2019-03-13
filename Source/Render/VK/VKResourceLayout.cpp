@@ -65,10 +65,10 @@ void ResourceLayout::Binding(CommandList* list)
 		descriptor_sets.push_back(vk_state->GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
-	auto vk_cmd = list->GetCommandBufferVK();
 	auto vk_pipeline_layout = StaticCast(mCurrentLayout);
-	auto vk_layout = vk_pipeline_layout->GetPipelineLayoutVK();
-	vk_cmd->BindDescriptorSets(vk_layout, descriptor_sets, offset);
+	auto vulkan_command_buffer = list->GetVulkanCommandBuffer();
+	auto vulkan_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
+	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
 }
 
 void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
@@ -103,7 +103,7 @@ void ResourceLayout::CreateDescriptorPool(size_t max)
 	}
 
 	size_t max_allocate = VK_DESCRIPTOR_TYPE_RANGE_SIZE * max;
-	auto device = StaticCast(mContext)->GetDeviceVK();
+	auto device = StaticCast(mContext)->GetVulkanDevice();
 	mDescriptorPool = Vulkan::DescriptorPool::New(device);
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }

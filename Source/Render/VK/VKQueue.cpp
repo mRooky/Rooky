@@ -33,8 +33,8 @@ Queue::~Queue(void)
 void Queue::Create(uint32_t mIndex)
 {
 	auto context = StaticCast(mContext);
-	auto device = context->GetDeviceVK();
-	auto physical = context->GetPhysicalDeviceVK();
+	auto device = context->GetVulkanDevice();
+	auto physical = context->GetVulkanPhysicalDevice();
 	uint32_t family = physical->GetFamily();
 	mQueue = device->GetQueue(family, mIndex);
 }
@@ -43,16 +43,16 @@ void Queue::Submit(Render::CommandList* command)
 {
 	assert(mQueue != nullptr);
 	auto command_list = StaticCast(command);
-	auto command_buffer = command_list->GetCommandBufferVK();
-	auto vk_command = command_buffer->GetHandle();
-	auto vk_semaphore = command_buffer->GetSemaphore()->GetHandle();
+	auto command_buffer = command_list->GetVulkanCommandBuffer();
+	auto vulkan_command = command_buffer->GetHandle();
+	auto vulkan_semaphore = command_buffer->GetSemaphore()->GetHandle();
 	VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 
 	VkSubmitInfo submit_info = Vulkan::Queue::SubmitInfo();
 	submit_info.commandBufferCount = 1;
-	submit_info.pCommandBuffers = &vk_command;
+	submit_info.pCommandBuffers = &vulkan_command;
 	submit_info.waitSemaphoreCount = 1;
-	submit_info.pWaitSemaphores = &vk_semaphore;
+	submit_info.pWaitSemaphores = &vulkan_semaphore;
 	submit_info.pWaitDstStageMask = &wait_stage_mask;
 
 	mQueue->Submit(1, &submit_info);

@@ -31,8 +31,8 @@ CommandPool::~CommandPool(void)
 void CommandPool::Create(void)
 {
 	auto context = StaticCast(mContext);
-	auto device = context->GetDeviceVK();
-	auto physical = context->GetPhysicalDeviceVK();
+	auto device = context->GetVulkanDevice();
+	auto physical = context->GetVulkanPhysicalDevice();
 	uint32_t family = physical->GetFamily();
 	mCommandPool = Vulkan::CommandPool::New(device);
 	mCommandPool->Create(family);
