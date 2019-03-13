@@ -8,26 +8,27 @@
 #ifndef SOURCE_CORE_CORETARGET_H_
 #define SOURCE_CORE_CORETARGET_H_
 
-#include "CoreObject.h"
 #include "RenderClasses.h"
 
 namespace Core
 {
-
-class Target : public Object
+class TextureManager;
+class Target
 {
 public:
-	explicit Target(System* system);
-	virtual ~Target(void) override;
+	explicit Target(TextureManager* manager);
+	virtual ~Target(void);
 
 public:
 	void Create(const Render::ImageLayout& layout);
 
 public:
 	inline Render::Image* GetImage(void) const { return mImage; }
+	inline TextureManager* GetManager(void) const { return mManager; }
 
 protected:
 	Render::Image* mImage = nullptr;
+	TextureManager* mManager = nullptr;
 };
 
 } /* namespace Core */

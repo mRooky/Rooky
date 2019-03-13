@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#ifndef EXAMPLE_BASE_EXAMPLEVIEWPORT_H_
-#define EXAMPLE_BASE_EXAMPLEVIEWPORT_H_
+#ifndef EXAMPLE_EXAMPLEVIEWPORT_H_
+#define EXAMPLE_EXAMPLEVIEWPORT_H_
 
-#include "ExampleBase.h"
 #include "CoreViewport.h"
+#include "ExampleBase.h"
 
 namespace Example
 {
@@ -32,4 +32,4 @@ protected:
 
 } /* namespace Example */
 
-#endif /* EXAMPLE_BASE_EXAMPLEVIEWPORT_H_ */
+#endif /* EXAMPLE_EXAMPLEVIEWPORT_H_ */

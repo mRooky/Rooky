@@ -6,6 +6,7 @@
  */
 
 #include "ExamplePath.h"
+
 #include "CorePass.h"
 
 #include "RenderPass.h"

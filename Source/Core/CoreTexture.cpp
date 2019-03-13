@@ -6,12 +6,15 @@
  */
 
 #include "CoreTexture.h"
+#include "CoreTextureManager.h"
+
+#include <cassert>
 
 namespace Core
 {
 
-Texture::Texture(System* system):
-		Target(system)
+Texture::Texture(TextureManager* manager):
+		Target(manager)
 {
 }
 
@@ -22,7 +25,7 @@ Texture::~Texture(void)
 
 void Texture::Create(const char* file)
 {
-
+	mName = file;
 }
 
 } /* namespace Core */

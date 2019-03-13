@@ -5,12 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef EXAMPLE_BASE_EXAMPLEBUFFER_H_
-#define EXAMPLE_BASE_EXAMPLEBUFFER_H_
+#ifndef EXAMPLE_EXAMPLEBUFFER_H_
+#define EXAMPLE_EXAMPLEBUFFER_H_
 
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
+
 #include "ExamplePath.h"
 
 namespace Example
@@ -45,4 +46,4 @@ protected:
 
 } /* namespace Example */
 
-#endif /* EXAMPLE_BASE_EXAMPLEBUFFER_H_ */
+#endif /* EXAMPLE_EXAMPLEBUFFER_H_ */

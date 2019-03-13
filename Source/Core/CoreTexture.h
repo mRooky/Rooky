@@ -9,23 +9,25 @@
 #define SOURCE_CORE_CORETEXTURE_H_
 
 #include "CoreTarget.h"
+#include <string>
 
 namespace Core
 {
-
 class Texture : public Target
 {
 public:
-	explicit Texture(System* system);
+	explicit Texture(TextureManager* manager);
 	virtual ~Texture(void) override;
 
 public:
 	void Create(const char* file);
 
 public:
+	inline const char* GetName(void) const { return mName.c_str(); }
 	inline Render::Sampler* GetSampler(void) const { return mSampler; }
 
 protected:
+	std::string mName;
 	Render::Sampler* mSampler = nullptr;
 };
 

@@ -6,17 +6,20 @@
  */
 
 #include "CoreTarget.h"
+#include <cassert>
 
 namespace Core
 {
 
-Target::Target(System* system):
-		Object(system)
+Target::Target(TextureManager* manager):
+		mManager(manager)
 {
+	assert(mManager != nullptr);
 }
 
 Target::~Target(void)
 {
+	mManager = nullptr;
 }
 
 void Target::Create(const Render::ImageLayout& layout)

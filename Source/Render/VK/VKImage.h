@@ -26,7 +26,9 @@ public:
 
 public:
 	virtual void Download(void* dst) override;
-	virtual void Upload(const void* src) override;
+	virtual void Upload(uint32_t index, uint32_t mipmap, const void* src) override;
+
+public:
 	virtual void* Map(size_t offset, size_t size) override;
 	virtual void Unmap(size_t offset, size_t size) override;
 
@@ -47,9 +49,13 @@ public:
 public:
 	static VkImageUsageFlags ConvertUsageFlag(Render::ResourceUsage usage);
 
-private:
+protected:
 	void CreateImage(void);
 	void AllocateMemory(void);
+
+protected:
+	size_t GetMipmapSize(uint32_t mipmap) const;
+	VkExtent2D GetMipmapExtent(uint32_t mipmap) const;
 
 protected:
 	Vulkan::Image* mImage = nullptr;

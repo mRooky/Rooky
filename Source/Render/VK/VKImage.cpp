@@ -11,6 +11,8 @@
 #include "VKBuffer.h"
 #include "VKInline.h"
 #include "VKFactory.h"
+#include "VKResourceHeap.h"
+#include "VKOperator.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -21,6 +23,8 @@
 #include "VulkanCommandBuffer.h"
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
+
+#include <cstring>
 
 namespace VK
 {
@@ -96,9 +100,32 @@ void Image::Download(void* dst)
 
 }
 
-void Image::Upload(const void* src)
+void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
+	assert(index == 0 && mipmap == 0);
+	Factory* factory = StaticCast(mContext->GetFactory());
+	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
+	size_t buffer_size = GetMipmapSize(mipmap);
+	auto resource_heap = factory->GetResourceHeap();
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	auto stage_buffer = resource_heap->AcquireBuffer(buffer_size, usage, true);
+	void* dst = stage_buffer->Map(0, buffer_size);
+	std::memcpy(dst, src, buffer_size);
+	stage_buffer->Unmap(0, buffer_size);
+
+	VkExtent2D extent = GetMipmapExtent(mipmap);
+
+	VkBufferImageCopy copy_region = {};
+	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	copy_region.imageSubresource.mipLevel = 0;
+	copy_region.imageSubresource.baseArrayLayer = mipmap;
+	copy_region.imageSubresource.layerCount = 1;
+	copy_region.imageExtent = { extent.width, extent.height, 1 };
+	copy_region.bufferOffset = 0;
+
+	command_buffer->CopyResource(stage_buffer->GetVulkanBuffer(), mImage, 1, &copy_region);
 }
 
 VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
@@ -137,6 +164,21 @@ void Image::CopyFrom(const Render::Buffer* other)
 	Vulkan::Device* device = context->GetVulkanDevice();
 	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
 	queue->FlushCommandBuffer(command_buffer);
+}
+
+size_t Image::GetMipmapSize(uint32_t mipmap) const
+{
+	size_t format_size = GetFormatSize(mLayout.format);
+	VkExtent2D extent = GetMipmapExtent(mipmap);
+	return (extent.width * extent.height * format_size);
+}
+
+VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
+{
+	VkExtent2D extent = {};
+	extent.width = mLayout.extent.width / (1u << mipmap);
+	extent.height = mLayout.extent.height / (1u << mipmap);
+	return extent;
 }
 
 VkImageViewType Image::ConverType(const Render::ImageType& type)

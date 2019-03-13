@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef EXAMPLE_BASE_EXAMPLEPATH_H_
-#define EXAMPLE_BASE_EXAMPLEPATH_H_
+#ifndef EXAMPLE_EXAMPLEPATH_H_
+#define EXAMPLE_EXAMPLEPATH_H_
 
-#include "ExampleViewport.h"
 #include "CorePath.h"
 #include "CoreThread.h"
 #include "RenderFormat.h"
+#include "ExampleViewport.h"
 
 namespace Example
 {
@@ -36,4 +36,4 @@ protected:
 
 } /* namespace Example */
 
-#endif /* EXAMPLE_BASE_EXAMPLEPATH_H_ */
+#endif /* EXAMPLE_EXAMPLEPATH_H_ */

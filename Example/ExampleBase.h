@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef EXAMPLE_BASE_EXAMPLEBASE_H_
-#define EXAMPLE_BASE_EXAMPLEBASE_H_
+#ifndef EXAMPLE_EXAMPLEBASE_H_
+#define EXAMPLE_EXAMPLEBASE_H_
 
 #include "CoreSystem.h"
 #include "CoreViewport.h"
@@ -42,4 +42,4 @@ protected:
 
 } /* namespace Example */
 
-#endif /* EXAMPLE_BASE_EXAMPLEBASE_H_ */
+#endif /* EXAMPLE_EXAMPLEBASE_H_ */

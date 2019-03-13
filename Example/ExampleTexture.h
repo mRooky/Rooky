@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef EXAMPLE_BASE_EXAMPLETEXTURE_H_
-#define EXAMPLE_BASE_EXAMPLETEXTURE_H_
+#ifndef EXAMPLE_EXAMPLETEXTURE_H_
+#define EXAMPLE_EXAMPLETEXTURE_H_
 
 #include "ExampleBuffer.h"
 
@@ -28,4 +28,4 @@ public:
 
 } /* namespace Example */
 
-#endif /* EXAMPLE_BASE_EXAMPLETEXTURE_H_ */
+#endif /* EXAMPLE_EXAMPLETEXTURE_H_ */

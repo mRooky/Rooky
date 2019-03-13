@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGERH_H_
-#define SOURCE_CORE_MANAGER_CORETEXTUREMANAGERH_H_
+#ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
+#define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
 #include "CoreObject.h"
 #include <vector>
@@ -20,10 +20,16 @@ public:
 	explicit TextureManager(System* system);
 	virtual ~TextureManager(void) override;
 
-private:
+public:
+	Texture* GetTexture(const char* file);
+
+protected:
+	Texture* TextureFind(const char* file) const;
+
+protected:
 	std::vector<Texture*> mTextures;
 };
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_MANAGER_CORETEXTUREMANAGERH_H_ */
+#endif /* SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_ */

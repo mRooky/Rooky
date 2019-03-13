@@ -26,6 +26,10 @@ public:
 	virtual void CreateView(ImageType type) = 0;
 
 public:
+	virtual void Download(void* dst) = 0;
+	virtual void Upload(uint32_t index, uint32_t mipmap, const void* src) = 0;
+
+public:
 	inline Format GetFormat(void) const { return mLayout.format; }
 	inline const Extent3& GetExtent(void) const { return mLayout.extent; }
 

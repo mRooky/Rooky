@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "Base/ExampleBuffer.h"
+#include "ExampleBuffer.h"
 
 int main(void)
 {
