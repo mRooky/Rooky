@@ -97,8 +97,6 @@
                                     									
                                     <listOptionValue builtIn="false" value="xcb"/>
                                     									
-                                    <listOptionValue builtIn="false" value="freeimage"/>
-                                    									
                                     <listOptionValue builtIn="false" value="png"/>
                                     									
                                     <listOptionValue builtIn="false" value="vulkan"/>
@@ -280,5 +278,7 @@
     </storageModule>
     	
     <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+    	
+    <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
     
 </cproject>
