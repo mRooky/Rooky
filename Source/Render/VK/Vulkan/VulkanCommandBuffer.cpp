@@ -101,6 +101,11 @@ void CommandBuffer::Draw(DrawCall* draw)
 	draw->Record(this);
 }
 
+void CommandBuffer::BeginRenderPass(const VkRenderPassBeginInfo& info)
+{
+	vkCmdBeginRenderPass(m_buffer, &info, VK_SUBPASS_CONTENTS_INLINE);
+}
+
 void CommandBuffer::BeginRenderPass(RenderPass* pass, FrameBuffer* frame, VkRect2D area)
 {
 	std::vector<VkClearValue> clear_values;
@@ -122,7 +127,7 @@ void CommandBuffer::BeginRenderPass(RenderPass* pass, FrameBuffer* frame, VkRect
 	render_pass_begin_info.pClearValues = clear_values.data();
 	render_pass_begin_info.renderArea = area;
 
-	vkCmdBeginRenderPass(m_buffer, &render_pass_begin_info, VK_SUBPASS_CONTENTS_INLINE);
+	BeginRenderPass(render_pass_begin_info);
 }
 
 void CommandBuffer::EndRenderPass(void)

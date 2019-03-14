@@ -34,22 +34,22 @@ Pipeline::~Pipeline(void)
 	Vulkan::Release(mPipelines);
 }
 
-void Pipeline::Initialize(const Render::PipelineDescription& desc)
+void Pipeline::Initialize(const Render::PipelineInfo& info)
 {
 	assert(mCurrent == nullptr);
-	bool valid = desc.IsValid();
+	bool valid = info.IsValid();
 	assert(valid == true);
 	if (valid == true)
 	{
-		mDescription = desc;
-		auto render_pass = StaticCast(mDescription.pRenderPass);
+		mInfo = info;
+		auto render_pass = StaticCast(mInfo.pRenderPass);
 		auto vulkan_pass = render_pass->GetVulkanRenderPass();
-		auto pipeline_state = StaticCast(mDescription.pPipelineState);
-		auto pipeline_layout = StaticCast(mDescription.pPipelineLayout);
+		auto pipeline_state = StaticCast(mInfo.pPipelineState);
+		auto pipeline_layout = StaticCast(mInfo.pPipelineLayout);
 		auto vulkan_layout = pipeline_layout->GetVulkanPipelineLayout();
 
 		auto pipeline_create_info = pipeline_state->GetGraphicsInfo();
-		pipeline_create_info->SetContent(vulkan_layout, vulkan_pass, mDescription.index);
+		pipeline_create_info->SetContent(vulkan_layout, vulkan_pass, mInfo.index);
 
 		assert(false);
 

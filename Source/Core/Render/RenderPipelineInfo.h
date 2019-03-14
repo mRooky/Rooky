@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERPIPELINEDESCRIPTION_H_
-#define SOURCE_CORE_RENDER_RENDERPIPELINEDESCRIPTION_H_
+#ifndef SOURCE_CORE_RENDER_RENDERPIPELINEINFO_H_
+#define SOURCE_CORE_RENDER_RENDERPIPELINEINFO_H_
 
 #include "RenderShaderState.h"
 
@@ -16,18 +16,18 @@ class Pass;
 class Declaration;
 class PipelineState;
 class PipelineLayout;
-class PipelineDescription
+class PipelineInfo
 {
 public:
-	PipelineDescription(void);
-	~PipelineDescription(void);
+	PipelineInfo(void);
+	~PipelineInfo(void);
 
 public:
 	bool IsValid(void) const;
 
 public:
-	bool operator == (const PipelineDescription& other) const;
-	PipelineDescription& operator = (const PipelineDescription& other);
+	bool operator == (const PipelineInfo& other) const;
+	PipelineInfo& operator = (const PipelineInfo& other);
 
 public:
 	uint32_t index = 0;
@@ -39,4 +39,4 @@ public:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERPIPELINEDESCRIPTION_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERPIPELINEINFO_H_ */

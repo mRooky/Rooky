@@ -82,15 +82,7 @@ void Buffer::RecordCommands(void)
 	Render::Extent2 extent2 = { extent.width, extent.height };
 	Render::Offset2 offset2 = {0.0f, 0.0f};
 	Render::Rect2D area = { offset2, extent2 };
-
-	Render::Viewport viewport =
-	{
-			0.0f, 0.0f,
-			static_cast<float>(extent.width),
-			static_cast<float>(extent.height),
-			0.0f, 1.0f
-	};
-
+	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2D scissor = area;
 
 	const size_t count = mThread->GetCommandListCount();
@@ -100,16 +92,12 @@ void Buffer::RecordCommands(void)
 		auto frame_buffer = render_pass->GetFrameBuffer(i);
 		auto command_list = mThread->GetCommandList(i);
 		command_list->BeginRecord();
-		command_list->BeginPass(0, render_pass);
-		command_list->SetFrameBuffer(frame_buffer, area);
+		command_list->BeginPass(render_pass, frame_buffer, area);
 		command_list->SetViewport(0, 1, &viewport);
 		command_list->SetScissor(0, 1, &scissor);
 		command_list->EndPass();
 		command_list->EndRecord();
-		if (true)
-		{
-			command_list->Submit(0);
-		}
+		command_list->Submit(0u);
 	}
 }
 

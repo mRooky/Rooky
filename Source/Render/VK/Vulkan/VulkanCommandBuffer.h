@@ -26,6 +26,7 @@ private:
 
 public:
 	void Begin(VkCommandBufferUsageFlags flags);
+	void BeginRenderPass(const VkRenderPassBeginInfo& info);
 	void BeginRenderPass(RenderPass* pass, FrameBuffer* frame, VkRect2D area);
 	void BindPipeline(Pipeline* pipeline);
 	void PushConstants(PipelineLayout* layout, uint32_t offset, uint32_t size, const void* data);

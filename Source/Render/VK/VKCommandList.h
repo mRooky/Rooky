@@ -23,13 +23,13 @@ public:
 public:
 	virtual void Create(bool primary) override;
 	virtual void Submit(uint32_t index) override;
+	virtual void Submit(Render::Queue* queue) override;
 
 public:
 	virtual void BeginRecord(void) override;
 	// Draw Commands
-	virtual void BeginPass(uint32_t index, Render::Pass* pass) override;
+	virtual void BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2D& area) override;
 	// Fix Setup
-	virtual void SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area) override;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
 	// End Fix Setup

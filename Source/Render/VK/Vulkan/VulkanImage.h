@@ -42,6 +42,7 @@ public:
 	inline const VkImageCreateInfo& GetInfo(void) const { return mInfo; }
 
 public:
+	bool IsDepthStencil(void) const;
 	VkExtent2D GetExtent(void) const;
 
 public:

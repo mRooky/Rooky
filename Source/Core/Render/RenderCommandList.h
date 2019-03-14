@@ -13,7 +13,6 @@
 #include "RenderEnum.h"
 #include "RenderResource.h"
 #include "RenderResourceLayout.h"
-#include "RenderPipelineDescription.h"
 
 namespace Render
 {
@@ -26,13 +25,15 @@ protected:
 
 public:
 	virtual void Create(bool level) = 0;
+
+public:
+	virtual void Submit(Queue* queue) = 0;
 	virtual void Submit(uint32_t index) = 0;
 
 public:
 	virtual void BeginRecord(void) = 0;
-	virtual void BeginPass(uint32_t index, Pass* pass) = 0;
+	virtual void BeginPass(Pass* pass, FrameBuffer* frame, const Rect2D& area) = 0;
 	// Fix Setup
-	virtual void SetFrameBuffer(FrameBuffer* frame, const Rect2D& area) = 0;
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
 	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
 	// End Fix Setup
@@ -51,8 +52,6 @@ public:
 protected:
 	CommandPool* mCommandPool = nullptr;
 
-protected:
-	PipelineDescription mPipelineDescription = {};
 };
 
 } /* namespace Render */

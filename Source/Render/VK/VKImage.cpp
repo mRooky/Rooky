@@ -128,6 +128,25 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	command_buffer->CopyResource(stage_buffer->GetVulkanBuffer(), mImage, 1, &copy_region);
 }
 
+VkClearValue Image::GetClearValue(void) const
+{
+	VkClearValue clear_value = {};
+	bool depth_stencil = mImage->IsDepthStencil();
+	if(depth_stencil)
+	{
+		clear_value.depthStencil.depth = 1.0f;
+		clear_value.depthStencil.stencil = 0;
+	}
+	else
+	{
+		clear_value.color.float32[0] = 0.0f;
+		clear_value.color.float32[1] = 0.0f;
+		clear_value.color.float32[2] = 0.0f;
+		clear_value.color.float32[3] = 1.0f;
+	}
+	return clear_value;
+}
+
 VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 {
 	assert(mImage != nullptr);

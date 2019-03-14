@@ -84,10 +84,16 @@ VkResult Image::CreateView(VkImageViewType type)
 	return m_view->Create(this, type, sub_resource_range);
 }
 
+bool Image::IsDepthStencil(void) const
+{
+	VkFormat format = mInfo.format;
+	return Vulkan::ImageView::IsDepthFormat(format);
+}
+
 VkClearValue Image::GetClearValue(void) const
 {
 	VkClearValue clear_value = {};
-	VkFormat format = mInfo.format;;
+	VkFormat format = mInfo.format;
 	if(Vulkan::ImageView::IsDepthFormat(format))
 	{
 		clear_value.depthStencil.depth = 1.0f;

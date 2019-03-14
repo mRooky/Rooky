@@ -22,7 +22,7 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(const Render::PipelineDescription& desc) override;
+	virtual void Initialize(const Render::PipelineInfo& info) override;
 
 public:
 	void Update(void);

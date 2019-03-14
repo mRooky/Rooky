@@ -39,6 +39,7 @@ public:
 	inline Vulkan::DeviceMemory* GetVulkanMemory(void) const { return mMemory; }
 
 public:
+	VkClearValue GetClearValue(void) const;
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
 
 public:

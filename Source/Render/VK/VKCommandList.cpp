@@ -16,6 +16,7 @@
 #include "VKContext.h"
 #include "VKResourceLayout.h"
 #include "VKInline.h"
+#include "VKQueue.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -25,6 +26,8 @@
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
 #include "VulkanSampler.h"
+#include "VulkanRenderPass.h"
+#include "VulkanFrameBuffer.h"
 
 #include <cassert>
 
@@ -69,32 +72,61 @@ void CommandList::Submit(uint32_t index)
 	}
 }
 
+void CommandList::Submit(Render::Queue* queue)
+{
+	assert(mCommandBuffer != nullptr);
+	assert(queue != nullptr);
+	auto command_buffer = mCommandBuffer->GetHandle();
+	VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+	VkSubmitInfo submit_info = {};
+	submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	submit_info.pWaitDstStageMask = &wait_stage_mask;
+	submit_info.commandBufferCount = 1;
+	submit_info.pCommandBuffers = &command_buffer;
+
+	auto vk_queue = StaticCast(queue);
+	auto vulkan_queue = vk_queue->GetVulkanQueue();
+	vulkan_queue->Submit(1, &submit_info);
+}
+
 void CommandList::BeginRecord(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->Begin(VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
 }
 
-void CommandList::BeginPass(uint32_t index, Render::Pass* pass)
+void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2D& area)
 {
-	mPipelineDescription.index = index;
-	mPipelineDescription.pRenderPass = pass;
-}
-
-void CommandList::SetFrameBuffer(Render::FrameBuffer* frame, const Render::Rect2D& area)
-{
-	assert(mPipelineDescription.pRenderPass != nullptr);
+	assert(pass != nullptr);
 	assert(mCommandBuffer != nullptr);
-	RenderPass* render_pass = StaticCast(mPipelineDescription.pRenderPass);
-	FrameBuffer* frame_buffer = StaticCast(frame);
-	VkRect2D vulkan_area = {};
-	vulkan_area.offset.x = area.offset.x;
-	vulkan_area.offset.y = area.offset.y;
-	vulkan_area.extent.width = area.extent.width;
-	vulkan_area.extent.height = area.extent.height;
-	auto vulkan_pass = render_pass->GetVulkanRenderPass();
-	auto vulkan_frame = frame_buffer->GetVulkanFrameBuffer();
-	mCommandBuffer->BeginRenderPass(vulkan_pass, vulkan_frame, vulkan_area);
+	RenderPass* vk_pass = StaticCast(pass);
+	FrameBuffer* vk_frame = StaticCast(frame);
+	auto vulkan_pass = vk_pass->GetVulkanRenderPass();
+	auto vulkan_frame = vk_frame->GetVulkanFrameBuffer();
+
+	std::vector<VkClearValue> clear_values;
+	const size_t count = frame->GetAttachmentCount();
+	assert(count > 0);
+	clear_values.reserve(count);
+
+	for(size_t index = 0; index < count; ++index)
+	{
+		auto vk_image = StaticCast(frame->GetAttachment(index));
+		VkClearValue clear_value = vk_image->GetClearValue();
+		clear_values.push_back(clear_value);
+	}
+
+	auto render_pass_begin_info = Vulkan::RenderPass::BeginInfo();
+	render_pass_begin_info.renderPass = vulkan_pass->GetHandle();
+	render_pass_begin_info.framebuffer = vulkan_frame->GetHandle();
+	render_pass_begin_info.clearValueCount = clear_values.size();
+	render_pass_begin_info.pClearValues = clear_values.data();
+	render_pass_begin_info.renderArea.offset.x = area.offset.x;
+	render_pass_begin_info.renderArea.offset.y = area.offset.y;
+	render_pass_begin_info.renderArea.extent.width = area.extent.width;
+	render_pass_begin_info.renderArea.extent.height = area.extent.height;
+
+	mCommandBuffer->BeginRenderPass(render_pass_begin_info);
 }
 
 void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports)
@@ -139,10 +171,9 @@ void CommandList::Draw(Render::DrawCall* draw)
 {
 	assert(mPipeline != nullptr);
 	assert(mResourceLayout != nullptr);
-	auto& traits = mPipeline->GetTraits();
+	auto& info = mPipeline->GetInfo();
 	auto layout = mResourceLayout->GetCurrentLayout();
-	assert(traits.pPipelineLayout == layout);
-	if (traits.pPipelineLayout == layout)
+	if (info.pPipelineLayout == layout)
 	{
 		auto layout = StaticCast(mResourceLayout);
 		layout->Binding(this);
@@ -158,7 +189,6 @@ void CommandList::EndPass(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->EndRenderPass();
-	mPipelineDescription.pRenderPass = nullptr;
 }
 
 void CommandList::EndRecord(void)
