@@ -24,4 +24,24 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1552557069632</id>
+			<name>Third/gli</name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-test</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1552559161538</id>
+			<name>Third/gli/gli/core</name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-dummy.cpp</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
