@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_DRAWCALL_RENDERDRAWARRAY_H_
-#define SOURCE_CORE_RENDER_DRAWCALL_RENDERDRAWARRAY_H_
+#ifndef SOURCE_CORE_RENDER_DRAW_RENDERDRAWARRAY_H_
+#define SOURCE_CORE_RENDER_DRAW_RENDERDRAWARRAY_H_
 
-#include "RenderDrawDirect.h"
+#include <Draw/RenderDrawDirect.h>
 
 namespace Render
 {
@@ -34,4 +34,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_DRAWCALL_RENDERDRAWARRAY_H_ */
+#endif /* SOURCE_CORE_RENDER_DRAW_RENDERDRAWARRAY_H_ */
