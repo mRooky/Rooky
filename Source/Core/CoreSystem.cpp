@@ -6,7 +6,9 @@
  */
 
 #include "CoreSystem.h"
+
 #include "CoreBufferManager.h"
+#include "CoreTextureManager.h"
 
 #include "RenderContext.h"
 
@@ -23,6 +25,8 @@ System::~System(void)
 {
 	delete mBufferManager;
 	mBufferManager = nullptr;
+	delete mTextureManager;
+	mTextureManager = nullptr;
 	Render::DestroyContext(mContext);
 }
 
@@ -32,6 +36,7 @@ void System::Create(void)
 	assert(mContext != nullptr);
 	mContext->Create();
 	mBufferManager = new BufferManager(this);
+	mTextureManager = new TextureManager(this);
 }
 
 } /* namespace Core */

@@ -13,6 +13,7 @@
 namespace Core
 {
 class BufferManager;
+class TextureManager;
 class System
 {
 public:
@@ -24,11 +25,17 @@ public:
 
 public:
 	inline Render::Context* GetContext(void) const { return mContext; }
+
+public:
 	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
+	inline TextureManager* GetTextureManager(void) const { return mTextureManager; }
 
 protected:
 	Render::Context* mContext = nullptr;
+
+protected:
 	BufferManager* mBufferManager = nullptr;
+	TextureManager* mTextureManager = nullptr;
 };
 
 } /* namespace Core */

@@ -23,9 +23,10 @@ Texture::~Texture(void)
 	mSampler = nullptr;
 }
 
-void Texture::Create(const char* file)
+void Texture::Create(const char* file, const Render::ImageLayout& layout)
 {
 	mName = file;
+	Target::Create(layout);
 }
 
 } /* namespace Core */

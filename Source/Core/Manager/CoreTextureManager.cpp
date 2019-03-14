@@ -9,7 +9,9 @@
 #include "CoreTexture.h"
 
 #include "UtilRelease.h"
+
 #include <string>
+#include <iostream>
 
 namespace Core
 {
@@ -21,7 +23,9 @@ TextureManager::TextureManager(System* system):
 
 TextureManager::~TextureManager(void)
 {
+	std::cout << "Release Texture ..." << std::endl;
 	Util::Release(mTextures);
+	std::cout << "All Textures Released" << std::endl;
 }
 
 Texture* TextureManager::GetTexture(const char* file)

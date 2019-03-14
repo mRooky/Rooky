@@ -231,7 +231,12 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 
 VkImageUsageFlags Image::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkImageUsageFlags flags = VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+	VkImageUsageFlags flags = VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+
+	if (usage.heap.Transform == 1)
+	{
+		flags |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+	}
 	if (usage.binding.SampledImage == 1)
 	{
 		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;

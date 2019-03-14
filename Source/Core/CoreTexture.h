@@ -20,7 +20,7 @@ public:
 	virtual ~Texture(void) override;
 
 public:
-	void Create(const char* file);
+	void Create(const char* file, const Render::ImageLayout& layout);
 
 public:
 	inline const char* GetName(void) const { return mName.c_str(); }

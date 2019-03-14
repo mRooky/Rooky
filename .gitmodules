@@ -1,3 +1,6 @@
 [submodule "Third/gli"]
 	path = Third/gli
 	url = https://github.com/g-truc/gli.git
+[submodule "Third/soil"]
+	path = Third/soil
+	url = https://github.com/epatel/SOIL.git

@@ -12,6 +12,7 @@
 #include "VulkanBuffer.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace VK
 {
@@ -25,7 +26,9 @@ ResourceHeap::ResourceHeap(Context* context):
 ResourceHeap::~ResourceHeap(void)
 {
 	mContext = nullptr;
+	std::cout << "Release Recycled Buffer ..." << std::endl;
 	Util::Release(mBuffers);
+	std::cout << "All Recycled Buffers Released" << std::endl;
 }
 
 Buffer* ResourceHeap::AcquireBuffer(size_t size, VkBufferUsageFlags usage, bool cpu)
@@ -34,6 +37,7 @@ Buffer* ResourceHeap::AcquireBuffer(size_t size, VkBufferUsageFlags usage, bool 
 	if (buffer == nullptr)
 	{
 		auto resource_usage = Render::ResourceUsage::GetBufferUsage(cpu);
+		resource_usage.heap.Transform = 1;
 		buffer = new Buffer(mContext);
 		buffer->Create(size, resource_usage);
 		mBuffers.push_back(buffer);
