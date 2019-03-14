@@ -139,10 +139,10 @@ VkClearValue Image::GetClearValue(void) const
 	}
 	else
 	{
-		clear_value.color.float32[0] = 0.0f;
-		clear_value.color.float32[1] = 0.0f;
-		clear_value.color.float32[2] = 0.0f;
-		clear_value.color.float32[3] = 1.0f;
+		clear_value.color.float32[0] = mClearColor.GetRed();
+		clear_value.color.float32[1] = mClearColor.GetGreen();
+		clear_value.color.float32[2] = mClearColor.GetBlue();
+		clear_value.color.float32[3] = mClearColor.GetAlpha();
 	}
 	return clear_value;
 }

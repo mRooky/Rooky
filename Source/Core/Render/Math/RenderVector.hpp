@@ -21,6 +21,9 @@ public:
 	T y = static_cast<T>(0);
 };
 
+typedef Vector2_t<float> Offset2;
+typedef Vector2_t<int32_t> Point2;
+
 template<typename T>
 class Vector3_t
 {
@@ -28,6 +31,16 @@ public:
 	T x = static_cast<T>(0);
 	T y = static_cast<T>(0);
 	T z = static_cast<T>(0);
+};
+
+template<typename T>
+class Vector4_t
+{
+public:
+	T x = static_cast<T>(0);
+	T y = static_cast<T>(0);
+	T z = static_cast<T>(0);
+	T w = static_cast<T>(0);
 };
 
 }

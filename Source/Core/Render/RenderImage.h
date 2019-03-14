@@ -30,7 +30,7 @@ public:
 
 public:
 	inline Format GetFormat(void) const { return mLayout.format; }
-	inline void SetClearColor(uint32_t color) { mClearColor = color; }
+	inline void SetClearColor(uint32_t color) { mClearColor.Set(color); }
 	inline const Extent3& GetExtent(void) const { return mLayout.extent; }
 
 public:
@@ -40,8 +40,8 @@ public:
 	static bool IsDepthStencilFormat(Format format);
 
 protected:
+	Color mClearColor = {};
 	ImageLayout mLayout = {};
-	uint32_t mClearColor = 0;
 };
 
 } /* namespace Render */

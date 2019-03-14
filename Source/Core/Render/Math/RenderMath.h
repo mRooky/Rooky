@@ -11,6 +11,7 @@
 #include "RenderVector.hpp"
 #include "RenderExtent.hpp"
 #include "RenderRect.hpp"
+#include "RenderColor.hpp"
 #include "RenderViewport.hpp"
 
 #endif /* SOURCE_CORE_RENDER_RENDERMATH_H_ */
