@@ -19,7 +19,6 @@ namespace Core
 class Index;
 class Vertex;
 class Uniform;
-class System;
 class BufferManager : public Object
 {
 	friend class System;
