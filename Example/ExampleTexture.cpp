@@ -7,9 +7,6 @@
 
 #include "ExampleTexture.h"
 
-#include "RenderLayout.hpp"
-#include "RenderImage.h"
-
 #include "CoreTextureManager.h"
 #include "CoreTexture.h"
 
@@ -45,23 +42,14 @@ void Texture::CreateTexture(const char* file)
 		std::cout << "Width " << width << std::endl;
 		std::cout << "Height " << height << std::endl;
 		std::cout << "Channels " << channels << std::endl;
-
-		Render::ImageLayout image_layout = {};
-		image_layout.extent = { width, height, 1 };
-		image_layout.usage = Render::ResourceUsage::GetImageUsage(false);
-		image_layout.usage.binding.SampledImage = 1;
-		image_layout.format = Render::Format::FORMAT_R8G8B8A8_UNORM;
-		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-
-		auto manager = mSystem->GetTextureManager();
+		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
 
 		std::string file_path = file;
 		std::string file_name = file_path.substr(file_path.find_last_of("/\\") + 1);
-
-		auto texture = manager->GetTexture(file_name.c_str());
-		texture->Create(file_name.c_str(), image_layout);
-		auto image = texture->GetImage();
-		image->Upload(0, 0, bitmap);
+		Render::Extent3 extent = { width, height, 1 };
+		mTexture = mSystem->CreateTexture2D(file_name.c_str(), extent, format);
+		mTexture->Update(0, 0, bitmap);
+		SOIL_free_image_data(bitmap);
 	}
 	else
 	{

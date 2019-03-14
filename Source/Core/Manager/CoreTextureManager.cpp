@@ -10,7 +10,8 @@
 
 #include "UtilRelease.h"
 
-#include <string>
+#include <cstring>
+#include <cassert>
 #include <iostream>
 
 namespace Core
@@ -28,29 +29,27 @@ TextureManager::~TextureManager(void)
 	std::cout << "All Textures Released" << std::endl;
 }
 
-Texture* TextureManager::GetTexture(const char* file)
+Texture* TextureManager::GetTexture(const char* name)
 {
-	Texture* texture = TextureFind(file);
-	if (texture == nullptr)
+	assert(name != nullptr);
+	Texture* texture = nullptr;
+	for (auto tex : mTextures)
 	{
-		texture = new Texture(this);
-		mTextures.push_back(texture);
+		const char* tex_name = tex->GetName();
+		if (std::strcmp(tex_name, name) == 0)
+		{
+			texture = tex;
+			break;
+		}
 	}
 	return texture;
 }
 
-Texture* TextureManager::TextureFind(const char* file) const
+Texture* TextureManager::CreateTexture(void)
 {
-	std::string texture_name(file);
-	for (auto texture : mTextures)
-	{
-		const char* name = texture->GetName();
-		if (texture_name == name)
-		{
-			return texture;
-		}
-	}
-	return nullptr;
+	Texture* texture = new Texture(this);
+	mTextures.push_back(texture);
+	return texture;
 }
 
 } /* namespace Core */

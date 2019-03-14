@@ -95,9 +95,7 @@ VkClearValue Image::GetClearValue(void) const
 	}
 	else
 	{
-		// Azure [0, 127, 255]
-		// const static float color = 0.01f;
-		clear_value.color.float32[0] = 0.0f   / 255.0f;;
+		clear_value.color.float32[0] = 220.0f / 255.0f;;
 		clear_value.color.float32[1] = 127.0f / 255.0f;
 		clear_value.color.float32[2] = 255.0f / 255.0f;;
 		clear_value.color.float32[3] = 1.0f;

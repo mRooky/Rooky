@@ -23,6 +23,9 @@ public:
 	void Create(const Render::ImageLayout& layout);
 
 public:
+	inline bool IsValid(void) const { return mImage != nullptr; }
+
+public:
 	inline Render::Image* GetImage(void) const { return mImage; }
 	inline TextureManager* GetManager(void) const { return mManager; }
 

@@ -9,9 +9,12 @@
 #define SOURCE_CORE_CORESYSTEM_H_
 
 #include "RenderClasses.h"
+#include "RenderFormat.h"
+#include "RenderMath.h"
 
 namespace Core
 {
+class Texture;
 class BufferManager;
 class TextureManager;
 class System
@@ -22,6 +25,9 @@ public:
 
 public:
 	void Create(void);
+
+public:
+	Texture* CreateTexture2D(const char* name, const Render::Extent3& extent, Render::Format format);
 
 public:
 	inline Render::Context* GetContext(void) const { return mContext; }

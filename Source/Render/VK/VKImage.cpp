@@ -45,6 +45,7 @@ void Image::Create(const Render::ImageLayout& layout)
 	mLayout = layout;
 	CreateImage();
 	AllocateMemory();
+	CreateView();
 }
 
 void Image::CreateImage(void)
@@ -76,9 +77,8 @@ void Image::AllocateMemory(void)
 	mImage->BindMemory(mMemory, 0);
 }
 
-void Image::CreateView(Render::ImageType type)
+void Image::CreateView(void)
 {
-	assert(mLayout.type == type);
 	assert(mLayout.type != Render::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
 	VkImageViewType vulkan_type = ConverType(mLayout.type);

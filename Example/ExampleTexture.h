@@ -10,6 +10,8 @@
 
 #include "ExampleBuffer.h"
 
+#include "CoreTexture.h"
+
 namespace Example
 {
 
@@ -25,8 +27,8 @@ public:
 public:
 	virtual void CreateTexture(const char* file);
 
-public:
-
+protected:
+	Core::Texture* mTexture = nullptr;
 };
 
 } /* namespace Example */

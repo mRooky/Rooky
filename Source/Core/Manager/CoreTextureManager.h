@@ -21,10 +21,8 @@ public:
 	virtual ~TextureManager(void) override;
 
 public:
-	Texture* GetTexture(const char* file);
-
-protected:
-	Texture* TextureFind(const char* file) const;
+	Texture* GetTexture(const char* name);
+	Texture* CreateTexture(void);
 
 protected:
 	std::vector<Texture*> mTextures;

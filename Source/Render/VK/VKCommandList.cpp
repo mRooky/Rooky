@@ -148,6 +148,10 @@ void CommandList::Draw(Render::DrawCall* draw)
 		layout->Binding(this);
 		assert(false);
 	}
+	else
+	{
+		assert(false);
+	}
 }
 
 void CommandList::EndPass(void)

@@ -23,7 +23,6 @@ public:
 
 public:
 	virtual void Create(const ImageLayout& layout) = 0;
-	virtual void CreateView(ImageType type) = 0;
 
 public:
 	virtual void Download(void* dst) = 0;
@@ -41,6 +40,7 @@ public:
 
 protected:
 	ImageLayout mLayout = {};
+	uint32_t mClearColor = 0;
 };
 
 } /* namespace Render */

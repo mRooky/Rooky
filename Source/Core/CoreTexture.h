@@ -20,9 +20,10 @@ public:
 	virtual ~Texture(void) override;
 
 public:
-	void Create(const char* file, const Render::ImageLayout& layout);
+	void Update(uint32_t index, uint32_t mipmap, const void* src);
 
 public:
+	inline void SetName(const char* name) { mName = name; }
 	inline const char* GetName(void) const { return mName.c_str(); }
 	inline Render::Sampler* GetSampler(void) const { return mSampler; }
 

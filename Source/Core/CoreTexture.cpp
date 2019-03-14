@@ -8,6 +8,8 @@
 #include "CoreTexture.h"
 #include "CoreTextureManager.h"
 
+#include "RenderImage.h"
+
 #include <cassert>
 
 namespace Core
@@ -23,10 +25,10 @@ Texture::~Texture(void)
 	mSampler = nullptr;
 }
 
-void Texture::Create(const char* file, const Render::ImageLayout& layout)
+void Texture::Update(uint32_t index, uint32_t mipmap, const void* src)
 {
-	mName = file;
-	Target::Create(layout);
+	assert(mImage != nullptr);
+	mImage->Upload(index, mipmap, src);
 }
 
 } /* namespace Core */

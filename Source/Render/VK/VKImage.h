@@ -22,7 +22,6 @@ public:
 
 public:
 	virtual void Create(const Render::ImageLayout& layout) override;
-	virtual void CreateView(Render::ImageType type) override;
 
 public:
 	virtual void Download(void* dst) override;
@@ -51,6 +50,7 @@ public:
 
 protected:
 	void CreateImage(void);
+	void CreateView(void);
 	void AllocateMemory(void);
 
 protected:
