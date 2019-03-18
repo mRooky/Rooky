@@ -28,7 +28,7 @@ public:
 	void Create(void);
 
 public:
-	Texture* CreateTexture2D(const char* name, const Render::Extent3& extent, Render::Format format);
+	Texture* CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format);
 
 public:
 	inline Render::Context* GetContext(void) const { return mContext; }

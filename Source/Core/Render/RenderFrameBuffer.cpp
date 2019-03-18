@@ -33,7 +33,7 @@ void FrameBuffer::Create(void)
 	auto attachment = mAttachments.at(0);
 	auto& layout = attachment->GetLayout();
 	auto& extent = layout.extent;
-	Extent2 extent2 = { extent.width, extent.height };
+	Extent2D extent2 = { extent.width, extent.height };
 	Create(extent2);
 	std::cout << "Width:" << extent.width << " Height:" << extent.height << std::endl;
 }

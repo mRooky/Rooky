@@ -24,7 +24,10 @@
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
 
+#include "MathBits.hpp"
+
 #include <cstring>
+#include <iostream>
 
 namespace VK
 {
@@ -59,8 +62,10 @@ void Image::CreateImage(void)
 	vulkan_extent.width = static_cast<uint32_t>(mLayout.extent.width);
 	vulkan_extent.height = static_cast<uint32_t>(mLayout.extent.height);
 	vulkan_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
+
+	VkImageUsageFlags usage = Image::ConvertUsageFlag(mLayout.usage);
 	mImage = Vulkan::Image::New(device);
-	mImage->Create(vulkan_format, vulkan_extent, Image::ConvertUsageFlag(mLayout.usage));
+	mImage->Create(vulkan_format, vulkan_extent, usage);
 }
 
 void Image::AllocateMemory(void)
@@ -69,7 +74,7 @@ void Image::AllocateMemory(void)
 	auto flags = GetMemoryPropertyFlags(mLayout.usage.heap);
 	Vulkan::Device* device = mImage->GetDevice();
 
-	VkMemoryRequirements requirements = mImage->GetMemoryRequirements();
+	auto& requirements = mImage->GetMemoryRequirements();
 	mHeapSize = requirements.size;
 
 	mMemory = Vulkan::DeviceMemory::New(device);
@@ -125,7 +130,9 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	copy_region.imageExtent = { extent.width, extent.height, 1 };
 	copy_region.bufferOffset = 0;
 
-	command_buffer->CopyResource(stage_buffer->GetVulkanBuffer(), mImage, 1, &copy_region);
+	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
+
+	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
 }
 
 VkClearValue Image::GetClearValue(void) const
@@ -163,8 +170,8 @@ void Image::CopyFrom(const Render::Buffer* other)
 {
 	Context* context = StaticCast(mContext);
 	Factory* factory = StaticCast(mContext->GetFactory());
-	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
-	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
+	auto command_pool = factory->GetVulkanCommandPool();
+	auto command_buffer = command_pool->GetCommandBuffer(0);
 
 	VkBufferImageCopy copy_region = {};
 	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
@@ -181,7 +188,8 @@ void Image::CopyFrom(const Render::Buffer* other)
 	command_buffer->End();
 
 	Vulkan::Device* device = context->GetVulkanDevice();
-	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = device->GetQueue(queue_family, 0);
 	queue->FlushCommandBuffer(command_buffer);
 }
 
@@ -189,12 +197,26 @@ size_t Image::GetMipmapSize(uint32_t mipmap) const
 {
 	size_t format_size = GetFormatSize(mLayout.format);
 	VkExtent2D extent = GetMipmapExtent(mipmap);
-	return (extent.width * extent.height * format_size);
+	size_t size_in_byte = extent.width * extent.height * format_size;
+	return size_in_byte;
 }
 
 VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 {
 	VkExtent2D extent = {};
+	if (mipmap > 0)
+	{
+		const auto& extent = mLayout.extent;
+		bool width_pow2 = Render::IsPowerOfTow(extent.width);
+		bool height_pow2 = Render::IsPowerOfTow(extent.height);
+		assert(width_pow2 == true);
+		assert(height_pow2 == true);
+		if (!width_pow2 || !height_pow2)
+		{
+			std::cout << extent.width << " " << extent.height << std::endl;
+			std::cout << "Width and Height must Power of 2 !" << std::endl;
+		}
+	}
 	extent.width = mLayout.extent.width / (1u << mipmap);
 	extent.height = mLayout.extent.height / (1u << mipmap);
 	return extent;

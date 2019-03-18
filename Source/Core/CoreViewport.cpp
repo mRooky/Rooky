@@ -39,7 +39,7 @@ void Viewport::Create(Platform::Window* window)
 	mSwapChain->Create(window);
 }
 
-void Viewport::CreateDepthStencil(const Render::Extent2& extent)
+void Viewport::CreateDepthStencil(const Render::Extent2D& extent)
 {
 	assert(mSwapChain != nullptr);
 	assert(mDepthStencil == nullptr);

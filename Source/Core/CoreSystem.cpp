@@ -45,7 +45,7 @@ void System::Create(void)
 	mResourceManager = new ResourceManager(this);
 }
 
-Texture* System::CreateTexture2D(const char* name, const Render::Extent3& extent, Render::Format format)
+Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format)
 {
 	assert(mTextureManager != nullptr);
 

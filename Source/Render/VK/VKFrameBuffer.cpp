@@ -29,7 +29,7 @@ FrameBuffer::~FrameBuffer(void)
 	Vulkan::Release(mFrameBuffer);
 }
 
-void FrameBuffer::Create(const Render::Extent2& extent)
+void FrameBuffer::Create(const Render::Extent2D& extent)
 {
 	assert(mAttachments.size() > 0);
 

@@ -27,7 +27,7 @@ public:
 
 public:
 	uint32_t array = 1;
-	Extent3 extent = {};
+	Extent3D extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
 	ResourceUsage usage = {};

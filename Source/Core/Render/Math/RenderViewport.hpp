@@ -20,8 +20,8 @@ public:
 	~Viewport(void) = default;
 
 public:
-	inline Viewport(const Extent2& extent) { Set(extent.width, extent.height); }
-	inline Viewport(const Extent3& extent) { Set(extent.width, extent.height); }
+	inline Viewport(const Extent2D& extent) { Set(extent.width, extent.height); }
+	inline Viewport(const Extent3D& extent) { Set(extent.width, extent.height); }
 
 public:
 	inline void Set(int32_t width, int32_t height)

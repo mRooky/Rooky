@@ -88,8 +88,8 @@ void Buffer::RecordCommands(void)
 
 	auto& extent = attachment->GetExtent();
 
-	Render::Extent2 extent2 = { extent.width, extent.height };
-	Render::Offset2 offset2 = {0.0f, 0.0f};
+	Render::Extent2D extent2 = { extent.width, extent.height };
+	Render::Offset2D offset2 = {0.0f, 0.0f};
 	Render::Rect2D area = { offset2, extent2 };
 	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2D scissor = area;

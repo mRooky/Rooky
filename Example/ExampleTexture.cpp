@@ -46,7 +46,7 @@ void Texture::CreateTexture(const char* file)
 
 		std::string file_path = file;
 		std::string file_name = file_path.substr(file_path.find_last_of("/\\") + 1);
-		Render::Extent3 extent = { width, height, 1 };
+		Render::Extent3D extent = { width, height, 1 };
 		mTexture = mSystem->CreateTexture2D(file_name.c_str(), extent, format);
 		mTexture->Update(0, 0, bitmap);
 		SOIL_free_image_data(bitmap);
