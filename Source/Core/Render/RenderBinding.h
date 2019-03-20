@@ -26,10 +26,7 @@ enum class ResourceFlag : uint32_t
 	RESOURCE_TYPE_UNKNOWN = ~0U
 };
 
-class Buffer;
-class Image;
-class Sampler;
-class Object;
+class Resource;
 class Binding
 {
 public:
@@ -43,32 +40,22 @@ public:
 public:
 	inline bool operator==(const Binding& other) const
 	{
-		return mType == other.mType && mObject == other.mObject && mStage == other.mStage;
+		return mType == other.mType && mResource == other.mResource && mStage == other.mStage;
 	}
 	inline bool operator!=(const Binding& other) const { return !(*this == other); }
 
 public:
-	void SetImage(Image* image, ShaderStage stage);
-	void SetUniform(Buffer* uniform, ShaderStage stage);
-	void SetSampler(Sampler* sampler, ShaderStage stage);
+	void SetResource(Resource* resource, ShaderStage stage);
 
 public:
-	inline Image* GetImage(void) const { return mImage; }
-	inline Buffer* GetUniform(void) const { return mUniform; }
-	inline Sampler* GetSampler(void) const { return mSampler; }
+	inline Resource* GetResource(void) const { return mResource; }
 
 public:
 	inline ShaderStage GetShaderStage(void) const { return mStage; }
 	inline ResourceFlag GetResourceType(void) const { return mType; }
 
 protected:
-	union
-	{
-		Image* mImage;
-		Buffer* mUniform;
-		Sampler* mSampler;
-		Object* mObject = nullptr;
-	};
+	Resource* mResource = nullptr;
 	ShaderStage mStage = ShaderStage::SHADER_STAGE_UNKNOWN;
 	ResourceFlag mType = ResourceFlag::RESOURCE_TYPE_COMMON;
 

@@ -110,14 +110,14 @@ void BindingState::UpdateDescriptorSet(void)
 void BindingState::SetImageInfo(const Render::Binding& binding, VkDescriptorImageInfo* info)
 {
 	assert(info != nullptr);
-	Image* image = StaticCast(binding.GetImage());
+	Image* image = static_cast<Image*>(binding.GetResource());
 	*info = image->GetVulkanImage()->GetDescriptorInfo();
 }
 
 void BindingState::SetUniformInfo(const Render::Binding& binding, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
-	Buffer* buffer = StaticCast(binding.GetUniform());
+	Buffer* buffer = static_cast<Buffer*>(binding.GetResource());
 	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
 }
 

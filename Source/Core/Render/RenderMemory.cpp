@@ -11,7 +11,7 @@ namespace Render
 {
 
 Memory::Memory(Context* context):
-		Object(context)
+		Resource(context)
 {
 }
 

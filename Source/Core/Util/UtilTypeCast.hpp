@@ -5,13 +5,24 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILSAFECAST_HPP_
-#define SOURCE_CORE_UTIL_UTILSAFECAST_HPP_
+#ifndef SOURCE_CORE_UTIL_UTILTYPECAST_HPP_
+#define SOURCE_CORE_UTIL_UTILTYPECAST_HPP_
 
 #include <cassert>
 
 namespace Util
 {
+
+template<class O, typename I>
+static inline O* StaticCast(I* in)
+{
+   if(in != nullptr)
+   {
+      O* out = static_cast<O*>(in);
+      return out;
+   }
+   return nullptr;
+}
 
 template<class O, typename I>
 static inline O* SafeCast(I* in)
@@ -33,4 +44,4 @@ static inline void* SafeCast<void>(void* in)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILSAFECAST_HPP_ */
+#endif /* SOURCE_CORE_UTIL_UTILTYPECAST_HPP_ */

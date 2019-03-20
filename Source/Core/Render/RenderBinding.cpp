@@ -21,7 +21,7 @@ Binding::~Binding(void)
 
 bool Binding::IsValid(void) const
 {
-	bool valid = mObject != nullptr;
+	bool valid = mResource != nullptr;
 	valid = valid && mStage!= ShaderStage::SHADER_STAGE_UNKNOWN;
 	valid = valid && mType != ResourceFlag::RESOURCE_TYPE_COMMON;
 	return valid;
@@ -30,28 +30,14 @@ bool Binding::IsValid(void) const
 Binding& Binding::operator=(const Binding& other)
 {
 	mType = other.mType;
-	mObject = other.mObject;
+	mResource = other.mResource;
 	mStage = other.mStage;
 	return *this;
 }
 
-void Binding::SetImage(Image* image, ShaderStage stage)
+void Binding::SetResource(Resource* resource, ShaderStage stage)
 {
-	mImage = image;
-	mStage = stage;
-	mType = ResourceFlag::RESOURCE_TYPE_IMAGE;
-}
-
-void Binding::SetUniform(Buffer* uniform, ShaderStage stage)
-{
-	mUniform = uniform;
-	mStage = stage;
-	mType = ResourceFlag::RESOURCE_TYPE_IMAGE;
-}
-
-void Binding::SetSampler(Sampler* sampler, ShaderStage stage)
-{
-	mSampler = sampler;
+	mResource = resource;
 	mStage = stage;
 	mType = ResourceFlag::RESOURCE_TYPE_IMAGE;
 }

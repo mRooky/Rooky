@@ -8,12 +8,12 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSAMPLER_H_
 #define SOURCE_CORE_RENDER_RENDERSAMPLER_H_
 
-#include "RenderObject.h"
+#include "RenderResource.h"
 
 namespace Render
 {
 
-class Sampler: public Object
+class Sampler: public Resource
 {
 public:
 	explicit Sampler(Context* context);
