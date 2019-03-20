@@ -51,21 +51,6 @@ protected:
 	Vulkan::DeviceMemory* mMemory = nullptr;
 };
 
-static inline Buffer* StaticCast(Render::Buffer* buffer)
-{
-	return static_cast<Buffer*>(buffer);
-}
-
-static inline Buffer* SaftyCast(Render::Buffer* buffer)
-{
-	return dynamic_cast<Buffer*>(buffer);
-}
-
-static inline const Buffer* StaticCast(const Render::Buffer* buffer)
-{
-	return static_cast<const Buffer*>(buffer);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKBUFFER_H_ */

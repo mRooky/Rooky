@@ -103,7 +103,7 @@ void BindingState::UpdateDescriptorSet(void)
 		layout_bindings.push_back(layout_bind);
 	}
 
-	auto layout = StaticCast(mLayout);
+	auto layout = static_cast<BindingLayout*>(mLayout);
 	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 }
 

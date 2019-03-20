@@ -31,16 +31,6 @@ protected:
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;
 };
 
-static inline PipelineState* StaticCast(Render::PipelineState* state)
-{
-	return static_cast<PipelineState*>(state);
-}
-
-static inline PipelineState* SaftyCast(Render::PipelineState* state)
-{
-	return dynamic_cast<PipelineState*>(state);
-}
-
 }
 
 #endif /* SOURCE_RENDER_VK_VKPIPELINESTATE_H_ */

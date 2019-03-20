@@ -41,7 +41,8 @@ Factory::~Factory(void)
 
 void Factory::CreateDefaultPool(void)
 {
-	auto device = StaticCast(mContext)->GetVulkanDevice();
+	auto vk_context = static_cast<Context*>(mContext);
+	auto device = vk_context->GetVulkanDevice();
 	uint32_t family = device->GetPhysicalDevice()->GetFamily();
 	mCommandPool = Vulkan::CommandPool::New(device);
 	mCommandPool->Create(family);
@@ -50,44 +51,44 @@ void Factory::CreateDefaultPool(void)
 
 Render::Pass* Factory::CreatePass(void)
 {
-	Context* context = StaticCast(mContext);
-	return new RenderPass(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new RenderPass(vk_context);
 }
 
 Render::Queue* Factory::CreateQueue(void)
 {
-	Context* context = StaticCast(mContext);
-	return new Queue(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new Queue(vk_context);
 }
 
 Render::Image* Factory::CreateImage(void)
 {
-	Context* context = StaticCast(mContext);
-	return new Image(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new Image(vk_context);
 }
 
 Render::Buffer* Factory::CreateBuffer(void)
 {
-	Context* context = StaticCast(mContext);
-	return new Buffer(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new Buffer(vk_context);
 }
 
 Render::Shader* Factory::CreateShader(void)
 {
-	Context* context = StaticCast(mContext);
-	return new Shader(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new Shader(vk_context);
 }
 
 Render::SwapChain* Factory::CreateSwapChain(void)
 {
-	Context* context = StaticCast(mContext);
-	return new SwapChain(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new SwapChain(vk_context);
 }
 
 Render::CommandPool* Factory::CreateCommandPool(void)
 {
-	Context* context = StaticCast(mContext);
-	return new CommandPool(context);
+	auto vk_context = static_cast<Context*>(mContext);
+	return new CommandPool(vk_context);
 }
 
 Render::Declaration* Factory::CreateDeclaration(void)

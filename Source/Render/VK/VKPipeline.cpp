@@ -42,10 +42,10 @@ void Pipeline::Initialize(const Render::PipelineInfo& info)
 	if (valid == true)
 	{
 		mInfo = info;
-		auto render_pass = StaticCast(mInfo.pRenderPass);
+		auto render_pass = static_cast<RenderPass*>(mInfo.pRenderPass);
 		auto vulkan_pass = render_pass->GetVulkanRenderPass();
-		auto pipeline_state = StaticCast(mInfo.pPipelineState);
-		auto pipeline_layout = StaticCast(mInfo.pPipelineLayout);
+		auto pipeline_state = static_cast<PipelineState*>(mInfo.pPipelineState);
+		auto pipeline_layout = static_cast<PipelineLayout*>(mInfo.pPipelineLayout);
 		auto vulkan_layout = pipeline_layout->GetVulkanPipelineLayout();
 
 		auto pipeline_create_info = pipeline_state->GetGraphicsInfo();

@@ -43,16 +43,6 @@ protected:
 	Vulkan::CommandPool* mCommandPool = nullptr;
 };
 
-static inline Factory* StaticCast(Render::Factory* factory)
-{
-	return static_cast<Factory*>(factory);
-}
-
-static inline Factory* SaftyCast(Render::Factory* factory)
-{
-	return dynamic_cast<Factory*>(factory);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKFACTORY_H_ */

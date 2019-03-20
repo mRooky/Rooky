@@ -41,19 +41,19 @@ void FrameBuffer::Create(const Render::Extent2D& extent)
 	attachments.reserve(mAttachments.size());
 	for (auto attachment : mAttachments)
 	{
-		Image* image = StaticCast(attachment);
+		Image* image = static_cast<Image*>(attachment);
 		auto vulkan_image = image->GetVulkanImage();
 		attachments.push_back(vulkan_image);
 	}
 
 	if (mDepthStencil != nullptr)
 	{
-		Image* image = StaticCast(mDepthStencil);
+		Image* image = static_cast<Image*>(mDepthStencil);
 		auto vulkan_image = image->GetVulkanImage();
 		attachments.push_back(vulkan_image);
 	}
 
-	RenderPass* pass = StaticCast(mPass);
+	RenderPass* pass = static_cast<RenderPass*>(mPass);
 	auto vulkan_pass = pass->GetVulkanRenderPass();
 	mFrameBuffer = Vulkan::FrameBuffer::New(vulkan_pass->GetDevice());
 	mFrameBuffer->Create(vulkan_pass, attachments, vulkan_extent);

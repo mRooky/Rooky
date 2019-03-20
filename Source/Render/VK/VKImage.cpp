@@ -55,7 +55,7 @@ void Image::CreateImage(void)
 {
 	assert(mImage == nullptr);
 	VkFormat vulkan_format = ConvertFormat(mLayout.format);
-	Context* context = StaticCast(mContext);
+	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetVulkanDevice();
 
 	VkExtent3D vulkan_extent = {};
@@ -108,7 +108,7 @@ void Image::Download(void* dst)
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(index == 0 && mipmap == 0);
-	Factory* factory = StaticCast(mContext->GetFactory());
+	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
 	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
@@ -168,8 +168,8 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 
 void Image::CopyFrom(const Render::Buffer* other)
 {
-	Context* context = StaticCast(mContext);
-	Factory* factory = StaticCast(mContext->GetFactory());
+	Context* context = static_cast<Context*>(mContext);
+	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
 	auto command_pool = factory->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 

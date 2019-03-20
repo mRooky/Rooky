@@ -84,7 +84,7 @@ void CommandList::Submit(Render::Queue* queue)
 	submit_info.commandBufferCount = 1;
 	submit_info.pCommandBuffers = &command_buffer;
 
-	auto vk_queue = StaticCast(queue);
+	auto vk_queue = static_cast<Queue*>(queue);
 	auto vulkan_queue = vk_queue->GetVulkanQueue();
 	vulkan_queue->Submit(1, &submit_info);
 }
@@ -99,8 +99,8 @@ void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, cons
 {
 	assert(pass != nullptr);
 	assert(mCommandBuffer != nullptr);
-	RenderPass* vk_pass = StaticCast(pass);
-	FrameBuffer* vk_frame = StaticCast(frame);
+	RenderPass* vk_pass = static_cast<RenderPass*>(pass);
+	FrameBuffer* vk_frame = static_cast<FrameBuffer*>(frame);
 	auto vulkan_pass = vk_pass->GetVulkanRenderPass();
 	auto vulkan_frame = vk_frame->GetVulkanFrameBuffer();
 
@@ -111,7 +111,7 @@ void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, cons
 
 	for(size_t index = 0; index < count; ++index)
 	{
-		auto vk_image = StaticCast(frame->GetAttachment(index));
+		auto vk_image = static_cast<Image*>(frame->GetAttachment(index));
 		VkClearValue clear_value = vk_image->GetClearValue();
 		clear_values.push_back(clear_value);
 	}
@@ -175,7 +175,7 @@ void CommandList::Draw(Render::DrawCall* draw)
 	auto layout = mBindingLayout->GetCurrentLayout();
 	if (info.pPipelineLayout == layout)
 	{
-		auto layout = StaticCast(mBindingLayout);
+		auto layout = static_cast<BindingLayout*>(mBindingLayout);
 		layout->Binding(this);
 		assert(false);
 	}
@@ -202,7 +202,7 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 {
 	assert(mCommandBuffer != nullptr);
 	mPipeline = pipeline;
-	Pipeline* vk_pipeline = StaticCast(pipeline);
+	Pipeline* vk_pipeline = static_cast<Pipeline*>(pipeline);
 	auto vulkan_pipeline = vk_pipeline->GetVulkanPipeline();
 	mCommandBuffer->BindPipeline(vulkan_pipeline);
 }
@@ -219,8 +219,9 @@ void CommandList::SetResourceLayout(Render::BindingLayout* layout)
 void CommandList::SetResourceState(uint32_t index, Render::BindingState* state)
 {
 	assert(mBindingLayout != nullptr);
-	auto layout = StaticCast(mBindingLayout);
-	layout->SetBindingState(index, StaticCast(state));
+	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
+	auto vk_binding_state = static_cast<BindingState*>(state);
+	vk_layout->SetBindingState(index, vk_binding_state);
 }
 
 } /* namespace VK */

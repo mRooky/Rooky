@@ -30,16 +30,6 @@ protected:
 	Vulkan::FrameBuffer* mFrameBuffer = nullptr;
 };
 
-static inline FrameBuffer* StaticCast(Render::FrameBuffer* frame)
-{
-	return static_cast<FrameBuffer*>(frame);
-}
-
-static inline FrameBuffer* SaftyCast(Render::FrameBuffer* frame)
-{
-	return dynamic_cast<FrameBuffer*>(frame);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKFRAMEBUFFER_H_ */

@@ -33,7 +33,7 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		auto device = StaticCast(mContext)->GetVulkanDevice();
+		auto device = static_cast<Context*>(mContext)->GetVulkanDevice();
 		mShader = Vulkan::ShaderModule::New(device);
 		mShader->Create(code.size(), code.data());
 	}

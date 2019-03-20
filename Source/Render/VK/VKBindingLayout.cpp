@@ -61,11 +61,11 @@ void BindingLayout::Binding(CommandList* list)
 
 	for(auto& state : mBindingStates)
 	{
-		auto vk_state = StaticCast(state);
+		auto vk_state = static_cast<BindingState*>(state);
 		descriptor_sets.push_back(vk_state->GetDescriptorSet());
 	}
 	std::vector<uint32_t> offset;
-	auto vk_pipeline_layout = StaticCast(mCurrentLayout);
+	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mCurrentLayout);
 	auto vulkan_command_buffer = list->GetVulkanCommandBuffer();
 	auto vulkan_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
 	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
@@ -75,8 +75,7 @@ void BindingLayout::SetBindingState(uint32_t index, BindingState* state)
 {
 	assert(index < mBindingStates.size());
 	auto layout = mDescriptorSetLayouts.at(index);
-	auto vk_state = StaticCast(state);
-	auto state_layout = vk_state->GetDescriptorSet()->GetLayout();
+	auto state_layout = state->GetDescriptorSet()->GetLayout();
 	if (layout == state_layout)
 	{
 		mBindingStates.at(index) = state;
@@ -103,7 +102,7 @@ void BindingLayout::CreateDescriptorPool(size_t max)
 	}
 
 	size_t max_allocate = VK_DESCRIPTOR_TYPE_RANGE_SIZE * max;
-	auto device = StaticCast(mContext)->GetVulkanDevice();
+	auto device = static_cast<Context*>(mContext)->GetVulkanDevice();
 	mDescriptorPool = Vulkan::DescriptorPool::New(device);
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }
@@ -124,7 +123,7 @@ void BindingLayout::UpdatePipelineLayout(void)
 
 	for(auto& state : mBindingStates)
 	{
-		auto vk_state = StaticCast(state);
+		auto vk_state = static_cast<BindingState*>(state);
 		vk_state->Update();
 		Vulkan::DescriptorSetLayout* layout = vk_state->GetDescriptorSet()->GetLayout();
 		descriptor_layouts.push_back(layout);
@@ -132,7 +131,7 @@ void BindingLayout::UpdatePipelineLayout(void)
 
 	if (mCurrentLayout != nullptr)
 	{
-		auto& current_layouts = StaticCast(mCurrentLayout)->GetLayouts();
+		auto& current_layouts = static_cast<PipelineLayout*>(mCurrentLayout)->GetLayouts();
 		if (current_layouts == descriptor_layouts)
 		{
 			return;

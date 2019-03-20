@@ -33,16 +33,6 @@ protected:
 	Vulkan::RenderPass* mRenderPass = nullptr;
 };
 
-static inline RenderPass* StaticCast(Render::Pass* pass)
-{
-	return static_cast<RenderPass*>(pass);
-}
-
-static inline RenderPass* SaftyCast(Render::Pass* pass)
-{
-	return dynamic_cast<RenderPass*>(pass);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKRENDERPASS_H_ */

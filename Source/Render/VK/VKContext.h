@@ -51,16 +51,6 @@ private:
 	std::vector<std::string> m_extensions;
 };
 
-static inline Context* StaticCast(Render::Context* context)
-{
-	return static_cast<Context*>(context);
-}
-
-static inline Context* SaftyCast(Render::Context* context)
-{
-	return dynamic_cast<Context*>(context);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKCONTEXT_H_ */

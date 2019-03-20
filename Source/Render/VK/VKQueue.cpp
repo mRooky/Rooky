@@ -32,7 +32,7 @@ Queue::~Queue(void)
 
 void Queue::Create(uint32_t mIndex)
 {
-	auto context = StaticCast(mContext);
+	auto context = static_cast<Context*>(mContext);
 	auto device = context->GetVulkanDevice();
 	auto physical = context->GetVulkanPhysicalDevice();
 	uint32_t family = physical->GetFamily();
@@ -42,7 +42,7 @@ void Queue::Create(uint32_t mIndex)
 void Queue::Submit(Render::CommandList* command)
 {
 	assert(mQueue != nullptr);
-	auto command_list = StaticCast(command);
+	auto command_list = static_cast<CommandList*>(command);
 	auto command_buffer = command_list->GetVulkanCommandBuffer();
 	auto vulkan_command = command_buffer->GetHandle();
 	auto vulkan_semaphore = command_buffer->GetSemaphore()->GetHandle();

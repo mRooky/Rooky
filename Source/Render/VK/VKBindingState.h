@@ -43,16 +43,6 @@ protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
 };
 
-static inline BindingState* StaticCast(Render::BindingState* state)
-{
-	return static_cast<BindingState*>(state);
-}
-
-static inline BindingState* SaftyCast(Render::BindingState* state)
-{
-	return dynamic_cast<BindingState*>(state);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKBINDINGSTATE_H_ */

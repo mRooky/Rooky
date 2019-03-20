@@ -30,7 +30,7 @@ PipelineLayout::~PipelineLayout(void)
 void PipelineLayout::Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
 {
 	auto context = mBindingLayout->GetContext();
-	Vulkan::Device* device = StaticCast(context)->GetVulkanDevice();
+	Vulkan::Device* device = static_cast<Context*>(context)->GetVulkanDevice();
 	mPipelineLayout = Vulkan::PipelineLayout::New(device);
 	mPipelineLayout->Create(layouts, mConstantRanges.size(), mConstantRanges.data());
 }

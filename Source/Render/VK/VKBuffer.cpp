@@ -45,7 +45,7 @@ void Buffer::Create(size_t size, const Render::ResourceUsage& usage)
 void Buffer::CreateBuffer(void)
 {
 	assert(mBuffer == nullptr);
-	Context* context = StaticCast(mContext);
+	Context* context = static_cast<Context*>(mContext);
 	Vulkan::Device* device = context->GetVulkanDevice();
 	mBuffer = Vulkan::Buffer::New(device);
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
@@ -88,8 +88,8 @@ void Buffer::Upload(const void* src)
 
 void Buffer::CopyFrom(const Render::Buffer* other)
 {
-	Context* context = StaticCast(mContext);
-	Factory* factory = StaticCast(mContext->GetFactory());
+	Context* context = static_cast<Context*>(mContext);
+	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
 	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
@@ -97,7 +97,7 @@ void Buffer::CopyFrom(const Render::Buffer* other)
 	VkBufferCopy buffer_copy_range = {};
 	buffer_copy_range.size = other->GetSize();
 
-	const Buffer* buffer = StaticCast(other);
+	const Buffer* buffer = static_cast<const Buffer*>(other);
 	Vulkan::Buffer* vk_buffer = buffer->GetVulkanBuffer();
 
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);

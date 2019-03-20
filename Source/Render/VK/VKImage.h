@@ -63,16 +63,6 @@ protected:
 	Vulkan::DeviceMemory* mMemory = nullptr;
 };
 
-static inline Image* StaticCast(Render::Image* image)
-{
-	return static_cast<Image*>(image);
-}
-
-static inline Image* SaftyCast(Render::Image* image)
-{
-	return dynamic_cast<Image*>(image);
-}
-
 class SwapChainImage final : private Image
 {
 	friend class SwapChain;

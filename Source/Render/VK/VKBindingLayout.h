@@ -53,16 +53,6 @@ protected:
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
-static inline BindingLayout* StaticCast(Render::BindingLayout* layout)
-{
-	return static_cast<BindingLayout*>(layout);
-}
-
-static inline BindingLayout* SaftyCast(Render::BindingLayout* layout)
-{
-	return dynamic_cast<BindingLayout*>(layout);
-}
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKBINDINGLAYOUT_H_ */

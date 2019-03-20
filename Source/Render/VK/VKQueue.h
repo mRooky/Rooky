@@ -33,9 +33,6 @@ protected:
 	Vulkan::Queue* mQueue = nullptr;
 };
 
-static inline Queue* StaticCast(Render::Queue* queue) { return static_cast<Queue*>(queue); }
-static inline Queue* SaftyCast(Render::Queue* queue) { return dynamic_cast<Queue*>(queue); }
-
 } /* namespace VK */
 
 #endif /* SOURCE_RENDER_VK_VKQUEUE_H_ */

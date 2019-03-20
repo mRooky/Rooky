@@ -30,7 +30,7 @@ CommandPool::~CommandPool(void)
 
 void CommandPool::Create(void)
 {
-	auto context = StaticCast(mContext);
+	auto context = static_cast<Context*>(mContext);
 	auto device = context->GetVulkanDevice();
 	auto physical = context->GetVulkanPhysicalDevice();
 	uint32_t family = physical->GetFamily();
