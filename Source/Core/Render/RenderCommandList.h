@@ -8,11 +8,11 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 
+#include "RenderBinding.h"
+#include "RenderBindingLayout.h"
 #include "RenderClasses.h"
 #include "RenderMath.h"
 #include "RenderEnum.h"
-#include "RenderResource.h"
-#include "RenderResourceLayout.h"
 
 namespace Render
 {
@@ -39,8 +39,8 @@ public:
 	// End Fix Setup
 	// Resource Setup
 	virtual void SetPipeline(Pipeline* pipeline) = 0;
-	virtual void SetResourceLayout(ResourceLayout* layout) = 0;
-	virtual void SetResourceState(uint32_t index, ResourceState* state) = 0;
+	virtual void SetResourceLayout(BindingLayout* layout) = 0;
+	virtual void SetResourceState(uint32_t index, BindingState* state) = 0;
 	virtual void Draw(DrawCall* draw) = 0;
 	// End Resource Setup
 	virtual void EndPass(void) = 0;

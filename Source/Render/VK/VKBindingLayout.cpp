@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKResourceLayout.h"
+#include "VKBindingLayout.h"
 #include "VKContext.h"
 #include "VKCommandList.h"
 #include "VKPipelineLayout.h"
@@ -24,42 +24,42 @@
 namespace VK
 {
 
-ResourceLayout::ResourceLayout(Context* context):
-		Render::ResourceLayout(context)
+BindingLayout::BindingLayout(Context* context):
+		Render::BindingLayout(context)
 {
 	static const size_t max = 32;
 	CreateDescriptorPool(max);
 }
 
-ResourceLayout::~ResourceLayout(void)
+BindingLayout::~BindingLayout(void)
 {
 	Util::Release(mPipelineLayouts);
 	Vulkan::Release(mDescriptorPool);
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
 
-Render::PipelineLayout* ResourceLayout::Update(void)
+Render::PipelineLayout* BindingLayout::Update(void)
 {
 	UpdatePipelineLayout();
 	return mCurrentLayout;
 }
 
-Render::ResourceState* ResourceLayout::CreateState(void)
+Render::BindingState* BindingLayout::CreateState(void)
 {
-	ResourceState * state = new ResourceState(this);
-	mResourceStates.push_back(state);
+	BindingState * state = new BindingState(this);
+	mBindingStates.push_back(state);
 	return state;
 }
 
-void ResourceLayout::Binding(CommandList* list)
+void BindingLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
-	assert(mResourceStates.size() > 0);
+	assert(mBindingStates.size() > 0);
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(mResourceStates.size());
+	descriptor_sets.reserve(mBindingStates.size());
 
-	for(auto& state : mResourceStates)
+	for(auto& state : mBindingStates)
 	{
 		auto vk_state = StaticCast(state);
 		descriptor_sets.push_back(vk_state->GetDescriptorSet());
@@ -71,15 +71,15 @@ void ResourceLayout::Binding(CommandList* list)
 	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
 }
 
-void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
+void BindingLayout::SetBindingState(uint32_t index, BindingState* state)
 {
-	assert(index < mResourceStates.size());
+	assert(index < mBindingStates.size());
 	auto layout = mDescriptorSetLayouts.at(index);
 	auto vk_state = StaticCast(state);
 	auto state_layout = vk_state->GetDescriptorSet()->GetLayout();
 	if (layout == state_layout)
 	{
-		mResourceStates.at(index) = state;
+		mBindingStates.at(index) = state;
 	}
 	else
 	{
@@ -89,7 +89,7 @@ void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
 	}
 }
 
-void ResourceLayout::CreateDescriptorPool(size_t max)
+void BindingLayout::CreateDescriptorPool(size_t max)
 {
 	std::vector<VkDescriptorPoolSize> descriptor_pool_sizes;
 
@@ -108,7 +108,7 @@ void ResourceLayout::CreateDescriptorPool(size_t max)
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }
 
-Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+Vulkan::DescriptorSet* BindingLayout::AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
 {
 	assert(mDescriptorPool != nullptr);
 	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(count, bindings);
@@ -116,13 +116,13 @@ Vulkan::DescriptorSet* ResourceLayout::AllocateDescriptorSet(uint32_t count, con
 	return mDescriptorPool->Allocate(layout);
 }
 
-void ResourceLayout::UpdatePipelineLayout(void)
+void BindingLayout::UpdatePipelineLayout(void)
 {
-	assert(mResourceStates.size() > 0);
+	assert(mBindingStates.size() > 0);
 	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
-	descriptor_layouts.reserve(mResourceStates.size());
+	descriptor_layouts.reserve(mBindingStates.size());
 
-	for(auto& state : mResourceStates)
+	for(auto& state : mBindingStates)
 	{
 		auto vk_state = StaticCast(state);
 		vk_state->Update();
@@ -141,7 +141,7 @@ void ResourceLayout::UpdatePipelineLayout(void)
 	mCurrentLayout = GetPipelineLayout(descriptor_layouts);
 }
 
-PipelineLayout* ResourceLayout::GetPipelineLayout(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
+PipelineLayout* BindingLayout::GetPipelineLayout(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
 {
 	for (auto pipeline_layout : mPipelineLayouts)
 	{

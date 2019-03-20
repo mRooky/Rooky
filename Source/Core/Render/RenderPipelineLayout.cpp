@@ -11,8 +11,8 @@
 namespace Render
 {
 
-PipelineLayout::PipelineLayout(ResourceLayout* layout):
-		mResourceLayout(layout)
+PipelineLayout::PipelineLayout(BindingLayout* layout):
+		mBindingLayout(layout)
 {
 }
 

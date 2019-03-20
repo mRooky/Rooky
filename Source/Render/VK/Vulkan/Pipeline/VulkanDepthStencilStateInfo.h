@@ -31,6 +31,8 @@ public:
 		m_createInfo.depthBoundsTestEnable = bound ? VK_TRUE : VK_FALSE;
 	}
 
+	inline void SetStencil(bool test);
+
 private:
 	VkPipelineDepthStencilStateCreateInfo m_createInfo = {};
 

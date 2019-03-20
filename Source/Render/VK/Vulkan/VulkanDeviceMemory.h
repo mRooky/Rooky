@@ -36,6 +36,7 @@ public:
 
 public:
 	inline VkDeviceMemory GetHandle(void) const { return m_memory; }
+	inline uint32_t GetMemoryTypeIndex(void) const { return m_typeIndex; }
 	inline VkMemoryPropertyFlags GetPropertyFlags(void) const { return mProperties; }
 
 public:

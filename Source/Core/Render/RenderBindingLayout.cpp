@@ -5,27 +5,27 @@
  *      Author: rookyma
  */
 
-#include "RenderResourceLayout.h"
+#include "RenderBindingLayout.h"
 #include <cassert>
 #include <algorithm>
 
 namespace Render
 {
 
-ResourceLayout::ResourceLayout(Context* context):
+BindingLayout::BindingLayout(Context* context):
 		Object(context)
 {
 }
 
-ResourceLayout::~ResourceLayout(void)
+BindingLayout::~BindingLayout(void)
 {
 }
 
-void ResourceLayout::SetResourceState(uint32_t index, ResourceState* state)
+void BindingLayout::SetResourceState(uint32_t index, BindingState* state)
 {
 	assert(index < 8);
 	mResourceMask.set(index);
-	mResourceStates.at(index) = state;
+	mBindingStates.at(index) = state;
 }
 
 } /* namespace Render */

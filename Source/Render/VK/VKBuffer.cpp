@@ -56,7 +56,7 @@ void Buffer::AllocateMemory(void)
 	assert(mBuffer != nullptr);
 	auto flags = GetMemoryPropertyFlags(mUsage.heap);
 	Vulkan::Device* device = mBuffer->GetDevice();
-	const VkMemoryRequirements& requires = mBuffer->GetMemoryRequirements();
+	const auto& requires = mBuffer->GetMemoryRequirements();
 	mHeapSize = requires.size;
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(requires, flags);

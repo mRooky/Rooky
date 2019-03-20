@@ -14,9 +14,9 @@
 #include "VKSampler.h"
 #include "VKShader.h"
 #include "VKContext.h"
-#include "VKResourceLayout.h"
 #include "VKInline.h"
 #include "VKQueue.h"
+#include "VKBindingLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -170,12 +170,12 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 void CommandList::Draw(Render::DrawCall* draw)
 {
 	assert(mPipeline != nullptr);
-	assert(mResourceLayout != nullptr);
+	assert(mBindingLayout != nullptr);
 	auto& info = mPipeline->GetInfo();
-	auto layout = mResourceLayout->GetCurrentLayout();
+	auto layout = mBindingLayout->GetCurrentLayout();
 	if (info.pPipelineLayout == layout)
 	{
-		auto layout = StaticCast(mResourceLayout);
+		auto layout = StaticCast(mBindingLayout);
 		layout->Binding(this);
 		assert(false);
 	}
@@ -207,20 +207,20 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 	mCommandBuffer->BindPipeline(vulkan_pipeline);
 }
 
-void CommandList::SetResourceLayout(Render::ResourceLayout* layout)
+void CommandList::SetResourceLayout(Render::BindingLayout* layout)
 {
-	if (mResourceLayout != layout)
+	if (mBindingLayout != layout)
 	{
-		mResourceLayout = layout;
+		mBindingLayout = layout;
 		// some states trace future
 	}
 }
 
-void CommandList::SetResourceState(uint32_t index, Render::ResourceState* state)
+void CommandList::SetResourceState(uint32_t index, Render::BindingState* state)
 {
-	assert(mResourceLayout != nullptr);
-	auto layout = StaticCast(mResourceLayout);
-	layout->SetResourceState(index, StaticCast(state));
+	assert(mBindingLayout != nullptr);
+	auto layout = StaticCast(mBindingLayout);
+	layout->SetBindingState(index, StaticCast(state));
 }
 
 } /* namespace VK */

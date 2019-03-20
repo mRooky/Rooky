@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERRESOURCE_H_
-#define SOURCE_CORE_RENDER_RENDERRESOURCE_H_
+#ifndef SOURCE_CORE_RENDER_RENDERBINDING_H_
+#define SOURCE_CORE_RENDER_RENDERBINDING_H_
 
 #include "RenderEnum.h"
 #include <cstddef>
@@ -30,22 +30,22 @@ class Buffer;
 class Image;
 class Sampler;
 class Object;
-class Resource
+class Binding
 {
 public:
-	Resource(void);
-	virtual ~Resource(void);
+	Binding(void);
+	virtual ~Binding(void);
 
 public:
 	bool IsValid(void) const;
-	Resource& operator=(const Resource& other);
+	Binding& operator=(const Binding& other);
 
 public:
-	inline bool operator==(const Resource& other) const
+	inline bool operator==(const Binding& other) const
 	{
 		return mType == other.mType && mObject == other.mObject && mStage == other.mStage;
 	}
-	inline bool operator!=(const Resource& other) const { return !(*this == other); }
+	inline bool operator!=(const Binding& other) const { return !(*this == other); }
 
 public:
 	void SetImage(Image* image, ShaderStage stage);
@@ -76,4 +76,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERRESOURCE_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERBINDING_H_ */

@@ -12,18 +12,18 @@
 
 namespace Render
 {
-class ResourceLayout;
+class BindingLayout;
 class PipelineLayout
 {
 public:
-	explicit PipelineLayout(ResourceLayout* layout);
+	explicit PipelineLayout(BindingLayout* layout);
 	virtual ~PipelineLayout(void);
 
 public:
-	inline ResourceLayout* GetResourceLayout(void) const { return mResourceLayout; }
+	inline BindingLayout* GetResourceLayout(void) const { return mBindingLayout; }
 
 protected:
-	ResourceLayout* mResourceLayout = nullptr;
+	BindingLayout* mBindingLayout = nullptr;
 };
 
 } /* namespace Render */

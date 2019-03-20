@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
-#define SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_
+#ifndef SOURCE_RENDER_VK_VKBINDINGLAYOUT_H_
+#define SOURCE_RENDER_VK_VKBINDINGLAYOUT_H_
 
-#include <VKResourceState.h>
-#include "RenderResourceLayout.h"
+#include "RenderBindingLayout.h"
+#include "VKBindingState.h"
 #include <vector>
 
 namespace VK
@@ -17,19 +17,19 @@ namespace VK
 class Context;
 class CommandList;
 class PipelineLayout;
-class ResourceLayout : public Render::ResourceLayout
+class BindingLayout : public Render::BindingLayout
 {
 public:
-	explicit ResourceLayout(Context* context);
-	virtual ~ResourceLayout(void);
+	explicit BindingLayout(Context* context);
+	virtual ~BindingLayout(void);
 
 public:
 	virtual Render::PipelineLayout* Update(void) override;
-	virtual Render::ResourceState* CreateState(void) override;
+	virtual Render::BindingState* CreateState(void) override;
 
 public:
 	void Binding(CommandList* list);
-	void SetResourceState(uint32_t index, ResourceState* state);
+	void SetBindingState(uint32_t index, BindingState* state);
 
 public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
@@ -48,21 +48,21 @@ protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
 
 protected:
-	std::vector<ResourceState*> mResourceStates;
+	std::vector<BindingState*> mBindingStates;
 	std::vector<PipelineLayout*> mPipelineLayouts;
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
-static inline ResourceLayout* StaticCast(Render::ResourceLayout* layout)
+static inline BindingLayout* StaticCast(Render::BindingLayout* layout)
 {
-	return static_cast<ResourceLayout*>(layout);
+	return static_cast<BindingLayout*>(layout);
 }
 
-static inline ResourceLayout* SaftyCast(Render::ResourceLayout* layout)
+static inline BindingLayout* SaftyCast(Render::BindingLayout* layout)
 {
-	return dynamic_cast<ResourceLayout*>(layout);
+	return dynamic_cast<BindingLayout*>(layout);
 }
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_VKRESOURCELAYOUT_H_ */
+#endif /* SOURCE_RENDER_VK_VKBINDINGLAYOUT_H_ */

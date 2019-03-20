@@ -35,8 +35,8 @@ public:
 	// End Fix Setup
 	// Resource Setting
 	virtual void SetPipeline(Render::Pipeline* pipeline) override;
-	virtual void SetResourceLayout(Render::ResourceLayout* layout) override;
-	virtual void SetResourceState(uint32_t index, Render::ResourceState* state) override;
+	virtual void SetResourceLayout(Render::BindingLayout* layout) override;
+	virtual void SetResourceState(uint32_t index, Render::BindingState* state) override;
 	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;
@@ -48,7 +48,7 @@ public:
 
 protected:
 	Render::Pipeline* mPipeline = nullptr;
-	Render::ResourceLayout* mResourceLayout = nullptr;
+	Render::BindingLayout* mBindingLayout = nullptr;
 
 protected:
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;

@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#include <VKResourceLayout.h>
-#include <VKResourceState.h>
+#include "VKBindingState.h"
 #include "VKShader.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
+#include "VKBindingLayout.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -24,25 +24,25 @@
 namespace VK
 {
 
-ResourceState::ResourceState(ResourceLayout* layout):
-		Render::ResourceState(layout)
+BindingState::BindingState(BindingLayout* layout):
+		Render::BindingState(layout)
 {
 }
 
-ResourceState::~ResourceState(void)
+BindingState::~BindingState(void)
 {
 	std::cout << "VK Destroy Resource List" << std::endl;
 }
 
-void ResourceState::Update(void)
+void BindingState::Update(void)
 {
 	UpdateDescriptorSet();
 	WriteDescriptorSet();
 }
 
-void ResourceState::WriteDescriptorSet(void)
+void BindingState::WriteDescriptorSet(void)
 {
-	const size_t size = mResources.size();
+	const size_t size = mBindings.size();
 	assert(size > 0);
 
 	std::vector<VkWriteDescriptorSet> descriptor_writes;
@@ -53,23 +53,23 @@ void ResourceState::WriteDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& resource = mResources.at(bind);
-		Render::ResourceFlag type = resource.GetResourceType();
+		auto& binding = mBindings.at(bind);
+		Render::ResourceFlag type = binding.GetResourceType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
 		write.dstSet = mDescriptorSet->GetHandle();
 		write.dstBinding = bind;
 		write.descriptorCount = 1;
-		write.descriptorType = ResourceState::GetDescriptorType(type);
+		write.descriptorType = BindingState::GetDescriptorType(type);
 
 		switch(type)
 		{
 		case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
-			ResourceState::SetImageInfo(resource, &image_infos.at(bind));
+			BindingState::SetImageInfo(binding, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			break;
 		case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
-			ResourceState::SetUniformInfo(resource, &buffer_infos.at(bind));
+			BindingState::SetUniformInfo(binding, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			break;
 		default:
@@ -81,9 +81,9 @@ void ResourceState::WriteDescriptorSet(void)
 	Vulkan::DescriptorSet::UpdateSets(mDescriptorSet->GetDevice(), descriptor_writes.size(), descriptor_writes.data());
 }
 
-void ResourceState::UpdateDescriptorSet(void)
+void BindingState::UpdateDescriptorSet(void)
 {
-	const size_t size = mResources.size();
+	const size_t size = mBindings.size();
 	assert(size > 0);
 
 	std::vector<VkDescriptorSetLayoutBinding> layout_bindings;
@@ -91,15 +91,15 @@ void ResourceState::UpdateDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& resource = mResources.at(bind);
-		Render::ShaderStage stage = resource.GetShaderStage();
-		Render::ResourceFlag type = resource.GetResourceType();
+		auto& binding = mBindings.at(bind);
+		Render::ShaderStage stage = binding.GetShaderStage();
+		Render::ResourceFlag type = binding.GetResourceType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;
 		layout_bind.descriptorCount = 1;
 		layout_bind.stageFlags = Shader::ConvertStage(stage);
-		layout_bind.descriptorType = ResourceState::GetDescriptorType(type);
+		layout_bind.descriptorType = BindingState::GetDescriptorType(type);
 		layout_bindings.push_back(layout_bind);
 	}
 
@@ -107,26 +107,26 @@ void ResourceState::UpdateDescriptorSet(void)
 	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 }
 
-void ResourceState::SetImageInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)
+void BindingState::SetImageInfo(const Render::Binding& binding, VkDescriptorImageInfo* info)
 {
 	assert(info != nullptr);
-	Image* image = StaticCast(resource.GetImage());
+	Image* image = StaticCast(binding.GetImage());
 	*info = image->GetVulkanImage()->GetDescriptorInfo();
 }
 
-void ResourceState::SetUniformInfo(const Render::Resource& resource, VkDescriptorBufferInfo* info)
+void BindingState::SetUniformInfo(const Render::Binding& binding, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
-	Buffer* buffer = StaticCast(resource.GetUniform());
+	Buffer* buffer = StaticCast(binding.GetUniform());
 	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
 }
 
-void ResourceState::SetSamplerInfo(const Render::Resource& resource, VkDescriptorImageInfo* info)
+void BindingState::SetSamplerInfo(const Render::Binding& binding, VkDescriptorImageInfo* info)
 {
 	assert(false);
 }
 
-VkDescriptorType ResourceState::GetDescriptorType(Render::ResourceFlag type)
+VkDescriptorType BindingState::GetDescriptorType(Render::ResourceFlag type)
 {
 	switch(type)
 	{

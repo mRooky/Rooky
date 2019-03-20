@@ -5,21 +5,21 @@
  *      Author: rookyma
  */
 
-#include "RenderResource.h"
+#include "RenderBinding.h"
 #include <cassert>
 
 namespace Render
 {
 
-Resource::Resource(void)
+Binding::Binding(void)
 {
 }
 
-Resource::~Resource(void)
+Binding::~Binding(void)
 {
 }
 
-bool Resource::IsValid(void) const
+bool Binding::IsValid(void) const
 {
 	bool valid = mObject != nullptr;
 	valid = valid && mStage!= ShaderStage::SHADER_STAGE_UNKNOWN;
@@ -27,7 +27,7 @@ bool Resource::IsValid(void) const
 	return valid;
 }
 
-Resource& Resource::operator=(const Resource& other)
+Binding& Binding::operator=(const Binding& other)
 {
 	mType = other.mType;
 	mObject = other.mObject;
@@ -35,21 +35,21 @@ Resource& Resource::operator=(const Resource& other)
 	return *this;
 }
 
-void Resource::SetImage(Image* image, ShaderStage stage)
+void Binding::SetImage(Image* image, ShaderStage stage)
 {
 	mImage = image;
 	mStage = stage;
 	mType = ResourceFlag::RESOURCE_TYPE_IMAGE;
 }
 
-void Resource::SetUniform(Buffer* uniform, ShaderStage stage)
+void Binding::SetUniform(Buffer* uniform, ShaderStage stage)
 {
 	mUniform = uniform;
 	mStage = stage;
 	mType = ResourceFlag::RESOURCE_TYPE_IMAGE;
 }
 
-void Resource::SetSampler(Sampler* sampler, ShaderStage stage)
+void Binding::SetSampler(Sampler* sampler, ShaderStage stage)
 {
 	mSampler = sampler;
 	mStage = stage;

@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include <RenderBindingLayout.h>
 #include "RenderCommandList.h"
-#include "RenderResourceLayout.h"
 #include <cassert>
 
 namespace Render

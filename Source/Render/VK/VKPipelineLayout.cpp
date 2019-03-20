@@ -5,10 +5,9 @@
  *      Author: rookyma
  */
 
+#include <VKBindingLayout.h>
 #include "VKPipelineLayout.h"
 #include "VKContext.h"
-#include "VKResourceLayout.h"
-
 #include "VulkanInline.h"
 #include "VulkanPipelineLayout.h"
 #include "VulkanDescriptorSetLayout.h"
@@ -18,7 +17,7 @@
 namespace VK
 {
 
-PipelineLayout::PipelineLayout(ResourceLayout* layout):
+PipelineLayout::PipelineLayout(BindingLayout* layout):
 		Render::PipelineLayout(layout)
 {
 }
@@ -30,7 +29,7 @@ PipelineLayout::~PipelineLayout(void)
 
 void PipelineLayout::Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
 {
-	auto context = mResourceLayout->GetContext();
+	auto context = mBindingLayout->GetContext();
 	Vulkan::Device* device = StaticCast(context)->GetVulkanDevice();
 	mPipelineLayout = Vulkan::PipelineLayout::New(device);
 	mPipelineLayout->Create(layouts, mConstantRanges.size(), mConstantRanges.data());
