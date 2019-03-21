@@ -25,8 +25,18 @@ public:
 	void Init(void);
 
 public:
-	static bool CheckError(void);
+	void MakeCurrent(void);
+
+public:
+	static void CheckError(void);
 	static const char* ErrorString(ALCenum code);
+
+public:
+	inline ALCdevice* GetOpenALDevice(void) const { return mDevice; }
+	inline ALCcontext* GetOpenALContext(void) const { return mContext; }
+
+public:
+	inline bool IsValid(void) const { return mDevice != nullptr && mContext != nullptr; }
 
 protected:
 	void OpenDevice(void);

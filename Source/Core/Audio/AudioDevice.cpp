@@ -44,37 +44,42 @@ void Device::OpenDevice(void)
 {
 	mDevice = alcOpenDevice(nullptr);
 	assert(mDevice != nullptr);
-	const ALCchar* device_name = alcGetString(mDevice, ALC_DEVICE_SPECIFIER);
-	std::cout << "OpenAL Device Name : " << device_name << std::endl;
+	std::cout << "OpenAL Device Name : " << alcGetString(mDevice, ALC_DEVICE_SPECIFIER) << std::endl;
+	std::cout << "OpenAL Device Extensions : " << alcGetString(mDevice, ALC_EXTENSIONS) << std::endl;
 }
 
 void Device::CreateContext(void)
 {
 	assert(mDevice != nullptr);
 	mContext = alcCreateContext(mDevice, nullptr);
-	bool error = Device::CheckError();
-	assert(mContext != nullptr && error == false);
-	alcMakeContextCurrent(mContext);
-	error = Device::CheckError();
-	if (!error)
+	if (mContext != nullptr)
 	{
-		std::cout << "OpenAL Device Vendor : " << alcGetString(mDevice, AL_VENDOR) << std::endl;
-		std::cout << "OpenAL Device Version : " << alcGetString(mDevice, AL_VERSION) << std::endl;
-		std::cout << "OpenAL Device Renderer : " << alcGetString(mDevice, AL_RENDERER) << std::endl;
-		std::cout << "OpenAL Device Extensions : " << alcGetString(mDevice, AL_EXTENSIONS) << std::endl;
+		ALCboolean error = alcMakeContextCurrent(mContext);
+		if (error == AL_TRUE)
+		{
+			std::cout << "OpenAL Device Vendor : " << alGetString(AL_VENDOR) << std::endl;
+			std::cout << "OpenAL Device Version : " << alGetString(AL_VERSION) << std::endl;
+			std::cout << "OpenAL Device Renderer : " << alGetString(AL_RENDERER) << std::endl;
+			std::cout << "OpenAL Device Extensions : " << alGetString(AL_EXTENSIONS) << std::endl;
+			return;
+		}
 	}
+	Device::CheckError();
+	assert(false);
 }
 
-bool Device::CheckError(void)
+void Device::CheckError(void)
 {
 	ALCenum code = alGetError();
-	if(!code == AL_NO_ERROR)
-	{
-		const char* str = Device::ErrorString(code);
-		std::cout << "OpenAL Error : " <<str << std::endl;
-		return false;
-	}
-	return true;
+	std::cout << "OpenAL Error : " << Device::ErrorString(code) << std::endl;
+	assert(code == AL_NO_ERROR);
+}
+
+void Device::MakeCurrent(void)
+{
+	assert(mContext != nullptr);
+	ALCboolean error = alcMakeContextCurrent(mContext);
+	assert(error == AL_TRUE);
 }
 
 const char* Device::ErrorString(ALCenum code)

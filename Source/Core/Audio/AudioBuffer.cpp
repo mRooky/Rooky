@@ -6,17 +6,26 @@
  */
 
 #include "AudioBuffer.h"
+#include "AudioDevice.h"
 
 namespace Audio
 {
 
-Buffer::Buffer(Device& parent):
-		m_parent(parent)
+Buffer::Buffer(Device& device):
+		Object(device)
 {
 }
 
 Buffer::~Buffer(void)
 {
+	alDeleteBuffers(1, &mID);
+	mID = 0;
+}
+
+void Buffer::Init(void)
+{
+	alGenBuffers(1, &mID);
+	Device::CheckError();
 }
 
 } /* namespace Audio */

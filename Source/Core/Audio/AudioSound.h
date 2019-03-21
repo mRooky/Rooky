@@ -8,21 +8,26 @@
 #ifndef SOURCE_CORE_AUDIO_AUDIOSOUND_H_
 #define SOURCE_CORE_AUDIO_AUDIOSOUND_H_
 
+#include "AudioObject.h"
+
 namespace Audio
 {
-class Device;
 class Buffer;
-class Sound
+class Sound : public Object
 {
 public:
-	explicit Sound(Device& parent);
-	virtual ~Sound(void);
+	explicit Sound(Device& device);
+	virtual ~Sound(void) override;
 
-private:
-	Device& m_parent;
+public:
+	void Init(void);
+	void Update(void);
+	void Play(void);
+	void Stop(void);
+	void Pause(void);
 
-private:
-	Buffer* m_buffer = nullptr;
+protected:
+	Buffer* mBuffer = nullptr;
 };
 
 } /* namespace Audio */

@@ -6,9 +6,12 @@
  */
 
 #include "ExampleTexture.h"
+#include "Audio/AudioDevice.h"
 
 int main(void)
 {
+	Audio::Device device;
+	device.Init();
 	Example::Texture texture;
 	texture.Initialize();
 	texture.RecordCommands();

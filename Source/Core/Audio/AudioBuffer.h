@@ -8,24 +8,21 @@
 #ifndef SOURCE_CORE_AUDIO_AUDIOBUFFER_H_
 #define SOURCE_CORE_AUDIO_AUDIOBUFFER_H_
 
-#include <AL/al.h>
-#include <AL/alc.h>
+#include "AudioObject.h"
 #include <cstdint>
 
 namespace Audio
 {
-class Device;
-class Buffer
+class Buffer : public Object
 {
 public:
-	explicit Buffer(Device& parent);
-	virtual ~Buffer(void);
+	explicit Buffer(Device& device);
+	virtual ~Buffer(void) override;
+
+public:
+	void Init(void);
 
 private:
-	Device& m_parent;
-
-private:
-	ALuint m_buffer = 0;
 	ALuint m_format = 0;
 	uint32_t m_size = 0;
 	uint32_t m_rate = 0;
