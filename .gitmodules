@@ -7,3 +7,4 @@
 [submodule "Source/Third/tinyxml2"]
 	path = Source/Third/tinyxml2
 	url = https://github.com/leethomason/tinyxml2.git
+
