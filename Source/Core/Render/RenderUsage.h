@@ -95,13 +95,13 @@ public:
 	~ResourceUsage(void) = default;
 
 public:
-	AllocateType allocate;
-	ResourceType type = ResourceType::RESOURCE_TYPE_UNKNOWN;
 	union
 	{
 		ImageUsage imageUsage;
 		BufferUsage bufferUsage;
 	};
+	AllocateType allocate;
+	ResourceType type = ResourceType::RESOURCE_TYPE_UNKNOWN;
 
 public:
 	inline bool CPUAccessable(void) const

@@ -9,7 +9,7 @@
 
 #include "CoreBufferManager.h"
 #include "CoreTextureManager.h"
-#include "CoreResourceManager.h"
+#include "CoreBindingManager.h"
 #include "CoreTexture.h"
 
 #include "RenderContext.h"
@@ -30,8 +30,8 @@ System::~System(void)
 	mBufferManager = nullptr;
 	delete mTextureManager;
 	mTextureManager = nullptr;
-	delete mResourceManager;
-	mResourceManager = nullptr;
+	delete mBindingManager;
+	mBindingManager = nullptr;
 	Render::DestroyContext(mContext);
 }
 
@@ -42,7 +42,7 @@ void System::Create(void)
 	mContext->Create();
 	mBufferManager = new BufferManager(this);
 	mTextureManager = new TextureManager(this);
-	mResourceManager = new ResourceManager(this);
+	mBindingManager = new BindingManager(this);
 }
 
 Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format)

@@ -17,7 +17,7 @@ namespace Core
 class Texture;
 class BufferManager;
 class TextureManager;
-class ResourceManager;
+class BindingManager;
 class System
 {
 public:
@@ -36,7 +36,7 @@ public:
 public:
 	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
 	inline TextureManager* GetTextureManager(void) const { return mTextureManager; }
-	inline ResourceManager* GetResourceManager(void) const { return mResourceManager; }
+	inline BindingManager* GetBindingManager(void) const { return mBindingManager; }
 
 protected:
 	Render::Context* mContext = nullptr;
@@ -44,7 +44,7 @@ protected:
 protected:
 	BufferManager* mBufferManager = nullptr;
 	TextureManager* mTextureManager = nullptr;
-	ResourceManager* mResourceManager = nullptr;
+	BindingManager* mBindingManager = nullptr;
 };
 
 } /* namespace Core */

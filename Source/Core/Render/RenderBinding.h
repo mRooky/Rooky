@@ -49,8 +49,6 @@ public:
 
 public:
 	inline Resource* GetResource(void) const { return mResource; }
-
-public:
 	inline ShaderStage GetShaderStage(void) const { return mStage; }
 	inline ResourceFlag GetResourceType(void) const { return mType; }
 

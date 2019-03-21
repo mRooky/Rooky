@@ -5,17 +5,17 @@
  *      Author: rookyma
  */
 
-#include "CoreResourceManager.h"
+#include "CoreBindingManager.h"
 
 namespace Core
 {
 
-ResourceManager::ResourceManager(System* system):
+BindingManager::BindingManager(System* system):
 		Object(system)
 {
 }
 
-ResourceManager::~ResourceManager(void)
+BindingManager::~BindingManager(void)
 {
 }
 
