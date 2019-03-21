@@ -10,19 +10,25 @@
 
 #include "CoreObject.h"
 #include "RenderBinding.h"
+#include "RenderBindingState.h"
+#include "RenderBindingLayout.h"
 #include <vector>
 
 namespace Core
 {
-
 class BindingManager : public Object
 {
 public:
 	explicit BindingManager(System* system);
 	virtual ~BindingManager(void) override;
 
+public:
+	Render::BindingState* CreateState(void);
+	Render::BindingLayout* CreateLayout(void);
+
 protected:
-	std::vector<Render::Binding> mBindings;
+	std::vector<Render::BindingState*> mBindingStates;
+	std::vector<Render::BindingLayout*> mBindingLayouts;
 };
 
 } /* namespace Core */

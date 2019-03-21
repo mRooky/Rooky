@@ -54,7 +54,7 @@ void BindingState::WriteDescriptorSet(void)
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& binding = mBindings.at(bind);
-		Render::ResourceFlag type = binding.GetResourceType();
+		Render::ResourceFlag type = binding->GetResourceType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
 		write.dstSet = mDescriptorSet->GetHandle();
@@ -65,11 +65,11 @@ void BindingState::WriteDescriptorSet(void)
 		switch(type)
 		{
 		case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
-			BindingState::SetImageInfo(binding, &image_infos.at(bind));
+			BindingState::SetImageInfo(*binding, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			break;
 		case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
-			BindingState::SetUniformInfo(binding, &buffer_infos.at(bind));
+			BindingState::SetUniformInfo(*binding, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			break;
 		default:
@@ -92,8 +92,8 @@ void BindingState::UpdateDescriptorSet(void)
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& binding = mBindings.at(bind);
-		Render::ShaderStage stage = binding.GetShaderStage();
-		Render::ResourceFlag type = binding.GetResourceType();
+		Render::ShaderStage stage = binding->GetShaderStage();
+		Render::ResourceFlag type = binding->GetResourceType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;

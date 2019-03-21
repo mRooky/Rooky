@@ -31,6 +31,10 @@ public:
 	virtual SwapChain* CreateSwapChain(void) = 0;
 	virtual CommandPool* CreateCommandPool(void) = 0;
 	virtual Declaration* CreateDeclaration(void) = 0;
+
+public:
+	virtual BindingState* CreateBindingState(void) = 0;
+	virtual BindingLayout* CreateBindingLayout(void) = 0;
 };
 
 } /* namespace Render */

@@ -28,8 +28,8 @@ class Sampler;
 class Element;
 class Declaration;
 class DrawCall;
-class ResourceState;
-class ImageLayout;
+class BindingState;
+class BindingLayout;
 
 }
 

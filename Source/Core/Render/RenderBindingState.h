@@ -25,11 +25,11 @@ public:
 	virtual void Update(void) = 0;
 
 public:
-	void AppendResource(const Binding& binding);
+	void AppendResource(const Binding* binding);
 
 protected:
 	BindingLayout* mLayout = nullptr;
-	std::vector<Binding> mBindings;
+	std::vector<const Binding*> mBindings;
 };
 
 } /* namespace Render */

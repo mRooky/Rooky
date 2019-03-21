@@ -22,9 +22,9 @@ BindingState::~BindingState(void)
 {
 }
 
-void BindingState::AppendResource(const Binding& binding)
+void BindingState::AppendResource(const Binding* binding)
 {
-	assert(binding.IsValid());
+	assert(binding->IsValid());
 	auto iterator = Util::Find(mBindings, binding);
 	assert(iterator == mBindings.end());
 	if (iterator == mBindings.end())

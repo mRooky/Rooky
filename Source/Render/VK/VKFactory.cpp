@@ -16,11 +16,15 @@
 #include "VKShader.h"
 #include "VKDeclaration.h"
 #include "VKResourceHeap.h"
+#include "VKBindingState.h"
+#include "VKBindingLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
 #include "VulkanDevice.h"
 #include "VulkanPhysicalDevice.h"
+
+#include <cassert>
 
 namespace VK
 {
@@ -94,6 +98,18 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 Render::Declaration* Factory::CreateDeclaration(void)
 {
 	return new Declaration;
+}
+
+Render::BindingState* Factory::CreateBindingState(void)
+{
+	assert(false);
+	return nullptr;
+}
+
+Render::BindingLayout* Factory::CreateBindingLayout(void)
+{
+	assert(false);
+	return nullptr;
 }
 
 } /* namespace VK */

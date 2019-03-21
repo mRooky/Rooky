@@ -9,6 +9,7 @@
 #define SOURCE_CORE_CORETARGET_H_
 
 #include "RenderClasses.h"
+#include "RenderLayout.hpp"
 
 namespace Core
 {
