@@ -21,7 +21,7 @@ BindingLayout::~BindingLayout(void)
 {
 }
 
-void BindingLayout::SetResourceState(uint32_t index, BindingState* state)
+void BindingLayout::SetBindingState(uint32_t index, BindingState* state)
 {
 	assert(index < 8);
 	mResourceMask.set(index);

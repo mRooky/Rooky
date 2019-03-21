@@ -71,7 +71,7 @@ void Image::CreateImage(void)
 void Image::AllocateMemory(void)
 {
 	assert(mImage != nullptr);
-	auto flags = GetMemoryPropertyFlags(mLayout.usage.heap);
+	auto flags = GetMemoryPropertyFlags(mLayout.usage.allocate);
 	Vulkan::Device* device = mImage->GetDevice();
 
 	auto& requirements = mImage->GetMemoryRequirements();
@@ -272,36 +272,16 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 
 VkImageUsageFlags Image::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkImageUsageFlags flags = VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-
-	if (usage.heap.Transform == 1)
-	{
-		flags |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
-	}
-	if (usage.binding.SampledImage == 1)
-	{
-		flags |= VK_IMAGE_USAGE_SAMPLED_BIT;
-	}
-	if (usage.binding.StorageImage == 1)
-	{
-		flags |= VK_IMAGE_USAGE_STORAGE_BIT;
-	}
-	if (usage.binding.ColorImage == 1)
-	{
-		flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
-	}
-	if (usage.binding.DepthStencil == 1)
-	{
-		flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
-	}
-	if (usage.binding.TransientImage == 1)
-	{
-		flags |= VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT;
-	}
-	if (usage.binding.InputImage == 1)
-	{
-		flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
-	}
+	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_IMAGE);
+	VkImageUsageFlags flags = 0;
+	flags |= (usage.allocate.Source == 1) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.allocate.Destination == 1) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.imageUsage.SampledImage == 1) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
+	flags |= (usage.imageUsage.StorageImage == 1) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
+	flags |= (usage.imageUsage.ColorImage == 1) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.DepthStencil == 1) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.TransientImage == 1) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.InputImage == 1) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
 	return flags;
 }
 

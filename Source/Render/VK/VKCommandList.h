@@ -35,8 +35,8 @@ public:
 	// End Fix Setup
 	// Resource Setting
 	virtual void SetPipeline(Render::Pipeline* pipeline) override;
-	virtual void SetResourceLayout(Render::BindingLayout* layout) override;
-	virtual void SetResourceState(uint32_t index, Render::BindingState* state) override;
+	virtual void SetBindingLayout(Render::BindingLayout* layout) override;
+	virtual void SetBindingState(uint32_t index, Render::BindingState* state) override;
 	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;

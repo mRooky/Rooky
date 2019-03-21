@@ -13,7 +13,7 @@
 #include "CoreTexture.h"
 
 #include "RenderContext.h"
-#include "RenderLayout.hpp"
+#include "RenderInline.h"
 
 #include <cassert>
 
@@ -52,13 +52,7 @@ Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& exten
 	Texture* texture = mTextureManager->GetTexture(name);
 	if (texture == nullptr)
 	{
-		Render::ImageLayout image_layout = {};
-		image_layout.extent = extent;
-		image_layout.usage = Render::ResourceUsage::GetImageUsage(false);
-		image_layout.usage.binding.SampledImage = 1;
-		image_layout.format = format;
-		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-
+		auto image_layout = CreateImageLayout(extent, format);
 		texture = mTextureManager->CreateTexture();
 		texture->SetName(name);
 		texture->Create(image_layout);

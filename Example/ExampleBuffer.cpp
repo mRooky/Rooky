@@ -128,12 +128,11 @@ void Buffer::CreateIndexBuffer(void)
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
 
-	Render::ResourceHeap heap_access;
-	heap_access.Buffer = 1;
-	heap_access.CPUAccess = 1;
+	Render::AllocateType allocate;
+	allocate.CPUAccess = 1;
 
 	mIndex = manager->CreateIndex();
-	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, heap_access);
+	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, allocate);
 
 	std::vector<uint16_t> indexes = { 0, 1, 2, 0, 2, 3 };
 
@@ -146,9 +145,8 @@ void Buffer::CreateVertexBuffer(void)
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
 
-	Render::ResourceHeap heap_access;
-	heap_access.Buffer = 1;
-	heap_access.CPUAccess = 1;
+	Render::AllocateType allocate;
+	allocate.CPUAccess = 1;
 
 	mVertex = manager->CreateVertex();
 
@@ -171,7 +169,7 @@ void Buffer::CreateVertexBuffer(void)
 	elements.push_back(Render::Element(0, 0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3));
 	elements.push_back(Render::Element(0, 1, 4, Render::ElementType::ELEMENT_TYPE_FLOAT3));
 	auto decl = manager->CreateDeclaration(elements);
-	mVertex->Create(decl, vertex_buffer.size(), heap_access);
+	mVertex->Create(decl, vertex_buffer.size(), allocate);
 
 	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
 	mVertex->Write(vertex_buffer.data(), 0, size);
@@ -182,9 +180,8 @@ void Buffer::CreateUniformBuffer(void)
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
 
-	Render::ResourceHeap heap_access;
-	heap_access.Buffer = 1;
-	heap_access.CPUAccess = 1;
+	Render::AllocateType allocate;
+	allocate.CPUAccess = 1;
 
 	mUniform = manager->CreateUniform();
 
@@ -193,7 +190,7 @@ void Buffer::CreateUniformBuffer(void)
 	glm::mat4 matrix = trans * scale;
 
 	uint32_t size = sizeof(matrix);
-	mUniform->Create(size, heap_access);
+	mUniform->Create(size, allocate);
 	mVertex->Write(&matrix, 0, size);
 }
 

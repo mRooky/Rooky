@@ -54,7 +54,7 @@ void Buffer::CreateBuffer(void)
 void Buffer::AllocateMemory(void)
 {
 	assert(mBuffer != nullptr);
-	auto flags = GetMemoryPropertyFlags(mUsage.heap);
+	auto flags = GetMemoryPropertyFlags(mUsage.allocate);
 	Vulkan::Device* device = mBuffer->GetDevice();
 	const auto& requires = mBuffer->GetMemoryRequirements();
 	mHeapSize = requires.size;
@@ -122,31 +122,15 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 
 VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::ResourceUsage usage)
 {
-	VkBufferUsageFlags flags = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-	if (usage.heap.Transform == 1)
-	{
-		flags |= VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-	}
-	if (usage.binding.IndexBuffer == 1)
-	{
-		flags |= VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
-	}
-	if (usage.binding.VertexBuffer == 1)
-	{
-		flags |= VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-	}
-	if (usage.binding.UniformBuffer == 1)
-	{
-		flags |= VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
-	}
-	if (usage.binding.StorageBuffer == 1)
-	{
-		flags |= VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
-	}
-	if (usage.binding.IndirectBuffer == 1)
-	{
-		flags |= VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
-	}
+	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_BUFFER);
+	VkBufferUsageFlags flags = 0;
+	flags |= (usage.allocate.Source == 1) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.allocate.Destination == 1) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.bufferUsage.IndexBuffer == 1) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.VertexBuffer == 1) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.UniformBuffer == 1) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.StorageBuffer == 1) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.IndirectBuffer == 1) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
 	return flags;
 }
 

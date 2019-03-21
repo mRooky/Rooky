@@ -207,7 +207,7 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 	mCommandBuffer->BindPipeline(vulkan_pipeline);
 }
 
-void CommandList::SetResourceLayout(Render::BindingLayout* layout)
+void CommandList::SetBindingLayout(Render::BindingLayout* layout)
 {
 	if (mBindingLayout != layout)
 	{
@@ -216,7 +216,7 @@ void CommandList::SetResourceLayout(Render::BindingLayout* layout)
 	}
 }
 
-void CommandList::SetResourceState(uint32_t index, Render::BindingState* state)
+void CommandList::SetBindingState(uint32_t index, Render::BindingState* state)
 {
 	assert(mBindingLayout != nullptr);
 	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);

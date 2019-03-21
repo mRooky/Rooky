@@ -24,7 +24,7 @@ public:
 	virtual ~BindingLayout(void) override;
 
 public:
-	void SetResourceState(uint32_t index, BindingState* state);
+	void SetBindingState(uint32_t index, BindingState* state);
 
 public:
 	virtual PipelineLayout* Update(void) = 0;

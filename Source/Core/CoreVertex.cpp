@@ -29,15 +29,15 @@ Vertex::~Vertex(void)
 	mDeclaration = nullptr;
 }
 
-void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::ResourceHeap heap)
+void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::AllocateType allocate)
 {
 	mCount = count;
 	mDeclaration = decl;
 	size_t size = mDeclaration->GetStride() * count;
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
-	buffer_usage.heap = heap;
-	buffer_usage.binding.VertexBuffer = 1;
+	buffer_usage.allocate = allocate;
+	buffer_usage.bufferUsage.VertexBuffer = 1;
 	Buffer::Create(size, buffer_usage);
 }
 

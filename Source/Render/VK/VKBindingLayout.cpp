@@ -64,6 +64,7 @@ void BindingLayout::Binding(CommandList* list)
 		auto vk_state = static_cast<BindingState*>(state);
 		descriptor_sets.push_back(vk_state->GetDescriptorSet());
 	}
+
 	std::vector<uint32_t> offset;
 	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mCurrentLayout);
 	auto vulkan_command_buffer = list->GetVulkanCommandBuffer();

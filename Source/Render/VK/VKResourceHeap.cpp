@@ -8,6 +8,7 @@
 #include "VKResourceHeap.h"
 #include "VKBuffer.h"
 #include "UtilRelease.h"
+#include "VKInline.h"
 
 #include "VulkanBuffer.h"
 
@@ -36,8 +37,8 @@ Buffer* ResourceHeap::AcquireBuffer(size_t size, VkBufferUsageFlags usage, bool 
 	Buffer* buffer = BufferFind(size, usage, cpu);
 	if (buffer == nullptr)
 	{
-		auto resource_usage = Render::ResourceUsage::GetBufferUsage(cpu);
-		resource_usage.heap.Transform = 1;
+		auto resource_usage = ConvertBufferUsageFlags(usage);
+		resource_usage.allocate.CPUAccess = cpu ? 1 : 0;
 		buffer = new Buffer(mContext);
 		buffer->Create(size, resource_usage);
 		mBuffers.push_back(buffer);
@@ -50,7 +51,7 @@ Buffer* ResourceHeap::BufferFind(size_t size, VkBufferUsageFlags usage, bool cpu
 	for (auto buffer : mBuffers)
 	{
 		size_t buffer_size = buffer->GetSize();
-		bool access_cpu = buffer->GetUsage().AccessCPU();
+		bool access_cpu = buffer->GetUsage().CPUAccessable();
 		if (buffer_size > size && access_cpu == cpu)
 		{
 			auto vulkan_buffer = buffer->GetVulkanBuffer();

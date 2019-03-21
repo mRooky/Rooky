@@ -28,7 +28,7 @@ public:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(Render::Declaration* decl, uint32_t count, Render::ResourceHeap heap);
+	void Create(Render::Declaration* decl, uint32_t count, Render::AllocateType allocate);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
