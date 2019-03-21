@@ -4,3 +4,6 @@
 [submodule "Third/soil"]
 	path = Third/soil
 	url = https://github.com/epatel/SOIL.git
+[submodule "Source/Third/tinyxml2"]
+	path = Source/Third/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
