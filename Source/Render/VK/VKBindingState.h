@@ -31,9 +31,9 @@ public:
 	static VkDescriptorType GetDescriptorType(Render::ResourceFlag type);
 
 public:
-	static void SetImageInfo(const Render::Binding& binding, VkDescriptorImageInfo* info);
-	static void SetUniformInfo(const Render::Binding& binding, VkDescriptorBufferInfo* info);
-	static void SetSamplerInfo(const Render::Binding& binding, VkDescriptorImageInfo* info);
+	static void SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info);
+	static void SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info);
+	static void SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info);
 
 protected:
 	void WriteDescriptorSet(void);

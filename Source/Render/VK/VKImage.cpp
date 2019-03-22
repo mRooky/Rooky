@@ -11,7 +11,7 @@
 #include "VKBuffer.h"
 #include "VKInline.h"
 #include "VKFactory.h"
-#include "VKResourceHeap.h"
+#include "VKStaging.h"
 #include "VKOperator.h"
 
 #include "VulkanImage.h"
@@ -102,7 +102,7 @@ void Image::Unmap(size_t offset, size_t size)
 
 void Image::Download(void* dst)
 {
-
+	assert(false);
 }
 
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
@@ -113,9 +113,9 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	size_t buffer_size = GetMipmapSize(mipmap);
-	auto resource_heap = factory->GetResourceHeap();
+	auto staging = factory->GetStaging();
 	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-	auto stage_buffer = resource_heap->AcquireBuffer(buffer_size, usage, true);
+	auto stage_buffer = staging->GetBuffer(buffer_size, usage);
 	void* dst = stage_buffer->Map(0, buffer_size);
 	std::memcpy(dst, src, buffer_size);
 	stage_buffer->Unmap(0, buffer_size);

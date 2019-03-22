@@ -42,19 +42,20 @@ void Pipeline::Initialize(const Render::PipelineInfo& info)
 	if (valid == true)
 	{
 		mInfo = info;
-		auto render_pass = static_cast<RenderPass*>(mInfo.pRenderPass);
-		auto vulkan_pass = render_pass->GetVulkanRenderPass();
-		auto pipeline_state = static_cast<PipelineState*>(mInfo.pPipelineState);
-		auto pipeline_layout = static_cast<PipelineLayout*>(mInfo.pPipelineLayout);
-		auto vulkan_layout = pipeline_layout->GetVulkanPipelineLayout();
+		auto vk_render_pass = static_cast<RenderPass*>(mInfo.pRenderPass);
+		auto vk_pipeline_state = static_cast<PipelineState*>(mInfo.pPipelineState);
+		auto vk_pipeline_layout = static_cast<PipelineLayout*>(mInfo.pPipelineLayout);
 
-		auto pipeline_create_info = pipeline_state->GetGraphicsInfo();
-		pipeline_create_info->SetContent(vulkan_layout, vulkan_pass, mInfo.index);
+		auto vulkan_pass = vk_render_pass->GetVulkanRenderPass();
+		auto vulkan_pipeline_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
+
+		auto pipeline_create_info = vk_pipeline_state->GetGraphicsInfo();
+		pipeline_create_info->SetContent(vulkan_pipeline_layout, vulkan_pass, mInfo.index);
 
 		assert(false);
 
-		auto device = vulkan_pass->GetDevice();
-		mCurrent = Vulkan::Pipeline::New(device);
+		auto vulkan_device = vulkan_pass->GetDevice();
+		mCurrent = Vulkan::Pipeline::New(vulkan_device);
 		mCurrent->Create(nullptr, pipeline_create_info->CreateInfo());
 	}
 	else

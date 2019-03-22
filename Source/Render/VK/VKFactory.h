@@ -14,7 +14,7 @@
 namespace VK
 {
 class Context;
-class ResourceHeap;
+class Staging;
 class Factory: public Render::Factory
 {
 public:
@@ -36,14 +36,14 @@ public:
 	virtual Render::BindingLayout* CreateBindingLayout(void) override;
 
 public:
-	inline ResourceHeap* GetResourceHeap(void) const { return mResourceHeap; }
+	inline Staging* GetStaging(void) const { return mStaging; }
 	inline Vulkan::CommandPool* GetVulkanCommandPool(void) const { return mCommandPool; }
 
 protected:
 	void CreateDefaultPool(void);
 
 protected:
-	ResourceHeap* mResourceHeap = nullptr;
+	Staging* mStaging = nullptr;
 	Vulkan::CommandPool* mCommandPool = nullptr;
 };
 

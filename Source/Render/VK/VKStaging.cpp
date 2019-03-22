@@ -1,14 +1,16 @@
 /*
- * VKHeap.cpp
+ * VKStaging.cpp
  *
- *  Created on: Mar 13, 2019
+ *  Created on: Mar 22, 2019
  *      Author: rookyma
  */
 
-#include "VKResourceHeap.h"
+#include "VKStaging.h"
+#include "VKContext.h"
 #include "VKBuffer.h"
-#include "UtilRelease.h"
 #include "VKInline.h"
+
+#include "UtilRelease.h"
 
 #include "VulkanBuffer.h"
 
@@ -18,27 +20,25 @@
 namespace VK
 {
 
-ResourceHeap::ResourceHeap(Context* context):
+Staging::Staging(Context* context):
 		mContext(context)
 {
-	assert(mContext != nullptr);
 }
 
-ResourceHeap::~ResourceHeap(void)
+Staging::~Staging(void)
 {
-	mContext = nullptr;
 	std::cout << "Release Recycled Buffer ..." << std::endl;
 	Util::Release(mBuffers);
 	std::cout << "All Recycled Buffers Released" << std::endl;
 }
 
-Buffer* ResourceHeap::AcquireBuffer(size_t size, VkBufferUsageFlags usage, bool cpu)
+Buffer* Staging::GetBuffer(size_t size, VkBufferUsageFlags usage)
 {
-	Buffer* buffer = BufferFind(size, usage, cpu);
+	Buffer* buffer = SearchBuffer(size, usage);
 	if (buffer == nullptr)
 	{
 		auto resource_usage = ConvertBufferUsageFlags(usage);
-		resource_usage.allocate.CPUAccess = cpu ? 1 : 0;
+		resource_usage.allocate.CPUAccess = 1; // Must CPU Access
 		buffer = new Buffer(mContext);
 		buffer->Create(size, resource_usage);
 		mBuffers.push_back(buffer);
@@ -46,18 +46,16 @@ Buffer* ResourceHeap::AcquireBuffer(size_t size, VkBufferUsageFlags usage, bool 
 	return buffer;
 }
 
-Buffer* ResourceHeap::BufferFind(size_t size, VkBufferUsageFlags usage, bool cpu)
+Buffer* Staging::SearchBuffer(size_t size, VkBufferUsageFlags usage)
 {
 	for (auto buffer : mBuffers)
 	{
 		size_t buffer_size = buffer->GetSize();
-		bool access_cpu = buffer->GetUsage().CPUAccessable();
-		if (buffer_size > size && access_cpu == cpu)
+		if (buffer_size > size)
 		{
 			auto vulkan_buffer = buffer->GetVulkanBuffer();
-			auto& info = vulkan_buffer->GetInfo();
-			auto& buffer_usage = info.usage;
-			if (usage & buffer_usage)
+			auto buffer_usage = vulkan_buffer->GetUsage();
+			if (usage & buffer_usage == usage)
 			{
 				return buffer;
 			}

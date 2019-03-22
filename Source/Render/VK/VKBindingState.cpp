@@ -65,11 +65,11 @@ void BindingState::WriteDescriptorSet(void)
 		switch(type)
 		{
 		case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
-			BindingState::SetImageInfo(*binding, &image_infos.at(bind));
+			BindingState::SetImageInfo(binding, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			break;
 		case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
-			BindingState::SetUniformInfo(*binding, &buffer_infos.at(bind));
+			BindingState::SetUniformInfo(binding, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			break;
 		default:
@@ -107,21 +107,21 @@ void BindingState::UpdateDescriptorSet(void)
 	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 }
 
-void BindingState::SetImageInfo(const Render::Binding& binding, VkDescriptorImageInfo* info)
+void BindingState::SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
 {
 	assert(info != nullptr);
-	Image* image = static_cast<Image*>(binding.GetResource());
+	Image* image = static_cast<Image*>(binding->GetResource());
 	*info = image->GetVulkanImage()->GetDescriptorInfo();
 }
 
-void BindingState::SetUniformInfo(const Render::Binding& binding, VkDescriptorBufferInfo* info)
+void BindingState::SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
-	Buffer* buffer = static_cast<Buffer*>(binding.GetResource());
+	Buffer* buffer = static_cast<Buffer*>(binding->GetResource());
 	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
 }
 
-void BindingState::SetSamplerInfo(const Render::Binding& binding, VkDescriptorImageInfo* info)
+void BindingState::SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
 {
 	assert(false);
 }

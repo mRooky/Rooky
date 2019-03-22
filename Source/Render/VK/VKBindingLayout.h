@@ -29,6 +29,8 @@ public:
 
 public:
 	void Binding(CommandList* list);
+
+public:
 	void SetBindingState(uint32_t index, BindingState* state);
 
 public:

@@ -15,7 +15,7 @@
 #include "VKQueue.h"
 #include "VKShader.h"
 #include "VKDeclaration.h"
-#include "VKResourceHeap.h"
+#include "VKStaging.h"
 #include "VKBindingState.h"
 #include "VKBindingLayout.h"
 
@@ -33,13 +33,13 @@ Factory::Factory(Context* context):
 		Render::Factory(context)
 {
 	CreateDefaultPool();
-	mResourceHeap = new ResourceHeap(context);
+	mStaging = new Staging(context);
 }
 
 Factory::~Factory(void)
 {
-	delete mResourceHeap;
-	mResourceHeap = nullptr;
+	delete mStaging;
+	mStaging = nullptr;
 	Vulkan::Release(mCommandPool);
 }
 
