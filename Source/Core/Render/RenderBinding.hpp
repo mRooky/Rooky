@@ -44,7 +44,7 @@ public:
 
 	inline bool operator==(const Binding& other) const
 	{
-		return mResource == other.mResource && mStage == other.mStage;
+		return (mResource == other.mResource && mStage == other.mStage);
 	}
 
 	inline bool operator!=(const Binding& other) const

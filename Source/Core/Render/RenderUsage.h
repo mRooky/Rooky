@@ -28,7 +28,7 @@ public:
 	~AllocateType(void) = default;
 
 public:
-	inline bool operator==(const AllocateType& other)
+	inline bool operator==(const AllocateType& other) const
 	{
 		return (TypeFlags == other.TypeFlags);
 	}
@@ -54,7 +54,7 @@ public:
 	~ImageUsage(void) = default;
 
 public:
-	inline bool operator==(const ImageUsage& other)
+	inline bool operator==(const ImageUsage& other) const
 	{
 		return (UsageFlags == other.UsageFlags);
 	}
@@ -83,7 +83,7 @@ public:
 	~BufferUsage(void) = default;
 
 public:
-	inline bool operator==(const BufferUsage& other)
+	inline bool operator==(const BufferUsage& other) const
 	{
 		return (UsageFlags == other.UsageFlags);
 	}
@@ -119,7 +119,7 @@ public:
 	}
 
 public:
-	inline bool operator==(const ResourceUsage& other)
+	inline bool operator==(const ResourceUsage& other) const
 	{
 		if (type == other.type && allocate == other.allocate)
 		{
@@ -138,7 +138,7 @@ public:
 		return false;
 	}
 
-	inline bool operator!=(const ResourceUsage& other)
+	inline bool operator!=(const ResourceUsage& other) const
 	{
 		return !(*this == other);
 	}

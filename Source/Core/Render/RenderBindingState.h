@@ -27,6 +27,9 @@ public:
 	virtual void SetBinding(uint32_t index, const Binding& binding) = 0;
 
 public:
+	bool operator==(const BindingState& other) const;
+
+public:
 	inline BindingLayout* GetBindingLayout(void) const { return mLayout; }
 	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
 
