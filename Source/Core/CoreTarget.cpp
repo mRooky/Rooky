@@ -31,14 +31,14 @@ Target::~Target(void)
 	mManager = nullptr;
 }
 
-void Target::Create(const Render::ImageLayout& layout)
+void Target::Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage)
 {
 	assert(mImage == nullptr);
 	auto system = mManager->GetSystem();
 	auto context = system->GetContext();
 	auto factory = context->GetFactory();
 	mImage = factory->CreateImage();
-	mImage->Create(layout);
+	mImage->Create(layout, usage);
 }
 
 } /* namespace Core */

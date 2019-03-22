@@ -72,23 +72,6 @@ void BindingLayout::Binding(CommandList* list)
 	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
 }
 
-void BindingLayout::SetBindingState(uint32_t index, BindingState* state)
-{
-	assert(index < mBindingStates.size());
-	auto layout = mDescriptorSetLayouts.at(index);
-	auto state_layout = state->GetDescriptorSet()->GetLayout();
-	if (layout == state_layout)
-	{
-		mBindingStates.at(index) = state;
-	}
-	else
-	{
-		// log message future
-		std::cout << "ResourceState does not match ResourceLayout !" << std::endl;
-		assert(false);
-	}
-}
-
 void BindingLayout::CreateDescriptorPool(size_t max)
 {
 	std::vector<VkDescriptorPoolSize> descriptor_pool_sizes;

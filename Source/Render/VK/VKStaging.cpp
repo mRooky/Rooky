@@ -55,7 +55,7 @@ Buffer* Staging::SearchBuffer(size_t size, VkBufferUsageFlags usage)
 		{
 			auto vulkan_buffer = buffer->GetVulkanBuffer();
 			auto buffer_usage = vulkan_buffer->GetUsage();
-			if (usage & buffer_usage == usage)
+			if ((usage & buffer_usage) == usage)
 			{
 				return buffer;
 			}

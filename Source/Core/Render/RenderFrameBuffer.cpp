@@ -41,14 +41,17 @@ void FrameBuffer::Create(void)
 
 void FrameBuffer::SetDepthStencil(Image* attachment)
 {
-	if(mDepthStencil != nullptr)
+	if(attachment != nullptr)
 	{
-		Format format = attachment->GetFormat();
-		bool valid = Image::IsDepthStencilFormat(format);
-		assert(valid);
-		if (valid)
+		auto& usage = attachment->GetUsage();
+		bool for_depth_stencil = usage.imageUsage.DepthStencil == 1;
+		assert(true == for_depth_stencil);
+		if (true == for_depth_stencil)
 		{
-			mDepthStencil = attachment;
+			Format format = attachment->GetFormat();
+			bool format_depth_stencil = Image::IsDepthStencilFormat(format);
+			assert(true == format_depth_stencil);
+			mDepthStencil = (true == format_depth_stencil) ? attachment : nullptr;
 		}
 	}
 }

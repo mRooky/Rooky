@@ -30,7 +30,6 @@ public:
 	Extent3D extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
-	ResourceUsage usage = {};
 
 public:
 	Format format = Format::FORMAT_UNDEFINED;

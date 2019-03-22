@@ -134,4 +134,15 @@ VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::ResourceUsage usage)
 	return flags;
 }
 
+VkDescriptorType Buffer::GetDescriptorType(const Render::BufferUsage& usage)
+{
+	VkDescriptorType descriptor_type =
+	(usage.UniformBuffer == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER :
+	(usage.StorageBuffer == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_BUFFER :
+	(usage.UniformTexel == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER :
+	(usage.StorageTexel == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER: VK_DESCRIPTOR_TYPE_MAX_ENUM;
+	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
+	return descriptor_type;
+}
+
 } /* namespace VK */

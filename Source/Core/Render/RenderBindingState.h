@@ -8,8 +8,9 @@
 #ifndef SOURCE_CORE_RENDER_RENDERBINDINGSTATE_H_
 #define SOURCE_CORE_RENDER_RENDERBINDINGSTATE_H_
 
-#include "RenderBinding.h"
-#include <vector>
+#include "RenderBinding.hpp"
+#include <array>
+#include <bitset>
 
 namespace Render
 {
@@ -23,13 +24,16 @@ public:
 
 public:
 	virtual void Update(void) = 0;
+	virtual void SetBinding(uint32_t index, const Binding& binding) = 0;
 
 public:
-	void AppendResource(const Binding* binding);
+	inline BindingLayout* GetBindingLayout(void) const { return mLayout; }
+	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
 
 protected:
 	BindingLayout* mLayout = nullptr;
-	std::vector<const Binding*> mBindings;
+	std::bitset<8> mBindingMask = 0;
+	std::array<Binding, 8> mBindings;
 };
 
 } /* namespace Render */

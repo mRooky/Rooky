@@ -43,8 +43,9 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(const Render::ImageLayout& layout)
+void Image::Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage)
 {
+	mUsage = usage;
 	mLayout = layout;
 	CreateImage();
 	AllocateMemory();
@@ -63,7 +64,7 @@ void Image::CreateImage(void)
 	vulkan_extent.height = static_cast<uint32_t>(mLayout.extent.height);
 	vulkan_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
 
-	VkImageUsageFlags usage = Image::ConvertUsageFlag(mLayout.usage);
+	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
 	mImage = Vulkan::Image::New(device);
 	mImage->Create(vulkan_format, vulkan_extent, usage);
 }
@@ -71,7 +72,7 @@ void Image::CreateImage(void)
 void Image::AllocateMemory(void)
 {
 	assert(mImage != nullptr);
-	auto flags = GetMemoryPropertyFlags(mLayout.usage.allocate);
+	auto flags = GetMemoryPropertyFlags(mUsage.allocate);
 	Vulkan::Device* device = mImage->GetDevice();
 
 	auto& requirements = mImage->GetMemoryRequirements();
@@ -220,6 +221,16 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	extent.width = mLayout.extent.width / (1u << mipmap);
 	extent.height = mLayout.extent.height / (1u << mipmap);
 	return extent;
+}
+
+VkDescriptorType Image::GetDescriptorType(const Render::ImageUsage& usage)
+{
+	VkDescriptorType descriptor_type =
+	(usage.SampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
+	(usage.StorageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
+	(usage.InputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT : VK_DESCRIPTOR_TYPE_MAX_ENUM;
+	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
+	return descriptor_type;
 }
 
 VkImageViewType Image::ConverType(const Render::ImageType& type)

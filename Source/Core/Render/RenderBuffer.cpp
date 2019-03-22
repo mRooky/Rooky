@@ -13,6 +13,7 @@ namespace Render
 Buffer::Buffer(Context* context):
 		Memory(context)
 {
+	mType = ResourceType::RESOURCE_TYPE_BUFFER;
 }
 
 Buffer::~Buffer(void)

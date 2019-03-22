@@ -21,7 +21,7 @@ public:
 	virtual ~Target(void);
 
 public:
-	void Create(const Render::ImageLayout& layout);
+	void Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage);
 
 public:
 	inline bool IsValid(void) const { return mImage != nullptr; }

@@ -28,6 +28,12 @@ public:
 	~AllocateType(void) = default;
 
 public:
+	inline bool operator==(const AllocateType& other)
+	{
+		return (TypeFlags == other.TypeFlags);
+	}
+
+public:
 	union
 	{
 		struct
@@ -46,6 +52,12 @@ class ImageUsage
 public:
 	ImageUsage(void) = default;
 	~ImageUsage(void) = default;
+
+public:
+	inline bool operator==(const ImageUsage& other)
+	{
+		return (UsageFlags == other.UsageFlags);
+	}
 
 public:
 	union
@@ -69,6 +81,12 @@ class BufferUsage
 public:
 	BufferUsage(void) = default;
 	~BufferUsage(void) = default;
+
+public:
+	inline bool operator==(const BufferUsage& other)
+	{
+		return (UsageFlags == other.UsageFlags);
+	}
 
 public:
 	union
@@ -95,6 +113,41 @@ public:
 	~ResourceUsage(void) = default;
 
 public:
+	inline bool CPUAccessable(void) const
+	{
+		return (allocate.CPUAccess == 1);
+	}
+
+public:
+	inline bool operator==(const ResourceUsage& other)
+	{
+		if (type == other.type && allocate == other.allocate)
+		{
+			switch(type)
+			{
+			case ResourceType::RESOURCE_TYPE_IMAGE:
+				return (imageUsage == other.imageUsage);
+			case ResourceType::RESOURCE_TYPE_BUFFER:
+				return (bufferUsage == other.bufferUsage);
+			case ResourceType::RESOURCE_TYPE_SAMPLER:
+				return true;
+			default:
+				return false;
+			}
+		}
+		return false;
+	}
+
+	inline bool operator!=(const ResourceUsage& other)
+	{
+		return !(*this == other);
+	}
+
+public:
+	static ResourceUsage GetImageUsage(bool access);
+	static ResourceUsage GetBufferUsage(bool access);
+
+public:
 	union
 	{
 		ImageUsage imageUsage;
@@ -102,16 +155,6 @@ public:
 	};
 	AllocateType allocate;
 	ResourceType type = ResourceType::RESOURCE_TYPE_UNKNOWN;
-
-public:
-	inline bool CPUAccessable(void) const
-	{
-		return allocate.CPUAccess == 1;
-	}
-
-public:
-	static ResourceUsage GetImageUsage(bool access);
-	static ResourceUsage GetBufferUsage(bool access);
 };
 
 }

@@ -15,6 +15,7 @@ namespace Render
 Image::Image(Context* context):
 		Memory(context)
 {
+	mType = ResourceType::RESOURCE_TYPE_IMAGE;
 }
 
 Image::~Image(void)

@@ -48,12 +48,14 @@ void Viewport::CreateDepthStencil(const Render::Extent2D& extent)
 	Render::ImageLayout image_layout = {};
 
 	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-	image_layout.usage = Render::ResourceUsage::GetImageUsage(false);
 	image_layout.extent = { extent.width, extent.height, 1 };
 	image_layout.format = context->GetBestDepthStencilFormat();
 
+	auto image_usage = Render::ResourceUsage::GetImageUsage(false);
+	image_usage.imageUsage.DepthStencil = 1;
+
 	mDepthStencil = context->GetFactory()->CreateImage();
-	mDepthStencil->Create(image_layout);
+	mDepthStencil->Create(image_layout, image_usage);
 }
 
 } /* namespace Core */

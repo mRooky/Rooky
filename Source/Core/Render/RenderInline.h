@@ -24,9 +24,6 @@ static inline ImageLayout CreateImageLayout(const Render::Extent3D& extent, Rend
 {
 	Render::ImageLayout image_layout = {};
 	image_layout.extent = extent;
-	image_layout.usage = Render::ResourceUsage::GetImageUsage(false);
-	image_layout.usage.allocate.Destination = 1;
-	image_layout.usage.imageUsage.SampledImage = 1;
 	image_layout.format = format;
 	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
 	return image_layout;

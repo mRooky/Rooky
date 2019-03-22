@@ -41,6 +41,7 @@ public:
 
 public:
 	static VkBufferUsageFlags ConvertUsageFlag(Render::ResourceUsage usage);
+	static VkDescriptorType GetDescriptorType(const Render::BufferUsage& usage);
 
 private:
 	void CreateBuffer(void);

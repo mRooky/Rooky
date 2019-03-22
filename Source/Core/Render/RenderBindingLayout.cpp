@@ -21,11 +21,4 @@ BindingLayout::~BindingLayout(void)
 {
 }
 
-void BindingLayout::SetBindingState(uint32_t index, BindingState* state)
-{
-	assert(index < 8);
-	mResourceMask.set(index);
-	mBindingStates.at(index) = state;
-}
-
 } /* namespace Render */

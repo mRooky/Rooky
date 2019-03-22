@@ -53,9 +53,12 @@ Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& exten
 	if (texture == nullptr)
 	{
 		auto image_layout = CreateImageLayout(extent, format);
+		auto image_usage = Render::ResourceUsage::GetImageUsage(false);
+		image_usage.allocate.Destination = 1;
+		image_usage.imageUsage.SampledImage = 1;
 		texture = mTextureManager->CreateTexture();
 		texture->SetName(name);
-		texture->Create(image_layout);
+		texture->Create(image_layout, image_usage);
 	}
 
 	assert(texture != nullptr);

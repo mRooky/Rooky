@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
+#include <RenderBinding.hpp>
 #include "CoreObject.h"
-#include "RenderBinding.h"
 #include "RenderBindingState.h"
 #include "RenderBindingLayout.h"
 #include <vector>

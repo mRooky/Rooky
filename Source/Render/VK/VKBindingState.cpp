@@ -40,6 +40,30 @@ void BindingState::Update(void)
 	WriteDescriptorSet();
 }
 
+void BindingState::SetBinding(uint32_t index, const Render::Binding& binding)
+{
+	bool set = mBindingMask.test(index);
+	if (false == set)
+	{
+		mBindingMask.set(index);
+		mBindings.at(index) = binding;
+	}
+	else
+	{
+		auto& old = mBindings.at(index);
+		auto old_usage = old.GetResource()->GetUsage();
+		auto new_usage = binding.GetResource()->GetUsage();
+		if (old_usage != new_usage)
+		{
+			assert(false);
+		}
+		else
+		{
+			mBindings.at(index) = binding;
+		}
+	}
+}
+
 void BindingState::WriteDescriptorSet(void)
 {
 	const size_t size = mBindings.size();
@@ -54,23 +78,26 @@ void BindingState::WriteDescriptorSet(void)
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& binding = mBindings.at(bind);
-		Render::ResourceFlag type = binding->GetResourceType();
+		auto resource = binding.GetResource();
+		auto resource_usage = resource->GetUsage();
+		auto resource_type = resource->GetType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
 		write.dstSet = mDescriptorSet->GetHandle();
 		write.dstBinding = bind;
 		write.descriptorCount = 1;
-		write.descriptorType = BindingState::GetDescriptorType(type);
 
-		switch(type)
+		switch(resource_type)
 		{
-		case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
-			BindingState::SetImageInfo(binding, &image_infos.at(bind));
+		case Render::ResourceType::RESOURCE_TYPE_IMAGE:
+			BindingState::SetImageInfo(&binding, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
+			write.descriptorType = Image::GetDescriptorType(resource_usage.imageUsage);
 			break;
-		case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
-			BindingState::SetUniformInfo(binding, &buffer_infos.at(bind));
+		case Render::ResourceType::RESOURCE_TYPE_BUFFER:
+			BindingState::SetUniformInfo(&binding, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
+			write.descriptorType = Buffer::GetDescriptorType(resource_usage.bufferUsage);
 			break;
 		default:
 			assert(false);
@@ -92,14 +119,17 @@ void BindingState::UpdateDescriptorSet(void)
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& binding = mBindings.at(bind);
-		Render::ShaderStage stage = binding->GetShaderStage();
-		Render::ResourceFlag type = binding->GetResourceType();
+		Render::ShaderStage stage = binding.GetShaderStage();
+
+		Render::Resource* resource = binding.GetResource();
+		Render::ResourceUsage resource_usage = resource->GetUsage();
+		Render::ResourceType resource_type = resource->GetType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;
 		layout_bind.descriptorCount = 1;
 		layout_bind.stageFlags = Shader::ConvertStage(stage);
-		layout_bind.descriptorType = BindingState::GetDescriptorType(type);
+		layout_bind.descriptorType = BindingState::GetDescriptorType(resource_type, resource_usage);
 		layout_bindings.push_back(layout_bind);
 	}
 
@@ -126,26 +156,26 @@ void BindingState::SetSamplerInfo(const Render::Binding* binding, VkDescriptorIm
 	assert(false);
 }
 
-VkDescriptorType BindingState::GetDescriptorType(Render::ResourceFlag type)
+VkDescriptorType BindingState::GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage)
 {
+	VkDescriptorType descriptor_type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	switch(type)
 	{
-	case Render::ResourceFlag::RESOURCE_TYPE_COMMON:
-		return VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	case Render::ResourceFlag::RESOURCE_TYPE_BUFFER:
-		return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-	case Render::ResourceFlag::RESOURCE_TYPE_IMAGE:
-		return VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
-	case Render::ResourceFlag::RESOURCE_TYPE_UNIFORM:
-		return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	case Render::ResourceFlag::RESOURCE_TYPE_SAMPLER:
-		return VK_DESCRIPTOR_TYPE_SAMPLER;
-	case Render::ResourceFlag::RESOURCE_TYPE_TARGET:
-		return VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+	case Render::ResourceType::RESOURCE_TYPE_IMAGE:
+		descriptor_type = Image::GetDescriptorType(usage.imageUsage);
+		break;
+	case Render::ResourceType::RESOURCE_TYPE_BUFFER:
+		descriptor_type = Buffer::GetDescriptorType(usage.bufferUsage);
+		break;
+	case Render::ResourceType::RESOURCE_TYPE_SAMPLER:
+		descriptor_type = VK_DESCRIPTOR_TYPE_SAMPLER;
+		break;
 	default:
 		assert(false);
-		return VK_DESCRIPTOR_TYPE_MAX_ENUM;
+		break;
 	}
+	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
+	return descriptor_type;
 }
 
 } /* namespace VK */

@@ -216,12 +216,12 @@ void CommandList::SetBindingLayout(Render::BindingLayout* layout)
 	}
 }
 
-void CommandList::SetBindingState(uint32_t index, Render::BindingState* state)
+void CommandList::SetBinding(uint32_t slot, uint32_t index, Render::Binding* binding)
 {
 	assert(mBindingLayout != nullptr);
 	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
-	auto vk_binding_state = static_cast<BindingState*>(state);
-	vk_layout->SetBindingState(index, vk_binding_state);
+	auto vk_binding_state = static_cast<BindingState*>(vk_layout->GetBindingState(slot));
+	vk_binding_state->SetBinding(index, *binding);
 }
 
 } /* namespace VK */
