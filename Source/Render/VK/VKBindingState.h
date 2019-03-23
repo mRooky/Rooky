@@ -42,6 +42,9 @@ protected:
 	void UpdateDescriptorSet(void);
 
 protected:
+
+
+protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;
 };
 

@@ -23,17 +23,24 @@ public:
 	~ImageLayout(void) = default;
 
 public:
-	uint32_t mClearColor = 0;
-
-public:
 	uint32_t array = 1;
 	Extent3D extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
 
 public:
+	uint32_t mClearColor = 0;
+
+public:
 	Format format = Format::FORMAT_UNDEFINED;
 	ImageType type = ImageType::IMAGE_TYPE_UNKNOWN;
+};
+
+class VertexLayout
+{
+public:
+	VertexLayout(void) = default;
+	~VertexLayout(void) = default;
 };
 
 }
