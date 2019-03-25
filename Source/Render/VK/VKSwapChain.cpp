@@ -89,6 +89,7 @@ void SwapChain::GetSwapChainRenderBuffer(void)
 		SwapChainImage* image = new SwapChainImage(context);
 		auto vk_image = mSwapChain->GetImage(index);
 		image->Create(vk_image);
+		image->mSwapChain = this;
 		mRenderBuffers.push_back(image);
 	}
 }
