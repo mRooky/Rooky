@@ -28,7 +28,7 @@ class Sampler;
 class Element;
 class Declaration;
 class DrawCall;
-class BindingState;
+class BindingSet;
 class BindingLayout;
 
 }

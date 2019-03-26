@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERBINDINGSTATE_H_
-#define SOURCE_CORE_RENDER_RENDERBINDINGSTATE_H_
+#ifndef SOURCE_CORE_RENDER_RENDERBINDINGSET_H_
+#define SOURCE_CORE_RENDER_RENDERBINDINGSET_H_
 
 #include "RenderBinding.hpp"
 #include <array>
@@ -16,18 +16,18 @@ namespace Render
 {
 
 class BindingLayout;
-class BindingState
+class BindingSet
 {
 public:
-	BindingState(BindingLayout* layout);
-	virtual ~BindingState(void);
+	BindingSet(BindingLayout* layout);
+	virtual ~BindingSet(void);
 
 public:
 	virtual void Update(void) = 0;
 	virtual void SetBinding(uint32_t index, const Binding& binding) = 0;
 
 public:
-	bool operator==(const BindingState& other) const;
+	bool operator==(const BindingSet& other) const;
 
 public:
 	inline BindingLayout* GetBindingLayout(void) const { return mLayout; }
@@ -41,4 +41,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERBINDINGSTATE_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERBINDINGSET_H_ */

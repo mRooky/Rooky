@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 #define SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 
-#include "RenderBindingState.h"
+#include <RenderBindingSet.h>
 #include "RenderUsage.h"
 #include "VKRender.h"
 
@@ -16,11 +16,11 @@ namespace VK
 {
 
 class BindingLayout;
-class BindingState : public Render::BindingState
+class BindingSet : public Render::BindingSet
 {
 public:
-	explicit BindingState(BindingLayout* layout);
-	virtual ~BindingState(void) override;
+	explicit BindingSet(BindingLayout* layout);
+	virtual ~BindingSet(void) override;
 
 public:
 	virtual void Update(void) override;

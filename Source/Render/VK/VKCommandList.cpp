@@ -172,7 +172,7 @@ void CommandList::Draw(Render::DrawCall* draw)
 	assert(mPipeline != nullptr);
 	assert(mBindingLayout != nullptr);
 	auto& info = mPipeline->GetInfo();
-	auto layout = mBindingLayout->GetCurrentLayout();
+	auto layout = mBindingLayout->GetPipelineLayout();
 	if (info.pPipelineLayout == layout)
 	{
 		auto layout = static_cast<BindingLayout*>(mBindingLayout);
@@ -216,12 +216,11 @@ void CommandList::SetBindingLayout(Render::BindingLayout* layout)
 	}
 }
 
-void CommandList::SetBinding(uint32_t slot, uint32_t index, Render::Binding* binding)
+void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
 {
 	assert(mBindingLayout != nullptr);
 	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
-	auto vk_binding_state = static_cast<BindingState*>(vk_layout->GetBindingState(slot));
-	vk_binding_state->SetBinding(index, *binding);
+	assert(false && vk_layout);
 }
 
 } /* namespace VK */

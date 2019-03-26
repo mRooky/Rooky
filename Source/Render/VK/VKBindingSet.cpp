@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKBindingState.h"
+#include "VKBindingSet.h"
 #include "VKShader.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
@@ -24,23 +24,23 @@
 namespace VK
 {
 
-BindingState::BindingState(BindingLayout* layout):
-		Render::BindingState(layout)
+BindingSet::BindingSet(BindingLayout* layout):
+		Render::BindingSet(layout)
 {
 }
 
-BindingState::~BindingState(void)
+BindingSet::~BindingSet(void)
 {
 	std::cout << "VK Destroy Resource List" << std::endl;
 }
 
-void BindingState::Update(void)
+void BindingSet::Update(void)
 {
 	UpdateDescriptorSet();
 	WriteDescriptorSet();
 }
 
-void BindingState::SetBinding(uint32_t index, const Render::Binding& binding)
+void BindingSet::SetBinding(uint32_t index, const Render::Binding& binding)
 {
 	bool set = mBindingMask.test(index);
 	if (false == set)
@@ -64,7 +64,7 @@ void BindingState::SetBinding(uint32_t index, const Render::Binding& binding)
 	}
 }
 
-void BindingState::WriteDescriptorSet(void)
+void BindingSet::WriteDescriptorSet(void)
 {
 	const size_t size = mBindings.size();
 	assert(size > 0);
@@ -90,12 +90,12 @@ void BindingState::WriteDescriptorSet(void)
 		switch(resource_type)
 		{
 		case Render::ResourceType::RESOURCE_TYPE_IMAGE:
-			BindingState::SetImageInfo(&binding, &image_infos.at(bind));
+			BindingSet::SetImageInfo(&binding, &image_infos.at(bind));
 			write.pImageInfo = &image_infos.at(bind);
 			write.descriptorType = Image::GetDescriptorType(resource_usage.imageUsage);
 			break;
 		case Render::ResourceType::RESOURCE_TYPE_BUFFER:
-			BindingState::SetUniformInfo(&binding, &buffer_infos.at(bind));
+			BindingSet::SetUniformInfo(&binding, &buffer_infos.at(bind));
 			write.pBufferInfo = &buffer_infos.at(bind);
 			write.descriptorType = Buffer::GetDescriptorType(resource_usage.bufferUsage);
 			break;
@@ -108,7 +108,7 @@ void BindingState::WriteDescriptorSet(void)
 	Vulkan::DescriptorSet::UpdateSets(mDescriptorSet->GetDevice(), descriptor_writes.size(), descriptor_writes.data());
 }
 
-void BindingState::UpdateDescriptorSet(void)
+void BindingSet::UpdateDescriptorSet(void)
 {
 	const size_t size = mBindings.size();
 	assert(size > 0);
@@ -129,7 +129,7 @@ void BindingState::UpdateDescriptorSet(void)
 		layout_bind.binding = bind;
 		layout_bind.descriptorCount = 1;
 		layout_bind.stageFlags = Shader::ConvertStage(stage);
-		layout_bind.descriptorType = BindingState::GetDescriptorType(resource_type, resource_usage);
+		layout_bind.descriptorType = BindingSet::GetDescriptorType(resource_type, resource_usage);
 		layout_bindings.push_back(layout_bind);
 	}
 
@@ -137,26 +137,26 @@ void BindingState::UpdateDescriptorSet(void)
 	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 }
 
-void BindingState::SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
+void BindingSet::SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
 {
 	assert(info != nullptr);
 	Image* image = static_cast<Image*>(binding->GetResource());
 	*info = image->GetVulkanImage()->GetDescriptorInfo();
 }
 
-void BindingState::SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info)
+void BindingSet::SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info)
 {
 	assert(info != nullptr);
 	Buffer* buffer = static_cast<Buffer*>(binding->GetResource());
 	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
 }
 
-void BindingState::SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
+void BindingSet::SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
 {
 	assert(false);
 }
 
-VkDescriptorType BindingState::GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage)
+VkDescriptorType BindingSet::GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage)
 {
 	VkDescriptorType descriptor_type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	switch(type)

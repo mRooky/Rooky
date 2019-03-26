@@ -33,40 +33,52 @@ BindingLayout::BindingLayout(Context* context):
 
 BindingLayout::~BindingLayout(void)
 {
-	Util::Release(mPipelineLayouts);
 	Vulkan::Release(mDescriptorPool);
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
 
-Render::PipelineLayout* BindingLayout::Update(void)
+Render::PipelineLayout* BindingLayout::CreatePipelineLayout(void)
 {
-	UpdatePipelineLayout();
-	return mCurrentLayout;
+	assert(mBindingSets.size() > 0);
+	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
+	descriptor_layouts.reserve(mBindingSets.size());
+
+	for(auto& set : mBindingSets)
+	{
+		auto vk_set = static_cast<BindingSet*>(set);
+		vk_set->Update();
+		Vulkan::DescriptorSetLayout* layout = vk_set->GetDescriptorSet()->GetLayout();
+		descriptor_layouts.push_back(layout);
+	}
+
+	mPipelineLayout = new PipelineLayout(this);
+	static_cast<PipelineLayout*>(mPipelineLayout)->Create(descriptor_layouts);
+	return mPipelineLayout;
 }
 
-Render::BindingState* BindingLayout::CreateState(void)
+Render::BindingSet* BindingLayout::CreateState(void)
 {
-	BindingState * state = new BindingState(this);
-	mBindingStates.push_back(state);
+	BindingSet * state = new BindingSet(this);
+	mBindingSets.push_back(state);
 	return state;
 }
 
 void BindingLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
-	assert(mBindingStates.size() > 0);
+	assert(mBindingSets.size() > 0);
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(mBindingStates.size());
+	descriptor_sets.reserve(mBindingSets.size());
 
-	for(auto& state : mBindingStates)
+	for(auto& set : mBindingSets)
 	{
-		auto vk_state = static_cast<BindingState*>(state);
-		descriptor_sets.push_back(vk_state->GetDescriptorSet());
+		auto vk_set = static_cast<BindingSet*>(set);
+		descriptor_sets.push_back(vk_set->GetDescriptorSet());
 	}
 
 	std::vector<uint32_t> offset;
-	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mCurrentLayout);
+	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mPipelineLayout);
 	auto vulkan_command_buffer = list->GetVulkanCommandBuffer();
 	auto vulkan_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
 	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
@@ -97,48 +109,6 @@ Vulkan::DescriptorSet* BindingLayout::AllocateDescriptorSet(uint32_t count, cons
 	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(count, bindings);
 	mDescriptorSetLayouts.push_back(layout);
 	return mDescriptorPool->Allocate(layout);
-}
-
-void BindingLayout::UpdatePipelineLayout(void)
-{
-	assert(mBindingStates.size() > 0);
-	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
-	descriptor_layouts.reserve(mBindingStates.size());
-
-	for(auto& state : mBindingStates)
-	{
-		auto vk_state = static_cast<BindingState*>(state);
-		vk_state->Update();
-		Vulkan::DescriptorSetLayout* layout = vk_state->GetDescriptorSet()->GetLayout();
-		descriptor_layouts.push_back(layout);
-	}
-
-	if (mCurrentLayout != nullptr)
-	{
-		auto& current_layouts = static_cast<PipelineLayout*>(mCurrentLayout)->GetLayouts();
-		if (current_layouts == descriptor_layouts)
-		{
-			return;
-		}
-	}
-	mCurrentLayout = GetPipelineLayout(descriptor_layouts);
-}
-
-PipelineLayout* BindingLayout::GetPipelineLayout(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
-{
-	for (auto pipeline_layout : mPipelineLayouts)
-	{
-		auto& current_layouts = pipeline_layout->GetLayouts();
-		if (current_layouts == layouts)
-		{
-			return pipeline_layout;
-		}
-	}
-
-	auto pipeline_layout = new PipelineLayout(this);
-	pipeline_layout->Create(layouts);
-	mPipelineLayouts.push_back(pipeline_layout);
-	return pipeline_layout;
 }
 
 } /* namespace VK */

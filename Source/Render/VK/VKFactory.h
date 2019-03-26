@@ -32,7 +32,6 @@ public:
 	virtual Render::Declaration* CreateDeclaration(void) override;
 
 public:
-	virtual Render::BindingState* CreateBindingState(void) override;
 	virtual Render::BindingLayout* CreateBindingLayout(void) override;
 
 public:

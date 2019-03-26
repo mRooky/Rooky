@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "RenderBindingState.h"
+#include "RenderBindingSet.h"
 #include "UtilSearch.h"
 #include <cassert>
 #include <algorithm>
@@ -13,16 +13,16 @@
 namespace Render
 {
 
-BindingState::BindingState(BindingLayout* layout):
+BindingSet::BindingSet(BindingLayout* layout):
 		mLayout(layout)
 {
 }
 
-BindingState::~BindingState(void)
+BindingSet::~BindingSet(void)
 {
 }
 
-bool BindingState::operator==(const BindingState& other) const
+bool BindingSet::operator==(const BindingSet& other) const
 {
 	if (mBindingMask == other.mBindingMask)
 	{

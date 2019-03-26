@@ -22,17 +22,7 @@ BindingManager::BindingManager(System* system):
 
 BindingManager::~BindingManager(void)
 {
-	Util::Release(mBindingStates);
 	Util::Release(mBindingLayouts);
-}
-
-Render::BindingState* BindingManager::CreateState(void)
-{
-	auto context = mSystem->GetContext();
-	auto factory = context->GetFactory();
-	Render::BindingState* state = factory->CreateBindingState();
-	mBindingStates.push_back(state);
-	return state;
 }
 
 Render::BindingLayout* BindingManager::CreateLayout(void)

@@ -15,7 +15,7 @@
 
 namespace Render
 {
-class BindingState;
+class BindingSet;
 class PipelineLayout;
 class BindingLayout : public Object
 {
@@ -24,22 +24,22 @@ public:
 	virtual ~BindingLayout(void) override;
 
 public:
-	virtual PipelineLayout* Update(void) = 0;
-	virtual BindingState* CreateState(void) = 0;
+	virtual BindingSet* CreateState(void) = 0;
+	virtual PipelineLayout* CreatePipelineLayout(void) = 0;
 
 public:
 	inline void ClearState(void) { mResourceMask.reset(); }
-	inline PipelineLayout* GetCurrentLayout(void) const { return mCurrentLayout; }
+	inline PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
 
 public:
-	inline size_t GetStateCount(void) const { return mBindingStates.size(); }
-	inline BindingState* GetBindingState(size_t index) const { return mBindingStates.at(index); }
+	inline size_t GetStateCount(void) const { return mBindingSets.size(); }
+	inline BindingSet* GetBindingSet(size_t index) const { return mBindingSets.at(index); }
 
 protected:
 	bool mDirty = true;
-	PipelineLayout* mCurrentLayout = nullptr;
+	PipelineLayout* mPipelineLayout = nullptr;
 	std::bitset<8> mResourceMask = 0;
-	std::array<BindingState*, 8> mBindingStates;
+	std::array<BindingSet*, 8> mBindingSets;
 };
 
 } /* namespace Render */

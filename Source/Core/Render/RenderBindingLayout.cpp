@@ -6,6 +6,7 @@
  */
 
 #include "RenderBindingLayout.h"
+#include "RenderPipelineLayout.h"
 #include <cassert>
 #include <algorithm>
 
@@ -19,6 +20,8 @@ BindingLayout::BindingLayout(Context* context):
 
 BindingLayout::~BindingLayout(void)
 {
+	delete mPipelineLayout;
+	mPipelineLayout = nullptr;
 }
 
 } /* namespace Render */

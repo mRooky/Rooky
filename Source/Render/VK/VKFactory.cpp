@@ -16,7 +16,6 @@
 #include "VKShader.h"
 #include "VKDeclaration.h"
 #include "VKStaging.h"
-#include "VKBindingState.h"
 #include "VKBindingLayout.h"
 
 #include "VulkanCommandPool.h"
@@ -98,12 +97,6 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 Render::Declaration* Factory::CreateDeclaration(void)
 {
 	return new Declaration;
-}
-
-Render::BindingState* Factory::CreateBindingState(void)
-{
-	assert(false);
-	return nullptr;
 }
 
 Render::BindingLayout* Factory::CreateBindingLayout(void)

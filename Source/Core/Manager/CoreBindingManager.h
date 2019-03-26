@@ -9,8 +9,8 @@
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
 #include <RenderBinding.hpp>
+#include <RenderBindingSet.h>
 #include "CoreObject.h"
-#include "RenderBindingState.h"
 #include "RenderBindingLayout.h"
 #include <vector>
 
@@ -23,11 +23,9 @@ public:
 	virtual ~BindingManager(void) override;
 
 public:
-	Render::BindingState* CreateState(void);
 	Render::BindingLayout* CreateLayout(void);
 
 protected:
-	std::vector<Render::BindingState*> mBindingStates;
 	std::vector<Render::BindingLayout*> mBindingLayouts;
 };
 

@@ -33,7 +33,6 @@ public:
 	virtual Declaration* CreateDeclaration(void) = 0;
 
 public:
-	virtual BindingState* CreateBindingState(void) = 0;
 	virtual BindingLayout* CreateBindingLayout(void) = 0;
 };
 

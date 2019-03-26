@@ -40,7 +40,7 @@ public:
 	// Resource Setup
 	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetBindingLayout(BindingLayout* layout) = 0;
-	virtual void SetBinding(uint32_t slot, uint32_t index, Binding* binding) = 0;
+	virtual void SetBindingSet(uint32_t slot, BindingSet* set) = 0;
 	virtual void Draw(DrawCall* draw) = 0;
 	// End Resource Setup
 	virtual void EndPass(void) = 0;
