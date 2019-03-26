@@ -22,14 +22,15 @@ class SwapChain;
 class Pass;
 class FrameBuffer;
 class Pipeline;
+class PipelineState;
 class CommandPool;
 class CommandList;
 class Sampler;
 class Element;
-class Declaration;
 class DrawCall;
 class BindingSet;
 class BindingLayout;
+class VertexLayout;
 
 }
 

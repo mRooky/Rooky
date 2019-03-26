@@ -22,10 +22,10 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(const Render::PipelineInfo& info) override;
+	virtual void Create(Render::PipelineLayout* pipe_layout, Render::VertexLayout* vert_layout, Render::Pass* pass, uint32_t index) override;
 
 public:
-	void Update(void);
+	void CreateVulkanPipeline(void);
 
 public:
 	inline Vulkan::Pipeline* GetVulkanPipeline(void) const { return mCurrent; }

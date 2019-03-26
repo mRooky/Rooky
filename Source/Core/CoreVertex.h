@@ -10,7 +10,6 @@
 
 #include "CoreBuffer.h"
 #include "RenderFormat.h"
-#include "RenderDeclaration.h"
 
 
 #include <cstdint>
@@ -28,15 +27,15 @@ public:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(Render::Declaration* decl, uint32_t count, Render::AllocateType allocate);
+	void Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
-	inline Render::Declaration* GetDeclaration(void) const { return mDeclaration; }
+	inline Render::VertexLayout* GetLayout(void) const { return mLayout; }
 
 protected:
 	uint32_t mCount = 0;
-	Render::Declaration* mDeclaration = nullptr;
+	Render::VertexLayout* mLayout = nullptr;
 };
 
 } /* namespace Core */

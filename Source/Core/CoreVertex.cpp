@@ -9,7 +9,7 @@
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
-#include "RenderDeclaration.h"
+#include "RenderVertexLayout.h"
 #include "RenderContext.h"
 #include "RenderBuffer.h"
 
@@ -26,14 +26,14 @@ Vertex::Vertex(BufferManager* creator):
 Vertex::~Vertex(void)
 {
 	mCount = 0;
-	mDeclaration = nullptr;
+	mLayout = nullptr;
 }
 
-void Vertex::Create(Render::Declaration* decl, uint32_t count, Render::AllocateType allocate)
+void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate)
 {
 	mCount = count;
-	mDeclaration = decl;
-	size_t size = mDeclaration->GetStride() * count;
+	mLayout = layout;
+	size_t size = mLayout->GetSizeInByte() * count;
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;

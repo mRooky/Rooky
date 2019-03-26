@@ -8,13 +8,13 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSHADERSTATE_H_
 #define SOURCE_CORE_RENDER_RENDERSHADERSTATE_H_
 
-#include <array>
-#include <bitset>
+#include "RenderShader.h"
+#include <vector>
 
 namespace Render
 {
 class Shader;
-class Declaration;
+class VertexLayout;
 class ShaderState
 {
 public:
@@ -25,30 +25,14 @@ public:
 	void SetShader(Shader* shader);
 
 public:
-	inline ShaderState& operator = (const ShaderState& other)
-	{
-		mShaders = other.mShaders;
-		mShaderMask = other.mShaderMask;
-		return *this;
-	}
-
-	inline bool operator == (const ShaderState& other) const
-	{
-		return ((mShaders == other.mShaders) && (mShaderMask == other.mShaderMask));
-	}
+	Shader* GetShader(ShaderType type) const;
 
 public:
-	inline void Clear(void) { mShaderMask.reset(); }
-	inline void SetDeclaration(Declaration* declaration) { mDeclaration = declaration; }
-	inline Declaration* GetDeclaration(void) const { return mDeclaration; }
-	inline bool IsValid(void) const { return mShaderMask.any() &&  mDeclaration != nullptr;}
+	inline size_t GetShaderCount(void) const { return mShaders.size(); }
+	inline Shader* GetShader(size_t index) const { return mShaders.at(index); }
 
 protected:
-	std::bitset<5> mShaderMask;
-	std::array<Shader*, 5> mShaders;
-
-protected:
-	Declaration* mDeclaration = nullptr;
+	std::vector<Shader*> mShaders;
 };
 
 } /* namespace Render */

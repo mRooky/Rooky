@@ -35,24 +35,4 @@ void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 	}
 }
 
-bool BindingSet::operator==(const BindingSet& other) const
-{
-	assert(mBindings.size() > 0);
-	if (mBindings.size() != other.mBindings.size())
-	{
-		return false;
-	}
-	const size_t count = mBindings.size();
-	for (size_t index = 0; index < count; ++index)
-	{
-		auto& old_binding = mBindings.at(index);
-		auto& new_binding = other.mBindings.at(index);
-		if(old_binding != new_binding)
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
 } /* namespace Render */

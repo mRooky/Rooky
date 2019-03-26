@@ -29,7 +29,7 @@ public:
 	virtual Render::Shader* CreateShader(void) override;
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
-	virtual Render::Declaration* CreateDeclaration(void) override;
+	virtual Render::VertexLayout* CreateVertexLayout(void) override;
 
 public:
 	virtual Render::BindingLayout* CreateBindingLayout(void) override;

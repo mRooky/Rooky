@@ -14,9 +14,9 @@
 #include "VKCommandPool.h"
 #include "VKQueue.h"
 #include "VKShader.h"
-#include "VKDeclaration.h"
 #include "VKStaging.h"
 #include "VKBindingLayout.h"
+#include "VKVertexLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
@@ -94,9 +94,9 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 	return new CommandPool(vk_context);
 }
 
-Render::Declaration* Factory::CreateDeclaration(void)
+Render::VertexLayout* Factory::CreateVertexLayout(void)
 {
-	return new Declaration;
+	return new VertexLayout;
 }
 
 Render::BindingLayout* Factory::CreateBindingLayout(void)

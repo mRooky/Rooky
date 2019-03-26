@@ -21,7 +21,7 @@ public:
 	virtual ~VertexLayout(void);
 
 public:
-	virtual void Create(void) = 0;
+	void Create(const std::vector<Render::Element>& elements);
 
 public:
 	void AppendElement(const Element& element);
@@ -30,12 +30,14 @@ public:
 	inline const std::vector<Element>& GetElements(void) const { return mElements; }
 
 public:
-	inline size_t GetStride(void) const { return mStride; }
+	inline bool IsValid(void) const { return mValid; }
+	inline size_t GetSizeInByte(void) const { return mSizeInByte; }
 	inline size_t GetCount(void) const { return mElements.size(); }
 	inline const Element& GetElement(uint32_t index) const { return mElements.at(index); }
 
 protected:
-	size_t mStride = 0;
+	bool mValid = false;
+	size_t mSizeInByte = 0;
 	std::vector<Element> mElements;
 };
 

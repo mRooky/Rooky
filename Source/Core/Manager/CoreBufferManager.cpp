@@ -12,7 +12,7 @@
 #include "CoreSystem.h"
 
 #include "RenderElement.h"
-#include "RenderDeclaration.h"
+#include "RenderVertexLayout.h"
 #include "RenderContext.h"
 #include "RenderFactory.h"
 
@@ -33,7 +33,7 @@ BufferManager::~BufferManager(void)
 	Util::Release(mIndexes);
 	Util::Release(mVertexes);
 	Util::Release(mUniforms);
-	Util::Release(mDeclarations);
+	Util::Release(mVertexLayouts);
 }
 
 Index* BufferManager::CreateIndex(void)
@@ -57,22 +57,31 @@ Uniform* BufferManager::CreateUniform(void)
 	return uniform;
 }
 
-Render::Declaration* BufferManager::CreateDeclaration(const std::vector<Render::Element>& elements)
+Render::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<Render::Element>& elements)
 {
-	for (auto decl : mDeclarations)
+	Render::VertexLayout* layout = GetVertexLayout(elements);
+	if (layout == nullptr)
 	{
-		auto& list = decl->GetElements();
+		auto context = mSystem->GetContext();
+		auto factory = context->GetFactory();
+		layout = factory->CreateVertexLayout();
+		layout->Create(elements);
+		mVertexLayouts.push_back(layout);
+	}
+	return layout;
+}
+
+Render::VertexLayout* BufferManager::GetVertexLayout(const std::vector<Render::Element>& elements)
+{
+	for (auto layout : mVertexLayouts)
+	{
+		const auto& list = layout->GetElements();
 		if (elements == list)
 		{
-			return decl;
+			return layout;
 		}
 	}
-	auto context = mSystem->GetContext();
-	auto factory = context->GetFactory();
-	Render::Declaration* decl = factory->CreateDeclaration();
-	decl->Create(elements);
-	mDeclarations.push_back(decl);
-	return decl;
+	return nullptr;
 }
 
 } /* namespace Core */

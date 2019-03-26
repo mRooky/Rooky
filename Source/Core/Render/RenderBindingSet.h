@@ -28,9 +28,6 @@ public:
 	void SetBinding(uint32_t index, const Binding& binding);
 
 public:
-	bool operator==(const BindingSet& other) const;
-
-public:
 	inline bool IsValid(void) const { return mValid; }
 	inline BindingLayout* GetBindingLayout(void) const { return mLayout; }
 	inline void AppendBinding(const Binding& binding) { mBindings.push_back(binding); }

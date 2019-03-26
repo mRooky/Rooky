@@ -36,13 +36,6 @@ public:
 	ImageType type = ImageType::IMAGE_TYPE_UNKNOWN;
 };
 
-class VertexLayout
-{
-public:
-	VertexLayout(void) = default;
-	~VertexLayout(void) = default;
-};
-
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_ */

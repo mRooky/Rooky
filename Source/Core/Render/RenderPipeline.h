@@ -8,11 +8,17 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINE_H_
 
-#include "RenderPipelineInfo.h"
 #include "RenderObject.h"
+#include <cstdint>
 
 namespace Render
 {
+class Pass;
+class Declaration;
+class PipelineState;
+class PipelineLayout;
+class ShaderState;
+class VertexLayout;
 class Pipeline : public Object
 {
 public:
@@ -20,13 +26,27 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Initialize(const PipelineInfo& info) = 0;
+	virtual void Create(PipelineLayout* pipe_layout, VertexLayout* vert_layout, Pass* pass, uint32_t index) = 0;
 
 public:
-	inline const PipelineInfo& GetInfo(void) const { return mInfo; }
+	bool IsValid(void) const;
+
+public:
+	inline uint32_t GetSubIndex(void) const { return mIndex; }
+	inline Pass* GetRenderPass(void) const { return mRenderPass; }
+	inline PipelineState* GetState(void) const { return mPipelineState; }
+	inline ShaderState* GetShaderState(void) const { return mShaderState; }
+	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
 
 protected:
-	PipelineInfo mInfo;
+	uint32_t mIndex = 0;
+	Pass* mRenderPass = nullptr;
+	VertexLayout* mVertexLayout = nullptr;
+	PipelineState* mPipelineState = nullptr;
+	PipelineLayout* mPipelineLayout = nullptr;
+
+public:
+	ShaderState* mShaderState =nullptr;
 };
 
 } /* namespace Render */

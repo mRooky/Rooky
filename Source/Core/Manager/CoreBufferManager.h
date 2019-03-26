@@ -32,10 +32,13 @@ public:
 	Uniform* CreateUniform(void);
 
 public:
-	Render::Declaration* CreateDeclaration(const std::vector<Render::Element>& elements);
+	Render::VertexLayout* CreateVertexLayout(const std::vector<Render::Element>& elements);
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }
+
+protected:
+	Render::VertexLayout* GetVertexLayout(const std::vector<Render::Element>& elements);
 
 protected:
 	std::vector<Index*> mIndexes;
@@ -43,7 +46,7 @@ protected:
 	std::vector<Uniform*> mUniforms;
 
 protected:
-	std::vector<Render::Declaration*> mDeclarations;
+	std::vector<Render::VertexLayout*> mVertexLayouts;
 
 };
 

@@ -40,6 +40,8 @@ protected:
 protected:
 	Render::Pass* mRenderPass = nullptr;
 	Render::Pipeline* mPipeline = nullptr;
+	Render::BindingLayout* mBindingLayout = nullptr;
+	Render::PipelineState* mPipelineState = nullptr;
 };
 
 } /* namespace Core */

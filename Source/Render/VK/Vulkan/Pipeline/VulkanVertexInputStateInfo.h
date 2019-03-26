@@ -24,8 +24,8 @@ public:
 	VkVertexInputAttributeDescription* CreateAttribute(void);
 
 public:
-	VkVertexInputBindingDescription* CreateBinding(uint32_t binding, uint32_t stride, VkVertexInputRate rate);
-	VkVertexInputAttributeDescription* CreateAttribute(uint32_t location, uint32_t binding, VkFormat format, uint32_t offset);
+	VkVertexInputBindingDescription* GetBinding(uint32_t binding);
+	VkVertexInputAttributeDescription* GetAttribute(uint32_t binding, uint32_t location);
 
 public:
 	inline const VkPipelineVertexInputStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }

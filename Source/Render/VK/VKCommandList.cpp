@@ -171,18 +171,9 @@ void CommandList::Draw(Render::DrawCall* draw)
 {
 	assert(mPipeline != nullptr);
 	assert(mBindingLayout != nullptr);
-	auto& info = mPipeline->GetInfo();
-	auto layout = mBindingLayout->GetPipelineLayout();
-	if (info.pPipelineLayout == layout)
-	{
-		auto layout = static_cast<BindingLayout*>(mBindingLayout);
-		layout->Binding(this);
-		assert(false);
-	}
-	else
-	{
-		assert(false);
-	}
+	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
+	vk_layout->Binding(this);
+	assert(false);
 }
 
 void CommandList::EndPass(void)
@@ -209,11 +200,9 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 
 void CommandList::SetBindingLayout(Render::BindingLayout* layout)
 {
-	if (mBindingLayout != layout)
-	{
-		mBindingLayout = layout;
-		// some states trace future
-	}
+	assert(mPipeline != nullptr);
+	assert(mPipeline->GetLayout() == layout->GetPipelineLayout());
+	mBindingLayout = layout;
 }
 
 void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)

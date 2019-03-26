@@ -30,7 +30,7 @@ public:
 	virtual Shader* CreateShader(void) = 0;
 	virtual SwapChain* CreateSwapChain(void) = 0;
 	virtual CommandPool* CreateCommandPool(void) = 0;
-	virtual Declaration* CreateDeclaration(void) = 0;
+	virtual VertexLayout* CreateVertexLayout(void) = 0;
 
 public:
 	virtual BindingLayout* CreateBindingLayout(void) = 0;
