@@ -24,8 +24,14 @@ public:
 	virtual ~BindingLayout(void);
 
 public:
-	virtual Render::BindingSet* CreateState(void) override;
-	virtual Render::PipelineLayout* CreatePipelineLayout(void) override;
+	virtual void Create(void) override;
+
+public:
+	virtual Render::BindingSet* CreateSet(void) override;
+
+public:
+	virtual void AppendBindingSet(const Render::BindingSet* set) override;
+	virtual void SetBindingSet(size_t index, const Render::BindingSet* set) override;
 
 public:
 	void Binding(CommandList* list);
@@ -40,10 +46,10 @@ protected:
 	void CreateDescriptorPool(size_t max);
 
 protected:
-	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
+	std::vector<Vulkan::DescriptorSet*> mDescriptorSets;
 
 protected:
-	std::vector<BindingSet*> mBindingSets;
+	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
 	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 

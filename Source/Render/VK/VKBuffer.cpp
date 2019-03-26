@@ -86,23 +86,32 @@ void Buffer::Upload(const void* src)
 
 }
 
-void Buffer::CopyFrom(const Render::Buffer* other)
+void Buffer::CopyFrom(const Render::Resource* other)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
 	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	assert(mSize >= other->GetSize());
-	VkBufferCopy buffer_copy_range = {};
-	buffer_copy_range.size = other->GetSize();
+	Render::ResourceType type = other->GetType();
 
-	const Buffer* buffer = static_cast<const Buffer*>(other);
-	Vulkan::Buffer* vk_buffer = buffer->GetVulkanBuffer();
+	if (type == Render::ResourceType::RESOURCE_TYPE_BUFFER)
+	{
+		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
+		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
 
-	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
-	command_buffer->CopyResource(vk_buffer, mBuffer, 1, &buffer_copy_range);
-	command_buffer->End();
+		assert(mSize >= vk_buffer->GetSize());
+		VkBufferCopy buffer_copy_range = {};
+		buffer_copy_range.size = vk_buffer->GetSize();
+
+		command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+		command_buffer->CopyResource(vulkan_buffer, mBuffer, 1, &buffer_copy_range);
+		command_buffer->End();
+	}
+	else
+	{
+		assert(false);
+	}
 
 	Vulkan::Device* device = context->GetVulkanDevice();
 	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);

@@ -30,7 +30,7 @@ public:
 	virtual void Unmap(size_t offset, size_t size) override;
 
 public:
-	virtual void CopyFrom(const Render::Buffer* other) override;
+	virtual void CopyFrom(const Render::Resource* other) override;
 
 public:
 	VkDescriptorBufferInfo GetDescriptorInfo(void) const;

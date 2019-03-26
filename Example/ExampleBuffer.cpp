@@ -100,12 +100,12 @@ void Buffer::RecordCommands(void)
 		auto render_pass = pass->GetRenderPass();
 		auto frame_buffer = render_pass->GetFrameBuffer(i);
 		auto command_list = mThread->GetCommandList(i);
-		command_list->BeginRecord();
+		command_list->Begin();
 		command_list->BeginPass(render_pass, frame_buffer, area);
 		command_list->SetViewport(0, 1, &viewport);
 		command_list->SetScissor(0, 1, &scissor);
 		command_list->EndPass();
-		command_list->EndRecord();
+		command_list->End();
 		command_list->Submit(0u);
 	}
 }

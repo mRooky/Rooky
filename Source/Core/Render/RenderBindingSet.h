@@ -9,12 +9,11 @@
 #define SOURCE_CORE_RENDER_RENDERBINDINGSET_H_
 
 #include "RenderBinding.hpp"
-#include <array>
-#include <bitset>
+#include <vector>
 
+static const size_t MAX_BINDING_PER_SET = 8;
 namespace Render
 {
-
 class BindingLayout;
 class BindingSet
 {
@@ -24,19 +23,23 @@ public:
 
 public:
 	virtual void Update(void) = 0;
-	virtual void SetBinding(uint32_t index, const Binding& binding) = 0;
+
+public:
+	void SetBinding(uint32_t index, const Binding& binding);
 
 public:
 	bool operator==(const BindingSet& other) const;
 
 public:
+	inline bool IsValid(void) const { return mValid; }
 	inline BindingLayout* GetBindingLayout(void) const { return mLayout; }
+	inline void AppendBinding(const Binding& binding) { mBindings.push_back(binding); }
 	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
 
 protected:
+	bool mValid = false;
+	std::vector<Binding> mBindings;
 	BindingLayout* mLayout = nullptr;
-	std::bitset<8> mBindingMask = 0;
-	std::array<Binding, 8> mBindings;
 };
 
 } /* namespace Render */

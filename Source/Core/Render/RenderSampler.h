@@ -18,6 +18,7 @@ class Sampler: public Resource
 public:
 	explicit Sampler(Context* context);
 	virtual ~Sampler(void) override;
+
 };
 
 } /* namespace Render */

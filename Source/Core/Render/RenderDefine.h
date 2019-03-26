@@ -10,8 +10,11 @@
 
 #include <cstdint>
 
-namespace Render
-{
-}
+#ifndef TRUE
+static const uint8_t TRUE = 1;
+#endif
+#ifndef FALSE
+static const uint8_t FALSE = 0;
+#endif
 
 #endif /* SOURCE_CORE_RENDER_RENDERDEFINE_H_ */

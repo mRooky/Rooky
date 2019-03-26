@@ -26,7 +26,7 @@ public:
 	virtual void Unmap(size_t offset, size_t size) = 0;
 
 public:
-	virtual void CopyFrom(const Buffer* buffer) = 0;
+	virtual void CopyFrom(const Resource* other) = 0;
 
 public:
 	inline size_t GetHeapSize(void) const { return mHeapSize; }

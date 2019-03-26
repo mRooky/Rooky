@@ -167,26 +167,30 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-void Image::CopyFrom(const Render::Buffer* other)
+void Image::CopyFrom(const Render::Resource* other)
 {
 	Context* context = static_cast<Context*>(mContext);
 	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
 	auto command_pool = factory->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 
-	VkBufferImageCopy copy_region = {};
-	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-	copy_region.imageSubresource.layerCount = 1;
-	copy_region.imageExtent.width = mLayout.extent.width;
-	copy_region.imageExtent.height = mLayout.extent.height;
-	copy_region.imageExtent.depth = mLayout.extent.depth;
+	Render::ResourceType type = other->GetType();
+	if (type == Render::ResourceType::RESOURCE_TYPE_BUFFER)
+	{
+		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
+		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
 
-	const Buffer* buffer = static_cast<const Buffer*>(other);
-	Vulkan::Buffer* vulkan_buffer = buffer->GetVulkanBuffer();
+		VkBufferImageCopy copy_region = {};
+		copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		copy_region.imageSubresource.layerCount = 1;
+		copy_region.imageExtent.width = mLayout.extent.width;
+		copy_region.imageExtent.height = mLayout.extent.height;
+		copy_region.imageExtent.depth = mLayout.extent.depth;
 
-	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
-	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
-	command_buffer->End();
+		command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+		command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
+		command_buffer->End();
+	}
 
 	Vulkan::Device* device = context->GetVulkanDevice();
 	uint32_t queue_family = command_pool->GetFamily();

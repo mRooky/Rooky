@@ -6,6 +6,7 @@
  */
 
 #include "VKBindingLayout.h"
+#include "VKBindingSet.h"
 #include "VKContext.h"
 #include "VKCommandList.h"
 #include "VKPipelineLayout.h"
@@ -29,6 +30,7 @@ BindingLayout::BindingLayout(Context* context):
 {
 	static const size_t max = 32;
 	CreateDescriptorPool(max);
+	mDescriptorSets.reserve(MAX_BINDING_PER_SET);
 }
 
 BindingLayout::~BindingLayout(void)
@@ -37,9 +39,10 @@ BindingLayout::~BindingLayout(void)
 	std::cout << "VK Destroy Resource Container" << std::endl;
 }
 
-Render::PipelineLayout* BindingLayout::CreatePipelineLayout(void)
+void BindingLayout::Create(void)
 {
 	assert(mBindingSets.size() > 0);
+	assert(mPipelineLayout == nullptr);
 	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
 	descriptor_layouts.reserve(mBindingSets.size());
 
@@ -53,28 +56,48 @@ Render::PipelineLayout* BindingLayout::CreatePipelineLayout(void)
 
 	mPipelineLayout = new PipelineLayout(this);
 	static_cast<PipelineLayout*>(mPipelineLayout)->Create(descriptor_layouts);
-	return mPipelineLayout;
 }
 
-Render::BindingSet* BindingLayout::CreateState(void)
+Render::BindingSet* BindingLayout::CreateSet(void)
 {
-	BindingSet * state = new BindingSet(this);
-	mBindingSets.push_back(state);
-	return state;
+	BindingSet * set = new BindingSet(this);
+	mBindingSets.push_back(set);
+	return mBindingSets.back();
+}
+
+void BindingLayout::AppendBindingSet(const Render::BindingSet* set)
+{
+	assert(mDescriptorSets.size() < MAX_BINDING_PER_SET - 1);
+	assert(set->IsValid());
+	const BindingSet* vk_set = static_cast<const BindingSet*>(set);
+	mDescriptorSets.push_back(vk_set->GetDescriptorSet());
+}
+
+void BindingLayout::SetBindingSet(size_t index, const Render::BindingSet* set)
+{
+	assert(index < MAX_BINDING_PER_SET);
+	assert(index < mDescriptorSets.size());
+	const BindingSet* vk_set = static_cast<const BindingSet*>(set);
+	auto old_layout = mDescriptorSets.at(index)->GetLayout();
+	auto new_layout = vk_set->GetDescriptorSet()->GetLayout();
+	assert(old_layout == new_layout);
+	if (old_layout == new_layout)
+	{
+		mDescriptorSets.at(index) = vk_set->GetDescriptorSet();
+	}
 }
 
 void BindingLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
-	assert(mBindingSets.size() > 0);
+	assert(mDescriptorSets.size() > 0);
 
 	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(mBindingSets.size());
+	descriptor_sets.reserve(mDescriptorSets.size());
 
-	for(auto& set : mBindingSets)
+	for(auto descriptor_set : mDescriptorSets)
 	{
-		auto vk_set = static_cast<BindingSet*>(set);
-		descriptor_sets.push_back(vk_set->GetDescriptorSet());
+		descriptor_sets.push_back(descriptor_set);
 	}
 
 	std::vector<uint32_t> offset;

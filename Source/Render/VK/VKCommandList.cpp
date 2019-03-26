@@ -89,7 +89,7 @@ void CommandList::Submit(Render::Queue* queue)
 	vulkan_queue->Submit(1, &submit_info);
 }
 
-void CommandList::BeginRecord(void)
+void CommandList::Begin(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->Begin(VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
@@ -191,7 +191,7 @@ void CommandList::EndPass(void)
 	mCommandBuffer->EndRenderPass();
 }
 
-void CommandList::EndRecord(void)
+void CommandList::End(void)
 {
 	assert(mCommandBuffer != nullptr);
 	mCommandBuffer->End();

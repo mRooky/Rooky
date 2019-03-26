@@ -38,30 +38,7 @@ void BindingSet::Update(void)
 {
 	UpdateDescriptorSet();
 	WriteDescriptorSet();
-}
-
-void BindingSet::SetBinding(uint32_t index, const Render::Binding& binding)
-{
-	bool set = mBindingMask.test(index);
-	if (false == set)
-	{
-		mBindingMask.set(index);
-		mBindings.at(index) = binding;
-	}
-	else
-	{
-		auto& old = mBindings.at(index);
-		auto old_usage = old.GetResource()->GetUsage();
-		auto new_usage = binding.GetResource()->GetUsage();
-		if (old_usage != new_usage)
-		{
-			assert(false);
-		}
-		else
-		{
-			mBindings.at(index) = binding;
-		}
-	}
+	mValid = true;
 }
 
 void BindingSet::WriteDescriptorSet(void)

@@ -12,7 +12,6 @@
 
 namespace Render
 {
-
 enum ResourceType : uint8_t
 {
 	RESOURCE_TYPE_IMAGE,
@@ -121,7 +120,8 @@ public:
 public:
 	inline bool operator==(const ResourceUsage& other) const
 	{
-		if (type == other.type && allocate == other.allocate)
+		bool base_equal = (type == other.type) && (allocate == other.allocate);
+		if (true == base_equal)
 		{
 			switch(type)
 			{

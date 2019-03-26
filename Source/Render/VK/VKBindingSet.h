@@ -24,7 +24,6 @@ public:
 
 public:
 	virtual void Update(void) override;
-	virtual void SetBinding(uint32_t index, const Render::Binding& binding) override;
 
 public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
@@ -40,9 +39,6 @@ public:
 protected:
 	void WriteDescriptorSet(void);
 	void UpdateDescriptorSet(void);
-
-protected:
-
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

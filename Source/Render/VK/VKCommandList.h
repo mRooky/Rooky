@@ -26,7 +26,7 @@ public:
 	virtual void Submit(Render::Queue* queue) override;
 
 public:
-	virtual void BeginRecord(void) override;
+	virtual void Begin(void) override;
 	// Draw Commands
 	virtual void BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2D& area) override;
 	// Fix Setup
@@ -41,7 +41,7 @@ public:
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;
 	// End Draw Commands
-	virtual void EndRecord(void) override;
+	virtual void End(void) override;
 
 public:
 	inline Vulkan::CommandBuffer* GetVulkanCommandBuffer(void) const { return mCommandBuffer; }

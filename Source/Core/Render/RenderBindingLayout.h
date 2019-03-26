@@ -10,8 +10,7 @@
 
 #include "RenderObject.h"
 #include <cstddef>
-#include <array>
-#include <bitset>
+#include <vector>
 
 namespace Render
 {
@@ -24,22 +23,26 @@ public:
 	virtual ~BindingLayout(void) override;
 
 public:
-	virtual BindingSet* CreateState(void) = 0;
-	virtual PipelineLayout* CreatePipelineLayout(void) = 0;
+	virtual void Create(void) = 0;
 
 public:
-	inline void ClearState(void) { mResourceMask.reset(); }
-	inline PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
+	virtual void AppendBindingSet(const BindingSet* set) = 0;
+	virtual void SetBindingSet(size_t index, const BindingSet* set) = 0;
+
+public:
+	virtual BindingSet* CreateSet(void) = 0;
 
 public:
 	inline size_t GetStateCount(void) const { return mBindingSets.size(); }
+	inline PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
 	inline BindingSet* GetBindingSet(size_t index) const { return mBindingSets.at(index); }
 
 protected:
 	bool mDirty = true;
 	PipelineLayout* mPipelineLayout = nullptr;
-	std::bitset<8> mResourceMask = 0;
-	std::array<BindingSet*, 8> mBindingSets;
+
+protected:
+	std::vector<BindingSet*> mBindingSets;
 };
 
 } /* namespace Render */
