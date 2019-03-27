@@ -21,7 +21,15 @@ public:
 	virtual ~Sampler(void) override;
 
 public:
+	virtual void Create(void) override;
+
+public:
 	inline Vulkan::Sampler* GetVulkanSampler(void) const { return mSampler; }
+
+public:
+	static VkFilter GetFilter(Render::FilterType type);
+	static VkSamplerMipmapMode GetMipmapMode(Render::MipmapMode mode);
+	static VkSamplerAddressMode GetAddressMode(Render::AddressMode mode);
 
 protected:
 	Vulkan::Sampler* mSampler = nullptr;

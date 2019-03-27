@@ -29,6 +29,20 @@ static inline ImageLayout CreateImageLayout(const Render::Extent3D& extent, Rend
 	return image_layout;
 }
 
+static inline size_t GetIndexTypeSize(IndexType type)
+{
+	switch(type)
+	{
+	case IndexType::INDEX_TYPE_U16:
+		return 2;
+	case IndexType::INDEX_TYPE_U32:
+		return 4;
+	default:
+		assert(false);
+		return 0;
+	}
+}
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERINLINE_H_ */

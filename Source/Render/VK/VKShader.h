@@ -24,6 +24,7 @@ public:
 
 public:
 	virtual void Create(Render::ShaderStage stage, const char* file) override;
+	virtual void Create(Render::ShaderStage stage, size_t size, const void* data) override;
 
 public:
 	inline Vulkan::ShaderModule* GetVulkanModule(void) const { return mShader; }

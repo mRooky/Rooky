@@ -31,6 +31,7 @@ public:
 	virtual SwapChain* CreateSwapChain(void) = 0;
 	virtual CommandPool* CreateCommandPool(void) = 0;
 	virtual VertexLayout* CreateVertexLayout(void) = 0;
+	virtual Sampler* CreateSampler(void) = 0;
 
 public:
 	virtual BindingSet* CreateBindingSet(void) = 0;

@@ -9,6 +9,7 @@
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
 #include "CoreObject.h"
+#include "RenderSampler.h"
 #include <vector>
 
 namespace Core
@@ -24,8 +25,12 @@ public:
 	Texture* GetTexture(const char* name);
 	Texture* CreateTexture(void);
 
+public:
+	Render::Sampler* CreateSampler(void);
+
 protected:
 	std::vector<Texture*> mTextures;
+	std::vector<Render::Sampler*> mSamplers;
 };
 
 } /* namespace Core */

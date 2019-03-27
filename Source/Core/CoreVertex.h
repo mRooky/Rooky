@@ -33,6 +33,9 @@ public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline Render::VertexLayout* GetLayout(void) const { return mLayout; }
 
+private:
+	void CreateBuffer(Render::AllocateType allocate);
+
 protected:
 	uint32_t mCount = 0;
 	Render::VertexLayout* mLayout = nullptr;

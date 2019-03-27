@@ -30,6 +30,7 @@ public:
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
 	virtual Render::VertexLayout* CreateVertexLayout(void) override;
+	virtual Render::Sampler* CreateSampler(void) override;
 
 public:
 	virtual Render::BindingSet* CreateBindingSet(void) override;

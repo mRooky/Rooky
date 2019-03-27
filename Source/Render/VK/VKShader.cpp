@@ -29,19 +29,25 @@ Shader::~Shader(void)
 
 void Shader::Create(Render::ShaderStage stage, const char* file)
 {
-	mStage = stage;
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		auto vulkan_device = static_cast<Device*>(mDevice)->GetVulkanDevice();
-		mShader = Vulkan::ShaderModule::New(vulkan_device);
-		mShader->Create(code.size(), code.data());
+		Create(stage, code.size(), code.data());
 	}
 	else
 	{
 		std::cerr << "Create Shader Error !" << std::endl;
 		std::cerr << "Shader File : " << file << std::endl;
 	}
+}
+
+void Shader::Create(Render::ShaderStage stage, size_t size, const void* data)
+{
+	mStage = stage;
+	assert(size > 0);
+	auto vulkan_device = static_cast<Device*>(mDevice)->GetVulkanDevice();
+	mShader = Vulkan::ShaderModule::New(vulkan_device);
+	mShader->Create(size, data);
 }
 
 VkShaderStageFlagBits Shader::ConvertStage(Render::ShaderStage stage)

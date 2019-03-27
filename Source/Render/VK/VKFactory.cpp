@@ -18,6 +18,7 @@
 #include "VKBindingLayout.h"
 #include "VKVertexLayout.h"
 #include "VKDevice.h"
+#include "VKSampler.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
@@ -88,6 +89,12 @@ Render::VertexLayout* Factory::CreateVertexLayout(void)
 	return new VertexLayout;
 }
 
+Render::Sampler* Factory::CreateSampler(void)
+{
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Sampler(vk_device);
+}
+
 Render::BindingSet* Factory::CreateBindingSet(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
@@ -96,8 +103,8 @@ Render::BindingSet* Factory::CreateBindingSet(void)
 
 Render::BindingLayout* Factory::CreateBindingLayout(void)
 {
-	assert(false);
-	return nullptr;
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new BindingLayout(vk_device);
 }
 
 } /* namespace VK */

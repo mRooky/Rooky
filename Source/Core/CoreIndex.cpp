@@ -5,14 +5,14 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
 #include "CoreIndex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
 #include "RenderElement.h"
 #include "RenderBuffer.h"
-#include "RenderUtility.h"
+#include "RenderInline.h"
+#include "RenderDevice.h"
 
 namespace Core
 {
@@ -32,8 +32,12 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType 
 {
 	mType = type;
 	mCount = count;
-	size_t size = Render::GetIndexTypeSize(type);
-	size *= count;
+	CreateBuffer(allocate);
+}
+
+void Index::CreateBuffer(Render::AllocateType allocate)
+{
+	size_t size = Render::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;

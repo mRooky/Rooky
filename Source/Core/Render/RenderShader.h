@@ -23,6 +23,7 @@ public:
 
 public:
 	virtual void Create(ShaderStage stage, const char* file) = 0;
+	virtual void Create(ShaderStage stage, size_t size, const void* data) = 0;
 
 public:
 	inline ShaderType GetType(void) const { return mType; }
