@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Shader::Shader(Context* context):
-		Object(context)
+Shader::Shader(Device* device):
+		Object(device)
 {
 }
 

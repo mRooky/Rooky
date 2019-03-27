@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Sampler: public Render::Sampler
 {
 public:
-	explicit Sampler(Context* context);
+	explicit Sampler(Device* device);
 	virtual ~Sampler(void) override;
 
 public:

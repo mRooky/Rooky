@@ -12,8 +12,8 @@
 namespace Render
 {
 
-Pass::Pass(Context* context):
-		Object(context)
+Pass::Pass(Device* device):
+		Object(device)
 {
 }
 

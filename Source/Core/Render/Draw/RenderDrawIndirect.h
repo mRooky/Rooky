@@ -14,7 +14,7 @@
 namespace Render
 {
 class Buffer;
-class Context;
+class Device;
 class DrawIndirect : public DrawCall
 {
 public:
@@ -22,7 +22,7 @@ public:
 	virtual ~DrawIndirect(void) override;
 
 public:
-	void Create(Context* context, size_t size);
+	void Create(Device* device, size_t size);
 
 public:
 	inline size_t GetSize(void) const { return mSize; }

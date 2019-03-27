@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Sampler::Sampler(Context* context):
-		Resource(context)
+Sampler::Sampler(Device* device):
+		Resource(device)
 {
 	mType = ResourceType::RESOURCE_TYPE_SAMPLER;
 }

@@ -15,8 +15,8 @@
 namespace Render
 {
 
-BindingLayout::BindingLayout(Context* context):
-		Object(context)
+BindingLayout::BindingLayout(Device* device):
+		Object(device)
 {
 	mBindingSets.reserve(MAX_BINDING_PER_SET);
 }

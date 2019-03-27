@@ -19,7 +19,7 @@ namespace Render
 class PipelineState : public Object
 {
 public:
-	PipelineState(Context* context);
+	PipelineState(Device* device);
 	virtual ~PipelineState(void) override;
 
 public:

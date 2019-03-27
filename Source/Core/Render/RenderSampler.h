@@ -16,7 +16,7 @@ namespace Render
 class Sampler: public Resource
 {
 public:
-	explicit Sampler(Context* context);
+	explicit Sampler(Device* device);
 	virtual ~Sampler(void) override;
 
 };

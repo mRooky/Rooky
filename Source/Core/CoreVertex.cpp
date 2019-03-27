@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreVertex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
 #include "RenderVertexLayout.h"
-#include "RenderContext.h"
 #include "RenderBuffer.h"
 
 #include <cassert>

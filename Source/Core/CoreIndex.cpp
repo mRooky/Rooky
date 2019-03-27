@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreIndex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
 #include "RenderElement.h"
-#include "RenderContext.h"
 #include "RenderBuffer.h"
 #include "RenderUtility.h"
 

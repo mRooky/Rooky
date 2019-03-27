@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreUniform.h"
 #include "CoreSystem.h"
 #include "CoreBufferManager.h"
 
-#include "RenderContext.h"
 #include "RenderUsage.h"
 
 #include <cassert>

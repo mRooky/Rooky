@@ -6,8 +6,8 @@
  */
 
 #include "VKQueue.h"
-#include "VKContext.h"
 #include "VKCommandList.h"
+#include "VKDevice.h"
 
 #include "VulkanCommandBuffer.h"
 #include "VulkanSemaphore.h"
@@ -20,8 +20,8 @@
 namespace VK
 {
 
-Queue::Queue(Context* context):
-		Render::Queue(context)
+Queue::Queue(Device* device):
+		Render::Queue(device)
 {
 }
 
@@ -32,11 +32,11 @@ Queue::~Queue(void)
 
 void Queue::Create(uint32_t mIndex)
 {
-	auto context = static_cast<Context*>(mContext);
-	auto device = context->GetVulkanDevice();
-	auto physical = context->GetVulkanPhysicalDevice();
-	uint32_t family = physical->GetFamily();
-	mQueue = device->GetQueue(family, mIndex);
+	auto vk_device = static_cast<Device*>(mDevice);
+	auto vulkan_device = vk_device->GetVulkanDevice();
+	auto vulkan_physical = vk_device->GetVulkanPhysicalDevice();
+	uint32_t family = vulkan_physical->GetFamily();
+	mQueue = vulkan_device->GetQueue(family, mIndex);
 }
 
 void Queue::Submit(Render::CommandList* command)

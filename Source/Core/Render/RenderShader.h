@@ -18,7 +18,7 @@ namespace Render
 class Shader : public Object
 {
 public:
-	explicit Shader(Context* context);
+	explicit Shader(Device* device);
 	virtual ~Shader(void) override;
 
 public:

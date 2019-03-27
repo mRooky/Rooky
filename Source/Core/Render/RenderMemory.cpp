@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Memory::Memory(Context* context):
-		Resource(context)
+Memory::Memory(Device* device):
+		Resource(device)
 {
 }
 

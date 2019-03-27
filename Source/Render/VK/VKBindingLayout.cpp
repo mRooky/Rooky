@@ -7,9 +7,9 @@
 
 #include "VKBindingLayout.h"
 #include "VKBindingSet.h"
-#include "VKContext.h"
 #include "VKCommandList.h"
 #include "VKPipelineLayout.h"
+#include "VKDevice.h"
 
 #include "VulkanDescriptorPool.h"
 #include "VulkanDescriptorSet.h"
@@ -25,8 +25,8 @@
 namespace VK
 {
 
-BindingLayout::BindingLayout(Context* context):
-		Render::BindingLayout(context)
+BindingLayout::BindingLayout(Device* device):
+		Render::BindingLayout(device)
 {
 	static const size_t max = 32;
 	CreateDescriptorPool(max);
@@ -81,30 +81,18 @@ void BindingLayout::SetBindingSet(size_t index, const Render::BindingSet* set)
 	auto old_layout = mDescriptorSets.at(index)->GetLayout();
 	auto new_layout = vk_set->GetDescriptorSet()->GetLayout();
 	assert(old_layout == new_layout);
-	if (old_layout == new_layout)
-	{
-		mDescriptorSets.at(index) = vk_set->GetDescriptorSet();
-	}
+	mDescriptorSets.at(index) = (old_layout == new_layout) ? vk_set->GetDescriptorSet() : VK_NULL_HANDLE;
 }
 
 void BindingLayout::Binding(CommandList* list)
 {
 	assert(list != nullptr);
 	assert(mDescriptorSets.size() > 0);
-
-	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(mDescriptorSets.size());
-
-	for(auto descriptor_set : mDescriptorSets)
-	{
-		descriptor_sets.push_back(descriptor_set);
-	}
-
 	std::vector<uint32_t> offset;
 	auto vk_pipeline_layout = static_cast<PipelineLayout*>(mPipelineLayout);
 	auto vulkan_command_buffer = list->GetVulkanCommandBuffer();
 	auto vulkan_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
-	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, descriptor_sets, offset);
+	vulkan_command_buffer->BindDescriptorSets(vulkan_layout, mDescriptorSets, offset);
 }
 
 void BindingLayout::CreateDescriptorPool(size_t max)
@@ -121,7 +109,7 @@ void BindingLayout::CreateDescriptorPool(size_t max)
 	}
 
 	size_t max_allocate = VK_DESCRIPTOR_TYPE_RANGE_SIZE * max;
-	auto device = static_cast<Context*>(mContext)->GetVulkanDevice();
+	auto device = static_cast<Device*>(mDevice)->GetVulkanDevice();
 	mDescriptorPool = Vulkan::DescriptorPool::New(device);
 	mDescriptorPool->Create(max_allocate, descriptor_pool_sizes);
 }
@@ -130,7 +118,6 @@ Vulkan::DescriptorSet* BindingLayout::AllocateDescriptorSet(uint32_t count, cons
 {
 	assert(mDescriptorPool != nullptr);
 	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(count, bindings);
-	mDescriptorSetLayouts.push_back(layout);
 	return mDescriptorPool->Allocate(layout);
 }
 

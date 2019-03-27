@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class SwapChain: public Render::SwapChain
 {
 public:
-	explicit SwapChain(Context* context);
+	explicit SwapChain(Device* device);
 	virtual ~SwapChain(void) override;
 
 public:

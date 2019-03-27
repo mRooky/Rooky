@@ -9,6 +9,7 @@
 #define SOURCE_RENDER_VK_VKCONVERT_H_
 
 #include "VKInline.h"
+#include "RenderState.h"
 #include <cassert>
 
 namespace VK

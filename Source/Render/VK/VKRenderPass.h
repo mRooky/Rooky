@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class RenderPass: public Render::Pass
 {
 public:
-	explicit RenderPass(Context* context);
+	explicit RenderPass(Device* device);
 	virtual ~RenderPass(void) override;
 
 public:

@@ -16,7 +16,7 @@ namespace Render
 class Buffer : public Memory
 {
 protected:
-	explicit Buffer(Context* context);
+	explicit Buffer(Device* device);
 
 public:
 	virtual ~Buffer(void) override;

@@ -5,6 +5,7 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreSystem.h"
 
 #include "CoreBufferManager.h"
@@ -12,7 +13,6 @@
 #include "CoreBindingManager.h"
 #include "CoreTexture.h"
 
-#include "RenderContext.h"
 #include "RenderInline.h"
 
 #include <cassert>
@@ -32,14 +32,14 @@ System::~System(void)
 	mTextureManager = nullptr;
 	delete mBindingManager;
 	mBindingManager = nullptr;
-	Render::DestroyContext(mContext);
+	Render::DestroyDevice(mDevice);
 }
 
 void System::Create(void)
 {
-	mContext = Render::CreateContext();
-	assert(mContext != nullptr);
-	mContext->Create();
+	mDevice = Render::CreateDevice();
+	assert(mDevice != nullptr);
+	mDevice->Create();
 	mBufferManager = new BufferManager(this);
 	mTextureManager = new TextureManager(this);
 	mBindingManager = new BindingManager(this);

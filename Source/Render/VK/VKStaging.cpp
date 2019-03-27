@@ -6,9 +6,9 @@
  */
 
 #include "VKStaging.h"
-#include "VKContext.h"
 #include "VKBuffer.h"
 #include "VKInline.h"
+#include "VKDevice.h"
 
 #include "UtilRelease.h"
 
@@ -20,8 +20,8 @@
 namespace VK
 {
 
-Staging::Staging(Context* context):
-		mContext(context)
+Staging::Staging(Device* device):
+		mDevice(device)
 {
 }
 
@@ -39,7 +39,7 @@ Buffer* Staging::GetBuffer(size_t size, VkBufferUsageFlags usage)
 	{
 		auto resource_usage = ConvertBufferUsageFlags(usage);
 		resource_usage.allocate.CPUAccess = 1; // Must CPU Access
-		buffer = new Buffer(mContext);
+		buffer = new Buffer(mDevice);
 		buffer->Create(size, resource_usage);
 		mBuffers.push_back(buffer);
 	}

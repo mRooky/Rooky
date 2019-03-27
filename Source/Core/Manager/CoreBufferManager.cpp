@@ -5,6 +5,7 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -13,7 +14,6 @@
 
 #include "RenderElement.h"
 #include "RenderVertexLayout.h"
-#include "RenderContext.h"
 #include "RenderFactory.h"
 
 #include "UtilRelease.h"
@@ -62,8 +62,8 @@ Render::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<Render
 	Render::VertexLayout* layout = GetVertexLayout(elements);
 	if (layout == nullptr)
 	{
-		auto context = mSystem->GetContext();
-		auto factory = context->GetFactory();
+		auto device = mSystem->GetDevice();
+		auto factory = device->GetFactory();
 		layout = factory->CreateVertexLayout();
 		layout->Create(elements);
 		mVertexLayouts.push_back(layout);

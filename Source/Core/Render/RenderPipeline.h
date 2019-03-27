@@ -22,7 +22,7 @@ class VertexLayout;
 class Pipeline : public Object
 {
 public:
-	explicit Pipeline(Context* context);
+	explicit Pipeline(Device* device);
 	virtual ~Pipeline(void) override;
 
 public:

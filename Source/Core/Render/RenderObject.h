@@ -10,23 +10,23 @@
 
 namespace Render
 {
-class Context;
+class Device;
 class Object
 {
 protected:
-	explicit Object(Context* context);
+	explicit Object(Device* device);
 
 public:
 	virtual ~Object(void);
 
 public:
-	inline Context* GetContext(void) const { return mContext; }
+	inline Device* GetDevice(void) const { return mDevice; }
 
 public:
 	virtual inline void Destroy(void) { delete this; }
 
 protected:
-	Context* mContext = nullptr;
+	Device* mDevice = nullptr;
 };
 
 } /* namespace Render */

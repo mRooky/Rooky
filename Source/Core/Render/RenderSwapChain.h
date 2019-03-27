@@ -20,7 +20,7 @@ class Image;
 class SwapChain: public Object
 {
 protected:
-	explicit SwapChain(Context* context);
+	explicit SwapChain(Device* device);
 
 public:
 	virtual ~SwapChain(void) override;

@@ -17,7 +17,7 @@ namespace Render
 class Factory: public Object
 {
 protected:
-	explicit Factory(Context* context);
+	explicit Factory(Device* device);
 
 public:
 	virtual ~Factory(void) override;

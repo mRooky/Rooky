@@ -26,6 +26,8 @@ public:
 
 public:
 	DescriptorSet* Allocate(DescriptorSetLayout* layout);
+	DescriptorSet* Allocate(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
+	DescriptorSet* Allocate(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 	DescriptorSetLayout* GetLayout(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
 	DescriptorSetLayout* GetLayout(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 

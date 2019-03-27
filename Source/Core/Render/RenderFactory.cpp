@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Factory::Factory(Context* context):
-		Object(context)
+Factory::Factory(Device* device):
+		Object(device)
 {
 }
 

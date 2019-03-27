@@ -6,8 +6,8 @@
  */
 
 #include "VKSwapChain.h"
-#include "VKContext.h"
 #include "VKImage.h"
+#include "VKDevice.h"
 
 #include "VulkanInline.h"
 #include "VulkanSurface.h"
@@ -26,8 +26,8 @@
 namespace VK
 {
 
-SwapChain::SwapChain(Context* context):
-		Render::SwapChain(context)
+SwapChain::SwapChain(Device* device):
+		Render::SwapChain(device)
 {
 }
 
@@ -39,16 +39,16 @@ SwapChain::~SwapChain(void)
 
 void SwapChain::Create(Platform::Window* window)
 {
-	auto context = static_cast<Context*>(mContext);
-	Vulkan::Device* device = context->GetVulkanDevice();
-	mSurface = Vulkan::Surface::New(device->GetPhysicalDevice());
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	mSurface = Vulkan::Surface::New(vulkan_device->GetPhysicalDevice());
 
 #ifdef VK_USE_PLATFORM_XCB_KHR
 	auto xcb_window = static_cast<XCB::Window*>(window);
 	mSurface->Create(xcb_window->GetConnection(), xcb_window->GetWindow());
 #endif
 
-	mSwapChain = Vulkan::SwapChain::New(device);
+	mSwapChain = Vulkan::SwapChain::New(vulkan_device);
 	mSwapChain->Create(mSurface);
 
 	GetSwapChainRenderBuffer();
@@ -82,11 +82,11 @@ uint32_t SwapChain::AcquireNextImage(void)
 void SwapChain::GetSwapChainRenderBuffer(void)
 {
 	assert(mSwapChain != nullptr);
-	auto context = static_cast<Context*>(mContext);
+	auto vk_device = static_cast<Device*>(mDevice);
 	const size_t count = 2;
 	for (size_t index = 0; index < count; ++index)
 	{
-		SwapChainImage* image = new SwapChainImage(context);
+		SwapChainImage* image = new SwapChainImage(vk_device);
 		auto vk_image = mSwapChain->GetImage(index);
 		image->Create(vk_image);
 		image->mSwapChain = this;

@@ -13,12 +13,12 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Staging;
 class Factory: public Render::Factory
 {
 public:
-	explicit Factory(Context* context);
+	explicit Factory(Device* device);
 	virtual ~Factory(void) override;
 
 public:

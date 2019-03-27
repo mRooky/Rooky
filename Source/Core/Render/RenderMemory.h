@@ -18,7 +18,7 @@ class Buffer;
 class Memory: public Resource
 {
 public:
-	Memory(Context* context);
+	Memory(Device* device);
 	virtual ~Memory(void) override;
 
 public:

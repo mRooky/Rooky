@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreBindingManager.h"
 #include "CoreSystem.h"
-#include "RenderContext.h"
 #include "RenderFactory.h"
 
 #include "UtilRelease.h"
@@ -27,8 +27,8 @@ BindingManager::~BindingManager(void)
 
 Render::BindingLayout* BindingManager::CreateLayout(void)
 {
-	auto context = mSystem->GetContext();
-	auto factory = context->GetFactory();
+	auto device = mSystem->GetDevice();
+	auto factory = device->GetFactory();
 	Render::BindingLayout* layout = factory->CreateBindingLayout();
 	mBindingLayouts.push_back(layout);
 	return layout;

@@ -9,9 +9,9 @@
 #include "CoreSystem.h"
 #include "CoreBufferManager.h"
 
-#include "RenderContext.h"
 #include "RenderBuffer.h"
 #include "RenderFactory.h"
+#include "RenderDevice.h"
 
 #include <cassert>
 #include <cstring>
@@ -27,8 +27,6 @@ Buffer::Buffer(BufferManager* creator):
 
 Buffer::~Buffer(void)
 {
-	auto context = mCreator->GetSystem()->GetContext();
-	assert(context != nullptr);
 	delete mBuffer;
 	mBuffer = nullptr;
 	mCreator = nullptr;
@@ -36,8 +34,8 @@ Buffer::~Buffer(void)
 
 void Buffer::Create(size_t size, Render::ResourceUsage usage)
 {
-	auto context = mCreator->GetSystem()->GetContext();
-	mBuffer = context->GetFactory()->CreateBuffer();
+	auto device = mCreator->GetSystem()->GetDevice();
+	mBuffer = device->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, usage);
 }
 

@@ -6,7 +6,6 @@
  */
 
 #include "VKFactory.h"
-#include "VKContext.h"
 #include "VKImage.h"
 #include "VKBuffer.h"
 #include "VKSwapChain.h"
@@ -17,6 +16,7 @@
 #include "VKStaging.h"
 #include "VKBindingLayout.h"
 #include "VKVertexLayout.h"
+#include "VKDevice.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
@@ -28,11 +28,11 @@
 namespace VK
 {
 
-Factory::Factory(Context* context):
-		Render::Factory(context)
+Factory::Factory(Device* device):
+		Render::Factory(device)
 {
 	CreateDefaultPool();
-	mStaging = new Staging(context);
+	mStaging = new Staging(device);
 }
 
 Factory::~Factory(void)
@@ -44,54 +44,54 @@ Factory::~Factory(void)
 
 void Factory::CreateDefaultPool(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	auto device = vk_context->GetVulkanDevice();
-	uint32_t family = device->GetPhysicalDevice()->GetFamily();
-	mCommandPool = Vulkan::CommandPool::New(device);
+	auto vk_device = static_cast<Device*>(mDevice);
+	auto vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t family = vulkan_device->GetPhysicalDevice()->GetFamily();
+	mCommandPool = Vulkan::CommandPool::New(vulkan_device);
 	mCommandPool->Create(family);
 	mCommandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 }
 
 Render::Pass* Factory::CreatePass(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new RenderPass(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new RenderPass(vk_device);
 }
 
 Render::Queue* Factory::CreateQueue(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new Queue(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Queue(vk_device);
 }
 
 Render::Image* Factory::CreateImage(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new Image(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Image(vk_device);
 }
 
 Render::Buffer* Factory::CreateBuffer(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new Buffer(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Buffer(vk_device);
 }
 
 Render::Shader* Factory::CreateShader(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new Shader(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Shader(vk_device);
 }
 
 Render::SwapChain* Factory::CreateSwapChain(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new SwapChain(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new SwapChain(vk_device);
 }
 
 Render::CommandPool* Factory::CreateCommandPool(void)
 {
-	auto vk_context = static_cast<Context*>(mContext);
-	return new CommandPool(vk_context);
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new CommandPool(vk_device);
 }
 
 Render::VertexLayout* Factory::CreateVertexLayout(void)

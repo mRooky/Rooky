@@ -6,16 +6,15 @@
  */
 
 #include "VKSampler.h"
-#include "VKContext.h"
-
 #include "VulkanSampler.h"
 #include "VulkanInline.h"
+#include "VKDevice.h"
 
 namespace VK
 {
 
-Sampler::Sampler(Context* context):
-		Render::Sampler(context)
+Sampler::Sampler(Device* device):
+		Render::Sampler(device)
 {
 }
 

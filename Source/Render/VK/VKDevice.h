@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_RENDER_VK_VKCONTEXT_H_
-#define SOURCE_RENDER_VK_VKCONTEXT_H_
+#ifndef SOURCE_RENDER_VK_VKDEVICE_H_
+#define SOURCE_RENDER_VK_VKDEVICE_H_
 
-#include "RenderContext.h"
+#include "RenderDevice.h"
 #include "VKRender.h"
 #include <string>
 #include <vector>
@@ -16,11 +16,11 @@
 namespace VK
 {
 
-class Context : public Render::Context
+class Device : public Render::Device
 {
 public:
-	Context(void);
-	virtual ~Context(void) override;
+	Device(void);
+	virtual ~Device(void) override;
 
 public:
 	virtual void Create(void) override;
@@ -53,4 +53,4 @@ private:
 
 } /* namespace VK */
 
-#endif /* SOURCE_RENDER_VK_VKCONTEXT_H_ */
+#endif /* SOURCE_RENDER_VK_VKDEVICE_H_ */

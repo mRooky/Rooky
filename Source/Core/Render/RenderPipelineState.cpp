@@ -10,8 +10,8 @@
 namespace Render
 {
 
-PipelineState::PipelineState(Context* context):
-		Object(context)
+PipelineState::PipelineState(Device* device):
+		Object(device)
 {
 }
 

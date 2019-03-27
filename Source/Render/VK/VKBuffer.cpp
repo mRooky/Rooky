@@ -6,9 +6,9 @@
  */
 
 #include "VKBuffer.h"
-#include "VKContext.h"
 #include "VKInline.h"
 #include "VKFactory.h"
+#include "VKDevice.h"
 
 #include "VulkanBuffer.h"
 #include "VulkanInline.h"
@@ -23,8 +23,8 @@
 namespace VK
 {
 
-Buffer::Buffer(Context* context):
-		Render::Buffer(context)
+Buffer::Buffer(Device* device):
+		Render::Buffer(device)
 {
 }
 
@@ -45,9 +45,9 @@ void Buffer::Create(size_t size, const Render::ResourceUsage& usage)
 void Buffer::CreateBuffer(void)
 {
 	assert(mBuffer == nullptr);
-	Context* context = static_cast<Context*>(mContext);
-	Vulkan::Device* device = context->GetVulkanDevice();
-	mBuffer = Vulkan::Buffer::New(device);
+	Device* vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	mBuffer = Vulkan::Buffer::New(vulkan_device);
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
 }
 
@@ -88,9 +88,9 @@ void Buffer::Upload(const void* src)
 
 void Buffer::CopyFrom(const Render::Resource* other)
 {
-	Context* context = static_cast<Context*>(mContext);
-	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
-	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
+	Device* vk_device = static_cast<Device*>(mDevice);
+	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
+	Vulkan::CommandPool* command_pool = vk_factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	Render::ResourceType type = other->GetType();
@@ -113,8 +113,8 @@ void Buffer::CopyFrom(const Render::Resource* other)
 		assert(false);
 	}
 
-	Vulkan::Device* device = context->GetVulkanDevice();
-	Vulkan::Queue* queue = device->GetQueue(command_pool->GetFamily(), 0);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(command_pool->GetFamily(), 0);
 	queue->FlushCommandBuffer(command_buffer);
 }
 

@@ -11,8 +11,8 @@
 namespace Render
 {
 
-CommandPool::CommandPool(Context* context):
-		Object(context)
+CommandPool::CommandPool(Device* device):
+		Object(device)
 {
 }
 

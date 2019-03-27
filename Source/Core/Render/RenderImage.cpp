@@ -12,8 +12,8 @@
 namespace Render
 {
 
-Image::Image(Context* context):
-		Memory(context)
+Image::Image(Device* device):
+		Memory(device)
 {
 	mType = ResourceType::RESOURCE_TYPE_IMAGE;
 }

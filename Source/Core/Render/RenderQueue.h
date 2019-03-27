@@ -17,7 +17,7 @@ class CommandList;
 class Queue : public Object
 {
 public:
-	explicit Queue(Context* context);
+	explicit Queue(Device* device);
 	virtual ~Queue(void) override;
 
 public:

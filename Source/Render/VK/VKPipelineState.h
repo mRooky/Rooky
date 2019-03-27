@@ -14,11 +14,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class PipelineState : public Render::PipelineState
 {
 public:
-	explicit PipelineState(Context* context);
+	explicit PipelineState(Device* device);
 	virtual ~PipelineState(void) override;
 
 public:

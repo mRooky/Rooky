@@ -7,8 +7,8 @@
 
 #include "VKRenderPass.h"
 #include "VKFrameBuffer.h"
-#include "VKContext.h"
 #include "VKFormat.h"
+#include "VKDevice.h"
 
 #include "VulkanRenderPass.h"
 #include "VulkanInline.h"
@@ -19,8 +19,8 @@
 namespace VK
 {
 
-RenderPass::RenderPass(Context* context):
-		Render::Pass(context)
+RenderPass::RenderPass(Device* device):
+		Render::Pass(device)
 {
 }
 
@@ -80,7 +80,7 @@ void RenderPass::Create(void)
 	renderpass_create_info.dependencyCount = subpass_dependencies.size();
 	renderpass_create_info.pDependencies = subpass_dependencies.data();
 
-	auto device = static_cast<Context*>(mContext)->GetVulkanDevice();
+	auto device = static_cast<Device*>(mDevice)->GetVulkanDevice();
 	mRenderPass = Vulkan::RenderPass::New(device);
 	mRenderPass->Create(&renderpass_create_info);
 }

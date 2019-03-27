@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "VKContext.h"
+#include "VKDevice.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
 #include "VKFormat.h"
@@ -27,11 +27,11 @@
 namespace VK
 {
 
-Context::Context(void)
+Device::Device(void)
 {
 }
 
-Context::~Context(void)
+Device::~Device(void)
 {
 	delete mFactory;
 	mFactory = nullptr;
@@ -41,7 +41,7 @@ Context::~Context(void)
 	Vulkan::Release(m_vendor);
 }
 
-void Context::Create(void)
+void Device::Create(void)
 {
 	CreateVendor();
 	CreateInstance();
@@ -50,20 +50,20 @@ void Context::Create(void)
 	mFactory = new Factory(this);
 }
 
-Render::Format Context::GetBestDepthStencilFormat(void)
+Render::Format Device::GetBestDepthStencilFormat(void)
 {
 	VkFormat vk_format = m_physical->GetDepthStencilFormat();
 	Render::Format format = ConvertFormat(vk_format);
 	return format;
 }
 
-void Context::CreateVendor(void)
+void Device::CreateVendor(void)
 {
 	m_vendor = Vulkan::Vendor::New();
 	m_vendor->Init();
 }
 
-void Context::CreateInstance(bool debug)
+void Device::CreateInstance(bool debug)
 {
 	m_instance = Vulkan::Instance::New();
 
@@ -89,7 +89,7 @@ void Context::CreateInstance(bool debug)
 	m_instance->Create("Vulkan", debug);
 }
 
-void Context::CreatePhysical(void)
+void Device::CreatePhysical(void)
 {
 	VkQueueFlags flags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
 	m_physical = Vulkan::PhysicalDevice::New(m_instance);
@@ -98,7 +98,7 @@ void Context::CreatePhysical(void)
 //	Vulkan::DumpFormatsProperties(m_physical);
 }
 
-void Context::CreateDevice(void)
+void Device::CreateDevice(void)
 {
 	m_device = Vulkan::Device::New(m_physical);
 

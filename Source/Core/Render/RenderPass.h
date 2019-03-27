@@ -18,7 +18,7 @@ class FrameBuffer;
 class Pass: public Object
 {
 protected:
-	explicit Pass(Context* context);
+	explicit Pass(Device* device);
 
 public:
 	virtual ~Pass(void) override;

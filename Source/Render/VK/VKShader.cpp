@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#include "VKShader.h"
-#include "VKContext.h"
 
+#include "VKShader.h"
 #include "VulkanShaderModule.h"
 #include "VulkanInline.h"
+#include "VKDevice.h"
 
 #include <iostream>
 #include <cassert>
@@ -17,8 +17,8 @@
 namespace VK
 {
 
-Shader::Shader(Context* context):
-		Render::Shader(context)
+Shader::Shader(Device* device):
+		Render::Shader(device)
 {
 }
 
@@ -33,8 +33,8 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		auto device = static_cast<Context*>(mContext)->GetVulkanDevice();
-		mShader = Vulkan::ShaderModule::New(device);
+		auto vulkan_device = static_cast<Device*>(mDevice)->GetVulkanDevice();
+		mShader = Vulkan::ShaderModule::New(vulkan_device);
 		mShader->Create(code.size(), code.data());
 	}
 	else

@@ -6,13 +6,13 @@
  */
 
 #include "VKImage.h"
-#include "VKContext.h"
 #include "VKFormat.h"
 #include "VKBuffer.h"
 #include "VKInline.h"
 #include "VKFactory.h"
 #include "VKStaging.h"
 #include "VKOperator.h"
+#include "VKDevice.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -32,8 +32,8 @@
 namespace VK
 {
 
-Image::Image(Context* context):
-		Render::Image(context)
+Image::Image(Device* device):
+		Render::Image(device)
 {
 }
 
@@ -56,8 +56,8 @@ void Image::CreateImage(void)
 {
 	assert(mImage == nullptr);
 	VkFormat vulkan_format = ConvertFormat(mLayout.format);
-	Context* context = static_cast<Context*>(mContext);
-	Vulkan::Device* device = context->GetVulkanDevice();
+	Device* vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
 
 	VkExtent3D vulkan_extent = {};
 	vulkan_extent.width = static_cast<uint32_t>(mLayout.extent.width);
@@ -65,7 +65,7 @@ void Image::CreateImage(void)
 	vulkan_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
 
 	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
-	mImage = Vulkan::Image::New(device);
+	mImage = Vulkan::Image::New(vulkan_device);
 	mImage->Create(vulkan_format, vulkan_extent, usage);
 }
 
@@ -109,7 +109,7 @@ void Image::Download(void* dst)
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(index == 0 && mipmap == 0);
-	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
+	Factory* factory = static_cast<Factory*>(mDevice->GetFactory());
 	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
@@ -169,9 +169,9 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 
 void Image::CopyFrom(const Render::Resource* other)
 {
-	Context* context = static_cast<Context*>(mContext);
-	Factory* factory = static_cast<Factory*>(mContext->GetFactory());
-	auto command_pool = factory->GetVulkanCommandPool();
+	Device* vk_device = static_cast<Device*>(mDevice);
+	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
+	auto command_pool = vk_factory->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 
 	Render::ResourceType type = other->GetType();
@@ -192,9 +192,9 @@ void Image::CopyFrom(const Render::Resource* other)
 		command_buffer->End();
 	}
 
-	Vulkan::Device* device = context->GetVulkanDevice();
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
 	uint32_t queue_family = command_pool->GetFamily();
-	Vulkan::Queue* queue = device->GetQueue(queue_family, 0);
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
 	queue->FlushCommandBuffer(command_buffer);
 }
 
@@ -300,8 +300,8 @@ VkImageUsageFlags Image::ConvertUsageFlag(Render::ResourceUsage usage)
 	return flags;
 }
 
-SwapChainImage::SwapChainImage(Context* context):
-		Image(context)
+SwapChainImage::SwapChainImage(Device* device):
+		Image(device)
 {
 }
 

@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class CommandPool: public Render::CommandPool
 {
 public:
-	explicit CommandPool(Context* context);
+	explicit CommandPool(Device* device);
 	virtual ~CommandPool(void) override;
 
 public:

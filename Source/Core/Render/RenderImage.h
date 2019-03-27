@@ -17,7 +17,7 @@ class SwapChain;
 class Image : public Memory
 {
 protected:
-	explicit Image(Context* context);
+	explicit Image(Device* device);
 
 public:
 	virtual ~Image(void) override;

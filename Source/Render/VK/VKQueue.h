@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Queue: public Render::Queue
 {
 public:
-	explicit Queue(Context* context);
+	explicit Queue(Device* device);
 	virtual ~Queue(void) override;
 
 public:

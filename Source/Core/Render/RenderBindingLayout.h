@@ -19,7 +19,7 @@ class PipelineLayout;
 class BindingLayout : public Object
 {
 public:
-	explicit BindingLayout(Context* context);
+	explicit BindingLayout(Device* device);
 	virtual ~BindingLayout(void) override;
 
 public:

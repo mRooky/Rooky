@@ -11,8 +11,8 @@
 namespace Render
 {
 
-SwapChain::SwapChain(Context* context):
-		Object(context)
+SwapChain::SwapChain(Device* device):
+		Object(device)
 {
 }
 

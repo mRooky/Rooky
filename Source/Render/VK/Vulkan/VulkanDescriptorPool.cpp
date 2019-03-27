@@ -62,6 +62,17 @@ DescriptorSet* DescriptorPool::Allocate(DescriptorSetLayout* layout)
 	return set;
 }
 
+DescriptorSet* DescriptorPool::Allocate(const std::vector<VkDescriptorSetLayoutBinding>& bindings)
+{
+	return Allocate(bindings.size(), bindings.data());
+}
+
+DescriptorSet* DescriptorPool::Allocate(uint32_t count, const VkDescriptorSetLayoutBinding* bindings)
+{
+	DescriptorSetLayout* layout = GetLayout(count ,bindings);
+	return Allocate(layout);
+}
+
 DescriptorSetLayout* DescriptorPool::GetLayout(const std::vector<VkDescriptorSetLayoutBinding>& bindings)
 {
 	return GetLayout(bindings.size() ,bindings.data());
@@ -76,6 +87,7 @@ DescriptorSetLayout* DescriptorPool::GetLayout(uint32_t count, const VkDescripto
 		layout->Create(count, bindings);
 		m_layouts.push_back(layout);
 	}
+	assert(layout != nullptr);
 	return layout;
 }
 

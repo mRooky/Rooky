@@ -31,7 +31,7 @@ public:
 	Texture* CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format);
 
 public:
-	inline Render::Context* GetContext(void) const { return mContext; }
+	inline Render::Device* GetDevice(void) const { return mDevice; }
 
 public:
 	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
@@ -39,7 +39,7 @@ public:
 	inline BindingManager* GetBindingManager(void) const { return mBindingManager; }
 
 protected:
-	Render::Context* mContext = nullptr;
+	Render::Device* mDevice = nullptr;
 
 protected:
 	BufferManager* mBufferManager = nullptr;

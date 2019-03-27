@@ -5,21 +5,21 @@
  *      Author: rookyma
  */
 
-#include "VKContext.h"
+#include <VKDevice.h>
 #include <cassert>
 
 namespace Render
 {
-	Context* CreateContext(void)
-	{
-		return new VK::Context;
-	}
+Device* CreateDevice(void)
+{
+	return new VK::Device;
+}
 
-	void DestroyContext(Context* context)
-	{
-		assert(context != nullptr);
-		delete context;
-	}
+void DestroyDevice(Device* device)
+{
+	assert(device != nullptr);
+	delete device;
+}
 }
 
 

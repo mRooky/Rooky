@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Resource::Resource(Context* context):
-		Object(context)
+Resource::Resource(Device* device):
+		Object(device)
 {
 }
 

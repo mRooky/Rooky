@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Queue::Queue(Context* context):
-		Object(context)
+Queue::Queue(Device* device):
+		Object(device)
 {
 }
 

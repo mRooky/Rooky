@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreThread.h"
 #include "CoreSystem.h"
 
 #include "RenderCommandPool.h"
-#include "RenderContext.h"
 #include "RenderFactory.h"
 
 #include <cassert>
@@ -31,8 +31,9 @@ Thread::~Thread(void)
 
 void Thread::Create(void)
 {
-	auto context = mSystem->GetContext();
-	mCommandPool = context->GetFactory()->CreateCommandPool();
+	auto device = mSystem->GetDevice();
+	auto factory = device->GetFactory();
+	mCommandPool = factory->CreateCommandPool();
 	mCommandPool->Create();
 }
 

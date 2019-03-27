@@ -15,11 +15,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Shader: public Render::Shader
 {
 public:
-	explicit Shader(Context* context);
+	explicit Shader(Device* device);
 	virtual ~Shader(void) override;
 
 public:

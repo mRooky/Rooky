@@ -12,8 +12,8 @@
 namespace Render
 {
 
-Pipeline::Pipeline(Context* context):
-		Object(context)
+Pipeline::Pipeline(Device* device):
+		Object(device)
 {
 	mShaderState = new ShaderState;
 }

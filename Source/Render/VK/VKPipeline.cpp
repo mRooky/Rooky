@@ -6,11 +6,11 @@
  */
 
 #include "VKPipeline.h"
-#include "VKContext.h"
 #include "VKPipelineState.h"
 #include "VKPipelineLayout.h"
 #include "VKRenderPass.h"
 #include "VKShader.h"
+#include "VKDevice.h"
 
 #include "RenderShaderState.h"
 
@@ -29,11 +29,11 @@
 namespace VK
 {
 
-Pipeline::Pipeline(Context* context):
-		Render::Pipeline(context)
+Pipeline::Pipeline(Device* device):
+		Render::Pipeline(device)
 {
-	Context* vk_context = static_cast<Context*>(mContext);
-	mPipelineState = new PipelineState(vk_context);
+	Device* vk_device = static_cast<Device*>(mDevice);
+	mPipelineState = new PipelineState(vk_device);
 }
 
 Pipeline::~Pipeline(void)

@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERCONTEXT_H_
-#define SOURCE_CORE_RENDER_RENDERCONTEXT_H_
+#ifndef SOURCE_CORE_RENDER_RENDERDEVICE_H_
+#define SOURCE_CORE_RENDER_RENDERDEVICE_H_
 
 #include "RenderFormat.h"
 #include <vector>
@@ -14,13 +14,13 @@
 namespace Render
 {
 class Factory;
-class Context
+class Device
 {
 protected:
-	Context(void);
+	Device(void);
 
 public:
-	virtual ~Context(void);
+	virtual ~Device(void);
 
 public:
 	virtual void Create(void) = 0;
@@ -35,9 +35,9 @@ public:
 	virtual Format GetBestDepthStencilFormat(void) = 0;
 };
 
-Context* CreateContext(void);
-void DestroyContext(Context* context);
+Device* CreateDevice(void);
+void DestroyDevice(Device* device);
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_RENDERCONTEXT_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERDEVICE_H_ */

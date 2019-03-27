@@ -7,16 +7,16 @@
 
 
 #include "VKPipelineState.h"
-#include "VKContext.h"
 #include "VKPipeline.h"
+#include "VKDevice.h"
 
 #include <cassert>
 
 namespace VK
 {
 
-PipelineState::PipelineState(Context* context):
-		Render::PipelineState(context)
+PipelineState::PipelineState(Device* device):
+		Render::PipelineState(device)
 {
 }
 

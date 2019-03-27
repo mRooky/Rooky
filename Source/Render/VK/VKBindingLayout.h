@@ -14,13 +14,13 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class CommandList;
 class PipelineLayout;
 class BindingLayout : public Render::BindingLayout
 {
 public:
-	explicit BindingLayout(Context* context);
+	explicit BindingLayout(Device* device);
 	virtual ~BindingLayout(void);
 
 public:
@@ -40,7 +40,7 @@ public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
 
 public:
-	inline Vulkan::DescriptorPool* GetDescriptorPool(void) const { return mDescriptorPool; }
+	inline Vulkan::DescriptorPool* GetVulkanDescriptorPool(void) const { return mDescriptorPool; }
 
 protected:
 	void CreateDescriptorPool(size_t max);
@@ -50,7 +50,6 @@ protected:
 
 protected:
 	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
-	std::vector<Vulkan::DescriptorSetLayout*> mDescriptorSetLayouts;
 };
 
 } /* namespace VK */

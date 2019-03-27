@@ -17,7 +17,7 @@ namespace Render
 class Resource: public Object
 {
 public:
-	explicit Resource(Context* context);
+	explicit Resource(Device* device);
 	virtual ~Resource(void) override;
 
 public:

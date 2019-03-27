@@ -18,7 +18,7 @@ class CommandList;
 class CommandPool : public Object
 {
 public:
-	explicit CommandPool(Context* context);
+	explicit CommandPool(Device* device);
 	virtual ~CommandPool(void) override;
 
 public:

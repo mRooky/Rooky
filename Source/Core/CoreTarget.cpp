@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CoreTarget.h"
 #include "CoreTextureManager.h"
 #include "CoreSystem.h"
 
 #include "RenderImage.h"
-#include "RenderContext.h"
 #include "RenderFactory.h"
 
 #include <cassert>
@@ -35,8 +35,8 @@ void Target::Create(const Render::ImageLayout& layout, const Render::ResourceUsa
 {
 	assert(mImage == nullptr);
 	auto system = mManager->GetSystem();
-	auto context = system->GetContext();
-	auto factory = context->GetFactory();
+	auto device = system->GetDevice();
+	auto factory = device->GetFactory();
 	mImage = factory->CreateImage();
 	mImage->Create(layout, usage);
 }

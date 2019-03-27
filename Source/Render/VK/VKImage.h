@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Image: public Render::Image
 {
 public:
-	explicit Image(Context* context);
+	explicit Image(Device* device);
 	virtual ~Image(void) override;
 
 public:
@@ -68,7 +68,7 @@ class SwapChainImage final : private Image
 {
 	friend class SwapChain;
 private:
-	explicit SwapChainImage(Context* context);
+	explicit SwapChainImage(Device* device);
 	virtual ~SwapChainImage(void) override;
 
 private:

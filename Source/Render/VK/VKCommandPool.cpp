@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include "VKDevice.h"
 #include "VKCommandPool.h"
-#include "VKContext.h"
 #include "VKCommandList.h"
 
 #include "VulkanPhysicalDevice.h"
@@ -18,8 +18,8 @@
 namespace VK
 {
 
-CommandPool::CommandPool(Context* context):
-		Render::CommandPool(context)
+CommandPool::CommandPool(Device* device):
+		Render::CommandPool(device)
 {
 }
 
@@ -30,11 +30,11 @@ CommandPool::~CommandPool(void)
 
 void CommandPool::Create(void)
 {
-	auto context = static_cast<Context*>(mContext);
-	auto device = context->GetVulkanDevice();
-	auto physical = context->GetVulkanPhysicalDevice();
-	uint32_t family = physical->GetFamily();
-	mCommandPool = Vulkan::CommandPool::New(device);
+	auto vk_device = static_cast<Device*>(mDevice);
+	auto vulkan_device = vk_device->GetVulkanDevice();
+	auto vulkan_physical = vk_device->GetVulkanPhysicalDevice();
+	uint32_t family = vulkan_physical->GetFamily();
+	mCommandPool = Vulkan::CommandPool::New(vulkan_device);
 	mCommandPool->Create(family);
 }
 

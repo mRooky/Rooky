@@ -13,11 +13,11 @@
 
 namespace VK
 {
-class Context;
+class Device;
 class Buffer: public Render::Buffer
 {
 public:
-	explicit Buffer(Context* context);
+	explicit Buffer(Device* device);
 	virtual ~Buffer(void) override;
 
 public:

@@ -14,11 +14,11 @@
 namespace VK
 {
 class Buffer;
-class Context;
+class Device;
 class Staging
 {
 public:
-	explicit Staging(Context* context);
+	explicit Staging(Device* device);
 	virtual ~Staging(void);
 
 public:
@@ -28,7 +28,7 @@ protected:
 	Buffer* SearchBuffer(size_t size, VkBufferUsageFlags usage);
 
 protected:
-	Context* mContext = nullptr;
+	Device* mDevice = nullptr;
 	std::vector<Buffer*> mBuffers;
 };
 

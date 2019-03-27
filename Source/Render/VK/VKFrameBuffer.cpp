@@ -7,7 +7,6 @@
 
 #include "VKFrameBuffer.h"
 #include "VKRenderPass.h"
-#include "VKContext.h"
 #include "VKImage.h"
 
 #include "VulkanFrameBuffer.h"

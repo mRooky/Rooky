@@ -12,7 +12,7 @@ namespace Render
 {
 
 class Buffer;
-class Context;
+class Device;
 class Image;
 class Object;
 class Resource;

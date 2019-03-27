@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include <VKBindingLayout.h>
+#include "VKBindingLayout.h"
+#include "VKDevice.h"
 #include "VKPipelineLayout.h"
-#include "VKContext.h"
 #include "VulkanInline.h"
 #include "VulkanPipelineLayout.h"
 #include "VulkanDescriptorSetLayout.h"
@@ -29,9 +29,9 @@ PipelineLayout::~PipelineLayout(void)
 
 void PipelineLayout::Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
 {
-	auto context = mBindingLayout->GetContext();
-	Vulkan::Device* device = static_cast<Context*>(context)->GetVulkanDevice();
-	mPipelineLayout = Vulkan::PipelineLayout::New(device);
+	auto device = mBindingLayout->GetDevice();
+	Vulkan::Device* vulkan_device = static_cast<Device*>(device)->GetVulkanDevice();
+	mPipelineLayout = Vulkan::PipelineLayout::New(vulkan_device);
 	mPipelineLayout->Create(layouts, mConstantRanges.size(), mConstantRanges.data());
 }
 

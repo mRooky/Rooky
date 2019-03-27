@@ -11,15 +11,15 @@
 namespace Render
 {
 
-Object::Object(Context* context):
-		mContext(context)
+Object::Object(Device* device):
+		mDevice(device)
 {
-	assert(mContext != nullptr);
+	assert(mDevice != nullptr);
 }
 
 Object::~Object(void)
 {
-	mContext = nullptr;
+	mDevice = nullptr;
 }
 
 } /* namespace Render */

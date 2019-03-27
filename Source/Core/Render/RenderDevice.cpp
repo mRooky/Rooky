@@ -5,17 +5,17 @@
  *      Author: rookyma
  */
 
-#include "RenderContext.h"
+#include "RenderDevice.h"
 #include "RenderFactory.h"
 
 namespace Render
 {
 
-Context::Context(void)
+Device::Device(void)
 {
 }
 
-Context::~Context(void)
+Device::~Device(void)
 {
 	delete mFactory;
 	mFactory = nullptr;

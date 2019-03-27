@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
+#include <RenderDevice.h>
 #include "CorePass.h"
 #include "CorePath.h"
 #include "CoreSystem.h"
 
-#include "RenderContext.h"
 #include "RenderPass.h"
 #include "RenderFactory.h"
 
@@ -33,8 +33,8 @@ Pass::~Pass(void)
 void Pass::Create(const std::vector<Render::Format>& formats)
 {
 	auto system = mParent->GetSystem();
-	auto context = system->GetContext();
-	mRenderPass = context->GetFactory()->CreatePass();
+	auto device = system->GetDevice();
+	mRenderPass = device->GetFactory()->CreatePass();
 	for (auto format : formats)
 	{
 		mRenderPass->AppendFormat(format);

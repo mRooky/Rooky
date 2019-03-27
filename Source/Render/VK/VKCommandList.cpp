@@ -13,10 +13,10 @@
 #include "VKImage.h"
 #include "VKSampler.h"
 #include "VKShader.h"
-#include "VKContext.h"
 #include "VKInline.h"
 #include "VKQueue.h"
 #include "VKBindingLayout.h"
+#include "VKDevice.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"

@@ -10,8 +10,8 @@
 namespace Render
 {
 
-Buffer::Buffer(Context* context):
-		Memory(context)
+Buffer::Buffer(Device* device):
+		Memory(device)
 {
 	mType = ResourceType::RESOURCE_TYPE_BUFFER;
 }

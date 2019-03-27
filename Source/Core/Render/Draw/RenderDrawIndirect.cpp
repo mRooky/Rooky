@@ -6,8 +6,8 @@
  */
 
 #include <Draw/RenderDrawIndirect.h>
+#include <RenderDevice.h>
 #include "RenderBuffer.h"
-#include "RenderContext.h"
 #include "RenderFactory.h"
 #include "RenderUsage.h"
 #include <cassert>
@@ -26,13 +26,13 @@ DrawIndirect::~DrawIndirect(void)
 	mBuffer = nullptr;
 }
 
-void DrawIndirect::Create(Context* context, size_t size)
+void DrawIndirect::Create(Device* device, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
 	auto resource_usage = Render::ResourceUsage::GetBufferUsage(true);
 	resource_usage.bufferUsage.IndirectBuffer = 1;
-	mBuffer = context->GetFactory()->CreateBuffer();
+	mBuffer = device->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, resource_usage);
 }
 
