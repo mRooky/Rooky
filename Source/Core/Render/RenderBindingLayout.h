@@ -30,19 +30,16 @@ public:
 	virtual void SetBindingSet(size_t index, const BindingSet* set) = 0;
 
 public:
-	virtual BindingSet* CreateSet(void) = 0;
-
-public:
 	inline size_t GetStateCount(void) const { return mBindingSets.size(); }
 	inline PipelineLayout* GetPipelineLayout(void) const { return mPipelineLayout; }
-	inline BindingSet* GetBindingSet(size_t index) const { return mBindingSets.at(index); }
+	inline const BindingSet* GetBindingSet(size_t index) const { return mBindingSets.at(index); }
 
 protected:
 	bool mDirty = true;
 	PipelineLayout* mPipelineLayout = nullptr;
 
 protected:
-	std::vector<BindingSet*> mBindingSets;
+	std::vector<const BindingSet*> mBindingSets;
 };
 
 } /* namespace Render */

@@ -14,8 +14,8 @@
 namespace Render
 {
 
-BindingSet::BindingSet(BindingLayout* layout):
-		mLayout(layout)
+BindingSet::BindingSet(Device* device):
+		Object(device)
 {
 }
 

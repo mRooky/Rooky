@@ -10,6 +10,9 @@
 #include "VKBuffer.h"
 #include "VKImage.h"
 #include "VKBindingLayout.h"
+#include "VKFactory.h"
+#include "VKDevice.h"
+#include "VKPool.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -24,8 +27,8 @@
 namespace VK
 {
 
-BindingSet::BindingSet(BindingLayout* layout):
-		Render::BindingSet(layout)
+BindingSet::BindingSet(Device* device):
+		Render::BindingSet(device)
 {
 }
 
@@ -110,8 +113,9 @@ void BindingSet::UpdateDescriptorSet(void)
 		layout_bindings.push_back(layout_bind);
 	}
 
-	auto layout = static_cast<BindingLayout*>(mLayout);
-	mDescriptorSet = layout->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
+	auto factory = mDevice->GetFactory();
+	auto vk_pool = static_cast<Factory*>(factory)->GetPool();
+	mDescriptorSet = vk_pool->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
 }
 
 void BindingSet::SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)

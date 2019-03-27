@@ -9,6 +9,7 @@
 #include "VKInline.h"
 #include "VKFactory.h"
 #include "VKDevice.h"
+#include "VKPool.h"
 
 #include "VulkanBuffer.h"
 #include "VulkanInline.h"
@@ -90,7 +91,8 @@ void Buffer::CopyFrom(const Render::Resource* other)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
-	Vulkan::CommandPool* command_pool = vk_factory->GetVulkanCommandPool();
+	Pool* vk_pool = vk_factory->GetPool();
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	Render::ResourceType type = other->GetType();

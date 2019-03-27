@@ -15,11 +15,11 @@
 namespace VK
 {
 
-class BindingLayout;
+class Device;
 class BindingSet : public Render::BindingSet
 {
 public:
-	explicit BindingSet(BindingLayout* layout);
+	explicit BindingSet(Device* device);
 	virtual ~BindingSet(void) override;
 
 public:
@@ -39,6 +39,9 @@ public:
 protected:
 	void WriteDescriptorSet(void);
 	void UpdateDescriptorSet(void);
+
+protected:
+	Device* mDevice = nullptr;
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

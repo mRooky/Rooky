@@ -13,7 +13,8 @@
 #include "VKCommandPool.h"
 #include "VKQueue.h"
 #include "VKShader.h"
-#include "VKStaging.h"
+#include "VKPool.h"
+#include "VKBindingSet.h"
 #include "VKBindingLayout.h"
 #include "VKVertexLayout.h"
 #include "VKDevice.h"
@@ -31,25 +32,13 @@ namespace VK
 Factory::Factory(Device* device):
 		Render::Factory(device)
 {
-	CreateDefaultPool();
-	mStaging = new Staging(device);
+	mPool = new Pool(static_cast<Device&>(*mDevice));
 }
 
 Factory::~Factory(void)
 {
-	delete mStaging;
-	mStaging = nullptr;
-	Vulkan::Release(mCommandPool);
-}
-
-void Factory::CreateDefaultPool(void)
-{
-	auto vk_device = static_cast<Device*>(mDevice);
-	auto vulkan_device = vk_device->GetVulkanDevice();
-	uint32_t family = vulkan_device->GetPhysicalDevice()->GetFamily();
-	mCommandPool = Vulkan::CommandPool::New(vulkan_device);
-	mCommandPool->Create(family);
-	mCommandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+	delete mPool;
+	mPool = nullptr;
 }
 
 Render::Pass* Factory::CreatePass(void)
@@ -97,6 +86,12 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 Render::VertexLayout* Factory::CreateVertexLayout(void)
 {
 	return new VertexLayout;
+}
+
+Render::BindingSet* Factory::CreateBindingSet(void)
+{
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new BindingSet(vk_device);
 }
 
 Render::BindingLayout* Factory::CreateBindingLayout(void)

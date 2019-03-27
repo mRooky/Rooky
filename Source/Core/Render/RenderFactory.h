@@ -33,6 +33,7 @@ public:
 	virtual VertexLayout* CreateVertexLayout(void) = 0;
 
 public:
+	virtual BindingSet* CreateBindingSet(void) = 0;
 	virtual BindingLayout* CreateBindingLayout(void) = 0;
 };
 

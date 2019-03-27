@@ -14,7 +14,7 @@
 namespace VK
 {
 class Device;
-class Staging;
+class Pool;
 class Factory: public Render::Factory
 {
 public:
@@ -32,18 +32,14 @@ public:
 	virtual Render::VertexLayout* CreateVertexLayout(void) override;
 
 public:
+	virtual Render::BindingSet* CreateBindingSet(void) override;
 	virtual Render::BindingLayout* CreateBindingLayout(void) override;
 
 public:
-	inline Staging* GetStaging(void) const { return mStaging; }
-	inline Vulkan::CommandPool* GetVulkanCommandPool(void) const { return mCommandPool; }
+	inline Pool* GetPool(void) const { return mPool; }
 
 protected:
-	void CreateDefaultPool(void);
-
-protected:
-	Staging* mStaging = nullptr;
-	Vulkan::CommandPool* mCommandPool = nullptr;
+	Pool* mPool = nullptr;
 };
 
 } /* namespace VK */

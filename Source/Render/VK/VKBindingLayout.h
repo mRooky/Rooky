@@ -27,29 +27,14 @@ public:
 	virtual void Create(void) override;
 
 public:
-	virtual Render::BindingSet* CreateSet(void) override;
-
-public:
 	virtual void AppendBindingSet(const Render::BindingSet* set) override;
 	virtual void SetBindingSet(size_t index, const Render::BindingSet* set) override;
 
 public:
 	void Binding(CommandList* list);
 
-public:
-	Vulkan::DescriptorSet* AllocateDescriptorSet(uint32_t count, const VkDescriptorSetLayoutBinding* bindings);
-
-public:
-	inline Vulkan::DescriptorPool* GetVulkanDescriptorPool(void) const { return mDescriptorPool; }
-
-protected:
-	void CreateDescriptorPool(size_t max);
-
 protected:
 	std::vector<Vulkan::DescriptorSet*> mDescriptorSets;
-
-protected:
-	Vulkan::DescriptorPool* mDescriptorPool = nullptr;
 };
 
 } /* namespace VK */

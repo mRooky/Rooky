@@ -92,6 +92,7 @@ void SwapChain::GetSwapChainRenderBuffer(void)
 		image->mSwapChain = this;
 		mRenderBuffers.push_back(image);
 	}
+	mFormat = mRenderBuffers.at(0)->GetFormat();
 }
 
 } /* namespace VK */

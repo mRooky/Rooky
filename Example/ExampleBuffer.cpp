@@ -51,25 +51,18 @@ void Buffer::Initialize(void)
 	{
 		Core::Viewport* viewport = GetViewport();
 		Render::SwapChain* swap_chain = viewport->GetSwapChain();
-		Render::Image* attachment = swap_chain->GetRenderBuffer(0);
-
-		auto format = attachment->GetFormat();
+		auto format = swap_chain->GetFormat();
 		std::vector<Render::Format> formats = { format };
 		CreateRenderPass(formats, Render::Format::FORMAT_UNDEFINED);
+		Render::Color clear_color = Render::Color(150, 150, 150);
 
-		Render::Color clear_color = Render::Color(50, 50, 150);
-		attachment->SetClearColor(clear_color);
-
-		std::vector<Render::Image*> attachments(1);
-		attachments.at(0) = attachment;
-
-		CreateFrameBuffer(attachments, nullptr);
-
-		attachment = swap_chain->GetRenderBuffer(1);
-		attachment->SetClearColor(clear_color);
-
-		attachments.at(0) = attachment;
-		CreateFrameBuffer(attachments, nullptr);
+		for (size_t index = 0; index < 2; ++index)
+		{
+			Render::Image* attachment = swap_chain->GetRenderBuffer(index);
+			attachment->SetClearColor(clear_color);
+			std::vector<Render::Image*> attachments = { attachment };
+			CreateFrameBuffer(attachments, nullptr);
+		}
 
 		CreateRenderThread(2);
 	}

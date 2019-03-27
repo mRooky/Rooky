@@ -10,7 +10,7 @@
 #include "VKBuffer.h"
 #include "VKInline.h"
 #include "VKFactory.h"
-#include "VKStaging.h"
+#include "VKPool.h"
 #include "VKOperator.h"
 #include "VKDevice.h"
 
@@ -109,14 +109,14 @@ void Image::Download(void* dst)
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(index == 0 && mipmap == 0);
-	Factory* factory = static_cast<Factory*>(mDevice->GetFactory());
-	Vulkan::CommandPool* command_pool = factory->GetVulkanCommandPool();
+	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
+	Pool* vk_pool = vk_factory->GetPool();
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	size_t buffer_size = GetMipmapSize(mipmap);
-	auto staging = factory->GetStaging();
 	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-	auto stage_buffer = staging->GetBuffer(buffer_size, usage);
+	auto stage_buffer = vk_pool->GetBuffer(buffer_size, usage);
 	void* dst = stage_buffer->Map(0, buffer_size);
 	std::memcpy(dst, src, buffer_size);
 	stage_buffer->Unmap(0, buffer_size);
@@ -171,7 +171,8 @@ void Image::CopyFrom(const Render::Resource* other)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
-	auto command_pool = vk_factory->GetVulkanCommandPool();
+	Pool* vk_pool = vk_factory->GetPool();
+	auto command_pool = vk_pool->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 
 	Render::ResourceType type = other->GetType();
