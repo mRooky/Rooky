@@ -10,11 +10,13 @@
 
 #include "RenderClasses.h"
 #include "RenderFormat.h"
+#include "RenderShaderState.h"
 #include <vector>
 
 namespace Core
 {
 class Path;
+class Texture;
 class Pass
 {
 	friend class Path;
@@ -25,23 +27,33 @@ public:
 	virtual ~Pass(void);
 
 public:
-	void Create(const std::vector<Render::Format>& formats);
+	void CreateRenderPass(const std::vector<Render::Format>& formats);
 
 public:
 	inline Path* GetParent(void) const { return mParent; }
 
 public:
-	inline Render::Pipeline* GetPipeline(void) const { return mPipeline; }
+	inline size_t GetTextureCount(void) const { return mTextures.size(); }
+
+public:
+	inline void SetTexture(Texture* texture) { mTextures.push_back(texture); }
+	inline Texture* GetTexture(size_t index) const { return mTextures.at(index); }
+
+public:
 	inline Render::Pass* GetRenderPass(void) const { return mRenderPass; }
+	inline Render::Pipeline* GetPipeline(void) const { return mPipeline; }
+	inline Render::ShaderState* GetShaderState(void) { return &mShaderState; }
 
 protected:
 	Path* mParent = nullptr;
 
 protected:
+	std::vector<Texture*> mTextures;
+
+protected:
+	Render::ShaderState mShaderState = {};
 	Render::Pass* mRenderPass = nullptr;
 	Render::Pipeline* mPipeline = nullptr;
-	Render::BindingLayout* mBindingLayout = nullptr;
-	Render::PipelineState* mPipelineState = nullptr;
 };
 
 } /* namespace Core */

@@ -31,6 +31,8 @@ public:
 	virtual void RecordCommands(void) override;
 
 public:
+	virtual void CreateRenderPass(void);
+	virtual void CreateFrameBuffer(void);
 	virtual void CreateIndexBuffer(void);
 	virtual void CreateVertexBuffer(void);
 	virtual void CreateUniformBuffer(void);

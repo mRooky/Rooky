@@ -19,14 +19,14 @@ class Path : public Object
 {
 public:
 	explicit Path(System* system);
-	virtual ~Path(void);
+	virtual ~Path(void) override;
 
 public:
 	Pass* CreatePass(void);
 
 public:
 	inline size_t GetPassCount(void) const { return mPasses.size(); }
-	inline Pass* GetPass(size_t index) const { return mPasses.at(index); }
+	inline Pass* GetRenderPass(size_t index) const { return mPasses.at(index); }
 
 protected:
 	std::vector<Pass*> mPasses;

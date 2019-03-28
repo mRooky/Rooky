@@ -19,8 +19,8 @@
 #include "VKVertexLayout.h"
 #include "VKDevice.h"
 #include "VKSampler.h"
-#include "VKPipelineState.h"
 #include "VKPipeline.h"
+#include "VKPipelineState.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"

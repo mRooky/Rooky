@@ -10,7 +10,7 @@
 #include "CoreBufferManager.h"
 #include "CoreTextureManager.h"
 #include "CoreBindingManager.h"
-#include "CoreTexture.h"
+#include "CorePipelineManager.h"
 
 #include "RenderInline.h"
 #include "RenderDevice.h"
@@ -33,6 +33,8 @@ System::~System(void)
 	mTextureManager = nullptr;
 	delete mBindingManager;
 	mBindingManager = nullptr;
+	delete mPipelineManager;
+	mPipelineManager = nullptr;
 	Render::DestroyDevice(mDevice);
 }
 
@@ -44,31 +46,7 @@ void System::Create(void)
 	mBufferManager = new BufferManager(this);
 	mTextureManager = new TextureManager(this);
 	mBindingManager = new BindingManager(this);
-}
-
-Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format)
-{
-	assert(mTextureManager != nullptr);
-
-	Texture* texture = mTextureManager->GetTexture(name);
-	if (texture == nullptr)
-	{
-		Render::ImageLayout image_layout = {};
-		image_layout.extent = extent;
-		image_layout.format = format;
-		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-
-		auto image_usage = Render::ResourceUsage::GetImageUsage(false);
-		image_usage.allocate.Destination = TRUE;
-		image_usage.imageUsage.SampledImage = TRUE;
-
-		texture = mTextureManager->CreateTexture();
-		texture->SetName(name);
-		texture->Create(image_layout, image_usage);
-	}
-
-	assert(texture != nullptr);
-	return texture;
+	mPipelineManager = new PipelineManager(this);
 }
 
 } /* namespace Core */

@@ -11,6 +11,8 @@
 #include "VulkanInline.h"
 #include "VKDevice.h"
 
+#include "UtilString.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -25,14 +27,19 @@ Shader::Shader(Device* device):
 Shader::~Shader(void)
 {
 	Vulkan::Release(mShader);
+	std::cout << "Destroy Shader : " << mName << std::endl;
 }
 
-void Shader::Create(Render::ShaderStage stage, const char* file)
+void Shader::Create(const char* file)
 {
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		Create(stage, code.size(), code.data());
+		mName = Util::GetFileName(file);
+		mType = Render::Shader::GetShaderType(file);
+		mStage = Render::Shader::GetShaderStage(file);
+		std::cout << "Create Shader File : " << file << std::endl;
+		CreateVulkanShader(code.size(), code.data());
 	}
 	else
 	{
@@ -41,9 +48,8 @@ void Shader::Create(Render::ShaderStage stage, const char* file)
 	}
 }
 
-void Shader::Create(Render::ShaderStage stage, size_t size, const void* data)
+void Shader::CreateVulkanShader(size_t size, const void* data)
 {
-	mStage = stage;
 	assert(size > 0);
 	auto vulkan_device = static_cast<Device*>(mDevice)->GetVulkanDevice();
 	mShader = Vulkan::ShaderModule::New(vulkan_device);

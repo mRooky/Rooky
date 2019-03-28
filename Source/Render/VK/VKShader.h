@@ -8,10 +8,10 @@
 #ifndef SOURCE_RENDER_VK_VKSHADER_H_
 #define SOURCE_RENDER_VK_VKSHADER_H_
 
+#include <VKPipelineState.h>
 #include "RenderShader.h"
 #include "VKRender.h"
 
-#include "VKPipelineState.h"
 
 namespace VK
 {
@@ -23,14 +23,16 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(Render::ShaderStage stage, const char* file) override;
-	virtual void Create(Render::ShaderStage stage, size_t size, const void* data) override;
+	virtual void Create(const char* file) override;
 
 public:
 	inline Vulkan::ShaderModule* GetVulkanModule(void) const { return mShader; }
 
 public:
 	static VkShaderStageFlagBits ConvertStage(Render::ShaderStage stage);
+
+private:
+	void CreateVulkanShader(size_t size, const void* data);
 
 protected:
 	Vulkan::ShaderModule* mShader = nullptr;

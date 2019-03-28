@@ -24,10 +24,17 @@ public:
 	virtual ~PipelineManager(void) override;
 
 public:
+	Render::Shader* GetShader(const char* file);
+
+public:
+	Render::Shader* CreateShader(void);
 	Render::Pipeline* CreatePipeline(void);
+	Render::PipelineState* CreatePipelineState(void);
 
 protected:
+	std::vector<Render::Shader*> mShaders;
 	std::vector<Render::Pipeline*> mPipelines;
+	std::vector<Render::PipelineState*> mPipelineStates;
 };
 
 } /* namespace Core */

@@ -25,7 +25,7 @@ public:
 	virtual void Initialize(void) override;
 
 public:
-	inline Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) { return &mGraphicsInfo; }
+	inline const Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) const { return &mGraphicsInfo; }
 
 protected:
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;

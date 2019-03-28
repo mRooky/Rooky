@@ -39,7 +39,8 @@ Shader* ShaderState::GetShader(ShaderType type) const
 {
 	for (auto shader : mShaders)
 	{
-		if (type == shader->GetType())
+		bool result = (type == shader->GetType());
+		if (true == result)
 		{
 			return shader;
 		}

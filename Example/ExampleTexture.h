@@ -26,6 +26,8 @@ public:
 
 public:
 	virtual void CreateTexture(const char* file);
+	virtual void CreateShader(void);
+	virtual void CreatePipeline(void);
 
 protected:
 	Core::Texture* mTexture = nullptr;

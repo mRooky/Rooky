@@ -9,7 +9,7 @@
 #define SOURCE_RENDER_VK_VKCONVERT_H_
 
 #include "VKInline.h"
-#include "RenderState.h"
+#include "State/RenderState.h"
 #include <cassert>
 
 namespace VK
@@ -26,6 +26,20 @@ static inline VkVertexInputRate Convert(Render::VertexInputRate rate)
 	default:
 		assert(false);
 		return VK_VERTEX_INPUT_RATE_VERTEX;
+	}
+}
+
+static inline VkIndexType Convert(Render::IndexType type)
+{
+	switch(type)
+	{
+	case Render::IndexType::INDEX_TYPE_U16:
+		return VK_INDEX_TYPE_UINT16;
+	case Render::IndexType::INDEX_TYPE_U32:
+		return VK_INDEX_TYPE_UINT32;
+	default:
+		assert(false);
+		return VK_INDEX_TYPE_MAX_ENUM;
 	}
 }
 

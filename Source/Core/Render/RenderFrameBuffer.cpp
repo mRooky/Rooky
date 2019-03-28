@@ -27,18 +27,6 @@ FrameBuffer::~FrameBuffer(void)
 	mDepthStencil = nullptr;
 }
 
-void FrameBuffer::Create(void)
-{
-	assert(mAttachments.size() > 0);
-	auto attachment = mAttachments.at(0);
-	auto& layout = attachment->GetLayout();
-	auto& extent = layout.extent;
-	Extent2D extent2 = { extent.width, extent.height };
-	Create(extent2);
-	std::cout << "New FrameBuffer" << std::endl;
-	std::cout << "Width:" << extent.width << " Height:" << extent.height << std::endl;
-}
-
 void FrameBuffer::SetDepthStencil(Image* attachment)
 {
 	if(attachment != nullptr)

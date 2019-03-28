@@ -10,7 +10,6 @@
 
 #include "RenderPipeline.h"
 #include "VKRender.h"
-#include <vector>
 
 namespace VK
 {
@@ -22,17 +21,16 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Create(Render::PipelineLayout* pipe_layout, Render::VertexLayout* vert_layout, Render::Pass* pass, uint32_t index) override;
+	virtual void Create(Render::PipelineState* state) override;
 
 public:
 	void CreateVulkanPipeline(void);
 
 public:
-	inline Vulkan::Pipeline* GetVulkanPipeline(void) const { return mCurrent; }
+	inline Vulkan::Pipeline* GetVulkanPipeline(void) const { return mPipeline; }
 
 protected:
-	Vulkan::Pipeline* mCurrent = nullptr;
-	std::vector<Vulkan::Pipeline*> mPipelines;
+	Vulkan::Pipeline* mPipeline = nullptr;
 };
 
 } /* namespace VK */

@@ -30,7 +30,7 @@ Base::~Base(void)
 
 void Base::Initialize(void)
 {
-	CreateWindow("Rooky Window");
+	CreateWindow("Base Window");
 	CreateSystem();
 }
 
@@ -39,7 +39,7 @@ void Base::CreateWindow(const char* title)
 	assert(mWindow == nullptr);
 	mWindow = new XCB::Window;
 	mWindow->Create(1280, 800);
-	mWindow->SetTitle("Rooky Vulkan");
+	mWindow->SetTitle(title);
 }
 
 void Base::CreateSystem(void)

@@ -24,10 +24,7 @@ public:
 	virtual ~FrameBuffer(void);
 
 public:
-	void Create(void);
-
-public:
-	virtual void Create(const Extent2D& extent) = 0;
+	virtual void Create(const std::vector<Image*>& attachments, Image* depth) = 0;
 
 public:
 	void AppendAttachment(Image* attachment);

@@ -25,12 +25,13 @@ Pass::Pass(Path* parent):
 
 Pass::~Pass(void)
 {
+	mTextures.clear();
 	mParent = nullptr;
 	delete mRenderPass;
 	mRenderPass = nullptr;
 }
 
-void Pass::Create(const std::vector<Render::Format>& formats)
+void Pass::CreateRenderPass(const std::vector<Render::Format>& formats)
 {
 	auto system = mParent->GetSystem();
 	auto device = system->GetDevice();

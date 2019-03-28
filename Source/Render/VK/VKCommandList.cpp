@@ -17,6 +17,8 @@
 #include "VKQueue.h"
 #include "VKBindingLayout.h"
 #include "VKDevice.h"
+#include "VKBuffer.h"
+#include "VKConvert.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -201,8 +203,12 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 void CommandList::SetBindingLayout(Render::BindingLayout* layout)
 {
 	assert(mPipeline != nullptr);
-	assert(mPipeline->GetLayout() == layout->GetPipelineLayout());
-	mBindingLayout = layout;
+	auto state = mPipeline->GetState();
+	assert(state->GetLayout() == layout->GetPipelineLayout());
+	if(state->GetLayout() == layout->GetPipelineLayout())
+	{
+		mBindingLayout = layout;
+	}
 }
 
 void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
@@ -210,6 +216,25 @@ void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
 	assert(mBindingLayout != nullptr);
 	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
 	assert(false && vk_layout);
+}
+
+void CommandList::SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset)
+{
+	assert(buffer != nullptr);
+	assert(mCommandBuffer != nullptr);
+	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
+	mCommandBuffer->BindVertexBuffers(vulkan_buffer, binding, offset);
+}
+
+void CommandList::SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexType type)
+{
+	assert(buffer != nullptr);
+	assert(mCommandBuffer != nullptr);
+	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
+	VkIndexType index_type = Convert(type);
+	mCommandBuffer->BindIndexBuffer(vulkan_buffer, offset, index_type);
 }
 
 } /* namespace VK */

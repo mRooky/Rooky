@@ -19,6 +19,7 @@
 #include "RenderPass.h"
 #include "RenderBuffer.h"
 #include "RenderEnum.h"
+#include "RenderFrameBuffer.h"
 
 #include <cassert>
 
@@ -43,38 +44,48 @@ Buffer::~Buffer(void)
 
 void Buffer::Initialize(void)
 {
-	CreateWindow("Rooky Window");
+	CreateWindow("Buffer Window");
 	CreateSystem();
 	CreateViewport();
 	CreateRenderPath();
-
-	{
-		Core::Viewport* viewport = GetViewport();
-		Render::SwapChain* swap_chain = viewport->GetSwapChain();
-		auto format = swap_chain->GetFormat();
-		std::vector<Render::Format> formats = { format };
-		CreateRenderPass(formats, Render::Format::FORMAT_UNDEFINED);
-		Render::Color clear_color = Render::Color(150, 150, 150);
-
-		for (size_t index = 0; index < 2; ++index)
-		{
-			Render::Image* attachment = swap_chain->GetRenderBuffer(index);
-			attachment->SetClearColor(clear_color);
-			std::vector<Render::Image*> attachments = { attachment };
-			CreateFrameBuffer(attachments, nullptr);
-		}
-
-		CreateRenderThread(2);
-	}
-
+	CreateRenderPass();
+	CreateFrameBuffer();
+	CreateRenderThread(2);
 	CreateIndexBuffer();
 	CreateVertexBuffer();
 	CreateUniformBuffer();
 }
 
+void Buffer::CreateRenderPass(void)
+{
+	assert(mPath != nullptr);
+	Core::Viewport* viewport = GetViewport();
+	Render::SwapChain* swap_chain = viewport->GetSwapChain();
+	auto format = swap_chain->GetFormat();
+	std::vector<Render::Format> formats = { format };
+	Core::Pass* pass = mPath->CreatePass();
+	pass->CreateRenderPass(formats);
+}
+
+void Buffer::CreateFrameBuffer(void)
+{
+	assert(mPath->GetPassCount() > 0);
+	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::Color clear_color = Render::Color(150, 150, 150);
+	Render::Pass* pass = mPath->GetRenderPass(0)->GetRenderPass();
+	for (size_t index = 0; index < 2; ++index)
+	{
+		Render::Image* attachment = swap_chain->GetRenderBuffer(index);
+		attachment->SetClearColor(clear_color);
+		std::vector<Render::Image*> attachments = { attachment };
+		Render::FrameBuffer* frame = pass->CreateFrameBuffer();
+		frame->Create(attachments, nullptr);
+	}
+}
+
 void Buffer::RecordCommands(void)
 {
-	auto pass = mPath->GetPass(0);
+	auto pass = mPath->GetRenderPass(0);
 
 	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
 	Render::Image* attachment = swap_chain->GetRenderBuffer(0);

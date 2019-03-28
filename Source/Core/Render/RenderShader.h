@@ -22,13 +22,19 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(ShaderStage stage, const char* file) = 0;
-	virtual void Create(ShaderStage stage, size_t size, const void* data) = 0;
+	virtual void Create(const char* file) = 0;
 
 public:
 	inline ShaderType GetType(void) const { return mType; }
 	inline ShaderStage GetStage(void) const { return mStage; }
+
+public:
+	inline void SetName(const char* name) { mName = name; }
 	inline const char* GetName(void) const { return mName.c_str(); }
+
+public:
+	static ShaderType GetShaderType(const char* file);
+	static ShaderStage GetShaderStage(const char* file);
 
 protected:
 	std::string mName;

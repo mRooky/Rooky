@@ -21,7 +21,10 @@ public:
 	virtual ~FrameBuffer(void) override;
 
 public:
-	virtual void Create(const Render::Extent2D& extent) override;
+	virtual void Create(const std::vector<Render::Image*>& attachments, Render::Image* depth) override;
+
+public:
+	void CreateVulkanFrameBuffer(void);
 
 public:
 	inline Vulkan::FrameBuffer* GetVulkanFrameBuffer(void) const { return mFrameBuffer; }

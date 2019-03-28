@@ -12,6 +12,7 @@
 #include "RenderDevice.h"
 #include "RenderFactory.h"
 #include "RenderSampler.h"
+#include "RenderDefine.h"
 
 #include "UtilRelease.h"
 
@@ -29,29 +30,88 @@ TextureManager::TextureManager(System* system):
 
 TextureManager::~TextureManager(void)
 {
+	size_t count = 0;
 	std::cout << "Release Texture ..." << std::endl;
+	count = mTextures.size();
 	Util::Release(mTextures);
-	std::cout << "All Textures Released" << std::endl;
+	std::cout << count << " Textures Released ! " << std::endl;
 
 	std::cout << "Release Sampler ..." << std::endl;
+	count = mSamplers.size();
 	Util::Release(mSamplers);
-	std::cout << "All Samplers Released" << std::endl;
+	std::cout << count << " Samplers Released !" << std::endl;
+}
+
+Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
+}
+
+Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	Texture* texture = GetTexture(name);
+	if (texture == nullptr)
+	{
+		Render::ImageLayout image_layout = {};
+		image_layout.extent = extent;
+		image_layout.format = format;
+		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
+
+		auto image_usage = Render::ResourceUsage::GetImageUsage(false);
+		image_usage.allocate.Destination = TRUE;
+		image_usage.imageUsage.SampledImage = TRUE;
+
+		texture = CreateTexture();
+		texture->SetName(name);
+		texture->Create(image_layout, image_usage);
+	}
+	assert(texture != nullptr);
+	return texture;
+}
+
+Texture* TextureManager::CreateTexture3D(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
+}
+
+Texture* TextureManager::CreateTexture1DArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
+}
+
+Texture* TextureManager::CreateTexture2DArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
+}
+
+Texture* TextureManager::CreateTextureCube(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
+}
+
+Texture* TextureManager::CreateTextureCubeArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+{
+	assert(false);
+	return nullptr;
 }
 
 Texture* TextureManager::GetTexture(const char* name)
 {
 	assert(name != nullptr);
-	Texture* texture = nullptr;
-	for (auto tex : mTextures)
+	for (auto texture : mTextures)
 	{
-		const char* tex_name = tex->GetName();
+		const char* tex_name = texture->GetName();
 		if (std::strcmp(tex_name, name) == 0)
 		{
-			texture = tex;
-			break;
+			return texture;
 		}
 	}
-	return texture;
+	return nullptr;
 }
 
 Texture* TextureManager::CreateTexture(void)

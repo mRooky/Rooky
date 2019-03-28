@@ -41,6 +41,8 @@ public:
 	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetBindingLayout(BindingLayout* layout) = 0;
 	virtual void SetBindingSet(uint32_t slot, BindingSet* set) = 0;
+	virtual void SetVertex(Buffer* buffer, uint32_t binding, size_t offset) = 0;
+	virtual void SetIndex(Buffer* buffer, size_t offset, IndexType type) = 0;
 	virtual void Draw(DrawCall* draw) = 0;
 	// End Resource Setup
 	virtual void EndPass(void) = 0;

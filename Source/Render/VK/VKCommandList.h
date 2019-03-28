@@ -37,6 +37,8 @@ public:
 	virtual void SetPipeline(Render::Pipeline* pipeline) override;
 	virtual void SetBindingLayout(Render::BindingLayout* layout) override;
 	virtual void SetBindingSet(uint32_t slot, Render::BindingSet* set) override;
+	virtual void SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset) override;
+	virtual void SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexType type) override;
 	// End Resource Setting
 	virtual void Draw(Render::DrawCall* draw) override;
 	virtual void EndPass(void) override;

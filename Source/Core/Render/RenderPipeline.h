@@ -13,12 +13,7 @@
 
 namespace Render
 {
-class Pass;
-class Declaration;
 class PipelineState;
-class PipelineLayout;
-class ShaderState;
-class VertexLayout;
 class Pipeline : public Object
 {
 public:
@@ -26,26 +21,15 @@ public:
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Create(PipelineLayout* pipe_layout, VertexLayout* vert_layout, Pass* pass, uint32_t index) = 0;
+	virtual void Create(PipelineState* state) = 0;
 
 public:
 	bool IsValid(void) const;
 
 public:
-	inline uint32_t GetSubIndex(void) const { return mIndex; }
-	inline Pass* GetRenderPass(void) const { return mRenderPass; }
 	inline PipelineState* GetState(void) const { return mPipelineState; }
-	inline ShaderState* GetShaderState(void) const { return mShaderState; }
-	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
 
 protected:
-	uint32_t mIndex = 0;
-	Pass* mRenderPass = nullptr;
-	VertexLayout* mVertexLayout = nullptr;
-	PipelineLayout* mPipelineLayout = nullptr;
-
-protected:
-	ShaderState* mShaderState =nullptr;
 	PipelineState* mPipelineState = nullptr;
 };
 

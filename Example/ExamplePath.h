@@ -24,8 +24,6 @@ public:
 
 public:
 	virtual void CreateRenderPath(void);
-	virtual void CreateRenderPass(const std::vector<Render::Format>& formats, Render::Format depth);
-	virtual void CreateFrameBuffer(const std::vector<Render::Image*>& attachments, Render::Image* depth);
 	virtual void CreateRenderThread(size_t count);
 
 protected:
