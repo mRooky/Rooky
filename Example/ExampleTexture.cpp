@@ -90,8 +90,8 @@ void Texture::CreateTexture(const char* file)
 
 void Texture::CreateShader(void)
 {
-	const char* vert_file = "Resource/texture.vert";
-	const char* frag_file = "Resource/texture.frag";
+	const char* vert_file = "Shaders/texture.vert";
+	const char* frag_file = "Shaders/texture.frag";
 
 	auto shader_state = mPass->GetShaderState();
 
