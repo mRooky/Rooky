@@ -1,6 +1,7 @@
 Rooky
 ====
 **Render Engine powered by Vulkan**
+This repository is mainly for myself learning Vulkan and graphics game engine.
 
 **FrameBuffer**
 ![FrameBuffer](https://github.com/mRooky/Rooky/blob/master/Resource/FrameBuffer.png)  
