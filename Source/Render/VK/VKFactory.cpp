@@ -19,6 +19,8 @@
 #include "VKVertexLayout.h"
 #include "VKDevice.h"
 #include "VKSampler.h"
+#include "VKPipelineState.h"
+#include "VKPipeline.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
@@ -93,6 +95,18 @@ Render::Sampler* Factory::CreateSampler(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Sampler(vk_device);
+}
+
+Render::PipelineState* Factory::CreatePipelineState(void)
+{
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new PipelineState(vk_device);
+}
+
+Render::Pipeline* Factory::CreatePipeline(void)
+{
+	auto vk_device = static_cast<Device*>(mDevice);
+	return new Pipeline(vk_device);
 }
 
 Render::BindingSet* Factory::CreateBindingSet(void)

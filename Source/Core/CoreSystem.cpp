@@ -5,7 +5,6 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
 #include "CoreSystem.h"
 
 #include "CoreBufferManager.h"
@@ -14,6 +13,8 @@
 #include "CoreTexture.h"
 
 #include "RenderInline.h"
+#include "RenderDevice.h"
+#include "RenderDefine.h"
 
 #include <cassert>
 
@@ -52,10 +53,15 @@ Texture* System::CreateTexture2D(const char* name, const Render::Extent3D& exten
 	Texture* texture = mTextureManager->GetTexture(name);
 	if (texture == nullptr)
 	{
-		auto image_layout = CreateImageLayout(extent, format);
+		Render::ImageLayout image_layout = {};
+		image_layout.extent = extent;
+		image_layout.format = format;
+		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
+
 		auto image_usage = Render::ResourceUsage::GetImageUsage(false);
-		image_usage.allocate.Destination = 1;
-		image_usage.imageUsage.SampledImage = 1;
+		image_usage.allocate.Destination = TRUE;
+		image_usage.imageUsage.SampledImage = TRUE;
+
 		texture = mTextureManager->CreateTexture();
 		texture->SetName(name);
 		texture->Create(image_layout, image_usage);

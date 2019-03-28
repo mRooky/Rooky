@@ -31,6 +31,8 @@ public:
 	virtual Render::CommandPool* CreateCommandPool(void) override;
 	virtual Render::VertexLayout* CreateVertexLayout(void) override;
 	virtual Render::Sampler* CreateSampler(void) override;
+	virtual Render::PipelineState* CreatePipelineState(void) override;
+	virtual Render::Pipeline* CreatePipeline(void) override;
 
 public:
 	virtual Render::BindingSet* CreateBindingSet(void) override;

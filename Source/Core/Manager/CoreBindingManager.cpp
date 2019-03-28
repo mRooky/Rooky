@@ -5,11 +5,13 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
 #include "CoreBindingManager.h"
 #include "CoreSystem.h"
-#include "RenderFactory.h"
 
+#include "RenderBindingLayout.h"
+#include "RenderBindingSet.h"
+#include "RenderDevice.h"
+#include "RenderFactory.h"
 #include "UtilRelease.h"
 
 namespace Core
@@ -22,7 +24,17 @@ BindingManager::BindingManager(System* system):
 
 BindingManager::~BindingManager(void)
 {
+	Util::Release(mBindingSets);
 	Util::Release(mBindingLayouts);
+}
+
+Render::BindingSet* BindingManager::CreateSet(void)
+{
+	auto device = mSystem->GetDevice();
+	auto factory = device->GetFactory();
+	Render::BindingSet* set = factory->CreateBindingSet();
+	mBindingSets.push_back(set);
+	return set;
 }
 
 Render::BindingLayout* BindingManager::CreateLayout(void)

@@ -42,11 +42,11 @@ protected:
 	uint32_t mIndex = 0;
 	Pass* mRenderPass = nullptr;
 	VertexLayout* mVertexLayout = nullptr;
-	PipelineState* mPipelineState = nullptr;
 	PipelineLayout* mPipelineLayout = nullptr;
 
-public:
+protected:
 	ShaderState* mShaderState =nullptr;
+	PipelineState* mPipelineState = nullptr;
 };
 
 } /* namespace Render */

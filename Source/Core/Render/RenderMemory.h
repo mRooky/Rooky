@@ -17,7 +17,7 @@ namespace Render
 class Buffer;
 class Memory: public Resource
 {
-public:
+protected:
 	Memory(Device* device);
 	virtual ~Memory(void) override;
 

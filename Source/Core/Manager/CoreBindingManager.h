@@ -8,10 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
-#include <RenderBinding.hpp>
-#include <RenderBindingSet.h>
 #include "CoreObject.h"
-#include "RenderBindingLayout.h"
+#include "RenderClasses.h"
 #include <vector>
 
 namespace Core
@@ -23,9 +21,11 @@ public:
 	virtual ~BindingManager(void) override;
 
 public:
+	Render::BindingSet* CreateSet(void);
 	Render::BindingLayout* CreateLayout(void);
 
 protected:
+	std::vector<Render::BindingSet*> mBindingSets;
 	std::vector<Render::BindingLayout*> mBindingLayouts;
 };
 

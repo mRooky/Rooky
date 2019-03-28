@@ -66,11 +66,11 @@ VkFramebufferCreateInfo FrameBuffer::CreateInfo(void)
 {
 	VkFramebufferCreateInfo frame_buffer_create_info = {};
 	frame_buffer_create_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-	frame_buffer_create_info.pNext = NULL;
+	frame_buffer_create_info.pNext = nullptr;
 	frame_buffer_create_info.flags = 0;
 	frame_buffer_create_info.renderPass = VK_NULL_HANDLE;
 	frame_buffer_create_info.attachmentCount = 0;
-	frame_buffer_create_info.pAttachments = NULL;
+	frame_buffer_create_info.pAttachments = nullptr;
 	frame_buffer_create_info.width = 0;
 	frame_buffer_create_info.height = 0;
 	frame_buffer_create_info.layers = 0;

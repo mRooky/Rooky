@@ -13,6 +13,7 @@
 
 namespace Render
 {
+class Vendor;
 class Factory;
 class Device
 {
@@ -27,8 +28,10 @@ public:
 
 public:
 	inline Factory* GetFactory(void) const { return mFactory; }
+	inline const Vendor* GetVendor(void) const { return mVendor; }
 
 protected:
+	Vendor* mVendor = nullptr;
 	Factory* mFactory = nullptr;
 
 public:

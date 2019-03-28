@@ -31,6 +31,8 @@ public:
 
 public:
 	inline bool IsValid(void) const { return mValid; }
+
+public:
 	inline void AppendBinding(const Binding& binding) { mBindings.push_back(binding); }
 	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
 

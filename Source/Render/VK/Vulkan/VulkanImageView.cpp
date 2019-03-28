@@ -90,7 +90,7 @@ VkImageViewCreateInfo ImageView::CreateInfo(void)
 {
 	VkImageViewCreateInfo image_view_create_info = {};
 	image_view_create_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-	image_view_create_info.pNext = NULL;
+	image_view_create_info.pNext = nullptr;
 	image_view_create_info.flags = 0;
 	image_view_create_info.image = VK_NULL_HANDLE;
 	image_view_create_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
