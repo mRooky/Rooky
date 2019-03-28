@@ -21,13 +21,16 @@ public:
 	virtual ~VertexLayout(void) override;
 
 public:
-	void CreateInputState(void);
+	virtual void Create(void) override;
 
 public:
 	inline const Vulkan::VertexInputStateInfo* GetVertexInputStateInfo(void) const { return &mInputStateInfo; }
 
 public:
 	static VkFormat GetElementFormat(Render::ElementType type);
+
+protected:
+	void CreateInputState(void);
 
 protected:
 	Vulkan::VertexInputStateInfo mInputStateInfo = {};

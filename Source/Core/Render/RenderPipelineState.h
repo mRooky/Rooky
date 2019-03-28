@@ -26,11 +26,11 @@ public:
 	virtual ~PipelineState(void) override;
 
 public:
-	virtual void Initialize(void) = 0;
+	virtual void Create(void) = 0;
 
 public:
 	inline void SetLayout(PipelineLayout* layout) { mPipelineLayout = layout; }
-	inline void SetShader(Shader* shader) { mShaderState.SetShader(shader);  }
+	inline void SetShaderState(ShaderState* state) { mShaderState = state;  }
 	inline void SetVertexLayout(VertexLayout* layout) { mVertexLayout = layout; }
 	inline void SetRenderPass(uint32_t index, Pass* pass)
 	{
@@ -45,18 +45,18 @@ public:
 	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
 
 public:
-	inline const ShaderState* GetShaderState(void) const { return &mShaderState; }
+	inline const ShaderState* GetShaderState(void) const { return mShaderState; }
 	inline const PipelineCommon* GetCommon(void) const { return &mPipelineCommon; }
 
 protected:
 	bool mValid = false;
 	uint32_t mIndex = 0;
 	Pass* mRenderPass = nullptr;
+	ShaderState* mShaderState = nullptr;
 	VertexLayout* mVertexLayout = nullptr;
 	PipelineLayout* mPipelineLayout = nullptr;
 
 protected:
-	ShaderState mShaderState = {};
 	PipelineCommon mPipelineCommon = {};
 };
 

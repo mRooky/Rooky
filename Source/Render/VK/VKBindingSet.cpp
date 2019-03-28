@@ -34,10 +34,11 @@ BindingSet::BindingSet(Device* device):
 
 BindingSet::~BindingSet(void)
 {
-	std::cout << "VK Destroy Resource List" << std::endl;
+	mDescriptorSet = nullptr;
+	std::cout << "VK Destroy BindingSet" << std::endl;
 }
 
-void BindingSet::Update(void)
+void BindingSet::Create(void)
 {
 	UpdateDescriptorSet();
 	WriteDescriptorSet();

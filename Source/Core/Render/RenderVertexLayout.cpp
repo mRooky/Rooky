@@ -21,7 +21,7 @@ VertexLayout::~VertexLayout(void)
 	mElements.clear();
 }
 
-void VertexLayout::Create(const std::vector<Render::Element>& elements)
+void VertexLayout::SetElement(const std::vector<Render::Element>& elements)
 {
 	assert(elements.size() > 0);
 	assert(mElements.size() == 0);

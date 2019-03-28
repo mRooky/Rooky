@@ -21,8 +21,11 @@ public:
 	~GraphicsPipelineInfo(void);
 
 public:
-	void SetContent(PipelineLayout* layout, RenderPass* pass, uint32_t index);
 	VkPipelineShaderStageCreateInfo* CreateShaderStage(void);
+
+public:
+	void SetContent(PipelineLayout* layout);
+	void SetContent(RenderPass* pass, uint32_t index);
 
 public:
 	inline VertexInputStateInfo* GetVertexInputStateInfo(void) { return &mVertexInputStateInfo; }

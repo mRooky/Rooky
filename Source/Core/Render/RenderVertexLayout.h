@@ -21,10 +21,11 @@ public:
 	virtual ~VertexLayout(void);
 
 public:
-	void Create(const std::vector<Render::Element>& elements);
+	virtual void Create(void) = 0;
 
 public:
 	void AppendElement(const Element& element);
+	void SetElement(const std::vector<Render::Element>& elements);
 
 public:
 	inline const std::vector<Element>& GetElements(void) const { return mElements; }

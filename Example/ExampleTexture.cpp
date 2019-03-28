@@ -16,6 +16,14 @@
 #include "CoreBindingManager.h"
 #include "CorePipelineManager.h"
 
+#include "RenderImage.h"
+#include "RenderBuffer.h"
+#include "RenderBinding.hpp"
+#include "RenderBindingSet.h"
+#include "RenderBindingLayout.h"
+#include "RenderPipeline.h"
+#include "RenderPipelineState.h"
+
 #include "UtilString.h"
 
 #include <iostream>
@@ -42,12 +50,13 @@ void Texture::Initialize(void)
 	CreateRenderPath();
 	CreateRenderPass();
 	CreateFrameBuffer();
-	CreateShader();
 	CreateRenderThread(2);
 	CreateIndexBuffer();
 	CreateVertexBuffer();
 	CreateUniformBuffer();
 	CreateTexture("Resource/vulkan2.png");
+	CreateShader();
+	CreatePipeline();
 }
 
 void Texture::CreateTexture(const char* file)
@@ -70,8 +79,7 @@ void Texture::CreateTexture(const char* file)
 		mTexture = manager->CreateTexture2D(file_name.c_str(), extent, format);
 		mTexture->Update(0, 0, bitmap);
 
-		auto pass = mPath->GetRenderPass(0);
-		pass->SetTexture(mTexture);
+		mPass->SetTexture(mTexture);
 		SOIL_free_image_data(bitmap);
 	}
 	else
@@ -85,8 +93,7 @@ void Texture::CreateShader(void)
 	const char* vert_file = "Resource/texture.vert";
 	const char* frag_file = "Resource/texture.frag";
 
-	auto pass = mPath->GetRenderPass(0);
-	auto shader_state = pass->GetShaderState();
+	auto shader_state = mPass->GetShaderState();
 
 	auto manager = mSystem->GetPipelineManager();
 	auto vert_shader = manager->GetShader(vert_file);
@@ -97,7 +104,52 @@ void Texture::CreateShader(void)
 
 void Texture::CreatePipeline(void)
 {
+	auto pipeline_manager = mSystem->GetPipelineManager();
 
+	auto pipeline_state = pipeline_manager->CreatePipelineState();
+	pipeline_state->SetRenderPass(0, mPass->GetRenderPass());
+
+	assert(mVertex != nullptr);
+	auto vertex_layout = mVertex->GetLayout();
+	pipeline_state->SetVertexLayout(vertex_layout);
+
+	auto shader_state = mPass->GetShaderState();
+	pipeline_state->SetShaderState(shader_state);
+
+	auto binding_manager = mSystem->GetBindingManager();
+	auto binding_layout = binding_manager->CreateLayout();
+	{
+		auto binding_set = binding_manager->CreateSet();
+		{
+			assert(mUniform != nullptr);
+			auto resource = mUniform->GetBuffer();
+			Render::Binding binding = {};
+			auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
+			binding.SetResource(resource, shader_stage);
+			binding_set->AppendBinding(binding);
+		}
+
+		const size_t count = mPass->GetTextureCount();
+		assert(count > 0);
+		for (size_t index = 0; index < count; ++index)
+		{
+			auto texture = mPass->GetTexture(index);
+			auto resource = texture->GetImage();
+			Render::Binding binding = {};
+			auto shader_stage = Render::ShaderStage::SHADER_STAGE_FRAGMENT;
+			binding.SetResource(resource, shader_stage);
+			binding_set->AppendBinding(binding);
+		}
+		binding_set->Create();
+		binding_layout->AppendBindingSet(binding_set);
+	}
+	binding_layout->Create();
+	auto pipeline_layout = binding_layout->GetPipelineLayout();
+	pipeline_state->SetLayout(pipeline_layout);
+	pipeline_state->Create();
+
+	auto pipeline = pipeline_manager->CreatePipeline();
+	pipeline->Create(pipeline_state);
 }
 
 } /* namespace Example */

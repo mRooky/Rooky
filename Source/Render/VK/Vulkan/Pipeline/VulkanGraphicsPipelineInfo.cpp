@@ -35,22 +35,24 @@ GraphicsPipelineInfo::~GraphicsPipelineInfo(void)
 {
 }
 
-void GraphicsPipelineInfo::SetContent(PipelineLayout* layout, RenderPass* pass, uint32_t index)
-{
-	assert(pass != nullptr);
-	assert(layout != nullptr);
-
-	m_createInfo.layout = layout->GetHandle();
-	m_createInfo.renderPass = pass->GetHandle();
-	m_createInfo.subpass = index;
-}
-
 VkPipelineShaderStageCreateInfo* GraphicsPipelineInfo::CreateShaderStage(void)
 {
-	mShaderStages.push_back(VkPipelineShaderStageCreateInfo());
+	auto shader_stage_create_info = Vulkan::Pipeline::ShaderStageCreateInfo();
+	mShaderStages.push_back(shader_stage_create_info);
 	m_createInfo.pStages = mShaderStages.data();
 	m_createInfo.stageCount = mShaderStages.size();
 	return &mShaderStages.back();
+}
+
+void GraphicsPipelineInfo::SetContent(PipelineLayout* layout)
+{
+	m_createInfo.layout = layout->GetHandle();
+}
+
+void GraphicsPipelineInfo::SetContent(RenderPass* pass, uint32_t index)
+{
+	m_createInfo.subpass = index;
+	m_createInfo.renderPass = pass->GetHandle();
 }
 
 } /* namespace VK */

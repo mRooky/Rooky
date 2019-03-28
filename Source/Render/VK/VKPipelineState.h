@@ -22,10 +22,18 @@ public:
 	virtual ~PipelineState(void) override;
 
 public:
-	virtual void Initialize(void) override;
+	virtual void Create(void) override;
 
 public:
 	inline const Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) const { return &mGraphicsInfo; }
+
+protected:
+	void CreateVulkanLayoutInfo(void);
+	void CreateVulkanViewportInfo(void);
+	void CreateVulkanVertexInputInfo(void);
+	void CreateVulkanRenderPassInfo(void);
+	void CreateVulkanShaderStageInfo(void);
+	void CreateVulkanColorBlendInfo(void);
 
 protected:
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;

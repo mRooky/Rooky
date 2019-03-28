@@ -19,21 +19,32 @@ VertexLayout::~VertexLayout(void)
 {
 }
 
-void VertexLayout::CreateInputState(void)
+void VertexLayout::Create(void)
 {
 	assert(mElements.size() > 0);
-	uint32_t offset = 0;
-	for (auto& element : mElements)
-	{
-		uint32_t binding = element.GetBinding();
-		auto type = element.GetType();
-		VkVertexInputBindingDescription* input_binding = mInputStateInfo.GetBinding(binding);
-		input_binding->stride += Render::Element::GetTypeSize(type);
+	CreateInputState();
+}
 
-		uint32_t location = element.GetLocation();
-		VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
-		input_attribute->offset = offset;
-		input_attribute->format = VertexLayout::GetElementFormat(type);
+void VertexLayout::CreateInputState(void)
+{
+	if (false == mValid)
+	{
+		uint32_t offset = 0;
+		for (auto& element : mElements)
+		{
+			uint32_t binding = element.GetBinding();
+			auto type = element.GetType();
+			VkVertexInputBindingDescription* input_binding = mInputStateInfo.GetBinding(binding);
+			input_binding->stride += Render::Element::GetTypeSize(type);
+
+			uint32_t location = element.GetLocation();
+			VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
+			input_attribute->offset = offset;
+			input_attribute->format = VertexLayout::GetElementFormat(type);
+
+			offset += Render::Element::GetTypeSize(type);
+		}
+		mValid = true;
 	}
 }
 

@@ -28,6 +28,9 @@ public:
 	VkVertexInputAttributeDescription* GetAttribute(uint32_t binding, uint32_t location);
 
 public:
+	VertexInputStateInfo& operator=(const VertexInputStateInfo& other);
+
+public:
 	inline const VkPipelineVertexInputStateCreateInfo* CreateInfo(void) const { return &m_createInfo; }
 
 private:

@@ -41,7 +41,6 @@ public:
 
 public:
 	inline Render::Pass* GetRenderPass(void) const { return mRenderPass; }
-	inline Render::Pipeline* GetPipeline(void) const { return mPipeline; }
 	inline Render::ShaderState* GetShaderState(void) { return &mShaderState; }
 
 protected:
@@ -53,7 +52,6 @@ protected:
 protected:
 	Render::ShaderState mShaderState = {};
 	Render::Pass* mRenderPass = nullptr;
-	Render::Pipeline* mPipeline = nullptr;
 };
 
 } /* namespace Core */

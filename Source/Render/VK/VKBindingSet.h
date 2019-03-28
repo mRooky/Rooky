@@ -23,7 +23,7 @@ public:
 	virtual ~BindingSet(void) override;
 
 public:
-	virtual void Update(void) override;
+	virtual void Create(void) override;
 
 public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
@@ -39,9 +39,6 @@ public:
 protected:
 	void WriteDescriptorSet(void);
 	void UpdateDescriptorSet(void);
-
-protected:
-	Device* mDevice = nullptr;
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

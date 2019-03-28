@@ -38,6 +38,7 @@ public:
 	virtual void CreateUniformBuffer(void);
 
 protected:
+	Core::Pass* mPass = nullptr;
 	Core::Index* mIndex = nullptr;
 	Core::Vertex* mVertex = nullptr;
 	Core::Uniform* mUniform = nullptr;

@@ -63,8 +63,8 @@ void Buffer::CreateRenderPass(void)
 	Render::SwapChain* swap_chain = viewport->GetSwapChain();
 	auto format = swap_chain->GetFormat();
 	std::vector<Render::Format> formats = { format };
-	Core::Pass* pass = mPath->CreatePass();
-	pass->CreateRenderPass(formats);
+	mPass = mPath->CreatePass();
+	mPass->CreateRenderPass(formats);
 }
 
 void Buffer::CreateFrameBuffer(void)

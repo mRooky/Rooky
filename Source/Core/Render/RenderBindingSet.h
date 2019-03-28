@@ -24,7 +24,7 @@ public:
 	virtual ~BindingSet(void) override;
 
 public:
-	virtual void Update(void) = 0;
+	virtual void Create(void) = 0;
 
 public:
 	void SetBinding(uint32_t index, const Binding& binding);
@@ -34,6 +34,9 @@ public:
 
 public:
 	inline void AppendBinding(const Binding& binding) { mBindings.push_back(binding); }
+
+public:
+	inline size_t GetBindingCount(void) const { return mBindings.size(); }
 	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
 
 protected:

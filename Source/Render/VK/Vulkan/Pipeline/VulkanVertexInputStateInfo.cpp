@@ -8,6 +8,9 @@
 #include "VulkanVertexInputStateInfo.h"
 #include "VulkanPipeline.h"
 
+#include <cassert>
+#include <algorithm>
+
 namespace Vulkan
 {
 
@@ -18,6 +21,22 @@ VertexInputStateInfo::VertexInputStateInfo(void)
 
 VertexInputStateInfo::~VertexInputStateInfo(void)
 {
+}
+
+VertexInputStateInfo& VertexInputStateInfo::operator=(const VertexInputStateInfo& other)
+{
+	auto& bindings = other.m_vertexInputBindings;
+	m_vertexInputBindings.resize(bindings.size());
+	std::copy(bindings.begin(), bindings.end(), m_vertexInputBindings.begin());
+	m_createInfo.pVertexBindingDescriptions = m_vertexInputBindings.data();
+	m_createInfo.vertexBindingDescriptionCount = m_vertexInputBindings.size();
+
+	auto& attributes = other.m_vertexInputAttributes;
+	m_vertexInputAttributes.resize(attributes.size());
+	std::copy(attributes.begin(), attributes.end(), m_vertexInputAttributes.begin());
+	m_createInfo.pVertexAttributeDescriptions = m_vertexInputAttributes.data();
+	m_createInfo.vertexAttributeDescriptionCount = m_vertexInputAttributes.size();
+	return *this;
 }
 
 VkVertexInputBindingDescription* VertexInputStateInfo::GetBinding(uint32_t binding)

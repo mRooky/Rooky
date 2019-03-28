@@ -23,9 +23,9 @@ BindingLayout::BindingLayout(Device* device):
 
 BindingLayout::~BindingLayout(void)
 {
+	mBindingSets.clear();
 	delete mPipelineLayout;
 	mPipelineLayout = nullptr;
-	Util::Release(mBindingSets);
 }
 
 } /* namespace Render */
