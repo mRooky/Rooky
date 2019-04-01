@@ -39,9 +39,7 @@ Render::BindingSet* BindingManager::CreateSet(void)
 
 Render::BindingLayout* BindingManager::CreateLayout(void)
 {
-	auto device = mSystem->GetDevice();
-	auto factory = device->GetFactory();
-	Render::BindingLayout* layout = factory->CreateBindingLayout();
+	Render::BindingLayout* layout = new Render::BindingLayout;
 	mBindingLayouts.push_back(layout);
 	return layout;
 }

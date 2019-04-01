@@ -30,11 +30,13 @@ public:
 	Render::Shader* CreateShader(void);
 	Render::Pipeline* CreatePipeline(void);
 	Render::PipelineState* CreatePipelineState(void);
+	Render::PipelineLayout* CreatePipelineLayout(void);
 
 protected:
 	std::vector<Render::Shader*> mShaders;
 	std::vector<Render::Pipeline*> mPipelines;
 	std::vector<Render::PipelineState*> mPipelineStates;
+	std::vector<Render::PipelineLayout*> mPipelineLayouts;
 };
 
 } /* namespace Core */

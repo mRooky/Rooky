@@ -15,12 +15,12 @@
 #include "VKShader.h"
 #include "VKInline.h"
 #include "VKQueue.h"
-#include "VKBindingLayout.h"
 #include "VKDevice.h"
 #include "VKBuffer.h"
 #include "VKConvert.h"
 #include "VKPipelineState.h"
 #include "VKPipelineLayout.h"
+#include "VKBindingSet.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -32,6 +32,8 @@
 #include "VulkanSampler.h"
 #include "VulkanRenderPass.h"
 #include "VulkanFrameBuffer.h"
+
+#include "RenderBindingLayout.h"
 
 #include <cassert>
 
@@ -175,9 +177,26 @@ void CommandList::Draw(Render::DrawCall* draw)
 {
 	assert(mPipeline != nullptr);
 	assert(mBindingLayout != nullptr);
-	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
-	vk_layout->Binding(this);
-	assert(false);
+	const size_t count = mBindingLayout->GetSetCount();
+	assert(count > 0);
+	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
+	descriptor_sets.reserve(count);
+
+	for(size_t index = 0; index < count; ++index)
+	{
+		auto set = mBindingLayout->GetBindingSet(index);
+		assert(set->IsValid());
+		auto vk_set = static_cast<const BindingSet*>(set);
+		Vulkan::DescriptorSet* vulkan_set = vk_set->GetDescriptorSet();
+		descriptor_sets.push_back(vulkan_set);
+	}
+
+	std::vector<uint32_t> offset;
+
+	auto pipeline_layout = mPipeline->GetState()->GetLayout();
+	auto vk_pipeline_layout = static_cast<PipelineLayout*>(pipeline_layout);
+	auto vulkan_pipeline_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
+	mCommandBuffer->BindDescriptorSets(vulkan_pipeline_layout, descriptor_sets, offset);
 }
 
 void CommandList::EndPass(void)
@@ -208,8 +227,8 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
 {
 	assert(mBindingLayout != nullptr);
-	auto vk_layout = static_cast<BindingLayout*>(mBindingLayout);
-	assert(false && vk_layout);
+	mBindingLayout->SetBindingSet(slot, set);
+	assert(false);
 }
 
 void CommandList::SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset)

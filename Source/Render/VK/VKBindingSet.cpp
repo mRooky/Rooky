@@ -9,7 +9,6 @@
 #include "VKShader.h"
 #include "VKBuffer.h"
 #include "VKImage.h"
-#include "VKBindingLayout.h"
 #include "VKFactory.h"
 #include "VKDevice.h"
 #include "VKPool.h"

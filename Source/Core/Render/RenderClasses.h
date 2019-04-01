@@ -23,6 +23,7 @@ class Pass;
 class FrameBuffer;
 class Pipeline;
 class PipelineState;
+class PipelineLayout;
 class CommandPool;
 class CommandList;
 class Sampler;

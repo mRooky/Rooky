@@ -23,6 +23,7 @@
 #include "RenderBindingLayout.h"
 #include "RenderPipeline.h"
 #include "RenderPipelineState.h"
+#include "RenderPipelineLayout.h"
 #include "RenderSwapChain.h"
 #include "RenderCommandList.h"
 #include "RenderPass.h"
@@ -181,8 +182,8 @@ void Texture::CreatePipeline(void)
 		binding_set->Create();
 		binding_layout->AppendBindingSet(binding_set);
 	}
-	binding_layout->Create();
-	auto pipeline_layout = binding_layout->GetPipelineLayout();
+	auto pipeline_layout = pipeline_manager->CreatePipelineLayout();
+	pipeline_layout->Create(binding_layout);
 	pipeline_state->SetLayout(pipeline_layout);
 	pipeline_state->Create();
 

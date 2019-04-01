@@ -13,6 +13,7 @@
 #include "RenderShader.h"
 #include "RenderPipeline.h"
 #include "RenderPipelineState.h"
+#include "RenderPipelineLayout.h"
 
 #include "UtilRelease.h"
 #include "UtilString.h"
@@ -45,6 +46,11 @@ PipelineManager::~PipelineManager(void)
 	count = mPipelineStates.size();
 	Util::Release(mPipelineStates);
 	std::cout << count << " PipelineState(s) Released !" << std::endl;
+
+	std::cout << "Release PipelineLayout ..." << std::endl;
+	count = mPipelineLayouts.size();
+	Util::Release(mPipelineLayouts);
+	std::cout << count << " PipelineLayout(s) Released !" << std::endl;
 }
 
 Render::Shader* PipelineManager::GetShader(const char* file)
@@ -90,6 +96,15 @@ Render::PipelineState* PipelineManager::CreatePipelineState(void)
 	Render::PipelineState* state = factory->CreatePipelineState();
 	mPipelineStates.push_back(state);
 	return state;
+}
+
+Render::PipelineLayout* PipelineManager::CreatePipelineLayout(void)
+{
+	auto device = mSystem->GetDevice();
+	auto factory = device->GetFactory();
+	Render::PipelineLayout* layout = factory->CreatePipelineLayout();
+	mPipelineLayouts.push_back(layout);
+	return layout;
 }
 
 } /* namespace Core */

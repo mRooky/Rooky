@@ -15,12 +15,12 @@
 #include "VKShader.h"
 #include "VKPool.h"
 #include "VKBindingSet.h"
-#include "VKBindingLayout.h"
 #include "VKVertexLayout.h"
 #include "VKDevice.h"
 #include "VKSampler.h"
 #include "VKPipeline.h"
 #include "VKPipelineState.h"
+#include "VKPipelineLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanInline.h"
@@ -115,10 +115,10 @@ Render::BindingSet* Factory::CreateBindingSet(void)
 	return new BindingSet(vk_device);
 }
 
-Render::BindingLayout* Factory::CreateBindingLayout(void)
+Render::PipelineLayout* Factory::CreatePipelineLayout(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
-	return new BindingLayout(vk_device);
+	return new PipelineLayout(vk_device);
 }
 
 } /* namespace VK */

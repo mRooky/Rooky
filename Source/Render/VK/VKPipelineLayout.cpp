@@ -5,13 +5,16 @@
  *      Author: rookyma
  */
 
-#include "VKBindingLayout.h"
 #include "VKDevice.h"
 #include "VKPipelineLayout.h"
+#include "VKBindingSet.h"
+
 #include "VulkanInline.h"
 #include "VulkanPipelineLayout.h"
 #include "VulkanDescriptorSet.h"
 #include "VulkanDescriptorSetLayout.h"
+
+#include "RenderBindingLayout.h"
 
 #include <cassert>
 
@@ -38,23 +41,24 @@ void PipelineLayout::Create(Render::BindingLayout* layout)
 void PipelineLayout::CreateVulkanPipelineLayout(void)
 {
 	assert(mPipelineLayout == nullptr);
-	const size_t count = mBindingLayout->GetStateCount();
+	const size_t count = mBindingLayout->GetSetCount();
 	assert(count > 0);
-	std::vector<Vulkan::DescriptorSetLayout*> descriptor_layouts;
-	descriptor_layouts.reserve(count);
+	mDescriptorSetLayouts.clear();
+	mDescriptorSetLayouts.reserve(count);
+
 	for (size_t index = 0; index < count; ++index)
 	{
 		auto set = mBindingLayout->GetBindingSet(index);
 		assert(set->IsValid());
 		auto vk_set = static_cast<const BindingSet*>(set);
 		Vulkan::DescriptorSetLayout* layout = vk_set->GetDescriptorSet()->GetLayout();
-		descriptor_layouts.push_back(layout);
+		mDescriptorSetLayouts.push_back(layout);
 	}
 
-	auto device = mBindingLayout->GetDevice();
-	Vulkan::Device* vulkan_device = static_cast<Device*>(device)->GetVulkanDevice();
+	Device* vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
 	mPipelineLayout = Vulkan::PipelineLayout::New(vulkan_device);
-	mPipelineLayout->Create(descriptor_layouts, mConstantRanges.size(), mConstantRanges.data());
+	mPipelineLayout->Create(mDescriptorSetLayouts, mConstantRanges.size(), mConstantRanges.data());
 }
 
 } /* namespace VK */

@@ -7,7 +7,6 @@
 
 #include "RenderBindingLayout.h"
 #include "RenderBindingSet.h"
-#include "RenderPipelineLayout.h"
 #include "UtilRelease.h"
 #include <cassert>
 #include <algorithm>
@@ -15,8 +14,7 @@
 namespace Render
 {
 
-BindingLayout::BindingLayout(Device* device):
-		Object(device)
+BindingLayout::BindingLayout(void)
 {
 	mBindingSets.reserve(MAX_BINDING_PER_SET);
 }
@@ -24,8 +22,25 @@ BindingLayout::BindingLayout(Device* device):
 BindingLayout::~BindingLayout(void)
 {
 	mBindingSets.clear();
-	delete mPipelineLayout;
-	mPipelineLayout = nullptr;
+}
+
+void BindingLayout::AppendBindingSet(const Render::BindingSet* set)
+{
+	assert(mBindingSets.size() < MAX_BINDING_PER_SET - 1);
+	assert(set->IsValid());
+	mBindingSets.push_back(set);
+}
+
+void BindingLayout::SetBindingSet(size_t index, const Render::BindingSet* set)
+{
+	assert(index < MAX_BINDING_PER_SET);
+	assert(index < mBindingSets.size());
+	if (true)
+	{
+		// Set Check
+		assert(false);
+	}
+	mBindingSets.at(index) = set;
 }
 
 } /* namespace Render */
