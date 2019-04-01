@@ -11,8 +11,8 @@
 namespace Render
 {
 
-PipelineLayout::PipelineLayout(BindingLayout* layout):
-		mBindingLayout(layout)
+PipelineLayout::PipelineLayout(Device* device):
+		Object(device)
 {
 }
 

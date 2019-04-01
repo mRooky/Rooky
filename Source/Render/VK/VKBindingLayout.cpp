@@ -48,8 +48,9 @@ void BindingLayout::Create(void)
 		descriptor_layouts.push_back(layout);
 	}
 
-	mPipelineLayout = new PipelineLayout(this);
-	static_cast<PipelineLayout*>(mPipelineLayout)->Create(descriptor_layouts);
+	auto vk_device = static_cast<Device*>(mDevice);
+	mPipelineLayout = new PipelineLayout(vk_device);
+	static_cast<PipelineLayout*>(mPipelineLayout)->Create(this);
 }
 
 void BindingLayout::AppendBindingSet(const Render::BindingSet* set)

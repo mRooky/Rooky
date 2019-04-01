@@ -14,18 +14,19 @@
 
 namespace VK
 {
+class Device;
 class BindingLayout;
 class PipelineLayout: public Render::PipelineLayout
 {
 public:
-	explicit PipelineLayout(BindingLayout* layout);
+	explicit PipelineLayout(Device* device);
 	virtual ~PipelineLayout(void) override;
 
 public:
-	virtual void Create(void) override;
+	virtual void Create(Render::BindingLayout* layout) override;
 
 public:
-	void Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts);
+	void CreateVulkanPipelineLayout(void);
 
 public:
 	inline Vulkan::PipelineLayout* GetVulkanPipelineLayout(void) const { return mPipelineLayout; }

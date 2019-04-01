@@ -13,14 +13,14 @@
 namespace Render
 {
 class BindingLayout;
-class PipelineLayout
+class PipelineLayout : public Object
 {
 public:
-	explicit PipelineLayout(BindingLayout* layout);
+	explicit PipelineLayout(Device* device);
 	virtual ~PipelineLayout(void);
 
 public:
-	virtual void Create(void) = 0;
+	virtual void Create(BindingLayout* layout) = 0;
 
 public:
 	inline BindingLayout* GetBindingLayout(void) const { return mBindingLayout; }
