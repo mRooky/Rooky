@@ -22,13 +22,13 @@ bool PipelineState::operator==(const PipelineState& other) const
 {
 	return mIndex == other.mIndex
 	&& mRenderPass == other.mRenderPass
+	&& mBlendState == other.mBlendState
 	&& mShaderState == other.mShaderState
 	&& mVertexLayout == other.mVertexLayout
 	&& mPipelineLayout == other.mPipelineLayout
 	&& mMultisample == other.mMultisample
 	&& mInputAssembly == other.mInputAssembly
-	&& mRasterization == other.mRasterization
-	&& mRenderBlendState == other.mRenderBlendState;
+	&& mRasterization == other.mRasterization;
 }
 
 } /* namespace Core */

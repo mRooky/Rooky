@@ -42,12 +42,14 @@ public:
 public:
 	inline uint32_t GetSubIndex(void) const { return mIndex; }
 	inline Pass* GetRenderPass(void) const { return mRenderPass; }
+	inline BlendState* GetBlendState(void) { return &mBlendState; }
 	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
 	inline VertexLayout* GetVertexLayout(void) const { return mVertexLayout; }
 
 public:
-	inline void SetShaderState(const ShaderState& state) { mShaderState = state;  }
+	inline void SetShaderState(const ShaderState& state) { mShaderState = state; }
 	inline void SetMultisample(const Multisample& multi) { mMultisample = multi; }
+	inline void SetDepthStencil(const DepthStencil& depth) { mDepthStencil = depth; }
 	inline void SetRasterization(const Rasterization& raster) { mRasterization = raster; }
 	inline void SetInputAssembly(const InputAssembly& assembly) { mInputAssembly = assembly; }
 
@@ -65,7 +67,7 @@ protected:
 	PipelineLayout* mPipelineLayout = nullptr;
 
 protected:
-	BlendState mRenderBlendState = {};
+	BlendState mBlendState = {};
 
 protected:
 	ShaderState mShaderState = {};
