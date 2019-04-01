@@ -10,6 +10,7 @@
 
 #include "RenderObject.h"
 #include "RenderFormat.h"
+#include "State/RenderColorBlend.h"
 
 #include "PlatformWindow.h"
 
@@ -36,10 +37,12 @@ public:
 
 public:
 	inline Format GetFormat(void) const { return mFormat; }
+	inline ColorBlend* GetColorBlend(void) { return &mColorBlend; }
 	inline size_t GetRenderBufferCount(void) const { return mRenderBuffers.size(); }
 	inline Image* GetRenderBuffer(size_t index) const { return mRenderBuffers.at(index); }
 
 protected:
+	ColorBlend mColorBlend = {};
 	std::vector<Image*> mRenderBuffers;
 	Format mFormat = Format::FORMAT_UNDEFINED;
 };

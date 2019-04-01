@@ -23,6 +23,9 @@
 #include "RenderBindingLayout.h"
 #include "RenderPipeline.h"
 #include "RenderPipelineState.h"
+#include "RenderSwapChain.h"
+#include "RenderCommandList.h"
+#include "RenderPass.h"
 
 #include "UtilString.h"
 
@@ -59,6 +62,41 @@ void Texture::Initialize(void)
 	CreatePipeline();
 }
 
+void Texture::RecordCommands(void)
+{
+	auto pass = mPath->GetRenderPass(0);
+
+	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::Image* attachment = swap_chain->GetRenderBuffer(0);
+
+	auto& extent = attachment->GetExtent();
+
+	Render::Extent2Di extent2 = { extent.width, extent.height };
+	Render::Offset2Di offset2 = { 0, 0};
+	Render::Rect2Di area = { offset2, extent2 };
+	Render::Viewport viewport = Render::Viewport(extent);
+	Render::Rect2Di scissor = area;
+
+	const size_t count = mThread->GetCommandListCount();
+	for (uint32_t i = 0; i < count; ++i)
+	{
+		auto render_pass = pass->GetRenderPass();
+		auto frame_buffer = render_pass->GetFrameBuffer(i);
+		auto command_list = mThread->GetCommandList(i);
+		command_list->Begin();
+		command_list->BeginPass(render_pass, frame_buffer, area);
+		command_list->SetViewport(0, 1, &viewport);
+		command_list->SetScissor(0, 1, &scissor);
+
+		command_list->SetVertex(mVertex->GetBuffer(), 0, 0);
+		command_list->SetIndex(mIndex->GetBuffer(), 0, mIndex->GetType());
+
+		command_list->EndPass();
+		command_list->End();
+		command_list->Submit(0u);
+	}
+}
+
 void Texture::CreateTexture(const char* file)
 {
 	int width, height, channels;
@@ -73,7 +111,7 @@ void Texture::CreateTexture(const char* file)
 
 		std::string file_path = file;
 		std::string file_name = Util::GetFileName(file);
-		Render::Extent3D extent = { width, height, 1 };
+		Render::Extent3Di extent = { width, height, 1 };
 
 		auto manager = mSystem->GetTextureManager();
 		mTexture = manager->CreateTexture2D(file_name.c_str(), extent, format);

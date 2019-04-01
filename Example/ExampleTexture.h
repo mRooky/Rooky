@@ -23,6 +23,7 @@ public:
 
 public:
 	virtual void Initialize(void) override;
+	virtual void RecordCommands(void) override;
 
 public:
 	virtual void CreateTexture(const char* file);

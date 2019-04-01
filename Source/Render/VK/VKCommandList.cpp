@@ -19,6 +19,8 @@
 #include "VKDevice.h"
 #include "VKBuffer.h"
 #include "VKConvert.h"
+#include "VKPipelineState.h"
+#include "VKPipelineLayout.h"
 
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
@@ -97,7 +99,7 @@ void CommandList::Begin(void)
 	mCommandBuffer->Begin(VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
 }
 
-void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2D& area)
+void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2Di& area)
 {
 	assert(pass != nullptr);
 	assert(mCommandBuffer != nullptr);
@@ -151,7 +153,7 @@ void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::View
 	mCommandBuffer->SetViewport(first, count, vulkan_viewports.data());
 }
 
-void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects)
+void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2Di* rects)
 {
 	assert(mCommandBuffer != nullptr);
 	std::vector<VkRect2D> vulkan_scissors;
@@ -198,17 +200,9 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 	Pipeline* vk_pipeline = static_cast<Pipeline*>(pipeline);
 	auto vulkan_pipeline = vk_pipeline->GetVulkanPipeline();
 	mCommandBuffer->BindPipeline(vulkan_pipeline);
-}
-
-void CommandList::SetBindingLayout(Render::BindingLayout* layout)
-{
-	assert(mPipeline != nullptr);
-	auto state = mPipeline->GetState();
-	assert(state->GetLayout() == layout->GetPipelineLayout());
-	if(state->GetLayout() == layout->GetPipelineLayout())
-	{
-		mBindingLayout = layout;
-	}
+	auto pipeline_state = mPipeline->GetState();
+	auto pipeline_layout = pipeline_state->GetLayout();
+	mBindingLayout = pipeline_layout->GetBindingLayout();
 }
 
 void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)

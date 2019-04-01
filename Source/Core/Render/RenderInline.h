@@ -20,7 +20,7 @@ static inline uint32_t Bit(uint32_t pos)
 	return 1u << pos;
 }
 
-static inline ImageLayout CreateImageLayout(const Render::Extent3D& extent, Render::Format format)
+static inline ImageLayout CreateImageLayout(const Render::Extent3Di& extent, Render::Format format)
 {
 	Render::ImageLayout image_layout = {};
 	image_layout.extent = extent;

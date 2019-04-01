@@ -24,17 +24,17 @@ public:
 	virtual ~TextureManager(void) override;
 
 public:
-	Texture* CreateTexture1D(const char* name, const Render::Extent3D& extent, Render::Format format);
-	Texture* CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format);
-	Texture* CreateTexture3D(const char* name, const Render::Extent3D& extent, Render::Format format);
+	Texture* CreateTexture1D(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTexture3D(const char* name, const Render::Extent3Di& extent, Render::Format format);
 
 public:
-	Texture* CreateTexture1DArray(const char* name, const Render::Extent3D& extent, Render::Format format);
-	Texture* CreateTexture2DArray(const char* name, const Render::Extent3D& extent, Render::Format format);
+	Texture* CreateTexture1DArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTexture2DArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
 
 public:
-	Texture* CreateTextureCube(const char* name, const Render::Extent3D& extent, Render::Format format);
-	Texture* CreateTextureCubeArray(const char* name, const Render::Extent3D& extent, Render::Format format);
+	Texture* CreateTextureCube(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTextureCubeArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
 
 public:
 	Texture* GetTexture(const char* name);

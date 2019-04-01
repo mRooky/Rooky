@@ -22,6 +22,9 @@ public:
 	virtual ~PipelineLayout(void) override;
 
 public:
+	virtual void Create(void) override;
+
+public:
 	void Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts);
 
 public:

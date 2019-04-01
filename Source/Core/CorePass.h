@@ -11,6 +11,7 @@
 #include "RenderClasses.h"
 #include "RenderFormat.h"
 #include "RenderShaderState.h"
+#include "State/RenderDepthStencil.h"
 #include <vector>
 
 namespace Core
@@ -42,6 +43,7 @@ public:
 public:
 	inline Render::Pass* GetRenderPass(void) const { return mRenderPass; }
 	inline Render::ShaderState* GetShaderState(void) { return &mShaderState; }
+	inline Render::DepthStencil* GetDepthStencil(void) { return &mDepthStencil; }
 
 protected:
 	Path* mParent = nullptr;
@@ -50,8 +52,9 @@ protected:
 	std::vector<Texture*> mTextures;
 
 protected:
-	Render::ShaderState mShaderState = {};
 	Render::Pass* mRenderPass = nullptr;
+	Render::ShaderState mShaderState = {};
+	Render::DepthStencil mDepthStencil = {};
 };
 
 } /* namespace Core */

@@ -92,11 +92,11 @@ void Buffer::RecordCommands(void)
 
 	auto& extent = attachment->GetExtent();
 
-	Render::Extent2D extent2 = { extent.width, extent.height };
-	Render::Offset2D offset2 = {0.0f, 0.0f};
-	Render::Rect2D area = { offset2, extent2 };
+	Render::Extent2Di extent2 = { extent.width, extent.height };
+	Render::Offset2Di offset2 = { 0, 0};
+	Render::Rect2Di area = { offset2, extent2 };
 	Render::Viewport viewport = Render::Viewport(extent);
-	Render::Rect2D scissor = area;
+	Render::Rect2Di scissor = area;
 
 	const size_t count = mThread->GetCommandListCount();
 	for (uint32_t i = 0; i < count; ++i)

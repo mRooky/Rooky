@@ -39,6 +39,8 @@ public:
 
 protected:
 	std::vector<ColorBlend> mColorBlends = {};
+
+protected:
 	Multisample mMultisample = {};
 	DepthStencil mDepthStencil = {};
 	InputAssembly mInputAssembly = {};

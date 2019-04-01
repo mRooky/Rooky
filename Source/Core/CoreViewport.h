@@ -25,7 +25,7 @@ public:
 
 public:
 	void Create(Platform::Window* window);
-	void CreateDepthStencil(const Render::Extent2D& extent);
+	void CreateDepthStencil(const Render::Extent2Di& extent);
 
 public:
 	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }

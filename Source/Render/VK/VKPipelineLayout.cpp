@@ -27,6 +27,11 @@ PipelineLayout::~PipelineLayout(void)
 	Vulkan::Release(mPipelineLayout);
 }
 
+void PipelineLayout::Create(void)
+{
+	assert(false);
+}
+
 void PipelineLayout::Create(const std::vector<Vulkan::DescriptorSetLayout*>& layouts)
 {
 	auto device = mBindingLayout->GetDevice();

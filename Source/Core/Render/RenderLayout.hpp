@@ -24,9 +24,9 @@ public:
 
 public:
 	uint32_t array = 1;
-	Extent3D extent = {};
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
+	Extent3Di extent = {};
 
 public:
 	uint32_t mClearColor = 0;

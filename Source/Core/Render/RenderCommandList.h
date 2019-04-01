@@ -32,14 +32,13 @@ public:
 
 public:
 	virtual void Begin(void) = 0;
-	virtual void BeginPass(Pass* pass, FrameBuffer* frame, const Rect2D& area) = 0;
+	virtual void BeginPass(Pass* pass, FrameBuffer* frame, const Rect2Di& area) = 0;
 	// Fix Setup
 	virtual void SetViewport(uint32_t first, uint32_t count, const Viewport* viewports) = 0;
-	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2D* rects) = 0;
+	virtual void SetScissor(uint32_t first, uint32_t count, const Rect2Di* rects) = 0;
 	// End Fix Setup
 	// Resource Setup
 	virtual void SetPipeline(Pipeline* pipeline) = 0;
-	virtual void SetBindingLayout(BindingLayout* layout) = 0;
 	virtual void SetBindingSet(uint32_t slot, BindingSet* set) = 0;
 	virtual void SetVertex(Buffer* buffer, uint32_t binding, size_t offset) = 0;
 	virtual void SetIndex(Buffer* buffer, size_t offset, IndexType type) = 0;

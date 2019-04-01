@@ -20,7 +20,10 @@ public:
 	virtual ~PipelineLayout(void);
 
 public:
-	inline BindingLayout* GetResourceLayout(void) const { return mBindingLayout; }
+	virtual void Create(void) = 0;
+
+public:
+	inline BindingLayout* GetBindingLayout(void) const { return mBindingLayout; }
 
 protected:
 	BindingLayout* mBindingLayout = nullptr;

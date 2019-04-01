@@ -29,6 +29,9 @@ public:
 	virtual void Create(void) = 0;
 
 public:
+	bool operator==(const PipelineState& other) const;
+
+public:
 	inline void SetLayout(PipelineLayout* layout) { mPipelineLayout = layout; }
 	inline void SetShaderState(ShaderState* state) { mShaderState = state;  }
 	inline void SetVertexLayout(VertexLayout* layout) { mVertexLayout = layout; }

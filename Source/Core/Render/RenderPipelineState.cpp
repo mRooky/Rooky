@@ -19,4 +19,10 @@ PipelineState::~PipelineState(void)
 {
 }
 
+bool PipelineState::operator==(const PipelineState& other) const
+{
+
+	return true;
+}
+
 } /* namespace Core */

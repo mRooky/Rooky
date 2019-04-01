@@ -10,6 +10,7 @@
 
 #include "RenderClasses.h"
 #include "RenderLayout.hpp"
+#include "State/RenderColorBlend.h"
 
 namespace Core
 {
@@ -33,6 +34,9 @@ public:
 protected:
 	Render::Image* mImage = nullptr;
 	TextureManager* mManager = nullptr;
+
+protected:
+	Render::ColorBlend mColorBlend = {};
 };
 
 } /* namespace Core */

@@ -27,7 +27,7 @@ public:
 	T height = static_cast<T>(0);
 };
 
-typedef Extent2_t<int32_t> Extent2D;
+typedef Extent2_t<int32_t> Extent2Di;
 
 template<typename T>
 class Extent3_t
@@ -44,7 +44,7 @@ public:
 	T depth = static_cast<T>(0);
 };
 
-typedef Extent3_t<int32_t> Extent3D;
+typedef Extent3_t<int32_t> Extent3Di;
 
 }
 

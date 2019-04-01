@@ -42,13 +42,13 @@ TextureManager::~TextureManager(void)
 	std::cout << count << " Samplers Released !" << std::endl;
 }
 
-Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	Texture* texture = GetTexture(name);
 	if (texture == nullptr)
@@ -70,31 +70,31 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3
 	return texture;
 }
 
-Texture* TextureManager::CreateTexture3D(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTexture3D(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture1DArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTexture1DArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture2DArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTexture2DArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTextureCube(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTextureCube(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTextureCubeArray(const char* name, const Render::Extent3D& extent, Render::Format format)
+Texture* TextureManager::CreateTextureCubeArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	assert(false);
 	return nullptr;

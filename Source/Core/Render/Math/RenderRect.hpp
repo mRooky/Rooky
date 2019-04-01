@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATH_RENDERRECT_HPP_
 #define SOURCE_CORE_MATH_RENDERRECT_HPP_
 
-#include <RenderExtent.hpp>
-#include <RenderVector.hpp>
+#include "RenderExtent.hpp"
+#include "RenderVector.hpp"
 
 namespace Render
 {
@@ -41,7 +41,7 @@ public:
     Extent2_t<I> extent = {};
 };
 
-typedef Rect2D_t<float, int32_t> Rect2D;
+typedef Rect2D_t<int32_t, int32_t> Rect2Di;
 
 }
 

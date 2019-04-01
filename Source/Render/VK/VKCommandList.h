@@ -28,14 +28,13 @@ public:
 public:
 	virtual void Begin(void) override;
 	// Draw Commands
-	virtual void BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2D& area) override;
+	virtual void BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2Di& area) override;
 	// Fix Setup
 	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
-	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2D* rects) override;
+	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2Di* rects) override;
 	// End Fix Setup
 	// Resource Setting
 	virtual void SetPipeline(Render::Pipeline* pipeline) override;
-	virtual void SetBindingLayout(Render::BindingLayout* layout) override;
 	virtual void SetBindingSet(uint32_t slot, Render::BindingSet* set) override;
 	virtual void SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset) override;
 	virtual void SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexType type) override;

@@ -21,8 +21,8 @@ public:
 	T y = static_cast<T>(0);
 };
 
-typedef Vector2_t<float> Offset2D;
-typedef Vector2_t<int32_t> Point2;
+typedef Vector2_t<float> Offset2Df;
+typedef Vector2_t<int32_t> Point2, Offset2Di;
 
 template<typename T>
 class Vector3_t

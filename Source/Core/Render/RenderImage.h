@@ -33,7 +33,7 @@ public:
 	inline Format GetFormat(void) const { return mLayout.format; }
 	inline SwapChain* GetSwapChain(void) const { return mSwapChain; }
 	inline void SetClearColor(uint32_t color) { mClearColor.Set(color); }
-	inline const Extent3D& GetExtent(void) const { return mLayout.extent; }
+	inline const Extent3Di& GetExtent(void) const { return mLayout.extent; }
 	inline const ImageLayout& GetLayout(void) const { return mLayout; }
 
 public:
