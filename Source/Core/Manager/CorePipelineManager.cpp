@@ -71,6 +71,21 @@ Render::Shader* PipelineManager::GetShader(const char* file)
 	return shader;
 }
 
+Render::Pipeline* PipelineManager::GetPipeline(Render::PipelineState* state)
+{
+	for (auto pipeline : mPipelines)
+	{
+		auto curr = pipeline->GetState();
+		if (curr == state)
+		{
+			return pipeline;
+		}
+	}
+	Render::Pipeline* pipeline = CreatePipeline();
+	pipeline->Create(state);
+	return pipeline;
+}
+
 Render::Shader* PipelineManager::CreateShader(void)
 {
 	auto device = mSystem->GetDevice();
@@ -91,9 +106,7 @@ Render::Pipeline* PipelineManager::CreatePipeline(void)
 
 Render::PipelineState* PipelineManager::CreatePipelineState(void)
 {
-	auto device = mSystem->GetDevice();
-	auto factory = device->GetFactory();
-	Render::PipelineState* state = factory->CreatePipelineState();
+	Render::PipelineState* state = new Render::PipelineState;
 	mPipelineStates.push_back(state);
 	return state;
 }

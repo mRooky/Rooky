@@ -97,12 +97,6 @@ Render::Sampler* Factory::CreateSampler(void)
 	return new Sampler(vk_device);
 }
 
-Render::PipelineState* Factory::CreatePipelineState(void)
-{
-	auto vk_device = static_cast<Device*>(mDevice);
-	return new PipelineState(vk_device);
-}
-
 Render::Pipeline* Factory::CreatePipeline(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);

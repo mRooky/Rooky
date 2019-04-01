@@ -25,6 +25,7 @@ public:
 
 public:
 	Render::Shader* GetShader(const char* file);
+	Render::Pipeline* GetPipeline(Render::PipelineState* state);
 
 public:
 	Render::Shader* CreateShader(void);

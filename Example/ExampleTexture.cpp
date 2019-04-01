@@ -68,13 +68,10 @@ void Texture::RecordCommands(void)
 	auto pass = mPath->GetRenderPass(0);
 
 	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
-	Render::Image* attachment = swap_chain->GetRenderBuffer(0);
 
-	auto& extent = attachment->GetExtent();
-
-	Render::Extent2Di extent2 = { extent.width, extent.height };
-	Render::Offset2Di offset2 = { 0, 0};
-	Render::Rect2Di area = { offset2, extent2 };
+	Render::Extent2Di extent = swap_chain->GetExtent();
+	Render::Offset2Di offset = { 0, 0 };
+	Render::Rect2Di area = { offset, extent };
 	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2Di scissor = area;
 
@@ -185,10 +182,9 @@ void Texture::CreatePipeline(void)
 	auto pipeline_layout = pipeline_manager->CreatePipelineLayout();
 	pipeline_layout->Create(binding_layout);
 	pipeline_state->SetLayout(pipeline_layout);
-	pipeline_state->Create();
 
-	auto pipeline = pipeline_manager->CreatePipeline();
-	pipeline->Create(pipeline_state);
+	auto pipeline = pipeline_manager->GetPipeline(pipeline_state);
+	assert(pipeline);
 }
 
 } /* namespace Example */

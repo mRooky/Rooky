@@ -9,6 +9,7 @@
 #define SOURCE_RENDER_VK_VKPIPELINE_H_
 
 #include "RenderPipeline.h"
+#include "VKPipelineState.h"
 #include "VKRender.h"
 
 namespace VK

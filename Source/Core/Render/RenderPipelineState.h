@@ -16,17 +16,13 @@
 namespace Render
 {
 class Pass;
-class PipelineCommon;
 class PipelineLayout;
 class VertexLayout;
-class PipelineState : public Object
+class PipelineState
 {
 public:
-	PipelineState(Device* device);
-	virtual ~PipelineState(void) override;
-
-public:
-	virtual void Create(void) = 0;
+	PipelineState(void);
+	~PipelineState(void);
 
 public:
 	bool operator==(const PipelineState& other) const;
@@ -42,17 +38,16 @@ public:
 	}
 
 public:
-	inline bool IsValid(void) const { return mValid; }
 	inline uint32_t GetSubIndex(void) const { return mIndex; }
 	inline Pass* GetRenderPass(void) const { return mRenderPass; }
 	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
+	inline VertexLayout* GetVertexLayout(void) const { return mVertexLayout; }
 
 public:
 	inline const ShaderState* GetShaderState(void) const { return mShaderState; }
 	inline const PipelineCommon* GetCommon(void) const { return &mPipelineCommon; }
 
 protected:
-	bool mValid = false;
 	uint32_t mIndex = 0;
 	Pass* mRenderPass = nullptr;
 	ShaderState* mShaderState = nullptr;

@@ -8,23 +8,23 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 #define SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 
-#include "RenderPipelineState.h"
-#include "VKRender.h"
+#include "RenderClasses.h"
 #include "Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {
 class Device;
-class PipelineState : public Render::PipelineState
+class PipelineState
 {
 public:
-	explicit PipelineState(Device* device);
-	virtual ~PipelineState(void) override;
+	PipelineState(void);
+	~PipelineState(void);
 
 public:
-	virtual void Create(void) override;
+	void Create(const Render::PipelineState* state);
 
 public:
+	inline bool IsValid(void) const { return mValid; }
 	inline const Vulkan::GraphicsPipelineInfo* GetGraphicsInfo(void) const { return &mGraphicsInfo; }
 
 protected:
@@ -36,7 +36,9 @@ protected:
 	void CreateVulkanColorBlendInfo(void);
 
 protected:
+	bool mValid = false;
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;
+	const Render::PipelineState* mState = nullptr;
 };
 
 }

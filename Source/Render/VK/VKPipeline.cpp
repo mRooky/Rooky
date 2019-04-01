@@ -38,9 +38,10 @@ void Pipeline::CreateVulkanPipeline(void)
 {
 	assert(mPipeline == nullptr);
 	assert(mPipelineState != nullptr);
-	assert(mPipelineState->IsValid());
-	auto vk_pipeline_state = static_cast<PipelineState*>(mPipelineState);
-	auto pipeline_create_info = vk_pipeline_state->GetGraphicsInfo();
+
+	PipelineState vk_pipeline_state = {};
+	vk_pipeline_state.Create(mPipelineState);
+	auto pipeline_create_info = vk_pipeline_state.GetGraphicsInfo();
 
 	auto vk_device = static_cast<Device*>(mDevice);
 	auto vulkan_device = vk_device->GetVulkanDevice();

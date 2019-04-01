@@ -32,7 +32,6 @@ public:
 	virtual CommandPool* CreateCommandPool(void) = 0;
 	virtual VertexLayout* CreateVertexLayout(void) = 0;
 	virtual Sampler* CreateSampler(void) = 0;
-	virtual PipelineState* CreatePipelineState(void) = 0;
 	virtual PipelineLayout* CreatePipelineLayout(void) = 0;
 	virtual Pipeline* CreatePipeline(void) = 0;
 	virtual BindingSet* CreateBindingSet(void) = 0;

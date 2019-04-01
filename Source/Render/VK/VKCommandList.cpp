@@ -18,7 +18,6 @@
 #include "VKDevice.h"
 #include "VKBuffer.h"
 #include "VKConvert.h"
-#include "VKPipelineState.h"
 #include "VKPipelineLayout.h"
 #include "VKBindingSet.h"
 
@@ -34,6 +33,7 @@
 #include "VulkanFrameBuffer.h"
 
 #include "RenderBindingLayout.h"
+#include "RenderPipelineState.h"
 
 #include <cassert>
 
