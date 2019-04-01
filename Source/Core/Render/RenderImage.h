@@ -10,6 +10,7 @@
 
 #include "RenderMemory.h"
 #include "RenderLayout.hpp"
+#include "RenderColorBlend.h"
 
 namespace Render
 {
@@ -35,12 +36,15 @@ public:
 	inline const Extent3Di& GetExtent(void) const { return mLayout.extent; }
 	inline const ImageLayout& GetLayout(void) const { return mLayout; }
 
+	inline ColorBlend* GetColorBlend(void) { return &mColorBlend; }
+
 public:
 	static bool IsDepthStencilFormat(Format format);
 
 protected:
 	Color mClearColor = {};
 	ImageLayout mLayout = {};
+	ColorBlend mColorBlend = {};
 };
 
 } /* namespace Render */

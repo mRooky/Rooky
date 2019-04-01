@@ -25,7 +25,8 @@ bool PipelineState::operator==(const PipelineState& other) const
 	&& mShaderState == other.mShaderState
 	&& mVertexLayout == other.mVertexLayout
 	&& mPipelineLayout == other.mPipelineLayout
-	&& mPipelineCommon == other.mPipelineCommon;
+	&& mPipelineCommon == other.mPipelineCommon
+	&& mRenderBlendState == other.mRenderBlendState;
 }
 
 } /* namespace Core */
