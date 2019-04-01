@@ -18,4 +18,9 @@ PipelineCommon::~PipelineCommon(void)
 {
 }
 
+bool PipelineCommon::operator==(const PipelineCommon& other) const
+{
+	return true;
+}
+
 } /* namespace Render */

@@ -20,6 +20,19 @@ public:
 	~ColorBlend(void) = default;
 
 public:
+	inline bool operator==(const ColorBlend& other) const
+	{
+		return blendEnable == other.blendEnable
+		&& srcColorBlendFactor == other.srcColorBlendFactor
+		&& dstColorBlendFactor == other.dstColorBlendFactor
+		&& colorBlendOp == other.colorBlendOp
+		&& srcAlphaBlendFactor == other.srcAlphaBlendFactor
+		&& dstAlphaBlendFactor == other.dstAlphaBlendFactor
+		&& alphaBlendOp == other.alphaBlendOp
+		&& colorWriteMask == other.colorWriteMask;
+	}
+
+public:
 	bool blendEnable = false;
 	BlendFactor srcColorBlendFactor = BlendFactor::BLEND_FACTOR_SRC_COLOR;
 	BlendFactor dstColorBlendFactor = BlendFactor::BLEND_FACTOR_DST_COLOR;

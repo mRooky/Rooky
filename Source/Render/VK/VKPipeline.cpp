@@ -41,6 +41,7 @@ void Pipeline::CreateVulkanPipeline(void)
 
 	PipelineState vk_pipeline_state = {};
 	vk_pipeline_state.Create(mPipelineState);
+	assert(vk_pipeline_state.IsValid());
 	auto pipeline_create_info = vk_pipeline_state.GetGraphicsInfo();
 
 	auto vk_device = static_cast<Device*>(mDevice);

@@ -11,7 +11,8 @@
 #include "RenderObject.h"
 #include "RenderShaderState.h"
 #include "RenderPipelineCommon.h"
-#include "State/RenderDescription.h"
+#include "RenderDepthStencil.h"
+#include "RenderBlendState.h"
 
 namespace Render
 {
@@ -29,7 +30,7 @@ public:
 
 public:
 	inline void SetLayout(PipelineLayout* layout) { mPipelineLayout = layout; }
-	inline void SetShaderState(ShaderState* state) { mShaderState = state;  }
+	inline void SetShaderState(ShaderState* state) { mShaderState = *state;  }
 	inline void SetVertexLayout(VertexLayout* layout) { mVertexLayout = layout; }
 	inline void SetRenderPass(uint32_t index, Pass* pass)
 	{
@@ -44,17 +45,19 @@ public:
 	inline VertexLayout* GetVertexLayout(void) const { return mVertexLayout; }
 
 public:
-	inline const ShaderState* GetShaderState(void) const { return mShaderState; }
+	inline const ShaderState* GetShaderState(void) const { return &mShaderState; }
 	inline const PipelineCommon* GetCommon(void) const { return &mPipelineCommon; }
 
 protected:
 	uint32_t mIndex = 0;
 	Pass* mRenderPass = nullptr;
-	ShaderState* mShaderState = nullptr;
 	VertexLayout* mVertexLayout = nullptr;
 	PipelineLayout* mPipelineLayout = nullptr;
 
 protected:
+	ShaderState mShaderState = {};
+	DepthStencil mDepthStencil = {};
+	BlendState mRenderBlendState = {};
 	PipelineCommon mPipelineCommon = {};
 };
 

@@ -20,8 +20,12 @@ PipelineState::~PipelineState(void)
 
 bool PipelineState::operator==(const PipelineState& other) const
 {
-
-	return true;
+	return mIndex == other.mIndex
+	&& mRenderPass == other.mRenderPass
+	&& mShaderState == other.mShaderState
+	&& mVertexLayout == other.mVertexLayout
+	&& mPipelineLayout == other.mPipelineLayout
+	&& mPipelineCommon == other.mPipelineCommon;
 }
 
 } /* namespace Core */

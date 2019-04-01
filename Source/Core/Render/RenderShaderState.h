@@ -28,6 +28,9 @@ public:
 	Shader* GetShader(ShaderType type) const;
 
 public:
+	bool operator==(const ShaderState& other) const;
+
+public:
 	inline size_t GetShaderCount(void) const { return mShaders.size(); }
 	inline Shader* GetShader(size_t index) const { return mShaders.at(index); }
 

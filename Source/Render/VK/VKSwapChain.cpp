@@ -93,7 +93,6 @@ void SwapChain::GetSwapChainRenderBuffer(void)
 		SwapChainImage* image = new SwapChainImage(vk_device);
 		auto vk_image = mSwapChain->GetImage(index);
 		image->Create(vk_image);
-		image->mSwapChain = this;
 		mRenderBuffers.push_back(image);
 	}
 	mFormat = mRenderBuffers.at(0)->GetFormat();

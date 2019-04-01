@@ -33,6 +33,12 @@ public:
 	inline const char* GetName(void) const { return mName.c_str(); }
 
 public:
+	inline bool operator==(const Shader& other) const
+	{
+		return (mName == other.mName) && (mType == other.mType) && (mStage == other.mStage);
+	}
+
+public:
 	static ShaderType GetShaderType(const char* file);
 	static ShaderStage GetShaderStage(const char* file);
 
