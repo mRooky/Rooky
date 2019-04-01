@@ -150,7 +150,7 @@ void Texture::CreatePipeline(void)
 	pipeline_state->SetVertexLayout(vertex_layout);
 
 	auto shader_state = mPass->GetShaderState();
-	pipeline_state->SetShaderState(shader_state);
+	pipeline_state->SetShaderState(*shader_state);
 
 	auto binding_manager = mSystem->GetBindingManager();
 	auto binding_layout = binding_manager->CreateLayout();

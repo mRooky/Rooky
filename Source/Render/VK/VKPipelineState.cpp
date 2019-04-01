@@ -82,12 +82,11 @@ void PipelineState::CreateVulkanLayoutInfo(void)
 
 void PipelineState::CreateVulkanShaderStageInfo(void)
 {
-	auto shader_state = mState->GetShaderState();
-	assert(shader_state != nullptr);
-	const size_t count = shader_state->GetShaderCount();
+	auto& shader_state = mState->GetShaderState();
+	const size_t count = shader_state.GetShaderCount();
 	for (size_t index = 0; index < count; ++index)
 	{
-		auto shader = shader_state->GetShader(index);
+		auto shader = shader_state.GetShader(index);
 		auto vk_shader = static_cast<Shader*>(shader);
 		auto vulkan_shader = vk_shader->GetVulkanModule();
 		auto state = vk_shader->GetStage();

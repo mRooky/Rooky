@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_MATH_MATHBITS_HPP_
-#define SOURCE_CORE_RENDER_MATH_MATHBITS_HPP_
+#ifndef SOURCE_CORE_RENDER_MATH_RENDERBITS_HPP_
+#define SOURCE_CORE_RENDER_MATH_RENDERBITS_HPP_
 
 #include <cstddef>
 #include <type_traits>
@@ -37,4 +37,4 @@ static inline void* AlignAllocate(size_t size, size_t alignment)
 
 }
 
-#endif /* SOURCE_CORE_RENDER_MATH_MATHBITS_HPP_ */
+#endif /* SOURCE_CORE_RENDER_MATH_RENDERBITS_HPP_ */

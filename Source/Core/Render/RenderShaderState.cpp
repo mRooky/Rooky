@@ -9,6 +9,7 @@
 #include "RenderShader.h"
 
 #include <cassert>
+#include <algorithm>
 
 namespace Render
 {
@@ -66,6 +67,15 @@ bool ShaderState::operator==(const ShaderState& other) const
 		return true;
 	}
 	return false;
+}
+
+ShaderState& ShaderState::operator=(const ShaderState& other)
+{
+	assert(other.mShaders.size() > 0);
+	mShaders.clear();
+	mShaders.resize(other.mShaders.size());
+	std::copy(other.mShaders.begin(), other.mShaders.end(), mShaders.begin());
+	return *this;
 }
 
 } /* namespace Render */

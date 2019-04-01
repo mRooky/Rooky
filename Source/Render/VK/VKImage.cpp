@@ -5,6 +5,7 @@
  *      Author: rookyma
  */
 
+#include <RenderBits.hpp>
 #include "VKImage.h"
 #include "VKFormat.h"
 #include "VKBuffer.h"
@@ -23,8 +24,6 @@
 #include "VulkanCommandBuffer.h"
 #include "VulkanDevice.h"
 #include "VulkanQueue.h"
-
-#include "MathBits.hpp"
 
 #include <cstring>
 #include <iostream>

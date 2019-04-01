@@ -29,6 +29,7 @@ public:
 
 public:
 	bool operator==(const ShaderState& other) const;
+	ShaderState& operator=(const ShaderState& other);
 
 public:
 	inline size_t GetShaderCount(void) const { return mShaders.size(); }

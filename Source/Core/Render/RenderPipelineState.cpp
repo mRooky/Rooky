@@ -25,7 +25,9 @@ bool PipelineState::operator==(const PipelineState& other) const
 	&& mShaderState == other.mShaderState
 	&& mVertexLayout == other.mVertexLayout
 	&& mPipelineLayout == other.mPipelineLayout
-	&& mPipelineCommon == other.mPipelineCommon
+	&& mMultisample == other.mMultisample
+	&& mInputAssembly == other.mInputAssembly
+	&& mRasterization == other.mRasterization
 	&& mRenderBlendState == other.mRenderBlendState;
 }
 

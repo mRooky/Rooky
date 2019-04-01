@@ -20,6 +20,12 @@ public:
 	~InputAssembly(void) = default;
 
 public:
+	inline bool operator==(const InputAssembly& other) const
+	{
+		return topology == other.topology;
+	}
+
+public:
 	PrimitiveTopology topology = PrimitiveTopology::PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 };
 

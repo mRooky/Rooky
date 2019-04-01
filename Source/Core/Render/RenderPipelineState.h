@@ -10,8 +10,10 @@
 
 #include "RenderObject.h"
 #include "RenderShaderState.h"
-#include "RenderPipelineCommon.h"
+#include "RenderMultisample.h"
 #include "RenderDepthStencil.h"
+#include "RenderInputAssembly.h"
+#include "RenderRasterization.h"
 #include "RenderBlendState.h"
 
 namespace Render
@@ -30,7 +32,6 @@ public:
 
 public:
 	inline void SetLayout(PipelineLayout* layout) { mPipelineLayout = layout; }
-	inline void SetShaderState(ShaderState* state) { mShaderState = *state;  }
 	inline void SetVertexLayout(VertexLayout* layout) { mVertexLayout = layout; }
 	inline void SetRenderPass(uint32_t index, Pass* pass)
 	{
@@ -45,8 +46,17 @@ public:
 	inline VertexLayout* GetVertexLayout(void) const { return mVertexLayout; }
 
 public:
-	inline const ShaderState* GetShaderState(void) const { return &mShaderState; }
-	inline const PipelineCommon* GetCommon(void) const { return &mPipelineCommon; }
+	inline void SetShaderState(const ShaderState& state) { mShaderState = state;  }
+	inline void SetMultisample(const Multisample& multi) { mMultisample = multi; }
+	inline void SetRasterization(const Rasterization& raster) { mRasterization = raster; }
+	inline void SetInputAssembly(const InputAssembly& assembly) { mInputAssembly = assembly; }
+
+public:
+	inline const Multisample& GetMultisample(void) const { return mMultisample; }
+	inline const ShaderState& GetShaderState(void) const { return mShaderState; }
+	inline const DepthStencil& GetDepthStencil(void) const { return mDepthStencil; }
+	inline const InputAssembly& GetInputAssembly(void) const { return mInputAssembly; }
+	inline const Rasterization& GetRasterization(void) const { return mRasterization; }
 
 protected:
 	uint32_t mIndex = 0;
@@ -55,10 +65,14 @@ protected:
 	PipelineLayout* mPipelineLayout = nullptr;
 
 protected:
+	BlendState mRenderBlendState = {};
+
+protected:
 	ShaderState mShaderState = {};
 	DepthStencil mDepthStencil = {};
-	BlendState mRenderBlendState = {};
-	PipelineCommon mPipelineCommon = {};
+	Multisample mMultisample = {};
+	InputAssembly mInputAssembly = {};
+	Rasterization mRasterization = {};
 };
 
 } /* namespace Core */

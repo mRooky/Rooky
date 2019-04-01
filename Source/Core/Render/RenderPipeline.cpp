@@ -7,7 +7,6 @@
 
 #include "RenderPipeline.h"
 #include "RenderShaderState.h"
-#include "RenderPipelineCommon.h"
 #include "RenderDevice.h"
 #include "RenderFactory.h"
 

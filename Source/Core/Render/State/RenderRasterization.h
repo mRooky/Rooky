@@ -20,6 +20,9 @@ public:
 	~Rasterization(void) = default;
 
 public:
+	bool operator==(const Rasterization& other) const;
+
+public:
 	bool depthClampEnable = false;
 	bool rasterizerDiscardEnable = false;
 	bool depthBiasEnable = false;
