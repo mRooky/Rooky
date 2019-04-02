@@ -34,6 +34,7 @@ protected:
 	void CreateVulkanRenderPassInfo(void);
 	void CreateVulkanShaderStageInfo(void);
 	void CreateVulkanColorBlendInfo(void);
+	void CreateVulkanDepthStencil(void);
 
 protected:
 	bool mValid = false;

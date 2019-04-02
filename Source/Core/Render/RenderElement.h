@@ -28,29 +28,27 @@ enum class ElementType : uint32_t
 class Element
 {
 public:
-	explicit Element(uint32_t binding, uint32_t location, uint32_t offset, ElementType type);
+	explicit Element(uint32_t binding, uint32_t location, ElementType type);
 	~Element(void);
 
 public:
 	inline ElementType GetType(void) const { return mType; }
-	inline uint32_t GetOffset(void) const { return mOffset; }
 	inline uint32_t GetBinding(void) const { return mBinding; }
 	inline uint32_t GetLocation(void) const { return mLocation; }
 
 public:
 	static size_t GetTypeSize(ElementType type);
+	static const char* GetTypeName(ElementType type);
 
 public:
 	inline bool operator == (const Element& other) const
 	{
-		return mOffset == other.mOffset
-			&& mBinding == other.mBinding
+		return mBinding == other.mBinding
 			&& mLocation == other.mLocation
 			&& mType == other.mType;
 	}
 
 protected:
-	uint32_t mOffset = 0;
 	uint32_t mBinding = 0;
 	uint32_t mLocation = 0;
 	ElementType mType = ElementType::ELEMENT_TYPE_UNKNOWN;

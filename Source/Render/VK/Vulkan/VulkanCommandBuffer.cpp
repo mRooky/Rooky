@@ -74,12 +74,14 @@ void CommandBuffer::End(void)
 
 void CommandBuffer::BindVertexBuffers(Buffer* buffer, uint32_t binding, VkDeviceSize offset)
 {
+	assert(buffer->GetUsage() & VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
 	VkBuffer handle = buffer->GetHandle();
 	vkCmdBindVertexBuffers(m_buffer, binding, 1, &handle, &offset);
 }
 
 void CommandBuffer::BindIndexBuffer(Buffer* buffer, VkDeviceSize offset, VkIndexType type)
 {
+	assert(buffer->GetUsage() & VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
 	VkBuffer handle = buffer->GetHandle();
 	vkCmdBindIndexBuffer(m_buffer, handle, offset, type);
 }

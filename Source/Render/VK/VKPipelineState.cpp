@@ -43,6 +43,7 @@ void PipelineState::Create(const Render::PipelineState* state)
 		CreateVulkanShaderStageInfo();
 		CreateVulkanVertexInputInfo();
 		CreateVulkanColorBlendInfo();
+		CreateVulkanDepthStencil();
 		mValid = true;
 	}
 }
@@ -103,6 +104,11 @@ void PipelineState::CreateVulkanVertexInputInfo(void)
 	auto vk_vertex_layout = static_cast<VertexLayout*>(vertex_layout);
 	auto input_state_info = vk_vertex_layout->GetVertexInputStateInfo();
 	(*mGraphicsInfo.GetVertexInputStateInfo()) = (*input_state_info);
+}
+
+void PipelineState::CreateVulkanDepthStencil(void)
+{
+
 }
 
 }

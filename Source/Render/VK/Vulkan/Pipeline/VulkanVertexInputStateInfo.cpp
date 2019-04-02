@@ -50,6 +50,7 @@ VkVertexInputBindingDescription* VertexInputStateInfo::GetBinding(uint32_t bindi
 	}
 	VkVertexInputBindingDescription input_binding = {};
 	input_binding.binding = binding;
+	input_binding.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 	m_vertexInputBindings.push_back(input_binding);
 	m_createInfo.vertexBindingDescriptionCount = m_vertexInputBindings.size();
 	m_createInfo.pVertexBindingDescriptions = m_vertexInputBindings.data();

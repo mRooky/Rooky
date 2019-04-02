@@ -9,6 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERUSAGE_H_
 
 #include "RenderEnum.h"
+#include "RenderDefine.h"
 
 namespace Render
 {

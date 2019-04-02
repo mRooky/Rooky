@@ -22,6 +22,7 @@
 #include "RenderFrameBuffer.h"
 
 #include <cassert>
+#include <array>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -135,13 +136,20 @@ void Buffer::CreateIndexBuffer(void)
 	Render::AllocateType allocate;
 	allocate.CPUAccess = 1;
 
-	mIndex = manager->CreateIndex();
-	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, 6, allocate);
-
 	std::vector<uint16_t> indexes = { 0, 1, 2, 0, 2, 3 };
+	const size_t count = indexes.size();
+	const size_t size = sizeof(uint16_t) * count;
 
-	size_t size = sizeof(uint16_t) * indexes.size();
+	mIndex = manager->CreateIndex();
+	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, count, allocate);
 	mIndex->Write(indexes.data(), 0, size);
+
+	if (false)
+	{
+		std::array<uint16_t, 6> data;
+		mIndex->Read(data.data(), 0, size);
+		assert(size);
+	}
 }
 
 void Buffer::CreateVertexBuffer(void)
@@ -149,34 +157,47 @@ void Buffer::CreateVertexBuffer(void)
 	assert(mSystem != nullptr);
 	auto manager = mSystem->GetBufferManager();
 
-	Render::AllocateType allocate;
-	allocate.CPUAccess = 1;
-
 	mVertex = manager->CreateVertex();
 
-	struct Vertex { float position[3]; float color[3]; };
+	struct Vertex { float position[3]; float uv[2]; };
 
-	const float x = 1150.0f / 2.0f; //2.3f;
-	const float y = 326.0f / 2.0f; //0.652f;
-	const float z = 1.0f;
-	const float o = 0.0f;
+//	const float x = 1150.0f / 2.0f;
+//	const float y = 326.0f / 2.0f;
+
+	const float x = 0.92f;
+	const float y = 0.26f;
+
+	const float z = 0.1f;
+//	const float o = 0.0f;
 
 	std::vector<Vertex> vertex_buffer =
 	{
-			{ { x, y, z }, { 0.0f, 0.0f, 1.0f } },
-			{ { o, y, z }, { 0.0f, 1.0f, 0.0f } },
-			{ { o, o, z }, { 0.0f, 0.0f, 1.0f } },
-			{ { x, o, z }, { 1.0f, 1.0f, 0.0f } }
+			{ {  x,  y, z }, { 1.0f, 1.0f } },
+			{ { -x,  y, z }, { 0.0f, 1.0f } },
+			{ { -x, -y, z }, { 0.0f, 0.0f } },
+			{ {  x, -y, z }, { 1.0f, 0.0f } }
 	};
 
-	std::vector<Render::Element> elements;
-	elements.push_back(Render::Element(0, 0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3));
-	elements.push_back(Render::Element(0, 1, 4, Render::ElementType::ELEMENT_TYPE_FLOAT3));
-	auto layout = manager->CreateVertexLayout(elements);
-	mVertex->Create(layout, vertex_buffer.size(), allocate);
+	std::vector<Render::Element> elements =
+	{
+			Render::Element(0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3),
+			Render::Element(0, 1, Render::ElementType::ELEMENT_TYPE_FLOAT2)
+	};
 
-	uint32_t size = vertex_buffer.size() * sizeof(Vertex);
+	Render::AllocateType allocate;
+	allocate.CPUAccess = 1;
+	auto layout = manager->CreateVertexLayout(elements);
+	const size_t count = vertex_buffer.size();
+	const uint32_t size = count * sizeof(Vertex);
+	mVertex->Create(layout, count, allocate);
 	mVertex->Write(vertex_buffer.data(), 0, size);
+
+	if (false)
+	{
+		std::array<Vertex, 4> data;
+		mVertex->Read(data.data(), 0, size);
+		assert(size);
+	}
 }
 
 void Buffer::CreateUniformBuffer(void)
@@ -188,10 +209,7 @@ void Buffer::CreateUniformBuffer(void)
 	allocate.CPUAccess = 1;
 
 	mUniform = manager->CreateUniform();
-
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f) ,glm::vec3(1.0f / 1280.f, 1.0f / 800.0f, 0.0f));
-	glm::mat4 trans = glm::translate(glm::mat4(1.0f) ,glm::vec3(-1.0f, -1.0f, 0.0f));
-	glm::mat4 matrix = trans * scale;
+	glm::mat4 matrix = glm::mat4(1.0f);
 
 	uint32_t size = sizeof(matrix);
 	mUniform->Create(size, allocate);

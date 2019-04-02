@@ -43,6 +43,20 @@ static inline size_t GetIndexTypeSize(IndexType type)
 	}
 }
 
+static inline const char* GetIndexTypeName(IndexType type)
+{
+	switch(type)
+	{
+	case IndexType::INDEX_TYPE_U16:
+		return "INDEX_TYPE_U16";
+	case IndexType::INDEX_TYPE_U32:
+		return "INDEX_TYPE_U32";
+	default:
+		assert(false);
+		return "Unknown";
+	}
+}
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERINLINE_H_ */

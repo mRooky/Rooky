@@ -7,6 +7,7 @@
 
 #include "VKVertexLayout.h"
 #include <cassert>
+#include <iostream>
 
 namespace VK
 {
@@ -22,6 +23,7 @@ VertexLayout::~VertexLayout(void)
 void VertexLayout::Create(void)
 {
 	assert(mElements.size() > 0);
+	std::cout << "Create Vertex Element Count : " << mElements.size() << std::endl;
 	CreateInputState();
 }
 

@@ -14,6 +14,8 @@
 #include "RenderInline.h"
 #include "RenderDevice.h"
 
+#include <iostream>
+
 namespace Core
 {
 
@@ -34,6 +36,7 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType 
 	mCount = count;
 	CreateBuffer(allocate);
 	mDrawIndexed.SetIndexCount(mCount);
+	std::cout << "Create Index Type : " << Render::GetIndexTypeName(mType) << std::endl;
 }
 
 void Index::CreateBuffer(Render::AllocateType allocate)
@@ -42,7 +45,7 @@ void Index::CreateBuffer(Render::AllocateType allocate)
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;
-	buffer_usage.bufferUsage.IndexBuffer = 1;
+	buffer_usage.bufferUsage.IndexBuffer = TRUE;
 	Buffer::Create(size, buffer_usage);
 }
 
