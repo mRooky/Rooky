@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKCONVERT_H_
 #define SOURCE_RENDER_VK_VKCONVERT_H_
 
-#include <RenderState/RenderState.h>
+#include "RenderStateEnum.h"
 #include "VKInline.h"
 #include <cassert>
 

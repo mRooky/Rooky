@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSTATE_RENDERRASTERIZATION_H_
 #define SOURCE_CORE_RENDER_RENDERSTATE_RENDERRASTERIZATION_H_
 
-#include "RenderState.h"
+#include "RenderStateEnum.h"
 
 namespace Render
 {
