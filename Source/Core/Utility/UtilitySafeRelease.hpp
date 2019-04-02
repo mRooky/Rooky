@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILSAFERELEASE_HPP_
-#define SOURCE_CORE_UTIL_UTILSAFERELEASE_HPP_
+#ifndef SOURCE_CORE_UTILITY_UTILITYSAFERELEASE_HPP_
+#define SOURCE_CORE_UTILITY_UTILITYSAFERELEASE_HPP_
 
-namespace Util
+namespace Utility
 {
 
 template<class T>
@@ -33,4 +33,4 @@ static inline void SafeDestroy(T*& ptr)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILSAFERELEASE_HPP_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYSAFERELEASE_HPP_ */

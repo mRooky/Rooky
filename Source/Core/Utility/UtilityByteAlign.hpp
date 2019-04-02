@@ -5,15 +5,15 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILBYTEALIGN_HPP_
-#define SOURCE_CORE_UTIL_UTILBYTEALIGN_HPP_
+#ifndef SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_
+#define SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_
 
 #include <cstddef>
 #include <type_traits>
 #include <cassert>
 #include <cstdlib>
 
-namespace Util
+namespace Utility
 {
 
 template<typename T>
@@ -38,4 +38,4 @@ static inline void* AlignAllocate(size_t size, size_t alignment)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILBYTEALIGN_HPP_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_ */

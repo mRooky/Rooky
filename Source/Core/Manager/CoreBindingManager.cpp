@@ -5,6 +5,7 @@
  *      Author: rookyma
  */
 
+#include "UtilityRelease.h"
 #include "CoreBindingManager.h"
 #include "CoreSystem.h"
 
@@ -12,7 +13,6 @@
 #include "RenderBindingSet.h"
 #include "RenderDevice.h"
 #include "RenderFactory.h"
-#include "UtilRelease.h"
 
 namespace Core
 {
@@ -24,8 +24,8 @@ BindingManager::BindingManager(System* system):
 
 BindingManager::~BindingManager(void)
 {
-	Util::Release(mBindingSets);
-	Util::Release(mBindingLayouts);
+	Utility::Release(mBindingSets);
+	Utility::Release(mBindingLayouts);
 }
 
 Render::BindingSet* BindingManager::CreateSet(void)

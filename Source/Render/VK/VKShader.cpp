@@ -5,13 +5,12 @@
  *      Author: rookyma
  */
 
-
 #include "VKShader.h"
 #include "VulkanShaderModule.h"
 #include "VulkanInline.h"
 #include "VKDevice.h"
 
-#include "UtilString.h"
+#include "UtilityString.h"
 
 #include <iostream>
 #include <cassert>
@@ -35,7 +34,7 @@ void Shader::Create(const char* file)
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		mName = Util::GetFileName(file);
+		mName = Utility::GetFileName(file);
 		mType = Render::Shader::GetShaderType(file);
 		mStage = Render::Shader::GetShaderStage(file);
 		std::cout << "Create Shader File : " << file << std::endl;

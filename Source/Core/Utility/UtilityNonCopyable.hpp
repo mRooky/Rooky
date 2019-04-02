@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILNONCOPYABLE_HPP_
-#define SOURCE_CORE_UTIL_UTILNONCOPYABLE_HPP_
+#ifndef SOURCE_CORE_UTILITY_UTILITYNONCOPYABLE_HPP_
+#define SOURCE_CORE_UTILITY_UTILITYNONCOPYABLE_HPP_
 
-namespace Util
+namespace Utility
 {
 
 class NonCopyable
@@ -20,4 +20,4 @@ private:
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILNONCOPYABLE_HPP_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYNONCOPYABLE_HPP_ */

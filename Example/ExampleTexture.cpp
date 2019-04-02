@@ -28,12 +28,11 @@
 #include "RenderCommandList.h"
 #include "RenderPass.h"
 
-#include "UtilString.h"
-
 #include <iostream>
 #include <cassert>
 
 #include <SOIL/SOIL.h>
+#include <Utility/UtilityString.h>
 
 namespace Example
 {
@@ -105,7 +104,7 @@ void Texture::CreateTexture(const char* file)
 		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
 
 		std::string file_path = file;
-		assert(Util::DoesFileExist(file));
+		assert(Utility::DoesFileExist(file));
 		Render::Extent3Di extent = { width, height, 1 };
 
 		auto manager = mSystem->GetTextureManager();

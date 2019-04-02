@@ -5,14 +5,14 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILSEARCH_H_
-#define SOURCE_CORE_UTIL_UTILSEARCH_H_
+#ifndef SOURCE_CORE_UTILITY_UTILITYSEARCH_H_
+#define SOURCE_CORE_UTILITY_UTILITYSEARCH_H_
 
 #include <array>
 #include <vector>
 #include <algorithm>
 
-namespace Util
+namespace Utility
 {
 
 template<typename T>
@@ -35,4 +35,4 @@ static inline auto Find(const std::vector<T>& container, V& value)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILSEARCH_H_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYSEARCH_H_ */

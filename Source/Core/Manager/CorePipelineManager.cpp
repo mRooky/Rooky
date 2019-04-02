@@ -5,6 +5,8 @@
  *      Author: rookyma
  */
 
+#include "UtilityRelease.h"
+#include "UtilityString.h"
 #include "CorePipelineManager.h"
 #include "CoreSystem.h"
 
@@ -14,9 +16,6 @@
 #include "RenderPipeline.h"
 #include "RenderPipelineState.h"
 #include "RenderPipelineLayout.h"
-
-#include "UtilRelease.h"
-#include "UtilString.h"
 
 #include <string>
 #include <iostream>
@@ -34,29 +33,29 @@ PipelineManager::~PipelineManager(void)
 	size_t count = 0;
 	std::cout << "Release Shader ..." << std::endl;
 	count = mShaders.size();
-	Util::Release(mShaders);
+	Utility::Release(mShaders);
 	std::cout << count << " Shader(s) Released !" << std::endl;
 
 	std::cout << "Release Pipeline ..." << std::endl;
 	count = mPipelines.size();
-	Util::Release(mPipelines);
+	Utility::Release(mPipelines);
 	std::cout << count << " Pipeline(s) Released !" << std::endl;
 
 	std::cout << "Release PipelineState ..." << std::endl;
 	count = mPipelineStates.size();
-	Util::Release(mPipelineStates);
+	Utility::Release(mPipelineStates);
 	std::cout << count << " PipelineState(s) Released !" << std::endl;
 
 	std::cout << "Release PipelineLayout ..." << std::endl;
 	count = mPipelineLayouts.size();
-	Util::Release(mPipelineLayouts);
+	Utility::Release(mPipelineLayouts);
 	std::cout << count << " PipelineLayout(s) Released !" << std::endl;
 }
 
 Render::Shader* PipelineManager::GetShader(const char* file)
 {
 	std::string shader_file = file;
-	auto current_name = Util::GetFileName(shader_file);
+	auto current_name = Utility::GetFileName(shader_file);
 	for (auto shader : mShaders)
 	{
 		auto shader_name = shader->GetName();

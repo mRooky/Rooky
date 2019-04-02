@@ -5,6 +5,8 @@
  *      Author: rookyma
  */
 
+#include "UtilityRelease.h"
+#include "UtilityString.h"
 #include "CoreTextureManager.h"
 #include "CoreTexture.h"
 #include "CoreSystem.h"
@@ -13,9 +15,6 @@
 #include "RenderFactory.h"
 #include "RenderSampler.h"
 #include "RenderDefine.h"
-
-#include "UtilRelease.h"
-#include "UtilString.h"
 
 #include <cstring>
 #include <cassert>
@@ -34,12 +33,12 @@ TextureManager::~TextureManager(void)
 	size_t count = 0;
 	std::cout << "Release Texture ..." << std::endl;
 	count = mTextures.size();
-	Util::Release(mTextures);
+	Utility::Release(mTextures);
 	std::cout << count << " Texture(s) Released ! " << std::endl;
 
 	std::cout << "Release Sampler ..." << std::endl;
 	count = mSamplers.size();
-	Util::Release(mSamplers);
+	Utility::Release(mSamplers);
 	std::cout << count << " Sampler(s) Released !" << std::endl;
 }
 
@@ -52,7 +51,7 @@ Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3
 Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
 	std::string file_string = name;
-	std::string file_name = Util::GetFileName(file_string);
+	std::string file_name = Utility::GetFileName(file_string);
 	Texture* texture = GetTexture(file_name.c_str());
 	if (texture == nullptr)
 	{

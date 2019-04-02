@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILFASTCAST_HPP_
-#define SOURCE_CORE_UTIL_UTILFASTCAST_HPP_
+#ifndef SOURCE_CORE_UTILITY_UTILITYFASTCAST_HPP_
+#define SOURCE_CORE_UTILITY_UTILITYFASTCAST_HPP_
 
-namespace Util
+namespace Utility
 {
 
 template<class O, typename I>
@@ -30,4 +30,4 @@ static inline void* FastCast<void>(void* in)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILFASTCAST_HPP_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYFASTCAST_HPP_ */

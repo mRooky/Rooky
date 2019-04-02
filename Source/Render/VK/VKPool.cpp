@@ -18,8 +18,6 @@
 #include "VulkanPhysicalDevice.h"
 #include "VulkanBuffer.h"
 
-#include "UtilRelease.h"
-
 #include <cassert>
 
 namespace VK

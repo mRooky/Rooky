@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILTYPECAST_HPP_
-#define SOURCE_CORE_UTIL_UTILTYPECAST_HPP_
+#ifndef SOURCE_CORE_UTILITY_UTILITYTYPECAST_HPP_
+#define SOURCE_CORE_UTILITY_UTILITYTYPECAST_HPP_
 
 #include <cassert>
 
-namespace Util
+namespace Utility
 {
 
 template<class O, typename I>
@@ -44,4 +44,4 @@ static inline void* SafeCast<void>(void* in)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILTYPECAST_HPP_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYTYPECAST_HPP_ */

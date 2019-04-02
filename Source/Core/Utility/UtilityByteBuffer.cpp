@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#include "UtilByteBuffer.h"
+#include "UtilityByteBuffer.h"
 #include <memory>
 #include <cassert>
 #include <cstring>
 
-namespace Util
+namespace Utility
 {
 
 ByteBuffer::ByteBuffer(void)

@@ -5,7 +5,6 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
 #include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -15,8 +14,8 @@
 #include "RenderElement.h"
 #include "RenderVertexLayout.h"
 #include "RenderFactory.h"
-
-#include "UtilRelease.h"
+#include "RenderDevice.h"
+#include "UtilityRelease.h"
 
 #include <cassert>
 
@@ -30,10 +29,10 @@ BufferManager::BufferManager(System* system):
 
 BufferManager::~BufferManager(void)
 {
-	Util::Release(mIndexes);
-	Util::Release(mVertexes);
-	Util::Release(mUniforms);
-	Util::Release(mVertexLayouts);
+	Utility::Release(mIndexes);
+	Utility::Release(mVertexes);
+	Utility::Release(mUniforms);
+	Utility::Release(mVertexLayouts);
 }
 
 Index* BufferManager::CreateIndex(void)

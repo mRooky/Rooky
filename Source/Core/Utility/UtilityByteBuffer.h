@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILBYTEBUFFER_H_
-#define SOURCE_CORE_UTIL_UTILBYTEBUFFER_H_
+#ifndef SOURCE_CORE_UTILITY_UTILITYBYTEBUFFER_H_
+#define SOURCE_CORE_UTILITY_UTILITYBYTEBUFFER_H_
 
 #include <cstdint>
 #include <cstddef>
 
-namespace Util
+namespace Utility
 {
 
 class ByteBuffer
@@ -40,4 +40,4 @@ private:
 
 } /* namespace Util */
 
-#endif /* SOURCE_CORE_UTIL_UTILBYTEBUFFER_H_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYBYTEBUFFER_H_ */

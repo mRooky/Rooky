@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILSTRING_H_
-#define SOURCE_CORE_UTIL_UTILSTRING_H_
+#ifndef SOURCE_CORE_UTILITY_UTILITYSTRING_H_
+#define SOURCE_CORE_UTILITY_UTILITYSTRING_H_
 
 #include <string>
 #include <fstream>
 
-namespace Util
+namespace Utility
 {
 
 static inline bool DoesFileExist(const std::string& file)
@@ -37,4 +37,4 @@ static inline std::string GetFilePath(const std::string& file)
 
 } /* namespace Util */
 
-#endif /* SOURCE_CORE_UTIL_UTILSTRING_H_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYSTRING_H_ */

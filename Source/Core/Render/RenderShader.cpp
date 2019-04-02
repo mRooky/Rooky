@@ -5,9 +5,8 @@
  *      Author: rookyma
  */
 
+#include "UtilityString.h"
 #include "RenderShader.h"
-#include "UtilString.h"
-
 #include <cassert>
 #include <map>
 
@@ -35,7 +34,7 @@ ShaderType Shader::GetShaderType(const char* file)
 		{"comp", ShaderType::SHADER_TYPE_COMPUTE}
 	};
 	std::string file_name = file;
-	std::string file_type = Util::GetFileType(file);
+	std::string file_type = Utility::GetFileType(file);
 	auto iterator = stage_map.find(file_type);
 	assert(iterator != stage_map.end());
 	ShaderType type = iterator->second;
@@ -54,7 +53,7 @@ ShaderStage Shader::GetShaderStage(const char* file)
 		{"comp", ShaderStage::SHADER_STAGE_COMPUTE}
 	};
 	std::string file_name = file;
-	std::string file_type = Util::GetFileType(file);
+	std::string file_type = Utility::GetFileType(file);
 	auto iterator = stage_map.find(file_type);
 	assert(iterator != stage_map.end());
 	ShaderStage stage = iterator->second;

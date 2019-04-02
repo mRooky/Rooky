@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILRELEASE_H_
-#define SOURCE_CORE_UTIL_UTILRELEASE_H_
+#ifndef SOURCE_CORE_UTILITY_UTILITYRELEASE_H_
+#define SOURCE_CORE_UTILITY_UTILITYRELEASE_H_
 
 #include <vector>
 
-namespace Util
+namespace Utility
 {
 
 template<typename T>
@@ -25,4 +25,4 @@ static inline void Release(std::vector<T*>& list)
 
 }
 
-#endif /* SOURCE_CORE_UTIL_UTILRELEASE_H_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYRELEASE_H_ */

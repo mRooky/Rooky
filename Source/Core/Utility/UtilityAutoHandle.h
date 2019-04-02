@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTIL_UTILAUTOHANDLE_H_
-#define SOURCE_CORE_UTIL_UTILAUTOHANDLE_H_
+#ifndef SOURCE_CORE_UTILITY_UTILITYAUTOHANDLE_H_
+#define SOURCE_CORE_UTILITY_UTILITYAUTOHANDLE_H_
 
-namespace Util
+namespace Utility
 {
 
 template<class T>
@@ -36,4 +36,4 @@ inline AutoHandle<T>::~AutoHandle(void)
 
 } /* namespace Util */
 
-#endif /* SOURCE_CORE_UTIL_UTILAUTOHANDLE_H_ */
+#endif /* SOURCE_CORE_UTILITY_UTILITYAUTOHANDLE_H_ */
