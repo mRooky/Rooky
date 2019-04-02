@@ -34,12 +34,12 @@ TextureManager::~TextureManager(void)
 	std::cout << "Release Texture ..." << std::endl;
 	count = mTextures.size();
 	Util::Release(mTextures);
-	std::cout << count << " Textures Released ! " << std::endl;
+	std::cout << count << " Texture(s) Released ! " << std::endl;
 
 	std::cout << "Release Sampler ..." << std::endl;
 	count = mSamplers.size();
 	Util::Release(mSamplers);
-	std::cout << count << " Samplers Released !" << std::endl;
+	std::cout << count << " Sampler(s) Released !" << std::endl;
 }
 
 Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3Di& extent, Render::Format format)

@@ -12,6 +12,7 @@
 #include "VKFactory.h"
 #include "VKDevice.h"
 #include "VKPool.h"
+#include "VKSampler.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -39,7 +40,7 @@ BindingSet::~BindingSet(void)
 
 void BindingSet::Create(void)
 {
-	UpdateDescriptorSet();
+	AllocateDescriptorSet();
 	WriteDescriptorSet();
 	mValid = true;
 }
@@ -79,6 +80,11 @@ void BindingSet::WriteDescriptorSet(void)
 			write.pBufferInfo = &buffer_infos.at(bind);
 			write.descriptorType = Buffer::GetDescriptorType(resource_usage.bufferUsage);
 			break;
+		case Render::ResourceType::RESOURCE_TYPE_SAMPLER:
+			BindingSet::SetSamplerInfo(&binding, &image_infos.at(bind));
+			write.pImageInfo = &image_infos.at(bind);
+			write.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
+			break;
 		default:
 			assert(false);
 		}
@@ -88,7 +94,7 @@ void BindingSet::WriteDescriptorSet(void)
 	Vulkan::DescriptorSet::UpdateSets(mDescriptorSet->GetDevice(), descriptor_writes.size(), descriptor_writes.data());
 }
 
-void BindingSet::UpdateDescriptorSet(void)
+void BindingSet::AllocateDescriptorSet(void)
 {
 	const size_t size = mBindings.size();
 	assert(size > 0);
@@ -134,7 +140,9 @@ void BindingSet::SetUniformInfo(const Render::Binding* binding, VkDescriptorBuff
 
 void BindingSet::SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
 {
-	assert(false);
+	assert(info != nullptr);
+	Sampler* sampler = static_cast<Sampler*>(binding->GetResource());
+	*info = sampler->GetVulkanSampler()->GetDescriptorInfo();
 }
 
 VkDescriptorType BindingSet::GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage)

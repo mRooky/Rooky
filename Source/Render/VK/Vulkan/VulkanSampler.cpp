@@ -45,6 +45,14 @@ VkResult Sampler::Create(const VkSamplerCreateInfo* info)
 	return mResult;
 }
 
+VkDescriptorImageInfo Sampler::GetDescriptorInfo(void) const
+{
+	VkDescriptorImageInfo descriptor_sampler_info = {};
+	descriptor_sampler_info.sampler = m_sampler;
+	descriptor_sampler_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+	return descriptor_sampler_info;
+}
+
 VkSamplerCreateInfo Sampler::CreateInfo(void)
 {
 	VkSamplerCreateInfo sampler_create_info = {};

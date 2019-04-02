@@ -26,6 +26,9 @@ public:
 	inline const VkSamplerCreateInfo& GetInfo(void) const { return m_info; }
 
 public:
+	VkDescriptorImageInfo GetDescriptorInfo(void) const;
+
+public:
 	static inline Sampler* New(Device* device) { return new Sampler(device); }
 
 public:

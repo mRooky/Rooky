@@ -38,7 +38,7 @@ public:
 
 protected:
 	void WriteDescriptorSet(void);
-	void UpdateDescriptorSet(void);
+	void AllocateDescriptorSet(void);
 
 protected:
 	Vulkan::DescriptorSet* mDescriptorSet = nullptr;

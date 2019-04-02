@@ -115,6 +115,10 @@ void Texture::CreateTexture(const char* file)
 		mTexture = manager->CreateTexture2D(file_name.c_str(), extent, format);
 		mTexture->Update(0, 0, bitmap);
 
+		auto sampler = manager->CreateSampler();
+		sampler->Create();
+		mTexture->SetSampler(sampler);
+
 		mPass->SetTexture(mTexture);
 		SOIL_free_image_data(bitmap);
 	}
@@ -169,12 +173,22 @@ void Texture::CreatePipeline(void)
 		assert(count > 0);
 		for (size_t index = 0; index < count; ++index)
 		{
-			auto texture = mPass->GetTexture(index);
-			auto resource = texture->GetImage();
-			Render::Binding binding = {};
-			auto shader_stage = Render::ShaderStage::SHADER_STAGE_FRAGMENT;
-			binding.SetResource(resource, shader_stage);
-			binding_set->AppendBinding(binding);
+			Render::ShaderStage shader_stage = Render::ShaderStage::SHADER_STAGE_FRAGMENT;
+			Core::Texture* texture = mPass->GetTexture(index);
+			{
+				Render::Image* image = texture->GetImage();
+				Render::Binding binding = {};
+				binding.SetResource(image, shader_stage);
+				binding_set->AppendBinding(binding);
+			}
+
+			Render::Sampler* sampler = texture->GetSampler();
+			if (sampler != nullptr)
+			{
+				Render::Binding binding = {};
+				binding.SetResource(sampler, shader_stage);
+				binding_set->AppendBinding(binding);
+			}
 		}
 		binding_set->Create();
 		binding_layout->AppendBindingSet(binding_set);
