@@ -11,6 +11,7 @@
 #include "RenderColorBlend.h"
 #include "RenderMemory.h"
 #include "RenderLayout.hpp"
+#include "RenderColor.hpp"
 
 namespace Render
 {

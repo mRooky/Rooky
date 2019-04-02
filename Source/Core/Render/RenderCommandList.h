@@ -13,6 +13,8 @@
 #include "RenderBindingLayout.h"
 #include "RenderClasses.h"
 #include "RenderEnum.h"
+#include "RenderRect.hpp"
+#include "RenderViewport.hpp"
 
 namespace Render
 {

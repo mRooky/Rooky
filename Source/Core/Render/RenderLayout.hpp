@@ -12,6 +12,7 @@
 #include "RenderEnum.h"
 #include "RenderFormat.h"
 #include "RenderUsage.h"
+#include "RenderExtent.hpp"
 
 namespace Render
 {

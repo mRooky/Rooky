@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
-#include <RenderMath/RenderMath.h>
+#include "RenderExtent.hpp"
 #include "CoreObject.h"
 #include "RenderSampler.h"
 #include "RenderFormat.h"
