@@ -9,6 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERVECTOR_HPP_
 
 #include <cstdint>
+#include <cstddef>
 
 namespace Render
 {
@@ -16,6 +17,10 @@ namespace Render
 template<typename T>
 class Vector2_t
 {
+public:
+	inline T& operator[](size_t index) { return *(&x + index); }
+	inline const T& operator[](size_t index) const { return *(&x + index); }
+
 public:
 	T x = static_cast<T>(0);
 	T y = static_cast<T>(0);
@@ -28,6 +33,10 @@ template<typename T>
 class Vector3_t
 {
 public:
+	inline T& operator[](size_t index) { return *(&x + index); }
+	inline const T& operator[](size_t index) const { return *(&x + index); }
+
+public:
 	T x = static_cast<T>(0);
 	T y = static_cast<T>(0);
 	T z = static_cast<T>(0);
@@ -36,6 +45,10 @@ public:
 template<typename T>
 class Vector4_t
 {
+public:
+	inline T& operator[](size_t index) { return *(&x + index); }
+	inline const T& operator[](size_t index) const { return *(&x + index); }
+
 public:
 	T x = static_cast<T>(0);
 	T y = static_cast<T>(0);
