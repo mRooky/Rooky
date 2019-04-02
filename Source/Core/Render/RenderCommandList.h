@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_RENDER_RENDERCOMMANDLIST_H_
 
-#include <RenderBinding.hpp>
+#include "RenderBinding.hpp"
+#include "RenderMath.h"
 #include "RenderBindingLayout.h"
 #include "RenderClasses.h"
-#include "RenderMath.h"
 #include "RenderEnum.h"
 
 namespace Render

@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
+#include <RenderMath/RenderMath.h>
 #include "CoreObject.h"
 
 #include "RenderClasses.h"
-#include "RenderMath.h"
 #include "PlatformWindow.h"
 
 namespace Core

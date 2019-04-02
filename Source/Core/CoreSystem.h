@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_CORESYSTEM_H_
 #define SOURCE_CORE_CORESYSTEM_H_
 
+#include <RenderMath/RenderMath.h>
 #include "RenderClasses.h"
 #include "RenderFormat.h"
-#include "RenderMath.h"
 
 namespace Core
 {

@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSAMPLER_H_
 #define SOURCE_CORE_RENDER_RENDERSAMPLER_H_
 
+#include "RenderColor.hpp"
 #include "RenderResource.h"
 #include "RenderSamplerState.h"
-#include "RenderColor.hpp"
 
 namespace Render
 {

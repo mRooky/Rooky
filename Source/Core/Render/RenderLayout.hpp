@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_
 #define SOURCE_CORE_RENDER_RENDERLAYOUT_HPP_
 
-#include "RenderEnum.h"
 #include "RenderMath.h"
+#include "RenderEnum.h"
 #include "RenderFormat.h"
 #include "RenderUsage.h"
 

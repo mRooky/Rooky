@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
+#include <RenderMath/RenderMath.h>
 #include "CoreObject.h"
 #include "RenderSampler.h"
 #include "RenderFormat.h"
-#include "RenderMath.h"
 #include <vector>
 
 namespace Core
