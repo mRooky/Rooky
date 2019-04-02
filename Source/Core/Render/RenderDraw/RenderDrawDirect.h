@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_DRAW_RENDERDRAWDIRECT_H_
-#define SOURCE_CORE_RENDER_DRAW_RENDERDRAWDIRECT_H_
+#ifndef SOURCE_CORE_RENDER_RENDERDRAW_RENDERDRAWDIRECT_H_
+#define SOURCE_CORE_RENDER_RENDERDRAW_RENDERDRAWDIRECT_H_
 
-#include <RenderDraw.h>
+#include <RenderDraw/RenderDraw.h>
 
 namespace Render
 {
@@ -34,4 +34,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_DRAW_RENDERDRAWDIRECT_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERDRAW_RENDERDRAWDIRECT_H_ */
