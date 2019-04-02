@@ -12,6 +12,7 @@
 #include "CoreVertex.h"
 #include "CoreUniform.h"
 #include "CorePass.h"
+#include "CoreSystem.h"
 
 #include "RenderCommandList.h"
 #include "RenderImage.h"
@@ -46,7 +47,7 @@ Buffer::~Buffer(void)
 void Buffer::Initialize(void)
 {
 	CreateWindow("Buffer Window");
-	CreateSystem();
+	CreateScene();
 	CreateViewport();
 	CreateRenderPath();
 	CreateRenderPass();
@@ -159,16 +160,15 @@ void Buffer::CreateVertexBuffer(void)
 
 	mVertex = manager->CreateVertex();
 
-	struct Vertex { float position[3]; float uv[2]; };
-
-//	const float x = 1150.0f / 2.0f;
-//	const float y = 326.0f / 2.0f;
+	struct Vertex
+	{
+		float position[3];
+		float uv[2];
+	};
 
 	const float x = 0.90f;
-	const float y = 0.40f;
-
+	const float y = 0.85f;
 	const float z = 0.1f;
-//	const float o = 0.0f;
 
 	std::vector<Vertex> vertex_buffer =
 	{

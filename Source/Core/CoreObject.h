@@ -8,14 +8,16 @@
 #ifndef SOURCE_CORE_COREOBJECT_H_
 #define SOURCE_CORE_COREOBJECT_H_
 
+#include "CoreBase.h"
+
 namespace Core
 {
 class System;
-class Object
+class Object : public Base
 {
 public:
 	explicit Object(System* system);
-	virtual ~Object(void);
+	virtual ~Object(void) override;
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }

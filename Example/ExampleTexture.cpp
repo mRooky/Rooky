@@ -9,6 +9,7 @@
 
 #include "CorePass.h"
 #include "CoreTexture.h"
+#include "CoreSystem.h"
 
 #include "CoreTextureManager.h"
 #include "CoreBufferManager.h"
@@ -28,11 +29,12 @@
 #include "RenderCommandList.h"
 #include "RenderPass.h"
 
+#include "UtilityString.h"
+
 #include <iostream>
 #include <cassert>
 
 #include <SOIL/SOIL.h>
-#include <Utility/UtilityString.h>
 
 namespace Example
 {
@@ -48,7 +50,7 @@ Texture::~Texture(void)
 void Texture::Initialize(void)
 {
 	CreateWindow("Texture Window");
-	CreateSystem();
+	CreateScene();
 	CreateViewport();
 	CreateRenderPath();
 	CreateRenderPass();
@@ -57,7 +59,7 @@ void Texture::Initialize(void)
 	CreateIndexBuffer();
 	CreateVertexBuffer();
 	CreateUniformBuffer();
-	CreateTexture("Resource/vulkan2.png");
+	CreateTexture("Resource/vulkan.png");
 	CreateShader();
 	CreatePipeline();
 }
@@ -96,16 +98,14 @@ void Texture::RecordCommands(void)
 
 void Texture::CreateTexture(const char* file)
 {
+	assert(Utility::DoesFileExist(file));
 	int width, height, channels;
 	uint8_t * bitmap = SOIL_load_image(file, &width, &height, &channels, SOIL_LOAD_RGBA);
 	if (bitmap != nullptr)
 	{
-		assert(channels == 4);
-		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
-
-		std::string file_path = file;
-		assert(Utility::DoesFileExist(file));
+		//assert(channels == 4);
 		Render::Extent3Di extent = { width, height, 1 };
+		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
 
 		auto manager = mSystem->GetTextureManager();
 		mTexture = manager->CreateTexture2D(file, extent, format);
@@ -126,14 +126,14 @@ void Texture::CreateTexture(const char* file)
 
 void Texture::CreateShader(void)
 {
-	const char* vert_file = "Shaders/texture.vert";
-	const char* frag_file = "Shaders/texture.frag";
-
 	auto shader_state = mPass->GetShaderState();
-
 	auto manager = mSystem->GetPipelineManager();
+
+	const char* vert_file = "Shaders/texture.vert";
 	auto vert_shader = manager->GetShader(vert_file);
 	shader_state->SetShader(vert_shader);
+
+	const char* frag_file = "Shaders/texture.frag";
 	auto frag_shader = manager->GetShader(frag_file);
 	shader_state->SetShader(frag_shader);
 }

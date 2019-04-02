@@ -24,14 +24,15 @@ Base::~Base(void)
 {
 	delete mWindow;
 	mWindow = nullptr;
-	delete mSystem;
+	delete mScene;
+	mScene = nullptr;
 	mSystem = nullptr;
 }
 
 void Base::Initialize(void)
 {
 	CreateWindow("Base Window");
-	CreateSystem();
+	CreateScene();
 }
 
 void Base::CreateWindow(const char* title)
@@ -42,11 +43,10 @@ void Base::CreateWindow(const char* title)
 	mWindow->SetTitle(title);
 }
 
-void Base::CreateSystem(void)
+void Base::CreateScene(void)
 {
-	mSystem = new Core::System;
-	assert(mSystem != nullptr);
-	mSystem->Create();
+	mScene = new Core::Scene;
+	mSystem = mScene->GetSystem();
 }
 
 } /* namespace Example */

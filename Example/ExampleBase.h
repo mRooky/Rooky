@@ -8,7 +8,7 @@
 #ifndef EXAMPLE_EXAMPLEBASE_H_
 #define EXAMPLE_EXAMPLEBASE_H_
 
-#include "CoreSystem.h"
+#include "CoreScene.h"
 #include "CoreViewport.h"
 #include "PlatformWindow.h"
 #include <cstdint>
@@ -27,7 +27,7 @@ public:
 
 public:
 	virtual void CreateWindow(const char* title);
-	virtual void CreateSystem(void);
+	virtual void CreateScene(void);
 
 public:
 	virtual void RecordCommands(void) = 0;
@@ -36,6 +36,7 @@ public:
 	virtual int32_t ShowModal(void) = 0;
 
 protected:
+	Core::Scene* mScene = nullptr;
 	Core::System* mSystem = nullptr;
 	Platform::Window* mWindow = nullptr;
 };

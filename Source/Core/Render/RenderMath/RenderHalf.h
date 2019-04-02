@@ -44,8 +44,8 @@ public:
 private:
 	union
 	{
-		Float16Components m_components;
 		uint16_t m_encoded = 0;
+		Float16Components m_components;
 	};
 
 };
