@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_COREINDEX_H_
 #define SOURCE_CORE_COREINDEX_H_
 
-#include <RenderDraw/RenderDrawIndexed.h>
+#include "RenderDrawIndexed.h"
 #include "CoreBuffer.h"
 #include "RenderEnum.h"
 #include "RenderUsage.h"
