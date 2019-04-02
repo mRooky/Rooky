@@ -44,6 +44,7 @@ public:
 };
 
 typedef Matrix_t<float> Matrix;
+static_assert(sizeof(Matrix) == sizeof(float) * 16, "Matrix Size 16 * float");
 
 }
 

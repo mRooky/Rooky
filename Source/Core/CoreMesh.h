@@ -23,6 +23,7 @@ public:
 	SubMesh* CreateSubMesh(void);
 
 public:
+	inline size_t GetSubMeshCount(void) const { return m_subMeshes.size(); }
 	inline SubMesh* GetSubMesh(size_t index) const { return m_subMeshes.at(index); }
 
 private:

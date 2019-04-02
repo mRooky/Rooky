@@ -22,8 +22,17 @@ public:
 	inline const T& operator[](size_t index) const { return *(&x + index); }
 
 public:
-	T x = static_cast<T>(0);
-	T y = static_cast<T>(0);
+	union
+	{
+		struct{	T r; T g; };
+		struct{	T s; T t; };
+		struct
+		{
+			T x = static_cast<T>(0);
+			T y = static_cast<T>(0);
+		};
+	};
+
 };
 
 typedef Vector2_t<float> Offset2Df;
@@ -37,9 +46,18 @@ public:
 	inline const T& operator[](size_t index) const { return *(&x + index); }
 
 public:
-	T x = static_cast<T>(0);
-	T y = static_cast<T>(0);
-	T z = static_cast<T>(0);
+	union
+	{
+		struct{	T r; T g; T b; };
+		struct{	T s; T t; T p; };
+		struct
+		{
+			T x = static_cast<T>(0);
+			T y = static_cast<T>(0);
+			T z = static_cast<T>(0);
+		};
+	};
+
 };
 
 template<typename T>
@@ -50,10 +68,18 @@ public:
 	inline const T& operator[](size_t index) const { return *(&x + index); }
 
 public:
-	T x = static_cast<T>(0);
-	T y = static_cast<T>(0);
-	T z = static_cast<T>(0);
-	T w = static_cast<T>(0);
+	union
+	{
+		struct{	T r; T g; T b; T a; };
+		struct{	T s; T t; T p; T q; };
+		struct
+		{
+			T x = static_cast<T>(0);
+			T y = static_cast<T>(0);
+			T z = static_cast<T>(0);
+			T w = static_cast<T>(0);
+		};
+	};
 };
 
 }

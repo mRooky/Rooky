@@ -15,20 +15,6 @@
 namespace Render
 {
 
-static inline uint32_t Bit(uint32_t pos)
-{
-	return 1u << pos;
-}
-
-static inline ImageLayout CreateImageLayout(const Render::Extent3Di& extent, Render::Format format)
-{
-	Render::ImageLayout image_layout = {};
-	image_layout.extent = extent;
-	image_layout.format = format;
-	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
-	return image_layout;
-}
-
 static inline size_t GetIndexTypeSize(IndexType type)
 {
 	switch(type)

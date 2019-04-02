@@ -20,6 +20,10 @@
 
 #else
 
+#if 0
+#define PLATFORM_LITTLE_ENDIAN 1
+#endif
+
 #endif
 
 namespace Render

@@ -40,6 +40,7 @@ void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::Alloca
 
 void Vertex::CreateBuffer(Render::AllocateType allocate)
 {
+	assert(mLayout->IsValid());
 	size_t size = mLayout->GetSizeInByte() * mCount;
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);

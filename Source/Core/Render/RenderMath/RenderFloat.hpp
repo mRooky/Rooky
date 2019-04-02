@@ -40,10 +40,10 @@ private:
 
 };
 
-	static inline bool CloseEnough(const float& v1, const float& v2)
-	{
-		return std::abs(v1 - v2) < std::numeric_limits<float>::epsilon();
-	}
+static inline bool CloseEnough(const float& v1, const float& v2)
+{
+	return std::abs(v1 - v2) < std::numeric_limits<float>::epsilon();
+}
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERMATH_RENDERFLOAT_HPP_ */

@@ -16,7 +16,13 @@
 namespace Render
 {
 
-template<typename T> inline bool IsPowerOfTow(T value)
+static inline unsigned Bit(unsigned pos)
+{
+	return 1u << pos;
+}
+
+template<typename T>
+inline bool IsPowerOfTow(T value)
 {
 	static_assert(std::is_integral<T>::value, "Integral required");
 	return value > 0 && (value & (value - 1)) == 0;
