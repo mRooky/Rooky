@@ -15,7 +15,7 @@ namespace Vulkan
 {
 class ROOKY_EXPORT DrawCall : public Object
 {
-public:
+protected:
 	DrawCall(void);
 	virtual ~DrawCall(void) override;
 
@@ -25,7 +25,7 @@ public:
 
 class ROOKY_EXPORT DrawDirect : public DrawCall
 {
-protected:
+public:
 	DrawDirect(void);
 	virtual ~DrawDirect(void) override;
 
@@ -42,7 +42,7 @@ protected:
 
 class ROOKY_EXPORT DrawArray : public DrawDirect
 {
-protected:
+public:
 	DrawArray(void);
 	virtual ~DrawArray(void) override;
 
@@ -58,9 +58,6 @@ public:
 	inline void SetVertexCount(uint32_t count) { mVertexCount = count; }
 	inline void SetFirstVertex(uint32_t first) { mFirstVertex = first; }
 
-public:
-	static inline DrawArray* New(void) { return new DrawArray; }
-
 protected:
 	uint32_t mVertexCount = 0;
 	uint32_t mFirstVertex = 0;
@@ -68,7 +65,7 @@ protected:
 
 class ROOKY_EXPORT DrawIndexed : public DrawDirect
 {
-protected:
+public:
 	DrawIndexed(void);
 	virtual ~DrawIndexed(void) override;
 
@@ -86,9 +83,6 @@ public:
 	inline void SetFirstIndex(uint32_t first) { mFirstIndex = first; }
 	inline void SetVertexOffset(uint32_t offset) { mVertexOffset = offset; }
 
-public:
-	static inline DrawIndexed* New(void) { return new DrawIndexed; }
-
 protected:
 	uint32_t mIndexCount = 0;
 	uint32_t mFirstIndex = 0;
@@ -97,7 +91,7 @@ protected:
 
 class ROOKY_EXPORT DrawIndirect : public DrawCall
 {
-protected:
+public:
 	DrawIndirect(void);
 	virtual ~DrawIndirect(void) override;
 
@@ -118,9 +112,6 @@ public:
 public:
 	inline void SetOffset(uint32_t offset) { mOffset = offset; }
 	inline void SetDrawCount(uint32_t count) { mDrawCount = count; }
-
-public:
-	static inline DrawIndirect* New(void) { return new DrawIndirect; }
 
 protected:
 	size_t mSize = 0;
@@ -148,9 +139,6 @@ public:
 
 public:
 	uint32_t Write(uint32_t offset, DrawIndexed* draw);
-
-public:
-	static inline DrawIndexedIndirect* New(void) { return new DrawIndexedIndirect; }
 };
 
 

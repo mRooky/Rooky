@@ -29,11 +29,6 @@ public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
 
 public:
-	static void SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info);
-	static void SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info);
-	static void SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info);
-
-public:
 	static VkDescriptorType GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage);
 
 protected:

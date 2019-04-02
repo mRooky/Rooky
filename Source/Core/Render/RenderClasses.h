@@ -28,7 +28,7 @@ class CommandPool;
 class CommandList;
 class Sampler;
 class Element;
-class DrawCall;
+class Draw;
 class BindingSet;
 class BindingLayout;
 class VertexLayout;

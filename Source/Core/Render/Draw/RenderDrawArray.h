@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_DRAW_RENDERDRAWARRAY_H_
 #define SOURCE_CORE_RENDER_DRAW_RENDERDRAWARRAY_H_
 
-#include <Draw/RenderDrawDirect.h>
+#include "RenderDrawDirect.h"
 
 namespace Render
 {

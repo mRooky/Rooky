@@ -42,7 +42,7 @@ public:
 	virtual void SetBindingSet(uint32_t slot, BindingSet* set) = 0;
 	virtual void SetVertex(Buffer* buffer, uint32_t binding, size_t offset) = 0;
 	virtual void SetIndex(Buffer* buffer, size_t offset, IndexType type) = 0;
-	virtual void Draw(DrawCall* draw) = 0;
+	virtual void Draw(Draw* draw) = 0;
 	// End Resource Setup
 	virtual void EndPass(void) = 0;
 	virtual void End(void) = 0;

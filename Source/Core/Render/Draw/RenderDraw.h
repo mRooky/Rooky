@@ -22,11 +22,11 @@ enum class DrawType : uint32_t
 	DRAW_TYPE_UNKNOWN = ~0U
 };
 
-class DrawCall
+class Draw
 {
 protected:
-	DrawCall(void);
-	virtual ~DrawCall(void);
+	Draw(void);
+	virtual ~Draw(void);
 
 public:
 	inline DrawType GetType(void) const { return mType; }

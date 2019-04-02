@@ -71,17 +71,17 @@ void BindingSet::WriteDescriptorSet(void)
 		switch(resource_type)
 		{
 		case Render::ResourceType::RESOURCE_TYPE_IMAGE:
-			BindingSet::SetImageInfo(&binding, &image_infos.at(bind));
+			image_infos.at(bind) = static_cast<Image*>(resource)->GetVulkanImage()->GetDescriptorInfo();;
 			write.pImageInfo = &image_infos.at(bind);
 			write.descriptorType = Image::GetDescriptorType(resource_usage.imageUsage);
 			break;
 		case Render::ResourceType::RESOURCE_TYPE_BUFFER:
-			BindingSet::SetUniformInfo(&binding, &buffer_infos.at(bind));
+			buffer_infos.at(bind) = static_cast<Buffer*>(resource)->GetVulkanBuffer()->GetDescriptorInfo();
 			write.pBufferInfo = &buffer_infos.at(bind);
 			write.descriptorType = Buffer::GetDescriptorType(resource_usage.bufferUsage);
 			break;
 		case Render::ResourceType::RESOURCE_TYPE_SAMPLER:
-			BindingSet::SetSamplerInfo(&binding, &image_infos.at(bind));
+			image_infos.at(bind) = static_cast<Sampler*>(resource)->GetVulkanSampler()->GetDescriptorInfo();
 			write.pImageInfo = &image_infos.at(bind);
 			write.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
 			break;
@@ -122,27 +122,6 @@ void BindingSet::AllocateDescriptorSet(void)
 	auto factory = mDevice->GetFactory();
 	auto vk_pool = static_cast<Factory*>(factory)->GetPool();
 	mDescriptorSet = vk_pool->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
-}
-
-void BindingSet::SetImageInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
-{
-	assert(info != nullptr);
-	Image* image = static_cast<Image*>(binding->GetResource());
-	*info = image->GetVulkanImage()->GetDescriptorInfo();
-}
-
-void BindingSet::SetUniformInfo(const Render::Binding* binding, VkDescriptorBufferInfo* info)
-{
-	assert(info != nullptr);
-	Buffer* buffer = static_cast<Buffer*>(binding->GetResource());
-	*info = buffer->GetVulkanBuffer()->GetDescriptorInfo();
-}
-
-void BindingSet::SetSamplerInfo(const Render::Binding* binding, VkDescriptorImageInfo* info)
-{
-	assert(info != nullptr);
-	Sampler* sampler = static_cast<Sampler*>(binding->GetResource());
-	*info = sampler->GetVulkanSampler()->GetDescriptorInfo();
 }
 
 VkDescriptorType BindingSet::GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage)

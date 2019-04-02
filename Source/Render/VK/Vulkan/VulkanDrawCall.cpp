@@ -11,6 +11,7 @@
 #include "VulkanCommandBuffer.h"
 #include "VulkanInline.h"
 #include <cassert>
+#include <iostream>
 
 namespace Vulkan
 {
@@ -45,6 +46,7 @@ DrawIndexed::~DrawIndexed(void) = default;
 
 void DrawIndexed::Record(CommandBuffer* command)
 {
+	std::cout << "Draw Index Count : " << mIndexCount << std::endl;
 	VkCommandBuffer handle = command->GetHandle();
 	vkCmdDrawIndexed(handle, mIndexCount, mInstanceCount, mFirstIndex, mVertexOffset, mFirstInstance);
 }

@@ -39,13 +39,17 @@ public:
 	virtual void SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset) override;
 	virtual void SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexType type) override;
 	// End Resource Setting
-	virtual void Draw(Render::DrawCall* draw) override;
+	virtual void Draw(Render::Draw* draw) override;
 	virtual void EndPass(void) override;
 	// End Draw Commands
 	virtual void End(void) override;
 
 public:
 	inline Vulkan::CommandBuffer* GetVulkanCommandBuffer(void) const { return mCommandBuffer; }
+
+private:
+	void BindingResource(void);
+	void DrawIndexed(Render::Draw* draw);
 
 protected:
 	Render::Pipeline* mPipeline = nullptr;

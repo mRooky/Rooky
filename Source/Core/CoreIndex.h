@@ -12,6 +12,8 @@
 #include "RenderEnum.h"
 #include "RenderUsage.h"
 
+#include "RenderDrawIndexed.h"
+
 namespace Core
 {
 
@@ -30,12 +32,14 @@ public:
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline Render::IndexType GetType(void) const { return mType; }
+	inline Render::DrawIndexed* GetDraw(void) { return &mDrawIndexed; }
 
 private:
 	void CreateBuffer(Render::AllocateType allocate);
 
 protected:
 	uint32_t mCount = 0;
+	Render::DrawIndexed mDrawIndexed = {};
 	Render::IndexType mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 };
 

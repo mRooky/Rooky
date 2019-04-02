@@ -8,12 +8,12 @@
 #ifndef SOURCE_CORE_RENDER_DRAW_RENDERDRAWDIRECT_H_
 #define SOURCE_CORE_RENDER_DRAW_RENDERDRAWDIRECT_H_
 
-#include <Draw/RenderDrawCall.h>
+#include <RenderDraw.h>
 
 namespace Render
 {
 
-class DrawDirect : public DrawCall
+class DrawDirect : public Draw
 {
 protected:
 	DrawDirect(void);

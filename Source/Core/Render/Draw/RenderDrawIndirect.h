@@ -8,14 +8,14 @@
 #ifndef SOURCE_CORE_RENDER_DRAW_RENDERDRAWINDIRECT_H_
 #define SOURCE_CORE_RENDER_DRAW_RENDERDRAWINDIRECT_H_
 
-#include <Draw/RenderDrawCall.h>
+#include "RenderDraw.h"
 #include <cstddef>
 
 namespace Render
 {
 class Buffer;
 class Device;
-class DrawIndirect : public DrawCall
+class DrawIndirect : public Draw
 {
 public:
 	DrawIndirect(void);

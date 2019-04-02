@@ -74,7 +74,7 @@ void Texture::RecordCommands(void)
 	Render::Rect2Di area = { offset, extent };
 	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2Di scissor = area;
-
+	Render::Draw* draw = mIndex->GetDraw();
 	const size_t count = mThread->GetCommandListCount();
 	for (uint32_t i = 0; i < count; ++i)
 	{
@@ -85,10 +85,10 @@ void Texture::RecordCommands(void)
 		command_list->BeginPass(render_pass, frame_buffer, area);
 		command_list->SetViewport(0, 1, &viewport);
 		command_list->SetScissor(0, 1, &scissor);
-
+		command_list->SetPipeline(mPipeline);
 		command_list->SetVertex(mVertex->GetBuffer(), 0, 0);
 		command_list->SetIndex(mIndex->GetBuffer(), 0, mIndex->GetType());
-
+		command_list->Draw(draw);
 		command_list->EndPass();
 		command_list->End();
 		command_list->Submit(0u);
@@ -197,8 +197,7 @@ void Texture::CreatePipeline(void)
 	pipeline_layout->Create(binding_layout);
 	pipeline_state->SetLayout(pipeline_layout);
 
-	auto pipeline = pipeline_manager->GetPipeline(pipeline_state);
-	assert(pipeline);
+	mPipeline = pipeline_manager->GetPipeline(pipeline_state);
 }
 
 } /* namespace Example */

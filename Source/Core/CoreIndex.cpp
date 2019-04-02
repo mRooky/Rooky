@@ -33,6 +33,7 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType 
 	mType = type;
 	mCount = count;
 	CreateBuffer(allocate);
+	mDrawIndexed.SetIndexCount(mCount);
 }
 
 void Index::CreateBuffer(Render::AllocateType allocate)

@@ -31,9 +31,11 @@
 #include "VulkanSampler.h"
 #include "VulkanRenderPass.h"
 #include "VulkanFrameBuffer.h"
+#include "VulkanDrawCall.h"
 
 #include "RenderBindingLayout.h"
 #include "RenderPipelineState.h"
+#include "RenderDrawIndexed.h"
 
 #include <cassert>
 
@@ -173,44 +175,6 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 	mCommandBuffer->SetScissor(first, count, vulkan_scissors.data());
 }
 
-void CommandList::Draw(Render::DrawCall* draw)
-{
-	assert(mPipeline != nullptr);
-	assert(mBindingLayout != nullptr);
-	const size_t count = mBindingLayout->GetSetCount();
-	assert(count > 0);
-	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
-	descriptor_sets.reserve(count);
-
-	for(size_t index = 0; index < count; ++index)
-	{
-		auto set = mBindingLayout->GetBindingSet(index);
-		assert(set->IsValid());
-		auto vk_set = static_cast<const BindingSet*>(set);
-		Vulkan::DescriptorSet* vulkan_set = vk_set->GetDescriptorSet();
-		descriptor_sets.push_back(vulkan_set);
-	}
-
-	std::vector<uint32_t> offset;
-
-	auto pipeline_layout = mPipeline->GetState()->GetLayout();
-	auto vk_pipeline_layout = static_cast<PipelineLayout*>(pipeline_layout);
-	auto vulkan_pipeline_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
-	mCommandBuffer->BindDescriptorSets(vulkan_pipeline_layout, descriptor_sets, offset);
-}
-
-void CommandList::EndPass(void)
-{
-	assert(mCommandBuffer != nullptr);
-	mCommandBuffer->EndRenderPass();
-}
-
-void CommandList::End(void)
-{
-	assert(mCommandBuffer != nullptr);
-	mCommandBuffer->End();
-}
-
 // ----------------- Main Resource Setup ------------------//
 void CommandList::SetPipeline(Render::Pipeline* pipeline)
 {
@@ -248,6 +212,75 @@ void CommandList::SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexT
 	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
 	VkIndexType index_type = Convert(type);
 	mCommandBuffer->BindIndexBuffer(vulkan_buffer, offset, index_type);
+}
+
+void CommandList::Draw(Render::Draw* draw)
+{
+	BindingResource();
+	auto type = draw->GetType();
+	switch(type)
+	{
+	case Render::DrawType::DRAW_TYPE_ARRAY:
+		assert(false);
+		break;
+	case Render::DrawType::DRAW_TYPE_INDEXED:
+		DrawIndexed(draw);
+		break;
+	case Render::DrawType::DRAW_TYPE_INDEXED_INDIRECT:
+		assert(false);
+		break;
+	case Render::DrawType::DRAW_TYPE_INDIRECT:
+		assert(false);
+		break;
+	default:
+		assert(false);
+	}
+}
+
+void CommandList::EndPass(void)
+{
+	assert(mCommandBuffer != nullptr);
+	mCommandBuffer->EndRenderPass();
+}
+
+void CommandList::End(void)
+{
+	assert(mCommandBuffer != nullptr);
+	mCommandBuffer->End();
+}
+
+void CommandList::BindingResource(void)
+{
+	assert(mPipeline != nullptr);
+	assert(mBindingLayout != nullptr);
+	const size_t count = mBindingLayout->GetSetCount();
+	assert(count > 0);
+	std::vector<Vulkan::DescriptorSet*> descriptor_sets;
+	descriptor_sets.reserve(count);
+
+	for(size_t index = 0; index < count; ++index)
+	{
+		auto set = mBindingLayout->GetBindingSet(index);
+		assert(set->IsValid());
+		auto vk_set = static_cast<const BindingSet*>(set);
+		Vulkan::DescriptorSet* vulkan_set = vk_set->GetDescriptorSet();
+		descriptor_sets.push_back(vulkan_set);
+	}
+
+	std::vector<uint32_t> offset;
+
+	auto pipeline_layout = mPipeline->GetState()->GetLayout();
+	auto vk_pipeline_layout = static_cast<PipelineLayout*>(pipeline_layout);
+	auto vulkan_pipeline_layout = vk_pipeline_layout->GetVulkanPipelineLayout();
+	mCommandBuffer->BindDescriptorSets(vulkan_pipeline_layout, descriptor_sets, offset);
+}
+
+void CommandList::DrawIndexed(Render::Draw* draw)
+{
+	Render::DrawIndexed* index = static_cast<Render::DrawIndexed*>(draw);
+	Vulkan::DrawIndexed vulkan_index = {};
+	vulkan_index.SetIndexCount(index->GetIndexCount());
+	mCommandBuffer->Draw(&vulkan_index);
 }
 
 } /* namespace VK */

@@ -32,6 +32,7 @@ public:
 
 protected:
 	Core::Texture* mTexture = nullptr;
+	Render::Pipeline* mPipeline = nullptr;
 };
 
 } /* namespace Example */
