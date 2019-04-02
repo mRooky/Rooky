@@ -11,6 +11,7 @@
 #include "RenderImage.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace Core
 {
@@ -23,6 +24,7 @@ Texture::Texture(TextureManager* manager):
 Texture::~Texture(void)
 {
 	mSampler = nullptr;
+	std::cout << "Destroy Texture : " << mName << std::endl;
 }
 
 void Texture::Update(uint32_t index, uint32_t mipmap, const void* src)

@@ -164,8 +164,8 @@ void Buffer::CreateVertexBuffer(void)
 //	const float x = 1150.0f / 2.0f;
 //	const float y = 326.0f / 2.0f;
 
-	const float x = 0.92f;
-	const float y = 0.26f;
+	const float x = 0.90f;
+	const float y = 0.40f;
 
 	const float z = 0.1f;
 //	const float o = 0.0f;
@@ -213,7 +213,7 @@ void Buffer::CreateUniformBuffer(void)
 
 	uint32_t size = sizeof(matrix);
 	mUniform->Create(size, allocate);
-	mVertex->Write(&matrix, 0, size);
+	mUniform->Write(&matrix, 0, size);
 }
 
 } /* namespace Example */

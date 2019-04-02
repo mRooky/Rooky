@@ -15,6 +15,7 @@
 #include "RenderDefine.h"
 
 #include "UtilRelease.h"
+#include "UtilString.h"
 
 #include <cstring>
 #include <cassert>
@@ -50,7 +51,9 @@ Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3
 
 Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format)
 {
-	Texture* texture = GetTexture(name);
+	std::string file_string = name;
+	std::string file_name = Util::GetFileName(file_string);
+	Texture* texture = GetTexture(file_name.c_str());
 	if (texture == nullptr)
 	{
 		Render::ImageLayout image_layout = {};
@@ -63,7 +66,7 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3
 		image_usage.imageUsage.SampledImage = TRUE;
 
 		texture = CreateTexture();
-		texture->SetName(name);
+		texture->SetName(file_name.c_str());
 		texture->Create(image_layout, image_usage);
 	}
 	assert(texture != nullptr);

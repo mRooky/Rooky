@@ -102,17 +102,14 @@ void Texture::CreateTexture(const char* file)
 	if (bitmap != nullptr)
 	{
 		assert(channels == 4);
-		std::cout << "Width " << width << std::endl;
-		std::cout << "Height " << height << std::endl;
-		std::cout << "Channels " << channels << std::endl;
 		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
 
 		std::string file_path = file;
-		std::string file_name = Util::GetFileName(file);
+		assert(Util::DoesFileExist(file));
 		Render::Extent3Di extent = { width, height, 1 };
 
 		auto manager = mSystem->GetTextureManager();
-		mTexture = manager->CreateTexture2D(file_name.c_str(), extent, format);
+		mTexture = manager->CreateTexture2D(file, extent, format);
 		mTexture->Update(0, 0, bitmap);
 
 		auto sampler = manager->CreateSampler();

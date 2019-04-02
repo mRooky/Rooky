@@ -14,6 +14,7 @@
 #include "RenderFactory.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace Core
 {
@@ -39,6 +40,8 @@ void Target::Create(const Render::ImageLayout& layout, const Render::ResourceUsa
 	auto factory = device->GetFactory();
 	mImage = factory->CreateImage();
 	mImage->Create(layout, usage);
+	std::cout << "Image Width " << layout.extent.width << std::endl;
+	std::cout << "Image Height " << layout.extent.height << std::endl;
 }
 
 } /* namespace Core */

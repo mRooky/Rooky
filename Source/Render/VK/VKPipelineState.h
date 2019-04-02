@@ -33,7 +33,7 @@ protected:
 	void CreateVulkanVertexInputInfo(void);
 	void CreateVulkanRenderPassInfo(void);
 	void CreateVulkanShaderStageInfo(void);
-	void CreateVulkanColorBlendInfo(void);
+	void CreateVulkanColorBlendInfo(bool blend = false);
 	void CreateVulkanDepthStencil(void);
 
 protected:

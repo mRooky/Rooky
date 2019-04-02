@@ -135,13 +135,13 @@ VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::ResourceUsage usage)
 {
 	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_BUFFER);
 	VkBufferUsageFlags flags = 0;
-	flags |= (usage.allocate.Source == 1) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.allocate.Destination == 1) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.bufferUsage.IndexBuffer == 1) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
-	flags |= (usage.bufferUsage.VertexBuffer == 1) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
-	flags |= (usage.bufferUsage.UniformBuffer == 1) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
-	flags |= (usage.bufferUsage.StorageBuffer == 1) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
-	flags |= (usage.bufferUsage.IndirectBuffer == 1) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
+	flags |= (usage.allocate.Source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.allocate.Destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.bufferUsage.IndexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.VertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.UniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.StorageBuffer == TRUE) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.IndirectBuffer == TRUE) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
 	return flags;
 }
 

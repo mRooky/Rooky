@@ -42,7 +42,7 @@ void PipelineState::Create(const Render::PipelineState* state)
 		CreateVulkanRenderPassInfo();
 		CreateVulkanShaderStageInfo();
 		CreateVulkanVertexInputInfo();
-		CreateVulkanColorBlendInfo();
+		CreateVulkanColorBlendInfo(true);
 		CreateVulkanDepthStencil();
 		mValid = true;
 	}
@@ -65,10 +65,10 @@ void PipelineState::CreateVulkanViewportInfo(void)
 	//Empty
 }
 
-void PipelineState::CreateVulkanColorBlendInfo(void)
+void PipelineState::CreateVulkanColorBlendInfo(bool blend)
 {
 	//mPipelineCommon;
-	auto state = mGraphicsInfo.GetColorBlendStateInfo()->CreateAttachmentState(false);
+	auto state = mGraphicsInfo.GetColorBlendStateInfo()->CreateAttachmentState(blend);
 	assert(state != nullptr);
 }
 

@@ -8,7 +8,7 @@ This repository is mainly for myself learning Vulkan and graphics game engine.
 ![FrameBuffer](https://github.com/mRooky/Rooky/blob/master/Resource/FrameBuffer.png)  
 
 **Texture**
-![Texture](https://github.com/mRooky/Rooky/blob/master/Resource/vulkan_target.png)  
+![Texture](https://github.com/mRooky/Rooky/blob/master/Resource/Texture.png)  
 
 **Copyright (c) rookyma 2018**
 

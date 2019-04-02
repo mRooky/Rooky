@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
 #include "CoreUniform.h"
 #include "CoreSystem.h"
 #include "CoreBufferManager.h"
 
 #include "RenderUsage.h"
+#include "RenderDevice.h"
 
 #include <cassert>
 
@@ -31,7 +31,7 @@ void Uniform::Create(size_t size, Render::AllocateType allocate)
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;
-	buffer_usage.bufferUsage.UniformBuffer = 1;
+	buffer_usage.bufferUsage.UniformBuffer = TRUE;
 	Buffer::Create(size, buffer_usage);
 }
 

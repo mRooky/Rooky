@@ -9,9 +9,16 @@
 #define SOURCE_CORE_UTIL_UTILSTRING_H_
 
 #include <string>
+#include <fstream>
 
 namespace Util
 {
+
+static inline bool DoesFileExist(const std::string& file)
+{
+	std::ifstream f(file.c_str());
+	return f.good();
+}
 
 static inline std::string GetFileName(const std::string& file)
 {

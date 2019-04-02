@@ -133,6 +133,12 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
 
 	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
+
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
+	queue->FlushCommandBuffer(command_buffer);
 }
 
 VkClearValue Image::GetClearValue(void) const
