@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_
-#define SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_
+#ifndef SOURCE_CORE_RENDER_RENDERSTATE_RENDERBLENDSTATE_H_
+#define SOURCE_CORE_RENDER_RENDERSTATE_RENDERBLENDSTATE_H_
 
-#include <PipelineState/RenderColorBlend.h>
+#include "RenderColorBlend.h"
 #include <vector>
 
 namespace Render
@@ -34,4 +34,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERSTATE_RENDERBLENDSTATE_H_ */

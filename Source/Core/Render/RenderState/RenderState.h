@@ -5,15 +5,15 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_PIPELINESTATE_RENDERSTATE_H_
-#define SOURCE_CORE_RENDER_PIPELINESTATE_RENDERSTATE_H_
+#ifndef SOURCE_CORE_RENDER_RENDERSTATE_RENDERSTATE_H_
+#define SOURCE_CORE_RENDER_RENDERSTATE_RENDERSTATE_H_
 
 #include <cstdint>
 
 namespace Render
 {
 
-enum class BlendFactor : uint32_t
+	enum class BlendFactor : uint32_t
 	{
 		BLEND_FACTOR_ZERO,
 		BLEND_FACTOR_ONE,
@@ -132,4 +132,4 @@ enum class BlendFactor : uint32_t
 	};
 }
 
-#endif /* SOURCE_CORE_RENDER_PIPELINESTATE_RENDERSTATE_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERSTATE_RENDERSTATE_H_ */

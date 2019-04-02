@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_RENDER_RENDERSWAPCHAIN_H_
 #define SOURCE_CORE_RENDER_RENDERSWAPCHAIN_H_
 
-#include "RenderExtent.hpp"
 #include "RenderColorBlend.h"
+#include "RenderExtent.hpp"
 #include "RenderObject.h"
 #include "RenderFormat.h"
 #include "PlatformWindow.h"
