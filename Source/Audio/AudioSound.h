@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_AUDIO_AUDIOSOUND_H_
-#define SOURCE_CORE_AUDIO_AUDIOSOUND_H_
+#ifndef SOURCE_AUDIO_AUDIOSOUND_H_
+#define SOURCE_AUDIO_AUDIOSOUND_H_
 
 #include "AudioObject.h"
 
@@ -32,4 +32,4 @@ protected:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_CORE_AUDIO_AUDIOSOUND_H_ */
+#endif /* SOURCE_AUDIO_AUDIOSOUND_H_ */

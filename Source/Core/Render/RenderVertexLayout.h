@@ -33,7 +33,7 @@ public:
 public:
 	inline bool IsValid(void) const { return mValid; }
 	inline size_t GetSizeInByte(void) const { return mSizeInByte; }
-	inline size_t GetCount(void) const { return mElements.size(); }
+	inline size_t GetElementCount(void) const { return mElements.size(); }
 	inline const Element& GetElement(uint32_t index) const { return mElements.at(index); }
 
 protected:

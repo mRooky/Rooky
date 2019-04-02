@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_AUDIO_AUDIOLISTENER_H_
-#define SOURCE_CORE_AUDIO_AUDIOLISTENER_H_
+#ifndef SOURCE_AUDIO_AUDIOLISTENER_H_
+#define SOURCE_AUDIO_AUDIOLISTENER_H_
 
 #include "AudioObject.h"
 
@@ -22,4 +22,4 @@ public:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_CORE_AUDIO_AUDIOLISTENER_H_ */
+#endif /* SOURCE_AUDIO_AUDIOLISTENER_H_ */

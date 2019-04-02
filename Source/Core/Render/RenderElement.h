@@ -43,9 +43,9 @@ public:
 public:
 	inline bool operator == (const Element& other) const
 	{
-		return mBinding == other.mBinding
-			&& mLocation == other.mLocation
-			&& mType == other.mType;
+		return mType == other.mType
+			&& mBinding == other.mBinding
+			&& mLocation == other.mLocation;
 	}
 
 protected:

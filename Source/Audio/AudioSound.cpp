@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#include "AudioSound.h"
 #include "AudioDevice.h"
+#include "AudioSound.h"
 #include <cassert>
 
 namespace Audio

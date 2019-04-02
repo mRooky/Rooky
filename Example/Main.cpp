@@ -5,8 +5,9 @@
  *      Author: rookyma
  */
 
+#include <Audio/AudioDevice.h>
+
 #include "ExampleTexture.h"
-#include "Audio/AudioDevice.h"
 
 int main(void)
 {

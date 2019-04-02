@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_AUDIO_AUDIOBUFFER_H_
-#define SOURCE_CORE_AUDIO_AUDIOBUFFER_H_
+#ifndef SOURCE_AUDIO_AUDIOBUFFER_H_
+#define SOURCE_AUDIO_AUDIOBUFFER_H_
 
 #include "AudioObject.h"
 #include <cstdint>
@@ -30,4 +30,4 @@ private:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_CORE_AUDIO_AUDIOBUFFER_H_ */
+#endif /* SOURCE_AUDIO_AUDIOBUFFER_H_ */
