@@ -19,6 +19,9 @@ public:
 	Object(void);
 	virtual ~Object(void);
 
+public:
+	inline GLuint GetID(void) const { return mID; }
+
 protected:
 	GLuint mID = 0;
 };
