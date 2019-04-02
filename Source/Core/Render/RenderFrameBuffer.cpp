@@ -32,7 +32,7 @@ void FrameBuffer::SetDepthStencil(Image* attachment)
 	if(attachment != nullptr)
 	{
 		auto& usage = attachment->GetUsage();
-		bool for_depth_stencil = usage.imageUsage.DepthStencil == 1;
+		bool for_depth_stencil = usage.imageUsage.DepthStencil == TRUE;
 		assert(true == for_depth_stencil);
 		if (true == for_depth_stencil)
 		{

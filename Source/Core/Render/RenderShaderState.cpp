@@ -54,17 +54,7 @@ bool ShaderState::operator==(const ShaderState& other) const
 	assert(mShaders.size() > 0);
 	if (mShaders.size() == other.mShaders.size())
 	{
-		const size_t count = mShaders.size();
-		for (size_t index = 0; index < count; ++index)
-		{
-			const Shader* inter = mShaders.at(index);
-			const Shader* outer = other.mShaders.at(index);
-			if (inter != outer)
-			{
-				return false;
-			}
-		}
-		return true;
+		return mShaders == other.mShaders;
 	}
 	return false;
 }

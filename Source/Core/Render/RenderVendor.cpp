@@ -5,20 +5,17 @@
  *      Author: rookyma
  */
 
-#include <RenderVendor.h>
+#include "RenderVendor.h"
 
 namespace Render
 {
 
-Vendor::Vendor()
+Vendor::Vendor(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Vendor::~Vendor()
+Vendor::~Vendor(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Render */

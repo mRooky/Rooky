@@ -68,9 +68,11 @@ void RenderPass::Create(void)
 		subpass_description.pDepthStencilAttachment = &depth_reference;
 	}
 
-	std::vector<VkSubpassDependency> subpass_dependencies;
-	subpass_dependencies.push_back(Vulkan::RenderPass::SubpassDenpendency(VK_SUBPASS_EXTERNAL, 0));
-	subpass_dependencies.push_back(Vulkan::RenderPass::SubpassDenpendency(0, VK_SUBPASS_EXTERNAL));
+	std::vector<VkSubpassDependency> subpass_dependencies =
+	{
+			Vulkan::RenderPass::SubpassDenpendency(VK_SUBPASS_EXTERNAL, 0),
+			Vulkan::RenderPass::SubpassDenpendency(0, VK_SUBPASS_EXTERNAL)
+	};
 
 	VkRenderPassCreateInfo renderpass_create_info = Vulkan::RenderPass::CreateInfo();
 	renderpass_create_info.attachmentCount = attachment_descriptions.size();

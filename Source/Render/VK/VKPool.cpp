@@ -42,7 +42,8 @@ Pool::~Pool(void)
 void Pool::CreateCommandPool(void)
 {
 	auto vulkan_device = mDevice.GetVulkanDevice();
-	uint32_t family = vulkan_device->GetPhysicalDevice()->GetFamily();
+	auto vulkan_physical = vulkan_device->GetPhysicalDevice();
+	uint32_t family = vulkan_physical->GetFamily();
 	mCommandPool = Vulkan::CommandPool::New(vulkan_device);
 	mCommandPool->Create(family);
 	mCommandPool->Allocate(VK_COMMAND_BUFFER_LEVEL_PRIMARY);
@@ -76,7 +77,7 @@ Vulkan::DescriptorSet* Pool::AllocateDescriptorSet(uint32_t count, const VkDescr
 {
 	assert(count > 0);
 	assert(mDescriptorPool != nullptr);
-	Vulkan::DescriptorSetLayout* layout = mDescriptorPool->GetLayout(count, bindings);
+	auto layout = mDescriptorPool->GetLayout(count, bindings);
 	return mDescriptorPool->Allocate(layout);
 }
 

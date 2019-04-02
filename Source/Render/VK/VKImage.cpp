@@ -58,10 +58,12 @@ void Image::CreateImage(void)
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
 
-	VkExtent3D vulkan_extent = {};
-	vulkan_extent.width = static_cast<uint32_t>(mLayout.extent.width);
-	vulkan_extent.height = static_cast<uint32_t>(mLayout.extent.height);
-	vulkan_extent.depth = static_cast<uint32_t>(mLayout.extent.depth);
+	VkExtent3D vulkan_extent =
+	{
+			static_cast<uint32_t>(mLayout.extent.width),
+			static_cast<uint32_t>(mLayout.extent.height),
+			static_cast<uint32_t>(mLayout.extent.depth)
+	};
 
 	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
 	mImage = Vulkan::Image::New(vulkan_device);
@@ -108,7 +110,8 @@ void Image::Download(void* dst)
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(index == 0 && mipmap == 0);
-	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
+	Render::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
@@ -175,7 +178,8 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 void Image::CopyFrom(const Render::Resource* other)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
-	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
+	Render::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	auto command_pool = vk_pool->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
@@ -214,7 +218,6 @@ size_t Image::GetMipmapSize(uint32_t mipmap) const
 
 VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 {
-	VkExtent2D extent = {};
 	if (mipmap > 0)
 	{
 		const auto& extent = mLayout.extent;
@@ -228,8 +231,12 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 			std::cout << "Width and Height must Power of 2 !" << std::endl;
 		}
 	}
-	extent.width = mLayout.extent.width / (1u << mipmap);
-	extent.height = mLayout.extent.height / (1u << mipmap);
+
+	VkExtent2D extent =
+	{
+		mLayout.extent.width / (1u << mipmap),
+		mLayout.extent.height / (1u << mipmap)
+	};
 	return extent;
 }
 
@@ -238,7 +245,8 @@ VkDescriptorType Image::GetDescriptorType(const Render::ImageUsage& usage)
 	VkDescriptorType descriptor_type =
 	(usage.SampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
 	(usage.StorageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
-	(usage.InputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT : VK_DESCRIPTOR_TYPE_MAX_ENUM;
+	(usage.InputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT :
+			VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
 	return descriptor_type;
 }

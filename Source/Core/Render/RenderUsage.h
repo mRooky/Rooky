@@ -115,28 +115,15 @@ public:
 public:
 	inline bool CPUAccessable(void) const
 	{
-		return (allocate.CPUAccess == 1);
+		return (allocate.CPUAccess == TRUE);
 	}
 
 public:
 	inline bool operator==(const ResourceUsage& other) const
 	{
-		bool base_equal = (type == other.type) && (allocate == other.allocate);
-		if (true == base_equal)
-		{
-			switch(type)
-			{
-			case ResourceType::RESOURCE_TYPE_IMAGE:
-				return (imageUsage == other.imageUsage);
-			case ResourceType::RESOURCE_TYPE_BUFFER:
-				return (bufferUsage == other.bufferUsage);
-			case ResourceType::RESOURCE_TYPE_SAMPLER:
-				return true;
-			default:
-				return false;
-			}
-		}
-		return false;
+		return (type == other.type)
+				&& (allocate == other.allocate)
+				&& (allUsageFlags == other.allUsageFlags);
 	}
 
 	inline bool operator!=(const ResourceUsage& other) const
@@ -151,8 +138,12 @@ public:
 public:
 	union
 	{
-		ImageUsage imageUsage;
-		BufferUsage bufferUsage;
+		union
+		{
+			ImageUsage imageUsage;
+			BufferUsage bufferUsage;
+		};
+		uint8_t allUsageFlags = 0;
 	};
 	AllocateType allocate;
 	ResourceType type = ResourceType::RESOURCE_TYPE_UNKNOWN;

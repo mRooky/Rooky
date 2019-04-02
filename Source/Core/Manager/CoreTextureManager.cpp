@@ -126,7 +126,8 @@ Texture* TextureManager::CreateTexture(void)
 
 Render::Sampler* TextureManager::CreateSampler(void)
 {
-	auto factory = mSystem->GetDevice()->GetFactory();
+	Render::Device* device = mSystem->GetDevice();
+	auto factory = device->GetFactory();
 	Render::Sampler* sampler = factory->CreateSampler();
 	mSamplers.push_back(sampler);
 	return sampler;

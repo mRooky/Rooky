@@ -49,11 +49,14 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 	auto& layout = attachment->GetLayout();
 	auto& extent = layout.extent;
 
-	std::cout << "Width:" << extent.width << " Height:" << extent.height << std::endl;
+	std::cout << "Width:" << extent.width << std::endl;
+	std::cout << "Height:" << extent.height << std::endl;
 
-	VkExtent2D vulkan_extent = {};
-	vulkan_extent.width = static_cast<uint32_t>(extent.width);
-	vulkan_extent.height = static_cast<uint32_t>(extent.height);
+	VkExtent2D vulkan_extent =
+	{
+			static_cast<uint32_t>(extent.width),
+			static_cast<uint32_t>(extent.height)
+	};
 
 	std::vector<Vulkan::Image*> attachments;
 	attachments.reserve(mAttachments.size() + 1);
@@ -71,8 +74,8 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 		attachments.push_back(vulkan_image);
 	}
 
-	RenderPass* pass = static_cast<RenderPass*>(mPass);
-	auto vulkan_pass = pass->GetVulkanRenderPass();
+	RenderPass* vk_pass = static_cast<RenderPass*>(mPass);
+	auto vulkan_pass = vk_pass->GetVulkanRenderPass();
 	mFrameBuffer = Vulkan::FrameBuffer::New(vulkan_pass->GetDevice());
 	mFrameBuffer->Create(vulkan_pass, attachments, vulkan_extent);
 }

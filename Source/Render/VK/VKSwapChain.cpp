@@ -39,7 +39,7 @@ SwapChain::~SwapChain(void)
 
 void SwapChain::Create(Platform::Window* window)
 {
-	auto vk_device = static_cast<Device*>(mDevice);
+	Device* vk_device = static_cast<Device*>(mDevice);
 	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
 	mSurface = Vulkan::Surface::New(vulkan_device->GetPhysicalDevice());
 
@@ -48,7 +48,7 @@ void SwapChain::Create(Platform::Window* window)
 	mSurface->Create(xcb_window->GetConnection(), xcb_window->GetWindow());
 #endif
 
-	const VkSurfaceCapabilitiesKHR& capabilities = mSurface->GetCapabilities();
+	const auto& capabilities = mSurface->GetCapabilities();
 	mExtent.width = static_cast<int32_t>(capabilities.currentExtent.width);
 	mExtent.height = static_cast<int32_t>(capabilities.currentExtent.height);
 

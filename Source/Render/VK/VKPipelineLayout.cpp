@@ -51,8 +51,9 @@ void PipelineLayout::CreateVulkanPipelineLayout(void)
 		auto set = mBindingLayout->GetBindingSet(index);
 		assert(set->IsValid());
 		auto vk_set = static_cast<const BindingSet*>(set);
-		Vulkan::DescriptorSetLayout* layout = vk_set->GetDescriptorSet()->GetLayout();
-		mDescriptorSetLayouts.push_back(layout);
+		Vulkan::DescriptorSet* vulkan_set = vk_set->GetDescriptorSet();
+		Vulkan::DescriptorSetLayout* vulkan_layout = vulkan_set->GetLayout();
+		mDescriptorSetLayouts.push_back(vulkan_layout);
 	}
 
 	Device* vk_device = static_cast<Device*>(mDevice);

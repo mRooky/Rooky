@@ -26,8 +26,10 @@ BindingSet::~BindingSet(void)
 void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 {
 	assert(index < mBindings.size());
-	auto old_usage = mBindings.at(index).GetResource()->GetUsage();
-	auto new_usage = binding.GetResource()->GetUsage();
+	Render::Resource* new_resource = binding.GetResource();
+	Render::Resource* old_resource = mBindings.at(index).GetResource();
+	auto old_usage = old_resource->GetUsage();
+	auto new_usage = new_resource->GetUsage();
 	assert(old_usage == new_usage);
 	if (old_usage == new_usage)
 	{

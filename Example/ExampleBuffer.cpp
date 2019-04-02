@@ -72,7 +72,7 @@ void Buffer::CreateFrameBuffer(void)
 {
 	assert(mPath->GetPassCount() > 0);
 	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
-	Render::Color clear_color = Render::Color(150, 150, 150);
+	Render::Color clear_color = Render::Color(10, 10, 10);
 	Render::Pass* pass = mPath->GetRenderPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{
@@ -180,8 +180,8 @@ void Buffer::CreateVertexBuffer(void)
 
 	std::vector<Render::Element> elements =
 	{
-			Render::Element(0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3),
-			Render::Element(0, 1, Render::ElementType::ELEMENT_TYPE_FLOAT2)
+		Render::Element(0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3),
+		Render::Element(0, 1, Render::ElementType::ELEMENT_TYPE_FLOAT2)
 	};
 
 	Render::AllocateType allocate;

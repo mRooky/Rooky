@@ -34,8 +34,10 @@ Buffer::~Buffer(void)
 
 void Buffer::Create(size_t size, Render::ResourceUsage usage)
 {
-	auto device = mCreator->GetSystem()->GetDevice();
-	mBuffer = device->GetFactory()->CreateBuffer();
+	System* system = mCreator->GetSystem();
+	Render::Device* device = system->GetDevice();
+	Render::Factory* factory = device->GetFactory();
+	mBuffer = factory->CreateBuffer();
 	mBuffer->Create(size, usage);
 }
 

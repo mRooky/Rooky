@@ -32,10 +32,9 @@ public:
 	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
 
 protected:
+	Render::Image* mDepthStencil = nullptr;
 	Render::SwapChain* mSwapChain = nullptr;
 
-protected:
-	Render::Image* mDepthStencil = nullptr;
 };
 
 } /* namespace Core */

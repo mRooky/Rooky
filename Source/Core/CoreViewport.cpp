@@ -52,7 +52,7 @@ void Viewport::CreateDepthStencil(const Render::Extent2Di& extent)
 	image_layout.format = device->GetBestDepthStencilFormat();
 
 	auto image_usage = Render::ResourceUsage::GetImageUsage(false);
-	image_usage.imageUsage.DepthStencil = 1;
+	image_usage.imageUsage.DepthStencil = TRUE;
 
 	mDepthStencil = device->GetFactory()->CreateImage();
 	mDepthStencil->Create(image_layout, image_usage);
