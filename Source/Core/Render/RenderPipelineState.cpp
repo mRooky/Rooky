@@ -20,15 +20,24 @@ PipelineState::~PipelineState(void)
 
 bool PipelineState::operator==(const PipelineState& other) const
 {
-	return mIndex == other.mIndex
+	bool equal = mIndex == other.mIndex
 	&& mRenderPass == other.mRenderPass
-	&& mBlendState == other.mBlendState
-	&& mShaderState == other.mShaderState
 	&& mVertexLayout == other.mVertexLayout
-	&& mPipelineLayout == other.mPipelineLayout
-	&& mMultisample == other.mMultisample
-	&& mInputAssembly == other.mInputAssembly
-	&& mRasterization == other.mRasterization;
+	&& mPipelineLayout == other.mPipelineLayout;
+	if (equal)
+	{
+		equal = mBlendState == other.mBlendState
+			&& mShaderState == other.mShaderState
+			&& mMultisample == other.mMultisample
+			&& mInputAssembly == other.mInputAssembly
+			&& mRasterization == other.mRasterization;
+
+		if (equal)
+		{
+			return mBlendState == other.mBlendState;
+		}
+	}
+	return false;
 }
 
 } /* namespace Core */

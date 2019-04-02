@@ -8,13 +8,13 @@
 #ifndef SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_
 #define SOURCE_CORE_RENDER_RENDERPIPELINESTATE_H_
 
-#include "RenderObject.h"
-#include "RenderShaderState.h"
-#include "RenderMultisample.h"
+#include "RenderBlendState.h"
 #include "RenderDepthStencil.h"
 #include "RenderInputAssembly.h"
+#include "RenderMultisample.h"
 #include "RenderRasterization.h"
-#include "RenderBlendState.h"
+#include "RenderObject.h"
+#include "RenderShaderState.h"
 
 namespace Render
 {

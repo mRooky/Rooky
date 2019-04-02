@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_STATE_RENDERCOLORBLEND_H_
-#define SOURCE_CORE_RENDER_STATE_RENDERCOLORBLEND_H_
+#ifndef SOURCE_CORE_RENDER_PIPELINESTATE_RENDERCOLORBLEND_H_
+#define SOURCE_CORE_RENDER_PIPELINESTATE_RENDERCOLORBLEND_H_
 
-#include "RenderState.h"
+#include <PipelineState/RenderState.h>
 
 namespace Render
 {
@@ -32,6 +32,11 @@ public:
 		&& colorWriteMask == other.colorWriteMask;
 	}
 
+	inline bool operator!=(const ColorBlend& other) const
+	{
+		return !(*this == other);
+	}
+
 public:
 	bool blendEnable = false;
 	BlendFactor srcColorBlendFactor = BlendFactor::BLEND_FACTOR_SRC_COLOR;
@@ -45,4 +50,4 @@ public:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_STATE_RENDERCOLORBLEND_H_ */
+#endif /* SOURCE_CORE_RENDER_PIPELINESTATE_RENDERCOLORBLEND_H_ */

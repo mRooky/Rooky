@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_STATE_RENDERBLENDSTATE_H_
-#define SOURCE_CORE_RENDER_STATE_RENDERBLENDSTATE_H_
+#ifndef SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_
+#define SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_
 
-#include "RenderColorBlend.h"
+#include <PipelineState/RenderColorBlend.h>
 #include <vector>
 
 namespace Render
@@ -29,9 +29,9 @@ public:
 	inline const ColorBlend& GetColorBlend(size_t index) const { return mColorBlends.at(index); }
 
 protected:
-	std::vector<ColorBlend> mColorBlends = {};
+	std::vector<ColorBlend> mColorBlends;
 };
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_RENDER_STATE_RENDERBLENDSTATE_H_ */
+#endif /* SOURCE_CORE_RENDER_PIPELINESTATE_RENDERBLENDSTATE_H_ */
