@@ -10,6 +10,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <cmath>
 
 namespace Render
 {
@@ -35,15 +36,65 @@ public:
 
 };
 
-typedef Vector2_t<float> Offset2Df;
+typedef Vector2_t<float> Offset2Df, Vector2f;
 typedef Vector2_t<int32_t> Point2, Offset2Di;
 
 template<typename T>
 class Vector3_t
 {
 public:
+	Vector3_t(T X = 0, T Y = 0, T Z = 0) : x(X), y(Y), z(Z) {}
+
+public:
 	inline T& operator[](size_t index) { return *(&x + index); }
 	inline const T& operator[](size_t index) const { return *(&x + index); }
+	inline T Length(void) const { return std::sqrt(x * x + y * y + z * z); }
+
+public:
+template<typename V>
+inline Vector3_t operator+(V value)
+{
+	return Vector3_t(x + value, y + value, z + value);
+}
+
+template<typename V>
+inline Vector3_t operator-(V value)
+{
+	return Vector3_t(x - value, y - value, z - value);
+}
+
+template<typename V>
+inline Vector3_t operator*(V value)
+{
+	return Vector3_t(x * value, y * value, z * value);
+}
+
+template<typename V>
+inline Vector3_t operator/(V value)
+{
+	return Vector3_t(x / value, y / value, z / value);
+}
+
+public:
+inline Vector3_t operator+(const Vector3_t& other)
+{
+	return Vector3_t(x + other.x, y + other.y, z + other.z);
+}
+
+inline Vector3_t operator-(const Vector3_t& other)
+{
+	return Vector3_t(x - other.x, y - other.y, z - other.z);
+}
+
+inline Vector3_t operator*(const Vector3_t& other)
+{
+	return Vector3_t(x * other.x, y * other.y, z * other.z);
+}
+
+inline Vector3_t operator/(const Vector3_t& other)
+{
+	return Vector3_t(x / other.x, y / other.y, z / other.z);
+}
 
 public:
 	union
@@ -59,6 +110,8 @@ public:
 	};
 
 };
+
+typedef Vector3_t<float> Vector3f;
 
 template<typename T>
 class Vector4_t
@@ -81,6 +134,8 @@ public:
 		};
 	};
 };
+
+typedef Vector4_t<float> Vector4f;
 
 }
 
