@@ -6,6 +6,7 @@
  */
 
 #include "CoreSubMesh.h"
+#include <cassert>
 
 namespace Core
 {
@@ -13,6 +14,7 @@ namespace Core
 SubMesh::SubMesh(Mesh* parent):
 		mParent(parent)
 {
+	assert(mParent != nullptr);
 }
 
 SubMesh::~SubMesh(void)

@@ -8,21 +8,17 @@
 #ifndef SOURCE_CORE_COREMESH_H_
 #define SOURCE_CORE_COREMESH_H_
 
-#include "CoreBase.h"
+#include "CoreRenderable.h"
 #include "CoreDataType.h"
-#include "RenderAABB.h"
 
 #include <array>
 #include <vector>
 
 namespace Core
 {
-class Index;
-class Vertex;
-class Material;
 class SubMesh;
 class MeshManager;
-class Mesh : public Base
+class Mesh : public Renderable
 {
 	friend class MeshManager;
 protected:
@@ -36,31 +32,6 @@ public:
 
 public:
 	void* Allocate(StreamType type, size_t size, bool discard);
-
-public:
-	inline void SetIndex(Index* index, size_t offset)
-	{
-		mIndex = index;
-		mIndexOffset = offset;
-	}
-
-	inline void SetVertex(Vertex* vertex, size_t offset)
-	{
-		mVertex = vertex;
-		mVertexOffset = offset;
-	}
-
-public:
-	inline Index* GetIndex(void) const { return mIndex; }
-	inline size_t GetIndexOffset(void) const { return mIndexOffset; }
-
-public:
-	inline Vertex* GetVertex(void) const { return mVertex; }
-	inline size_t  GetVertexOffset(void) const { return mVertexOffset; }
-
-public:
-	inline Material* GetMaterial(void) const { return mMaterial; }
-	inline void SetMaterial(Material* material) { mMaterial = material; }
 
 public:
 	inline void* GetStream(StreamType type)
@@ -78,22 +49,8 @@ protected:
 	void FreeStream(StreamType type);
 
 protected:
-	Render::AABB mAABB = {};
 	MeshManager* mManager = nullptr;
-
-protected:
-	Index* mIndex = nullptr;
-	size_t mIndexOffset = 0;
-
-protected:
-	Vertex* mVertex = nullptr;
-	size_t  mVertexOffset = 0;
-
-protected:
-	Material* mMaterial = nullptr;
 	std::vector<SubMesh*> mSubMeshes;
-
-protected:
 	std::array<uint8_t*, STREAM_TYPE_COUNT> mStreams;
 };
 

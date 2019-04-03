@@ -9,6 +9,7 @@
 #define SOURCE_CORE_CORENODE_H_
 
 #include "CoreBase.h"
+#include "RenderAABB.h"
 
 namespace Core
 {
@@ -18,6 +19,9 @@ class Node: public Base
 public:
 	Node(void);
 	virtual ~Node(void) override;
+
+protected:
+	Render::AABB mAABB = {};
 };
 
 } /* namespace Core */

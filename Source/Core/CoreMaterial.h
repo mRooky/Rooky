@@ -9,7 +9,7 @@
 #define SOURCE_CORE_COREMATERIAL_H_
 
 #include "CoreBase.h"
-#include <vector>
+#include "CoreShaderResource.h"
 
 namespace Core
 {
@@ -25,18 +25,18 @@ public:
 	void SetSubMaterial(size_t index, Material* material);
 
 public:
+	inline size_t GetSubMaterialCount(void) const { return mSubMaterials.size(); }
+	inline Material* GetSubMaterial(size_t index) const { return mSubMaterials.at(index); }
 	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
 
 public:
-	inline size_t GetSubMaterialCount(void) const { return mSubMaterials.size(); }
-	inline Material* GetSubMaterial(size_t index) const { return mSubMaterials.at(index); }
-
-public:
 	inline MaterialManager* GetManager(void) const { return mManager; }
+	inline ShaderResource* GetShaderResource(void) { return &mShaderResource; }
 
 protected:
 	MaterialManager* mManager = nullptr;
 	std::vector<Material*> mSubMaterials;
+	ShaderResource mShaderResource = {};
 };
 
 } /* namespace Core */
