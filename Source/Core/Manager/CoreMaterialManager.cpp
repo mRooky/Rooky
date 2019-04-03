@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#include "CoreMaterialManager.h"
 #include "CoreMaterial.h"
+#include "CoreMaterialManager.h"
 
 namespace Core
 {

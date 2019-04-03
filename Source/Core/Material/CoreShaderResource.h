@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_CORESHADERRESOURCE_H_
-#define SOURCE_CORE_CORESHADERRESOURCE_H_
+#ifndef SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
+#define SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 
 #include "RenderClasses.h"
 #include <vector>
@@ -22,6 +22,13 @@ public:
 	~ShaderResource(void);
 
 public:
+	void SetUniform(Uniform* uniform, size_t offset);
+
+public:
+	inline bool IsEnabled(void) { return mEnabled; }
+	inline void SetEnabled(bool use) { mEnabled = use; }
+
+public:
 	inline Render::Shader* GetShader(void) const { return mShader; }
 	inline void SetShader(Render::Shader* shader)  { mShader = shader; }
 
@@ -31,16 +38,11 @@ public:
 	inline Texture* GetTexture(size_t index) const { return mTextures.at(index); }
 
 public:
-	inline void SetUniform(Uniform* uniform, size_t offset)
-	{
-		mUniform = uniform;
-		mUniformOffset = offset;
-	}
-
 	inline Uniform* GetUniform(void) const { return mUniform; }
 	inline size_t GetUniformOffset(void) const { return mUniformOffset; }
 
 protected:
+	bool mEnabled = false;
 	Render::Shader* mShader = nullptr;
 
 protected:
@@ -51,4 +53,4 @@ protected:
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_CORESHADERRESOURCE_H_ */
+#endif /* SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_ */

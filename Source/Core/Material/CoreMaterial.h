@@ -5,11 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_COREMATERIAL_H_
-#define SOURCE_CORE_COREMATERIAL_H_
+#ifndef SOURCE_CORE_MATERIAL_COREMATERIAL_H_
+#define SOURCE_CORE_MATERIAL_COREMATERIAL_H_
 
-#include "CoreBase.h"
 #include "CoreShaderResource.h"
+#include "CoreBase.h"
+#include <array>
 
 namespace Core
 {
@@ -30,15 +31,18 @@ public:
 	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
 
 public:
+	inline ShaderResource* GetShaderResource(size_t index) { return &mShaderResources.at(index); }
+	inline void EnabledShaderResource(size_t index, bool use) { mShaderResources.at(index).SetEnabled(use); }
+
+public:
 	inline MaterialManager* GetManager(void) const { return mManager; }
-	inline ShaderResource* GetShaderResource(void) { return &mShaderResource; }
 
 protected:
 	MaterialManager* mManager = nullptr;
 	std::vector<Material*> mSubMaterials;
-	ShaderResource mShaderResource = {};
+	std::array<ShaderResource, 5> mShaderResources;
 };
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_COREMATERIAL_H_ */
+#endif /* SOURCE_CORE_MATERIAL_COREMATERIAL_H_ */
