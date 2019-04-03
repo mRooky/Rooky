@@ -20,6 +20,8 @@ class Material : Base
 	friend class MaterialManager;
 protected:
 	explicit Material(MaterialManager* manager);
+
+public:
 	virtual ~Material(void);
 
 public:
@@ -31,8 +33,8 @@ public:
 	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
 
 public:
-	inline ShaderResource* GetShaderResource(size_t index) { return &mShaderResources.at(index); }
-	inline void EnabledShaderResource(size_t index, bool use) { mShaderResources.at(index).SetEnabled(use); }
+	inline ShaderResource* GetShaderResource(size_t index) { return mShaderResources.at(index); }
+	inline void SetShaderResource(size_t index, ShaderResource* resource) { mShaderResources.at(index) = resource; }
 
 public:
 	inline MaterialManager* GetManager(void) const { return mManager; }
@@ -40,7 +42,7 @@ public:
 protected:
 	MaterialManager* mManager = nullptr;
 	std::vector<Material*> mSubMaterials;
-	std::array<ShaderResource, 5> mShaderResources;
+	std::array<ShaderResource*, 5> mShaderResources;
 };
 
 } /* namespace Core */

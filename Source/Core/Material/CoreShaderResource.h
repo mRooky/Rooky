@@ -25,10 +25,6 @@ public:
 	void SetUniform(Uniform* uniform, size_t offset);
 
 public:
-	inline bool IsEnabled(void) { return mEnabled; }
-	inline void SetEnabled(bool use) { mEnabled = use; }
-
-public:
 	inline Render::Shader* GetShader(void) const { return mShader; }
 	inline void SetShader(Render::Shader* shader)  { mShader = shader; }
 
@@ -42,7 +38,6 @@ public:
 	inline size_t GetUniformOffset(void) const { return mUniformOffset; }
 
 protected:
-	bool mEnabled = false;
 	Render::Shader* mShader = nullptr;
 
 protected:

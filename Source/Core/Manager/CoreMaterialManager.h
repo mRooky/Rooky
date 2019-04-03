@@ -14,6 +14,7 @@
 namespace Core
 {
 class Material;
+class ShaderResource;
 class MaterialManager: public Object
 {
 public:
@@ -26,6 +27,7 @@ public:
 
 protected:
 	std::vector<Material*> mMaterials;
+	std::vector<ShaderResource*> mShaderResources;
 };
 
 } /* namespace Core */

@@ -7,6 +7,9 @@
 
 #include "CoreMaterial.h"
 #include "CoreMaterialManager.h"
+#include "CoreShaderResource.h"
+
+#include "UtilityRelease.h"
 
 namespace Core
 {
@@ -18,6 +21,8 @@ MaterialManager::MaterialManager(System* system):
 
 MaterialManager::~MaterialManager(void)
 {
+	Utility::Release(mMaterials);
+	Utility::Release(mShaderResources);
 }
 
 Material* MaterialManager::GetMaterial(const char* name)
