@@ -23,15 +23,10 @@ public:
 	void Update(uint32_t index, uint32_t mipmap, const void* src);
 
 public:
-	inline void SetName(const char* name) { mName = name; }
-	inline const char* GetName(void) const { return mName.c_str(); }
-
-public:
 	inline Render::Sampler* GetSampler(void) const { return mSampler; }
 	inline void SetSampler(Render::Sampler* sampler) { mSampler = sampler; }
 
 protected:
-	std::string mName;
 	Render::Sampler* mSampler = nullptr;
 };
 

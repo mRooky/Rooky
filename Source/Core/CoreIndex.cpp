@@ -13,6 +13,7 @@
 #include "RenderBuffer.h"
 #include "RenderInline.h"
 #include "RenderDevice.h"
+#include "RenderFactory.h"
 
 #include <iostream>
 
@@ -20,13 +21,15 @@ namespace Core
 {
 
 Index::Index(BufferManager* creator):
-		Buffer(creator)
+		mCreator(creator)
 {
 }
 
 Index::~Index(void)
 {
 	mCount = 0;
+	delete mBuffer;
+	mBuffer = nullptr;
 	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
@@ -34,19 +37,24 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType 
 {
 	mType = type;
 	mCount = count;
-	CreateBuffer(allocate);
+	CreateRenderBuffer(allocate);
 	mDrawIndexed.SetIndexCount(mCount);
 	std::cout << "Create Index Type : " << Render::GetIndexTypeName(mType) << std::endl;
 }
 
-void Index::CreateBuffer(Render::AllocateType allocate)
+void Index::CreateRenderBuffer(Render::AllocateType allocate)
 {
 	size_t size = Render::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;
 	buffer_usage.bufferUsage.IndexBuffer = TRUE;
-	Buffer::Create(size, buffer_usage);
+
+	System* system = mCreator->GetSystem();
+	Render::Device* device = system->GetDevice();
+	Render::Factory* factory = device->GetFactory();
+	mBuffer = factory->CreateBuffer();
+	mBuffer->Create(size, buffer_usage);
 }
 
 } /* namespace Core */

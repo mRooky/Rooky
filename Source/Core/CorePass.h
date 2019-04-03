@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_COREPASS_H_
 #define SOURCE_CORE_COREPASS_H_
 
-#include <RenderState/RenderDepthStencil.h>
 #include "RenderClasses.h"
 #include "RenderFormat.h"
 #include "RenderShaderState.h"
+#include "RenderDepthStencil.h"
 #include <vector>
 
 namespace Core

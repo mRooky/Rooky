@@ -158,7 +158,7 @@ void Texture::CreatePipeline(void)
 		auto binding_set = binding_manager->CreateSet();
 		{
 			assert(mUniform != nullptr);
-			auto resource = mUniform->GetBuffer();
+			Render::Resource* resource = mUniform->GetRenderResource();
 			Render::Binding binding = {};
 			auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
 			binding.SetResource(resource, shader_stage);
@@ -172,9 +172,9 @@ void Texture::CreatePipeline(void)
 			Render::ShaderStage shader_stage = Render::ShaderStage::SHADER_STAGE_FRAGMENT;
 			Core::Texture* texture = mPass->GetTexture(index);
 			{
-				Render::Image* image = texture->GetImage();
+				Render::Resource* resource = texture->GetRenderResource();
 				Render::Binding binding = {};
-				binding.SetResource(image, shader_stage);
+				binding.SetResource(resource, shader_stage);
 				binding_set->AppendBinding(binding);
 			}
 

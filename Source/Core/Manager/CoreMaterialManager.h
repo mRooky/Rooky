@@ -9,15 +9,23 @@
 #define SOURCE_CORE_MANAGER_COREMATERIALMANAGER_H_
 
 #include "CoreObject.h"
+#include <vector>
 
 namespace Core
 {
-
+class Material;
 class MaterialManager: public Object
 {
 public:
 	explicit MaterialManager(System* system);
 	virtual ~MaterialManager(void) override;
+
+public:
+	Material* GetMaterial(const char* name);
+	Material* CreateMaterial(const char* name);
+
+protected:
+	std::vector<Material*> mMaterials;
 };
 
 } /* namespace Core */

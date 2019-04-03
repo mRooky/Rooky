@@ -12,6 +12,7 @@
 #include "RenderVertexLayout.h"
 #include "RenderBuffer.h"
 #include "RenderDevice.h"
+#include "RenderFactory.h"
 
 #include <cassert>
 #include <iostream>
@@ -20,7 +21,7 @@ namespace Core
 {
 
 Vertex::Vertex(BufferManager* creator):
-		Buffer(creator)
+		mCreator(creator)
 {
 }
 
@@ -28,17 +29,19 @@ Vertex::~Vertex(void)
 {
 	mCount = 0;
 	mLayout = nullptr;
+	delete mBuffer;
+	mBuffer = nullptr;
 }
 
 void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate)
 {
 	mCount = count;
 	mLayout = layout;
-	CreateBuffer(allocate);
+	CreateRenderBuffer(allocate);
 	std::cout << "Create Vertex Count : " << mCount << std::endl;
 }
 
-void Vertex::CreateBuffer(Render::AllocateType allocate)
+void Vertex::CreateRenderBuffer(Render::AllocateType allocate)
 {
 	assert(mLayout->IsValid());
 	size_t size = mLayout->GetSizeInByte() * mCount;
@@ -46,7 +49,12 @@ void Vertex::CreateBuffer(Render::AllocateType allocate)
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
 	buffer_usage.allocate = allocate;
 	buffer_usage.bufferUsage.VertexBuffer = TRUE;
-	Buffer::Create(size, buffer_usage);
+
+	System* system = mCreator->GetSystem();
+	Render::Device* device = system->GetDevice();
+	Render::Factory* factory = device->GetFactory();
+	mBuffer = factory->CreateBuffer();
+	mBuffer->Create(size, buffer_usage);
 }
 
 } /* namespace Core */

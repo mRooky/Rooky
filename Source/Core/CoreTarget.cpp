@@ -27,19 +27,17 @@ Target::Target(TextureManager* manager):
 
 Target::~Target(void)
 {
-	delete mImage;
-	mImage = nullptr;
 	mManager = nullptr;
 }
 
 void Target::Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage)
 {
-	assert(mImage == nullptr);
+	assert(mResource == nullptr);
 	auto system = mManager->GetSystem();
 	auto device = system->GetDevice();
 	auto factory = device->GetFactory();
-	mImage = factory->CreateImage();
-	mImage->Create(layout, usage);
+	mResource = factory->CreateImage();
+	static_cast<Render::Image*>(mResource)->Create(layout, usage);
 	std::cout << "Image Width " << layout.extent.width << std::endl;
 	std::cout << "Image Height " << layout.extent.height << std::endl;
 }

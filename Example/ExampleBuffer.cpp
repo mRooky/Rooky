@@ -145,12 +145,12 @@ void Buffer::CreateIndexBuffer(void)
 
 	mIndex = buffer_manager->CreateIndex();
 	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, count, allocate);
-	mIndex->Write(indexes.data(), 0, size);
+	mIndex->GetBuffer()->Write(indexes.data(), 0, size);
 
 	if (false)
 	{
 		std::array<uint16_t, 6> data;
-		mIndex->Read(data.data(), 0, size);
+		mIndex->GetBuffer()->Read(data.data(), 0, size);
 		assert(size);
 	}
 }
@@ -193,12 +193,12 @@ void Buffer::CreateVertexBuffer(void)
 	const size_t count = vertex_buffer.size();
 	const uint32_t size = count * sizeof(Vertex);
 	mVertex->Create(layout, count, allocate);
-	mVertex->Write(vertex_buffer.data(), 0, size);
+	mVertex->GetBuffer()->Write(vertex_buffer.data(), 0, size);
 
 	if (false)
 	{
 		std::array<Vertex, 4> data;
-		mVertex->Read(data.data(), 0, size);
+		mVertex->GetBuffer()->Read(data.data(), 0, size);
 		assert(size);
 	}
 }

@@ -14,7 +14,6 @@
 
 #include <array>
 #include <vector>
-#include <string>
 
 namespace Core
 {
@@ -36,15 +35,28 @@ public:
 	SubMesh* CreateSubMesh(void);
 
 public:
-	void* Allocate(StreamType type, size_t size, bool discard = true);
+	void* Allocate(StreamType type, size_t size, bool discard);
 
 public:
-	inline Index* GetIndex(void) const { return mIndex; };
-	inline void SetIndex(Index* index) { mIndex = index; };
+	inline void SetIndex(Index* index, size_t offset)
+	{
+		mIndex = index;
+		mIndexOffset = offset;
+	}
+
+	inline void SetVertex(Vertex* vertex, size_t offset)
+	{
+		mVertex = vertex;
+		mVertexOffset = offset;
+	}
+
+public:
+	inline Index* GetIndex(void) const { return mIndex; }
+	inline size_t GetIndexOffset(void) const { return mIndexOffset; }
 
 public:
 	inline Vertex* GetVertex(void) const { return mVertex; }
-	inline void SetVertex(Vertex* vertex) { mVertex = vertex; }
+	inline size_t  GetVertexOffset(void) const { return mVertexOffset; }
 
 public:
 	inline Material* GetMaterial(void) const { return mMaterial; }

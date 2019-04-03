@@ -8,13 +8,14 @@
 #ifndef SOURCE_CORE_CORETARGET_H_
 #define SOURCE_CORE_CORETARGET_H_
 
+#include "CoreResource.h"
 #include "RenderClasses.h"
 #include "RenderLayout.hpp"
 
 namespace Core
 {
 class TextureManager;
-class Target
+class Target : public Resource
 {
 public:
 	explicit Target(TextureManager* manager);
@@ -24,14 +25,9 @@ public:
 	void Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage);
 
 public:
-	inline bool IsValid(void) const { return mImage != nullptr; }
-
-public:
-	inline Render::Image* GetImage(void) const { return mImage; }
 	inline TextureManager* GetManager(void) const { return mManager; }
 
 protected:
-	Render::Image* mImage = nullptr;
 	TextureManager* mManager = nullptr;
 };
 

@@ -29,8 +29,8 @@ Texture::~Texture(void)
 
 void Texture::Update(uint32_t index, uint32_t mipmap, const void* src)
 {
-	assert(mImage != nullptr);
-	mImage->Upload(index, mipmap, src);
+	assert(mResource != nullptr);
+	static_cast<Render::Image*>(mResource)->Upload(index, mipmap, src);
 }
 
 } /* namespace Core */

@@ -25,6 +25,10 @@ public:
 	virtual void Create(size_t size, const ResourceUsage& usage) = 0;
 
 public:
+	void Read(void* dst, size_t offset, size_t size);
+	void Write(const void* src, size_t offset, size_t size);
+
+public:
 	virtual void Download(void* dst) = 0;
 	virtual void Upload(const void* src) = 0;
 
