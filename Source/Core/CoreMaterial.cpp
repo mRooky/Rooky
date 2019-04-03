@@ -5,20 +5,18 @@
  *      Author: rookyma
  */
 
-#include <CoreMaterial.h>
+#include "CoreMaterial.h"
 
 namespace Core
 {
 
-Material::Material()
+Material::Material(MaterialManager* manager):
+		mManager(manager)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Material::~Material()
+Material::~Material(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

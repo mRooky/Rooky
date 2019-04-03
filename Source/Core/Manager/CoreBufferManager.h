@@ -21,7 +21,7 @@ class Vertex;
 class Uniform;
 class BufferManager : public Object
 {
-	friend class System;
+	friend class MeshManager;
 private:
 	explicit BufferManager(System* system);
 	virtual ~BufferManager(void) override;

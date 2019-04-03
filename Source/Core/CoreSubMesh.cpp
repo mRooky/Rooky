@@ -11,7 +11,7 @@ namespace Core
 {
 
 SubMesh::SubMesh(Mesh* parent):
-		m_parent(parent)
+		mParent(parent)
 {
 }
 

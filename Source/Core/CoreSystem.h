@@ -8,13 +8,13 @@
 #ifndef SOURCE_CORE_CORESYSTEM_H_
 #define SOURCE_CORE_CORESYSTEM_H_
 
-#include <RenderMath/RenderMath.h>
+#include "RenderMath.h"
 #include "RenderClasses.h"
 #include "RenderFormat.h"
 
 namespace Core
 {
-class BufferManager;
+class MeshManager;
 class TextureManager;
 class BindingManager;
 class PipelineManager;
@@ -31,7 +31,7 @@ public:
 	inline Render::Device* GetDevice(void) const { return mDevice; }
 
 public:
-	inline BufferManager* GetBufferManager(void) const { return mBufferManager; }
+	inline MeshManager* GetMeshManager(void) const { return mMeshManager; }
 	inline TextureManager* GetTextureManager(void) const { return mTextureManager; }
 	inline BindingManager* GetBindingManager(void) const { return mBindingManager; }
 	inline PipelineManager* GetPipelineManager(void) const { return mPipelineManager; }
@@ -40,7 +40,7 @@ protected:
 	Render::Device* mDevice = nullptr;
 
 protected:
-	BufferManager* mBufferManager = nullptr;
+	MeshManager* mMeshManager = nullptr;
 	TextureManager* mTextureManager = nullptr;
 	BindingManager* mBindingManager = nullptr;
 	PipelineManager* mPipelineManager = nullptr;

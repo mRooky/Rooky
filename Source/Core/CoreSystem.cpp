@@ -7,7 +7,7 @@
 
 #include "CoreSystem.h"
 
-#include "CoreBufferManager.h"
+#include "CoreMeshManager.h"
 #include "CoreTextureManager.h"
 #include "CoreBindingManager.h"
 #include "CorePipelineManager.h"
@@ -27,8 +27,8 @@ System::System(void)
 
 System::~System(void)
 {
-	delete mBufferManager;
-	mBufferManager = nullptr;
+	delete mMeshManager;
+	mMeshManager = nullptr;
 	delete mTextureManager;
 	mTextureManager = nullptr;
 	delete mBindingManager;
@@ -43,7 +43,7 @@ void System::Create(void)
 	mDevice = Render::CreateDevice();
 	assert(mDevice != nullptr);
 	mDevice->Create();
-	mBufferManager = new BufferManager(this);
+	mMeshManager = new MeshManager(this);
 	mTextureManager = new TextureManager(this);
 	mBindingManager = new BindingManager(this);
 	mPipelineManager = new PipelineManager(this);

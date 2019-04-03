@@ -8,25 +8,24 @@
 #ifndef SOURCE_CORE_COREMATERIAL_H_
 #define SOURCE_CORE_COREMATERIAL_H_
 
+#include "CoreBase.h"
 #include <vector>
 
 namespace Core
 {
-class Pass;
-class Material
+class MaterialManager;
+class Material : Base
 {
-public:
-	Material(void);
+protected:
+	explicit Material(MaterialManager* manager);
 	virtual ~Material(void);
 
 public:
-	Pass* CreatePass(void);
-
-public:
-	inline Pass* GetPass(size_t index) const { return mPasses.at(index); }
+	inline MaterialManager* GetManager(void) const { return mManager; }
 
 protected:
-	std::vector<Pass*> mPasses;
+	MaterialManager* mManager = nullptr;
+	std::vector<Material*> mSubMaterials;
 };
 
 } /* namespace Core */

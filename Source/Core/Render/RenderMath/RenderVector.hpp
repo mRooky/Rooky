@@ -52,46 +52,46 @@ public:
 
 public:
 template<typename V>
-inline Vector3_t operator+(V value)
+inline Vector3_t operator+(V value) const
 {
 	return Vector3_t(x + value, y + value, z + value);
 }
 
 template<typename V>
-inline Vector3_t operator-(V value)
+inline Vector3_t operator-(V value) const
 {
 	return Vector3_t(x - value, y - value, z - value);
 }
 
 template<typename V>
-inline Vector3_t operator*(V value)
+inline Vector3_t operator*(V value) const
 {
 	return Vector3_t(x * value, y * value, z * value);
 }
 
 template<typename V>
-inline Vector3_t operator/(V value)
+inline Vector3_t operator/(V value) const
 {
 	return Vector3_t(x / value, y / value, z / value);
 }
 
 public:
-inline Vector3_t operator+(const Vector3_t& other)
+inline Vector3_t operator+(const Vector3_t& other) const
 {
 	return Vector3_t(x + other.x, y + other.y, z + other.z);
 }
 
-inline Vector3_t operator-(const Vector3_t& other)
+inline Vector3_t operator-(const Vector3_t& other) const
 {
 	return Vector3_t(x - other.x, y - other.y, z - other.z);
 }
 
-inline Vector3_t operator*(const Vector3_t& other)
+inline Vector3_t operator*(const Vector3_t& other) const
 {
 	return Vector3_t(x * other.x, y * other.y, z * other.z);
 }
 
-inline Vector3_t operator/(const Vector3_t& other)
+inline Vector3_t operator/(const Vector3_t& other) const
 {
 	return Vector3_t(x / other.x, y / other.y, z / other.z);
 }

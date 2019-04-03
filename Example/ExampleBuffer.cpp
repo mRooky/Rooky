@@ -7,12 +7,13 @@
 
 #include "ExampleBuffer.h"
 
-#include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
 #include "CorePass.h"
 #include "CoreSystem.h"
+#include "CoreMeshManager.h"
+#include "CoreBufferManager.h"
 
 #include "RenderCommandList.h"
 #include "RenderImage.h"
@@ -132,7 +133,8 @@ int32_t Buffer::ShowModal(void)
 void Buffer::CreateIndexBuffer(void)
 {
 	assert(mSystem != nullptr);
-	auto manager = mSystem->GetBufferManager();
+	auto mesh_manager = mSystem->GetMeshManager();
+	auto buffer_manager = mesh_manager->GetBufferManager();
 
 	Render::AllocateType allocate;
 	allocate.CPUAccess = 1;
@@ -141,7 +143,7 @@ void Buffer::CreateIndexBuffer(void)
 	const size_t count = indexes.size();
 	const size_t size = sizeof(uint16_t) * count;
 
-	mIndex = manager->CreateIndex();
+	mIndex = buffer_manager->CreateIndex();
 	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, count, allocate);
 	mIndex->Write(indexes.data(), 0, size);
 
@@ -156,9 +158,10 @@ void Buffer::CreateIndexBuffer(void)
 void Buffer::CreateVertexBuffer(void)
 {
 	assert(mSystem != nullptr);
-	auto manager = mSystem->GetBufferManager();
+	auto mesh_manager = mSystem->GetMeshManager();
+	auto buffer_manager = mesh_manager->GetBufferManager();
 
-	mVertex = manager->CreateVertex();
+	mVertex = buffer_manager->CreateVertex();
 
 	struct Vertex
 	{
@@ -186,7 +189,7 @@ void Buffer::CreateVertexBuffer(void)
 
 	Render::AllocateType allocate;
 	allocate.CPUAccess = 1;
-	auto layout = manager->CreateVertexLayout(elements);
+	auto layout = buffer_manager->CreateVertexLayout(elements);
 	const size_t count = vertex_buffer.size();
 	const uint32_t size = count * sizeof(Vertex);
 	mVertex->Create(layout, count, allocate);
@@ -203,12 +206,13 @@ void Buffer::CreateVertexBuffer(void)
 void Buffer::CreateUniformBuffer(void)
 {
 	assert(mSystem != nullptr);
-	auto manager = mSystem->GetBufferManager();
+	auto mesh_manager = mSystem->GetMeshManager();
+	auto buffer_manager = mesh_manager->GetBufferManager();
 
 	Render::AllocateType allocate;
 	allocate.CPUAccess = 1;
 
-	mUniform = manager->CreateUniform();
+	mUniform = buffer_manager->CreateUniform();
 	glm::mat4 matrix = glm::mat4(1.0f);
 
 	uint32_t size = sizeof(matrix);
