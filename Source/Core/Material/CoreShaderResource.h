@@ -22,9 +22,6 @@ public:
 	~ShaderResource(void);
 
 public:
-	void SetUniform(Uniform* uniform, size_t offset);
-
-public:
 	inline Render::Shader* GetShader(void) const { return mShader; }
 	inline void SetShader(Render::Shader* shader)  { mShader = shader; }
 
@@ -33,16 +30,10 @@ public:
 	inline size_t GetTextureCount(void) const { return mTextures.size(); }
 	inline Texture* GetTexture(size_t index) const { return mTextures.at(index); }
 
-public:
-	inline Uniform* GetUniform(void) const { return mUniform; }
-	inline size_t GetUniformOffset(void) const { return mUniformOffset; }
-
 protected:
 	Render::Shader* mShader = nullptr;
 
 protected:
-	Uniform* mUniform = nullptr;
-	size_t mUniformOffset = 0;
 	std::vector<Texture*> mTextures;
 };
 

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 #define SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 
-#include "RenderVector.hpp"
+#include <array>
 
 namespace Core
 {
@@ -32,8 +32,9 @@ protected:
 	size_t mOffset = 0;
 	Uniform* mUniform = nullptr;
 
-protected: // uniform data
+protected: // material uniform data
 	const size_t mSize = 128;
+	std::array<uint8_t, 128> mBuffer;
 
 };
 

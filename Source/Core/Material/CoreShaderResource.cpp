@@ -16,15 +16,7 @@ ShaderResource::ShaderResource(void)
 
 ShaderResource::~ShaderResource(void)
 {
-	mUniform = nullptr;
-	mUniformOffset = 0;
 	mTextures.clear();
-}
-
-void ShaderResource::SetUniform(Uniform* uniform, size_t offset)
-{
-	mUniform = uniform;
-	mUniformOffset = offset;
 }
 
 } /* namespace Core */

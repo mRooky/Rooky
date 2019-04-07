@@ -29,7 +29,7 @@ public:
 	void SetSubMaterial(size_t index, Material* material);
 
 public:
-	inline size_t GetSubMaterialCount(void) const { return mSubMaterials.size(); }
+	inline size_t GetSubCount(void) const { return mSubMaterials.size(); }
 	inline Material* GetSubMaterial(size_t index) const { return mSubMaterials.at(index); }
 	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
 
@@ -47,6 +47,8 @@ public:
 protected:
 	MaterialManager* mManager = nullptr;
 	std::vector<Material*> mSubMaterials;
+
+protected:
 	MaterialUniform mMaterialUniform = {};
 	std::array<ShaderResource*, 5> mShaderResources;
 };
