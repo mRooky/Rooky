@@ -12,12 +12,29 @@
 
 namespace Core
 {
-
+class Uniform;
 class MaterialUniform
 {
 public:
 	MaterialUniform(void);
 	~MaterialUniform(void);
+
+public:
+	inline void SetUniform(Uniform* uniform, size_t offset)
+	{
+		mOffset = offset;
+		mUniform = uniform;
+	}
+	inline size_t GetOffset(void) const { return mOffset; }
+	inline Uniform* GetUniform(void) const { return mUniform; }
+
+protected:
+	size_t mOffset = 0;
+	Uniform* mUniform = nullptr;
+
+protected: // uniform data
+	const size_t mSize = 128;
+
 };
 
 } /* namespace Core */

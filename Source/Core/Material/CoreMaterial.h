@@ -10,6 +10,7 @@
 
 #include "CoreShaderResource.h"
 #include "CoreBase.h"
+#include "CoreMaterialUniform.h"
 #include <array>
 
 namespace Core
@@ -22,7 +23,7 @@ protected:
 	explicit Material(MaterialManager* manager);
 
 public:
-	virtual ~Material(void);
+	virtual ~Material(void) override;
 
 public:
 	void SetSubMaterial(size_t index, Material* material);
@@ -33,8 +34,12 @@ public:
 	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
 
 public:
+	inline void SetShaderResource(size_t index, ShaderResource* resource)
+	{
+		mShaderResources.at(index) = resource;
+	}
+	inline MaterialUniform* GetUniform(void) { return &mMaterialUniform; }
 	inline ShaderResource* GetShaderResource(size_t index) { return mShaderResources.at(index); }
-	inline void SetShaderResource(size_t index, ShaderResource* resource) { mShaderResources.at(index) = resource; }
 
 public:
 	inline MaterialManager* GetManager(void) const { return mManager; }
@@ -42,6 +47,7 @@ public:
 protected:
 	MaterialManager* mManager = nullptr;
 	std::vector<Material*> mSubMaterials;
+	MaterialUniform mMaterialUniform = {};
 	std::array<ShaderResource*, 5> mShaderResources;
 };
 
