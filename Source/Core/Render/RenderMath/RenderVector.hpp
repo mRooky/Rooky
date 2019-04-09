@@ -37,7 +37,7 @@ public:
 };
 
 typedef Vector2_t<float> Offset2Df, Vector2f;
-typedef Vector2_t<int32_t> Point2, Offset2Di;
+typedef Vector2_t<int32_t> Point2, Offset2Di, Vector2i;
 
 template<typename T>
 class Vector3_t

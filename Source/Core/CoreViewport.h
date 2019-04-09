@@ -24,7 +24,7 @@ public:
 	virtual ~Viewport(void);
 
 public:
-	void Create(Platform::Window* window);
+	void CreateSwapChain(Platform::Window* window);
 	void CreateDepthStencil(const Render::Extent2Di& extent);
 
 public:

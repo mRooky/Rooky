@@ -41,6 +41,14 @@ VkResult ShaderModule::Create(const VkShaderModuleCreateInfo* info)
 	return mResult;
 }
 
+VkPipelineShaderStageCreateInfo ShaderModule::GetStageInfo(VkShaderStageFlagBits flag)
+{
+	VkPipelineShaderStageCreateInfo stage_create_info = Pipeline::ShaderStageCreateInfo();
+	stage_create_info.stage = flag;
+	stage_create_info.module = m_shaderModule;
+	return stage_create_info;
+}
+
 VkShaderModuleCreateInfo ShaderModule::CreateInfo(void)
 {
 	VkShaderModuleCreateInfo shader_module_create_info = {};

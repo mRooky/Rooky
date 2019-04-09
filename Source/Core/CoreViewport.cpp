@@ -32,7 +32,7 @@ Viewport::~Viewport(void)
 	mDepthStencil = nullptr;
 }
 
-void Viewport::Create(Platform::Window* window)
+void Viewport::CreateSwapChain(Platform::Window* window)
 {
 	auto device = mSystem->GetDevice();
 	mSwapChain = device->GetFactory()->CreateSwapChain();

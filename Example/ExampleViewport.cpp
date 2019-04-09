@@ -27,7 +27,7 @@ void Viewport::CreateViewport(void)
 	assert(mSystem != nullptr);
 	assert(mWindow != nullptr);
 	mViewport = new Core::Viewport(mSystem);
-	mViewport->Create(mWindow);
+	mViewport->CreateSwapChain(mWindow);
 }
 
 } /* namespace Example */

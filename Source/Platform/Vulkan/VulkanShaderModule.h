@@ -22,6 +22,7 @@ private:
 
 public:
 	VkResult Create(size_t size, const void* code);
+	VkPipelineShaderStageCreateInfo GetStageInfo(VkShaderStageFlagBits flag);
 
 public:
 	inline VkShaderModule GetHandle(void) const { return m_shaderModule; }
