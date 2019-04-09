@@ -9,7 +9,7 @@
 #define SOURCE_CORE_COREMESH_H_
 
 #include "CoreMovable.h"
-#include "CoreDataType.h"
+#include "CoreStream.h"
 #include "RenderAABB.h"
 
 #include <array>
@@ -38,16 +38,6 @@ public:
 	SubMesh* CreateSubMesh(void);
 
 public:
-	void* Allocate(StreamType type, size_t size, bool discard);
-
-public:
-	inline void* GetStream(StreamType type)
-	{
-		uint32_t index = static_cast<uint32_t>(type);
-		return mSubMeshes.at(index);
-	}
-
-public:
 	inline Index* GetIndex(void) const { return mIndex; }
 	inline size_t GetIndexOffset(void) const { return mIndexOffset; }
 	inline Vertex* GetVertex(void) const { return mVertex; }
@@ -58,13 +48,11 @@ public:
 	inline SubMesh* GetSubMesh(size_t index) const { return mSubMeshes.at(index); }
 
 protected:
-	void FreeAllStream(void);
-	void FreeStream(StreamType type);
-
-protected:
+	inline Stream* GetStream(void) { return &mStream; }
 	inline Render::AABB* GetAABB(void) { return &mAABB; }
 
 protected:
+	Stream mStream;
 	Render::AABB mAABB = {};
 
 protected:
@@ -76,7 +64,6 @@ protected:
 protected:
 	MeshManager* mManager = nullptr;
 	std::vector<SubMesh*> mSubMeshes;
-	std::array<uint8_t*, STREAM_TYPE_COUNT> mStreams;
 };
 
 } /* namespace Core */

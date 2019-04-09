@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_COREINDEX_H_
 #define SOURCE_CORE_COREINDEX_H_
 
+#include "CoreBuffer.h"
 #include "RenderDrawIndexed.h"
 #include "RenderEnum.h"
 #include "RenderUsage.h"
@@ -18,21 +19,20 @@
 namespace Core
 {
 class BufferManager;
-class Index
+class Index : public Buffer
 {
 	friend class BufferManager;
 private:
 	explicit Index(BufferManager* creator);
 
 public:
-	virtual ~Index(void);
+	virtual ~Index(void) override;
 
 public:
 	void Create(Render::IndexType type, uint32_t count, Render::AllocateType allocate);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
-	inline Render::Buffer* GetBuffer(void) { return mBuffer; }
 	inline Render::IndexType GetType(void) const { return mType; }
 	inline Render::DrawIndexed* GetDraw(void) { return &mDrawIndexed; }
 
@@ -44,7 +44,6 @@ public:
 
 protected:
 	uint32_t mCount = 0;
-	Render::Buffer* mBuffer = nullptr;
 	Render::DrawIndexed mDrawIndexed = {};
 	Render::IndexType mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 };

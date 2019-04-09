@@ -87,8 +87,8 @@ void Texture::RecordCommands(void)
 		command_list->SetViewport(0, 1, &viewport);
 		command_list->SetScissor(0, 1, &scissor);
 		command_list->SetPipeline(mPipeline);
-		command_list->SetVertex(mVertex->GetBuffer(), 0, 0);
-		command_list->SetIndex(mIndex->GetBuffer(), 0, mIndex->GetType());
+		command_list->SetVertex(mVertex->GetRenderBuffer(), 0, 0);
+		command_list->SetIndex(mIndex->GetRenderBuffer(), 0, mIndex->GetType());
 		command_list->Draw(draw);
 		command_list->EndPass();
 		command_list->End();

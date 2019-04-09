@@ -29,8 +29,6 @@ Vertex::~Vertex(void)
 {
 	mCount = 0;
 	mLayout = nullptr;
-	delete mBuffer;
-	mBuffer = nullptr;
 }
 
 void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate)
@@ -53,8 +51,8 @@ void Vertex::CreateRenderBuffer(Render::AllocateType allocate)
 	System* system = mCreator->GetSystem();
 	Render::Device* device = system->GetDevice();
 	Render::Factory* factory = device->GetFactory();
-	mBuffer = factory->CreateBuffer();
-	mBuffer->Create(size, buffer_usage);
+	mResource = factory->CreateBuffer();
+	static_cast<Render::Buffer*>(mResource)->Create(size, buffer_usage);
 }
 
 } /* namespace Core */

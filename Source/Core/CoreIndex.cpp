@@ -28,8 +28,6 @@ Index::Index(BufferManager* creator):
 Index::~Index(void)
 {
 	mCount = 0;
-	delete mBuffer;
-	mBuffer = nullptr;
 	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
@@ -53,8 +51,8 @@ void Index::CreateRenderBuffer(Render::AllocateType allocate)
 	System* system = mCreator->GetSystem();
 	Render::Device* device = system->GetDevice();
 	Render::Factory* factory = device->GetFactory();
-	mBuffer = factory->CreateBuffer();
-	mBuffer->Create(size, buffer_usage);
+	mResource = factory->CreateBuffer();
+	static_cast<Render::Buffer*>(mResource)->Create(size, buffer_usage);
 }
 
 } /* namespace Core */

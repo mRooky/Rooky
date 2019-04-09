@@ -194,7 +194,7 @@ void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
 	assert(false);
 }
 
-void CommandList::SetVertex(Render::Buffer* buffer, uint32_t binding, size_t offset)
+void CommandList::SetVertex(Render::Resource* buffer, uint32_t binding, size_t offset)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);
@@ -203,7 +203,7 @@ void CommandList::SetVertex(Render::Buffer* buffer, uint32_t binding, size_t off
 	mCommandBuffer->BindVertexBuffers(vulkan_buffer, binding, offset);
 }
 
-void CommandList::SetIndex(Render::Buffer* buffer, size_t offset, Render::IndexType type)
+void CommandList::SetIndex(Render::Resource* buffer, size_t offset, Render::IndexType type)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);

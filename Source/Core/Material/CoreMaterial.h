@@ -11,7 +11,9 @@
 #include "CoreShaderResource.h"
 #include "CoreBase.h"
 #include "CoreMaterialUniform.h"
+#include "RenderBinding.hpp"
 #include <array>
+#include <vector>
 
 namespace Core
 {
@@ -24,6 +26,9 @@ protected:
 
 public:
 	virtual ~Material(void) override;
+
+public:
+	std::vector<Render::Binding> GetBindings(void) const;
 
 public:
 	inline void SetShaderResource(size_t index, ShaderResource* resource)
