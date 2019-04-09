@@ -18,16 +18,4 @@ Renderable::~Renderable(void)
 {
 }
 
-void Renderable::SetIndex(Index* index, size_t offset)
-{
-	mIndex = index;
-	mIndexOffset = offset;
-}
-
-void Renderable::SetVertex(Vertex* vertex, size_t offset)
-{
-	mVertex = vertex;
-	mVertexOffset = offset;
-}
-
 } /* namespace Core */

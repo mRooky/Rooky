@@ -12,8 +12,6 @@
 
 namespace Core
 {
-class Index;
-class Vertex;
 class Material;
 class Renderable : public Base
 {
@@ -22,28 +20,8 @@ public:
 	virtual ~Renderable(void) override;
 
 public:
-	void SetIndex(Index* index, size_t offset);
-	void SetVertex(Vertex* vertex, size_t offset);
-
-public:
-	inline Index* GetIndex(void) const { return mIndex; }
-	inline size_t GetIndexOffset(void) const { return mIndexOffset; }
-
-public:
-	inline Vertex* GetVertex(void) const { return mVertex; }
-	inline size_t  GetVertexOffset(void) const { return mVertexOffset; }
-
-public:
 	inline Material* GetMaterial(void) const { return mMaterial; }
 	inline void SetMaterial(Material* material) { mMaterial = material; }
-
-protected:
-	Index* mIndex = nullptr;
-	size_t mIndexOffset = 0;
-
-protected:
-	Vertex* mVertex = nullptr;
-	size_t  mVertexOffset = 0;
 
 protected:
 	Material* mMaterial = nullptr;

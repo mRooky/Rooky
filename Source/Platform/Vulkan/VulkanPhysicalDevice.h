@@ -58,6 +58,9 @@ private:
 	VkPhysicalDeviceProperties m_properties = {};
 	VkPhysicalDeviceMemoryProperties m_memoryProperties = {};
 	std::vector<VkQueueFamilyProperties> m_familyProperties;
+
+private:
+	std::vector<VkLayerProperties> m_layerProperties;
 };
 
 } /* namespace Vulkan */

@@ -62,4 +62,17 @@ void Mesh::FreeStream(StreamType type)
 	mStreams.at(index) = nullptr;
 }
 
+void Mesh::SetIndex(Index* index, size_t offset)
+{
+	mIndex = index;
+	mIndexOffset = offset;
+}
+
+void Mesh::SetVertex(Vertex* vertex, size_t offset)
+{
+	mVertex = vertex;
+	mVertexOffset = offset;
+}
+
+
 } /* namespace Core */

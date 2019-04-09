@@ -8,13 +8,14 @@
 #ifndef SOURCE_CORE_CORESUBMESH_H_
 #define SOURCE_CORE_CORESUBMESH_H_
 
+#include "CoreRenderable.h"
 #include "RenderClasses.h"
 #include <cstdint>
 
 namespace Core
 {
 class Mesh;
-class SubMesh
+class SubMesh : public Renderable
 {
 	friend class Mesh;
 private:

@@ -26,14 +26,6 @@ public:
 	virtual ~Material(void) override;
 
 public:
-	void SetSubMaterial(size_t index, Material* material);
-
-public:
-	inline size_t GetSubCount(void) const { return mSubMaterials.size(); }
-	inline Material* GetSubMaterial(size_t index) const { return mSubMaterials.at(index); }
-	inline void AppendSubMaterial(Material* material) { mSubMaterials.push_back(material); }
-
-public:
 	inline void SetShaderResource(size_t index, ShaderResource* resource)
 	{
 		mShaderResources.at(index) = resource;
@@ -46,7 +38,6 @@ public:
 
 protected:
 	MaterialManager* mManager = nullptr;
-	std::vector<Material*> mSubMaterials;
 
 protected:
 	MaterialUniform mMaterialUniform = {};

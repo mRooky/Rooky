@@ -69,6 +69,15 @@ void PhysicalDevice::InitializeProperties(void)
 	vkGetPhysicalDeviceFeatures(m_physicalDevice, &m_features);
 	vkGetPhysicalDeviceProperties(m_physicalDevice, &m_properties);
 	vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &m_memoryProperties);
+	uint32_t count = 0;
+	mResult = vkEnumerateDeviceLayerProperties(m_physicalDevice, &count, nullptr);
+	assert(mResult == VK_SUCCESS && count > 0);
+	if (count > 0)
+	{
+		m_layerProperties.resize(count);
+		mResult = vkEnumerateDeviceLayerProperties(m_physicalDevice, &count, m_layerProperties.data());
+		assert(mResult == VK_SUCCESS);
+	}
 }
 
 uint32_t PhysicalDevice::GetMemoryTypeIndex(uint32_t bits, VkMemoryPropertyFlags flag) const

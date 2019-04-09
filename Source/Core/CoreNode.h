@@ -8,20 +8,32 @@
 #ifndef SOURCE_CORE_CORENODE_H_
 #define SOURCE_CORE_CORENODE_H_
 
-#include "CoreBase.h"
-#include "RenderAABB.h"
+#include "CoreMovable.h"
+#include <vector>
 
 namespace Core
 {
 
-class Node: public Base
+class Node: public Movable
 {
 public:
-	Node(void);
+	Node(Node* parent = nullptr);
 	virtual ~Node(void) override;
 
+public:
+	void AppendChild(Node* node);
+
+public:
+	inline size_t GetChildrenCount(void) const { return mChildren.size(); }
+	inline Node* GetChild(size_t index) const { return mChildren.at(index); }
+
+public:
+	inline void SetParent(Node* node) { mParent = node; }
+	inline Node* GetParent(void) const { return mParent; }
+
 protected:
-	Render::AABB mAABB = {};
+	Node* mParent = nullptr;
+	std::vector<Node*> mChildren;
 };
 
 } /* namespace Core */
