@@ -8,14 +8,13 @@
 #ifndef SOURCE_CORE_COREPATH_H_
 #define SOURCE_CORE_COREPATH_H_
 
-#include "CoreObject.h"
-
+#include "CoreInterface.h"
 #include <vector>
 
 namespace Core
 {
 class Pass;
-class Path : public Object
+class Path : public Interface
 {
 public:
 	explicit Path(System* system);

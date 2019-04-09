@@ -8,13 +8,13 @@
 #ifndef SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
-#include "CoreObject.h"
+#include <CoreInterface.h>
 #include "RenderClasses.h"
 #include <vector>
 
 namespace Core
 {
-class BindingManager : public Object
+class BindingManager : public Interface
 {
 public:
 	explicit BindingManager(System* system);

@@ -5,20 +5,19 @@
  *      Author: rookyma
  */
 
-#include "CoreObject.h"
-
+#include "CoreInterface.h"
 #include <cassert>
 
 namespace Core
 {
 
-Object::Object(System* system):
+Interface::Interface(System* system):
 		mSystem(system)
 {
 	assert(system != nullptr);
 }
 
-Object::~Object(void)
+Interface::~Interface(void)
 {
 	mSystem = nullptr;
 }

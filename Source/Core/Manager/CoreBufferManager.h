@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_COREBUFFERMANAGER_H_
 #define SOURCE_CORE_COREBUFFERMANAGER_H_
 
-#include "CoreObject.h"
+#include "CoreInterface.h"
 #include "RenderClasses.h"
 #include "RenderFormat.h"
 #include "RenderElement.h"
@@ -19,7 +19,7 @@ namespace Core
 class Index;
 class Vertex;
 class Uniform;
-class BufferManager : public Object
+class BufferManager : public Interface
 {
 	friend class MeshManager;
 private:

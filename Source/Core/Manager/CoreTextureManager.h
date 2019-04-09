@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
+#include "CoreInterface.h"
 #include "RenderExtent.hpp"
-#include "CoreObject.h"
 #include "RenderSampler.h"
 #include "RenderFormat.h"
 #include <vector>
@@ -17,7 +17,7 @@
 namespace Core
 {
 class Texture;
-class TextureManager : public Object
+class TextureManager : public Interface
 {
 public:
 	explicit TextureManager(System* system);

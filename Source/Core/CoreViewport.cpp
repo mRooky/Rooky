@@ -20,7 +20,7 @@ namespace Core
 {
 
 Viewport::Viewport(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

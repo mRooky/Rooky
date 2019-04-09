@@ -8,14 +8,14 @@
 #ifndef SOURCE_CORE_MANAGER_COREMATERIALMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREMATERIALMANAGER_H_
 
-#include "CoreObject.h"
+#include "CoreInterface.h"
 #include <vector>
 
 namespace Core
 {
 class Material;
 class ShaderResource;
-class MaterialManager: public Object
+class MaterialManager: public Interface
 {
 public:
 	explicit MaterialManager(System* system);

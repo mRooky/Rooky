@@ -15,7 +15,7 @@ namespace Core
 {
 
 MeshManager::MeshManager(System* system):
-		Object(system)
+		Interface(system)
 {
 	mBufferManager = new BufferManager(system);
 }

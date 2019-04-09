@@ -8,8 +8,7 @@
 #ifndef SOURCE_CORE_MANAGER_COREPIPELINEMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREPIPELINEMANAGER_H_
 
-#include "CoreObject.h"
-
+#include "CoreInterface.h"
 #include "RenderClasses.h"
 
 #include <vector>
@@ -17,7 +16,7 @@
 namespace Core
 {
 
-class PipelineManager: public Object
+class PipelineManager: public Interface
 {
 public:
 	explicit PipelineManager(System* system);

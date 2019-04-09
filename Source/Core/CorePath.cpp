@@ -12,7 +12,7 @@ namespace Core
 {
 
 Path::Path(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

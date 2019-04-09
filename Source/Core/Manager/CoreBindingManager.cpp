@@ -18,7 +18,7 @@ namespace Core
 {
 
 BindingManager::BindingManager(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

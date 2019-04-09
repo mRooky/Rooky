@@ -5,19 +5,19 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_COREOBJECT_H_
-#define SOURCE_CORE_COREOBJECT_H_
+#ifndef SOURCE_CORE_COREINTERFACE_H_
+#define SOURCE_CORE_COREINTERFACE_H_
 
 #include "CoreBase.h"
 
 namespace Core
 {
 class System;
-class Object : public Base
+class Interface : public Base
 {
 public:
-	explicit Object(System* system);
-	virtual ~Object(void) override;
+	explicit Interface(System* system);
+	virtual ~Interface(void) override;
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }
@@ -28,4 +28,4 @@ protected:
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_COREOBJECT_H_ */
+#endif /* SOURCE_CORE_COREINTERFACE_H_ */

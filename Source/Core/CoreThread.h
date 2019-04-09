@@ -8,15 +8,14 @@
 #ifndef SOURCE_CORE_CORETHREAD_H_
 #define SOURCE_CORE_CORETHREAD_H_
 
-#include "CoreObject.h"
-
+#include "CoreInterface.h"
 #include "RenderClasses.h"
 #include <vector>
 
 namespace Core
 {
 
-class Thread : public Object
+class Thread : public Interface
 {
 public:
 	explicit Thread(System* system);

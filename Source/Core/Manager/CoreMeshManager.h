@@ -8,14 +8,14 @@
 #ifndef SOURCE_CORE_MANAGER_COREMESHMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREMESHMANAGER_H_
 
-#include "CoreObject.h"
+#include "CoreInterface.h"
 #include <vector>
 
 namespace Core
 {
 class Mesh;
 class BufferManager;
-class MeshManager: public Object
+class MeshManager: public Interface
 {
 	friend class System;
 protected:

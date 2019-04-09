@@ -8,16 +8,15 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
+#include "CoreInterface.h"
 #include "RenderExtent.hpp"
-#include "CoreObject.h"
-
 #include "RenderClasses.h"
 #include "PlatformWindow.h"
 
 namespace Core
 {
 class System;
-class Viewport : public Object
+class Viewport : public Interface
 {
 public:
 	explicit Viewport(System* system);

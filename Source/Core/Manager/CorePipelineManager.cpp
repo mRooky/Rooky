@@ -24,7 +24,7 @@ namespace Core
 {
 
 PipelineManager::PipelineManager(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

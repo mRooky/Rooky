@@ -18,7 +18,7 @@ namespace Core
 {
 
 Thread::Thread(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

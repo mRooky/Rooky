@@ -15,7 +15,7 @@ namespace Core
 {
 
 MaterialManager::MaterialManager(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

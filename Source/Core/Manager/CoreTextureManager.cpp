@@ -24,7 +24,7 @@ namespace Core
 {
 
 TextureManager::TextureManager(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 

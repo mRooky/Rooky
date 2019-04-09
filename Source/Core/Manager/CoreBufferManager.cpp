@@ -23,7 +23,7 @@ namespace Core
 {
 
 BufferManager::BufferManager(System* system):
-		Object(system)
+		Interface(system)
 {
 }
 
