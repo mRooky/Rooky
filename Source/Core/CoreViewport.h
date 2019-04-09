@@ -15,6 +15,7 @@
 
 namespace Core
 {
+class Camera;
 class System;
 class Viewport : public Interface
 {
@@ -29,6 +30,13 @@ public:
 public:
 	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
+
+public:
+	inline Camera* GetCamera(void) const { return mCamera; }
+	inline void SetCamera(Camera* camera) { mCamera = camera; }
+
+public:
+	Camera* mCamera = nullptr;
 
 protected:
 	Render::Image* mDepthStencil = nullptr;

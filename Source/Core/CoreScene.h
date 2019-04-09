@@ -8,9 +8,12 @@
 #ifndef SOURCE_CORE_CORESCENE_H_
 #define SOURCE_CORE_CORESCENE_H_
 
+#include <vector>
+
 namespace Core
 {
 class System;
+class Viewport;
 class Scene
 {
 public:
@@ -22,6 +25,7 @@ public:
 
 protected:
 	System* mSystem = nullptr;
+	std::vector<Viewport*> mViewports;
 };
 
 } /* namespace Core */

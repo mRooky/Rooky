@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORESTREAM_H_
 #define SOURCE_CORE_CORESTREAM_H_
 
-#include "CoreDataType.h"
+#include "CoreStreamType.h"
 #include <array>
 
 namespace Core
