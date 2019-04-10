@@ -179,6 +179,7 @@ void CommandBuffer::ClearAttachments(const std::vector<VkClearAttachment>& attac
 
 void CommandBuffer::CopyResource(Buffer* source, Buffer* dest, std::vector<VkBufferCopy>& regions)
 {
+	assert(m_begin == true);
 	VkBuffer dest_buffer = dest->GetHandle();
 	VkBuffer source_buffer = source->GetHandle();
 	vkCmdCopyBuffer(m_buffer, source_buffer, dest_buffer, regions.size(), regions.data());
@@ -186,6 +187,7 @@ void CommandBuffer::CopyResource(Buffer* source, Buffer* dest, std::vector<VkBuf
 
 void CommandBuffer::CopyResource(Image* source, Buffer* dest, std::vector<VkBufferImageCopy>& regions)
 {
+	assert(m_begin == true);
 	VkImage source_image = source->GetHandle();
 	VkBuffer dest_buffer = dest->GetHandle();
 	VkImageLayout layout = source->GetInfo().initialLayout;
@@ -194,6 +196,7 @@ void CommandBuffer::CopyResource(Image* source, Buffer* dest, std::vector<VkBuff
 
 void CommandBuffer::CopyResource(Buffer* source, Image* dest, std::vector<VkBufferImageCopy>& regions)
 {
+	assert(m_begin == true);
 	VkBuffer source_buffer = source->GetHandle();
 	VkImage dest_image = dest->GetHandle();
 	VkImageLayout layout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL; //dest->GetInfo().initialLayout;
@@ -206,6 +209,7 @@ void CommandBuffer::CopyResource(Buffer* source, Image* dest, std::vector<VkBuff
 
 void CommandBuffer::CopyResource(Image* source, Image* dest, std::vector<VkImageCopy>& regions)
 {
+	assert(m_begin == true);
 	VkImage source_image = source->GetHandle();
 	VkImage dest_image = dest->GetHandle();
 	VkImageLayout source_layout = source->GetInfo().initialLayout;
@@ -215,6 +219,7 @@ void CommandBuffer::CopyResource(Image* source, Image* dest, std::vector<VkImage
 
 void CommandBuffer::CopyResource(Buffer* source, Buffer* dest, size_t count, const VkBufferCopy* regions)
 {
+	assert(m_begin == true);
 	VkBuffer dest_buffer = dest->GetHandle();
 	VkBuffer source_buffer = source->GetHandle();
 	vkCmdCopyBuffer(m_buffer, source_buffer, dest_buffer, count, regions);
@@ -222,11 +227,13 @@ void CommandBuffer::CopyResource(Buffer* source, Buffer* dest, size_t count, con
 
 void CommandBuffer::CopyResource(Image* source, Buffer* dest, size_t count, const VkBufferImageCopy* regions)
 {
+	assert(m_begin == true);
 	assert(false);
 }
 
 void CommandBuffer::CopyResource(Buffer* source, Image* dest, size_t count, const VkBufferImageCopy* regions)
 {
+	assert(m_begin == true);
 	VkBuffer source_buffer = source->GetHandle();
 	VkImage dest_image = dest->GetHandle();
 	VkImageLayout layout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
@@ -239,6 +246,7 @@ void CommandBuffer::CopyResource(Buffer* source, Image* dest, size_t count, cons
 
 void CommandBuffer::CopyResource(Image* source, Image* dest, size_t count, const VkImageCopy* regions)
 {
+	assert(m_begin == true);
 	assert(false);
 }
 

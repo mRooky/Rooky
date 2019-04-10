@@ -18,6 +18,8 @@
 #include "VulkanPhysicalDevice.h"
 #include "VulkanBuffer.h"
 
+#include "UtilityRelease.h"
+
 #include <cassert>
 
 namespace VK
@@ -33,6 +35,7 @@ Pool::Pool(Device& device):
 
 Pool::~Pool(void)
 {
+	Utility::Release(mBuffers);
 	Vulkan::Release(mCommandPool);
 	Vulkan::Release(mDescriptorPool);
 }

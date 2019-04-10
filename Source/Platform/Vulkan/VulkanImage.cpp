@@ -130,9 +130,10 @@ VkImageLayout Image::SetLayout(CommandBuffer* command, VkImageLayout layout)
 	image_memory_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 	image_memory_barrier.dstAccessMask = Image::GetAccessFlags(layout);
 
-	VkPipelineStageFlags flags = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
-	//VkPipelineStageFlags src_stages = Image::GetStageFlags(image_memory_barrier.oldLayout);
-	//VkPipelineStageFlags dst_stages = Image::GetStageFlags(layout);
+//	VkPipelineStageFlags flags = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+	VkPipelineStageFlags flags = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
+//	VkPipelineStageFlags src_stages = Image::GetStageFlags(image_memory_barrier.oldLayout);
+//	VkPipelineStageFlags dst_stages = Image::GetStageFlags(layout);
 
 	VkCommandBuffer command_buffer = command->GetHandle();
 	vkCmdPipelineBarrier(command_buffer, flags, flags, 0, 0, nullptr, 0, nullptr, 1, &image_memory_barrier);
@@ -188,8 +189,8 @@ VkImageMemoryBarrier Image::GetMemoryBarrier(void) const
 	image_memory_barrier.oldLayout = mInfo.initialLayout;
 	image_memory_barrier.srcAccessMask = Image::GetAccessFlags(mInfo.initialLayout);
 	image_memory_barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-	image_memory_barrier.subresourceRange.layerCount = 1;
-	image_memory_barrier.subresourceRange.levelCount = 1;
+	image_memory_barrier.subresourceRange.layerCount = mInfo.arrayLayers;
+	image_memory_barrier.subresourceRange.levelCount = mInfo.mipLevels;
 	image_memory_barrier.subresourceRange.baseMipLevel = 0;
 	image_memory_barrier.subresourceRange.baseArrayLayer = 0;
 	return image_memory_barrier;
@@ -313,7 +314,8 @@ VkImageCreateInfo Image::CreateInfo(void)
 	image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 	image_create_info.queueFamilyIndexCount = 0;
 	image_create_info.pQueueFamilyIndices = nullptr;
-	image_create_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
+//	image_create_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
+	image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 	return image_create_info;
 }
 

@@ -10,6 +10,7 @@
 #include "VulkanFence.h"
 #include "VulkanPhysicalDevice.h"
 #include "VulkanCommandBuffer.h"
+#include "VulkanInline.h"
 #include <cassert>
 
 namespace Vulkan
@@ -25,6 +26,7 @@ Queue::~Queue(void)
 	m_queue = VK_NULL_HANDLE;
 	m_index = 0;
 	m_family = 0;
+	Release(m_fence);
 }
 
 VkResult Queue::Create(uint32_t family, uint32_t index)

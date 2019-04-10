@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_COREUNIFORM_H_
 #define SOURCE_CORE_COREUNIFORM_H_
 
-#include "CoreResource.h"
+#include "CoreBuffer.h"
 #include "RenderClasses.h"
 #include "RenderUsage.h"
 
@@ -17,21 +17,17 @@
 namespace Core
 {
 class BufferManager;
-class Uniform : public Resource
+class Uniform : public Buffer
 {
 	friend class BufferManager;
 private:
 	explicit Uniform(BufferManager* creator);
 
 public:
-	virtual ~Uniform(void);
+	virtual ~Uniform(void) override;
 
 public:
 	void Create(size_t size, Render::AllocateType allocate);
-
-public:
-	void Read(void* dst, size_t offset, size_t size);
-	void Write(const void* src, size_t offset, size_t size);
 
 protected:
 	void CreateRenderBuffer(Render::AllocateType allocate);

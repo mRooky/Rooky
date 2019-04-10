@@ -21,7 +21,14 @@ static inline void NotImplemented(void)
 
 static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::AllocateType allocate)
 {
-	return (allocate.CPUAccess == 1) ? VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT : VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+	if (allocate.CPUAccess == 1)
+	{
+		return VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
+	}
+	else
+	{
+		return VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+	}
 }
 
 static inline VkBufferUsageFlags ConvertBufferUsageFlags(const Render::ResourceUsage& usage)

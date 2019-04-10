@@ -12,6 +12,7 @@
 #include "VulkanInline.h"
 #include "VulkanSurface.h"
 #include "VulkanSwapChain.h"
+#include "VulkanSemaphore.h"
 #include "VulkanDevice.h"
 #include "VulkanImage.h"
 #include "VulkanPhysicalDevice.h"
@@ -33,8 +34,8 @@ SwapChain::SwapChain(Device* device):
 
 SwapChain::~SwapChain(void)
 {
-	Vulkan::Release(mSurface);
 	Vulkan::Release(mSwapChain);
+	Vulkan::Release(mSurface);
 }
 
 void SwapChain::Create(Platform::Window* window)
@@ -68,10 +69,14 @@ void SwapChain::SwapBuffer(uint32_t index)
 	auto queue = device->GetQueue(family, index);
 
 	uint32_t next = mSwapChain->AcquireNextImage();
-	auto handle = mSwapChain->GetHandle();
+	VkSwapchainKHR swap_chain = mSwapChain->GetHandle();
+	Vulkan::Semaphore* semaphore = mSwapChain->GetSemaphore();
+	VkSemaphore chain_semaphore = semaphore->GetHandle();
 	VkPresentInfoKHR present_info = Vulkan::Queue::PresentInfo();
+	present_info.waitSemaphoreCount = 1;
+	present_info.pWaitSemaphores = &chain_semaphore;
 	present_info.swapchainCount = 1;
-	present_info.pSwapchains = &handle;
+	present_info.pSwapchains = &swap_chain;
 	present_info.pImageIndices = &next;
 	queue->Present(&present_info);
 }

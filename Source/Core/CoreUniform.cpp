@@ -35,20 +35,6 @@ void Uniform::Create(size_t size, Render::AllocateType allocate)
 	CreateRenderBuffer(allocate);
 }
 
-void Uniform::Read(void* dst, size_t offset, size_t size)
-{
-	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
-	buffer->Read(dst, offset, size);
-}
-
-void Uniform::Write(const void* src, size_t offset, size_t size)
-{
-	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
-	buffer->Write(src, offset, size);
-}
-
 void Uniform::CreateRenderBuffer(Render::AllocateType allocate)
 {
 	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
