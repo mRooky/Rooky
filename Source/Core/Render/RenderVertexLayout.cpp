@@ -29,7 +29,7 @@ void VertexLayout::SetElement(const std::vector<Render::Element>& elements)
 	{
 		mElements.push_back(element);
 		ElementType type = element.GetType();
-		mSizeInByte += Element::GetTypeSize(type);
+		mStride += Element::GetTypeSize(type);
 	}
 }
 
@@ -37,7 +37,7 @@ void VertexLayout::AppendElement(const Element& element)
 {
 	mElements.push_back(element);
 	ElementType type = element.GetType();
-	mSizeInByte += Element::GetTypeSize(type);
+	mStride += Element::GetTypeSize(type);
 }
 
 } /* namespace Render */

@@ -40,6 +40,12 @@ void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType 
 	std::cout << "Create Index Type : " << Render::GetIndexTypeName(mType) << std::endl;
 }
 
+size_t Index::GetSizeInByte(void)
+{
+	const size_t size = Render::GetIndexTypeSize(mType) * mCount;
+	return size;
+}
+
 void Index::CreateRenderBuffer(Render::AllocateType allocate)
 {
 	size_t size = Render::GetIndexTypeSize(mType) * mCount;

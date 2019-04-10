@@ -6,53 +6,82 @@
  */
 
 #include "CoreStream.h"
+#include "CoreIndex.h"
+#include "CoreVertex.h"
+#include "CoreMesh.h"
+#include "CoreData.h"
+
+#include "RenderInline.h"
+#include "RenderVertexLayout.h"
+#include <cassert>
+#include <climits>
 
 namespace Core
 {
 
-Stream::Stream(void)
+Stream::Stream(Mesh* parent):
+		mParent(parent)
 {
-	mBuffers.fill(nullptr);
+	assert(mParent != nullptr);
 }
 
 Stream::~Stream(void)
 {
-	FreeAllBuffer();
 }
 
-void* Stream::GetBuffer(StreamType type)
+bool Stream::UploadData(void)
 {
-	uint32_t index = GetIndex(type);
-	return mBuffers.at(index);
+	UploadIndex();
+	UploadVertex();
+	return true;
 }
 
-void* Stream::Allocate(StreamType type, size_t size, bool discard)
+void Stream::UploadIndex(void)
 {
-	if (discard)
+	Index* index = mIndexBuffer.GetIndex();
+	const void* index_data = mStreamData.GetBuffer(StreamType::STREAM_TYPE_INDEX);
+	if (nullptr != index && nullptr != index_data)
 	{
-		FreeBuffer(type);
-	}
-	uint8_t* buffer = new uint8_t[size];
-	uint32_t index = GetIndex(type);
-	mBuffers.at(index) = buffer;
-	return buffer;
-}
-
-void Stream::FreeAllBuffer(void)
-{
-	for (uint32_t index = 0; index < STREAM_TYPE_COUNT; ++index)
-	{
-		auto type = GetStream(index);
-		FreeBuffer(type);
+		assert(index->IsValid());
+		const size_t index_count = mParent->GetIndexCount();
+		Render::IndexType index_type = mIndexBuffer.GetType();
+		assert(index_type != Render::IndexType::INDEX_TYPE_UNKNOWN);
+		const size_t buffer_offset = mIndexBuffer.GetOffset();
+		const size_t buffer_size = index_count * Render::GetIndexTypeSize(index_type);
+		index->Write(index_data, buffer_offset, buffer_size);
 	}
 }
 
-void Stream::FreeBuffer(StreamType type)
+void Stream::UploadVertex(void)
 {
-	uint32_t index = GetIndex(type);
-	uint8_t* buffer = mBuffers.at(index);
-	delete[] buffer;
-	mBuffers.at(index) = nullptr;
+	Vertex* vertex = mVertexBuffer.GetVertex();
+	if (nullptr != vertex)
+	{
+		assert(vertex->IsValid());
+		Render::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
+		assert(vertex_layout != nullptr);
+		Data vertex_data = {};
+		const size_t vertex_stride = vertex_layout->GetStride();
+		const size_t vertex_count = mParent->GetVertexCount();
+		const size_t buffer_size = vertex_stride * vertex_count;
+		vertex_data.Allocate(buffer_size);
+		void* vertex_buffer = vertex_data.GetBuffer();
+
+		//Fill Vertex Data
+		{
+			const size_t start = GetIndex(StreamType::STREAM_TYPE_POSITION);
+			const size_t end = STREAM_TYPE_COUNT;
+			for (size_t index = start; index < end; ++index)
+			{
+				StreamType type = GetStream(index);
+				Data* element_data = mStreamData.GetBuffer(type);
+				assert(false && element_data);
+			}
+		}
+
+		const size_t buffer_offset = mIndexBuffer.GetOffset();
+		vertex->Write(vertex_buffer, buffer_offset, buffer_size);
+	}
 }
 
 } /* namespace Core */

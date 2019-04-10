@@ -15,7 +15,6 @@
 #include "VKShader.h"
 #include "VKPool.h"
 #include "VKBindingSet.h"
-#include "VKVertexLayout.h"
 #include "VKDevice.h"
 #include "VKSampler.h"
 #include "VKPipeline.h"
@@ -84,11 +83,6 @@ Render::CommandPool* Factory::CreateCommandPool(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new CommandPool(vk_device);
-}
-
-Render::VertexLayout* Factory::CreateVertexLayout(void)
-{
-	return new VertexLayout;
 }
 
 Render::Sampler* Factory::CreateSampler(void)

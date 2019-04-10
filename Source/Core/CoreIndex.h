@@ -32,6 +32,9 @@ public:
 	void Create(Render::IndexType type, uint32_t count, Render::AllocateType allocate);
 
 public:
+	size_t GetSizeInByte(void);
+
+public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline Render::IndexType GetType(void) const { return mType; }
 	inline Render::DrawIndexed* GetDraw(void) { return &mDrawIndexed; }

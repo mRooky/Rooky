@@ -6,6 +6,8 @@
  */
 
 #include "VKVertexLayout.h"
+
+#include "RenderVertexLayout.h"
 #include <cassert>
 #include <iostream>
 
@@ -20,20 +22,16 @@ VertexLayout::~VertexLayout(void)
 {
 }
 
-void VertexLayout::Create(void)
+void VertexLayout::CreateInputState(Render::VertexLayout* layout)
 {
-	assert(mElements.size() > 0);
-	std::cout << "Create Vertex Element Count : " << mElements.size() << std::endl;
-	CreateInputState();
-}
-
-void VertexLayout::CreateInputState(void)
-{
-	if (false == mValid)
+	assert(layout != nullptr);
+	if (layout->IsValid())
 	{
 		uint32_t offset = 0;
-		for (auto& element : mElements)
+		const size_t count = layout->GetElementCount();
+		for (size_t index = 0; index < count; ++index)
 		{
+			auto element = layout->GetElement(index);
 			uint32_t binding = element.GetBinding();
 			auto type = element.GetType();
 			VkVertexInputBindingDescription* input_binding = mInputStateInfo.GetBinding(binding);
@@ -46,7 +44,6 @@ void VertexLayout::CreateInputState(void)
 
 			offset += Render::Element::GetTypeSize(type);
 		}
-		mValid = true;
 	}
 }
 

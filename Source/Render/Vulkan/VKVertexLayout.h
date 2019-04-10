@@ -8,29 +8,27 @@
 #ifndef SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 #define SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 
-#include "RenderVertexLayout.h"
+#include "RenderClasses.h"
+#include "RenderElement.h"
 #include "Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {
 
-class VertexLayout: public Render::VertexLayout
+class VertexLayout
 {
 public:
 	VertexLayout(void);
-	virtual ~VertexLayout(void) override;
+	virtual ~VertexLayout(void);
 
 public:
-	virtual void Create(void) override;
+	virtual void CreateInputState(Render::VertexLayout* layout);
 
 public:
 	inline const Vulkan::VertexInputStateInfo* GetVertexInputStateInfo(void) const { return &mInputStateInfo; }
 
 public:
 	static VkFormat GetElementFormat(Render::ElementType type);
-
-protected:
-	void CreateInputState(void);
 
 protected:
 	Vulkan::VertexInputStateInfo mInputStateInfo = {};

@@ -18,15 +18,14 @@ Viewport::Viewport(void)
 
 Viewport::~Viewport(void)
 {
-	delete mViewport;
 	mViewport = nullptr;
 }
 
 void Viewport::CreateViewport(void)
 {
-	assert(mSystem != nullptr);
+	assert(mScene != nullptr);
 	assert(mWindow != nullptr);
-	mViewport = new Core::Viewport(mSystem);
+	mViewport = mScene->CreateViewport();
 	mViewport->CreateSwapChain(mWindow);
 }
 

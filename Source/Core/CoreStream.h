@@ -9,27 +9,46 @@
 #define SOURCE_CORE_CORESTREAM_H_
 
 #include "CoreStreamType.h"
-#include <array>
+#include "CoreMeshBuffer.h"
+#include "CoreStreamData.h"
+
+#include "RenderElement.h"
+
+#include <vector>
 
 namespace Core
 {
-
+class Mesh;
+class StreamData;
 class Stream
 {
 public:
-	Stream(void);
+	explicit Stream(Mesh* parent);
 	~Stream(void);
 
 public:
-	void* GetBuffer(StreamType type);
-	void* Allocate(StreamType type, size_t size, bool discard);
+	bool UploadData(void);
+
+public:
+	inline Mesh* GetParent(void) const { return mParent; }
+	inline void SetParent(Mesh* parent) { mParent = parent; }
+
+public:
+	inline StreamData* GetStreamData(void) { return &mStreamData; }
+	inline IndexBuffer* GetIndexBuffer(void) { return &mIndexBuffer; }
+	inline VertexBuffer* GetVertexBuffer(void) { return &mVertexBuffer; }
 
 protected:
-	void FreeAllBuffer(void);
-	void FreeBuffer(StreamType type);
+	void UploadIndex(void);
+	void UploadVertex(void);
 
 protected:
-	std::array<uint8_t*, STREAM_TYPE_COUNT> mBuffers;
+	Mesh* mParent = nullptr;
+
+protected:
+	StreamData mStreamData = {};
+	IndexBuffer mIndexBuffer = {};
+	VertexBuffer mVertexBuffer = {};
 };
 
 } /* namespace Core */

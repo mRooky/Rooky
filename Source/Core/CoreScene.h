@@ -21,6 +21,9 @@ public:
 	virtual ~Scene(void);
 
 public:
+	Viewport* CreateViewport(void);
+
+public:
 	inline System* GetSystem(void) const { return mSystem; }
 
 protected:

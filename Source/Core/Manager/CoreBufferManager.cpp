@@ -61,11 +61,8 @@ Render::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<Render
 	Render::VertexLayout* layout = GetVertexLayout(elements);
 	if (layout == nullptr)
 	{
-		auto device = mSystem->GetDevice();
-		auto factory = device->GetFactory();
-		layout = factory->CreateVertexLayout();
+		layout = new Render::VertexLayout;
 		layout->SetElement(elements);
-		layout->Create();
 		mVertexLayouts.push_back(layout);
 	}
 	return layout;

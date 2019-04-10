@@ -29,7 +29,6 @@ public:
 	virtual Render::Shader* CreateShader(void) override;
 	virtual Render::SwapChain* CreateSwapChain(void) override;
 	virtual Render::CommandPool* CreateCommandPool(void) override;
-	virtual Render::VertexLayout* CreateVertexLayout(void) override;
 	virtual Render::Sampler* CreateSampler(void) override;
 	virtual Render::PipelineLayout* CreatePipelineLayout(void) override;
 	virtual Render::Pipeline* CreatePipeline(void) override;

@@ -101,8 +101,9 @@ void PipelineState::CreateVulkanVertexInputInfo(void)
 {
 	auto vertex_layout = mState->GetVertexLayout();
 	assert(vertex_layout != nullptr);
-	auto vk_vertex_layout = static_cast<VertexLayout*>(vertex_layout);
-	auto input_state_info = vk_vertex_layout->GetVertexInputStateInfo();
+	VertexLayout compiler = {};
+	compiler.CreateInputState(vertex_layout);
+	auto input_state_info = compiler.GetVertexInputStateInfo();
 	(*mGraphicsInfo.GetVertexInputStateInfo()) = (*input_state_info);
 }
 

@@ -21,24 +21,23 @@ public:
 	virtual ~VertexLayout(void);
 
 public:
-	virtual void Create(void) = 0;
-
-public:
 	void AppendElement(const Element& element);
 	void SetElement(const std::vector<Render::Element>& elements);
+
+public:
+	inline bool operator==(const VertexLayout& other) const { return mElements == other.mElements; }
 
 public:
 	inline const std::vector<Element>& GetElements(void) const { return mElements; }
 
 public:
-	inline bool IsValid(void) const { return mValid; }
-	inline size_t GetSizeInByte(void) const { return mSizeInByte; }
+	inline size_t GetStride(void) const { return mStride; }
+	inline bool IsValid(void) const { return mElements.size() > 0; }
 	inline size_t GetElementCount(void) const { return mElements.size(); }
 	inline const Element& GetElement(uint32_t index) const { return mElements.at(index); }
 
 protected:
-	bool mValid = false;
-	size_t mSizeInByte = 0;
+	size_t mStride = 0;
 	std::vector<Element> mElements;
 };
 

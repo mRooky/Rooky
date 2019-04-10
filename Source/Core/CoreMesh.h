@@ -9,7 +9,6 @@
 #define SOURCE_CORE_COREMESH_H_
 
 #include "CoreMovable.h"
-#include "CoreStream.h"
 #include "RenderAABB.h"
 
 #include <array>
@@ -17,8 +16,7 @@
 
 namespace Core
 {
-class Index;
-class Vertex;
+class Stream;
 class SubMesh;
 class MeshManager;
 class Mesh : public Movable
@@ -31,35 +29,26 @@ public:
 	virtual ~Mesh(void) override;
 
 public:
-	void SetIndex(Index* index, size_t offset);
-	void SetVertex(Vertex* vertex, size_t offset);
+	bool Compile(void);
+
+public:
+	size_t GetIndexCount(void);
+	size_t GetVertexCount(void);
 
 public:
 	SubMesh* CreateSubMesh(void);
 
 public:
-	inline Index* GetIndex(void) const { return mIndex; }
-	inline size_t GetIndexOffset(void) const { return mIndexOffset; }
-	inline Vertex* GetVertex(void) const { return mVertex; }
-	inline size_t  GetVertexOffset(void) const { return mVertexOffset; }
-
-public:
 	inline size_t GetSubMeshCount(void) const { return mSubMeshes.size(); }
 	inline SubMesh* GetSubMesh(size_t index) const { return mSubMeshes.at(index); }
 
-protected:
-	inline Stream* GetStream(void) { return &mStream; }
+public:
+	inline Stream* GetStream(void) { return mStream; }
 	inline Render::AABB* GetAABB(void) { return &mAABB; }
 
 protected:
-	Stream mStream;
 	Render::AABB mAABB = {};
-
-protected:
-	Index* mIndex = nullptr;
-	size_t mIndexOffset = 0;
-	Vertex* mVertex = nullptr;
-	size_t  mVertexOffset = 0;
+	Stream* mStream = nullptr;
 
 protected:
 	MeshManager* mManager = nullptr;

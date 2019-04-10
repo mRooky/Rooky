@@ -6,7 +6,10 @@
  */
 
 #include "CoreMesh.h"
+#include "CoreStream.h"
 #include "CoreSubMesh.h"
+#include "CoreMeshManager.h"
+#include "CoreBufferManager.h"
 
 #include "UtilityRelease.h"
 
@@ -16,10 +19,13 @@ namespace Core
 Mesh::Mesh(MeshManager* manager):
 		mManager(manager)
 {
+	mStream = new Stream(this);
 }
 
 Mesh::~Mesh(void)
 {
+	delete mStream;
+	mStream = nullptr;
 	Utility::Release(mSubMeshes);
 	mManager = nullptr;
 }
@@ -31,17 +37,34 @@ SubMesh* Mesh::CreateSubMesh(void)
 	return sub;
 }
 
-void Mesh::SetIndex(Index* index, size_t offset)
+bool Mesh::Compile(void)
 {
-	mIndex = index;
-	mIndexOffset = offset;
+	BufferManager* buffer_manager = mManager->GetBufferManager();
+	Index* index = buffer_manager->CreateIndex();
+	mStream->GetIndexBuffer()->SetIndex(index);
+	Vertex* vertex = buffer_manager->CreateVertex();
+	mStream->GetVertexBuffer()->SetVertex(vertex);
+	return mStream->UploadData();
 }
 
-void Mesh::SetVertex(Vertex* vertex, size_t offset)
+size_t Mesh::GetIndexCount(void)
 {
-	mVertex = vertex;
-	mVertexOffset = offset;
+	size_t count = 0;
+	for (auto sub : mSubMeshes)
+	{
+		count += sub->GetIndexCount();
+	}
+	return count;
 }
 
+size_t Mesh::GetVertexCount(void)
+{
+	size_t count = 0;
+	for (auto sub : mSubMeshes)
+	{
+		count += sub->GetVertexCount();
+	}
+	return count;
+}
 
 } /* namespace Core */

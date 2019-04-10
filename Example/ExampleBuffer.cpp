@@ -147,6 +147,8 @@ void Buffer::CreateIndexBuffer(void)
 	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, count, allocate);
 	mIndex->Write(indexes.data(), 0, size);
 
+	assert(mIndex->GetSizeInByte() == size);
+
 	if (false)
 	{
 		std::array<uint16_t, 6> data;

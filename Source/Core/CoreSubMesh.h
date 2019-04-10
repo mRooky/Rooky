@@ -25,14 +25,12 @@ public:
 	virtual ~SubMesh(void);
 
 public:
-	inline void SetMtlID(uint32_t id) { mMtlID = id; }
 	inline void SetFirstIndex(uint32_t first) { mFirstIndex = first; }
 	inline void SetIndexCount(uint32_t count) { mIndexCount = count; }
 	inline void SetFirstVertex(uint32_t first) { mFirstVertex = first; }
 	inline void SetVertexCount(uint32_t count) { mVertexCount = count; }
 
 public:
-	inline uint32_t GetMtlID(void) const { return mMtlID; }
 	inline uint32_t GetFirstIndex(void) const { return mFirstIndex; }
 	inline uint32_t GetIndexCount(void) const { return mIndexCount; }
 	inline uint32_t GetFirstVertex(void) const { return mFirstVertex; }
@@ -40,12 +38,12 @@ public:
 
 public:
 	inline Mesh* GetParent(void) const { return mParent; }
+	inline void SetParent(Mesh* parent) { mParent = parent; }
 
 protected:
 	Mesh* mParent = nullptr;
 
 protected:
-	uint32_t mMtlID = 0;
 	uint32_t mFirstIndex = 0;
 	uint32_t mIndexCount = 0;
 	uint32_t mFirstVertex = 0;
