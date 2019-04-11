@@ -29,6 +29,7 @@ public:
 	virtual ~Vertex(void) override;
 
 public:
+	void Create(Render::VertexLayout* layout, uint32_t count);
 	void Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate);
 
 public:

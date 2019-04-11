@@ -25,6 +25,7 @@
 
 #include <cassert>
 #include <array>
+#include <iostream>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -136,24 +137,26 @@ void Buffer::CreateIndexBuffer(void)
 	auto mesh_manager = mSystem->GetMeshManager();
 	auto buffer_manager = mesh_manager->GetBufferManager();
 
-	Render::AllocateType allocate;
-	allocate.CPUAccess = 1;
-
 	std::vector<uint16_t> indexes = { 0, 1, 2, 0, 2, 3 };
 	const size_t count = indexes.size();
 	const size_t size = sizeof(uint16_t) * count;
 
 	mIndex = buffer_manager->CreateIndex();
-	mIndex->Create(Render::IndexType::INDEX_TYPE_U16, count, allocate);
+	Render::IndexType index_type = Render::IndexType::INDEX_TYPE_U16;
+	mIndex->Create(index_type, count);
+	assert(mIndex->GetSizeInByte() == size);
 	mIndex->Write(indexes.data(), 0, size);
 
-	assert(mIndex->GetSizeInByte() == size);
-
-	if (false)
+	if (true)
 	{
-		std::array<uint16_t, 6> data;
+		std::cout << "Index : " << std::endl;
+		std::vector<uint16_t> data(6);
 		mIndex->Read(data.data(), 0, size);
-		assert(size);
+		for (size_t index = 0; index < 6; ++index)
+		{
+			std::cout << data.at(index) << " ";
+		}
+		std::cout << std::endl;
 	}
 }
 
@@ -189,15 +192,13 @@ void Buffer::CreateVertexBuffer(void)
 		Render::Element(0, 1, Render::ElementType::ELEMENT_TYPE_FLOAT2)
 	};
 
-	Render::AllocateType allocate;
-	allocate.CPUAccess = 1;
 	auto layout = buffer_manager->CreateVertexLayout(elements);
 	const size_t count = vertex_buffer.size();
 	const uint32_t size = count * sizeof(Vertex);
-	mVertex->Create(layout, count, allocate);
+	mVertex->Create(layout, count);
 	mVertex->Write(vertex_buffer.data(), 0, size);
 
-	if (false)
+	if (true)
 	{
 		std::array<Vertex, 4> data;
 		mVertex->Read(data.data(), 0, size);

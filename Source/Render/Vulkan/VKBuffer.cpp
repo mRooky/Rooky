@@ -21,6 +21,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <iostream>
 
 namespace VK
 {
@@ -68,7 +69,11 @@ void Buffer::AllocateMemory(void)
 void* Buffer::Map(size_t offset, size_t size)
 {
 	assert(mMemory != nullptr);
-	return mMemory->Map(offset, size);
+	if (mUsage.allocate.CPUAccess == TRUE)
+	{
+		return mMemory->Map(offset, size);
+	}
+	return nullptr;
 }
 
 void Buffer::Unmap(size_t offset, size_t size)
@@ -80,6 +85,8 @@ void Buffer::Unmap(size_t offset, size_t size)
 
 void Buffer::Download(void* dst, size_t offset, size_t size)
 {
+	std::cout << "[VK] Download Buffer Data" << std::endl;
+	assert(mMemory != nullptr);
 	assert(size != 0 && dst != nullptr);
 	Render::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
@@ -87,7 +94,7 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
 	auto stage_buffer = vk_pool->GetBuffer(size, usage);
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
 
@@ -107,12 +114,15 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	queue->FlushCommandBuffer(command_buffer);
 
 	void* src = stage_buffer->Map(0, size);
+	assert(src != nullptr);
 	std::memcpy(src, dst, size);
 	stage_buffer->Unmap(0, size);
 }
 
 void Buffer::Upload(const void* src, size_t offset, size_t size)
 {
+	std::cout << "[VK] Upload Buffer Data" << std::endl;
+	assert(mMemory != nullptr);
 	assert(size != 0 && src != nullptr);
 	Render::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
@@ -120,9 +130,10 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
 	auto stage_buffer = vk_pool->GetBuffer(size, usage);
 	void* dst = stage_buffer->Map(0, size);
+	assert(dst != nullptr);
 	std::memcpy(dst, src, size);
 	stage_buffer->Unmap(0, size);
 

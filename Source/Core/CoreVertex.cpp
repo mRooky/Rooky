@@ -31,6 +31,14 @@ Vertex::~Vertex(void)
 	mLayout = nullptr;
 }
 
+void Vertex::Create(Render::VertexLayout* layout, uint32_t count)
+{
+	Render::AllocateType allocate;
+	allocate.Source = TRUE;
+	allocate.Destination = TRUE;
+	Create(layout, count, allocate);
+}
+
 void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate)
 {
 	mCount = count;

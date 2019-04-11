@@ -21,6 +21,7 @@
 #include "UtilityRelease.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace VK
 {
@@ -35,7 +36,10 @@ Pool::Pool(Device& device):
 
 Pool::~Pool(void)
 {
+	const size_t count = mBuffers.size();
+	std::cout << "Release Recycle Buffer ..." << std::endl;
 	Utility::Release(mBuffers);
+	std::cout << "Released " << count << " Buffers !" << std::endl;
 	Vulkan::Release(mCommandPool);
 	Vulkan::Release(mDescriptorPool);
 }
@@ -84,6 +88,34 @@ Vulkan::DescriptorSet* Pool::AllocateDescriptorSet(uint32_t count, const VkDescr
 
 Buffer* Pool::GetBuffer(size_t size, VkBufferUsageFlags usage)
 {
+	Buffer* buffer = SearchBuffer(size, usage);
+	if (buffer == nullptr)
+	{
+		auto resource_usage = ConvertBufferUsageFlags(usage);
+		resource_usage.allocate.CPUAccess = TRUE;
+		buffer = new Buffer(&mDevice);
+		buffer->Create(size, resource_usage);
+		mBuffers.push_back(buffer);
+	}
+	assert(buffer != nullptr);
+	return buffer;
+}
+
+Buffer* Pool::GetBuffer(size_t size, Render::ResourceUsage usage)
+{
+	Buffer* buffer = SearchBuffer(size, usage);
+	if (buffer == nullptr)
+	{
+		buffer = new Buffer(&mDevice);
+		buffer->Create(size, usage);
+		mBuffers.push_back(buffer);
+	}
+	assert(buffer != nullptr);
+	return buffer;
+}
+
+Buffer* Pool::SearchBuffer(size_t size, VkBufferUsageFlags usage)
+{
 	for (auto buffer : mBuffers)
 	{
 		size_t buffer_size = buffer->GetSize();
@@ -97,12 +129,24 @@ Buffer* Pool::GetBuffer(size_t size, VkBufferUsageFlags usage)
 			}
 		}
 	}
-	auto resource_usage = ConvertBufferUsageFlags(usage);
-	resource_usage.allocate.CPUAccess = 1; // Must CPU Access
-	Buffer* buffer = new Buffer(&mDevice);
-	buffer->Create(size, resource_usage);
-	mBuffers.push_back(buffer);
-	return buffer;
+	return nullptr;
+}
+
+Buffer* Pool::SearchBuffer(size_t size, Render::ResourceUsage usage)
+{
+	for (auto buffer : mBuffers)
+	{
+		size_t buffer_size = buffer->GetSize();
+		if (buffer_size > size)
+		{
+			auto buffer_usage = buffer->GetUsage();
+			if (buffer_usage == usage)
+			{
+				return buffer;
+			}
+		}
+	}
+	return nullptr;
 }
 
 } /* namespace VK */

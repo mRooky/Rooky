@@ -29,14 +29,14 @@ Render::Buffer* Buffer::GetRenderBuffer(void)
 void Buffer::Read(void* dst, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
+	auto buffer = GetRenderBuffer();
 	buffer->Read(dst, offset, size);
 }
 
 void Buffer::Write(const void* src, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
+	auto buffer = GetRenderBuffer();
 	buffer->Write(src, offset, size);
 }
 

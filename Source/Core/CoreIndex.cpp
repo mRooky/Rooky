@@ -31,6 +31,14 @@ Index::~Index(void)
 	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
+void Index::Create(Render::IndexType type, uint32_t count)
+{
+	Render::AllocateType allocate;
+	allocate.Source = TRUE;
+	allocate.Destination = TRUE;
+	Create(type, count, allocate);
+}
+
 void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType allocate)
 {
 	mType = type;
