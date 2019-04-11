@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERVECTOR_HPP_
 #define SOURCE_CORE_RENDER_RENDERVECTOR_HPP_
 
+#include "RenderMath.h"
 #include <cstdint>
 #include <cstddef>
 #include <cmath>
@@ -135,7 +136,7 @@ public:
 	};
 };
 
-typedef Vector4_t<float> Vector4f;
+typedef Vector4_t<float> Vector4f, ColorValue;
 
 }
 

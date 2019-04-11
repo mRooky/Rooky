@@ -11,7 +11,6 @@
 #include "CoreShaderResource.h"
 #include "CoreBase.h"
 #include "CoreMaterialUniform.h"
-#include "RenderBinding.hpp"
 #include <array>
 #include <vector>
 
@@ -28,13 +27,12 @@ public:
 	virtual ~Material(void) override;
 
 public:
-	std::vector<Render::Binding> GetBindings(void) const;
-
-public:
 	inline void SetShaderResource(size_t index, ShaderResource* resource)
 	{
 		mShaderResources.at(index) = resource;
 	}
+
+public:
 	inline MaterialUniform* GetUniform(void) { return &mMaterialUniform; }
 	inline ShaderResource* GetShaderResource(size_t index) { return mShaderResources.at(index); }
 

@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 #define SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 
+#include "RenderBinding.hpp"
 #include "RenderClasses.h"
 #include <vector>
 
@@ -20,6 +21,9 @@ class ShaderResource
 public:
 	ShaderResource(void);
 	~ShaderResource(void);
+
+public:
+	std::vector<Render::Binding> GetBindings(void) const;
 
 public:
 	inline Render::Shader* GetShader(void) const { return mShader; }

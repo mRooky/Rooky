@@ -6,6 +6,7 @@
  */
 
 #include "CoreMaterial.h"
+#include "CoreUniform.h"
 #include <cassert>
 
 namespace Core
@@ -19,13 +20,6 @@ Material::Material(MaterialManager* manager):
 Material::~Material(void)
 {
 	mManager = nullptr;
-}
-
-std::vector<Render::Binding> Material::GetBindings(void) const
-{
-	std::vector<Render::Binding> bindings;
-	assert(false);
-	return bindings;
 }
 
 } /* namespace Core */

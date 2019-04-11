@@ -76,6 +76,8 @@ struct ColorComponent
 	uint8_t alpha = 255;
 };
 
+typedef float Real;
+
 }
 
 #endif /* SOURCE_CORE_RENDER_RENDERMATH_H_ */

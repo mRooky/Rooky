@@ -6,21 +6,31 @@
  */
 
 #include "CoreMaterialUniform.h"
+#include "CoreUniform.h"
 #include <cstring>
+#include <cassert>
 
 namespace Core
 {
 
 MaterialUniform::MaterialUniform(void)
 {
-	static_assert(sizeof(mBuffer) == 128, __FILE__);
-	std::memset(mBuffer.data(), 0u, sizeof(mBuffer));
 }
 
 MaterialUniform::~MaterialUniform(void)
 {
 	mOffset = 0;
 	mUniform = nullptr;
+}
+
+Render::Binding MaterialUniform::GetBinding(void) const
+{
+	assert(IsValid());
+	Render::Binding binding;
+	auto render_resource = mUniform->GetRenderResource();
+	auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
+	binding.SetResource(render_resource, shader_stage);
+	return binding;
 }
 
 } /* namespace Core */
