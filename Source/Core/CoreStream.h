@@ -43,8 +43,7 @@ protected:
 	void UploadVertex(void);
 
 private:
-	void FillVertexData(Data* dst, size_t stride, size_t count);
-	void FillSemanticData(Data* src, Data* dst, size_t step, size_t count);
+	const void* FillVertexData(Data* dest, size_t stride, size_t count);
 
 protected:
 	Mesh* mParent = nullptr;

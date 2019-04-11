@@ -12,6 +12,7 @@
 #include "RenderVector.hpp"
 #include <cstdint>
 #include <vector>
+#include <cstring>
 
 namespace Core
 {
@@ -45,6 +46,18 @@ public:
 		return mPositionData.data();
 	}
 
+	inline size_t WriteTo(void* dest, size_t index) const
+	{
+		size_t write_size = 0;
+		if (IsValid())
+		{
+			write_size = StreamBase::GetSemanticSize();
+			const void* memory = GetSemanticData(index);
+			std::memcpy(dest, memory, write_size);
+		}
+		return write_size;
+	}
+
 public:
 	inline void ClearSemanticData(void) { mPositionData.clear(); }
 
@@ -52,13 +65,17 @@ public:
 	inline bool IsValid(void) const { return mPositionData.size() > 0; }
 	inline size_t GetSemanticCount(void) const { return mPositionData.size(); }
 	inline const void* GetDataMemory(void) const { return mPositionData.data(); }
+	inline const void* GetSemanticData(size_t index) const { return &mPositionData.at(index); }
+
+public:
+	static inline size_t GetSemanticSize(void) { return sizeof(T); }
 
 protected:
 	std::vector<T> mPositionData;
 };
 
 typedef StreamBase<Render::Color> StreamColor;
-typedef StreamBase<Render::Vector2f> StreamCoord;
+typedef StreamBase<Render::Vector2f> StreamTexCoord;
 typedef StreamBase<Render::Vector3f> StreamPosition, StreamNormal;
 
 } /* namespace Core */

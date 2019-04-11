@@ -69,14 +69,13 @@ void Stream::UploadVertex(void)
 		const size_t vertex_count = mParent->GetVertexCount();
 		const size_t buffer_size = vertex_stride * vertex_count;
 		vertex_data.AllocateMemory(buffer_size);
-		FillVertexData(&vertex_data, vertex_stride, vertex_count);
-		void* vertex_buffer = vertex_data.GetMemory();
+		const void* vertex_buffer = FillVertexData(&vertex_data, vertex_stride, vertex_count);
 		const size_t buffer_offset = mIndexBuffer.GetOffset();
 		vertex->Write(vertex_buffer, buffer_offset, buffer_size);
 	}
 }
 
-void Stream::FillVertexData(Data* dst, size_t stride, size_t count)
+const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 {
 	const size_t stream_count = mStreamData.GetValidCount();
 	Render::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
@@ -84,16 +83,16 @@ void Stream::FillVertexData(Data* dst, size_t stride, size_t count)
 	assert(element_count == stream_count);
 	if (element_count == stream_count)
 	{
-
+		assert(dest->IsValid());
+		void* vertex_buffer = dest->GetMemory();
+		uint8_t* vertex_memory = reinterpret_cast<uint8_t*>(vertex_buffer);
+		for (size_t index = 0; index < count; ++index)
+		{
+			mStreamData.ReadSemanticData(vertex_memory, index);
+			vertex_memory += stride;
+		}
 	}
-}
-
-void Stream::FillSemanticData(Data* src, Data* dst, size_t step, size_t count)
-{
-	for (size_t index = 0; index < count; ++index)
-	{
-
-	}
+	return dest->GetMemory();
 }
 
 } /* namespace Core */

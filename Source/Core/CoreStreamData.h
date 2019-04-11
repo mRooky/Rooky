@@ -30,6 +30,10 @@ public:
 
 public:
 	size_t GetValidCount(void) const;
+	size_t GetSemanticStride(void) const;
+
+public:
+	void ReadSemanticData(void* dst, size_t index);
 
 public:
 	inline const Data* GetIndexBuffer(void) const { return &mIndexBuffer; }
@@ -43,7 +47,7 @@ protected:
 
 protected:
 	StreamColor mStreamColor = {};
-	StreamCoord mStreamCoord = {};
+	StreamTexCoord mStreamTexCoord = {};
 	StreamNormal mStreamNormal = {};
 	StreamPosition mStreamPosition = {};;
 };
