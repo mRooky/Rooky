@@ -20,6 +20,7 @@
 #include "VulkanDeviceMemory.h"
 
 #include <cassert>
+#include <cstring>
 
 namespace VK
 {
@@ -77,14 +78,69 @@ void Buffer::Unmap(size_t offset, size_t size)
 	mMemory->Flush(offset, size);
 }
 
-void Buffer::Download(void* dst)
+void Buffer::Download(void* dst, size_t offset, size_t size)
 {
+	assert(size != 0 && dst != nullptr);
+	Render::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
+	Pool* vk_pool = vk_factory->GetPool();
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+	auto stage_buffer = vk_pool->GetBuffer(size, usage);
+	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
+
+	VkBufferCopy copy_region = {};
+	copy_region.srcOffset = offset;
+	copy_region.dstOffset = 0;
+	copy_region.size = size;
+
+	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+	command_buffer->CopyResource(mBuffer, vulkan_buffer, 1, &copy_region);
+	command_buffer->End();
+
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
+	queue->FlushCommandBuffer(command_buffer);
+
+	void* src = stage_buffer->Map(0, size);
+	std::memcpy(src, dst, size);
+	stage_buffer->Unmap(0, size);
 }
 
-void Buffer::Upload(const void* src)
+void Buffer::Upload(const void* src, size_t offset, size_t size)
 {
+	assert(size != 0 && src != nullptr);
+	Render::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
+	Pool* vk_pool = vk_factory->GetPool();
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
+	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	auto stage_buffer = vk_pool->GetBuffer(size, usage);
+	void* dst = stage_buffer->Map(0, size);
+	std::memcpy(dst, src, size);
+	stage_buffer->Unmap(0, size);
+
+	VkBufferCopy copy_region = {};
+	copy_region.srcOffset = 0;
+	copy_region.dstOffset = offset;
+	copy_region.size = size;
+	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
+
+	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+	command_buffer->CopyResource(vulkan_buffer, mBuffer, 1, &copy_region);
+	command_buffer->End();
+
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
+	queue->FlushCommandBuffer(command_buffer);
 }
 
 void Buffer::CopyFrom(const Render::Resource* other)

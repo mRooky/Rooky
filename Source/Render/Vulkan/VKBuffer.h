@@ -24,10 +24,12 @@ public:
 	virtual void Create(size_t size, const Render::ResourceUsage& usage) override;
 
 public:
-	virtual void Download(void* dst) override;
-	virtual void Upload(const void* src) override;
 	virtual void* Map(size_t offset, size_t size) override;
 	virtual void Unmap(size_t offset, size_t size) override;
+
+public:
+	virtual void Download(void* dst, size_t offset, size_t size) override;
+	virtual void Upload(const void* src, size_t offset, size_t size) override;
 
 public:
 	virtual void CopyFrom(const Render::Resource* other) override;

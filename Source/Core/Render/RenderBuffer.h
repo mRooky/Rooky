@@ -29,8 +29,8 @@ public:
 	void Write(const void* src, size_t offset, size_t size);
 
 public:
-	virtual void Download(void* dst) = 0;
-	virtual void Upload(const void* src) = 0;
+	virtual void Download(void* dst, size_t offset, size_t size) = 0;
+	virtual void Upload(const void* src, size_t offset, size_t size) = 0;
 
 public:
 	inline size_t GetSize(void) const { return mSize; }

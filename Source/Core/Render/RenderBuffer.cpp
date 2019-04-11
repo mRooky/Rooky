@@ -26,18 +26,30 @@ void Buffer::Read(void* dst, size_t offset, size_t size)
 {
 	assert(dst != nullptr);
 	void* src = Map(offset, size);
-	assert(src != nullptr);
-	std::memcpy(dst, src, size);
-	Unmap(offset, size);
+	if (src != nullptr)
+	{
+		std::memcpy(dst, src, size);
+		Unmap(offset, size);
+	}
+	else
+	{
+		Download(dst, offset, size);
+	}
 }
 
 void Buffer::Write(const void* src, size_t offset, size_t size)
 {
 	assert(src != nullptr);
 	void* dst = Map(offset, size);
-	assert(dst != nullptr);
-	std::memcpy(dst, src, size);
-	Unmap(offset, size);
+	if(dst != nullptr)
+	{
+		std::memcpy(dst, src, size);
+		Unmap(offset, size);
+	}
+	else
+	{
+		Upload(src, offset, size);
+	}
 }
 
 } /* namespace Render */

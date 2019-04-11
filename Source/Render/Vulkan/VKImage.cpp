@@ -5,7 +5,6 @@
  *      Author: rookyma
  */
 
-#include <RenderMath/RenderBits.hpp>
 #include "VKImage.h"
 #include "VKFormat.h"
 #include "VKBuffer.h"
@@ -14,6 +13,8 @@
 #include "VKPool.h"
 #include "VKOperator.h"
 #include "VKDevice.h"
+
+#include "RenderBits.hpp"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"

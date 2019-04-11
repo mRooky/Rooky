@@ -6,7 +6,8 @@
  */
 
 #include "CoreMaterialData.h"
-#include <cstring>
+#include "CoreUniform.h"
+#include "UtilityMemory.h"
 #include <cassert>
 
 namespace Core
@@ -18,15 +19,6 @@ MaterialData::MaterialData(void)
 
 MaterialData::~MaterialData(void)
 {
-}
-
-void MaterialData::UpdateUniform(Uniform* uniform, size_t offset)
-{
-	if (mDirty)
-	{
-		assert(false);
-		mDirty = false;
-	}
 }
 
 void MaterialData::SetShininess(Render::Real shininess)
@@ -57,6 +49,25 @@ void MaterialData::SetEmissive(const Render::ColorValue& color)
 {
 	mDirty = true;
 	mEmissive = color;
+}
+
+void MaterialData::UpdateUniform(Uniform* uniform, size_t offset)
+{
+	if (mDirty)
+	{
+		uint8_t buffer[MaterialDataSize];
+		std::memset(buffer, 0, MaterialDataSize);
+		{
+			uint8_t* write_ptr = buffer;
+			write_ptr += Utility::Memcpy(write_ptr, mShininess);
+			write_ptr += Utility::Memcpy(write_ptr, mAmbient);
+			write_ptr += Utility::Memcpy(write_ptr, mDiffuse);
+			write_ptr += Utility::Memcpy(write_ptr, mSpecular);
+			write_ptr += Utility::Memcpy(write_ptr, mEmissive);
+		}
+		uniform->Write(buffer, offset, MaterialDataSize);
+		mDirty = false;
+	}
 }
 
 } /* namespace Core */

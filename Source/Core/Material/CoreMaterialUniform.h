@@ -22,6 +22,9 @@ public:
 	~MaterialUniform(void);
 
 public:
+	void UpdateUniformData(void);
+
+public:
 	Render::Binding GetBinding(void) const;
 
 public:

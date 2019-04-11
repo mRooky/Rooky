@@ -33,4 +33,10 @@ Render::Binding MaterialUniform::GetBinding(void) const
 	return binding;
 }
 
+void MaterialUniform::UpdateUniformData(void)
+{
+	assert(mUniform != nullptr);
+	mUniformData.UpdateUniform(mUniform, mOffset);
+}
+
 } /* namespace Core */

@@ -31,10 +31,10 @@ public:
 
 public:
 	inline Render::Real GetShininess(void) const { return mShininess; }
-	inline const Render::ColorValue GetAmbient(void) const { return mAmbient; }
-	inline const Render::ColorValue GetDiffuse(void) const { return mDiffuse; }
-	inline const Render::ColorValue GetSpecular(void) const { return mSpecular; }
-	inline const Render::ColorValue GetEmissive(void) const { return mEmissive; }
+	inline const Render::ColorValue& GetAmbient(void) const { return mAmbient; }
+	inline const Render::ColorValue& GetDiffuse(void) const { return mDiffuse; }
+	inline const Render::ColorValue& GetSpecular(void) const { return mSpecular; }
+	inline const Render::ColorValue& GetEmissive(void) const { return mEmissive; }
 
 public:
 	inline bool IsDirty(void) const { return mDirty ;}
@@ -52,7 +52,7 @@ protected:
 	Render::ColorValue mEmissive = {};
 
 private:
-	static const size_t MaterialDataSize = 32;
+	static constexpr size_t MaterialDataSize = 256;
 };
 
 } /* namespace Core */
