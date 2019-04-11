@@ -41,6 +41,7 @@ public:
 protected:
 	void UploadIndex(void);
 	void UploadVertex(void);
+	void FillVertexData(Data* dst);
 
 protected:
 	Mesh* mParent = nullptr;

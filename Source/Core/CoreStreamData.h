@@ -24,7 +24,7 @@ public:
 
 public:
 	Data* GetBuffer(StreamType type);
-	Data* Allocate(StreamType type, size_t size);
+	Data* AllocateBuffer(StreamType type, size_t size);
 
 protected:
 	void FreeAllBuffer(void);

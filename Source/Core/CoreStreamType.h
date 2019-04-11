@@ -27,8 +27,8 @@ enum class StreamType : uint32_t
 };
 
 static const uint32_t STREAM_TYPE_COUNT = static_cast<uint32_t>(StreamType::STREAM_TYPE_COUNT);
-static inline uint32_t GetIndex(StreamType type) { return static_cast<uint32_t>(type); }
-static inline StreamType GetStream(uint32_t index) { return static_cast<StreamType>(index); }
+static inline uint32_t CastStream(StreamType type) { return static_cast<uint32_t>(type); }
+static inline StreamType CastIndex(uint32_t index) { return static_cast<StreamType>(index); }
 
 } /* namespace Core */
 

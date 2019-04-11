@@ -22,13 +22,14 @@ StreamData::~StreamData(void)
 
 Data* StreamData::GetBuffer(StreamType type)
 {
-	uint32_t stream_index = GetIndex(type);
-	return &mBuffers.at(stream_index);
+	uint32_t stream_index = CastStream(type);
+	auto& data = mBuffers.at(stream_index);
+	return data.IsValid() ? &mBuffers.at(stream_index) : nullptr;
 }
 
-Data* StreamData::Allocate(StreamType type, size_t size)
+Data* StreamData::AllocateBuffer(StreamType type, size_t size)
 {
-	uint32_t stream_index = GetIndex(type);
+	uint32_t stream_index = CastStream(type);
 	mBuffers.at(stream_index).FreeBuffer();
 	mBuffers.at(stream_index).Allocate(size);
 	return &mBuffers.at(stream_index);
@@ -44,7 +45,7 @@ void StreamData::FreeAllBuffer(void)
 
 void StreamData::FreeBuffer(StreamType type)
 {
-	uint32_t stream_index = GetIndex(type);
+	uint32_t stream_index = CastStream(type);
 	assert(stream_index < STREAM_TYPE_COUNT);
 	mBuffers.at(stream_index).FreeBuffer();
 }

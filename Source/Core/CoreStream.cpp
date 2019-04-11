@@ -65,22 +65,25 @@ void Stream::UploadVertex(void)
 		const size_t vertex_count = mParent->GetVertexCount();
 		const size_t buffer_size = vertex_stride * vertex_count;
 		vertex_data.Allocate(buffer_size);
+		FillVertexData(&vertex_data);
 		void* vertex_buffer = vertex_data.GetBuffer();
-
-		//Fill Vertex Data
-		{
-			const size_t start = GetIndex(StreamType::STREAM_TYPE_POSITION);
-			const size_t end = STREAM_TYPE_COUNT;
-			for (size_t index = start; index < end; ++index)
-			{
-				StreamType type = GetStream(index);
-				Data* element_data = mStreamData.GetBuffer(type);
-				assert(false && element_data);
-			}
-		}
-
 		const size_t buffer_offset = mIndexBuffer.GetOffset();
 		vertex->Write(vertex_buffer, buffer_offset, buffer_size);
+	}
+}
+
+void Stream::FillVertexData(Data* dst)
+{
+	const size_t start = CastStream(StreamType::STREAM_TYPE_POSITION);
+	const size_t end = STREAM_TYPE_COUNT;
+	for (size_t index = start; index < end; ++index)
+	{
+		StreamType type = CastIndex(index);
+		Data* element_data = mStreamData.GetBuffer(type);
+		if (element_data != nullptr)
+		{
+
+		}
 	}
 }
 
