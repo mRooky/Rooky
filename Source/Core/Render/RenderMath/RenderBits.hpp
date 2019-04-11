@@ -16,7 +16,7 @@
 namespace Render
 {
 
-static inline unsigned Bit(unsigned pos)
+static inline unsigned constexpr Bit(unsigned pos)
 {
 	return 1u << pos;
 }

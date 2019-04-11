@@ -17,32 +17,22 @@ namespace Core
 class Data
 {
 public:
-	Data(void) = default;
-	~Data(void) { FreeBuffer(); }
+	Data(void);
+	~Data(void);
 
 public:
-	inline void Allocate(size_t size)
-	{
-		mSize = size;
-		mData = new uint8_t[size];
-	}
-
-	inline void FreeBuffer(void)
-	{
-		mSize = 0;
-		delete[] mData;
-		mData = nullptr;
-	}
+	void FreeMemory(void);
+	void AllocateMemory(size_t size);
 
 public:
-	inline void* GetBuffer(void) const { return mData; }
+	inline void* GetMemory(void) const { return mMemory; }
 
 public:
-	inline bool IsValid(void) const { return mData != nullptr; }
+	inline bool IsValid(void) const { return mMemory != nullptr; }
 
 protected:
 	size_t mSize = 0;
-	uint8_t* mData = nullptr;
+	uint8_t* mMemory = nullptr;
 };
 
 } /* namespace Core */

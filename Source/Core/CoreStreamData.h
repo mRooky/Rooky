@@ -8,10 +8,9 @@
 #ifndef SOURCE_CORE_CORESTREAMDATA_H_
 #define SOURCE_CORE_CORESTREAMDATA_H_
 
-#include "CoreStreamType.h"
 #include "CoreData.h"
+#include "CoreStreamType.h"
 #include <cstddef>
-#include <array>
 
 namespace Core
 {
@@ -23,15 +22,30 @@ public:
 	virtual ~StreamData(void);
 
 public:
-	Data* GetBuffer(StreamType type);
-	Data* AllocateBuffer(StreamType type, size_t size);
+	Data* AllocateIndexBuffer(size_t size);
+	void* AllocateSemanticBuffer(StreamType type, size_t count);
+
+public:
+	const void* GetSemanticBuffer(StreamType type) const;
+
+public:
+	size_t GetValidCount(void) const;
+
+public:
+	inline const Data* GetIndexBuffer(void) const { return &mIndexBuffer; }
 
 protected:
 	void FreeAllBuffer(void);
-	void FreeBuffer(StreamType type);
+	void FreeSemanticBuffer(StreamType type);
 
 protected:
-	std::array<Data, STREAM_TYPE_COUNT> mBuffers;
+	Data mIndexBuffer = {};
+
+protected:
+	StreamColor mStreamColor = {};
+	StreamCoord mStreamCoord = {};
+	StreamNormal mStreamNormal = {};
+	StreamPosition mStreamPosition = {};;
 };
 
 } /* namespace Core */
