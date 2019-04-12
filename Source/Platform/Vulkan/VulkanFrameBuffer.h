@@ -16,7 +16,7 @@ namespace Vulkan
 class Image;
 class Device;
 class RenderPass;
-class ROOKY_EXPORT FrameBuffer: public DeviceObject
+class VULKAN_EXPORT FrameBuffer: public DeviceObject
 {
 private:
 	explicit FrameBuffer(Device* device);

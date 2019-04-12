@@ -12,7 +12,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT RenderPass: public DeviceObject
+class VULKAN_EXPORT RenderPass: public DeviceObject
 {
 private:
 	explicit RenderPass(Device* device);

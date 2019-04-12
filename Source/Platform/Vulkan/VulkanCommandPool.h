@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 class CommandBuffer;
-class ROOKY_EXPORT CommandPool: public DeviceObject
+class VULKAN_EXPORT CommandPool: public DeviceObject
 {
 private:
 	explicit CommandPool(Device* device);

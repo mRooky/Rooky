@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 class DescriptorSetLayout;
-class ROOKY_EXPORT PipelineLayout: public DeviceObject
+class VULKAN_EXPORT PipelineLayout: public DeviceObject
 {
 private:
 	explicit PipelineLayout(Device* device);

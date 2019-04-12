@@ -12,7 +12,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT Sampler: public DeviceObject
+class VULKAN_EXPORT Sampler: public DeviceObject
 {
 private:
 	explicit Sampler(Device* device);

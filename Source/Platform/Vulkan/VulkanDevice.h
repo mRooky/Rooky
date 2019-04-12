@@ -15,7 +15,7 @@ namespace Vulkan
 {
 class Queue;
 class PhysicalDevice;
-class ROOKY_EXPORT Device: public Object
+class VULKAN_EXPORT Device: public Object
 {
 private:
 	explicit Device(PhysicalDevice* physical);

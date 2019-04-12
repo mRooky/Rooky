@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 
-class ROOKY_EXPORT Base
+class VULKAN_EXPORT Base
 {
 protected:
 	Base(void);

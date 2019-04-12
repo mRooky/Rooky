@@ -12,7 +12,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT Semaphore: public DeviceObject
+class VULKAN_EXPORT Semaphore: public DeviceObject
 {
 private:
 	explicit Semaphore(Device* device);

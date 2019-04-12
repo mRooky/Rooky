@@ -14,7 +14,7 @@ namespace Vulkan
 {
 class ImageView;
 class CommandBuffer;
-class ROOKY_EXPORT Image: public Resource
+class VULKAN_EXPORT Image: public Resource
 {
 protected:
 	explicit Image(Device* device);
@@ -77,7 +77,7 @@ private:
 	ImageView* m_view = nullptr;
 };
 
-class ROOKY_EXPORT SwapChainImage : public Image
+class VULKAN_EXPORT SwapChainImage : public Image
 {
 	friend class SwapChain;
 private:

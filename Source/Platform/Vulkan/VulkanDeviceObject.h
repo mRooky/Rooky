@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Device;
-class ROOKY_EXPORT DeviceObject: public Object
+class VULKAN_EXPORT DeviceObject: public Object
 {
 protected:
 	explicit DeviceObject(Device* device);

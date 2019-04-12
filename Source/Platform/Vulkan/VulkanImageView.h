@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Image;
-class ROOKY_EXPORT ImageView: public DeviceObject
+class VULKAN_EXPORT ImageView: public DeviceObject
 {
 private:
 	explicit ImageView(Device* device);

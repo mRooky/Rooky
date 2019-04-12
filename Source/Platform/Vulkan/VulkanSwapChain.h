@@ -17,7 +17,7 @@ class SwapChainImage;
 class Surface;
 class Fence;
 class Semaphore;
-class ROOKY_EXPORT SwapChain: public DeviceObject
+class VULKAN_EXPORT SwapChain: public DeviceObject
 {
 private:
 	explicit SwapChain(Device* device);

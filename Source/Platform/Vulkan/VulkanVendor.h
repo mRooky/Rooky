@@ -15,7 +15,7 @@
 namespace Vulkan
 {
 
-class Vendor : public Object
+class VULKAN_EXPORT Vendor : public Object
 {
 private:
 	Vendor(void);

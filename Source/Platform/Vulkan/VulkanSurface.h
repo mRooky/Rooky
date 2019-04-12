@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 class PhysicalDevice;
-class ROOKY_EXPORT Surface: public Object
+class VULKAN_EXPORT Surface: public Object
 {
 private:
 	explicit Surface(PhysicalDevice* physical);

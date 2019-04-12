@@ -12,7 +12,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT Buffer: public Resource
+class VULKAN_EXPORT Buffer: public Resource
 {
 private:
 	explicit Buffer(Device* device);

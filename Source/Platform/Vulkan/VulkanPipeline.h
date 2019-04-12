@@ -14,7 +14,7 @@ namespace Vulkan
 {
 class PipelineCache;
 class PipelineLayout;
-class ROOKY_EXPORT Pipeline: public DeviceObject
+class VULKAN_EXPORT Pipeline: public DeviceObject
 {
 private:
 	explicit Pipeline(Device* device);

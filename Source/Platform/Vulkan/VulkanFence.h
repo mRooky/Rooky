@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Device;
-class ROOKY_EXPORT Fence: public DeviceObject
+class VULKAN_EXPORT Fence: public DeviceObject
 {
 private:
 	explicit Fence(Device* device);

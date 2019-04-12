@@ -13,7 +13,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT DrawCall : public Object
+class VULKAN_EXPORT DrawCall : public Object
 {
 protected:
 	DrawCall(void);
@@ -23,7 +23,7 @@ public:
 	virtual void Record(CommandBuffer* command) = 0;
 };
 
-class ROOKY_EXPORT DrawDirect : public DrawCall
+class VULKAN_EXPORT DrawDirect : public DrawCall
 {
 public:
 	DrawDirect(void);
@@ -40,7 +40,7 @@ protected:
 	uint32_t mFirstInstance = 0;
 };
 
-class ROOKY_EXPORT DrawArray : public DrawDirect
+class VULKAN_EXPORT DrawArray : public DrawDirect
 {
 public:
 	DrawArray(void);
@@ -63,7 +63,7 @@ protected:
 	uint32_t mFirstVertex = 0;
 };
 
-class ROOKY_EXPORT DrawIndexed : public DrawDirect
+class VULKAN_EXPORT DrawIndexed : public DrawDirect
 {
 public:
 	DrawIndexed(void);
@@ -89,7 +89,7 @@ protected:
 	uint32_t mVertexOffset = 0;
 };
 
-class ROOKY_EXPORT DrawIndirect : public DrawCall
+class VULKAN_EXPORT DrawIndirect : public DrawCall
 {
 public:
 	DrawIndirect(void);
@@ -128,7 +128,7 @@ private:
 	DeviceMemory* m_memory = nullptr;
 };
 
-class ROOKY_EXPORT DrawIndexedIndirect : public DrawIndirect
+class VULKAN_EXPORT DrawIndexedIndirect : public DrawIndirect
 {
 protected:
 	DrawIndexedIndirect(void);

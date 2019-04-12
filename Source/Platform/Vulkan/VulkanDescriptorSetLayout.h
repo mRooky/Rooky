@@ -13,7 +13,7 @@
 
 namespace Vulkan
 {
-class ROOKY_EXPORT DescriptorSetLayout: public DeviceObject
+class VULKAN_EXPORT DescriptorSetLayout: public DeviceObject
 {
 	friend class DescriptorPool;
 private:

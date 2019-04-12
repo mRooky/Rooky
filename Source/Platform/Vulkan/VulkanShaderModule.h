@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 
-class ROOKY_EXPORT ShaderModule : public DeviceObject
+class VULKAN_EXPORT ShaderModule : public DeviceObject
 {
 private:
 	explicit ShaderModule(Device* device);

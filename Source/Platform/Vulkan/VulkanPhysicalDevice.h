@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 class Instance;
-class ROOKY_EXPORT PhysicalDevice: public Object
+class VULKAN_EXPORT PhysicalDevice: public Object
 {
 private:
 	PhysicalDevice(Instance* instance);

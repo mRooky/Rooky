@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Instance;
-class Debug : public Object
+class VULKAN_EXPORT Debug : public Object
 {
 private:
 	Debug(Instance* instance);

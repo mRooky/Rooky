@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Buffer;
-class ROOKY_EXPORT BufferView: public DeviceObject
+class VULKAN_EXPORT BufferView: public DeviceObject
 {
 private:
 	explicit BufferView(Device* device);

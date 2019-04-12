@@ -15,7 +15,7 @@ namespace Vulkan
 {
 class Fence;
 class CommandBuffer;
-class ROOKY_EXPORT Queue: public DeviceObject
+class VULKAN_EXPORT Queue: public DeviceObject
 {
 private:
 	explicit Queue(Device* device);

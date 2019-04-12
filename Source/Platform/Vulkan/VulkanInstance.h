@@ -15,7 +15,7 @@
 namespace Vulkan
 {
 class Debug;
-class ROOKY_EXPORT Instance: public Object
+class VULKAN_EXPORT Instance: public Object
 {
 	Instance(void);
 	virtual ~Instance(void) override;

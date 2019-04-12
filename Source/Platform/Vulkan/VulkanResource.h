@@ -14,7 +14,7 @@
 namespace Vulkan
 {
 class DeviceMemory;
-class ROOKY_EXPORT Resource : public DeviceObject
+class VULKAN_EXPORT Resource : public DeviceObject
 {
 public:
 	explicit Resource(Device* device);

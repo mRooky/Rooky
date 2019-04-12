@@ -13,7 +13,7 @@
 namespace Vulkan
 {
 class Device;
-class ROOKY_EXPORT Event: public DeviceObject
+class VULKAN_EXPORT Event: public DeviceObject
 {
 private:
 	explicit Event(Device* device);
