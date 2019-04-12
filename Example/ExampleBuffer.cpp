@@ -146,18 +146,6 @@ void Buffer::CreateIndexBuffer(void)
 	mIndex->Create(index_type, count);
 	assert(mIndex->GetSizeInByte() == size);
 	mIndex->Write(indexes.data(), 0, size);
-
-	if (true)
-	{
-		std::cout << "Index : " << std::endl;
-		std::vector<uint16_t> data(6);
-		mIndex->Read(data.data(), 0, size);
-		for (size_t index = 0; index < 6; ++index)
-		{
-			std::cout << data.at(index) << " ";
-		}
-		std::cout << std::endl;
-	}
 }
 
 void Buffer::CreateVertexBuffer(void)
@@ -197,13 +185,6 @@ void Buffer::CreateVertexBuffer(void)
 	const uint32_t size = count * sizeof(Vertex);
 	mVertex->Create(layout, count);
 	mVertex->Write(vertex_buffer.data(), 0, size);
-
-	if (true)
-	{
-		std::array<Vertex, 4> data;
-		mVertex->Read(data.data(), 0, size);
-		assert(size);
-	}
 }
 
 void Buffer::CreateUniformBuffer(void)

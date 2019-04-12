@@ -86,6 +86,12 @@ Vulkan::DescriptorSet* Pool::AllocateDescriptorSet(uint32_t count, const VkDescr
 	return mDescriptorPool->Allocate(layout);
 }
 
+Buffer* Pool::GetStageBuffer(size_t size)
+{
+	Render::UsageType usage = CreateStageBufferUsageType();
+	return GetBuffer(size, usage);
+}
+
 Buffer* Pool::GetBuffer(size_t size, Render::UsageType usage)
 {
 	Buffer* buffer = SearchBuffer(size, usage);

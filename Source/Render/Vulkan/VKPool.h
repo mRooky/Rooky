@@ -23,6 +23,7 @@ public:
 	virtual ~Pool(void);
 
 public:
+	Buffer* GetStageBuffer(size_t size);
 	Buffer* GetBuffer(size_t size, Render::UsageType usage);
 
 public:

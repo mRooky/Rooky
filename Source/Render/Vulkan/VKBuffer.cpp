@@ -96,7 +96,7 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 
 	Render::UsageType usage = CreateStageBufferUsageType();
 
-	auto stage_buffer = vk_pool->GetBuffer(size, usage);
+	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
 
 	VkBufferCopy copy_region = {};
@@ -114,10 +114,8 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
 	queue->FlushCommandBuffer(command_buffer);
 
-	void* src = stage_buffer->Map(0, size);
-	assert(src != nullptr);
-	std::memcpy(src, dst, size);
-	stage_buffer->Unmap(0, size);
+	assert(stage_buffer->GetUsage().CPUAccessable());
+	stage_buffer->Read(dst, 0, size);
 }
 
 void Buffer::Upload(const void* src, size_t offset, size_t size)
@@ -131,13 +129,9 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	Render::UsageType usage = CreateStageBufferUsageType();
-
-	Buffer* stage_buffer = vk_pool->GetBuffer(size, usage);
-	void* dst = stage_buffer->Map(0, size);
-	assert(dst != nullptr);
-	std::memcpy(dst, src, size);
-	stage_buffer->Unmap(0, size);
+	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
+	assert(stage_buffer->GetUsage().CPUAccessable());
+	stage_buffer->Write(src, 0, size);
 
 	VkBufferCopy copy_region = {};
 	copy_region.srcOffset = 0;

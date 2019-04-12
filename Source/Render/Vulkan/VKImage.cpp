@@ -118,9 +118,7 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	size_t buffer_size = GetMipmapSize(mipmap);
-	Render::UsageType usage = CreateStageBufferUsageType();
-
-	auto stage_buffer = vk_pool->GetBuffer(buffer_size, usage);
+	Buffer* stage_buffer = vk_pool->GetStageBuffer(buffer_size);
 	void* dst = stage_buffer->Map(0, buffer_size);
 	std::memcpy(dst, src, buffer_size);
 	stage_buffer->Unmap(0, buffer_size);
