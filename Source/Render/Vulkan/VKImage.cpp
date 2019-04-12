@@ -43,7 +43,7 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage)
+void Image::Create(const Render::ImageLayout& layout, const Render::UsageType& usage)
 {
 	mUsage = usage;
 	mLayout = layout;
@@ -61,9 +61,9 @@ void Image::CreateImage(void)
 
 	VkExtent3D vulkan_extent =
 	{
-			static_cast<uint32_t>(mLayout.extent.width),
-			static_cast<uint32_t>(mLayout.extent.height),
-			static_cast<uint32_t>(mLayout.extent.depth)
+		static_cast<uint32_t>(mLayout.extent.width),
+		static_cast<uint32_t>(mLayout.extent.height),
+		static_cast<uint32_t>(mLayout.extent.depth)
 	};
 
 	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
@@ -74,7 +74,7 @@ void Image::CreateImage(void)
 void Image::AllocateMemory(void)
 {
 	assert(mImage != nullptr);
-	auto flags = GetMemoryPropertyFlags(mUsage.allocate);
+	auto flags = GetMemoryPropertyFlags(mUsage);
 	Vulkan::Device* device = mImage->GetDevice();
 
 	auto& requirements = mImage->GetMemoryRequirements();
@@ -118,7 +118,8 @@ void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	size_t buffer_size = GetMipmapSize(mipmap);
-	VkBufferUsageFlags usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+	Render::UsageType usage = CreateStageBufferUsageType();
+
 	auto stage_buffer = vk_pool->GetBuffer(buffer_size, usage);
 	void* dst = stage_buffer->Map(0, buffer_size);
 	std::memcpy(dst, src, buffer_size);
@@ -243,12 +244,12 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	return extent;
 }
 
-VkDescriptorType Image::GetDescriptorType(const Render::ImageUsage& usage)
+VkDescriptorType Image::GetDescriptorType(const Render::UsageType& usage)
 {
 	VkDescriptorType descriptor_type =
-	(usage.SampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
-	(usage.StorageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
-	(usage.InputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT :
+	(usage.sampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
+	(usage.storageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
+	(usage.inputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT :
 			VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
 	return descriptor_type;
@@ -302,18 +303,18 @@ Render::ImageType Image::ConverType(const VkImageViewType& type)
 	}
 }
 
-VkImageUsageFlags Image::ConvertUsageFlag(Render::ResourceUsage usage)
+VkImageUsageFlags Image::ConvertUsageFlag(Render::UsageType usage)
 {
 	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_IMAGE);
 	VkImageUsageFlags flags = 0;
-	flags |= (usage.allocate.Source == 1) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.allocate.Destination == 1) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.imageUsage.SampledImage == 1) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
-	flags |= (usage.imageUsage.StorageImage == 1) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
-	flags |= (usage.imageUsage.ColorImage == 1) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
-	flags |= (usage.imageUsage.DepthStencil == 1) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
-	flags |= (usage.imageUsage.TransientImage == 1) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
-	flags |= (usage.imageUsage.InputImage == 1) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
+	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
+	flags |= (usage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
+	flags |= (usage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
+	flags |= (usage.depthStencil == TRUE) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
+	flags |= (usage.transientImage == TRUE) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
+	flags |= (usage.inputImage == TRUE) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
 	return flags;
 }
 

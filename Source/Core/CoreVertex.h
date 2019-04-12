@@ -11,7 +11,7 @@
 #include "CoreBuffer.h"
 #include "RenderFormat.h"
 #include "RenderClasses.h"
-#include "RenderUsage.h"
+#include "RenderUsageType.h"
 
 #include <cstdint>
 #include <vector>
@@ -30,14 +30,14 @@ public:
 
 public:
 	void Create(Render::VertexLayout* layout, uint32_t count);
-	void Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate);
+	void Create(Render::VertexLayout* layout, uint32_t count, Render::UsageType usage);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline Render::VertexLayout* GetLayout(void) const { return mLayout; }
 
 private:
-	void CreateRenderBuffer(Render::AllocateType allocate);
+	void CreateRenderBuffer(Render::UsageType usage);
 
 protected:
 	BufferManager* mCreator = nullptr;

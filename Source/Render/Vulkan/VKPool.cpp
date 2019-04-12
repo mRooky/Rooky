@@ -86,22 +86,7 @@ Vulkan::DescriptorSet* Pool::AllocateDescriptorSet(uint32_t count, const VkDescr
 	return mDescriptorPool->Allocate(layout);
 }
 
-Buffer* Pool::GetBuffer(size_t size, VkBufferUsageFlags usage)
-{
-	Buffer* buffer = SearchBuffer(size, usage);
-	if (buffer == nullptr)
-	{
-		auto resource_usage = ConvertBufferUsageFlags(usage);
-		resource_usage.allocate.CPUAccess = TRUE;
-		buffer = new Buffer(&mDevice);
-		buffer->Create(size, resource_usage);
-		mBuffers.push_back(buffer);
-	}
-	assert(buffer != nullptr);
-	return buffer;
-}
-
-Buffer* Pool::GetBuffer(size_t size, Render::ResourceUsage usage)
+Buffer* Pool::GetBuffer(size_t size, Render::UsageType usage)
 {
 	Buffer* buffer = SearchBuffer(size, usage);
 	if (buffer == nullptr)
@@ -114,30 +99,12 @@ Buffer* Pool::GetBuffer(size_t size, Render::ResourceUsage usage)
 	return buffer;
 }
 
-Buffer* Pool::SearchBuffer(size_t size, VkBufferUsageFlags usage)
+Buffer* Pool::SearchBuffer(size_t size, Render::UsageType usage)
 {
 	for (auto buffer : mBuffers)
 	{
 		size_t buffer_size = buffer->GetSize();
-		if (buffer_size > size)
-		{
-			auto vulkan_buffer = buffer->GetVulkanBuffer();
-			auto buffer_usage = vulkan_buffer->GetUsage();
-			if ((usage & buffer_usage) == usage)
-			{
-				return buffer;
-			}
-		}
-	}
-	return nullptr;
-}
-
-Buffer* Pool::SearchBuffer(size_t size, Render::ResourceUsage usage)
-{
-	for (auto buffer : mBuffers)
-	{
-		size_t buffer_size = buffer->GetSize();
-		if (buffer_size > size)
+		if (buffer_size >= size)
 		{
 			auto buffer_usage = buffer->GetUsage();
 			if (buffer_usage == usage)

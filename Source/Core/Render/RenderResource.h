@@ -9,7 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERRESOURCE_H_
 
 #include "RenderObject.h"
-#include "RenderUsage.h"
+#include "RenderUsageType.h"
 
 namespace Render
 {
@@ -22,10 +22,10 @@ public:
 
 public:
 	inline ResourceType GetType(void) const { return mType; }
-	inline const ResourceUsage& GetUsage(void) const { return mUsage; }
+	inline const UsageType& GetUsage(void) const { return mUsage; }
 
 protected:
-	ResourceUsage mUsage = {};
+	UsageType mUsage = {};
 	ResourceType mType = ResourceType::RESOURCE_TYPE_UNKNOWN;
 };
 

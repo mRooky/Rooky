@@ -10,7 +10,7 @@
 
 #include "CoreBuffer.h"
 #include "RenderClasses.h"
-#include "RenderUsage.h"
+#include "RenderUsageType.h"
 
 #include <cstddef>
 
@@ -27,10 +27,10 @@ public:
 	virtual ~Uniform(void) override;
 
 public:
-	void Create(size_t size, Render::AllocateType allocate);
+	void Create(size_t size, Render::UsageType usage);
 
 protected:
-	void CreateRenderBuffer(Render::AllocateType allocate);
+	void CreateRenderBuffer(Render::UsageType usage);
 
 protected:
 	size_t mSize = 0;

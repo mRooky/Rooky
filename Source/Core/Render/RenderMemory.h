@@ -9,7 +9,6 @@
 #define SOURCE_CORE_RENDER_RENDERMEMORY_H_
 
 #include "RenderResource.h"
-#include "RenderUsage.h"
 #include <cstddef>
 
 namespace Render

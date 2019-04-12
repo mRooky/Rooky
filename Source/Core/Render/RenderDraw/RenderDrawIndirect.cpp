@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
-#include <RenderDraw/RenderDrawIndirect.h>
+#include "RenderDevice.h"
+#include "RenderDrawIndirect.h"
 #include "RenderBuffer.h"
 #include "RenderFactory.h"
-#include "RenderUsage.h"
+#include "RenderUsageType.h"
 #include <cassert>
 
 namespace Render
@@ -30,8 +30,9 @@ void DrawIndirect::Create(Device* device, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
-	auto resource_usage = Render::ResourceUsage::GetBufferUsage(true);
-	resource_usage.bufferUsage.IndirectBuffer = 1;
+	Render::UsageType resource_usage;
+	resource_usage.cpuAccess = TRUE;
+	resource_usage.indirectBuffer = TRUE;
 	mBuffer = device->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, resource_usage);
 }

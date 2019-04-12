@@ -21,7 +21,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, const Render::ResourceUsage& usage) override;
+	virtual void Create(size_t size, const Render::UsageType& usage) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;
@@ -42,8 +42,8 @@ public:
 	inline Vulkan::DeviceMemory* GetVulkanMemory(void) const { return mMemory; }
 
 public:
-	static VkBufferUsageFlags ConvertUsageFlag(Render::ResourceUsage usage);
-	static VkDescriptorType GetDescriptorType(const Render::BufferUsage& usage);
+	static VkBufferUsageFlags ConvertUsageFlag(Render::UsageType usage);
+	static VkDescriptorType GetDescriptorType(const Render::UsageType& usage);
 
 private:
 	void CreateBuffer(void);

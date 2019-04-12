@@ -60,9 +60,10 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3
 		image_layout.format = format;
 		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
 
-		auto image_usage = Render::ResourceUsage::GetImageUsage(false);
-		image_usage.allocate.Destination = TRUE;
-		image_usage.imageUsage.SampledImage = TRUE;
+		Render::UsageType image_usage = {};
+		image_usage.destination = TRUE;
+		image_usage.sampledImage = TRUE;
+		image_usage.type = Render::ResourceType::RESOURCE_TYPE_IMAGE;
 
 		texture = CreateTexture();
 		texture->SetName(file_name.c_str());

@@ -11,7 +11,7 @@
 #include "CoreBuffer.h"
 #include "RenderDrawIndexed.h"
 #include "RenderEnum.h"
-#include "RenderUsage.h"
+#include "RenderUsageType.h"
 #include "RenderClasses.h"
 
 #include <cstddef>
@@ -30,7 +30,7 @@ public:
 
 public:
 	void Create(Render::IndexType type, uint32_t count);
-	void Create(Render::IndexType type, uint32_t count, Render::AllocateType allocate);
+	void Create(Render::IndexType type, uint32_t count, Render::UsageType usage);
 
 public:
 	size_t GetSizeInByte(void);
@@ -41,7 +41,7 @@ public:
 	inline Render::DrawIndexed* GetDraw(void) { return &mDrawIndexed; }
 
 private:
-	void CreateRenderBuffer(Render::AllocateType allocate);
+	void CreateRenderBuffer(Render::UsageType usage);
 
 public:
 	BufferManager* mCreator = nullptr;

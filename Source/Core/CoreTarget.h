@@ -11,6 +11,7 @@
 #include "CoreResource.h"
 #include "RenderClasses.h"
 #include "RenderLayout.hpp"
+#include "RenderUsageType.h"
 
 namespace Core
 {
@@ -22,7 +23,7 @@ public:
 	virtual ~Target(void);
 
 public:
-	void Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage);
+	void Create(const Render::ImageLayout& layout, const Render::UsageType& usage);
 
 public:
 	inline TextureManager* GetManager(void) const { return mManager; }

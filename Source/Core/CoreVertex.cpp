@@ -33,34 +33,33 @@ Vertex::~Vertex(void)
 
 void Vertex::Create(Render::VertexLayout* layout, uint32_t count)
 {
-	Render::AllocateType allocate;
-	allocate.Source = TRUE;
-	allocate.Destination = TRUE;
-	Create(layout, count, allocate);
+	Render::UsageType usage;
+	usage.source = TRUE;
+	usage.destination = TRUE;
+	usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	Create(layout, count, usage);
 }
 
-void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::AllocateType allocate)
+void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::UsageType usage)
 {
 	mCount = count;
 	mLayout = layout;
-	CreateRenderBuffer(allocate);
+	CreateRenderBuffer(usage);
 	std::cout << "Create Vertex Count : " << mCount << std::endl;
 }
 
-void Vertex::CreateRenderBuffer(Render::AllocateType allocate)
+void Vertex::CreateRenderBuffer(Render::UsageType usage)
 {
 	assert(mLayout->IsValid());
 	size_t size = mLayout->GetStride() * mCount;
 	assert(size > 0);
-	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
-	buffer_usage.allocate = allocate;
-	buffer_usage.bufferUsage.VertexBuffer = TRUE;
+	usage.vertexBuffer = TRUE;
 
 	System* system = mCreator->GetSystem();
 	Render::Device* device = system->GetDevice();
 	Render::Factory* factory = device->GetFactory();
 	mResource = factory->CreateBuffer();
-	static_cast<Render::Buffer*>(mResource)->Create(size, buffer_usage);
+	static_cast<Render::Buffer*>(mResource)->Create(size, usage);
 }
 
 } /* namespace Core */

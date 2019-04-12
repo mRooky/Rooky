@@ -33,17 +33,18 @@ Index::~Index(void)
 
 void Index::Create(Render::IndexType type, uint32_t count)
 {
-	Render::AllocateType allocate;
-	allocate.Source = TRUE;
-	allocate.Destination = TRUE;
-	Create(type, count, allocate);
+	Render::UsageType usage;
+	usage.source = TRUE;
+	usage.destination = TRUE;
+	usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	Create(type, count, usage);
 }
 
-void Index::Create(Render::IndexType type, uint32_t count, Render::AllocateType allocate)
+void Index::Create(Render::IndexType type, uint32_t count, Render::UsageType usage)
 {
 	mType = type;
 	mCount = count;
-	CreateRenderBuffer(allocate);
+	CreateRenderBuffer(usage);
 	mDrawIndexed.SetIndexCount(mCount);
 	std::cout << "Create Index Type : " << Render::GetIndexTypeName(mType) << std::endl;
 }
@@ -54,19 +55,17 @@ size_t Index::GetSizeInByte(void)
 	return size;
 }
 
-void Index::CreateRenderBuffer(Render::AllocateType allocate)
+void Index::CreateRenderBuffer(Render::UsageType usage)
 {
 	size_t size = Render::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
-	auto buffer_usage = Render::ResourceUsage::GetBufferUsage(true);
-	buffer_usage.allocate = allocate;
-	buffer_usage.bufferUsage.IndexBuffer = TRUE;
+	usage.indexBuffer = TRUE;
 
 	System* system = mCreator->GetSystem();
 	Render::Device* device = system->GetDevice();
 	Render::Factory* factory = device->GetFactory();
 	mResource = factory->CreateBuffer();
-	static_cast<Render::Buffer*>(mResource)->Create(size, buffer_usage);
+	static_cast<Render::Buffer*>(mResource)->Create(size, usage);
 }
 
 } /* namespace Core */

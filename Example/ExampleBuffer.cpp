@@ -212,14 +212,14 @@ void Buffer::CreateUniformBuffer(void)
 	auto mesh_manager = mSystem->GetMeshManager();
 	auto buffer_manager = mesh_manager->GetBufferManager();
 
-	Render::AllocateType allocate;
-	allocate.CPUAccess = 1;
+	Render::UsageType usage;
+	usage.cpuAccess = 1;
 
 	mUniform = buffer_manager->CreateUniform();
 	glm::mat4 matrix = glm::mat4(1.0f);
 
 	uint32_t size = sizeof(matrix);
-	mUniform->Create(size, allocate);
+	mUniform->Create(size, usage);
 	mUniform->Write(&matrix, 0, size);
 }
 

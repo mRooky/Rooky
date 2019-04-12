@@ -25,7 +25,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const ImageLayout& layout, const ResourceUsage& usage) = 0;
+	virtual void Create(const ImageLayout& layout, const UsageType& usage) = 0;
 
 public:
 	virtual void Download(void* dst) = 0;

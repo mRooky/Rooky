@@ -21,7 +21,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage) override;
+	virtual void Create(const Render::ImageLayout& layout, const Render::UsageType& usage) override;
 
 public:
 	virtual void Download(void* dst) override;
@@ -47,8 +47,8 @@ public:
 	static Render::ImageType ConverType(const VkImageViewType& type);
 
 public:
-	static VkImageUsageFlags ConvertUsageFlag(Render::ResourceUsage usage);
-	static VkDescriptorType GetDescriptorType(const Render::ImageUsage& usage);
+	static VkImageUsageFlags ConvertUsageFlag(Render::UsageType usage);
+	static VkDescriptorType GetDescriptorType(const Render::UsageType& usage);
 
 protected:
 	void CreateImage(void);

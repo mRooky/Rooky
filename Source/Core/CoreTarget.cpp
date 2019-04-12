@@ -30,7 +30,7 @@ Target::~Target(void)
 	mManager = nullptr;
 }
 
-void Target::Create(const Render::ImageLayout& layout, const Render::ResourceUsage& usage)
+void Target::Create(const Render::ImageLayout& layout, const Render::UsageType& usage)
 {
 	assert(mResource == nullptr);
 	auto system = mManager->GetSystem();

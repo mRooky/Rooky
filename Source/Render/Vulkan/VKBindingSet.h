@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 #define SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 
-#include <RenderBindingSet.h>
-#include "RenderUsage.h"
+#include "RenderBindingSet.h"
+#include "RenderUsageType.h"
 #include "VKRender.h"
 
 namespace VK
@@ -29,7 +29,7 @@ public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
 
 public:
-	static VkDescriptorType GetDescriptorType(Render::ResourceType type, const Render::ResourceUsage& usage);
+	static VkDescriptorType GetDescriptorType(Render::ResourceType type, const Render::UsageType& usage);
 
 protected:
 	void WriteDescriptorSet(void);
