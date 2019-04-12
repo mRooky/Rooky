@@ -74,7 +74,7 @@ protected:
 	std::vector<T> mPositionData;
 };
 
-typedef StreamBase<Render::Color> StreamColor;
+typedef StreamBase<Render::ColorValue> StreamColor;
 typedef StreamBase<Render::Vector2f> StreamTexCoord;
 typedef StreamBase<Render::Vector3f> StreamPosition, StreamNormal;
 
