@@ -1,26 +1,14 @@
 /*
- * RenderVertexLayout.cpp
+ * RenderLayout.cpp
  *
- *  Created on: Mar 23, 2019
+ *  Created on: Apr 15, 2019
  *      Author: rookyma
  */
 
-#include "RenderVertexLayout.h"
-#include "RenderElement.h"
+#include "RenderLayout.h"
 #include <cassert>
-
 namespace Render
 {
-
-VertexLayout::VertexLayout(void)
-{
-}
-
-VertexLayout::~VertexLayout(void)
-{
-	mElements.clear();
-}
-
 void VertexLayout::SetElement(const std::vector<Render::Element>& elements)
 {
 	assert(elements.size() > 0);
@@ -39,5 +27,4 @@ void VertexLayout::AppendElement(const Element& element)
 	ElementType type = element.GetType();
 	mStride += Element::GetTypeSize(type);
 }
-
-} /* namespace Render */
+}

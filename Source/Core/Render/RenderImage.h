@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_RENDER_RENDERIMAGE_H_
 #define SOURCE_CORE_RENDER_RENDERIMAGE_H_
 
+#include <RenderLayout.h>
 #include "RenderColorBlend.h"
 #include "RenderMemory.h"
-#include "RenderLayout.hpp"
 #include "RenderColor.hpp"
 
 namespace Render

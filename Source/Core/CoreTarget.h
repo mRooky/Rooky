@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_CORETARGET_H_
 #define SOURCE_CORE_CORETARGET_H_
 
+#include <RenderLayout.h>
 #include "CoreResource.h"
 #include "RenderClasses.h"
-#include "RenderLayout.hpp"
 #include "RenderUsageType.h"
 
 namespace Core

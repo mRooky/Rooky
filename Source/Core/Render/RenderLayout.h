@@ -1,24 +1,48 @@
 /*
- * RenderVertexLayout.h
+ * RenderLayout.h
  *
- *  Created on: Mar 23, 2019
+ *  Created on: Mar 6, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_RENDER_RENDERVERTEXLAYOUT_H_
-#define SOURCE_CORE_RENDER_RENDERVERTEXLAYOUT_H_
+#ifndef SOURCE_CORE_RENDER_RENDERLAYOUT_H_
+#define SOURCE_CORE_RENDER_RENDERLAYOUT_H_
 
+#include "RenderMath.h"
+#include "RenderEnum.h"
+#include "RenderFormat.h"
+#include "RenderExtent.hpp"
 #include "RenderElement.h"
 #include <vector>
 
 namespace Render
 {
 
+class ImageLayout
+{
+public:
+	ImageLayout(void) = default;
+	~ImageLayout(void) = default;
+
+public:
+	uint32_t array = 1;
+	uint32_t mipmap = 1;
+	uint32_t samples = 1;
+	Extent3Di extent = {};
+
+public:
+	uint32_t mClearColor = 0;
+
+public:
+	Format format = Format::FORMAT_UNDEFINED;
+	ImageType type = ImageType::IMAGE_TYPE_UNKNOWN;
+};
+
 class VertexLayout
 {
 public:
-	VertexLayout(void);
-	virtual ~VertexLayout(void);
+	VertexLayout(void) = default;
+	~VertexLayout(void) { mElements.clear(); }
 
 public:
 	void AppendElement(const Element& element);
@@ -41,6 +65,6 @@ protected:
 	std::vector<Element> mElements;
 };
 
-} /* namespace Render */
+}
 
-#endif /* SOURCE_CORE_RENDER_RENDERVERTEXLAYOUT_H_ */
+#endif /* SOURCE_CORE_RENDER_RENDERLAYOUT_H_ */

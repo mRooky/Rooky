@@ -12,7 +12,7 @@
 #include "CoreSystem.h"
 
 #include "RenderElement.h"
-#include "RenderVertexLayout.h"
+#include "RenderLayout.h"
 #include "RenderFactory.h"
 #include "RenderDevice.h"
 #include "UtilityRelease.h"

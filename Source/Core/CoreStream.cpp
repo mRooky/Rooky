@@ -12,7 +12,7 @@
 #include "CoreData.h"
 
 #include "RenderInline.h"
-#include "RenderVertexLayout.h"
+#include "RenderLayout.h"
 
 #include <cassert>
 #include <climits>

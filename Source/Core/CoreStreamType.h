@@ -28,7 +28,7 @@ enum class StreamType : uint32_t
 	STREAM_TYPE_UNKONWN = ~0U
 };
 
-static const uint32_t STREAM_TYPE_COUNT = 6;
+static constexpr uint32_t STREAM_TYPE_COUNT = 6;
 static inline uint32_t CastStream(StreamType type) { return static_cast<uint32_t>(type); }
 static inline StreamType CastIndex(uint32_t index) { return static_cast<StreamType>(index); }
 
@@ -68,7 +68,7 @@ public:
 	inline const void* GetSemanticData(size_t index) const { return &mPositionData.at(index); }
 
 public:
-	static inline size_t GetSemanticSize(void) { return sizeof(T); }
+	static inline constexpr size_t GetSemanticSize(void) { return sizeof(T); }
 
 protected:
 	std::vector<T> mPositionData;

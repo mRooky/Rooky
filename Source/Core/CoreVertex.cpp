@@ -9,7 +9,7 @@
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
 
-#include "RenderVertexLayout.h"
+#include "RenderLayout.h"
 #include "RenderBuffer.h"
 #include "RenderDevice.h"
 #include "RenderFactory.h"
