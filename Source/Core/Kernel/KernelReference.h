@@ -23,27 +23,6 @@ protected:
 	SafeRefCount mRefCount = {};
 };
 
-template<class T>
-class Ref
-{
-public:
-	Ref(void) = default;
-	~Ref(void) { Release(); }
-
-public:
-	inline bool IsNull(void) const { return mReference == nullptr; }
-	inline bool IsValid(void) const { return mReference != nullptr; }
-
-public:
-	inline void Release(void)
-	{
-
-	}
-
-protected:
-	T* mReference = nullptr;
-};
-
 } /* namespace Kernel */
 
 #endif /* SOURCE_CORE_KERNEL_KERNELREFERENCE_H_ */
