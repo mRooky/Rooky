@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREPLANE_H_
 #define SOURCE_CORE_COREPLANE_H_
 
+#include "RenderVector.h"
 #include "RenderFloat.hpp"
-#include "RenderVector.hpp"
 
 namespace Core
 {

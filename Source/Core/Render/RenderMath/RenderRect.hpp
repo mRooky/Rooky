@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATH_RENDERRECT_HPP_
 #define SOURCE_CORE_MATH_RENDERRECT_HPP_
 
+#include <RenderVector.h>
 #include "RenderExtent.hpp"
-#include "RenderVector.hpp"
 
 namespace Render
 {

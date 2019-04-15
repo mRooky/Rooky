@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORESTREAMTYPE_H_
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
+#include <RenderVector.h>
 #include "RenderColor.hpp"
-#include "RenderVector.hpp"
 #include <cstdint>
 #include <vector>
 #include <cstring>

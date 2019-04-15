@@ -8,9 +8,9 @@
 #ifndef DIRECTUI_DIRECTMATH_H_
 #define DIRECTUI_DIRECTMATH_H_
 
+#include "RenderVector.h"
 #include "RenderColor.hpp"
 #include "RenderRect.hpp"
-#include "RenderVector.hpp"
 #include "RenderExtent.hpp"
 
 namespace Direct

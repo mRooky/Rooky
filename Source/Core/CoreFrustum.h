@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_COREFRUSTUM_H_
 #define SOURCE_CORE_COREFRUSTUM_H_
 
+#include "RenderVector.h"
 #include "CorePlane.h"
 #include "RenderFloat.hpp"
-#include "RenderVector.hpp"
 #include "RenderMatrix.hpp"
 
 namespace Core

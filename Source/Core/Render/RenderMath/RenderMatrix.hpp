@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERMATH_RENDERMATRIX_HPP_
 #define SOURCE_CORE_RENDER_RENDERMATH_RENDERMATRIX_HPP_
 
-#include "RenderVector.hpp"
+#include <RenderVector.h>
 #include <cstring>
 
 namespace Render
