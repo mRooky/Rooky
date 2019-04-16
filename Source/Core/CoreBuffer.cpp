@@ -21,22 +21,17 @@ Buffer::~Buffer(void)
 {
 }
 
-Render::Buffer* Buffer::GetRenderBuffer(void)
-{
-	return static_cast<Render::Buffer*>(mResource);
-}
-
 void Buffer::Read(void* dst, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = GetRenderBuffer();
+	auto buffer = static_cast<Render::Buffer*>(mResource);
 	buffer->Read(dst, offset, size);
 }
 
 void Buffer::Write(const void* src, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = GetRenderBuffer();
+	auto buffer = static_cast<Render::Buffer*>(mResource);
 	buffer->Write(src, offset, size);
 }
 

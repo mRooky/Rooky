@@ -22,9 +22,6 @@ public:
 public:
 	void Read(void* dst, size_t offset, size_t size);
 	void Write(const void* src, size_t offset, size_t size);
-
-public:
-	Render::Buffer* GetRenderBuffer(void);
 };
 
 } /* namespace Core */
