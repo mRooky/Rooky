@@ -8,13 +8,13 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELSTRING_H_
 #define SOURCE_CORE_KERNEL_KERNELSTRING_H_
 
-#include "KernelObject.h"
+#include "KernelHashObject.h"
 #include <string>
 
 namespace Kernel
 {
 
-class String : public Object
+class String : public HashObject
 {
 public:
 	String(void);
