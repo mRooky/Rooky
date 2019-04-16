@@ -7,10 +7,12 @@
 
 #include "KernelString.h"
 #include <iostream>
+#include <cassert>
 
-void ComplieTest(void)
+void ComplieTest(const char* chars)
 {
-	Kernel::String mString;
+	assert(chars != nullptr);
+	Kernel::String mString = chars;
 	std::cout << mString.GetHash() << std::endl;
 }
 
