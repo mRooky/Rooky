@@ -36,6 +36,7 @@
 #include "RenderBindingLayout.h"
 #include "RenderPipelineState.h"
 #include "RenderDrawIndexed.h"
+#include "RenderAttachment.h"
 #include <cassert>
 
 namespace VK
@@ -112,13 +113,14 @@ void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, cons
 	auto vulkan_frame = vk_frame->GetVulkanFrameBuffer();
 
 	std::vector<VkClearValue> clear_values;
-	const size_t count = frame->GetAttachmentCount();
+	const auto& attachment = frame->GetAttachment();
+	const size_t count = attachment.GetImageCount();
 	assert(count > 0);
 	clear_values.reserve(count);
 
 	for(size_t index = 0; index < count; ++index)
 	{
-		auto vk_image = static_cast<Image*>(frame->GetAttachment(index));
+		auto vk_image = static_cast<Image*>(attachment.GetImage(index));
 		VkClearValue clear_value = vk_image->GetClearValue();
 		clear_values.push_back(clear_value);
 	}

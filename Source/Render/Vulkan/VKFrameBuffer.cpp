@@ -29,23 +29,18 @@ FrameBuffer::~FrameBuffer(void)
 	Vulkan::Release(mFrameBuffer);
 }
 
-void FrameBuffer::Create(const std::vector<Render::Image*>& attachments, Render::Image* depth)
+void FrameBuffer::Create(const Render::Attachment& attachment)
 {
-	size_t size = attachments.size();
-	assert(size > 0);
-	mAttachments.resize(size);
-	assert(mAttachments.size() >= size);
-	std::copy(attachments.begin(), attachments.end(), mAttachments.begin());
-	mDepthStencil = depth;
+	mAttachment = attachment;
 	std::cout << "New FrameBuffer" << std::endl;
 	CreateVulkanFrameBuffer();
 }
 
 void FrameBuffer::CreateVulkanFrameBuffer(void)
 {
-	assert(mAttachments.size() > 0);
+	assert(mAttachment.IsValid());
 
-	auto attachment = mAttachments.at(0);
+	auto attachment = mAttachment.GetImage(0);
 	auto& layout = attachment->GetLayout();
 	auto& extent = layout.extent;
 
@@ -59,17 +54,20 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 	};
 
 	std::vector<Vulkan::Image*> attachments;
-	attachments.reserve(mAttachments.size() + 1);
-	for (auto attachment : mAttachments)
+	const size_t count = mAttachment.GetImageCount();
+	attachments.reserve(count + 1);
+	for (size_t index = 0; index < count; ++index)
 	{
+		attachment = mAttachment.GetImage(index);
 		Image* vk_image = static_cast<Image*>(attachment);
 		auto vulkan_image = vk_image->GetVulkanImage();
 		attachments.push_back(vulkan_image);
 	}
 
-	if (mDepthStencil != nullptr)
+	auto depth_stencil = mAttachment.GetDepthStencil();
+	if (depth_stencil != nullptr)
 	{
-		Image* vk_image = static_cast<Image*>(mDepthStencil);
+		Image* vk_image = static_cast<Image*>(depth_stencil);
 		auto vulkan_image = vk_image->GetVulkanImage();
 		attachments.push_back(vulkan_image);
 	}

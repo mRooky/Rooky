@@ -5,11 +5,10 @@
  *      Author: rookyma
  */
 
-#include "UtilitySearch.h"
 #include "RenderBindingSet.h"
 #include "RenderResource.h"
 #include <cassert>
-#include <algorithm>
+#include "UtilitySearch.h"
 
 namespace Render
 {
@@ -23,15 +22,22 @@ BindingSet::~BindingSet(void)
 {
 }
 
+void BindingSet::AppendBinding(const Binding& binding)
+{
+	auto iterator = Utility::Find(mBindings, binding);
+	if (iterator == mBindings.end())
+	{
+		mBindings.push_back(binding);
+	}
+}
+
 void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 {
 	assert(index < mBindings.size());
 	Render::Resource* new_resource = binding.GetResource();
 	Render::Resource* old_resource = mBindings.at(index).GetResource();
-	auto old_usage = old_resource->GetUsage();
-	auto new_usage = new_resource->GetUsage();
-	assert(old_usage == new_usage);
-	if (old_usage == new_usage)
+	assert(old_resource->GetUsage() == new_resource->GetUsage());
+	if (old_resource->GetUsage() == new_resource->GetUsage())
 	{
 		mBindings.at(index) = binding;
 	}

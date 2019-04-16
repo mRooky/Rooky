@@ -24,6 +24,9 @@ public:
 	inline ResourceType GetType(void) const { return mType; }
 	inline const UsageType& GetUsage(void) const { return mUsage; }
 
+public:
+	inline bool operator==(const UsageType& usage) const { return mUsage == usage; }
+
 protected:
 	UsageType mUsage = {};
 	ResourceType mType = ResourceType::RESOURCE_TYPE_UNKNOWN;

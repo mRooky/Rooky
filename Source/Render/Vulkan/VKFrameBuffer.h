@@ -21,7 +21,7 @@ public:
 	virtual ~FrameBuffer(void) override;
 
 public:
-	virtual void Create(const std::vector<Render::Image*>& attachments, Render::Image* depth) override;
+	virtual void Create(const Render::Attachment& attachment) override;
 
 public:
 	void CreateVulkanFrameBuffer(void);

@@ -27,13 +27,11 @@ public:
 	virtual void Create(void) = 0;
 
 public:
+	void AppendBinding(const Binding& binding);
 	void SetBinding(uint32_t index, const Binding& binding);
 
 public:
 	inline bool IsValid(void) const { return mValid; }
-
-public:
-	inline void AppendBinding(const Binding& binding) { mBindings.push_back(binding); }
 
 public:
 	inline size_t GetBindingCount(void) const { return mBindings.size(); }

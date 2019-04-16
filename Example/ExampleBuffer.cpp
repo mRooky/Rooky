@@ -79,11 +79,12 @@ void Buffer::CreateFrameBuffer(void)
 	Render::Pass* pass = mPath->GetRenderPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{
-		Render::Image* attachment = swap_chain->GetRenderBuffer(index);
-		attachment->SetClearColor(clear_color);
-		std::vector<Render::Image*> attachments = { attachment };
+		Render::Image* image = swap_chain->GetRenderBuffer(index);
+		image->SetClearColor(clear_color);
+		Render::Attachment attachment = {};
+		attachment.AppendImage(image);
 		Render::FrameBuffer* frame = pass->CreateFrameBuffer();
-		frame->Create(attachments, nullptr);
+		frame->Create(attachment);
 	}
 }
 
