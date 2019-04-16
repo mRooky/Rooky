@@ -32,6 +32,9 @@ public:
 	}
 
 public:
+	inline const char* Char(void) const { return mString.c_str(); }
+
+public:
 	inline String& operator=(const char* chars)
 	{
 		Set(chars);

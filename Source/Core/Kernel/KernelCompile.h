@@ -8,6 +8,9 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELCOMPILE_H_
 #define SOURCE_CORE_KERNEL_KERNELCOMPILE_H_
 
-void ComplieTest(const char* chars);
+namespace Kernel
+{
+void StringHash(const char* chars);
+}
 
 #endif /* SOURCE_CORE_KERNEL_KERNELCOMPILE_H_ */

@@ -11,15 +11,6 @@
 namespace Render
 {
 
-Element::Element(uint32_t binding, uint32_t location, ElementType type):
-		mBinding(binding), mLocation(location), mType(type)
-{
-}
-
-Element::~Element(void)
-{
-}
-
 size_t Element::GetTypeSize(ElementType type)
 {
 	switch(type)

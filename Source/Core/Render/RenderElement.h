@@ -28,8 +28,20 @@ enum class ElementType : uint32_t
 class Element
 {
 public:
-	explicit Element(uint32_t binding, uint32_t location, ElementType type);
-	~Element(void);
+	explicit Element(uint32_t binding, uint32_t location, ElementType type)
+	{
+		Set(binding, location, type);
+	}
+
+	~Element(void) = default;
+
+public:
+	void Set(uint32_t binding, uint32_t location, ElementType type)
+	{
+		mType = type;
+		mBinding = binding;
+		mLocation = location;
+	}
 
 public:
 	inline ElementType GetType(void) const { return mType; }

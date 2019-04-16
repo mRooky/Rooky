@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_RENDER_RENDERDRAW_RENDERDRAWINDEXED_H_
 #define SOURCE_CORE_RENDER_RENDERDRAW_RENDERDRAWINDEXED_H_
 
-#include <RenderDraw/RenderDrawDirect.h>
+#include "RenderDrawDirect.h"
 
 namespace Render
 {
