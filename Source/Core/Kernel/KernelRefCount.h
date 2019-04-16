@@ -19,8 +19,12 @@ public:
 	SafeRefCount(void) = default;
 	~SafeRefCount(void) = default;
 
+public:
+	inline uint32_t IncRef(void) { return ++mRefCount; }
+	inline uint32_t DecRef(void) { return --mRefCount; }
+
 protected:
-	std::atomic<int32_t> mRefCoumt;
+	std::atomic<uint32_t> mRefCount = {0u};
 };
 
 } /* namespace Kernel */
