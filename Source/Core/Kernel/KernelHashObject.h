@@ -16,8 +16,14 @@ namespace Kernel
 class HashObject
 {
 public:
-	HashObject(void);
-	virtual ~HashObject(void);
+	HashObject(void) = default;
+	virtual ~HashObject(void) = default;
+
+public:
+	virtual void CalcHash(void) = 0;
+
+public:
+	inline size_t GetHash(void) const { return mHash; }
 
 protected:
 	size_t mHash = 0;
