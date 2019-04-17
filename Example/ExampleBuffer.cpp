@@ -14,6 +14,7 @@
 #include "CoreSystem.h"
 #include "CoreMeshManager.h"
 #include "CoreBufferManager.h"
+#include "CoreThread.h"
 
 #include "RenderCommandList.h"
 #include "RenderImage.h"
@@ -63,8 +64,7 @@ void Buffer::Initialize(void)
 void Buffer::CreateRenderPass(void)
 {
 	assert(mPath != nullptr);
-	Core::Viewport* viewport = GetViewport();
-	Render::SwapChain* swap_chain = viewport->GetSwapChain();
+	Render::SwapChain* swap_chain = mScene->GetSwapChain();
 	auto format = swap_chain->GetFormat();
 	std::vector<Render::Format> formats = { format };
 	mPass = mPath->CreatePass();
@@ -74,7 +74,7 @@ void Buffer::CreateRenderPass(void)
 void Buffer::CreateFrameBuffer(void)
 {
 	assert(mPath->GetPassCount() > 0);
-	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::SwapChain* swap_chain = mScene->GetSwapChain();
 	Render::Color clear_color = Render::Color(10, 10, 10);
 	Render::Pass* pass = mPath->GetRenderPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
@@ -92,18 +92,15 @@ void Buffer::RecordCommands(void)
 {
 	auto pass = mPath->GetRenderPass(0);
 
-	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
-	Render::Image* attachment = swap_chain->GetRenderBuffer(0);
-
-	auto& extent = attachment->GetExtent();
-
-	Render::Extent2Di extent2 = { extent.width, extent.height };
-	Render::Offset2Di offset2 = { 0, 0};
-	Render::Rect2Di area = { offset2, extent2 };
+	Render::SwapChain* swap_chain = mScene->GetSwapChain();
+	const Render::Extent2Di& extent = swap_chain->GetExtent();
+	Render::Rect2Di area = {};
+	area.extent = extent;
 	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2Di scissor = area;
 
 	const size_t count = mThread->GetCommandListCount();
+	assert(count > 1);
 	for (uint32_t i = 0; i < count; ++i)
 	{
 		auto render_pass = pass->GetRenderPass();
@@ -122,7 +119,7 @@ void Buffer::RecordCommands(void)
 int32_t Buffer::ShowModal(void)
 {
 	assert(mWindow != nullptr);
-	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::SwapChain* swap_chain = mScene->GetSwapChain();
 	bool done = false;
 	while (!done)
 	{

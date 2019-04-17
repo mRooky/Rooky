@@ -9,7 +9,12 @@
 #include "CoreSystem.h"
 #include "CoreViewport.h"
 
+#include "RenderFactory.h"
+#include "RenderDevice.h"
+#include "RenderSwapChain.h"
+
 #include "UtilityRelease.h"
+#include "UtilitySearch.h"
 
 #include <cassert>
 
@@ -24,17 +29,35 @@ Scene::Scene(void)
 
 Scene::~Scene(void)
 {
+	delete mSwapChain;
+	mSwapChain = nullptr;
 	Utility::Release(mViewports);
 	delete mSystem;
 	mSystem = nullptr;
+	mRenderables.clear();
+}
+
+void Scene::CreateSwapChain(Platform::Window* window)
+{
+	auto device = mSystem->GetDevice();
+	mSwapChain = device->GetFactory()->CreateSwapChain();
+	mSwapChain->Create(window);
 }
 
 Viewport* Scene::CreateViewport(void)
 {
-	assert(mSystem != nullptr);
-	Viewport* viewport = new Core::Viewport(mSystem);
+	Viewport* viewport = new Core::Viewport(this);
 	mViewports.push_back(viewport);
 	return viewport;
+}
+
+void Scene::AddRenderable(Renderable* renderable)
+{
+	auto iterator = Utility::Find(mRenderables, renderable);
+	if (iterator == mRenderables.end())
+	{
+		mRenderables.push_back(renderable);
+	}
 }
 
 } /* namespace Core */

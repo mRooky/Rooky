@@ -29,12 +29,17 @@ Thread::~Thread(void)
 	mCommandLists.clear();
 }
 
-void Thread::Create(void)
+void Thread::Create(uint32_t count)
 {
 	auto device = mSystem->GetDevice();
 	auto factory = device->GetFactory();
 	mCommandPool = factory->CreateCommandPool();
 	mCommandPool->Create();
+	for (uint32_t i = 0; i < count; ++i)
+	{
+		Render::CommandList* command = Allocate(true);
+		assert(command != nullptr);
+	}
 }
 
 Render::CommandList* Thread::Allocate(bool primary)

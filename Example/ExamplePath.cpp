@@ -22,9 +22,8 @@ Path::~Path(void)
 {
 	delete mPath;
 	mPath = nullptr;
-	delete mThread;
 	mThread = nullptr;
-	mCommandLists.clear();
+	mViewport = nullptr;
 }
 
 void Path::CreateRenderPath(void)
@@ -33,15 +32,19 @@ void Path::CreateRenderPath(void)
 	mPath = new Core::Path(mSystem);
 }
 
+void Path::CreateViewport(void)
+{
+	assert(mScene != nullptr);
+	assert(mWindow != nullptr);
+	mScene->CreateSwapChain(mWindow);
+	mViewport = mScene->CreateViewport();
+}
+
 void Path::CreateRenderThread(size_t count)
 {
-	mThread = new Core::Thread(mSystem);
-	mThread->Create();
-	for (size_t i = 0; i < count; ++i)
-	{
-		Render::CommandList* list = mThread->Allocate(true);
-		mCommandLists.push_back(list);
-	}
+	assert(mViewport != nullptr);
+	mViewport->CreateThread(count);
+	mThread = mViewport->GetThread();
 }
 
 } /* namespace Example */

@@ -22,7 +22,7 @@ public:
 	virtual ~Thread(void) override;
 
 public:
-	void Create(void);
+	void Create(uint32_t count = 0);
 
 public:
 	Render::CommandList* Allocate(bool primary);

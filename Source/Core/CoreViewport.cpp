@@ -6,45 +6,46 @@
  */
 
 
-#include <RenderDevice.h>
 #include "CoreViewport.h"
 #include "CoreSystem.h"
+#include "CoreThread.h"
+#include "CoreScene.h"
 
-#include "RenderSwapChain.h"
 #include "RenderImage.h"
 #include "RenderFactory.h"
+#include "RenderDevice.h"
 
 #include <cassert>
 
 namespace Core
 {
 
-Viewport::Viewport(System* system):
-		Interface(system)
+Viewport::Viewport(Scene* scene):
+		mParent(scene)
 {
+	assert(mParent != nullptr);
 }
 
 Viewport::~Viewport(void)
 {
-	delete mSwapChain;
-	mSwapChain = nullptr;
+	delete mThread;
+	mThread = nullptr;
 	delete mDepthStencil;
 	mDepthStencil = nullptr;
 }
 
-void Viewport::CreateSwapChain(Platform::Window* window)
+void Viewport::CreateThread(uint32_t count)
 {
-	auto device = mSystem->GetDevice();
-	mSwapChain = device->GetFactory()->CreateSwapChain();
-	mSwapChain->Create(window);
+	System* system = mParent->GetSystem();
+	mThread = new Core::Thread(system);
+	mThread->Create(count);
 }
 
 void Viewport::CreateDepthStencil(const Render::Extent2Di& extent)
 {
-	assert(mSwapChain != nullptr);
 	assert(mDepthStencil == nullptr);
-
-	Render::Device* device = mSwapChain->GetDevice();
+	System* system = mParent->GetSystem();
+	Render::Device* device = system->GetDevice();
 	Render::ImageLayout image_layout = {};
 
 	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;

@@ -10,7 +10,7 @@
 #include "CorePass.h"
 #include "CoreTexture.h"
 #include "CoreSystem.h"
-
+#include "CoreThread.h"
 #include "CoreTextureManager.h"
 #include "CoreBufferManager.h"
 #include "CoreTextureManager.h"
@@ -68,15 +68,18 @@ void Texture::RecordCommands(void)
 {
 	auto pass = mPath->GetRenderPass(0);
 
-	Render::SwapChain* swap_chain = mViewport->GetSwapChain();
+	Render::SwapChain* swap_chain = mScene->GetSwapChain();
 
 	Render::Extent2Di extent = swap_chain->GetExtent();
-	Render::Offset2Di offset = { 0, 0 };
-	Render::Rect2Di area = { offset, extent };
+	Render::Offset2Di offset = {};
+	Render::Rect2Di area = {};
+	area.offset = offset;
+	area.extent = extent ;
 	Render::Viewport viewport = Render::Viewport(extent);
 	Render::Rect2Di scissor = area;
 	Render::Draw* draw = mIndex->GetDraw();
 	const size_t count = mThread->GetCommandListCount();
+	assert(count > 1);
 	for (uint32_t i = 0; i < count; ++i)
 	{
 		auto render_pass = pass->GetRenderPass();

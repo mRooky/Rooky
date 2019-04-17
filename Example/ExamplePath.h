@@ -9,14 +9,13 @@
 #define EXAMPLE_EXAMPLEPATH_H_
 
 #include "CorePath.h"
-#include "CoreThread.h"
 #include "RenderFormat.h"
-#include "ExampleViewport.h"
+#include "ExampleBase.h"
 
 namespace Example
 {
 
-class Path: public Viewport
+class Path: public Base
 {
 public:
 	Path(void);
@@ -25,11 +24,12 @@ public:
 public:
 	virtual void CreateRenderPath(void);
 	virtual void CreateRenderThread(size_t count);
+	virtual void CreateViewport(void);
 
 protected:
 	Core::Path* mPath = nullptr;
 	Core::Thread* mThread = nullptr;
-	std::vector<Render::CommandList*> mCommandLists;
+	Core::Viewport* mViewport = nullptr;
 };
 
 } /* namespace Example */
