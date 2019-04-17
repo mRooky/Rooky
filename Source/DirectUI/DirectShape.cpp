@@ -24,7 +24,7 @@ Shape::~Shape(void)
 
 Vector2I Shape::GetOffset(void) const
 {
-	Vector2I offset = {};
+	Vector2I offset;
 	assert(false);
 	return offset;
 }

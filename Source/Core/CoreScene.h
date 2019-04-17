@@ -37,6 +37,14 @@ public:
 	inline System* GetSystem(void) const { return mSystem; }
 	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 
+public:
+	inline size_t GetViewportCount(void) const { return mViewports.size(); }
+	inline size_t GetRenderableCount(void) const { return mRenderables.size(); }
+
+public:
+	inline Viewport* GetViewport(size_t index) const { return mViewports.at(index); }
+	inline Renderable* GetRenderable(size_t index) const { return mRenderables.at(index); }
+
 protected:
 	System* mSystem = nullptr;
 	Render::SwapChain* mSwapChain = nullptr;

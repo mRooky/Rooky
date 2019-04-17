@@ -32,7 +32,7 @@ public:
 	inline Painter* GetPainter(void) const { return mPainter; }
 
 protected:
-	RectI mRect = {};
+	RectI mRect;
 	Shape* mParent = nullptr;
 	Painter* mPainter = nullptr;
 };

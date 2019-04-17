@@ -35,7 +35,7 @@ public:
 	inline const RectI& GetPadding(void) const { return mPadding; }
 
 protected:
-	RectI mPadding = {};
+	RectI mPadding;
 	Widget* mParent = nullptr;
 
 };

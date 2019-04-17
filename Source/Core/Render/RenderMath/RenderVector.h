@@ -20,8 +20,23 @@ template<typename T>
 class Vector2_t
 {
 public:
+	Vector2_t(void) = default;
+
+public:
+	template<typename O>
+	Vector2_t(O x, O y) { Set(x, y); }
+
+public:
 	inline T& operator[](size_t index) { return *(&x + index); }
 	inline const T& operator[](size_t index) const { return *(&x + index); }
+
+public:
+	template<typename O>
+	void Set(O x, O y)
+	{
+		this->x = static_cast<T>(x);
+		this->y = static_cast<T>(t);
+	}
 
 public:
 	union

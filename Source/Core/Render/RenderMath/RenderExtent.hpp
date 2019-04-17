@@ -17,9 +17,22 @@ template<typename T>
 class Extent2_t
 {
 public:
+	Extent2_t(void) = default;
+	template<typename O>
+	Extent2_t(O width, O height) { Set(width, height); }
+
+public:
 	inline T GetArea(void) const
 	{
 		return width * height;
+	}
+
+public:
+	template<typename O>
+	void Set(O width, O height)
+	{
+		this->width = static_cast<T>(width);
+		this->width = static_cast<T>(height);
 	}
 
 public:

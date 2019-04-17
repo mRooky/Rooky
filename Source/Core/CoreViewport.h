@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
-#include "RenderExtent.hpp"
+#include "RenderViewport.hpp"
 #include "RenderClasses.h"
 
 namespace Core
@@ -21,6 +21,9 @@ class Viewport
 public:
 	explicit Viewport(Scene* scene);
 	virtual ~Viewport(void);
+
+public:
+	void Create(const Render::Rect2Di& rect);
 
 public:
 	void Draw(void);
@@ -45,6 +48,7 @@ protected:
 	Thread* mThread = nullptr;
 
 protected:
+	Render::Viewport mViewport;
 	Render::Image* mDepthStencil = nullptr;
 
 };

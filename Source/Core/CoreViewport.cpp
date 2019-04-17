@@ -14,6 +14,7 @@
 #include "RenderImage.h"
 #include "RenderFactory.h"
 #include "RenderDevice.h"
+#include "RenderCommandList.h"
 
 #include <cassert>
 
@@ -34,11 +35,31 @@ Viewport::~Viewport(void)
 	mDepthStencil = nullptr;
 }
 
+void Viewport::Create(const Render::Rect2Di& rect)
+{
+	mViewport = rect;
+	assert(rect.IsValid());
+}
+
 void Viewport::CreateThread(uint32_t count)
 {
 	System* system = mParent->GetSystem();
 	mThread = new Core::Thread(system);
 	mThread->Create(count);
+}
+
+void Viewport::Draw(void)
+{
+	assert(mThread != nullptr);
+
+	Render::Rect2Di area = mViewport.GetExtent();
+	Render::Rect2Di scissor = area;
+
+	Render::CommandList* command = mThread->GetCommandList(0);
+	command->Begin();
+	command->SetScissor(0, 1, &scissor);
+	command->SetViewport(0, 1, &mViewport);
+	command->End();
 }
 
 void Viewport::CreateDepthStencil(const Render::Extent2Di& extent)
