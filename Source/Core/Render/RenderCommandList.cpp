@@ -23,6 +23,7 @@ CommandList::CommandList(CommandPool* pool):
 
 CommandList::~CommandList(void)
 {
+	mCommandPool = nullptr;
 }
 
 void CommandList::Submit(Queue* queue)

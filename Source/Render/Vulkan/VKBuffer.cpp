@@ -41,11 +41,11 @@ void Buffer::Create(size_t size, const Render::UsageType& usage)
 {
 	mSize = size;
 	mUsage = usage;
-	CreateBuffer();
-	AllocateMemory();
+	CreateVulkanBuffer();
+	AllocateVulkanMemory();
 }
 
-void Buffer::CreateBuffer(void)
+void Buffer::CreateVulkanBuffer(void)
 {
 	assert(mBuffer == nullptr);
 	Device* vk_device = static_cast<Device*>(mDevice);
@@ -54,7 +54,7 @@ void Buffer::CreateBuffer(void)
 	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
 }
 
-void Buffer::AllocateMemory(void)
+void Buffer::AllocateVulkanMemory(void)
 {
 	assert(mBuffer != nullptr);
 	auto flags = GetMemoryPropertyFlags(mUsage);

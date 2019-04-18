@@ -46,8 +46,8 @@ public:
 	static VkDescriptorType GetDescriptorType(const Render::UsageType& usage);
 
 private:
-	void CreateBuffer(void);
-	void AllocateMemory(void);
+	void CreateVulkanBuffer(void);
+	void AllocateVulkanMemory(void);
 
 protected:
 	Vulkan::Buffer* mBuffer = nullptr;
