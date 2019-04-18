@@ -24,6 +24,7 @@ public:
 	virtual void Create(const Render::Attachment& attachment) override;
 
 public:
+	bool CheckAttachmentFormat(void);
 	void CreateVulkanFrameBuffer(void);
 
 public:

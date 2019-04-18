@@ -8,6 +8,7 @@
 #include "VKFrameBuffer.h"
 #include "VKRenderPass.h"
 #include "VKImage.h"
+#include "VKDefine.h"
 
 #include "VulkanFrameBuffer.h"
 #include "VulkanInline.h"
@@ -32,8 +33,13 @@ FrameBuffer::~FrameBuffer(void)
 void FrameBuffer::Create(const Render::Attachment& attachment)
 {
 	mAttachment = attachment;
-	std::cout << "New FrameBuffer" << std::endl;
-	CreateVulkanFrameBuffer();
+	bool result = CheckAttachmentFormat();
+	assert(true == result);
+	if (true == result)
+	{
+		std::cout << "New FrameBuffer" << std::endl;
+		CreateVulkanFrameBuffer();
+	}
 }
 
 void FrameBuffer::CreateVulkanFrameBuffer(void)
@@ -76,6 +82,40 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 	auto vulkan_pass = vk_pass->GetVulkanRenderPass();
 	mFrameBuffer = Vulkan::FrameBuffer::New(vulkan_pass->GetDevice());
 	mFrameBuffer->Create(vulkan_pass, attachments, vulkan_extent);
+}
+
+bool FrameBuffer::CheckAttachmentFormat(void)
+{
+	Render::Image* depth_stencil = mAttachment.GetDepthStencil();
+	if (nullptr != depth_stencil)
+	{
+		Render::Format attach_format = depth_stencil->GetFormat();
+		Render::Format pass_format = mPass->GetDepthStencilFormat();
+		if (attach_format != pass_format)
+		{
+			return false;
+		}
+	}
+
+	size_t count = mAttachment.GetImageCount();
+	if (count != mPass->GetAttachmentFormatCount())
+	{
+		return false;
+	}
+	else
+	{
+		for (size_t index = 0; index < count; ++index)
+		{
+			Render::Image* image = mAttachment.GetImage(index);
+			Render::Format attach_format = image->GetFormat();
+			Render::Format pass_format = mPass->GetAttachmentFormat(index);
+			if (attach_format != pass_format)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 } /* namespace VK */
