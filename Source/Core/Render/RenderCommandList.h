@@ -29,8 +29,8 @@ public:
 	virtual void Create(bool level) = 0;
 
 public:
-	virtual void Submit(Queue* queue) = 0;
-	virtual void Submit(uint32_t index) = 0;
+	void Submit(Queue* queue);
+	void Submit(uint32_t index);
 
 public:
 	virtual void Begin(void) = 0;

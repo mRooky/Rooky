@@ -49,12 +49,6 @@ Render::Pass* Factory::CreatePass(void)
 	return new RenderPass(vk_device);
 }
 
-Render::Queue* Factory::CreateQueue(void)
-{
-	auto vk_device = static_cast<Device*>(mDevice);
-	return new Queue(vk_device);
-}
-
 Render::Image* Factory::CreateImage(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);

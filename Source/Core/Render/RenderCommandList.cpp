@@ -5,8 +5,11 @@
  *      Author: rookyma
  */
 
-#include <RenderBindingLayout.h>
+#include "RenderBindingLayout.h"
 #include "RenderCommandList.h"
+#include "RenderDevice.h"
+#include "RenderCommandPool.h"
+#include "RenderQueue.h"
 #include <cassert>
 
 namespace Render
@@ -20,6 +23,19 @@ CommandList::CommandList(CommandPool* pool):
 
 CommandList::~CommandList(void)
 {
+}
+
+void CommandList::Submit(Queue* queue)
+{
+	assert(queue != nullptr);
+	queue->Submit(this);
+}
+
+void CommandList::Submit(uint32_t index)
+{
+	Device* device = mCommandPool->GetDevice();
+	Queue* queue = device->GetQueue(index);
+	queue->Submit(this);
 }
 
 } /* namespace Render */

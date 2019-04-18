@@ -24,7 +24,6 @@ public:
 
 public:
 	virtual Pass* CreatePass(void) = 0;
-	virtual Queue* CreateQueue(void) = 0;
 	virtual Image* CreateImage(void) = 0;
 	virtual Buffer* CreateBuffer(void) = 0;
 	virtual Shader* CreateShader(void) = 0;

@@ -61,42 +61,6 @@ void CommandList::Create(bool primary)
 	mCommandBuffer = vulkan_command_pool->Allocate(level);
 }
 
-void CommandList::Submit(uint32_t index)
-{
-	assert(mCommandBuffer != nullptr);
-	auto device = mCommandBuffer->GetDevice();
-	auto physical = device->GetPhysicalDevice();
-	uint32_t family = physical->GetFamily();
-	auto queue = device->GetQueue(family, index);
-	{
-		auto command_buffer = mCommandBuffer->GetHandle();
-		VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-		VkSubmitInfo submit_info = {};
-		submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submit_info.pWaitDstStageMask = &wait_stage_mask;
-		submit_info.commandBufferCount = 1;
-		submit_info.pCommandBuffers = &command_buffer;
-		queue->Submit(1, &submit_info);
-	}
-}
-
-void CommandList::Submit(Render::Queue* queue)
-{
-	assert(mCommandBuffer != nullptr);
-	assert(queue != nullptr);
-	auto command_buffer = mCommandBuffer->GetHandle();
-	VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-	VkSubmitInfo submit_info = {};
-	submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-	submit_info.pWaitDstStageMask = &wait_stage_mask;
-	submit_info.commandBufferCount = 1;
-	submit_info.pCommandBuffers = &command_buffer;
-
-	auto vk_queue = static_cast<Queue*>(queue);
-	auto vulkan_queue = vk_queue->GetVulkanQueue();
-	vulkan_queue->Submit(1, &submit_info);
-}
-
 void CommandList::Begin(void)
 {
 	assert(mCommandBuffer != nullptr);

@@ -32,6 +32,12 @@ public:
 	inline Image* GetImage(size_t index) const { return mImages.at(index); }
 
 public:
+	inline bool operator==(const Attachment& other)
+	{
+		return (mDepthStencil == other.mDepthStencil) && (mImages == other.mImages);
+	}
+
+public:
 	Attachment& operator=(const Attachment& other);
 
 protected:

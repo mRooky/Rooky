@@ -22,8 +22,6 @@ public:
 
 public:
 	virtual void Create(bool primary) override;
-	virtual void Submit(uint32_t index) override;
-	virtual void Submit(Render::Queue* queue) override;
 
 public:
 	virtual void Begin(void) override;

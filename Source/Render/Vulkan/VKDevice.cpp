@@ -11,6 +11,7 @@
 #include "VKFormat.h"
 #include "VKInline.h"
 #include "VKFactory.h"
+#include "VKQueue.h"
 
 #include "VulkanVendor.h"
 #include "VulkanInstance.h"
@@ -47,6 +48,7 @@ void Device::Create(void)
 	CreateInstance();
 	CreatePhysical();
 	CreateDevice();
+	CreateQueue(1);
 	mFactory = new Factory(this);
 }
 
@@ -124,6 +126,16 @@ void Device::CreateDevice(void)
 	device_create_info.pEnabledFeatures = &features;
 
 	m_device->Create(&device_create_info);
+}
+
+void Device::CreateQueue(size_t count)
+{
+	for (size_t i = 0; i < count; ++i)
+	{
+		Queue* queue = new Queue(this);
+		mQueues.push_back(queue);
+		queue->Create(i);
+	}
 }
 
 } /* namespace VK */

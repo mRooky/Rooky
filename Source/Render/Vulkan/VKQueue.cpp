@@ -45,14 +45,11 @@ void Queue::Submit(Render::CommandList* command)
 	auto command_list = static_cast<CommandList*>(command);
 	auto command_buffer = command_list->GetVulkanCommandBuffer();
 	auto vulkan_command = command_buffer->GetHandle();
-	auto vulkan_semaphore = command_buffer->GetSemaphore()->GetHandle();
 	VkPipelineStageFlags wait_stage_mask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 
 	VkSubmitInfo submit_info = Vulkan::Queue::SubmitInfo();
 	submit_info.commandBufferCount = 1;
 	submit_info.pCommandBuffers = &vulkan_command;
-	submit_info.waitSemaphoreCount = 1;
-	submit_info.pWaitSemaphores = &vulkan_semaphore;
 	submit_info.pWaitDstStageMask = &wait_stage_mask;
 
 	mQueue->Submit(1, &submit_info);

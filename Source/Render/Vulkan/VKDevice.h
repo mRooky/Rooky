@@ -39,6 +39,7 @@ private:
 	void CreateInstance(bool debug = true);
 	void CreatePhysical(void);
 	void CreateDevice(void);
+	void CreateQueue(size_t count);
 
 private:
 	Vulkan::Vendor* m_vendor = nullptr;
