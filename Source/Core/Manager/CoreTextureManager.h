@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
+#include "GHIFormat.h"
+#include "MathExtent.hpp"
+#include "GHISampler.h"
 #include "CoreInterface.h"
-#include "RenderExtent.hpp"
-#include "RenderSampler.h"
-#include "RenderFormat.h"
 #include <vector>
 
 namespace Core
@@ -24,28 +24,28 @@ public:
 	virtual ~TextureManager(void) override;
 
 public:
-	Texture* CreateTexture1D(const char* name, const Render::Extent3Di& extent, Render::Format format);
-	Texture* CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format);
-	Texture* CreateTexture3D(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTexture1D(const char* name, const Math::Extent3Di& extent, GHI::Format format);
+	Texture* CreateTexture2D(const char* name, const Math::Extent3Di& extent, GHI::Format format);
+	Texture* CreateTexture3D(const char* name, const Math::Extent3Di& extent, GHI::Format format);
 
 public:
-	Texture* CreateTexture1DArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
-	Texture* CreateTexture2DArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTexture1DArray(const char* name, const Math::Extent3Di& extent, GHI::Format format);
+	Texture* CreateTexture2DArray(const char* name, const Math::Extent3Di& extent, GHI::Format format);
 
 public:
-	Texture* CreateTextureCube(const char* name, const Render::Extent3Di& extent, Render::Format format);
-	Texture* CreateTextureCubeArray(const char* name, const Render::Extent3Di& extent, Render::Format format);
+	Texture* CreateTextureCube(const char* name, const Math::Extent3Di& extent, GHI::Format format);
+	Texture* CreateTextureCubeArray(const char* name, const Math::Extent3Di& extent, GHI::Format format);
 
 public:
 	Texture* GetTexture(const char* name);
 	Texture* CreateTexture(void);
 
 public:
-	Render::Sampler* CreateSampler(void);
+	GHI::Sampler* CreateSampler(void);
 
 protected:
 	std::vector<Texture*> mTextures;
-	std::vector<Render::Sampler*> mSamplers;
+	std::vector<GHI::Sampler*> mSamplers;
 };
 
 } /* namespace Core */

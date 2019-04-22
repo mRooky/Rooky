@@ -32,7 +32,7 @@ namespace VK
 {
 
 Factory::Factory(Device* device):
-		Render::Factory(device)
+		GHI::Factory(device)
 {
 	mPool = new Pool(static_cast<Device&>(*mDevice));
 }
@@ -43,61 +43,61 @@ Factory::~Factory(void)
 	mPool = nullptr;
 }
 
-Render::Pass* Factory::CreatePass(void)
+GHI::RenderPass* Factory::CreateRenderPass(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new RenderPass(vk_device);
 }
 
-Render::Image* Factory::CreateImage(void)
+GHI::Image* Factory::CreateImage(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Image(vk_device);
 }
 
-Render::Buffer* Factory::CreateBuffer(void)
+GHI::Buffer* Factory::CreateBuffer(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Buffer(vk_device);
 }
 
-Render::Shader* Factory::CreateShader(void)
+GHI::Shader* Factory::CreateShader(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Shader(vk_device);
 }
 
-Render::SwapChain* Factory::CreateSwapChain(void)
+GHI::SwapChain* Factory::CreateSwapChain(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new SwapChain(vk_device);
 }
 
-Render::CommandPool* Factory::CreateCommandPool(void)
+GHI::CommandPool* Factory::CreateCommandPool(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new CommandPool(vk_device);
 }
 
-Render::Sampler* Factory::CreateSampler(void)
+GHI::Sampler* Factory::CreateSampler(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Sampler(vk_device);
 }
 
-Render::Pipeline* Factory::CreatePipeline(void)
+GHI::Pipeline* Factory::CreatePipeline(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new Pipeline(vk_device);
 }
 
-Render::BindingSet* Factory::CreateBindingSet(void)
+GHI::BindingSet* Factory::CreateBindingSet(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new BindingSet(vk_device);
 }
 
-Render::PipelineLayout* Factory::CreatePipelineLayout(void)
+GHI::PipelineLayout* Factory::CreatePipelineLayout(void)
 {
 	auto vk_device = static_cast<Device*>(mDevice);
 	return new PipelineLayout(vk_device);

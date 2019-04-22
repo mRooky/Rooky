@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
-#include "RenderViewport.hpp"
-#include "RenderClasses.h"
+#include "GHIClasses.h"
+#include "MathViewport.h"
 
 namespace Core
 {
@@ -23,17 +23,17 @@ public:
 	virtual ~Viewport(void);
 
 public:
-	void Create(const Render::Rect2Di& rect);
+	void Create(const Math::Rect2Di& rect);
 
 public:
 	void Draw(void);
 
 public:
 	void CreateThread(uint32_t count);
-	void CreateDepthStencil(const Render::Extent2Di& extent);
+	void CreateDepthStencil(const Math::Extent2Di& extent);
 
 public:
-	inline Render::Image* GetDepthStencil(void) const { return mDepthStencil; }
+	inline GHI::Image* GetDepthStencil(void) const { return mDepthStencil; }
 
 public:
 	inline Camera* GetCamera(void) const { return mCamera; }
@@ -48,8 +48,8 @@ protected:
 	Thread* mThread = nullptr;
 
 protected:
-	Render::Viewport mViewport;
-	Render::Image* mDepthStencil = nullptr;
+	Math::Viewport mViewport;
+	GHI::Image* mDepthStencil = nullptr;
 
 };
 

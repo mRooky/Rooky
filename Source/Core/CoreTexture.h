@@ -23,11 +23,11 @@ public:
 	void Update(uint32_t index, uint32_t mipmap, const void* src);
 
 public:
-	inline Render::Sampler* GetSampler(void) const { return mSampler; }
-	inline void SetSampler(Render::Sampler* sampler) { mSampler = sampler; }
+	inline GHI::Sampler* GetSampler(void) const { return mSampler; }
+	inline void SetSampler(GHI::Sampler* sampler) { mSampler = sampler; }
 
 protected:
-	Render::Sampler* mSampler = nullptr;
+	GHI::Sampler* mSampler = nullptr;
 };
 
 } /* namespace Core */

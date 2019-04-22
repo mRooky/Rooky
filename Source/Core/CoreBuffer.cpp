@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include "GHIBuffer.h"
 #include "CoreBuffer.h"
-#include "RenderBuffer.h"
 #include <cassert>
 #include <cstring>
 
@@ -24,14 +24,14 @@ Buffer::~Buffer(void)
 void Buffer::Read(void* dst, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
+	auto buffer = static_cast<GHI::Buffer*>(mResource);
 	buffer->Read(dst, offset, size);
 }
 
 void Buffer::Write(const void* src, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);
-	auto buffer = static_cast<Render::Buffer*>(mResource);
+	auto buffer = static_cast<GHI::Buffer*>(mResource);
 	buffer->Write(src, offset, size);
 }
 

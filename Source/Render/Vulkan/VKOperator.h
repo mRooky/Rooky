@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKOPERATOR_H_
 #define SOURCE_RENDER_VK_VKOPERATOR_H_
 
-#include <RenderMath/RenderMath.h>
+#include "MathDefine.h"
 #include "VKRender.h"
 
 namespace VK

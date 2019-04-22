@@ -52,10 +52,10 @@ void Device::Create(void)
 	mFactory = new Factory(this);
 }
 
-Render::Format Device::GetBestDepthStencilFormat(void)
+GHI::Format Device::GetBestDepthStencilFormat(void)
 {
 	VkFormat vk_format = m_physical->GetDepthStencilFormat();
-	Render::Format format = ConvertFormat(vk_format);
+	GHI::Format format = ConvertFormat(vk_format);
 	return format;
 }
 

@@ -8,9 +8,8 @@
 #ifndef SOURCE_CORE_CORESYSTEM_H_
 #define SOURCE_CORE_CORESYSTEM_H_
 
-#include "RenderMath.h"
-#include "RenderClasses.h"
-#include "RenderFormat.h"
+#include "GHIClasses.h"
+#include "GHIFormat.h"
 
 namespace Core
 {
@@ -28,7 +27,7 @@ public:
 	void Create(void);
 
 public:
-	inline Render::Device* GetDevice(void) const { return mDevice; }
+	inline GHI::Device* GetDevice(void) const { return mDevice; }
 
 public:
 	inline MeshManager* GetMeshManager(void) const { return mMeshManager; }
@@ -37,7 +36,7 @@ public:
 	inline PipelineManager* GetPipelineManager(void) const { return mPipelineManager; }
 
 protected:
-	Render::Device* mDevice = nullptr;
+	GHI::Device* mDevice = nullptr;
 
 protected:
 	MeshManager* mMeshManager = nullptr;

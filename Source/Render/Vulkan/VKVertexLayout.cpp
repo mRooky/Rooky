@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
+#include "GHILayout.h"
 #include "VKVertexLayout.h"
 
-#include "RenderLayout.h"
 #include <cassert>
 #include <iostream>
 
@@ -22,7 +22,7 @@ VertexLayout::~VertexLayout(void)
 {
 }
 
-void VertexLayout::CreateInputState(Render::VertexLayout* layout)
+void VertexLayout::CreateInputState(GHI::VertexLayout* layout)
 {
 	assert(layout != nullptr);
 	if (layout->IsValid())
@@ -35,29 +35,29 @@ void VertexLayout::CreateInputState(Render::VertexLayout* layout)
 			uint32_t binding = element.GetBinding();
 			auto type = element.GetType();
 			VkVertexInputBindingDescription* input_binding = mInputStateInfo.GetBinding(binding);
-			input_binding->stride += Render::Element::GetTypeSize(type);
+			input_binding->stride += GHI::Element::GetTypeSize(type);
 
 			uint32_t location = element.GetLocation();
 			VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
 			input_attribute->offset = offset;
 			input_attribute->format = VertexLayout::GetElementFormat(type);
 
-			offset += Render::Element::GetTypeSize(type);
+			offset += GHI::Element::GetTypeSize(type);
 		}
 	}
 }
 
-VkFormat VertexLayout::GetElementFormat(Render::ElementType type)
+VkFormat VertexLayout::GetElementFormat(GHI::ElementType type)
 {
 	switch(type)
 	{
-	case Render::ElementType::ELEMENT_TYPE_FLOAT1:
+	case GHI::ElementType::ELEMENT_TYPE_FLOAT1:
 		return VK_FORMAT_R32_SFLOAT;
-	case Render::ElementType::ELEMENT_TYPE_FLOAT2:
+	case GHI::ElementType::ELEMENT_TYPE_FLOAT2:
 		return VK_FORMAT_R32G32_SFLOAT;
-	case Render::ElementType::ELEMENT_TYPE_FLOAT3:
+	case GHI::ElementType::ELEMENT_TYPE_FLOAT3:
 		return VK_FORMAT_R32G32B32_SFLOAT;
-	case Render::ElementType::ELEMENT_TYPE_FLOAT4:
+	case GHI::ElementType::ELEMENT_TYPE_FLOAT4:
 		return VK_FORMAT_R32G32B32A32_SFLOAT;
 	default:
 		assert(false);

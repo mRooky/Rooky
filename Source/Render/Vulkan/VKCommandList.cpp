@@ -21,6 +21,11 @@
 #include "VKPipelineLayout.h"
 #include "VKBindingSet.h"
 
+#include "GHIBindingLayout.h"
+#include "GHIDrawIndexed.h"
+#include "GHIPipelineState.h"
+#include "GHIAttachment.h"
+
 #include "VulkanCommandPool.h"
 #include "VulkanCommandBuffer.h"
 #include "VulkanDevice.h"
@@ -33,17 +38,13 @@
 #include "VulkanFrameBuffer.h"
 #include "VulkanDrawCall.h"
 
-#include "RenderBindingLayout.h"
-#include "RenderPipelineState.h"
-#include "RenderDrawIndexed.h"
-#include "RenderAttachment.h"
 #include <cassert>
 
 namespace VK
 {
 
 CommandList::CommandList(CommandPool* pool):
-		Render::CommandList(pool)
+		GHI::CommandList(pool)
 {
 }
 
@@ -67,7 +68,7 @@ void CommandList::Begin(void)
 	mCommandBuffer->Begin(VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
 }
 
-void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2Di& area)
+void CommandList::BeginPass(GHI::RenderPass* pass, GHI::FrameBuffer* frame, const Math::Rect2Di& area)
 {
 	assert(pass != nullptr);
 	assert(mCommandBuffer != nullptr);
@@ -102,7 +103,7 @@ void CommandList::BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, cons
 	mCommandBuffer->BeginRenderPass(render_pass_begin_info);
 }
 
-void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports)
+void CommandList::SetViewport(uint32_t first, uint32_t count, const Math::Viewport* viewports)
 {
 	assert(mCommandBuffer != nullptr);
 	std::vector<VkViewport> vulkan_viewports;
@@ -122,7 +123,7 @@ void CommandList::SetViewport(uint32_t first, uint32_t count, const Render::View
 	mCommandBuffer->SetViewport(first, count, vulkan_viewports.data());
 }
 
-void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2Di* rects)
+void CommandList::SetScissor(uint32_t first, uint32_t count, const Math::Rect2Di* rects)
 {
 	assert(mCommandBuffer != nullptr);
 	std::vector<VkRect2D> vulkan_scissors;
@@ -141,7 +142,7 @@ void CommandList::SetScissor(uint32_t first, uint32_t count, const Render::Rect2
 }
 
 // ----------------- Main Resource Setup ------------------//
-void CommandList::SetPipeline(Render::Pipeline* pipeline)
+void CommandList::SetPipeline(GHI::Pipeline* pipeline)
 {
 	assert(mCommandBuffer != nullptr);
 	mPipeline = pipeline;
@@ -153,14 +154,14 @@ void CommandList::SetPipeline(Render::Pipeline* pipeline)
 	mBindingLayout = pipeline_layout->GetBindingLayout();
 }
 
-void CommandList::SetBindingSet(uint32_t slot, Render::BindingSet* set)
+void CommandList::SetBindingSet(uint32_t slot, GHI::BindingSet* set)
 {
 	assert(mBindingLayout != nullptr);
 	mBindingLayout->SetBindingSet(slot, set);
 	assert(false);
 }
 
-void CommandList::SetVertex(Render::Resource* buffer, uint32_t binding, size_t offset)
+void CommandList::SetVertex(GHI::Resource* buffer, uint32_t binding, size_t offset)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);
@@ -169,7 +170,7 @@ void CommandList::SetVertex(Render::Resource* buffer, uint32_t binding, size_t o
 	mCommandBuffer->BindVertexBuffers(vulkan_buffer, binding, offset);
 }
 
-void CommandList::SetIndex(Render::Resource* buffer, size_t offset, Render::IndexType type)
+void CommandList::SetIndex(GHI::Resource* buffer, size_t offset, GHI::IndexType type)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);
@@ -179,22 +180,22 @@ void CommandList::SetIndex(Render::Resource* buffer, size_t offset, Render::Inde
 	mCommandBuffer->BindIndexBuffer(vulkan_buffer, offset, index_type);
 }
 
-void CommandList::Draw(Render::Draw* draw)
+void CommandList::Draw(GHI::Draw* draw)
 {
 	BindingResource();
 	auto type = draw->GetType();
 	switch(type)
 	{
-	case Render::DrawType::DRAW_TYPE_ARRAY:
+	case GHI::DrawType::DRAW_TYPE_ARRAY:
 		assert(false);
 		break;
-	case Render::DrawType::DRAW_TYPE_INDEXED:
+	case GHI::DrawType::DRAW_TYPE_INDEXED:
 		DrawIndexed(draw);
 		break;
-	case Render::DrawType::DRAW_TYPE_INDEXED_INDIRECT:
+	case GHI::DrawType::DRAW_TYPE_INDEXED_INDIRECT:
 		assert(false);
 		break;
-	case Render::DrawType::DRAW_TYPE_INDIRECT:
+	case GHI::DrawType::DRAW_TYPE_INDIRECT:
 		assert(false);
 		break;
 	default:
@@ -240,9 +241,9 @@ void CommandList::BindingResource(void)
 	mCommandBuffer->BindDescriptorSets(vulkan_pipeline_layout, descriptor_sets, offset);
 }
 
-void CommandList::DrawIndexed(Render::Draw* draw)
+void CommandList::DrawIndexed(GHI::Draw* draw)
 {
-	Render::DrawIndexed* index = static_cast<Render::DrawIndexed*>(draw);
+	GHI::DrawIndexed* index = static_cast<GHI::DrawIndexed*>(draw);
 	Vulkan::DrawIndexed vulkan_index = {};
 	vulkan_index.SetIndexCount(index->GetIndexCount());
 	mCommandBuffer->Draw(&vulkan_index);

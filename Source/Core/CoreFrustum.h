@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_COREFRUSTUM_H_
 #define SOURCE_CORE_COREFRUSTUM_H_
 
+#include "MathFloat.hpp"
+#include "MathMatrix.hpp"
 #include "CorePlane.h"
-#include "RenderFloat.hpp"
-#include "RenderMatrix.hpp"
 
 namespace Core
 {
@@ -25,24 +25,24 @@ public:
 	Plane GetPlane(FrustumPlane type);
 
 public:
-	inline void SetFov(Render::Float fov) { mFov = fov; }
-	inline void SetNear(Render::Float near) { mNear = near; }
-	inline void SetFar(Render::Float far) { mFar = far; }
+	inline void SetFov(Math::Float fov) { mFov = fov; }
+	inline void SetNear(Math::Float near) { mNear = near; }
+	inline void SetFar(Math::Float far) { mFar = far; }
 
 public:
-	inline Render::Float GetFov(void) const { return mFov; }
-	inline Render::Float GetNear(void) const { return mNear; }
-	inline Render::Float GetFar(void) const { return mFar; }
+	inline Math::Float GetFov(void) const { return mFov; }
+	inline Math::Float GetNear(void) const { return mNear; }
+	inline Math::Float GetFar(void) const { return mFar; }
 
 public:
-	inline const Render::Matrix& GetMatrax(void) const { return mMatrix; }
-	inline void GetMatrax(const Render::Matrix& matrix) { mMatrix = matrix; }
+	inline const Math::Matrix& GetMatrax(void) const { return mMatrix; }
+	inline void GetMatrax(const Math::Matrix& matrix) { mMatrix = matrix; }
 
 protected:
-	Render::Float mFov = 45.0f;
-	Render::Float mNear = 0.1f;
-	Render::Float mFar = 100.0f;
-	Render::Matrix mMatrix = {};
+	Math::Float mFov = 45.0f;
+	Math::Float mNear = 0.1f;
+	Math::Float mFar = 100.0f;
+	Math::Matrix mMatrix = {};
 };
 
 } /* namespace Core */

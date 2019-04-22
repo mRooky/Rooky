@@ -5,14 +5,13 @@
  *      Author: rookyma
  */
 
+#include "GHIBuffer.h"
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHILayout.h"
 #include "CoreVertex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
-
-#include "RenderLayout.h"
-#include "RenderBuffer.h"
-#include "RenderDevice.h"
-#include "RenderFactory.h"
 
 #include <cassert>
 #include <iostream>
@@ -31,16 +30,16 @@ Vertex::~Vertex(void)
 	mLayout = nullptr;
 }
 
-void Vertex::Create(Render::VertexLayout* layout, uint32_t count)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count)
 {
-	Render::UsageType usage;
+	GHI::UsageType usage;
 	usage.source = TRUE;
 	usage.destination = TRUE;
-	usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
 	Create(layout, count, usage);
 }
 
-void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::UsageType usage)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType usage)
 {
 	mCount = count;
 	mLayout = layout;
@@ -48,7 +47,7 @@ void Vertex::Create(Render::VertexLayout* layout, uint32_t count, Render::UsageT
 	std::cout << "Create Vertex Count : " << mCount << std::endl;
 }
 
-void Vertex::CreateRenderBuffer(Render::UsageType usage)
+void Vertex::CreateRenderBuffer(GHI::UsageType usage)
 {
 	assert(mLayout->IsValid());
 	size_t size = mLayout->GetStride() * mCount;
@@ -56,10 +55,10 @@ void Vertex::CreateRenderBuffer(Render::UsageType usage)
 	usage.vertexBuffer = TRUE;
 
 	System* system = mCreator->GetSystem();
-	Render::Device* device = system->GetDevice();
-	Render::Factory* factory = device->GetFactory();
+	GHI::Device* device = system->GetDevice();
+	GHI::Factory* factory = device->GetFactory();
 	mResource = factory->CreateBuffer();
-	static_cast<Render::Buffer*>(mResource)->Create(size, usage);
+	static_cast<GHI::Buffer*>(mResource)->Create(size, usage);
 }
 
 } /* namespace Core */

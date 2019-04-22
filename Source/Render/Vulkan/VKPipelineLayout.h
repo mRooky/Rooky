@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINELAYOUT_H_
 #define SOURCE_RENDER_VK_VKPIPELINELAYOUT_H_
 
-#include "RenderPipelineLayout.h"
+#include "GHIPipelineLayout.h"
 #include "VKRender.h"
 #include <vector>
 
@@ -16,14 +16,14 @@ namespace VK
 {
 class Device;
 class BindingLayout;
-class PipelineLayout: public Render::PipelineLayout
+class PipelineLayout: public GHI::PipelineLayout
 {
 public:
 	explicit PipelineLayout(Device* device);
 	virtual ~PipelineLayout(void) override;
 
 public:
-	virtual void Create(Render::BindingLayout* layout) override;
+	virtual void Create(GHI::BindingLayout* layout) override;
 
 public:
 	void CreateVulkanPipelineLayout(void);

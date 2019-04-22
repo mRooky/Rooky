@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKPOOL_H_
 #define SOURCE_RENDER_VK_VKPOOL_H_
 
-#include "RenderUsageType.h"
+#include "GHIUsageType.h"
 #include "VKRender.h"
 #include <vector>
 
@@ -24,7 +24,7 @@ public:
 
 public:
 	Buffer* GetStageBuffer(size_t size);
-	Buffer* GetBuffer(size_t size, Render::UsageType usage);
+	Buffer* GetBuffer(size_t size, GHI::UsageType usage);
 
 public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
@@ -42,7 +42,7 @@ protected:
 	void CreateDescriptorPool(size_t max);
 
 protected:
-	Buffer* SearchBuffer(size_t size, Render::UsageType usage);
+	Buffer* SearchBuffer(size_t size, GHI::UsageType usage);
 
 protected:
 	Device& mDevice;

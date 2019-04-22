@@ -5,16 +5,15 @@
  *      Author: rookyma
  */
 
+#include "GHIDefine.h"
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHISampler.h"
 #include "UtilityRelease.h"
 #include "UtilityString.h"
 #include "CoreTextureManager.h"
 #include "CoreTexture.h"
 #include "CoreSystem.h"
-
-#include "RenderDevice.h"
-#include "RenderFactory.h"
-#include "RenderSampler.h"
-#include "RenderDefine.h"
 
 #include <cstring>
 #include <cassert>
@@ -42,28 +41,28 @@ TextureManager::~TextureManager(void)
 	std::cout << count << " Sampler(s) Released !" << std::endl;
 }
 
-Texture* TextureManager::CreateTexture1D(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTexture1D(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	std::string file_string = name;
 	std::string file_name = Utility::GetFileName(file_string);
 	Texture* texture = GetTexture(file_name.c_str());
 	if (texture == nullptr)
 	{
-		Render::ImageLayout image_layout = {};
+		GHI::ImageLayout image_layout = {};
 		image_layout.extent = extent;
 		image_layout.format = format;
-		image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
+		image_layout.type = GHI::ImageType::IMAGE_TYPE_2D;
 
-		Render::UsageType image_usage = {};
+		GHI::UsageType image_usage = {};
 		image_usage.destination = TRUE;
 		image_usage.sampledImage = TRUE;
-		image_usage.type = Render::ResourceType::RESOURCE_TYPE_IMAGE;
+		image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;
 
 		texture = CreateTexture();
 		texture->SetName(file_name.c_str());
@@ -73,31 +72,31 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Render::Extent3
 	return texture;
 }
 
-Texture* TextureManager::CreateTexture3D(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTexture3D(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture1DArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTexture1DArray(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTexture2DArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTexture2DArray(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTextureCube(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTextureCube(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
 }
 
-Texture* TextureManager::CreateTextureCubeArray(const char* name, const Render::Extent3Di& extent, Render::Format format)
+Texture* TextureManager::CreateTextureCubeArray(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	assert(false);
 	return nullptr;
@@ -124,11 +123,11 @@ Texture* TextureManager::CreateTexture(void)
 	return texture;
 }
 
-Render::Sampler* TextureManager::CreateSampler(void)
+GHI::Sampler* TextureManager::CreateSampler(void)
 {
-	Render::Device* device = mSystem->GetDevice();
+	GHI::Device* device = mSystem->GetDevice();
 	auto factory = device->GetFactory();
-	Render::Sampler* sampler = factory->CreateSampler();
+	GHI::Sampler* sampler = factory->CreateSampler();
 	mSamplers.push_back(sampler);
 	return sampler;
 }

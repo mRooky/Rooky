@@ -8,7 +8,7 @@
 #include <VKDevice.h>
 #include <cassert>
 
-namespace Render
+namespace GHI
 {
 Device* CreateDevice(void)
 {

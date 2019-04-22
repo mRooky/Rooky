@@ -8,21 +8,21 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINE_H_
 #define SOURCE_RENDER_VK_VKPIPELINE_H_
 
-#include "RenderPipeline.h"
+#include "GHIPipeline.h"
 #include "VKPipelineState.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class Pipeline: public Render::Pipeline
+class Pipeline: public GHI::Pipeline
 {
 public:
 	explicit Pipeline(Device* device);
 	virtual ~Pipeline(void) override;
 
 public:
-	virtual void Create(Render::PipelineState* state) override;
+	virtual void Create(GHI::PipelineState* state) override;
 
 public:
 	void CreateVulkanPipeline(void);

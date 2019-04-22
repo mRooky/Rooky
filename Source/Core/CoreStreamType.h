@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORESTREAMTYPE_H_
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
-#include <RenderVector.h>
-#include "RenderColor.hpp"
+#include "MathColor.hpp"
+#include "MathVector.h"
 #include <cstdint>
 #include <vector>
 #include <cstring>
@@ -74,9 +74,9 @@ protected:
 	std::vector<T> mPositionData;
 };
 
-typedef StreamBase<Render::ColorValue> StreamColor;
-typedef StreamBase<Render::Vector2f> StreamTexCoord;
-typedef StreamBase<Render::Vector3f> StreamPosition, StreamNormal;
+typedef StreamBase<Math::ColorValue> StreamColor;
+typedef StreamBase<Math::Vector2f> StreamTexCoord;
+typedef StreamBase<Math::Vector3f> StreamPosition, StreamNormal;
 
 } /* namespace Core */
 

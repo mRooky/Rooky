@@ -5,6 +5,7 @@
  *      Author: rookyma
  */
 
+#include "GHIBindingLayout.h"
 #include "VKDevice.h"
 #include "VKPipelineLayout.h"
 #include "VKBindingSet.h"
@@ -14,15 +15,13 @@
 #include "VulkanDescriptorSet.h"
 #include "VulkanDescriptorSetLayout.h"
 
-#include "RenderBindingLayout.h"
-
 #include <cassert>
 
 namespace VK
 {
 
 PipelineLayout::PipelineLayout(Device* device):
-		Render::PipelineLayout(device)
+		GHI::PipelineLayout(device)
 {
 }
 
@@ -31,7 +30,7 @@ PipelineLayout::~PipelineLayout(void)
 	Vulkan::Release(mPipelineLayout);
 }
 
-void PipelineLayout::Create(Render::BindingLayout* layout)
+void PipelineLayout::Create(GHI::BindingLayout* layout)
 {
 	assert(mBindingLayout == nullptr);
 	mBindingLayout = layout;

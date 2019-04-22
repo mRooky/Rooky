@@ -8,13 +8,13 @@
 #ifndef SOURCE_RENDER_VK_VKCOMMANDPOOL_H_
 #define SOURCE_RENDER_VK_VKCOMMANDPOOL_H_
 
-#include "RenderCommandPool.h"
+#include "GHICommandPool.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class CommandPool: public Render::CommandPool
+class CommandPool: public GHI::CommandPool
 {
 public:
 	explicit CommandPool(Device* device);
@@ -24,7 +24,7 @@ public:
 	virtual void Create(void) override;
 
 public:
-	virtual Render::CommandList* Allocate(bool level) override;
+	virtual GHI::CommandList* Allocate(bool level) override;
 
 public:
 	inline Vulkan::CommandPool* GetVulkanCommandPool(void) const { return mCommandPool; }

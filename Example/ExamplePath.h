@@ -9,7 +9,6 @@
 #define EXAMPLE_EXAMPLEPATH_H_
 
 #include "CorePath.h"
-#include "RenderFormat.h"
 #include "ExampleBase.h"
 
 namespace Example

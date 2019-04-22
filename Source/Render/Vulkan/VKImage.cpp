@@ -14,7 +14,7 @@
 #include "VKOperator.h"
 #include "VKDevice.h"
 
-#include "RenderBits.hpp"
+#include "MathBits.hpp"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"
@@ -33,7 +33,7 @@ namespace VK
 {
 
 Image::Image(Device* device):
-		Render::Image(device)
+		GHI::Image(device)
 {
 }
 
@@ -43,7 +43,7 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(const Render::ImageLayout& layout, const Render::UsageType& usage)
+void Image::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
 {
 	mUsage = usage;
 	mLayout = layout;
@@ -87,7 +87,7 @@ void Image::AllocateMemory(void)
 
 void Image::CreateView(void)
 {
-	assert(mLayout.type != Render::ImageType::IMAGE_TYPE_UNKNOWN);
+	assert(mLayout.type != GHI::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
 	VkImageViewType vulkan_type = ConverType(mLayout.type);
 	mImage->CreateView(vulkan_type);
@@ -111,7 +111,7 @@ void Image::Download(void* dst)
 void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(index == 0 && mipmap == 0);
-	Render::Factory* factory = mDevice->GetFactory();
+	GHI::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
@@ -177,17 +177,17 @@ VkDescriptorImageInfo Image::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-void Image::CopyFrom(const Render::Resource* other)
+void Image::CopyFrom(const GHI::Resource* other)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
-	Render::Factory* factory = mDevice->GetFactory();
+	GHI::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	auto command_pool = vk_pool->GetVulkanCommandPool();
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 
-	Render::ResourceType type = other->GetType();
-	if (type == Render::ResourceType::RESOURCE_TYPE_BUFFER)
+	GHI::ResourceType type = other->GetType();
+	if (type == GHI::ResourceType::RESOURCE_TYPE_BUFFER)
 	{
 		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
 		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
@@ -223,8 +223,8 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	if (mipmap > 0)
 	{
 		const auto& extent = mLayout.extent;
-		bool width_pow2 = Render::IsPowerOfTow(extent.width);
-		bool height_pow2 = Render::IsPowerOfTow(extent.height);
+		bool width_pow2 = Math::IsPowerOfTow(extent.width);
+		bool height_pow2 = Math::IsPowerOfTow(extent.height);
 		assert(width_pow2 == true);
 		assert(height_pow2 == true);
 		if (!width_pow2 || !height_pow2)
@@ -242,7 +242,7 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	return extent;
 }
 
-VkDescriptorType Image::GetDescriptorType(const Render::UsageType& usage)
+VkDescriptorType Image::GetDescriptorType(const GHI::UsageType& usage)
 {
 	VkDescriptorType descriptor_type =
 	(usage.sampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
@@ -253,23 +253,23 @@ VkDescriptorType Image::GetDescriptorType(const Render::UsageType& usage)
 	return descriptor_type;
 }
 
-VkImageViewType Image::ConverType(const Render::ImageType& type)
+VkImageViewType Image::ConverType(const GHI::ImageType& type)
 {
 	switch (type)
 	{
-	case Render::ImageType::IMAGE_TYPE_1D:
+	case GHI::ImageType::IMAGE_TYPE_1D:
 		return VK_IMAGE_VIEW_TYPE_1D;
-	case Render::ImageType::IMAGE_TYPE_2D:
+	case GHI::ImageType::IMAGE_TYPE_2D:
 		return VK_IMAGE_VIEW_TYPE_2D;
-	case Render::ImageType::IMAGE_TYPE_3D:
+	case GHI::ImageType::IMAGE_TYPE_3D:
 		return VK_IMAGE_VIEW_TYPE_3D;
-	case Render::ImageType::IMAGE_TYPE_CUBE:
+	case GHI::ImageType::IMAGE_TYPE_CUBE:
 		return VK_IMAGE_VIEW_TYPE_CUBE;
-	case Render::ImageType::IMAGE_TYPE_1D_ARRAY:
+	case GHI::ImageType::IMAGE_TYPE_1D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_1D_ARRAY;
-	case Render::ImageType::IMAGE_TYPE_2D_ARRAY:
+	case GHI::ImageType::IMAGE_TYPE_2D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_2D_ARRAY;
-	case Render::ImageType::IMAGE_TYPE_CUBE_ARRAY:
+	case GHI::ImageType::IMAGE_TYPE_CUBE_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
 	default:
 		assert(false);
@@ -277,33 +277,33 @@ VkImageViewType Image::ConverType(const Render::ImageType& type)
 	}
 }
 
-Render::ImageType Image::ConverType(const VkImageViewType& type)
+GHI::ImageType Image::ConverType(const VkImageViewType& type)
 {
 	switch (type)
 	{
 	case VK_IMAGE_VIEW_TYPE_1D:
-		return Render::ImageType::IMAGE_TYPE_1D;
+		return GHI::ImageType::IMAGE_TYPE_1D;
 	case VK_IMAGE_VIEW_TYPE_2D:
-		return Render::ImageType::IMAGE_TYPE_2D;
+		return GHI::ImageType::IMAGE_TYPE_2D;
 	case VK_IMAGE_VIEW_TYPE_3D:
-		return Render::ImageType::IMAGE_TYPE_3D;
+		return GHI::ImageType::IMAGE_TYPE_3D;
 	case VK_IMAGE_VIEW_TYPE_CUBE:
-		return Render::ImageType::IMAGE_TYPE_CUBE;
+		return GHI::ImageType::IMAGE_TYPE_CUBE;
 	case VK_IMAGE_VIEW_TYPE_1D_ARRAY:
-		return Render::ImageType::IMAGE_TYPE_1D_ARRAY;
+		return GHI::ImageType::IMAGE_TYPE_1D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_2D_ARRAY:
-		return Render::ImageType::IMAGE_TYPE_2D_ARRAY;
+		return GHI::ImageType::IMAGE_TYPE_2D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_CUBE_ARRAY:
-		return Render::ImageType::IMAGE_TYPE_CUBE_ARRAY;
+		return GHI::ImageType::IMAGE_TYPE_CUBE_ARRAY;
 	default:
 		assert(false);
-		return Render::ImageType::IMAGE_TYPE_UNKNOWN;
+		return GHI::ImageType::IMAGE_TYPE_UNKNOWN;
 	}
 }
 
-VkImageUsageFlags Image::ConvertUsageFlag(Render::UsageType usage)
+VkImageUsageFlags Image::ConvertUsageFlag(GHI::UsageType usage)
 {
-	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_IMAGE);
+	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_IMAGE);
 	VkImageUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
@@ -336,7 +336,7 @@ void SwapChainImage::Create(Vulkan::Image* image)
 	mLayout.extent.height = static_cast<int32_t>(extent.height);
 	VkFormat format = image->GetFormat();
 	mLayout.format = ConvertFormat(format);
-	mLayout.type = Render::ImageType::IMAGE_TYPE_2D;
+	mLayout.type = GHI::ImageType::IMAGE_TYPE_2D;
 }
 
 } /* namespace VK */

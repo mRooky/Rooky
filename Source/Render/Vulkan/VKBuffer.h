@@ -8,20 +8,20 @@
 #ifndef SOURCE_RENDER_VK_VKBUFFER_H_
 #define SOURCE_RENDER_VK_VKBUFFER_H_
 
-#include "RenderBuffer.h"
+#include "GHIBuffer.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class Buffer: public Render::Buffer
+class Buffer: public GHI::Buffer
 {
 public:
 	explicit Buffer(Device* device);
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, const Render::UsageType& usage) override;
+	virtual void Create(size_t size, const GHI::UsageType& usage) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;
@@ -32,7 +32,7 @@ public:
 	virtual void Upload(const void* src, size_t offset, size_t size) override;
 
 public:
-	virtual void CopyFrom(const Render::Resource* other) override;
+	virtual void CopyFrom(const GHI::Resource* other) override;
 
 public:
 	VkDescriptorBufferInfo GetDescriptorInfo(void) const;
@@ -42,8 +42,8 @@ public:
 	inline Vulkan::DeviceMemory* GetVulkanMemory(void) const { return mMemory; }
 
 public:
-	static VkBufferUsageFlags ConvertUsageFlag(Render::UsageType usage);
-	static VkDescriptorType GetDescriptorType(const Render::UsageType& usage);
+	static VkBufferUsageFlags ConvertUsageFlag(GHI::UsageType usage);
+	static VkDescriptorType GetDescriptorType(const GHI::UsageType& usage);
 
 private:
 	void CreateVulkanBuffer(void);

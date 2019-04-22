@@ -5,15 +5,14 @@
  *      Author: rookyma
  */
 
+#include "GHIBuffer.h"
+#include "GHIDevice.h"
+#include "GHIElement.h"
+#include "GHIFactory.h"
+#include "GHIInline.h"
 #include "CoreIndex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
-
-#include "RenderElement.h"
-#include "RenderBuffer.h"
-#include "RenderInline.h"
-#include "RenderDevice.h"
-#include "RenderFactory.h"
 
 #include <iostream>
 
@@ -28,44 +27,44 @@ Index::Index(BufferManager* creator):
 Index::~Index(void)
 {
 	mCount = 0;
-	mType = Render::IndexType::INDEX_TYPE_UNKNOWN;
+	mType = GHI::IndexType::INDEX_TYPE_UNKNOWN;
 }
 
-void Index::Create(Render::IndexType type, uint32_t count)
+void Index::Create(GHI::IndexType type, uint32_t count)
 {
-	Render::UsageType usage;
+	GHI::UsageType usage;
 	usage.source = TRUE;
 	usage.destination = TRUE;
-	usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
 	Create(type, count, usage);
 }
 
-void Index::Create(Render::IndexType type, uint32_t count, Render::UsageType usage)
+void Index::Create(GHI::IndexType type, uint32_t count, GHI::UsageType usage)
 {
 	mType = type;
 	mCount = count;
 	CreateRenderBuffer(usage);
 	mDrawIndexed.SetIndexCount(mCount);
-	std::cout << "Create Index Type : " << Render::GetIndexTypeName(mType) << std::endl;
+	std::cout << "Create Index Type : " << GHI::GetIndexTypeName(mType) << std::endl;
 }
 
 size_t Index::GetSizeInByte(void)
 {
-	const size_t size = Render::GetIndexTypeSize(mType) * mCount;
+	const size_t size = GHI::GetIndexTypeSize(mType) * mCount;
 	return size;
 }
 
-void Index::CreateRenderBuffer(Render::UsageType usage)
+void Index::CreateRenderBuffer(GHI::UsageType usage)
 {
-	size_t size = Render::GetIndexTypeSize(mType) * mCount;
+	size_t size = GHI::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
 	usage.indexBuffer = TRUE;
 
 	System* system = mCreator->GetSystem();
-	Render::Device* device = system->GetDevice();
-	Render::Factory* factory = device->GetFactory();
+	GHI::Device* device = system->GetDevice();
+	GHI::Factory* factory = device->GetFactory();
 	mResource = factory->CreateBuffer();
-	static_cast<Render::Buffer*>(mResource)->Create(size, usage);
+	static_cast<GHI::Buffer*>(mResource)->Create(size, usage);
 }
 
 } /* namespace Core */

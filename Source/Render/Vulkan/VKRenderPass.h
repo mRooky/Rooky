@@ -8,13 +8,13 @@
 #ifndef SOURCE_RENDER_VK_VKRENDERPASS_H_
 #define SOURCE_RENDER_VK_VKRENDERPASS_H_
 
-#include "RenderPass.h"
+#include "GHIRenderPass.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class RenderPass: public Render::Pass
+class RenderPass: public GHI::RenderPass
 {
 public:
 	explicit RenderPass(Device* device);
@@ -24,7 +24,7 @@ public:
 	virtual void Create(void) override;
 
 public:
-	virtual Render::FrameBuffer* CreateFrameBuffer(void) override;
+	virtual GHI::FrameBuffer* CreateFrameBuffer(void) override;
 
 public:
 	inline Vulkan::RenderPass* GetVulkanRenderPass(void) const { return mRenderPass; }

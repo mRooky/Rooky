@@ -5,14 +5,13 @@
  *      Author: rookyma
  */
 
+#include "GHIInline.h"
+#include "GHILayout.h"
 #include "CoreStream.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreMesh.h"
 #include "CoreData.h"
-
-#include "RenderInline.h"
-#include "RenderLayout.h"
 
 #include <cassert>
 #include <climits>
@@ -47,10 +46,10 @@ void Stream::UploadIndex(void)
 		assert(index->IsValid());
 		assert(index_data->IsValid());
 		const size_t index_count = mParent->GetIndexCount();
-		Render::IndexType index_type = mIndexBuffer.GetType();
-		assert(index_type != Render::IndexType::INDEX_TYPE_UNKNOWN);
+		GHI::IndexType index_type = mIndexBuffer.GetType();
+		assert(index_type != GHI::IndexType::INDEX_TYPE_UNKNOWN);
 		const size_t buffer_offset = mIndexBuffer.GetOffset();
-		const size_t buffer_size = index_count * Render::GetIndexTypeSize(index_type);
+		const size_t buffer_size = index_count * GHI::GetIndexTypeSize(index_type);
 		const void* index_buffer = index_data->GetMemory();
 		index->Write(index_buffer, buffer_offset, buffer_size);
 	}
@@ -62,7 +61,7 @@ void Stream::UploadVertex(void)
 	if (nullptr != vertex)
 	{
 		assert(vertex->IsValid());
-		Render::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
+		GHI::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
 		assert(vertex_layout != nullptr);
 		Data vertex_data = {};
 		const size_t vertex_stride = vertex_layout->GetStride();
@@ -78,7 +77,7 @@ void Stream::UploadVertex(void)
 const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 {
 	const size_t stream_count = mStreamData.GetValidCount();
-	Render::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
+	GHI::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
 	const size_t element_count = vertex_layout->GetElementCount();
 	assert(element_count == stream_count);
 	if (element_count == stream_count)

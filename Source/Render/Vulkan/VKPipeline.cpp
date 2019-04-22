@@ -19,7 +19,7 @@ namespace VK
 {
 
 Pipeline::Pipeline(Device* device):
-		Render::Pipeline(device)
+		GHI::Pipeline(device)
 {
 }
 
@@ -28,7 +28,7 @@ Pipeline::~Pipeline(void)
 	Vulkan::Release(mPipeline);
 }
 
-void Pipeline::Create(Render::PipelineState* state)
+void Pipeline::Create(GHI::PipelineState* state)
 {
 	mPipelineState = state;
 	CreateVulkanPipeline();

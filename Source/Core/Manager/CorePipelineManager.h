@@ -8,9 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_COREPIPELINEMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREPIPELINEMANAGER_H_
 
+#include "GHIClasses.h"
 #include "CoreInterface.h"
-#include "RenderClasses.h"
-
 #include <vector>
 
 namespace Core
@@ -23,20 +22,20 @@ public:
 	virtual ~PipelineManager(void) override;
 
 public:
-	Render::Shader* GetShader(const char* file);
-	Render::Pipeline* GetPipeline(Render::PipelineState* state);
+	GHI::Shader* GetShader(const char* file);
+	GHI::Pipeline* GetPipeline(GHI::PipelineState* state);
 
 public:
-	Render::Shader* CreateShader(void);
-	Render::Pipeline* CreatePipeline(void);
-	Render::PipelineState* CreatePipelineState(void);
-	Render::PipelineLayout* CreatePipelineLayout(void);
+	GHI::Shader* CreateShader(void);
+	GHI::Pipeline* CreatePipeline(void);
+	GHI::PipelineState* CreatePipelineState(void);
+	GHI::PipelineLayout* CreatePipelineLayout(void);
 
 protected:
-	std::vector<Render::Shader*> mShaders;
-	std::vector<Render::Pipeline*> mPipelines;
-	std::vector<Render::PipelineState*> mPipelineStates;
-	std::vector<Render::PipelineLayout*> mPipelineLayouts;
+	std::vector<GHI::Shader*> mShaders;
+	std::vector<GHI::Pipeline*> mPipelines;
+	std::vector<GHI::PipelineState*> mPipelineStates;
+	std::vector<GHI::PipelineLayout*> mPipelineLayouts;
 };
 
 } /* namespace Core */

@@ -5,16 +5,15 @@
  *      Author: rookyma
  */
 
+#include "GHIDefine.h"
+#include "GHIDevice.h"
+#include "GHIInline.h"
 #include "CoreSystem.h"
 
 #include "CoreMeshManager.h"
 #include "CoreTextureManager.h"
 #include "CoreBindingManager.h"
 #include "CorePipelineManager.h"
-
-#include "RenderInline.h"
-#include "RenderDevice.h"
-#include "RenderDefine.h"
 
 #include <cassert>
 
@@ -35,12 +34,12 @@ System::~System(void)
 	mBindingManager = nullptr;
 	delete mPipelineManager;
 	mPipelineManager = nullptr;
-	Render::DestroyDevice(mDevice);
+	GHI::DestroyDevice(mDevice);
 }
 
 void System::Create(void)
 {
-	mDevice = Render::CreateDevice();
+	mDevice = GHI::CreateDevice();
 	assert(mDevice != nullptr);
 	mDevice->Create();
 	mMeshManager = new MeshManager(this);

@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORESUBMESH_H_
 #define SOURCE_CORE_CORESUBMESH_H_
 
+#include "GHIClasses.h"
 #include "CoreRenderable.h"
-#include "RenderClasses.h"
 #include <cstdint>
 
 namespace Core

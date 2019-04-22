@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_CORETARGET_H_
 #define SOURCE_CORE_CORETARGET_H_
 
-#include <RenderLayout.h>
+#include "GHIClasses.h"
+#include "GHILayout.h"
+#include "GHIUsageType.h"
 #include "CoreResource.h"
-#include "RenderClasses.h"
-#include "RenderUsageType.h"
 
 namespace Core
 {
@@ -23,7 +23,7 @@ public:
 	virtual ~Target(void);
 
 public:
-	void Create(const Render::ImageLayout& layout, const Render::UsageType& usage);
+	void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage);
 
 public:
 	inline TextureManager* GetManager(void) const { return mManager; }

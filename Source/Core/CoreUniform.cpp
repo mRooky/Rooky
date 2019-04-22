@@ -5,14 +5,13 @@
  *      Author: rookyma
  */
 
+#include "GHIBuffer.h"
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHIUsageType.h"
 #include "CoreUniform.h"
 #include "CoreSystem.h"
 #include "CoreBufferManager.h"
-
-#include "RenderUsageType.h"
-#include "RenderDevice.h"
-#include "RenderBuffer.h"
-#include "RenderFactory.h"
 
 #include <cassert>
 
@@ -28,22 +27,22 @@ Uniform::~Uniform(void)
 {
 }
 
-void Uniform::Create(size_t size, Render::UsageType usage)
+void Uniform::Create(size_t size, GHI::UsageType usage)
 {
 	assert(size > 0);
 	mSize = size;
 	CreateRenderBuffer(usage);
 }
 
-void Uniform::CreateRenderBuffer(Render::UsageType usage)
+void Uniform::CreateRenderBuffer(GHI::UsageType usage)
 {
 	usage.uniformBuffer = TRUE;
-	usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
 	System* system = mCreator->GetSystem();
-	Render::Device* device = system->GetDevice();
-	Render::Factory* factory = device->GetFactory();
+	GHI::Device* device = system->GetDevice();
+	GHI::Factory* factory = device->GetFactory();
 	mResource = factory->CreateBuffer();
-	static_cast<Render::Buffer*>(mResource)->Create(mSize, usage);
+	static_cast<GHI::Buffer*>(mResource)->Create(mSize, usage);
 }
 
 } /* namespace Core */

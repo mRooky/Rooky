@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORETRANSFORM_H_
 #define SOURCE_CORE_CORETRANSFORM_H_
 
-#include "RenderVector.h"
+#include "MathVector.h"
 
 namespace Core
 {
@@ -20,19 +20,19 @@ public:
 	~Transform(void);
 
 public:
-	inline void SetScale(const Render::Vector3f& scale) { mScale = scale; }
-	inline void SetPosition(const Render::Vector3f& position) { mPosition = position; }
-	inline void SetOrientation(const Render::Vector4f& orientation) { mOrientation = orientation; }
+	inline void SetScale(const Math::Vector3f& scale) { mScale = scale; }
+	inline void SetPosition(const Math::Vector3f& position) { mPosition = position; }
+	inline void SetOrientation(const Math::Vector4f& orientation) { mOrientation = orientation; }
 
 public:
-	inline const Render::Vector3f& GetScale(void) const { return mScale; }
-	inline const Render::Vector3f& GetPosition(void) const { return mPosition; }
-	inline const Render::Vector4f& GetOrientation(void) const { return mOrientation; }
+	inline const Math::Vector3f& GetScale(void) const { return mScale; }
+	inline const Math::Vector3f& GetPosition(void) const { return mPosition; }
+	inline const Math::Vector4f& GetOrientation(void) const { return mOrientation; }
 
 public:
-	Render::Vector3f mScale = {};
-	Render::Vector3f mPosition = {};
-	Render::Vector4f mOrientation = {};
+	Math::Vector3f mScale = {};
+	Math::Vector3f mPosition = {};
+	Math::Vector4f mOrientation = {};
 };
 
 } /* namespace Core */

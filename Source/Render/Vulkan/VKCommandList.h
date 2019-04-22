@@ -8,13 +8,13 @@
 #ifndef SOURCE_RENDER_VK_VKCOMMANDLIST_H_
 #define SOURCE_RENDER_VK_VKCOMMANDLIST_H_
 
-#include "RenderCommandList.h"
+#include "GHICommandList.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class CommandPool;
-class CommandList: public Render::CommandList
+class CommandList: public GHI::CommandList
 {
 public:
 	explicit CommandList(CommandPool* pool);
@@ -26,18 +26,18 @@ public:
 public:
 	virtual void Begin(void) override;
 	// Draw Commands
-	virtual void BeginPass(Render::Pass* pass, Render::FrameBuffer* frame, const Render::Rect2Di& area) override;
+	virtual void BeginPass(GHI::RenderPass* pass, GHI::FrameBuffer* frame, const Math::Rect2Di& area) override;
 	// Fix Setup
-	virtual void SetViewport(uint32_t first, uint32_t count, const Render::Viewport* viewports) override;
-	virtual void SetScissor(uint32_t first, uint32_t count, const Render::Rect2Di* rects) override;
+	virtual void SetViewport(uint32_t first, uint32_t count, const Math::Viewport* viewports) override;
+	virtual void SetScissor(uint32_t first, uint32_t count, const Math::Rect2Di* rects) override;
 	// End Fix Setup
 	// Resource Setting
-	virtual void SetPipeline(Render::Pipeline* pipeline) override;
-	virtual void SetBindingSet(uint32_t slot, Render::BindingSet* set) override;
-	virtual void SetVertex(Render::Resource* buffer, uint32_t binding, size_t offset) override;
-	virtual void SetIndex(Render::Resource* buffer, size_t offset, Render::IndexType type) override;
+	virtual void SetPipeline(GHI::Pipeline* pipeline) override;
+	virtual void SetBindingSet(uint32_t slot, GHI::BindingSet* set) override;
+	virtual void SetVertex(GHI::Resource* buffer, uint32_t binding, size_t offset) override;
+	virtual void SetIndex(GHI::Resource* buffer, size_t offset, GHI::IndexType type) override;
 	// End Resource Setting
-	virtual void Draw(Render::Draw* draw) override;
+	virtual void Draw(GHI::Draw* draw) override;
 	virtual void EndPass(void) override;
 	// End Draw Commands
 	virtual void End(void) override;
@@ -47,11 +47,11 @@ public:
 
 private:
 	void BindingResource(void);
-	void DrawIndexed(Render::Draw* draw);
+	void DrawIndexed(GHI::Draw* draw);
 
 protected:
-	Render::Pipeline* mPipeline = nullptr;
-	Render::BindingLayout* mBindingLayout = nullptr;
+	GHI::Pipeline* mPipeline = nullptr;
+	GHI::BindingLayout* mBindingLayout = nullptr;
 
 protected:
 	Vulkan::CommandBuffer* mCommandBuffer = nullptr;

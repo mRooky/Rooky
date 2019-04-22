@@ -21,31 +21,31 @@ MaterialData::~MaterialData(void)
 {
 }
 
-void MaterialData::SetShininess(Render::Real shininess)
+void MaterialData::SetShininess(Math::Real shininess)
 {
 	mDirty = true;
 	mShininess = shininess;
 }
 
-void MaterialData::SetAmbient(const Render::ColorValue& color)
+void MaterialData::SetAmbient(const Math::ColorValue& color)
 {
 	mDirty = true;
 	mAmbient = color;
 }
 
-void MaterialData::SetDiffuse(const Render::ColorValue& color)
+void MaterialData::SetDiffuse(const Math::ColorValue& color)
 {
 	mDirty = true;
 	mDiffuse = color;
 }
 
-void MaterialData::SetSpecular(const Render::ColorValue& color)
+void MaterialData::SetSpecular(const Math::ColorValue& color)
 {
 	mDirty = true;
 	mSpecular = color;
 }
 
-void MaterialData::SetEmissive(const Render::ColorValue& color)
+void MaterialData::SetEmissive(const Math::ColorValue& color)
 {
 	mDirty = true;
 	mEmissive = color;

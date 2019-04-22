@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 #define SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 
-#include "RenderBinding.hpp"
-#include "RenderClasses.h"
+#include "GHIBinding.hpp"
+#include "GHIClasses.h"
 #include <vector>
 
 namespace Core
@@ -23,11 +23,11 @@ public:
 	~ShaderResource(void);
 
 public:
-	std::vector<Render::Binding> GetBindings(void) const;
+	std::vector<GHI::Binding> GetBindings(void) const;
 
 public:
-	inline Render::Shader* GetShader(void) const { return mShader; }
-	inline void SetShader(Render::Shader* shader)  { mShader = shader; }
+	inline GHI::Shader* GetShader(void) const { return mShader; }
+	inline void SetShader(GHI::Shader* shader)  { mShader = shader; }
 
 public:
 	inline void AppendTexture(Texture* texture) { mTextures.push_back(texture); }
@@ -35,7 +35,7 @@ public:
 	inline Texture* GetTexture(size_t index) const { return mTextures.at(index); }
 
 protected:
-	Render::Shader* mShader = nullptr;
+	GHI::Shader* mShader = nullptr;
 
 protected:
 	std::vector<Texture*> mTextures;

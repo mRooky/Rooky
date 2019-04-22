@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
-#include <CoreInterface.h>
-#include "RenderClasses.h"
+#include "CoreInterface.h"
+#include "GHIClasses.h"
 #include <vector>
 
 namespace Core
@@ -21,12 +21,12 @@ public:
 	virtual ~BindingManager(void) override;
 
 public:
-	Render::BindingSet* CreateSet(void);
-	Render::BindingLayout* CreateLayout(void);
+	GHI::BindingSet* CreateSet(void);
+	GHI::BindingLayout* CreateLayout(void);
 
 protected:
-	std::vector<Render::BindingSet*> mBindingSets;
-	std::vector<Render::BindingLayout*> mBindingLayouts;
+	std::vector<GHI::BindingSet*> mBindingSets;
+	std::vector<GHI::BindingLayout*> mBindingLayouts;
 };
 
 } /* namespace Core */

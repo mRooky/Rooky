@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKDEVICE_H_
 #define SOURCE_RENDER_VK_VKDEVICE_H_
 
-#include "RenderDevice.h"
+#include "GHIDevice.h"
 #include "VKRender.h"
 #include <string>
 #include <vector>
@@ -16,7 +16,7 @@
 namespace VK
 {
 
-class Device : public Render::Device
+class Device : public GHI::Device
 {
 public:
 	Device(void);
@@ -26,7 +26,7 @@ public:
 	virtual void Create(void) override;
 
 public:
-	virtual Render::Format GetBestDepthStencilFormat(void) override;
+	virtual GHI::Format GetBestDepthStencilFormat(void) override;
 
 public:
 	inline Vulkan::Vendor* GetVulkanVendor(void) const { return m_vendor; }

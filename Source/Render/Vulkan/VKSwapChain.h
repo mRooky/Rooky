@@ -8,13 +8,13 @@
 #ifndef SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 #define SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 
-#include "RenderSwapChain.h"
+#include "GHISwapChain.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class SwapChain: public Render::SwapChain
+class SwapChain: public GHI::SwapChain
 {
 public:
 	explicit SwapChain(Device* device);

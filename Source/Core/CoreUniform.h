@@ -8,10 +8,9 @@
 #ifndef SOURCE_CORE_COREUNIFORM_H_
 #define SOURCE_CORE_COREUNIFORM_H_
 
+#include "GHIClasses.h"
+#include "GHIUsageType.h"
 #include "CoreBuffer.h"
-#include "RenderClasses.h"
-#include "RenderUsageType.h"
-
 #include <cstddef>
 
 namespace Core
@@ -27,10 +26,10 @@ public:
 	virtual ~Uniform(void) override;
 
 public:
-	void Create(size_t size, Render::UsageType usage);
+	void Create(size_t size, GHI::UsageType usage);
 
 protected:
-	void CreateRenderBuffer(Render::UsageType usage);
+	void CreateRenderBuffer(GHI::UsageType usage);
 
 protected:
 	size_t mSize = 0;

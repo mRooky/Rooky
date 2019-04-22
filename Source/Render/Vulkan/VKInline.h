@@ -19,17 +19,17 @@ static inline void NotImplemented(void)
 	assert(false);
 }
 
-static inline Render::UsageType CreateStageBufferUsageType(void)
+static inline GHI::UsageType CreateStageBufferUsageType(void)
 {
-	Render::UsageType stage_usage_type = {};
+	GHI::UsageType stage_usage_type = {};
 	stage_usage_type.cpuAccess = TRUE;
 	stage_usage_type.source = TRUE;
 	stage_usage_type.destination = TRUE;
-	stage_usage_type.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	stage_usage_type.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
 	return stage_usage_type;
 }
 
-static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::UsageType usage)
+static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::UsageType usage)
 {
 	if (usage.cpuAccess == 1)
 	{
@@ -41,9 +41,9 @@ static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(Render::UsageType usa
 	}
 }
 
-static inline VkBufferUsageFlags ConvertBufferUsageFlags(const Render::UsageType& usage)
+static inline VkBufferUsageFlags ConvertBufferUsageFlags(const GHI::UsageType& usage)
 {
-	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_BUFFER);
+	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_BUFFER);
 	VkBufferUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
@@ -55,9 +55,9 @@ static inline VkBufferUsageFlags ConvertBufferUsageFlags(const Render::UsageType
 	return flags;
 }
 
-static inline VkImageUsageFlags ConvertImageUsageFlags(const Render::UsageType&  usage)
+static inline VkImageUsageFlags ConvertImageUsageFlags(const GHI::UsageType&  usage)
 {
-	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_IMAGE);
+	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_IMAGE);
 	VkImageUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
@@ -70,10 +70,10 @@ static inline VkImageUsageFlags ConvertImageUsageFlags(const Render::UsageType& 
 	return flags;
 }
 
-static inline Render::UsageType ConvertBufferUsageFlags(VkBufferUsageFlags flags)
+static inline GHI::UsageType ConvertBufferUsageFlags(VkBufferUsageFlags flags)
 {
-	Render::UsageType resource_usage = {};
-	resource_usage.type = Render::ResourceType::RESOURCE_TYPE_BUFFER;
+	GHI::UsageType resource_usage = {};
+	resource_usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
 	resource_usage.source = (flags & VK_BUFFER_USAGE_TRANSFER_SRC_BIT) ? 1 : 0;
 	resource_usage.destination = (flags & VK_BUFFER_USAGE_TRANSFER_DST_BIT) ? 1 : 0;
 	resource_usage.indexBuffer = (flags & VK_BUFFER_USAGE_INDEX_BUFFER_BIT) ? 1 : 0;

@@ -5,10 +5,9 @@
  *      Author: rookyma
  */
 
+#include "GHIImage.h"
 #include "CoreTexture.h"
 #include "CoreTextureManager.h"
-
-#include "RenderImage.h"
 
 #include <cassert>
 #include <iostream>
@@ -30,7 +29,7 @@ Texture::~Texture(void)
 void Texture::Update(uint32_t index, uint32_t mipmap, const void* src)
 {
 	assert(mResource != nullptr);
-	static_cast<Render::Image*>(mResource)->Upload(index, mipmap, src);
+	static_cast<GHI::Image*>(mResource)->Upload(index, mipmap, src);
 }
 
 } /* namespace Core */

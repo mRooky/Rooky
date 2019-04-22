@@ -14,7 +14,7 @@
 #include "VKShader.h"
 #include "VKVertexLayout.h"
 
-#include "RenderPipelineState.h"
+#include "GHIPipelineState.h"
 
 #include "VulkanShaderModule.h"
 
@@ -31,7 +31,7 @@ PipelineState::~PipelineState(void)
 {
 }
 
-void PipelineState::Create(const Render::PipelineState* state)
+void PipelineState::Create(const GHI::PipelineState* state)
 {
 	if (false == mValid)
 	{

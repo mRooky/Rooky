@@ -8,20 +8,20 @@
 #ifndef SOURCE_RENDER_VK_VKIMAGE_H_
 #define SOURCE_RENDER_VK_VKIMAGE_H_
 
-#include "RenderImage.h"
+#include "GHIImage.h"
 #include "VKRender.h"
 
 namespace VK
 {
 class Device;
-class Image: public Render::Image
+class Image: public GHI::Image
 {
 public:
 	explicit Image(Device* device);
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const Render::ImageLayout& layout, const Render::UsageType& usage) override;
+	virtual void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage) override;
 
 public:
 	virtual void Download(void* dst) override;
@@ -32,7 +32,7 @@ public:
 	virtual void Unmap(size_t offset, size_t size) override;
 
 public:
-	virtual void CopyFrom(const Render::Resource* other) override;
+	virtual void CopyFrom(const GHI::Resource* other) override;
 
 public:
 	inline Vulkan::Image* GetVulkanImage(void) const { return mImage; }
@@ -43,12 +43,12 @@ public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
 
 public:
-	static VkImageViewType ConverType(const Render::ImageType& type);
-	static Render::ImageType ConverType(const VkImageViewType& type);
+	static VkImageViewType ConverType(const GHI::ImageType& type);
+	static GHI::ImageType ConverType(const VkImageViewType& type);
 
 public:
-	static VkImageUsageFlags ConvertUsageFlag(Render::UsageType usage);
-	static VkDescriptorType GetDescriptorType(const Render::UsageType& usage);
+	static VkImageUsageFlags ConvertUsageFlag(GHI::UsageType usage);
+	static VkDescriptorType GetDescriptorType(const GHI::UsageType& usage);
 
 protected:
 	void CreateImage(void);

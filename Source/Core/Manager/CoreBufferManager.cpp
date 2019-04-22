@@ -5,16 +5,16 @@
  *      Author: rookyma
  */
 
+#include "GHIDevice.h"
+#include "GHIElement.h"
+#include "GHIFactory.h"
+#include "GHILayout.h"
 #include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
 #include "CoreSystem.h"
 
-#include "RenderElement.h"
-#include "RenderLayout.h"
-#include "RenderFactory.h"
-#include "RenderDevice.h"
 #include "UtilityRelease.h"
 
 #include <cassert>
@@ -56,19 +56,19 @@ Uniform* BufferManager::CreateUniform(void)
 	return uniform;
 }
 
-Render::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<Render::Element>& elements)
+GHI::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<GHI::Element>& elements)
 {
-	Render::VertexLayout* layout = GetVertexLayout(elements);
+	GHI::VertexLayout* layout = GetVertexLayout(elements);
 	if (layout == nullptr)
 	{
-		layout = new Render::VertexLayout;
+		layout = new GHI::VertexLayout;
 		layout->SetElement(elements);
 		mVertexLayouts.push_back(layout);
 	}
 	return layout;
 }
 
-Render::VertexLayout* BufferManager::GetVertexLayout(const std::vector<Render::Element>& elements)
+GHI::VertexLayout* BufferManager::GetVertexLayout(const std::vector<GHI::Element>& elements)
 {
 	for (auto layout : mVertexLayouts)
 	{

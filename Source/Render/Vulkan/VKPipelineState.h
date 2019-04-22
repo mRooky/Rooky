@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 #define SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 
-#include "RenderClasses.h"
+#include "GHIClasses.h"
 #include "Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
@@ -21,7 +21,7 @@ public:
 	~PipelineState(void);
 
 public:
-	void Create(const Render::PipelineState* state);
+	void Create(const GHI::PipelineState* state);
 
 public:
 	inline bool IsValid(void) const { return mValid; }
@@ -39,7 +39,7 @@ protected:
 protected:
 	bool mValid = false;
 	Vulkan::GraphicsPipelineInfo mGraphicsInfo;
-	const Render::PipelineState* mState = nullptr;
+	const GHI::PipelineState* mState = nullptr;
 };
 
 }

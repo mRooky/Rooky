@@ -6,7 +6,7 @@
  */
 
 #include "CoreResource.h"
-#include "RenderResource.h"
+#include "GHIResource.h"
 
 namespace Core
 {

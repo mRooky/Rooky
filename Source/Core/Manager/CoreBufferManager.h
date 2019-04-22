@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_COREBUFFERMANAGER_H_
 #define SOURCE_CORE_COREBUFFERMANAGER_H_
 
+#include "GHIClasses.h"
+#include "GHIElement.h"
+#include "GHIFormat.h"
 #include "CoreInterface.h"
-#include "RenderClasses.h"
-#include "RenderFormat.h"
-#include "RenderElement.h"
 #include <vector>
 
 namespace Core
@@ -32,13 +32,13 @@ public:
 	Uniform* CreateUniform(void);
 
 public:
-	Render::VertexLayout* CreateVertexLayout(const std::vector<Render::Element>& elements);
+	GHI::VertexLayout* CreateVertexLayout(const std::vector<GHI::Element>& elements);
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }
 
 protected:
-	Render::VertexLayout* GetVertexLayout(const std::vector<Render::Element>& elements);
+	GHI::VertexLayout* GetVertexLayout(const std::vector<GHI::Element>& elements);
 
 protected:
 	std::vector<Index*> mIndexes;
@@ -46,7 +46,7 @@ protected:
 	std::vector<Uniform*> mUniforms;
 
 protected:
-	std::vector<Render::VertexLayout*> mVertexLayouts;
+	std::vector<GHI::VertexLayout*> mVertexLayouts;
 
 };
 

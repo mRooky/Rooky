@@ -19,7 +19,7 @@ namespace VK
 {
 
 CommandPool::CommandPool(Device* device):
-		Render::CommandPool(device)
+		GHI::CommandPool(device)
 {
 }
 
@@ -38,7 +38,7 @@ void CommandPool::Create(void)
 	mCommandPool->Create(family);
 }
 
-Render::CommandList* CommandPool::Allocate(bool level)
+GHI::CommandList* CommandPool::Allocate(bool level)
 {
 	assert(mCommandPool != nullptr);
 	CommandList* command_list = new CommandList(this);

@@ -8,20 +8,20 @@
 #ifndef DIRECTUI_DIRECTMATH_H_
 #define DIRECTUI_DIRECTMATH_H_
 
-#include "RenderVector.h"
-#include "RenderColor.hpp"
-#include "RenderRect.hpp"
-#include "RenderExtent.hpp"
+#include "MathColor.hpp"
+#include "MathExtent.hpp"
+#include "MathRect.hpp"
+#include "MathVector.h"
 
 namespace Direct
 {
 
-typedef Render::Color ColorI;
-typedef Render::Rect2Di RectI;
-typedef Render::Vector2i Vector2I;
-typedef Render::Vector2f Vector2F;
-typedef Render::Vector4f Vector4F;
-typedef Render::Extent2Di Extent;
+typedef Math::Color ColorI;
+typedef Math::Rect2Di RectI;
+typedef Math::Vector2i Vector2I;
+typedef Math::Vector2f Vector2F;
+typedef Math::Vector4f Vector4F;
+typedef Math::Extent2Di Extent;
 
 }
 

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORESCENE_H_
 #define SOURCE_CORE_CORESCENE_H_
 
-#include "RenderClasses.h"
+#include "GHIClasses.h"
 #include "PlatformWindow.h"
 #include <vector>
 
@@ -35,7 +35,7 @@ public:
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }
-	inline Render::SwapChain* GetSwapChain(void) const { return mSwapChain; }
+	inline GHI::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 
 public:
 	inline size_t GetViewportCount(void) const { return mViewports.size(); }
@@ -47,7 +47,7 @@ public:
 
 protected:
 	System* mSystem = nullptr;
-	Render::SwapChain* mSwapChain = nullptr;
+	GHI::SwapChain* mSwapChain = nullptr;
 
 protected:
 	std::vector<Viewport*> mViewports;

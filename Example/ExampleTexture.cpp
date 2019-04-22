@@ -7,6 +7,17 @@
 
 #include "ExampleTexture.h"
 
+#include "GHIBinding.hpp"
+#include "GHIBindingLayout.h"
+#include "GHIBindingSet.h"
+#include "GHIBuffer.h"
+#include "GHICommandList.h"
+#include "GHIImage.h"
+#include "GHIRenderPass.h"
+#include "GHIPipeline.h"
+#include "GHIPipelineLayout.h"
+#include "GHIPipelineState.h"
+#include "GHISwapChain.h"
 #include "CorePass.h"
 #include "CoreTexture.h"
 #include "CoreSystem.h"
@@ -16,18 +27,6 @@
 #include "CoreTextureManager.h"
 #include "CoreBindingManager.h"
 #include "CorePipelineManager.h"
-
-#include "RenderImage.h"
-#include "RenderBuffer.h"
-#include "RenderBinding.hpp"
-#include "RenderBindingSet.h"
-#include "RenderBindingLayout.h"
-#include "RenderPipeline.h"
-#include "RenderPipelineState.h"
-#include "RenderPipelineLayout.h"
-#include "RenderSwapChain.h"
-#include "RenderCommandList.h"
-#include "RenderPass.h"
 
 #include "UtilityString.h"
 
@@ -68,16 +67,16 @@ void Texture::RecordCommands(void)
 {
 	auto pass = mPath->GetRenderPass(0);
 
-	Render::SwapChain* swap_chain = mScene->GetSwapChain();
+	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 
-	Render::Extent2Di extent = swap_chain->GetExtent();
-	Render::Offset2Di offset = {};
-	Render::Rect2Di area = {};
+	Math::Extent2Di extent = swap_chain->GetExtent();
+	Math::Offset2Di offset = {};
+	Math::Rect2Di area = {};
 	area.offset = offset;
 	area.extent = extent ;
-	Render::Viewport viewport = Render::Viewport(extent);
-	Render::Rect2Di scissor = area;
-	Render::Draw* draw = mIndex->GetDraw();
+	Math::Viewport viewport = Math::Viewport(extent);
+	Math::Rect2Di scissor = area;
+	GHI::Draw* draw = mIndex->GetDraw();
 	const size_t count = mThread->GetCommandListCount();
 	assert(count > 1);
 	for (uint32_t i = 0; i < count; ++i)
@@ -107,8 +106,8 @@ void Texture::CreateTexture(const char* file)
 	if (bitmap != nullptr)
 	{
 		//assert(channels == 4);
-		Render::Extent3Di extent = { width, height, 1 };
-		Render::Format format = Render::Format::FORMAT_R8G8B8A8_UNORM;
+		Math::Extent3Di extent = { width, height, 1 };
+		GHI::Format format = GHI::Format::FORMAT_R8G8B8A8_UNORM;
 
 		auto manager = mSystem->GetTextureManager();
 		mTexture = manager->CreateTexture2D(file, extent, format);
@@ -161,9 +160,9 @@ void Texture::CreatePipeline(void)
 		auto binding_set = binding_manager->CreateSet();
 		{
 			assert(mUniform != nullptr);
-			Render::Resource* resource = mUniform->GetRenderResource();
-			Render::Binding binding = {};
-			auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
+			GHI::Resource* resource = mUniform->GetRenderResource();
+			GHI::Binding binding = {};
+			auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
 			binding.SetResource(resource, shader_stage);
 			binding_set->AppendBinding(binding);
 		}
@@ -172,19 +171,19 @@ void Texture::CreatePipeline(void)
 		assert(count > 0);
 		for (size_t index = 0; index < count; ++index)
 		{
-			Render::ShaderStage shader_stage = Render::ShaderStage::SHADER_STAGE_FRAGMENT;
+			GHI::ShaderStage shader_stage = GHI::ShaderStage::SHADER_STAGE_FRAGMENT;
 			Core::Texture* texture = mPass->GetTexture(index);
 			{
-				Render::Resource* resource = texture->GetRenderResource();
-				Render::Binding binding = {};
+				GHI::Resource* resource = texture->GetRenderResource();
+				GHI::Binding binding = {};
 				binding.SetResource(resource, shader_stage);
 				binding_set->AppendBinding(binding);
 			}
 
-			Render::Sampler* sampler = texture->GetSampler();
+			GHI::Sampler* sampler = texture->GetSampler();
 			if (sampler != nullptr)
 			{
-				Render::Binding binding = {};
+				GHI::Binding binding = {};
 				binding.SetResource(sampler, shader_stage);
 				binding_set->AppendBinding(binding);
 			}

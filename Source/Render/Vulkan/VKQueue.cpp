@@ -21,7 +21,7 @@ namespace VK
 {
 
 Queue::Queue(Device* device):
-		Render::Queue(device)
+		GHI::Queue(device)
 {
 }
 
@@ -39,7 +39,7 @@ void Queue::Create(uint32_t mIndex)
 	mQueue = vulkan_device->GetQueue(family, mIndex);
 }
 
-void Queue::Submit(Render::CommandList* command)
+void Queue::Submit(GHI::CommandList* command)
 {
 	assert(mQueue != nullptr);
 	auto command_list = static_cast<CommandList*>(command);

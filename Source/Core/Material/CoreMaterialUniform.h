@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 #define SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 
+#include "GHIBinding.hpp"
 #include "CoreMaterialData.h"
-#include "RenderBinding.hpp"
 #include <array>
 
 namespace Core
@@ -25,7 +25,7 @@ public:
 	void UpdateUniformData(void);
 
 public:
-	Render::Binding GetBinding(void) const;
+	GHI::Binding GetBinding(void) const;
 
 public:
 	inline void SetUniform(Uniform* uniform, size_t offset)

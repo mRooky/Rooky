@@ -5,13 +5,12 @@
  *      Author: rookyma
  */
 
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHISwapChain.h"
 #include "CoreScene.h"
 #include "CoreSystem.h"
 #include "CoreViewport.h"
-
-#include "RenderFactory.h"
-#include "RenderDevice.h"
-#include "RenderSwapChain.h"
 
 #include "UtilityRelease.h"
 #include "UtilitySearch.h"

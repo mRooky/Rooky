@@ -5,13 +5,12 @@
  *      Author: rookyma
  */
 
-#include <RenderDevice.h>
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHIRenderPass.h"
 #include "CorePass.h"
 #include "CorePath.h"
 #include "CoreSystem.h"
-
-#include "RenderPass.h"
-#include "RenderFactory.h"
 
 #include <cassert>
 
@@ -31,11 +30,11 @@ Pass::~Pass(void)
 	mRenderPass = nullptr;
 }
 
-void Pass::CreateRenderPass(const std::vector<Render::Format>& formats)
+void Pass::CreateRenderPass(const std::vector<GHI::Format>& formats)
 {
 	auto system = mParent->GetSystem();
 	auto device = system->GetDevice();
-	mRenderPass = device->GetFactory()->CreatePass();
+	mRenderPass = device->GetFactory()->CreateRenderPass();
 	for (auto format : formats)
 	{
 		mRenderPass->AppendFormat(format);

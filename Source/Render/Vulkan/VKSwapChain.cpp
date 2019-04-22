@@ -28,7 +28,7 @@ namespace VK
 {
 
 SwapChain::SwapChain(Device* device):
-		Render::SwapChain(device)
+		GHI::SwapChain(device)
 {
 }
 

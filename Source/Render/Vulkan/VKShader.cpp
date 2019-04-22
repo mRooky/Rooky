@@ -19,7 +19,7 @@ namespace VK
 {
 
 Shader::Shader(Device* device):
-		Render::Shader(device)
+		GHI::Shader(device)
 {
 }
 
@@ -35,8 +35,8 @@ void Shader::Create(const char* file)
 	if (code.size() > 0)
 	{
 		mName = Utility::GetFileName(file);
-		mType = Render::Shader::GetShaderType(file);
-		mStage = Render::Shader::GetShaderStage(file);
+		mType = GHI::Shader::GetShaderType(file);
+		mStage = GHI::Shader::GetShaderStage(file);
 		std::cout << "Create Shader File : " << file << std::endl;
 		CreateVulkanShader(code.size(), code.data());
 	}
@@ -55,21 +55,21 @@ void Shader::CreateVulkanShader(size_t size, const void* data)
 	mShader->Create(size, data);
 }
 
-VkShaderStageFlagBits Shader::ConvertStage(Render::ShaderStage stage)
+VkShaderStageFlagBits Shader::ConvertStage(GHI::ShaderStage stage)
 {
 	switch(stage)
 	{
-	case Render::ShaderStage::SHADER_STAGE_VERTEX:
+	case GHI::ShaderStage::SHADER_STAGE_VERTEX:
 		return VK_SHADER_STAGE_VERTEX_BIT;
-	case Render::ShaderStage::SHADER_STAGE_HULL:
+	case GHI::ShaderStage::SHADER_STAGE_HULL:
 		return VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
-	case Render::ShaderStage::SHADER_STAGE_DOMAIN:
+	case GHI::ShaderStage::SHADER_STAGE_DOMAIN:
 		return VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
-	case Render::ShaderStage::SHADER_STAGE_GEOMETRY:
+	case GHI::ShaderStage::SHADER_STAGE_GEOMETRY:
 		return VK_SHADER_STAGE_GEOMETRY_BIT;
-	case Render::ShaderStage::SHADER_STAGE_FRAGMENT:
+	case GHI::ShaderStage::SHADER_STAGE_FRAGMENT:
 		return VK_SHADER_STAGE_FRAGMENT_BIT;
-	case Render::ShaderStage::SHADER_STAGE_COMPUTE:
+	case GHI::ShaderStage::SHADER_STAGE_COMPUTE:
 		return VK_SHADER_STAGE_COMPUTE_BIT;
 	default:
 		assert(false);

@@ -7,6 +7,13 @@
 
 #include "ExampleBuffer.h"
 
+#include "GHIBuffer.h"
+#include "GHICommandList.h"
+#include "GHIEnum.h"
+#include "GHIFrameBuffer.h"
+#include "GHIImage.h"
+#include "GHIRenderPass.h"
+#include "GHISwapChain.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
@@ -15,14 +22,6 @@
 #include "CoreMeshManager.h"
 #include "CoreBufferManager.h"
 #include "CoreThread.h"
-
-#include "RenderCommandList.h"
-#include "RenderImage.h"
-#include "RenderSwapChain.h"
-#include "RenderPass.h"
-#include "RenderBuffer.h"
-#include "RenderEnum.h"
-#include "RenderFrameBuffer.h"
 
 #include <cassert>
 #include <array>
@@ -64,9 +63,9 @@ void Buffer::Initialize(void)
 void Buffer::CreateRenderPass(void)
 {
 	assert(mPath != nullptr);
-	Render::SwapChain* swap_chain = mScene->GetSwapChain();
+	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	auto format = swap_chain->GetFormat();
-	std::vector<Render::Format> formats = { format };
+	std::vector<GHI::Format> formats = { format };
 	mPass = mPath->CreatePass();
 	mPass->CreateRenderPass(formats);
 }
@@ -74,16 +73,16 @@ void Buffer::CreateRenderPass(void)
 void Buffer::CreateFrameBuffer(void)
 {
 	assert(mPath->GetPassCount() > 0);
-	Render::SwapChain* swap_chain = mScene->GetSwapChain();
-	Render::Color clear_color = Render::Color(10, 10, 10);
-	Render::Pass* pass = mPath->GetRenderPass(0)->GetRenderPass();
+	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
+	Math::Color clear_color = Math::Color(10, 10, 10);
+	GHI::RenderPass* pass = mPath->GetRenderPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{
-		Render::Image* image = swap_chain->GetRenderBuffer(index);
+		GHI::Image* image = swap_chain->GetRenderBuffer(index);
 		image->SetClearColor(clear_color);
-		Render::Attachment attachment = {};
+		GHI::Attachment attachment = {};
 		attachment.AppendImage(image);
-		Render::FrameBuffer* frame = pass->CreateFrameBuffer();
+		GHI::FrameBuffer* frame = pass->CreateFrameBuffer();
 		frame->Create(attachment);
 	}
 }
@@ -92,12 +91,12 @@ void Buffer::RecordCommands(void)
 {
 	auto pass = mPath->GetRenderPass(0);
 
-	Render::SwapChain* swap_chain = mScene->GetSwapChain();
-	const Render::Extent2Di& extent = swap_chain->GetExtent();
-	Render::Rect2Di area = {};
+	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
+	const Math::Extent2Di& extent = swap_chain->GetExtent();
+	Math::Rect2Di area = {};
 	area.extent = extent;
-	Render::Viewport viewport = Render::Viewport(extent);
-	Render::Rect2Di scissor = area;
+	Math::Viewport viewport = Math::Viewport(extent);
+	Math::Rect2Di scissor = area;
 
 	const size_t count = mThread->GetCommandListCount();
 	assert(count > 1);
@@ -119,7 +118,7 @@ void Buffer::RecordCommands(void)
 int32_t Buffer::ShowModal(void)
 {
 	assert(mWindow != nullptr);
-	Render::SwapChain* swap_chain = mScene->GetSwapChain();
+	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	bool done = false;
 	while (!done)
 	{
@@ -140,7 +139,7 @@ void Buffer::CreateIndexBuffer(void)
 	const size_t size = sizeof(uint16_t) * count;
 
 	mIndex = buffer_manager->CreateIndex();
-	Render::IndexType index_type = Render::IndexType::INDEX_TYPE_U16;
+	GHI::IndexType index_type = GHI::IndexType::INDEX_TYPE_U16;
 	mIndex->Create(index_type, count);
 	assert(mIndex->GetSizeInByte() == size);
 	mIndex->Write(indexes.data(), 0, size);
@@ -172,10 +171,10 @@ void Buffer::CreateVertexBuffer(void)
 			{ {  x, -y, z }, { 1.0f, 0.0f } }
 	};
 
-	std::vector<Render::Element> elements =
+	std::vector<GHI::Element> elements =
 	{
-		Render::Element(0, 0, Render::ElementType::ELEMENT_TYPE_FLOAT3),
-		Render::Element(0, 1, Render::ElementType::ELEMENT_TYPE_FLOAT2)
+			GHI::Element(0, 0, GHI::ElementType::ELEMENT_TYPE_FLOAT3),
+			GHI::Element(0, 1, GHI::ElementType::ELEMENT_TYPE_FLOAT2)
 	};
 
 	auto layout = buffer_manager->CreateVertexLayout(elements);
@@ -191,7 +190,7 @@ void Buffer::CreateUniformBuffer(void)
 	auto mesh_manager = mSystem->GetMeshManager();
 	auto buffer_manager = mesh_manager->GetBufferManager();
 
-	Render::UsageType usage;
+	GHI::UsageType usage;
 	usage.cpuAccess = 1;
 
 	mUniform = buffer_manager->CreateUniform();

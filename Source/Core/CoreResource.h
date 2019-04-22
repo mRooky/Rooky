@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORERESOURCE_H_
 #define SOURCE_CORE_CORERESOURCE_H_
 
+#include "GHIClasses.h"
 #include "CoreBase.h"
-#include "RenderClasses.h"
 
 namespace Core
 {
@@ -22,10 +22,10 @@ public:
 
 public:
 	inline bool IsValid(void) const { return mResource != nullptr; }
-	inline Render::Resource* GetRenderResource(void) const { return mResource; }
+	inline GHI::Resource* GetRenderResource(void) const { return mResource; }
 
 protected:
-	Render::Resource* mResource = nullptr;
+	GHI::Resource* mResource = nullptr;
 };
 
 } /* namespace Core */

@@ -23,12 +23,12 @@ MaterialUniform::~MaterialUniform(void)
 	mUniform = nullptr;
 }
 
-Render::Binding MaterialUniform::GetBinding(void) const
+GHI::Binding MaterialUniform::GetBinding(void) const
 {
 	assert(IsValid());
-	Render::Binding binding;
+	GHI::Binding binding;
 	auto render_resource = mUniform->GetRenderResource();
-	auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
+	auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
 	binding.SetResource(render_resource, shader_stage);
 	return binding;
 }

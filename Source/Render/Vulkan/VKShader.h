@@ -8,15 +8,15 @@
 #ifndef SOURCE_RENDER_VK_VKSHADER_H_
 #define SOURCE_RENDER_VK_VKSHADER_H_
 
-#include <VKPipelineState.h>
-#include "RenderShader.h"
+#include "GHIShader.h"
+#include "VKPipelineState.h"
 #include "VKRender.h"
 
 
 namespace VK
 {
 class Device;
-class Shader: public Render::Shader
+class Shader: public GHI::Shader
 {
 public:
 	explicit Shader(Device* device);
@@ -29,7 +29,7 @@ public:
 	inline Vulkan::ShaderModule* GetVulkanModule(void) const { return mShader; }
 
 public:
-	static VkShaderStageFlagBits ConvertStage(Render::ShaderStage stage);
+	static VkShaderStageFlagBits ConvertStage(GHI::ShaderStage stage);
 
 private:
 	void CreateVulkanShader(size_t size, const void* data);

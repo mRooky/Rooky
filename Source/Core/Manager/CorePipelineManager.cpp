@@ -5,17 +5,16 @@
  *      Author: rookyma
  */
 
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHIPipeline.h"
+#include "GHIPipelineLayout.h"
+#include "GHIPipelineState.h"
+#include "GHIShader.h"
 #include "UtilityRelease.h"
 #include "UtilityString.h"
 #include "CorePipelineManager.h"
 #include "CoreSystem.h"
-
-#include "RenderDevice.h"
-#include "RenderFactory.h"
-#include "RenderShader.h"
-#include "RenderPipeline.h"
-#include "RenderPipelineState.h"
-#include "RenderPipelineLayout.h"
 
 #include <string>
 #include <iostream>
@@ -52,7 +51,7 @@ PipelineManager::~PipelineManager(void)
 	std::cout << count << " PipelineLayout(s) Released !" << std::endl;
 }
 
-Render::Shader* PipelineManager::GetShader(const char* file)
+GHI::Shader* PipelineManager::GetShader(const char* file)
 {
 	std::string shader_file = file;
 	auto current_name = Utility::GetFileName(shader_file);
@@ -65,12 +64,12 @@ Render::Shader* PipelineManager::GetShader(const char* file)
 			return shader;
 		}
 	}
-	Render::Shader* shader = CreateShader();
+	GHI::Shader* shader = CreateShader();
 	shader->Create(file);
 	return shader;
 }
 
-Render::Pipeline* PipelineManager::GetPipeline(Render::PipelineState* state)
+GHI::Pipeline* PipelineManager::GetPipeline(GHI::PipelineState* state)
 {
 	for (auto pipeline : mPipelines)
 	{
@@ -80,41 +79,41 @@ Render::Pipeline* PipelineManager::GetPipeline(Render::PipelineState* state)
 			return pipeline;
 		}
 	}
-	Render::Pipeline* pipeline = CreatePipeline();
+	GHI::Pipeline* pipeline = CreatePipeline();
 	pipeline->Create(state);
 	return pipeline;
 }
 
-Render::Shader* PipelineManager::CreateShader(void)
+GHI::Shader* PipelineManager::CreateShader(void)
 {
 	auto device = mSystem->GetDevice();
 	auto factory = device->GetFactory();
-	Render::Shader* shader = factory->CreateShader();
+	GHI::Shader* shader = factory->CreateShader();
 	mShaders.push_back(shader);
 	return shader;
 }
 
-Render::Pipeline* PipelineManager::CreatePipeline(void)
+GHI::Pipeline* PipelineManager::CreatePipeline(void)
 {
 	auto device = mSystem->GetDevice();
 	auto factory = device->GetFactory();
-	Render::Pipeline* pipeline = factory->CreatePipeline();
+	GHI::Pipeline* pipeline = factory->CreatePipeline();
 	mPipelines.push_back(pipeline);
 	return pipeline;
 }
 
-Render::PipelineState* PipelineManager::CreatePipelineState(void)
+GHI::PipelineState* PipelineManager::CreatePipelineState(void)
 {
-	Render::PipelineState* state = new Render::PipelineState;
+	GHI::PipelineState* state = new GHI::PipelineState;
 	mPipelineStates.push_back(state);
 	return state;
 }
 
-Render::PipelineLayout* PipelineManager::CreatePipelineLayout(void)
+GHI::PipelineLayout* PipelineManager::CreatePipelineLayout(void)
 {
 	auto device = mSystem->GetDevice();
 	auto factory = device->GetFactory();
-	Render::PipelineLayout* layout = factory->CreatePipelineLayout();
+	GHI::PipelineLayout* layout = factory->CreatePipelineLayout();
 	mPipelineLayouts.push_back(layout);
 	return layout;
 }

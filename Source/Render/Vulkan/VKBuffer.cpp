@@ -27,7 +27,7 @@ namespace VK
 {
 
 Buffer::Buffer(Device* device):
-		Render::Buffer(device)
+		GHI::Buffer(device)
 {
 }
 
@@ -37,7 +37,7 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, const Render::UsageType& usage)
+void Buffer::Create(size_t size, const GHI::UsageType& usage)
 {
 	mSize = size;
 	mUsage = usage;
@@ -88,13 +88,13 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	std::cout << "[VK] Download Buffer Data" << std::endl;
 	assert(mMemory != nullptr);
 	assert(size != 0 && dst != nullptr);
-	Render::Factory* factory = mDevice->GetFactory();
+	GHI::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	Render::UsageType usage = CreateStageBufferUsageType();
+	GHI::UsageType usage = CreateStageBufferUsageType();
 
 	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
@@ -123,7 +123,7 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	std::cout << "[VK] Upload Buffer Data" << std::endl;
 	assert(mMemory != nullptr);
 	assert(size != 0 && src != nullptr);
-	Render::Factory* factory = mDevice->GetFactory();
+	GHI::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
@@ -150,7 +150,7 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	queue->FlushCommandBuffer(command_buffer);
 }
 
-void Buffer::CopyFrom(const Render::Resource* other)
+void Buffer::CopyFrom(const GHI::Resource* other)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Factory* vk_factory = static_cast<Factory*>(mDevice->GetFactory());
@@ -158,9 +158,9 @@ void Buffer::CopyFrom(const Render::Resource* other)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	Render::ResourceType type = other->GetType();
+	GHI::ResourceType type = other->GetType();
 
-	if (type == Render::ResourceType::RESOURCE_TYPE_BUFFER)
+	if (type == GHI::ResourceType::RESOURCE_TYPE_BUFFER)
 	{
 		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
 		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
@@ -194,9 +194,9 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::UsageType usage)
+VkBufferUsageFlags Buffer::ConvertUsageFlag(GHI::UsageType usage)
 {
-	assert(usage.type == Render::ResourceType::RESOURCE_TYPE_BUFFER);
+	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_BUFFER);
 	VkBufferUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
@@ -208,7 +208,7 @@ VkBufferUsageFlags Buffer::ConvertUsageFlag(Render::UsageType usage)
 	return flags;
 }
 
-VkDescriptorType Buffer::GetDescriptorType(const Render::UsageType& usage)
+VkDescriptorType Buffer::GetDescriptorType(const GHI::UsageType& usage)
 {
 	VkDescriptorType descriptor_type =
 	(usage.uniformBuffer == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER :

@@ -21,7 +21,7 @@ namespace VK
 {
 
 FrameBuffer::FrameBuffer(RenderPass* pass):
-		Render::FrameBuffer(pass)
+		GHI::FrameBuffer(pass)
 {
 }
 
@@ -30,7 +30,7 @@ FrameBuffer::~FrameBuffer(void)
 	Vulkan::Release(mFrameBuffer);
 }
 
-void FrameBuffer::Create(const Render::Attachment& attachment)
+void FrameBuffer::Create(const GHI::Attachment& attachment)
 {
 	mAttachment = attachment;
 	bool result = CheckAttachmentFormat();
@@ -86,11 +86,11 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 
 bool FrameBuffer::CheckAttachmentFormat(void)
 {
-	Render::Image* depth_stencil = mAttachment.GetDepthStencil();
+	GHI::Image* depth_stencil = mAttachment.GetDepthStencil();
 	if (nullptr != depth_stencil)
 	{
-		Render::Format attach_format = depth_stencil->GetFormat();
-		Render::Format pass_format = mPass->GetDepthStencilFormat();
+		GHI::Format attach_format = depth_stencil->GetFormat();
+		GHI::Format pass_format = mPass->GetDepthStencilFormat();
 		if (attach_format != pass_format)
 		{
 			return false;
@@ -106,9 +106,9 @@ bool FrameBuffer::CheckAttachmentFormat(void)
 	{
 		for (size_t index = 0; index < count; ++index)
 		{
-			Render::Image* image = mAttachment.GetImage(index);
-			Render::Format attach_format = image->GetFormat();
-			Render::Format pass_format = mPass->GetAttachmentFormat(index);
+			GHI::Image* image = mAttachment.GetImage(index);
+			GHI::Format attach_format = image->GetFormat();
+			GHI::Format pass_format = mPass->GetAttachmentFormat(index);
 			if (attach_format != pass_format)
 			{
 				return false;

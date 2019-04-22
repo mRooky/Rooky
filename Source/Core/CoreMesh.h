@@ -8,9 +8,8 @@
 #ifndef SOURCE_CORE_COREMESH_H_
 #define SOURCE_CORE_COREMESH_H_
 
+#include "MathAABB.h"
 #include "CoreMovable.h"
-#include "RenderAABB.h"
-
 #include <array>
 #include <vector>
 
@@ -44,10 +43,10 @@ public:
 
 public:
 	inline Stream* GetStream(void) { return mStream; }
-	inline Render::AABB* GetAABB(void) { return &mAABB; }
+	inline Math::AABB* GetAABB(void) { return &mAABB; }
 
 protected:
-	Render::AABB mAABB = {};
+	Math::AABB mAABB = {};
 	Stream* mStream = nullptr;
 
 protected:

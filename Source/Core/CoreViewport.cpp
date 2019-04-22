@@ -6,15 +6,14 @@
  */
 
 
+#include "GHICommandList.h"
+#include "GHIDevice.h"
+#include "GHIFactory.h"
+#include "GHIImage.h"
 #include "CoreViewport.h"
 #include "CoreSystem.h"
 #include "CoreThread.h"
 #include "CoreScene.h"
-
-#include "RenderImage.h"
-#include "RenderFactory.h"
-#include "RenderDevice.h"
-#include "RenderCommandList.h"
 
 #include <cassert>
 
@@ -35,7 +34,7 @@ Viewport::~Viewport(void)
 	mDepthStencil = nullptr;
 }
 
-void Viewport::Create(const Render::Rect2Di& rect)
+void Viewport::Create(const Math::Rect2Di& rect)
 {
 	mViewport = rect;
 	assert(rect.IsValid());
@@ -52,29 +51,29 @@ void Viewport::Draw(void)
 {
 	assert(mThread != nullptr);
 
-	Render::Rect2Di area = mViewport.GetExtent();
-	Render::Rect2Di scissor = area;
+	Math::Rect2Di area = mViewport.GetExtent();
+	Math::Rect2Di scissor = area;
 
-	Render::CommandList* command = mThread->GetCommandList(0);
+	GHI::CommandList* command = mThread->GetCommandList(0);
 	command->Begin();
 	command->SetScissor(0, 1, &scissor);
 	command->SetViewport(0, 1, &mViewport);
 	command->End();
 }
 
-void Viewport::CreateDepthStencil(const Render::Extent2Di& extent)
+void Viewport::CreateDepthStencil(const Math::Extent2Di& extent)
 {
 	assert(mDepthStencil == nullptr);
 	System* system = mParent->GetSystem();
-	Render::Device* device = system->GetDevice();
-	Render::ImageLayout image_layout = {};
+	GHI::Device* device = system->GetDevice();
+	GHI::ImageLayout image_layout = {};
 
-	image_layout.type = Render::ImageType::IMAGE_TYPE_2D;
+	image_layout.type = GHI::ImageType::IMAGE_TYPE_2D;
 	image_layout.extent = { extent.width, extent.height, 1 };
 	image_layout.format = device->GetBestDepthStencilFormat();
 
-	Render::UsageType image_usage = {};
-	image_usage.type = Render::ResourceType::RESOURCE_TYPE_IMAGE;
+	GHI::UsageType image_usage = {};
+	image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;
 	image_usage.depthStencil = TRUE;
 
 	mDepthStencil = device->GetFactory()->CreateImage();

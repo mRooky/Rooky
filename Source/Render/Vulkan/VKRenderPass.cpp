@@ -20,7 +20,7 @@ namespace VK
 {
 
 RenderPass::RenderPass(Device* device):
-		Render::Pass(device)
+		GHI::RenderPass(device)
 {
 }
 
@@ -56,7 +56,7 @@ void RenderPass::Create(void)
 
 	VkAttachmentReference depth_reference = {};
 
-	if (mDepthStencil != Render::Format::FORMAT_UNDEFINED)
+	if (mDepthStencil != GHI::Format::FORMAT_UNDEFINED)
 	{
 		VkFormat depth_stencil = ConvertFormat(mDepthStencil);
 
@@ -87,7 +87,7 @@ void RenderPass::Create(void)
 	mRenderPass->Create(&renderpass_create_info);
 }
 
-Render::FrameBuffer* RenderPass::CreateFrameBuffer(void)
+GHI::FrameBuffer* RenderPass::CreateFrameBuffer(void)
 {
 	FrameBuffer* frame_buffer = new FrameBuffer(this);
 	mFrameBuffers.push_back(frame_buffer);

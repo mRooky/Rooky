@@ -20,14 +20,14 @@ ShaderResource::~ShaderResource(void)
 	mTextures.clear();
 }
 
-std::vector<Render::Binding> ShaderResource::GetBindings(void) const
+std::vector<GHI::Binding> ShaderResource::GetBindings(void) const
 {
-	std::vector<Render::Binding> bindings;
+	std::vector<GHI::Binding> bindings;
 	for (auto texture : mTextures)
 	{
-		Render::Binding binding;
+		GHI::Binding binding;
 		auto render_resource = texture->GetRenderResource();
-		auto shader_stage = Render::ShaderStage::SHADER_STAGE_VERTEX;
+		auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
 		binding.SetResource(render_resource, shader_stage);
 		bindings.push_back(binding);
 	}

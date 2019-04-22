@@ -8,12 +8,12 @@
 #ifndef SOURCE_RENDER_OPENGL_GLDEVICE_H_
 #define SOURCE_RENDER_OPENGL_GLDEVICE_H_
 
-#include "RenderDevice.h"
+#include "GHIDevice.h"
 
 namespace GL
 {
 
-class Device : public Render::Device
+class Device : public GHI::Device
 {
 public:
 	Device(void);
