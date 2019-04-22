@@ -24,8 +24,8 @@ public:
 	double Elapsed(void) const;
 
 public:
-	static double Max(void);
-	static double Min(void);
+	static double MaxValue(void);
+	static double MinValue(void);
 
 private:
 	std::clock_t m_time = 0;

@@ -9,10 +9,10 @@
 #define SOURCE_CORE_GHI_RENDERSWAPCHAIN_H_
 
 #include "GHIFormat.h"
-#include "MathExtent.hpp"
 #include "GHIObject.h"
 #include "GHIColorBlend.h"
 #include "PlatformWindow.h"
+#include "MathExtent.hpp"
 
 #include <cstdint>
 #include <vector>

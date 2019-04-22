@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_COREPASS_H_
-#define SOURCE_CORE_COREPASS_H_
+#ifndef SOURCE_CORE_CORESUBPATH_H_
+#define SOURCE_CORE_CORESUBPATH_H_
 
 #include "GHIClasses.h"
 #include "GHIFormat.h"
@@ -18,14 +18,14 @@ namespace Core
 {
 class Path;
 class Texture;
-class Pass
+class SubPath
 {
 	friend class Path;
 protected:
-	explicit Pass(Path* parent);
+	explicit SubPath(Path* parent);
 
 public:
-	virtual ~Pass(void);
+	virtual ~SubPath(void);
 
 public:
 	void CreateRenderPass(const std::vector<GHI::Format>& formats);
@@ -59,4 +59,4 @@ protected:
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_COREPASS_H_ */
+#endif /* SOURCE_CORE_CORESUBPATH_H_ */

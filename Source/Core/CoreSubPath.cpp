@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
+#include "CoreSubPath.h"
 #include "GHIDevice.h"
 #include "GHIFactory.h"
 #include "GHIRenderPass.h"
-#include "CorePass.h"
 #include "CorePath.h"
 #include "CoreSystem.h"
 
@@ -17,12 +17,12 @@
 namespace Core
 {
 
-Pass::Pass(Path* parent):
+SubPath::SubPath(Path* parent):
 		mParent(parent)
 {
 }
 
-Pass::~Pass(void)
+SubPath::~SubPath(void)
 {
 	mTextures.clear();
 	mParent = nullptr;
@@ -30,7 +30,7 @@ Pass::~Pass(void)
 	mRenderPass = nullptr;
 }
 
-void Pass::CreateRenderPass(const std::vector<GHI::Format>& formats)
+void SubPath::CreateRenderPass(const std::vector<GHI::Format>& formats)
 {
 	auto system = mParent->GetSystem();
 	auto device = system->GetDevice();

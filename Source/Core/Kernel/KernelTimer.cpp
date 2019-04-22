@@ -31,13 +31,13 @@ double Timer::Elapsed(void) const
 	return elapsed / static_cast<double>(CLOCKS_PER_SEC);
 }
 
-double Timer::Max(void)
+double Timer::MaxValue(void)
 {
 	long limit = std::numeric_limits<std::clock_t>::max();
 	return static_cast<double>(limit) / static_cast<double>(CLOCKS_PER_SEC);
 }
 
-double Timer::Min(void)
+double Timer::MinValue(void)
 {
 	return static_cast<double>(1) / static_cast<double>(CLOCKS_PER_SEC);
 }

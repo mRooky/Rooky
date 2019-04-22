@@ -7,6 +7,7 @@
 
 #include "ExampleBuffer.h"
 
+#include "CoreSubPath.h"
 #include "GHIBuffer.h"
 #include "GHICommandList.h"
 #include "GHIEnum.h"
@@ -17,7 +18,6 @@
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
-#include "CorePass.h"
 #include "CoreSystem.h"
 #include "CoreMeshManager.h"
 #include "CoreBufferManager.h"
@@ -52,7 +52,7 @@ void Buffer::Initialize(void)
 	CreateScene();
 	CreateViewport();
 	CreateRenderPath();
-	CreateRenderPass();
+	CreateSubPath();
 	CreateFrameBuffer();
 	CreateRenderThread(2);
 	CreateIndexBuffer();
@@ -60,22 +60,22 @@ void Buffer::Initialize(void)
 	CreateUniformBuffer();
 }
 
-void Buffer::CreateRenderPass(void)
+void Buffer::CreateSubPath(void)
 {
 	assert(mPath != nullptr);
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	auto format = swap_chain->GetFormat();
 	std::vector<GHI::Format> formats = { format };
-	mPass = mPath->CreatePass();
-	mPass->CreateRenderPass(formats);
+	mSubPath = mPath->CreateSubPath();
+	mSubPath->CreateRenderPass(formats);
 }
 
 void Buffer::CreateFrameBuffer(void)
 {
-	assert(mPath->GetPassCount() > 0);
+	assert(mPath->GetSubPathCount() > 0);
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	Math::Color clear_color = Math::Color(10, 10, 10);
-	GHI::RenderPass* pass = mPath->GetRenderPass(0)->GetRenderPass();
+	GHI::RenderPass* pass = mPath->GetSubPath(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{
 		GHI::Image* image = swap_chain->GetRenderBuffer(index);
@@ -89,7 +89,7 @@ void Buffer::CreateFrameBuffer(void)
 
 void Buffer::RecordCommands(void)
 {
-	auto pass = mPath->GetRenderPass(0);
+	auto sub = mPath->GetSubPath(0);
 
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	const Math::Extent2Di& extent = swap_chain->GetExtent();
@@ -102,7 +102,7 @@ void Buffer::RecordCommands(void)
 	assert(count > 1);
 	for (uint32_t i = 0; i < count; ++i)
 	{
-		auto render_pass = pass->GetRenderPass();
+		auto render_pass = sub->GetRenderPass();
 		auto frame_buffer = render_pass->GetFrameBuffer(i);
 		auto command_list = mThread->GetCommandList(i);
 		command_list->Begin();

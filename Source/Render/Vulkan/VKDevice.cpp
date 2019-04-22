@@ -70,7 +70,12 @@ void Device::CreateInstance(bool debug)
 	m_instance = Vulkan::Instance::New();
 
 	m_instance->EnableExtension(VK_KHR_SURFACE_EXTENSION_NAME);
+
+#ifdef VK_USE_PLATFORM_XCB_KHR
 	m_instance->EnableExtension(VK_KHR_XCB_SURFACE_EXTENSION_NAME);
+#else
+	assert(false);
+#endif
 
 	if (debug == true)
 	{

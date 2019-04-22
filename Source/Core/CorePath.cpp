@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include "CoreSubPath.h"
 #include "CorePath.h"
-#include "CorePass.h"
 
 namespace Core
 {
@@ -18,18 +18,18 @@ Path::Path(System* system):
 
 Path::~Path(void)
 {
-	for (auto pass : mPasses)
+	for (auto sub : mSubPathes)
 	{
-		delete pass;
+		delete sub;
 	}
-	mPasses.clear();
+	mSubPathes.clear();
 }
 
-Pass* Path::CreatePass(void)
+SubPath* Path::CreateSubPath(void)
 {
-	Pass* pass = new Pass(this);
-	mPasses.push_back(pass);
-	return pass;
+	SubPath* sub = new SubPath(this);
+	mSubPathes.push_back(sub);
+	return sub;
 }
 
 } /* namespace Core */

@@ -13,7 +13,7 @@
 
 namespace Core
 {
-class Pass;
+class SubPath;
 class Path : public Interface
 {
 public:
@@ -21,14 +21,14 @@ public:
 	virtual ~Path(void) override;
 
 public:
-	Pass* CreatePass(void);
+	SubPath* CreateSubPath(void);
 
 public:
-	inline size_t GetPassCount(void) const { return mPasses.size(); }
-	inline Pass* GetRenderPass(size_t index) const { return mPasses.at(index); }
+	inline size_t GetSubPathCount(void) const { return mSubPathes.size(); }
+	inline SubPath* GetSubPath(size_t index) const { return mSubPathes.at(index); }
 
 protected:
-	std::vector<Pass*> mPasses;
+	std::vector<SubPath*> mSubPathes;
 };
 
 } /* namespace Core */
