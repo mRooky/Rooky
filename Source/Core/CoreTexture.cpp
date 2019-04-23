@@ -16,7 +16,7 @@ namespace Core
 {
 
 Texture::Texture(TextureManager* manager):
-		Target(manager)
+		RenderTarget(manager)
 {
 }
 

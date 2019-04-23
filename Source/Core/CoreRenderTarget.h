@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_CORETARGET_H_
-#define SOURCE_CORE_CORETARGET_H_
+#ifndef SOURCE_CORE_CORERENDERTARGET_H_
+#define SOURCE_CORE_CORERENDERTARGET_H_
 
 #include "GHIClasses.h"
 #include "GHILayout.h"
@@ -16,11 +16,11 @@
 namespace Core
 {
 class TextureManager;
-class Target : public Resource
+class RenderTarget : public Resource
 {
 public:
-	explicit Target(TextureManager* manager);
-	virtual ~Target(void);
+	explicit RenderTarget(TextureManager* manager);
+	virtual ~RenderTarget(void);
 
 public:
 	void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage);
@@ -34,4 +34,4 @@ protected:
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_CORETARGET_H_ */
+#endif /* SOURCE_CORE_CORERENDERTARGET_H_ */

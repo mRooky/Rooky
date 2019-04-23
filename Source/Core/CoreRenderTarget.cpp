@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
+#include "CoreRenderTarget.h"
 #include "GHIDevice.h"
 #include "GHIFactory.h"
 #include "GHIImage.h"
-#include "CoreTarget.h"
 #include "CoreTextureManager.h"
 #include "CoreSystem.h"
 
@@ -18,18 +18,18 @@
 namespace Core
 {
 
-Target::Target(TextureManager* manager):
+RenderTarget::RenderTarget(TextureManager* manager):
 		mManager(manager)
 {
 	assert(mManager != nullptr);
 }
 
-Target::~Target(void)
+RenderTarget::~RenderTarget(void)
 {
 	mManager = nullptr;
 }
 
-void Target::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
 {
 	assert(mResource == nullptr);
 	auto system = mManager->GetSystem();

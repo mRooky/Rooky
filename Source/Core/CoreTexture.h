@@ -8,12 +8,12 @@
 #ifndef SOURCE_CORE_CORETEXTURE_H_
 #define SOURCE_CORE_CORETEXTURE_H_
 
-#include "CoreTarget.h"
+#include "CoreRenderTarget.h"
 #include <string>
 
 namespace Core
 {
-class Texture : public Target
+class Texture : public RenderTarget
 {
 public:
 	explicit Texture(TextureManager* manager);
