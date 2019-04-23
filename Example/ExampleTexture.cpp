@@ -7,7 +7,7 @@
 
 #include "ExampleTexture.h"
 
-#include "CoreSubPath.h"
+#include <CoreSubPass.h>
 #include "GHIBinding.hpp"
 #include "GHIBindingLayout.h"
 #include "GHIBindingSet.h"
@@ -51,8 +51,8 @@ void Texture::Initialize(void)
 	CreateWindow("Texture Window");
 	CreateScene();
 	CreateViewport();
-	CreateRenderPath();
-	CreateSubPath();
+	CreateRenderPass();
+	CreateSubPass();
 	CreateFrameBuffer();
 	CreateRenderThread(2);
 	CreateIndexBuffer();
@@ -65,7 +65,7 @@ void Texture::Initialize(void)
 
 void Texture::RecordCommands(void)
 {
-	auto sub = mPath->GetSubPath(0);
+	auto sub = mPass->GetSubPass(0);
 
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 
@@ -117,7 +117,7 @@ void Texture::CreateTexture(const char* file)
 		sampler->Create();
 		mTexture->SetSampler(sampler);
 
-		mSubPath->SetTexture(mTexture);
+		mSubPass->SetTexture(mTexture);
 		SOIL_free_image_data(bitmap);
 	}
 	else
@@ -128,7 +128,7 @@ void Texture::CreateTexture(const char* file)
 
 void Texture::CreateShader(void)
 {
-	auto shader_state = mSubPath->GetShaderState();
+	auto shader_state = mSubPass->GetShaderState();
 	auto manager = mSystem->GetPipelineManager();
 
 	const char* vert_file = "Shaders/texture.vert";
@@ -145,13 +145,13 @@ void Texture::CreatePipeline(void)
 	auto pipeline_manager = mSystem->GetPipelineManager();
 
 	auto pipeline_state = pipeline_manager->CreatePipelineState();
-	pipeline_state->SetRenderPass(0, mSubPath->GetRenderPass());
+	pipeline_state->SetRenderPass(0, mSubPass->GetRenderPass());
 
 	assert(mVertex != nullptr);
 	auto vertex_layout = mVertex->GetLayout();
 	pipeline_state->SetVertexLayout(vertex_layout);
 
-	auto shader_state = mSubPath->GetShaderState();
+	auto shader_state = mSubPass->GetShaderState();
 	pipeline_state->SetShaderState(*shader_state);
 
 	auto binding_manager = mSystem->GetBindingManager();
@@ -167,12 +167,12 @@ void Texture::CreatePipeline(void)
 			binding_set->AppendBinding(binding);
 		}
 
-		const size_t count = mSubPath->GetTextureCount();
+		const size_t count = mSubPass->GetTextureCount();
 		assert(count > 0);
 		for (size_t index = 0; index < count; ++index)
 		{
 			GHI::ShaderStage shader_stage = GHI::ShaderStage::SHADER_STAGE_FRAGMENT;
-			Core::Texture* texture = mSubPath->GetTexture(index);
+			Core::Texture* texture = mSubPass->GetTexture(index);
 			{
 				GHI::Resource* resource = texture->GetRenderResource();
 				GHI::Binding binding = {};

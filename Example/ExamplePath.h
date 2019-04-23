@@ -8,7 +8,8 @@
 #ifndef EXAMPLE_EXAMPLEPATH_H_
 #define EXAMPLE_EXAMPLEPATH_H_
 
-#include "CorePath.h"
+#include <CorePass.h>
+
 #include "ExampleBase.h"
 
 namespace Example
@@ -21,12 +22,12 @@ public:
 	virtual ~Path(void) override;
 
 public:
-	virtual void CreateRenderPath(void);
+	virtual void CreateRenderPass(void);
 	virtual void CreateRenderThread(size_t count);
 	virtual void CreateViewport(void);
 
 protected:
-	Core::Path* mPath = nullptr;
+	Core::Pass* mPass = nullptr;
 	Core::Thread* mThread = nullptr;
 	Core::Viewport* mViewport = nullptr;
 };

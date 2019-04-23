@@ -19,9 +19,15 @@ public:
 	Multisample(void) = default;
 	~Multisample(void) = default;
 
+public:
 	inline bool operator==(const Multisample& other) const
 	{
 		return rasterizationSamples == other.rasterizationSamples;
+	}
+
+	inline bool operator!=(const Multisample& other) const
+	{
+		return !(*this == other);
 	}
 
 public:

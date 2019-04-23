@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_CORESUBPATH_H_
-#define SOURCE_CORE_CORESUBPATH_H_
+#ifndef SOURCE_CORE_CORESUBPASS_H_
+#define SOURCE_CORE_CORESUBPASS_H_
 
 #include "GHIClasses.h"
 #include "GHIFormat.h"
@@ -16,22 +16,22 @@
 
 namespace Core
 {
-class Path;
+class Pass;
 class Texture;
-class SubPath
+class SubPass
 {
-	friend class Path;
+	friend class Pass;
 protected:
-	explicit SubPath(Path* parent);
+	explicit SubPass(Pass* parent);
 
 public:
-	virtual ~SubPath(void);
+	virtual ~SubPass(void);
 
 public:
 	void CreateRenderPass(const std::vector<GHI::Format>& formats);
 
 public:
-	inline Path* GetParent(void) const { return mParent; }
+	inline Pass* GetParent(void) const { return mParent; }
 
 public:
 	inline size_t GetTextureCount(void) const { return mTextures.size(); }
@@ -46,7 +46,7 @@ public:
 	inline GHI::DepthStencil* GetDepthStencil(void) { return &mDepthStencil; }
 
 protected:
-	Path* mParent = nullptr;
+	Pass* mParent = nullptr;
 
 protected:
 	std::vector<Texture*> mTextures;
@@ -59,4 +59,4 @@ protected:
 
 } /* namespace Core */
 
-#endif /* SOURCE_CORE_CORESUBPATH_H_ */
+#endif /* SOURCE_CORE_CORESUBPASS_H_ */

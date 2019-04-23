@@ -31,14 +31,14 @@ public:
 	virtual void RecordCommands(void) override;
 
 public:
-	virtual void CreateSubPath(void);
+	virtual void CreateSubPass(void);
 	virtual void CreateFrameBuffer(void);
 	virtual void CreateIndexBuffer(void);
 	virtual void CreateVertexBuffer(void);
 	virtual void CreateUniformBuffer(void);
 
 protected:
-	Core::SubPath* mSubPath = nullptr;
+	Core::SubPass* mSubPass = nullptr;
 	Core::Index* mIndex = nullptr;
 	Core::Vertex* mVertex = nullptr;
 	Core::Uniform* mUniform = nullptr;

@@ -20,6 +20,25 @@ public:
 	~DepthStencil(void) = default;
 
 public:
+	bool operator==(const DepthStencil& other) const;
+	inline bool operator!=(const DepthStencil& other) const
+	{
+		return !(*this == other);
+	}
+
+public:
+	inline DepthStencil& operator=(const DepthStencil& other)
+	{
+		depthTestEnable = other.depthTestEnable;
+		depthWriteEnable = other.depthWriteEnable;
+		depthBoundsTestEnable = other.depthBoundsTestEnable;
+		stencilTestEnable = other.stencilTestEnable;
+		minDepthBounds = other.minDepthBounds;
+		maxDepthBounds = other.maxDepthBounds;
+		return *this;
+	}
+
+public:
 	bool depthTestEnable = true;
 	bool depthWriteEnable = true;
 	bool depthBoundsTestEnable = false;

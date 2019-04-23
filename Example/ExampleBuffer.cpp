@@ -7,7 +7,6 @@
 
 #include "ExampleBuffer.h"
 
-#include "CoreSubPath.h"
 #include "GHIBuffer.h"
 #include "GHICommandList.h"
 #include "GHIEnum.h"
@@ -15,6 +14,8 @@
 #include "GHIImage.h"
 #include "GHIRenderPass.h"
 #include "GHISwapChain.h"
+
+#include "CoreSubPass.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
 #include "CoreUniform.h"
@@ -51,8 +52,8 @@ void Buffer::Initialize(void)
 	CreateWindow("Buffer Window");
 	CreateScene();
 	CreateViewport();
-	CreateRenderPath();
-	CreateSubPath();
+	CreateRenderPass();
+	CreateSubPass();
 	CreateFrameBuffer();
 	CreateRenderThread(2);
 	CreateIndexBuffer();
@@ -60,22 +61,22 @@ void Buffer::Initialize(void)
 	CreateUniformBuffer();
 }
 
-void Buffer::CreateSubPath(void)
+void Buffer::CreateSubPass(void)
 {
-	assert(mPath != nullptr);
+	assert(mPass != nullptr);
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	auto format = swap_chain->GetFormat();
 	std::vector<GHI::Format> formats = { format };
-	mSubPath = mPath->CreateSubPath();
-	mSubPath->CreateRenderPass(formats);
+	mSubPass = mPass->CreateSubPass();
+	mSubPass->CreateRenderPass(formats);
 }
 
 void Buffer::CreateFrameBuffer(void)
 {
-	assert(mPath->GetSubPathCount() > 0);
+	assert(mPass->GetSubPassCount() > 0);
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	Math::Color clear_color = Math::Color(10, 10, 10);
-	GHI::RenderPass* pass = mPath->GetSubPath(0)->GetRenderPass();
+	GHI::RenderPass* pass = mPass->GetSubPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{
 		GHI::Image* image = swap_chain->GetRenderBuffer(index);
@@ -89,7 +90,7 @@ void Buffer::CreateFrameBuffer(void)
 
 void Buffer::RecordCommands(void)
 {
-	auto sub = mPath->GetSubPath(0);
+	auto sub = mPass->GetSubPass(0);
 
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
 	const Math::Extent2Di& extent = swap_chain->GetExtent();

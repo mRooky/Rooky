@@ -38,6 +38,20 @@ public:
 	}
 
 public:
+	inline ColorBlend& operator=(const ColorBlend& other)
+	{
+		blendEnable = other.blendEnable;
+		srcColorBlendFactor = other.srcColorBlendFactor;
+		dstColorBlendFactor = other.dstColorBlendFactor;
+		colorBlendOp = other.colorBlendOp;
+		srcAlphaBlendFactor = other.srcAlphaBlendFactor;
+		dstAlphaBlendFactor = other.dstAlphaBlendFactor;
+		alphaBlendOp = other.alphaBlendOp;
+		colorWriteMask = other.colorWriteMask;
+		return *this;
+	}
+
+public:
 	bool blendEnable = false;
 	BlendFactor srcColorBlendFactor = BlendFactor::BLEND_FACTOR_SRC_COLOR;
 	BlendFactor dstColorBlendFactor = BlendFactor::BLEND_FACTOR_DST_COLOR;

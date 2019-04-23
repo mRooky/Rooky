@@ -7,7 +7,7 @@
 
 #include "ExamplePath.h"
 
-#include "CoreSubPath.h"
+#include <CoreSubPass.h>
 #include <cassert>
 
 namespace Example
@@ -19,16 +19,16 @@ Path::Path(void)
 
 Path::~Path(void)
 {
-	delete mPath;
-	mPath = nullptr;
+	delete mPass;
+	mPass = nullptr;
 	mThread = nullptr;
 	mViewport = nullptr;
 }
 
-void Path::CreateRenderPath(void)
+void Path::CreateRenderPass(void)
 {
 	assert(mSystem != nullptr);
-	mPath = new Core::Path(mSystem);
+	mPass = new Core::Pass(mSystem);
 }
 
 void Path::CreateViewport(void)
