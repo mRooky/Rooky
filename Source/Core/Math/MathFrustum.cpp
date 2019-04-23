@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#include "CoreFrustum.h"
+#include "MathFrustum.h"
 #include <cassert>
 
-namespace Core
+namespace Math
 {
 
 Frustum::Frustum(void)

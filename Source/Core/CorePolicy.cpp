@@ -5,20 +5,24 @@
  *      Author: rookyma
  */
 
-#include <CorePolicy.h>
+#include "CorePolicy.h"
+#include "CoreSubPolicy.h"
+#include "UtilityRelease.h"
+
+#include "GHIRenderPass.h"
 
 namespace Core
 {
 
-Policy::Policy()
+Policy::Policy(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Policy::~Policy()
+Policy::~Policy(void)
 {
-	// TODO Auto-generated destructor stub
+	delete mRenderPass;
+	mRenderPass = nullptr;
+	Utility::Release(mSubPolicies);
 }
 
 } /* namespace Core */

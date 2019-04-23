@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORECAMERA_H_
 #define SOURCE_CORE_CORECAMERA_H_
 
-#include "CoreFrustum.h"
+#include "MathFrustum.h"
 
 namespace Core
 {
@@ -30,10 +30,10 @@ public:
 	inline CameraType GetType(void) const { return mType; }
 
 public:
-	inline Frustum* GetFrustum(void) { return &mFrustum; }
+	inline Math::Frustum* GetFrustum(void) { return &mFrustum; }
 
 protected:
-	Frustum mFrustum = {};
+	Math::Frustum mFrustum = {};
 	CameraType mType = CameraType::CAMERA_TYPE_PERSPECTIVE;
 };
 

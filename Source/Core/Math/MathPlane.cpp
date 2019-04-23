@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include <CorePlane.h>
+#include "MathPlane.h"
 
-namespace Core
+namespace Math
 {
 
 Plane::Plane()
