@@ -37,8 +37,9 @@ void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::UsageType& 
 	auto factory = device->GetFactory();
 	mResource = factory->CreateImage();
 	static_cast<GHI::Image*>(mResource)->Create(layout, usage);
-	std::cout << "Image Width " << layout.extent.width << std::endl;
-	std::cout << "Image Height " << layout.extent.height << std::endl;
+	const Math::Extent3Di& extent = layout.GetExtent();
+	std::cout << "Image Width " << extent.width << std::endl;
+	std::cout << "Image Height " << extent.height << std::endl;
 }
 
 } /* namespace Core */

@@ -55,15 +55,16 @@ void Image::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
 void Image::CreateImage(void)
 {
 	assert(mImage == nullptr);
-	VkFormat vulkan_format = ConvertFormat(mLayout.format);
+	GHI::Format format = mLayout.GetFormat();
+	VkFormat vulkan_format = ConvertFormat(format);
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
-
+	const Math::Extent3Di& extent = mLayout.GetExtent();
 	VkExtent3D vulkan_extent =
 	{
-		static_cast<uint32_t>(mLayout.extent.width),
-		static_cast<uint32_t>(mLayout.extent.height),
-		static_cast<uint32_t>(mLayout.extent.depth)
+		static_cast<uint32_t>(extent.width),
+		static_cast<uint32_t>(extent.height),
+		static_cast<uint32_t>(extent.depth)
 	};
 
 	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
@@ -87,9 +88,10 @@ void Image::AllocateMemory(void)
 
 void Image::CreateView(void)
 {
-	assert(mLayout.type != GHI::ImageType::IMAGE_TYPE_UNKNOWN);
+	GHI::ImageType type = mLayout.GetType();
+	assert(type != GHI::ImageType::IMAGE_TYPE_UNKNOWN);
 	assert(mMemory != nullptr);
-	VkImageViewType vulkan_type = ConverType(mLayout.type);
+	VkImageViewType vulkan_type = ConverType(type);
 	mImage->CreateView(vulkan_type);
 }
 
@@ -157,10 +159,11 @@ VkClearValue Image::GetClearValue(void) const
 	}
 	else
 	{
-		clear_value.color.float32[0] = mClearColor.GetRed();
-		clear_value.color.float32[1] = mClearColor.GetGreen();
-		clear_value.color.float32[2] = mClearColor.GetBlue();
-		clear_value.color.float32[3] = mClearColor.GetAlpha();
+		Math::Color clear_color = mLayout.GetClearColor();
+		clear_value.color.float32[0] = clear_color.GetRed();
+		clear_value.color.float32[1] = clear_color.GetGreen();
+		clear_value.color.float32[2] = clear_color.GetBlue();
+		clear_value.color.float32[3] = clear_color.GetAlpha();
 	}
 	return clear_value;
 }
@@ -191,13 +194,13 @@ void Image::CopyFrom(const GHI::Resource* other)
 	{
 		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
 		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
-
+		const Math::Extent3Di& extent = mLayout.GetExtent();
 		VkBufferImageCopy copy_region = {};
 		copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		copy_region.imageSubresource.layerCount = 1;
-		copy_region.imageExtent.width = mLayout.extent.width;
-		copy_region.imageExtent.height = mLayout.extent.height;
-		copy_region.imageExtent.depth = mLayout.extent.depth;
+		copy_region.imageExtent.width = extent.width;
+		copy_region.imageExtent.height = extent.height;
+		copy_region.imageExtent.depth = extent.depth;
 
 		command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 		command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
@@ -212,7 +215,8 @@ void Image::CopyFrom(const GHI::Resource* other)
 
 size_t Image::GetMipmapSize(uint32_t mipmap) const
 {
-	size_t format_size = GetFormatSize(mLayout.format);
+	GHI::Format format = mLayout.GetFormat();
+	size_t format_size = GetFormatSize(format);
 	VkExtent2D extent = GetMipmapExtent(mipmap);
 	size_t size_in_byte = extent.width * extent.height * format_size;
 	return size_in_byte;
@@ -220,9 +224,9 @@ size_t Image::GetMipmapSize(uint32_t mipmap) const
 
 VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 {
+	const auto& extent = mLayout.GetExtent();
 	if (mipmap > 0)
 	{
-		const auto& extent = mLayout.extent;
 		bool width_pow2 = Math::IsPowerOfTow(extent.width);
 		bool height_pow2 = Math::IsPowerOfTow(extent.height);
 		assert(width_pow2 == true);
@@ -234,12 +238,12 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 		}
 	}
 
-	VkExtent2D extent =
+	VkExtent2D vk_extent =
 	{
-		mLayout.extent.width / (1u << mipmap),
-		mLayout.extent.height / (1u << mipmap)
+		extent.width / (1u << mipmap),
+		extent.height / (1u << mipmap)
 	};
-	return extent;
+	return vk_extent;
 }
 
 VkDescriptorType Image::GetDescriptorType(const GHI::UsageType& usage)
@@ -331,12 +335,18 @@ void SwapChainImage::Create(Vulkan::Image* image)
 {
 	assert(image != nullptr);
 	mImage = image;
-	VkExtent2D extent = image->GetExtent();
-	mLayout.extent.width = static_cast<int32_t>(extent.width);
-	mLayout.extent.height = static_cast<int32_t>(extent.height);
-	VkFormat format = image->GetFormat();
-	mLayout.format = ConvertFormat(format);
-	mLayout.type = GHI::ImageType::IMAGE_TYPE_2D;
+	VkExtent2D vk_extent = image->GetExtent();
+	Math::Extent3Di extent =
+	{
+		static_cast<int32_t>(vk_extent.width),
+		static_cast<int32_t>(vk_extent.height),
+		1
+	};
+	mLayout.SetExtent(extent);
+	VkFormat vk_format = image->GetFormat();
+	GHI::Format format = ConvertFormat(vk_format);
+	mLayout.SetFormat(format);
+	mLayout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
 }
 
 } /* namespace VK */

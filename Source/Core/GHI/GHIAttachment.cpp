@@ -33,7 +33,8 @@ void Attachment::SetDepthStencil(Image* image)
 		assert(true == for_depth_stencil);
 		if (true == for_depth_stencil)
 		{
-			Format format = image->GetFormat();
+			const GHI::ImageLayout& layout = image->GetLayout();
+			Format format = layout.GetFormat();
 			bool format_depth_stencil = Image::IsDepthStencilFormat(format);
 			assert(true == format_depth_stencil);
 			mDepthStencil = (true == format_depth_stencil) ? image : nullptr;
@@ -44,8 +45,8 @@ void Attachment::SetDepthStencil(Image* image)
 void Attachment::AppendImage(Image* image)
 {
 	assert(image != nullptr);
-
-	Format format = image->GetFormat();
+	const GHI::ImageLayout& layout = image->GetLayout();
+	Format format = layout.GetFormat();
 	bool is_depth = Image::IsDepthStencilFormat(format);
 	if (is_depth == false)
 	{

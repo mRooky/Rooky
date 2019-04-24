@@ -32,7 +32,7 @@ public:
 	void Set(O width, O height)
 	{
 		this->width = static_cast<T>(width);
-		this->width = static_cast<T>(height);
+		this->height = static_cast<T>(height);
 	}
 
 public:
@@ -49,6 +49,16 @@ public:
 	inline T GetVolume(void) const
 	{
 		return width * height * depth;
+	}
+
+public:
+	template<typename O>
+	inline Extent3_t& operator=(const Extent2_t<O>& extent)
+	{
+		this->width = static_cast<T>(extent.width);
+		this->height = static_cast<T>(extent.height);
+		this->depth = 1;
+		return *this;
 	}
 
 public:

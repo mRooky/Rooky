@@ -25,17 +25,30 @@ public:
 	~ImageLayout(void) = default;
 
 public:
+	inline void SetType(ImageType type) { mType = type; }
+	inline void SetFormat(Format format) { mFormat = format; }
+	inline void SetClearColor(uint32_t color) { mClearColor = color; }
+	inline void SetExtent(const Math::Extent2Di& extent) { mExtent = extent; }
+	inline void SetExtent(const Math::Extent3Di& extent) { mExtent = extent; }
+
+public:
+	inline ImageType GetType(void) const { return mType; }
+	inline Format GetFormat(void) const { return mFormat; }
+	inline uint32_t GetClearColor(void) const { return mClearColor; }
+	inline const Math::Extent3Di& GetExtent(void) const { return mExtent; }
+
+public:
 	uint32_t array = 1;
 	uint32_t mipmap = 1;
 	uint32_t samples = 1;
-	Math::Extent3Di extent = {};
+	Math::Extent3Di mExtent = {};
 
 public:
 	uint32_t mClearColor = 0;
 
 public:
-	Format format = Format::FORMAT_UNDEFINED;
-	ImageType type = ImageType::IMAGE_TYPE_UNKNOWN;
+	Format mFormat = Format::FORMAT_UNDEFINED;
+	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
 };
 
 class VertexLayout

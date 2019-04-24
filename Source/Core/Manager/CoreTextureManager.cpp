@@ -55,9 +55,9 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 	if (texture == nullptr)
 	{
 		GHI::ImageLayout image_layout = {};
-		image_layout.extent = extent;
-		image_layout.format = format;
-		image_layout.type = GHI::ImageType::IMAGE_TYPE_2D;
+		image_layout.SetExtent(extent);
+		image_layout.SetFormat(format);
+		image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
 
 		GHI::UsageType image_usage = {};
 		image_usage.destination = TRUE;

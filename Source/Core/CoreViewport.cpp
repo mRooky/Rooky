@@ -67,10 +67,9 @@ void Viewport::CreateDepthStencil(const Math::Extent2Di& extent)
 	System* system = mParent->GetSystem();
 	GHI::Device* device = system->GetDevice();
 	GHI::ImageLayout image_layout = {};
-
-	image_layout.type = GHI::ImageType::IMAGE_TYPE_2D;
-	image_layout.extent = { extent.width, extent.height, 1 };
-	image_layout.format = device->GetBestDepthStencilFormat();
+	image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
+	image_layout.SetExtent(extent);
+	image_layout.SetFormat(device->GetBestDepthStencilFormat());
 
 	GHI::UsageType image_usage = {};
 	image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;

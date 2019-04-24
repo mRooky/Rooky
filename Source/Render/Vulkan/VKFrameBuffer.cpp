@@ -46,9 +46,9 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 {
 	assert(mAttachment.IsValid());
 
-	auto attachment = mAttachment.GetImage(0);
-	auto& layout = attachment->GetLayout();
-	auto& extent = layout.extent;
+	GHI::Image* attachment = mAttachment.GetImage(0);
+	const GHI::ImageLayout& layout = attachment->GetLayout();
+	const Math::Extent3Di& extent = layout.GetExtent();
 
 	std::cout << "Width:" << extent.width << std::endl;
 	std::cout << "Height:" << extent.height << std::endl;
@@ -89,7 +89,8 @@ bool FrameBuffer::CheckAttachmentFormat(void)
 	GHI::Image* depth_stencil = mAttachment.GetDepthStencil();
 	if (nullptr != depth_stencil)
 	{
-		GHI::Format attach_format = depth_stencil->GetFormat();
+		const GHI::ImageLayout& layout = depth_stencil->GetLayout();
+		GHI::Format attach_format = layout.GetFormat();
 		GHI::Format pass_format = mPass->GetDepthStencilFormat();
 		if (attach_format != pass_format)
 		{
@@ -107,7 +108,8 @@ bool FrameBuffer::CheckAttachmentFormat(void)
 		for (size_t index = 0; index < count; ++index)
 		{
 			GHI::Image* image = mAttachment.GetImage(index);
-			GHI::Format attach_format = image->GetFormat();
+			const GHI::ImageLayout& layout = image->GetLayout();
+			GHI::Format attach_format = layout.GetFormat();
 			GHI::Format pass_format = mPass->GetAttachmentFormat(index);
 			if (attach_format != pass_format)
 			{

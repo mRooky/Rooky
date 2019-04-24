@@ -32,18 +32,16 @@ public:
 	virtual void Upload(uint32_t index, uint32_t mipmap, const void* src) = 0;
 
 public:
-	inline Format GetFormat(void) const { return mLayout.format; }
-	inline void SetClearColor(uint32_t color) { mClearColor.Set(color); }
-	inline const Math::Extent3Di& GetExtent(void) const { return mLayout.extent; }
-	inline const ImageLayout& GetLayout(void) const { return mLayout; }
+	inline void SetClearColor(uint32_t color) { mLayout.SetClearColor(color); }
 
+public:
+	inline const ImageLayout& GetLayout(void) { return mLayout; }
 	inline ColorBlend* GetColorBlend(void) { return &mColorBlend; }
 
 public:
 	static bool IsDepthStencilFormat(Format format);
 
 protected:
-	Math::Color mClearColor = {};
 	ImageLayout mLayout = {};
 	ColorBlend mColorBlend = {};
 };
