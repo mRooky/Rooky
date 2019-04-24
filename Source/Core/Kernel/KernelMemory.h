@@ -28,6 +28,14 @@ static inline size_t Memcpy(void* dest, const T& value, size_t count = 1)
 	return size;
 }
 
+template<typename T>
+static inline size_t Memcpy(void* dest, const T* value, size_t count = 1)
+{
+	size_t size = sizeof(T) * count;
+	std::memcpy(dest, value, size);
+	return size;
+}
+
 } /* namespace Kernel */
 
 #endif /* SOURCE_CORE_KERNEL_KERNELMEMORY_H_ */
