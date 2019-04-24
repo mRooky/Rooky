@@ -5,14 +5,14 @@
  *      Author: rookyma
  */
 
-#include "AudioDevice.h"
+#include "OpenALDevice.h"
 
 #include "ExampleTexture.h"
 #include "KernelCompile.h"
 
 int main(void)
 {
-	Audio::Device device;
+	OpenAL::Device device;
 	device.Init();
 	Kernel::StringHash("Rook Win");
 	Example::Texture texture;

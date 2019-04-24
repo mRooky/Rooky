@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include "AudioListener.h"
+#include "OpenALListener.h"
 
-namespace Audio
+namespace OpenAL
 {
 
 Listener::Listener(Device& device):

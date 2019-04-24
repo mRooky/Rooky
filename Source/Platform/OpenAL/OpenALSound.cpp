@@ -5,11 +5,11 @@
  *      Author: rookyma
  */
 
-#include "AudioDevice.h"
-#include "AudioSound.h"
+#include "OpenALDevice.h"
+#include "OpenALSound.h"
 #include <cassert>
 
-namespace Audio
+namespace OpenAL
 {
 
 Sound::Sound(Device& device):

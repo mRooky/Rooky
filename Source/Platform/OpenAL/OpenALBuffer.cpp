@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#include "AudioBuffer.h"
-#include "AudioDevice.h"
+#include "OpenALBuffer.h"
+#include "OpenALDevice.h"
 
-namespace Audio
+namespace OpenAL
 {
 
 Buffer::Buffer(Device& device):

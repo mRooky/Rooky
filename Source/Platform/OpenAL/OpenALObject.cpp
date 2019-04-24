@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include "AudioObject.h"
+#include "OpenALObject.h"
 
-namespace Audio
+namespace OpenAL
 {
 
 Object::Object(Device& device):

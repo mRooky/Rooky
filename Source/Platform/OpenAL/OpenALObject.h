@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_AUDIO_AUDIOOBJECT_H_
-#define SOURCE_AUDIO_AUDIOOBJECT_H_
+#ifndef SOURCE_PLATFORM_OPENAL_OPENALOBJECT_H_
+#define SOURCE_PLATFORM_OPENAL_OPENALOBJECT_H_
 
 #include <AL/al.h>
 #include <AL/alc.h>
 
-namespace Audio
+namespace OpenAL
 {
 class Device;
 class Object
@@ -27,4 +27,4 @@ protected:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_AUDIO_AUDIOOBJECT_H_ */
+#endif /* SOURCE_PLATFORM_OPENAL_OPENALOBJECT_H_ */

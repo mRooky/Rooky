@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_AUDIO_AUDIOLISTENER_H_
-#define SOURCE_AUDIO_AUDIOLISTENER_H_
+#ifndef SOURCE_PLATFORM_OPENAL_OPENALLISTENER_H_
+#define SOURCE_PLATFORM_OPENAL_OPENALLISTENER_H_
 
-#include "AudioObject.h"
+#include "OpenALObject.h"
 
-namespace Audio
+namespace OpenAL
 {
 
 class Listener: public Object
@@ -22,4 +22,4 @@ public:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_AUDIO_AUDIOLISTENER_H_ */
+#endif /* SOURCE_PLATFORM_OPENAL_OPENALLISTENER_H_ */

@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_AUDIO_AUDIOBUFFER_H_
-#define SOURCE_AUDIO_AUDIOBUFFER_H_
+#ifndef SOURCE_PLATFORM_OPENAL_OPENALBUFFER_H_
+#define SOURCE_PLATFORM_OPENAL_OPENALBUFFER_H_
 
-#include "AudioObject.h"
+#include "OpenALObject.h"
 #include <cstdint>
 
-namespace Audio
+namespace OpenAL
 {
 class Buffer : public Object
 {
@@ -30,4 +30,4 @@ private:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_AUDIO_AUDIOBUFFER_H_ */
+#endif /* SOURCE_PLATFORM_OPENAL_OPENALBUFFER_H_ */

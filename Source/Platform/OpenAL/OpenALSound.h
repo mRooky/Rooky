@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_AUDIO_AUDIOSOUND_H_
-#define SOURCE_AUDIO_AUDIOSOUND_H_
+#ifndef SOURCE_PLATFORM_OPENAL_OPENALSOUND_H_
+#define SOURCE_PLATFORM_OPENAL_OPENALSOUND_H_
 
-#include "AudioObject.h"
+#include "OpenALObject.h"
 
-namespace Audio
+namespace OpenAL
 {
 class Buffer;
 class Sound : public Object
@@ -32,4 +32,4 @@ protected:
 
 } /* namespace Audio */
 
-#endif /* SOURCE_AUDIO_AUDIOSOUND_H_ */
+#endif /* SOURCE_PLATFORM_OPENAL_OPENALSOUND_H_ */
