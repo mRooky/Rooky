@@ -23,13 +23,13 @@ public:
 	inline bool operator==(const ColorBlend& other) const
 	{
 		return blendEnable == other.blendEnable
-		&& srcColorBlendFactor == other.srcColorBlendFactor
-		&& dstColorBlendFactor == other.dstColorBlendFactor
-		&& colorBlendOp == other.colorBlendOp
-		&& srcAlphaBlendFactor == other.srcAlphaBlendFactor
-		&& dstAlphaBlendFactor == other.dstAlphaBlendFactor
-		&& alphaBlendOp == other.alphaBlendOp
-		&& colorWriteMask == other.colorWriteMask;
+			&& srcColorBlendFactor == other.srcColorBlendFactor
+			&& dstColorBlendFactor == other.dstColorBlendFactor
+			&& colorBlendOp == other.colorBlendOp
+			&& srcAlphaBlendFactor == other.srcAlphaBlendFactor
+			&& dstAlphaBlendFactor == other.dstAlphaBlendFactor
+			&& alphaBlendOp == other.alphaBlendOp
+			&& colorWriteMask == other.colorWriteMask;
 	}
 
 	inline bool operator!=(const ColorBlend& other) const

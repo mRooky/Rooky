@@ -15,6 +15,7 @@
 namespace Core
 {
 class SubPolicy;
+class RenderTarget;
 class Policy
 {
 public:
@@ -33,6 +34,7 @@ public:
 
 protected:
 	std::vector<SubPolicy*> mSubPolicies = {};
+	std::vector<RenderTarget*> mRenderTargets = {};
 
 protected:
 	GHI::RenderPass* mRenderPass = nullptr;
