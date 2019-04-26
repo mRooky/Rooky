@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MATH_RENDERRECT_HPP_
 #define SOURCE_CORE_MATH_RENDERRECT_HPP_
 
-#include "MathExtent.hpp"
+#include "MathExtent.h"
 #include "MathVector.h"
 
 namespace Math
@@ -53,8 +53,8 @@ public:
 	inline bool IsValid(void) const { return extent.GetArea() > 0; }
 
 public:
-	Vector2_t<F> offset;
-    Extent2_t<I> extent;
+	Vector2_t<F> offset = {};
+    Extent2_t<I> extent = {};
 };
 
 typedef Rect2D_t<int32_t, int32_t> Rect2Di;

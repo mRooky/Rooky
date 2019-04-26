@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MATH_MATHPLANE_H_
 #define SOURCE_CORE_MATH_MATHPLANE_H_
 
-#include "MathFloat.hpp"
+#include "MathFloat.h"
 #include "MathVector.h"
 
 namespace Math

@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "MathFloat.hpp"
+#include "MathFloat.h"
 #include "GHIRasterization.h"
 
 namespace GHI

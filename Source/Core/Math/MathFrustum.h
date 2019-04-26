@@ -10,7 +10,7 @@
 
 #include "MathMatrix.h"
 #include "MathPlane.h"
-#include "MathFloat.hpp"
+#include "MathFloat.h"
 
 namespace Math
 {

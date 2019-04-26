@@ -9,7 +9,7 @@
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
 #include "GHIFormat.h"
-#include "MathExtent.hpp"
+#include "MathExtent.h"
 #include "GHISampler.h"
 #include "CoreInterface.h"
 #include <vector>

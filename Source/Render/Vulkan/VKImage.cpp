@@ -14,7 +14,7 @@
 #include "VKOperator.h"
 #include "VKDevice.h"
 
-#include "MathBits.hpp"
+#include "MathBits.h"
 
 #include "VulkanImage.h"
 #include "VulkanImageView.h"

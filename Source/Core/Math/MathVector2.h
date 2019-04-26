@@ -18,21 +18,25 @@ class Vector2_t
 {
 public:
 	Vector2_t(void) = default;
-
-public:
-	template<typename O>
-	Vector2_t(O x, O y) { Set(x, y); }
+	Vector2_t(T x, T y) { Set(x, y); }
+	~Vector2_t(void) = default;
 
 public:
 	inline T& operator[](size_t index) { return *(&x + index); }
 	inline const T& operator[](size_t index) const { return *(&x + index); }
 
 public:
+	inline void Set(T x, T y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+
 	template<typename O>
-	void Set(O x, O y)
+	inline void From(O x, O y)
 	{
 		this->x = static_cast<T>(x);
-		this->y = static_cast<T>(t);
+		this->y = static_cast<T>(y);
 	}
 
 public:

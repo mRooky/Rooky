@@ -17,13 +17,22 @@ template<typename T>
 class Vector3_t
 {
 public:
-	Vector3_t(T X = 0, T Y = 0, T Z = 0) : x(X), y(Y), z(Z) {}
+	Vector3_t(void) = default;
+	Vector3_t(T x, T y, T z) { Set(x, y, z); }
 	~Vector3_t(void) = default;
 
 public:
 	inline T& operator[](size_t index) { return *(&x + index); }
 	inline const T& operator[](size_t index) const { return *(&x + index); }
 	inline T Length(void) const { return std::sqrt(x * x + y * y + z * z); }
+
+public:
+	inline void Set(T x, T y, T z)
+	{
+		this->x = x;
+		this->y = y;
+		this->y = y;
+	}
 
 public:
 	union

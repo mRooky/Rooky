@@ -12,7 +12,7 @@
 #include "GHIObject.h"
 #include "GHIColorBlend.h"
 #include "PlatformWindow.h"
-#include "MathExtent.hpp"
+#include "MathExtent.h"
 
 #include <cstdint>
 #include <vector>

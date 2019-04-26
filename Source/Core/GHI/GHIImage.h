@@ -9,7 +9,7 @@
 #define SOURCE_CORE_GHI_RENDERIMAGE_H_
 
 #include "GHILayout.h"
-#include "MathColor.hpp"
+#include "MathColor.h"
 #include "GHIMemory.h"
 #include "GHIColorBlend.h"
 

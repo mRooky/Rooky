@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERMATH_RENDERHALF_H_
 #define SOURCE_CORE_GHI_RENDERMATH_RENDERHALF_H_
 
-#include "MathFloat.hpp"
+#include "MathFloat.h"
 
 namespace Math
 {

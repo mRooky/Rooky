@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORESTREAMTYPE_H_
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
-#include "MathColor.hpp"
+#include "MathColor.h"
 #include "MathVector.h"
 #include <cstdint>
 #include <vector>

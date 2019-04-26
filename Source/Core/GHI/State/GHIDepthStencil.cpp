@@ -6,7 +6,7 @@
  */
 
 #include "GHIDepthStencil.h"
-#include "MathFloat.hpp"
+#include "MathFloat.h"
 
 namespace GHI
 {
