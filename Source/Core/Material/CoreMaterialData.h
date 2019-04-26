@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_MATERIAL_COREMATERIALDATA_H_
 #define SOURCE_CORE_MATERIAL_COREMATERIALDATA_H_
 
+#include "MathDefine.h"
 #include "MathVector.h"
 
 namespace Core

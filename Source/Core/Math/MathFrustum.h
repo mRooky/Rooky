@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_MATH_MATHFRUSTUM_H_
 #define SOURCE_CORE_MATH_MATHFRUSTUM_H_
 
+#include "MathMatrix.h"
 #include "MathPlane.h"
 #include "MathFloat.hpp"
-#include "MathMatrix.hpp"
 
 namespace Math
 {
