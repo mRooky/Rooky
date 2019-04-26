@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERMATH_RENDERAABB_H_
 #define SOURCE_CORE_GHI_RENDERMATH_RENDERAABB_H_
 
-#include "MathVector.hpp"
+#include "MathVector.h"
 
 namespace Math
 {

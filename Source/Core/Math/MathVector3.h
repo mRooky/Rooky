@@ -18,6 +18,7 @@ class Vector3_t
 {
 public:
 	Vector3_t(T X = 0, T Y = 0, T Z = 0) : x(X), y(Y), z(Z) {}
+	~Vector3_t(void) = default;
 
 public:
 	inline T& operator[](size_t index) { return *(&x + index); }
@@ -40,6 +41,55 @@ public:
 };
 
 typedef Vector3_t<float> Vector3f;
+
+// Non-Member Static Functions
+template<typename T>
+static inline Vector3_t<T> operator+(const Vector3_t<T>& vector, T value)
+{
+	return Vector3_t<T>(vector.x + value, vector.y + value, vector.z + value);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator-(const Vector3_t<T>& vector, T value)
+{
+	return Vector3_t<T>(vector.x - value, vector.y - value, vector.z - value);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator*(const Vector3_t<T>& vector, T value)
+{
+	return Vector3_t<T>(vector.x * value, vector.y * value, vector.z * value);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator/(const Vector3_t<T>& vector, T value)
+{
+	return Vector3_t<T>(vector.x / value, vector.y / value, vector.z / value);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator+(const Vector3_t<T>& vector, const Vector3_t<T>& other)
+{
+	return Vector3_t<T>(vector.x + other.x, vector.y + other.y, vector.z + other.z);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator-(const Vector3_t<T>& vector, const Vector3_t<T>& other)
+{
+	return Vector3_t<T>(vector.x - other.x, vector.y - other.y, vector.z - other.z);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator*(const Vector3_t<T>& vector, const Vector3_t<T>& other)
+{
+	return Vector3_t<T>(vector.x * other.x, vector.y * other.y, vector.z * other.z);
+}
+
+template<typename T>
+static inline Vector3_t<T> operator/(const Vector3_t<T>& vector, const Vector3_t<T>& other)
+{
+	return Vector3_t<T>(vector.x / other.x, vector.y / other.y, vector.z / other.z);
+}
 
 } /* namespace Math */
 
