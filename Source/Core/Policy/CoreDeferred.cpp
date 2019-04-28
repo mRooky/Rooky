@@ -5,20 +5,18 @@
  *      Author: rookyma
  */
 
-#include <Policy/CoreDeferred.h>
+#include "CoreDeferred.h"
 
 namespace Core
 {
 
-Deferred::Deferred()
+Deferred::Deferred(void):
+		Policy(PolicyType::FORWARD)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Deferred::~Deferred()
+Deferred::~Deferred(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

@@ -28,7 +28,10 @@ public:
 public:
 	virtual void CalcHash(void) override
 	{
-		mHash = std::hash<std::string>()(mString);
+		if (mHash == 0)
+		{
+			mHash = std::hash<std::string>()(mString);
+		}
 	}
 
 public:

@@ -14,6 +14,7 @@
 
 namespace Core
 {
+class Camera;
 class System;
 class Viewport;
 class Renderable;
@@ -32,6 +33,7 @@ public:
 
 public:
 	void AddRenderable(Renderable* renderable);
+	std::vector<Renderable*> GetVisibility(const Camera& camera);
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }

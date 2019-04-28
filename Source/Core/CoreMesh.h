@@ -44,6 +44,7 @@ public:
 public:
 	inline Stream* GetStream(void) { return mStream; }
 	inline Math::AABB* GetAABB(void) { return &mAABB; }
+	inline const Math::AABB& GetAABB(void) const { return mAABB; }
 
 protected:
 	Math::AABB mAABB = {};

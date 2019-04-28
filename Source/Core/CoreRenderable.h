@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_CORERENDERABLE_H_
 #define SOURCE_CORE_CORERENDERABLE_H_
 
+#include "MathFrustum.h"
 #include "CoreBase.h"
 
 namespace Core
@@ -18,6 +19,9 @@ class Renderable : public Base
 public:
 	Renderable(void);
 	virtual ~Renderable(void) override;
+
+public:
+	virtual bool IsVisible(const Math::Frustum& frustum) = 0;
 
 public:
 	inline Material* GetMaterial(void) const { return mMaterial; }

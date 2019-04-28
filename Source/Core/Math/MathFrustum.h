@@ -14,7 +14,7 @@
 
 namespace Math
 {
-
+class AABB;
 class Frustum
 {
 public:
@@ -23,6 +23,9 @@ public:
 
 public:
 	Plane GetPlane(FrustumPlane type);
+
+public:
+	bool Contain(const AABB& aabb) const { return true; }
 
 public:
 	inline void SetFov(Float fov) { mFov = fov; }

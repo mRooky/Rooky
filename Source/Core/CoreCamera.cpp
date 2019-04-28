@@ -6,6 +6,7 @@
  */
 
 #include "CoreCamera.h"
+#include <cassert>
 
 namespace Core
 {
@@ -16,6 +17,14 @@ Camera::Camera(void)
 
 Camera::~Camera(void)
 {
+}
+
+void Camera::Update(void)
+{
+	if (mUniform != nullptr)
+	{
+
+	}
 }
 
 } /* namespace Core */

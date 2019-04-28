@@ -25,6 +25,9 @@ public:
 	virtual ~SubMesh(void);
 
 public:
+	virtual bool IsVisible(const Math::Frustum& frustum) override;
+
+public:
 	inline void SetFirstIndex(uint32_t first) { mFirstIndex = first; }
 	inline void SetIndexCount(uint32_t count) { mIndexCount = count; }
 	inline void SetFirstVertex(uint32_t first) { mFirstVertex = first; }

@@ -11,6 +11,8 @@
 #include "CoreScene.h"
 #include "CoreSystem.h"
 #include "CoreViewport.h"
+#include "CoreCamera.h"
+#include "CoreRenderable.h"
 
 #include "UtilityRelease.h"
 #include "UtilitySearch.h"
@@ -57,6 +59,21 @@ void Scene::AddRenderable(Renderable* renderable)
 	{
 		mRenderables.push_back(renderable);
 	}
+}
+
+std::vector<Renderable*> Scene::GetVisibility(const Camera& camera)
+{
+	std::vector<Renderable*> renderables;
+	const auto& frustum = camera.GetFrustum();
+	for (auto renderable : mRenderables)
+	{
+		bool visible = renderable->IsVisible(frustum);
+		if (true == visible)
+		{
+			renderables.push_back(renderable);
+		}
+	}
+	return renderables;
 }
 
 } /* namespace Core */

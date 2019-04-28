@@ -64,7 +64,9 @@ void CommandList::Create(bool primary)
 
 void CommandList::Begin(void)
 {
+	assert(mBegin == false);
 	assert(mCommandBuffer != nullptr);
+	mBegin = true;
 	mCommandBuffer->Begin(VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT);
 }
 
@@ -211,7 +213,9 @@ void CommandList::EndPass(void)
 
 void CommandList::End(void)
 {
+	assert(mBegin == true);
 	assert(mCommandBuffer != nullptr);
+	mBegin = false;
 	mCommandBuffer->End();
 }
 

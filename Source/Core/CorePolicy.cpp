@@ -10,11 +10,15 @@
 #include "UtilityRelease.h"
 
 #include "GHIRenderPass.h"
+#include "GHICommandList.h"
+
+#include <cassert>
 
 namespace Core
 {
 
-Policy::Policy(void)
+Policy::Policy(PolicyType type):
+		mType(type)
 {
 }
 
@@ -23,6 +27,11 @@ Policy::~Policy(void)
 	delete mRenderPass;
 	mRenderPass = nullptr;
 	Utility::Release(mSubPolicies);
+}
+
+void Policy::Render(GHI::CommandList* command, const std::vector<Renderable*>& renderables)
+{
+	assert(command->IsBegin());
 }
 
 } /* namespace Core */

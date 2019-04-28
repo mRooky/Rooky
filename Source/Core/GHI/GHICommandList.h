@@ -50,9 +50,11 @@ public:
 	virtual void End(void) = 0;
 
 public:
+	inline bool IsBegin(void) const { return mBegin; }
 	inline CommandPool* GetCommandPool(void) const { return mCommandPool; }
 
 protected:
+	bool mBegin = false;
 	CommandPool* mCommandPool = nullptr;
 
 };
