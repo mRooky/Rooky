@@ -23,9 +23,16 @@ public:
 
 public:
 	template<typename O>
-	Rect2D_t(const Extent2_t<O>& extent) { SetExtent(extent); }
+	Rect2D_t(const Extent2_t<O>& extent)
+	{
+		SetExtent(extent);
+	}
+
 	template<typename O>
-	Rect2D_t(O width, O height) { SetExtent(width, height); }
+	Rect2D_t(O width, O height)
+	{
+		SetExtent(width, height);
+	}
 
 public:
 	template<typename O>
@@ -54,7 +61,7 @@ public:
 
 public:
 	Vector2_t<F> offset = {};
-    Extent2_t<I> extent = {};
+	Extent2_t<I> extent = {};
 };
 
 typedef Rect2D_t<int32_t, int32_t> Rect2Di;

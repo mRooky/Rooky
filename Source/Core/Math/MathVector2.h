@@ -18,8 +18,10 @@ class Vector2_t
 {
 public:
 	Vector2_t(void) = default;
-	Vector2_t(T x, T y) { Set(x, y); }
 	~Vector2_t(void) = default;
+
+public:
+	Vector2_t(T x, T y) { Set(x, y); }
 
 public:
 	inline T& operator[](size_t index) { return *(&x + index); }
