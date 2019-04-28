@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREMOVABLE_H_
 #define SOURCE_CORE_COREMOVABLE_H_
 
+#include "MathTransform.h"
 #include "CoreBase.h"
-#include "CoreTransform.h"
 
 namespace Core
 {
@@ -21,10 +21,10 @@ public:
 	virtual ~Movable(void) override;
 
 public:
-	inline Transform* GetTransform(void) { return &mTransform; }
+	inline Math::Transform* GetTransform(void) { return &mTransform; }
 
 protected:
-	Transform mTransform = {};
+	Math::Transform mTransform = {};
 };
 
 } /* namespace Core */

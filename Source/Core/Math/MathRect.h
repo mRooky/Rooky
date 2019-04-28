@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATH_RENDERRECT_HPP_
 #define SOURCE_CORE_MATH_RENDERRECT_HPP_
 
-#include "MathExtent.h"
 #include "MathVector.h"
+#include "MathExtent2.h"
 
 namespace Math
 {

@@ -10,7 +10,7 @@
 
 #include "MathRect.h"
 #include "MathColor.h"
-#include "MathExtent.h"
+#include "MathExtent3.h"
 #include "MathVector.h"
 
 namespace Direct

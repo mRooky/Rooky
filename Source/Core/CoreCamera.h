@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_CORECAMERA_H_
 #define SOURCE_CORE_CORECAMERA_H_
 
+#include "CoreBase.h"
 #include "MathFrustum.h"
 
 namespace Core
@@ -19,11 +20,11 @@ enum class CameraType : uint32_t
 	CAMERA_TYPE_UNKNOWN = ~0u
 };
 
-class Camera
+class Camera : public Base
 {
 public:
 	Camera(void);
-	virtual ~Camera(void);
+	virtual ~Camera(void) override;
 
 public:
 	inline void SetType(CameraType type) { mType = type; }

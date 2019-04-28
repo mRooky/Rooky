@@ -9,6 +9,7 @@
 #define SOURCE_CORE_RENDER_RENDERVIEWPORT_HPP_
 
 #include "MathRect.h"
+#include "MathExtent3.h"
 
 namespace Math
 {
