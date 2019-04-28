@@ -52,7 +52,6 @@ protected:
 
 protected:
 	std::vector<SubPolicy*> mSubPolicies = {};
-	std::vector<RenderTarget*> mRenderTargets = {};
 
 protected:
 	GHI::RenderPass* mRenderPass = nullptr;
