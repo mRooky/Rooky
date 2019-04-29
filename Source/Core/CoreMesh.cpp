@@ -43,7 +43,7 @@ bool Mesh::Compile(void)
 	Index* index = buffer_manager->CreateIndex();
 	mStream->GetIndexBuffer()->SetIndex(index);
 	Vertex* vertex = buffer_manager->CreateVertex();
-	mStream->GetVertexBuffer()->SetVertex(vertex);
+	mStream->GetVertexBuffer()->SetPosition(vertex);
 	return mStream->UploadData();
 }
 

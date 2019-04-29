@@ -38,15 +38,12 @@ public:
 
 public:
 	inline Index* GetIndex(void) const { return mIndex; }
-	inline GHI::IndexType GetType(void) const { return mType; }
 
 public:
 	inline void SetIndex(Index* index) { mIndex = index; }
-	inline void SetType(GHI::IndexType type) { mType = type; }
 
 public:
 	Index* mIndex = nullptr;
-	GHI::IndexType mType = GHI::IndexType::INDEX_TYPE_UNKNOWN;
 };
 
 class VertexBuffer : public BaseBuffer
@@ -56,11 +53,16 @@ public:
 	~VertexBuffer(void) = default;
 
 public:
-	inline Vertex* GetVertex(void) const { return mVertex; }
-	inline void SetVertex(Vertex* vertex) { mVertex = vertex; }
+	inline Vertex* GetPosition(void) const { return mPosition; }
+	inline Vertex* GetAttribute(void) const { return mAttribute; }
 
 public:
-	Vertex* mVertex = nullptr;
+	inline void SetPosition(Vertex* position) { mPosition = position; }
+	inline void SetAttribute(Vertex* attribute) { mAttribute = attribute; }
+
+public:
+	Vertex* mPosition = nullptr; // for Z pre_pass, Format:RGB32SFLOAT
+	Vertex* mAttribute = nullptr;
 };
 
 } /* namespace Core */

@@ -42,7 +42,7 @@ namespace GHI
 		INDEX_TYPE_UNKNOWN = ~0u
 	};
 
-	enum ShaderStage : uint32_t
+	enum class ShaderStage : uint32_t
 	{
 		SHADER_STAGE_VERTEX,
 		SHADER_STAGE_HULL,

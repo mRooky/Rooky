@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERINLINE_H_
 #define SOURCE_CORE_GHI_RENDERINLINE_H_
 
-#include <GHIImageLayout.h>
+#include "GHIEnum.h"
 #include <cstddef>
 #include <cassert>
 

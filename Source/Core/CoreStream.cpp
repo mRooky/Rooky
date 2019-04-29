@@ -46,7 +46,7 @@ void Stream::UploadIndex(void)
 		assert(index->IsValid());
 		assert(index_data->IsValid());
 		const size_t index_count = mParent->GetIndexCount();
-		GHI::IndexType index_type = mIndexBuffer.GetType();
+		GHI::IndexType index_type = index->GetType();
 		assert(index_type != GHI::IndexType::INDEX_TYPE_UNKNOWN);
 		const size_t buffer_offset = mIndexBuffer.GetOffset();
 		const size_t buffer_size = index_count * GHI::GetIndexTypeSize(index_type);
@@ -57,7 +57,7 @@ void Stream::UploadIndex(void)
 
 void Stream::UploadVertex(void)
 {
-	Vertex* vertex = mVertexBuffer.GetVertex();
+	Vertex* vertex = mVertexBuffer.GetPosition();
 	if (nullptr != vertex)
 	{
 		assert(vertex->IsValid());
@@ -76,7 +76,7 @@ void Stream::UploadVertex(void)
 const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 {
 	const size_t stream_count = mStreamData.GetValidCount();
-	Vertex* vertex = mVertexBuffer.GetVertex();
+	Vertex* vertex = mVertexBuffer.GetPosition();
 	const auto& layout = vertex->GetLayout();
 	const size_t element_count = layout.GetSemanticCount();
 	assert(element_count == stream_count);
