@@ -75,11 +75,11 @@ static inline const char* GetTypeName(SemanticType type)
 	}
 }
 
-class SemanticElement
+class VertexSemantic
 {
 public:
-	SemanticElement(Semantic semantic, SemanticType type) { Set(semantic, type); }
-	~SemanticElement(void) = default;
+	VertexSemantic(Semantic semantic, SemanticType type) { Set(semantic, type); }
+	~VertexSemantic(void) = default;
 
 public:
 	inline void Set(Semantic semantic, SemanticType type)
@@ -89,7 +89,7 @@ public:
 	}
 
 public:
-	inline bool operator==(const SemanticElement& other) const
+	inline bool operator==(const VertexSemantic& other) const
 	{
 		return element == other.element;
 	}

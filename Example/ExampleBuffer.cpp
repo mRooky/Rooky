@@ -173,8 +173,8 @@ void Buffer::CreateVertexBuffer(void)
 	};
 
 	GHI::VertexLayout layout;
-	layout.Push(GHI::Semantic::POSITION, GHI::SemanticType::FLOAT3);
-	layout.Push(GHI::Semantic::TEXCOORD, GHI::SemanticType::FLOAT2);
+	layout.PushSemantic(GHI::Semantic::POSITION, GHI::SemanticType::FLOAT3);
+	layout.PushSemantic(GHI::Semantic::TEXCOORD, GHI::SemanticType::FLOAT2);
 
 	const size_t count = vertex_buffer.size();
 	const uint32_t size = count * sizeof(Vertex);

@@ -23,17 +23,17 @@ namespace GHI
 	void InputLayout::PushVertexLayout(uint32_t binding, const VertexLayout& layout)
 	{
 		VertexLayout* exist = GetVertexLayoutBinding(binding);
-		const size_t count = layout.GetSemanticElementCount();
+		const size_t count = layout.GetSemanticCount();
 		for (size_t index = 0; index < count; ++index)
 		{
-			const auto& semantic = layout.GetSemanticElement(index);
-			exist->Push(semantic.semantic, semantic.type);
+			const auto& semantic = layout.GetSemantic(index);
+			exist->PushSemantic(semantic.semantic, semantic.type);
 		}
 	}
 
 	void InputLayout::PushVertexLayout(uint32_t binding, Semantic semantic, SemanticType type)
 	{
 		VertexLayout* layout = GetVertexLayoutBinding(binding);
-		layout->Push(semantic, type);
+		layout->PushSemantic(semantic, type);
 	}
 }

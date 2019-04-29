@@ -78,7 +78,7 @@ const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 	const size_t stream_count = mStreamData.GetValidCount();
 	Vertex* vertex = mVertexBuffer.GetVertex();
 	const auto& layout = vertex->GetLayout();
-	const size_t element_count = layout.GetSemanticElementCount();
+	const size_t element_count = layout.GetSemanticCount();
 	assert(element_count == stream_count);
 	if (element_count == stream_count)
 	{

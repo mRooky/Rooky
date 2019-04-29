@@ -35,10 +35,10 @@ void InputLayout::CreateInputState(const GHI::InputLayout* layout)
 			input_binding->stride = vertex_layout.GetStride();
 
 			uint32_t offset = 0;
-			uint32_t attribute_count = vertex_layout.GetSemanticElementCount();
+			uint32_t attribute_count = vertex_layout.GetSemanticCount();
 			for(uint32_t location = 0; location < attribute_count; ++location)
 			{
-				auto semantic = vertex_layout.GetSemanticElement(location);
+				auto semantic = vertex_layout.GetSemantic(location);
 				auto semantic_type = semantic.GetSemanticType();
 				VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
 				input_attribute->offset = offset;

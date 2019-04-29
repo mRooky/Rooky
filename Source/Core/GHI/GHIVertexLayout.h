@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_GHIVERTEXLAYOUT_H_
 #define SOURCE_CORE_GHI_GHIVERTEXLAYOUT_H_
 
-#include "GHISemantic.h"
+#include "GHIVertexSemantic.h"
 #include <vector>
 
 namespace GHI
@@ -21,45 +21,45 @@ public:
 	~VertexLayout(void) = default;
 
 public:
-	inline void Push(const SemanticElement& element)
+	inline void PushSemantic(const VertexSemantic& element)
 	{
-		Push(element.GetSemantic(), element.GetSemanticType());
+		PushSemantic(element.GetSemantic(), element.GetSemanticType());
 	}
 
-	inline void Push(Semantic semantic, SemanticType type)
+	inline void PushSemantic(Semantic semantic, SemanticType type)
 	{
 		mStride += GetTypeSize(type);
-		mSemanticElements.push_back(SemanticElement(semantic, type));
+		mVertexSemantics.push_back(VertexSemantic(semantic, type));
 	}
 
 public:
 	inline VertexLayout& operator=(const VertexLayout& other)
 	{
 		mStride = other.mStride;
-		mSemanticElements = other.mSemanticElements;
+		mVertexSemantics = other.mVertexSemantics;
 		return *this;
 	}
 
 	inline bool operator==(const VertexLayout& other) const
 	{
 		return mStride == other.mStride
-			&& mSemanticElements == other.mSemanticElements;
+			&& mVertexSemantics == other.mVertexSemantics;
 	}
 
 public:
 	inline size_t GetStride(void) const { return mStride; }
-	inline size_t GetSemanticElementCount(void) const { return mSemanticElements.size(); }
-	inline const SemanticElement& GetSemanticElement(size_t index) const
+	inline size_t GetSemanticCount(void) const { return mVertexSemantics.size(); }
+	inline const VertexSemantic& GetSemantic(size_t index) const
 	{
-		return mSemanticElements.at(index);
+		return mVertexSemantics.at(index);
 	}
 
 public:
-	inline bool IsValid(void) const { return mSemanticElements.size() > 0; }
+	inline bool IsValid(void) const { return mVertexSemantics.size() > 0; }
 
 protected:
 	size_t mStride = 0;
-	std::vector<SemanticElement> mSemanticElements;
+	std::vector<VertexSemantic> mVertexSemantics;
 };
 
 } /* namespace GHI */
