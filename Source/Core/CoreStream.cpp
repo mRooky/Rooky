@@ -6,7 +6,7 @@
  */
 
 #include "GHIInline.h"
-#include "GHILayout.h"
+#include "GHIImageLayout.h"
 #include "CoreStream.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -61,10 +61,10 @@ void Stream::UploadVertex(void)
 	if (nullptr != vertex)
 	{
 		assert(vertex->IsValid());
-		GHI::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
-		assert(vertex_layout != nullptr);
+		GHI::VertexElement* vertex_element = mVertexBuffer.GetElement();
+		assert(vertex_element != nullptr);
 		Data vertex_data = {};
-		const size_t vertex_stride = vertex_layout->GetStride();
+		const size_t vertex_stride = vertex_element->GetStride();
 		const size_t vertex_count = mParent->GetVertexCount();
 		const size_t buffer_size = vertex_stride * vertex_count;
 		vertex_data.AllocateMemory(buffer_size);
@@ -77,8 +77,8 @@ void Stream::UploadVertex(void)
 const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 {
 	const size_t stream_count = mStreamData.GetValidCount();
-	GHI::VertexLayout* vertex_layout = mVertexBuffer.GetLayout();
-	const size_t element_count = vertex_layout->GetElementCount();
+	GHI::VertexElement* vertex_element = mVertexBuffer.GetElement();
+	const size_t element_count = vertex_element->GetSemanticElementCount();
 	assert(element_count == stream_count);
 	if (element_count == stream_count)
 	{

@@ -172,16 +172,13 @@ void Buffer::CreateVertexBuffer(void)
 			{ {  x, -y, z }, { 1.0f, 0.0f } }
 	};
 
-	std::vector<GHI::Element> elements =
-	{
-			GHI::Element(0, 0, GHI::ElementType::ELEMENT_TYPE_FLOAT3),
-			GHI::Element(0, 1, GHI::ElementType::ELEMENT_TYPE_FLOAT2)
-	};
+	GHI::VertexElement element;
+	element.Push(GHI::Semantic::POSITION, GHI::SemanticType::FLOAT3);
+	element.Push(GHI::Semantic::TEXCOORD, GHI::SemanticType::FLOAT2);
 
-	auto layout = buffer_manager->CreateVertexLayout(elements);
 	const size_t count = vertex_buffer.size();
 	const uint32_t size = count * sizeof(Vertex);
-	mVertex->Create(layout, count);
+	mVertex->Create(&element, count);
 	mVertex->Write(vertex_buffer.data(), 0, size);
 }
 

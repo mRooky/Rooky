@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#include "GHILayout.h"
 #include "VKVertexLayout.h"
+#include "GHIVertexLayout.h"
 
 #include <cassert>
 #include <iostream>
@@ -22,42 +22,44 @@ VertexLayout::~VertexLayout(void)
 {
 }
 
-void VertexLayout::CreateInputState(GHI::VertexLayout* layout)
+void VertexLayout::CreateInputState(const GHI::VertexLayout* layout)
 {
 	assert(layout != nullptr);
 	if (layout->IsValid())
 	{
-		uint32_t offset = 0;
-		const size_t count = layout->GetElementCount();
-		for (size_t index = 0; index < count; ++index)
+		const size_t binding_count = layout->GetVertexElementCount();
+		for (size_t binding = 0; binding < binding_count; ++binding)
 		{
-			auto element = layout->GetElement(index);
-			uint32_t binding = element.GetBinding();
-			auto type = element.GetType();
+			auto element = layout->GetVertexElement(binding);
 			VkVertexInputBindingDescription* input_binding = mInputStateInfo.GetBinding(binding);
-			input_binding->stride += GHI::Element::GetTypeSize(type);
+			input_binding->stride = element.GetStride();
 
-			uint32_t location = element.GetLocation();
-			VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
-			input_attribute->offset = offset;
-			input_attribute->format = VertexLayout::GetElementFormat(type);
-
-			offset += GHI::Element::GetTypeSize(type);
+			uint32_t offset = 0;
+			uint32_t attribute_count = element.GetSemanticElementCount();
+			for(uint32_t location = 0; location < attribute_count; ++location)
+			{
+				auto semantic = element.GetSemanticElement(location);
+				auto semantic_type = semantic.GetSemanticType();
+				VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
+				input_attribute->offset = offset;
+				input_attribute->format = VertexLayout::GetElementFormat(semantic_type);
+				offset += GHI::GetTypeSize(semantic_type);
+			}
 		}
 	}
 }
 
-VkFormat VertexLayout::GetElementFormat(GHI::ElementType type)
+VkFormat VertexLayout::GetElementFormat(GHI::SemanticType type)
 {
 	switch(type)
 	{
-	case GHI::ElementType::ELEMENT_TYPE_FLOAT1:
+	case GHI::SemanticType::FLOAT1:
 		return VK_FORMAT_R32_SFLOAT;
-	case GHI::ElementType::ELEMENT_TYPE_FLOAT2:
+	case GHI::SemanticType::FLOAT2:
 		return VK_FORMAT_R32G32_SFLOAT;
-	case GHI::ElementType::ELEMENT_TYPE_FLOAT3:
+	case GHI::SemanticType::FLOAT3:
 		return VK_FORMAT_R32G32B32_SFLOAT;
-	case GHI::ElementType::ELEMENT_TYPE_FLOAT4:
+	case GHI::SemanticType::FLOAT4:
 		return VK_FORMAT_R32G32B32A32_SFLOAT;
 	default:
 		assert(false);

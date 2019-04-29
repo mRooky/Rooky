@@ -8,7 +8,6 @@
 #ifndef SOURCE_CORE_GHI_RENDERLAYOUT_H_
 #define SOURCE_CORE_GHI_RENDERLAYOUT_H_
 
-#include "GHIElement.h"
 #include "GHIEnum.h"
 #include "GHIFormat.h"
 #include "MathExtent3.h"
@@ -49,33 +48,6 @@ public:
 public:
 	Format mFormat = Format::FORMAT_UNDEFINED;
 	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
-};
-
-class VertexLayout
-{
-public:
-	VertexLayout(void) = default;
-	~VertexLayout(void) { mElements.clear(); }
-
-public:
-	void AppendElement(const Element& element);
-	void SetElement(const std::vector<GHI::Element>& elements);
-
-public:
-	inline bool operator==(const VertexLayout& other) const { return mElements == other.mElements; }
-
-public:
-	inline const std::vector<Element>& GetElements(void) const { return mElements; }
-
-public:
-	inline size_t GetStride(void) const { return mStride; }
-	inline bool IsValid(void) const { return mElements.size() > 0; }
-	inline size_t GetElementCount(void) const { return mElements.size(); }
-	inline const Element& GetElement(uint32_t index) const { return mElements.at(index); }
-
-protected:
-	size_t mStride = 0;
-	std::vector<Element> mElements;
 };
 
 }

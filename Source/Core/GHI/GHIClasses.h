@@ -27,12 +27,12 @@ class PipelineLayout;
 class CommandPool;
 class CommandList;
 class Sampler;
-class Element;
 class Draw;
 class BindingSet;
 class BindingLayout;
-class VertexLayout;
 class ImageLayout;
+class VertexLayout;
+class VertexElement;
 
 }
 

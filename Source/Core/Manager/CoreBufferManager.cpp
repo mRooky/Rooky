@@ -6,9 +6,7 @@
  */
 
 #include "GHIDevice.h"
-#include "GHIElement.h"
 #include "GHIFactory.h"
-#include "GHILayout.h"
 #include "CoreBufferManager.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -32,7 +30,6 @@ BufferManager::~BufferManager(void)
 	Utility::Release(mIndexes);
 	Utility::Release(mVertexes);
 	Utility::Release(mUniforms);
-	Utility::Release(mVertexLayouts);
 }
 
 Index* BufferManager::CreateIndex(void)
@@ -54,31 +51,6 @@ Uniform* BufferManager::CreateUniform(void)
 	Uniform* uniform = new Uniform(this);
 	mUniforms.push_back(uniform);
 	return uniform;
-}
-
-GHI::VertexLayout* BufferManager::CreateVertexLayout(const std::vector<GHI::Element>& elements)
-{
-	GHI::VertexLayout* layout = GetVertexLayout(elements);
-	if (layout == nullptr)
-	{
-		layout = new GHI::VertexLayout;
-		layout->SetElement(elements);
-		mVertexLayouts.push_back(layout);
-	}
-	return layout;
-}
-
-GHI::VertexLayout* BufferManager::GetVertexLayout(const std::vector<GHI::Element>& elements)
-{
-	for (auto layout : mVertexLayouts)
-	{
-		const auto& list = layout->GetElements();
-		if (elements == list)
-		{
-			return layout;
-		}
-	}
-	return nullptr;
 }
 
 } /* namespace Core */

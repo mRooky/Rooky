@@ -8,7 +8,6 @@
 #ifndef SOURCE_CORE_CORESTREAM_H_
 #define SOURCE_CORE_CORESTREAM_H_
 
-#include "GHIElement.h"
 #include "CoreStreamType.h"
 #include "CoreMeshBuffer.h"
 #include "CoreStreamData.h"

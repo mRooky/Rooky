@@ -11,6 +11,7 @@
 #include "GHIClasses.h"
 #include "GHIFormat.h"
 #include "GHIUsageType.h"
+#include "GHIVertexElement.h"
 #include "CoreBuffer.h"
 #include <cstdint>
 #include <vector>
@@ -28,12 +29,12 @@ public:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(GHI::VertexLayout* layout, uint32_t count);
-	void Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType usage);
+	void Create(GHI::VertexElement* element, uint32_t count);
+	void Create(GHI::VertexElement* element, uint32_t count, GHI::UsageType usage);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
-	inline GHI::VertexLayout* GetLayout(void) const { return mLayout; }
+	inline const GHI::VertexElement& GetElement(void) const { return mElement; }
 
 private:
 	void CreateRenderBuffer(GHI::UsageType usage);
@@ -43,7 +44,7 @@ protected:
 
 protected:
 	uint32_t mCount = 0;
-	GHI::VertexLayout* mLayout = nullptr;
+	GHI::VertexElement mElement = {};
 };
 
 } /* namespace Core */

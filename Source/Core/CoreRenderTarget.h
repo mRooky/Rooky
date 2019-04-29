@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORERENDERTARGET_H_
 #define SOURCE_CORE_CORERENDERTARGET_H_
 
+#include <GHIImageLayout.h>
 #include "GHIClasses.h"
-#include "GHILayout.h"
 #include "GHIUsageType.h"
 #include "CoreResource.h"
 

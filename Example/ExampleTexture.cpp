@@ -148,8 +148,8 @@ void Texture::CreatePipeline(void)
 	pipeline_state->SetRenderPass(0, mSubPass->GetRenderPass());
 
 	assert(mVertex != nullptr);
-	auto vertex_layout = mVertex->GetLayout();
-	pipeline_state->SetVertexLayout(vertex_layout);
+	auto vertex_element = mVertex->GetElement();
+	pipeline_state->PushVertexElement(0, &vertex_element);
 
 	auto shader_state = mSubPass->GetShaderState();
 	pipeline_state->SetShaderState(*shader_state);

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERIMAGE_H_
 #define SOURCE_CORE_GHI_RENDERIMAGE_H_
 
-#include "GHILayout.h"
+#include <GHIImageLayout.h>
 #include "MathColor.h"
 #include "GHIMemory.h"
 #include "GHIColorBlend.h"

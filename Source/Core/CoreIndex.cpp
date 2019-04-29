@@ -7,7 +7,6 @@
 
 #include "GHIBuffer.h"
 #include "GHIDevice.h"
-#include "GHIElement.h"
 #include "GHIFactory.h"
 #include "GHIInline.h"
 #include "CoreIndex.h"
