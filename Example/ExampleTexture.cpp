@@ -147,10 +147,6 @@ void Texture::CreatePipeline(void)
 	auto pipeline_state = pipeline_manager->CreatePipelineState();
 	pipeline_state->SetRenderPass(0, mSubPass->GetRenderPass());
 
-	assert(mVertex != nullptr);
-	auto vertex_element = mVertex->GetElement();
-	pipeline_state->PushVertexElement(0, &vertex_element);
-
 	auto shader_state = mSubPass->GetShaderState();
 	pipeline_state->SetShaderState(*shader_state);
 
@@ -192,6 +188,9 @@ void Texture::CreatePipeline(void)
 		binding_layout->AppendBindingSet(binding_set);
 	}
 	auto pipeline_layout = pipeline_manager->CreatePipelineLayout();
+	assert(mVertex != nullptr);
+	const auto& vertex_element = mVertex->GetElement();
+	pipeline_layout->PushVertexElement(vertex_element);
 	pipeline_layout->Create(binding_layout);
 	pipeline_state->SetLayout(pipeline_layout);
 

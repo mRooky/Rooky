@@ -15,7 +15,6 @@
 #include "GHIInputAssembly.h"
 #include "GHIMultisample.h"
 #include "GHIRasterization.h"
-#include "GHIVertexLayout.h"
 
 namespace GHI
 {
@@ -32,9 +31,6 @@ public:
 	bool operator==(const PipelineState& other) const;
 
 public:
-	void PushVertexElement(uint32_t binding, VertexElement* element);
-
-public:
 	inline void SetLayout(PipelineLayout* layout) { mPipelineLayout = layout; }
 	inline void SetRenderPass(uint32_t index, RenderPass* pass)
 	{
@@ -45,11 +41,10 @@ public:
 public:
 	inline uint32_t GetSubIndex(void) const { return mIndex; }
 	inline RenderPass* GetRenderPass(void) const { return mRenderPass; }
-	inline BlendState* GetBlendState(void) { return &mBlendState; }
 	inline PipelineLayout* GetLayout(void) const { return mPipelineLayout; }
 
 public:
-	inline const VertexLayout* GetVertexLayout(void) const { return &mVertexLayout; }
+	inline const BlendState& GetBlendState(void) { return mBlendState; }
 
 public:
 	inline void SetShaderState(const ShaderState& state) { mShaderState = state; }
@@ -72,7 +67,6 @@ protected:
 
 protected:
 	BlendState mBlendState = {};
-	VertexLayout mVertexLayout = {};
 
 protected:
 	ShaderState mShaderState = {};

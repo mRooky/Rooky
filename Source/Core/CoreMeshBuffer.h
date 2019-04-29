@@ -60,12 +60,7 @@ public:
 	inline void SetVertex(Vertex* vertex) { mVertex = vertex; }
 
 public:
-	inline GHI::VertexElement* GetElement(void) const { return mVertexElement; }
-	inline void SetLayout(GHI::VertexElement* element) { mVertexElement = element; }
-
-public:
 	Vertex* mVertex = nullptr;
-	GHI::VertexElement* mVertexElement = nullptr;
 };
 
 } /* namespace Core */

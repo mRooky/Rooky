@@ -18,16 +18,10 @@ PipelineState::~PipelineState(void)
 {
 }
 
-void PipelineState::PushVertexElement(uint32_t binding, VertexElement* element)
-{
-	mVertexLayout.PushSemantic(binding, *element);
-}
-
 bool PipelineState::operator==(const PipelineState& other) const
 {
 	bool equal = mIndex == other.mIndex
 	&& mRenderPass == other.mRenderPass
-	&& mVertexLayout == other.mVertexLayout
 	&& mPipelineLayout == other.mPipelineLayout;
 	if (equal)
 	{

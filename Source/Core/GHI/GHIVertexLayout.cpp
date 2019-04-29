@@ -6,24 +6,19 @@
  */
 
 #include "GHIVertexLayout.h"
+#include <cassert>
 
 namespace GHI
 {
 	VertexElement* VertexLayout::GetVertexElementBinding(uint32_t binding)
 	{
-		for (auto& element : mVertexElements)
+		if (binding == mVertexElements.size())
 		{
-			uint32_t element_binding = element.GetBinding();
-			if (binding == element_binding)
-			{
-				return &element;
-			}
+			VertexElement element;
+			mVertexElements.push_back(element);
+			return &mVertexElements.back();
 		}
-
-		VertexElement element;
-		element.SetBinding(binding);
-		mVertexElements.push_back(element);
-		return &mVertexElements.back();
+		return &mVertexElements.at(binding);
 	}
 
 	void VertexLayout::PushSemantic(uint32_t binding, const VertexElement& element)

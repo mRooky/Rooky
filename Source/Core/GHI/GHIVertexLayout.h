@@ -27,13 +27,17 @@ public:
 	VertexLayout& operator=(const VertexLayout& other);
 
 public:
-	bool operator==(const VertexLayout& other) const
+	inline bool operator==(const VertexLayout& other) const
 	{
 		return mVertexElements == other.mVertexElements;
 	}
 
 public:
-	inline size_t GetVertexElementCount(void) const { return mVertexElements.size(); }
+	inline size_t GetVertexElementCount(void) const
+	{
+		return mVertexElements.size();
+	}
+
 	inline const VertexElement& GetVertexElement(size_t index) const
 	{
 		return mVertexElements.at(index);

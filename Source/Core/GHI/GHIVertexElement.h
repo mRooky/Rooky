@@ -43,8 +43,7 @@ public:
 	inline bool operator==(const VertexElement& other) const
 	{
 		return mStride == other.mStride
-			&& mSemanticElements == other.mSemanticElements
-			&& mBinding == other.mBinding;
+			&& mSemanticElements == other.mSemanticElements;
 	}
 
 public:
@@ -56,15 +55,10 @@ public:
 	}
 
 public:
-	inline void SetBinding(size_t binding) { mBinding = binding; }
-	inline size_t GetBinding(void) const { return mBinding; }
-
-public:
 	inline bool IsValid(void) const { return mSemanticElements.size() > 0; }
 
 protected:
 	size_t mStride = 0;
-	size_t mBinding = 0;
 	std::vector<SemanticElement> mSemanticElements;
 };
 
