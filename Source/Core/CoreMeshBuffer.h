@@ -53,15 +53,15 @@ public:
 	~VertexBuffer(void) = default;
 
 public:
-	inline Vertex* GetPosition(void) const { return mPosition; }
+	//inline Vertex* GetPosition(void) const { return mPosition; }
 	inline Vertex* GetAttribute(void) const { return mAttribute; }
 
 public:
-	inline void SetPosition(Vertex* position) { mPosition = position; }
+	//inline void SetPosition(Vertex* position) { mPosition = position; }
 	inline void SetAttribute(Vertex* attribute) { mAttribute = attribute; }
 
 public:
-	Vertex* mPosition = nullptr; // for Z pre_pass, Format:RGB32SFLOAT
+	//Vertex* mPosition = nullptr; // for Z pre_pass, Format:RGB32SFLOAT
 	Vertex* mAttribute = nullptr;
 };
 
