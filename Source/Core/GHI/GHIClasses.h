@@ -31,8 +31,8 @@ class Draw;
 class BindingSet;
 class BindingLayout;
 class ImageLayout;
+class InputLayout;
 class VertexLayout;
-class VertexElement;
 
 }
 

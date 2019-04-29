@@ -20,17 +20,17 @@ PipelineLayout::~PipelineLayout(void)
 {
 }
 
-void PipelineLayout::PushVertexElement(const VertexElement& element)
+void PipelineLayout::PushVertexLayout(const VertexLayout& layout)
 {
 	assert(this != nullptr);
-	uint32_t binding = mVertexLayout.GetVertexElementCount();
-	mVertexLayout.PushSemantic(binding, element);
+	uint32_t binding = mInputLayout.GetVertexElementCount();
+	mInputLayout.PushVertexLayout(binding, layout);
 }
 
-void PipelineLayout::PushVertexElement(uint32_t binding, const VertexElement& element)
+void PipelineLayout::PushVertexLayout(uint32_t binding, const VertexLayout& layout)
 {
 	assert(this != nullptr);
-	mVertexLayout.PushSemantic(binding, element);
+	mInputLayout.PushVertexLayout(binding, layout);
 }
 
 } /* namespace Render */

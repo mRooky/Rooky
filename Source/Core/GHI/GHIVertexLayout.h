@@ -1,5 +1,5 @@
 /*
- * GHIVertexLayout.h
+ * GHIVertexElement.h
  *
  *  Created on: Apr 29, 2019
  *      Author: rookyma
@@ -8,7 +8,8 @@
 #ifndef SOURCE_CORE_GHI_GHIVERTEXLAYOUT_H_
 #define SOURCE_CORE_GHI_GHIVERTEXLAYOUT_H_
 
-#include "GHIVertexElement.h"
+#include "GHISemantic.h"
+#include <vector>
 
 namespace GHI
 {
@@ -20,37 +21,45 @@ public:
 	~VertexLayout(void) = default;
 
 public:
-	void PushSemantic(uint32_t binding, const VertexElement& element);
-	void PushSemantic(uint32_t binding, Semantic semantic, SemanticType type);
+	inline void Push(const SemanticElement& element)
+	{
+		Push(element.GetSemantic(), element.GetSemanticType());
+	}
+
+	inline void Push(Semantic semantic, SemanticType type)
+	{
+		mStride += GetTypeSize(type);
+		mSemanticElements.push_back(SemanticElement(semantic, type));
+	}
 
 public:
-	VertexLayout& operator=(const VertexLayout& other);
+	inline VertexLayout& operator=(const VertexLayout& other)
+	{
+		mStride = other.mStride;
+		mSemanticElements = other.mSemanticElements;
+		return *this;
+	}
 
-public:
 	inline bool operator==(const VertexLayout& other) const
 	{
-		return mVertexElements == other.mVertexElements;
+		return mStride == other.mStride
+			&& mSemanticElements == other.mSemanticElements;
 	}
 
 public:
-	inline size_t GetVertexElementCount(void) const
+	inline size_t GetStride(void) const { return mStride; }
+	inline size_t GetSemanticElementCount(void) const { return mSemanticElements.size(); }
+	inline const SemanticElement& GetSemanticElement(size_t index) const
 	{
-		return mVertexElements.size();
-	}
-
-	inline const VertexElement& GetVertexElement(size_t index) const
-	{
-		return mVertexElements.at(index);
+		return mSemanticElements.at(index);
 	}
 
 public:
-	inline bool IsValid(void) const { return mVertexElements.size() > 0; }
+	inline bool IsValid(void) const { return mSemanticElements.size() > 0; }
 
 protected:
-	VertexElement* GetVertexElementBinding(uint32_t binding);
-
-protected:
-	std::vector<VertexElement> mVertexElements;
+	size_t mStride = 0;
+	std::vector<SemanticElement> mSemanticElements;
 };
 
 } /* namespace GHI */

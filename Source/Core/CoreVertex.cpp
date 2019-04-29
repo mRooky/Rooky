@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include <GHIImageLayout.h>
+#include "GHIImageLayout.h"
 #include "GHIBuffer.h"
 #include "GHIDevice.h"
 #include "GHIFactory.h"
@@ -29,27 +29,27 @@ Vertex::~Vertex(void)
 	mCount = 0;
 }
 
-void Vertex::Create(GHI::VertexElement* element, uint32_t count)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count)
 {
 	GHI::UsageType usage;
 	usage.source = TRUE;
 	usage.destination = TRUE;
 	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
-	Create(element, count, usage);
+	Create(layout, count, usage);
 }
 
-void Vertex::Create(GHI::VertexElement* element, uint32_t count, GHI::UsageType usage)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType usage)
 {
 	mCount = count;
-	mElement = *element;
+	mLayout = *layout;
 	CreateRenderBuffer(usage);
 	std::cout << "Create Vertex Count : " << mCount << std::endl;
 }
 
 void Vertex::CreateRenderBuffer(GHI::UsageType usage)
 {
-	assert(mElement.IsValid());
-	size_t size = mElement.GetStride() * mCount;
+	assert(mLayout.IsValid());
+	size_t size = mLayout.GetStride() * mCount;
 	assert(size > 0);
 	usage.vertexBuffer = TRUE;
 

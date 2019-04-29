@@ -100,9 +100,9 @@ void PipelineState::CreateVulkanShaderStageInfo(void)
 void PipelineState::CreateVulkanVertexInputInfo(void)
 {
 	auto piepline_layout = mState->GetLayout();
-	const auto& vertex_layout = piepline_layout->GetVertexLayout();
+	const auto& input_layout = piepline_layout->GetInputLayout();
 	VertexLayout compiler = {};
-	compiler.CreateInputState(&vertex_layout);
+	compiler.CreateInputState(&input_layout);
 	auto input_state_info = compiler.GetVertexInputStateInfo();
 	(*mGraphicsInfo.GetVertexInputStateInfo()) = (*input_state_info);
 }

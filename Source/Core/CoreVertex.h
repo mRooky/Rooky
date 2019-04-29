@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_COREVERTEX_H_
 #define SOURCE_CORE_COREVERTEX_H_
 
+#include <GHIVertexLayout.h>
 #include "GHIClasses.h"
 #include "GHIFormat.h"
 #include "GHIUsageType.h"
-#include "GHIVertexElement.h"
 #include "CoreBuffer.h"
 #include <cstdint>
 #include <vector>
@@ -29,12 +29,12 @@ public:
 	virtual ~Vertex(void) override;
 
 public:
-	void Create(GHI::VertexElement* element, uint32_t count);
-	void Create(GHI::VertexElement* element, uint32_t count, GHI::UsageType usage);
+	void Create(GHI::VertexLayout* layout, uint32_t count);
+	void Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType usage);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
-	inline const GHI::VertexElement& GetElement(void) const { return mElement; }
+	inline const GHI::VertexLayout& GetLayout(void) const { return mLayout; }
 
 private:
 	void CreateRenderBuffer(GHI::UsageType usage);
@@ -44,7 +44,7 @@ protected:
 
 protected:
 	uint32_t mCount = 0;
-	GHI::VertexElement mElement = {};
+	GHI::VertexLayout mLayout = {};
 };
 
 } /* namespace Core */

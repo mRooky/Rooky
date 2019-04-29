@@ -189,8 +189,8 @@ void Texture::CreatePipeline(void)
 	}
 	auto pipeline_layout = pipeline_manager->CreatePipelineLayout();
 	assert(mVertex != nullptr);
-	const auto& vertex_element = mVertex->GetElement();
-	pipeline_layout->PushVertexElement(vertex_element);
+	const auto& layout = mVertex->GetLayout();
+	pipeline_layout->PushVertexLayout(layout);
 	pipeline_layout->Create(binding_layout);
 	pipeline_state->SetLayout(pipeline_layout);
 

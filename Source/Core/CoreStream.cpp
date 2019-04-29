@@ -61,9 +61,9 @@ void Stream::UploadVertex(void)
 	if (nullptr != vertex)
 	{
 		assert(vertex->IsValid());
-		const auto& element = vertex->GetElement();
+		const auto& layout = vertex->GetLayout();
 		Data vertex_data = {};
-		const size_t vertex_stride = element.GetStride();
+		const size_t vertex_stride = layout.GetStride();
 		const size_t vertex_count = mParent->GetVertexCount();
 		const size_t buffer_size = vertex_stride * vertex_count;
 		vertex_data.AllocateMemory(buffer_size);
@@ -77,8 +77,8 @@ const void* Stream::FillVertexData(Data* dest, size_t stride, size_t count)
 {
 	const size_t stream_count = mStreamData.GetValidCount();
 	Vertex* vertex = mVertexBuffer.GetVertex();
-	const auto& element = vertex->GetElement();
-	const size_t element_count = element.GetSemanticElementCount();
+	const auto& layout = vertex->GetLayout();
+	const size_t element_count = layout.GetSemanticElementCount();
 	assert(element_count == stream_count);
 	if (element_count == stream_count)
 	{
