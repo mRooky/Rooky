@@ -8,21 +8,21 @@
 #ifndef SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 #define SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 
-#include <GHIInputLayout.h>
+#include "GHIInputLayout.h"
 #include "GHIClasses.h"
 #include "Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {
 
-class VertexLayout
+class InputLayout
 {
 public:
-	VertexLayout(void);
-	virtual ~VertexLayout(void);
+	InputLayout(void);
+	~InputLayout(void);
 
 public:
-	virtual void CreateInputState(const GHI::InputLayout* layout);
+	void CreateInputState(const GHI::InputLayout* layout);
 
 public:
 	inline const Vulkan::VertexInputStateInfo* GetVertexInputStateInfo(void) const { return &mInputStateInfo; }

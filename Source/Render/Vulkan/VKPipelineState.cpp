@@ -12,7 +12,7 @@
 #include "VKPipelineLayout.h"
 #include "VKRenderPass.h"
 #include "VKShader.h"
-#include "VKVertexLayout.h"
+#include "VKInputLayout.h"
 
 #include "GHIPipelineState.h"
 
@@ -101,7 +101,7 @@ void PipelineState::CreateVulkanVertexInputInfo(void)
 {
 	auto piepline_layout = mState->GetLayout();
 	const auto& input_layout = piepline_layout->GetInputLayout();
-	VertexLayout compiler = {};
+	InputLayout compiler = {};
 	compiler.CreateInputState(&input_layout);
 	auto input_state_info = compiler.GetVertexInputStateInfo();
 	(*mGraphicsInfo.GetVertexInputStateInfo()) = (*input_state_info);

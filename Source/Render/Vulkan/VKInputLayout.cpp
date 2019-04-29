@@ -6,7 +6,7 @@
  */
 
 
-#include "VKVertexLayout.h"
+#include "VKInputLayout.h"
 #include "GHIInputLayout.h"
 #include <cassert>
 #include <iostream>
@@ -14,15 +14,15 @@
 namespace VK
 {
 
-VertexLayout::VertexLayout(void)
+InputLayout::InputLayout(void)
 {
 }
 
-VertexLayout::~VertexLayout(void)
+InputLayout::~InputLayout(void)
 {
 }
 
-void VertexLayout::CreateInputState(const GHI::InputLayout* layout)
+void InputLayout::CreateInputState(const GHI::InputLayout* layout)
 {
 	assert(layout != nullptr);
 	if (layout->IsValid())
@@ -42,14 +42,14 @@ void VertexLayout::CreateInputState(const GHI::InputLayout* layout)
 				auto semantic_type = semantic.GetSemanticType();
 				VkVertexInputAttributeDescription* input_attribute = mInputStateInfo.GetAttribute(binding, location);
 				input_attribute->offset = offset;
-				input_attribute->format = VertexLayout::GetElementFormat(semantic_type);
+				input_attribute->format = InputLayout::GetElementFormat(semantic_type);
 				offset += GHI::GetTypeSize(semantic_type);
 			}
 		}
 	}
 }
 
-VkFormat VertexLayout::GetElementFormat(GHI::SemanticType type)
+VkFormat InputLayout::GetElementFormat(GHI::SemanticType type)
 {
 	switch(type)
 	{
