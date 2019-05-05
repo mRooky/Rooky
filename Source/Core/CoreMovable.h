@@ -22,6 +22,7 @@ public:
 
 public:
 	inline Math::Transform* GetTransform(void) { return &mTransform; }
+	inline const Math::Transform& GetTransform(void) const { return mTransform; }
 
 protected:
 	Math::Transform mTransform = {};

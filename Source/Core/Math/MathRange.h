@@ -27,7 +27,7 @@ public:
 public:
 	inline bool IsValid(void) const { return start <= end; }
 	inline bool IsEmpty(void) const { return start >= end; }
-	inline bool InInside(T value) const { return start >= value && value >= end; }
+	inline bool IsInside(T value) const { return start >= value && value >= end; }
 
 public:
 	T start = std::numeric_limits<T>::max();

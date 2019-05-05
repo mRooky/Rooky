@@ -37,8 +37,8 @@ public:
 	inline CameraType GetType(void) const { return mType; }
 
 public:
-	inline void SetUnfiorm(Uniform* uniform) { mUniform = uniform; }
-	inline Uniform* GetUnfiorm(void) const { return mUniform; }
+	inline void SetUniform(Uniform* uniform) { mUniform = uniform; }
+	inline Uniform* GetUniform(void) const { return mUniform; }
 
 public:
 	inline Math::Frustum* GetFrustum(void) { return &mFrustum; }
