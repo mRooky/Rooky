@@ -6,6 +6,7 @@
  */
 
 #include "CoreCamera.h"
+#include "UtilitySearch.h"
 #include <cassert>
 
 namespace Core
@@ -19,11 +20,20 @@ Camera::~Camera(void)
 {
 }
 
-void Camera::Update(void)
+void Camera::UpdateUniform(void)
 {
 	if (mUniform != nullptr)
 	{
 
+	}
+}
+
+void Camera::AppendRenderable(Renderable* renderable)
+{
+	auto iterator = Utility::Find(mRenderables, renderable);
+	if (iterator == mRenderables.end())
+	{
+		mRenderables.push_back(renderable);
 	}
 }
 

@@ -61,19 +61,18 @@ void Scene::AddRenderable(Renderable* renderable)
 	}
 }
 
-std::vector<Renderable*> Scene::GetVisibility(const Camera& camera)
+void Scene::Draw(Camera& camera)
 {
-	std::vector<Renderable*> renderables;
+	camera.ClearRenderable();
 	const auto& frustum = camera.GetFrustum();
 	for (auto renderable : mRenderables)
 	{
 		bool visible = renderable->IsVisible(frustum);
 		if (true == visible)
 		{
-			renderables.push_back(renderable);
+			camera.AppendRenderable(renderable);
 		}
 	}
-	return renderables;
 }
 
 } /* namespace Core */

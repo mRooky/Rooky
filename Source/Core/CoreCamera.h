@@ -11,11 +11,12 @@
 #include "CoreBase.h"
 #include "CoreCameraData.h"
 #include "MathFrustum.h"
+#include <vector>
 
 namespace Core
 {
 class Uniform;
-
+class Renderable;
 enum class CameraType : uint32_t
 {
 	CAMERA_TYPE_PERSPECTIVE,
@@ -30,7 +31,15 @@ public:
 	virtual ~Camera(void) override;
 
 public:
-	void Update(void);
+	void UpdateUniform(void);
+
+public:
+	void AppendRenderable(Renderable* renderable);
+
+public:
+	inline void ClearRenderable(void) { mRenderables.clear(); }
+	inline size_t GetRenderableCount(void) const { return mRenderables.size(); }
+	inline Renderable* GetRenderable(size_t index) const { return mRenderables.at(index); }
 
 public:
 	inline void SetType(CameraType type) { mType = type; }
@@ -41,12 +50,12 @@ public:
 	inline Uniform* GetUniform(void) const { return mUniform; }
 
 public:
-	inline Math::Frustum* GetFrustum(void) { return &mFrustum; }
 	inline const Math::Frustum& GetFrustum(void) const { return mFrustum; }
 
 protected:
 	CameraData mCameraData = {};
 	Uniform* mUniform = nullptr;
+	std::vector<Renderable*> mRenderables;
 
 protected:
 	Math::Frustum mFrustum = {};

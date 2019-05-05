@@ -25,7 +25,7 @@ public:
 	virtual ~Scene(void);
 
 public:
-	void Draw(void);
+	void Draw(Camera& camera);
 
 public:
 	void CreateSwapChain(Platform::Window* window);
@@ -33,7 +33,6 @@ public:
 
 public:
 	void AddRenderable(Renderable* renderable);
-	std::vector<Renderable*> GetVisibility(const Camera& camera);
 
 public:
 	inline System* GetSystem(void) const { return mSystem; }
