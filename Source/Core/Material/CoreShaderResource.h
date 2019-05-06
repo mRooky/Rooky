@@ -8,9 +8,8 @@
 #ifndef SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 #define SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 
-#include "GHIBinding.hpp"
+#include "CoreResourceBindSet.h"
 #include "GHIClasses.h"
-#include <vector>
 
 namespace Core
 {
@@ -23,7 +22,7 @@ public:
 	virtual ~ShaderResource(void);
 
 public:
-	virtual std::vector<GHI::Binding> GetBindings(void) const = 0;
+	virtual ResourceBindSet GetBindingSet(void) const = 0;
 
 public:
 	inline GHI::Shader* GetShader(void) const { return mShader; }

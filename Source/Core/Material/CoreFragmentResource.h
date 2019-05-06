@@ -20,7 +20,7 @@ public:
 	virtual ~FragmentResource(void);
 
 public:
-	virtual std::vector<GHI::Binding> GetBindings(void) const = 0;
+	virtual ResourceBindSet GetBindingSet(void) const override;
 
 public:
 	inline void AppendTexture(Texture* texture) { mTextures.push_back(texture); }

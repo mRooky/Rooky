@@ -38,6 +38,8 @@ public:
 public:
 	inline Camera* GetCamera(void) const { return mCamera; }
 	inline void SetCamera(Camera* camera) { mCamera = camera; }
+
+public:
 	inline Thread* GetThread(void) const { return mThread; }
 
 protected:

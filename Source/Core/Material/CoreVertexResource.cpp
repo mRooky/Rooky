@@ -18,10 +18,10 @@ VertexResource::~VertexResource(void)
 {
 }
 
-std::vector<GHI::Binding> VertexResource::GetBindings(void) const
+ResourceBindSet VertexResource::GetBindingSet(void) const
 {
-	std::vector<GHI::Binding> bindings;
-	return bindings;
+	ResourceBindSet binding_set;
+	return binding_set;
 }
 
 } /* namespace Core */

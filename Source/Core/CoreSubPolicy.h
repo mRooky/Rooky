@@ -31,17 +31,17 @@ public:
 	inline GHI::FrameBuffer* GetFrameBuffer(void) const { return mFrameBuffer; }
 
 public:
-	inline Policy* GetParentPolicy(void) const { return mParentPolicy; }
+	inline Policy* GetParent(void) const { return mParent; }
 	inline size_t GetRenderTargetCount(void) const { return mRenderTargets.size(); }
 	inline RenderTarget* GetRenderTarget(size_t index) const { return mRenderTargets.at(index); }
 
 protected:
-	void CreatePipeline(void);
-	void CreateFrameBuffer(void);
+	virtual void CreatePipeline(void);
+	virtual void CreateFrameBuffer(void);
 
 protected:
 	size_t mIndex = 0;
-	Policy* mParentPolicy = nullptr;
+	Policy* mParent = nullptr;
 	std::vector<RenderTarget*> mRenderTargets = {};
 
 protected:

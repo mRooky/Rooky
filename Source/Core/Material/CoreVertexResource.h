@@ -20,7 +20,7 @@ public:
 	virtual ~VertexResource(void) override;
 
 public:
-	virtual std::vector<GHI::Binding> GetBindings(void) const override;
+	virtual ResourceBindSet GetBindingSet(void) const override;
 };
 
 } /* namespace Core */

@@ -14,14 +14,14 @@ namespace Core
 {
 
 SubPolicy::SubPolicy(Policy* policy):
-		mParentPolicy(policy)
+		mParent(policy)
 {
-	assert(mParentPolicy != nullptr);
+	assert(mParent != nullptr);
 }
 
 SubPolicy::~SubPolicy(void)
 {
-	mParentPolicy = nullptr;
+	mParent = nullptr;
 }
 
 void SubPolicy::Create(size_t index)
