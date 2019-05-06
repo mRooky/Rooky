@@ -9,7 +9,7 @@
 #define SOURCE_CORE_COREMESH_H_
 
 #include "MathAABB.h"
-#include "CoreMovable.h"
+#include "CoreObject.h"
 #include <array>
 #include <vector>
 
@@ -18,7 +18,7 @@ namespace Core
 class Stream;
 class SubMesh;
 class MeshManager;
-class Mesh : public Movable
+class Mesh : public Object
 {
 	friend class MeshManager;
 protected:
@@ -26,6 +26,9 @@ protected:
 
 public:
 	virtual ~Mesh(void) override;
+
+public:
+	virtual void Render(Thread& thread) override;
 
 public:
 	bool Compile(void);

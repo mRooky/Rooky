@@ -21,11 +21,9 @@ public:
 	~ResourceBindSet(void);
 
 public:
+	void Append(const ResourceBindSet& other);
 	void PushBinding(const GHI::Binding& binding);
 	void PushResource(GHI::Resource* resource, GHI::ShaderStage stage);
-
-public:
-	ResourceBindSet& operator+=(const ResourceBindSet& other);
 
 public:
 	inline size_t GetBindingCount(void) const { return mBindings.size(); }

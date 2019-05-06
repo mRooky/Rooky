@@ -14,10 +14,10 @@
 
 namespace Core
 {
+class Node;
 class Camera;
 class System;
 class Viewport;
-class Renderable;
 class Scene
 {
 public:
@@ -32,27 +32,23 @@ public:
 	Viewport* CreateViewport(void);
 
 public:
-	void AddRenderable(Renderable* renderable);
-
-public:
+	inline Node* GetRootNode(void) const { return mRoot; }
 	inline System* GetSystem(void) const { return mSystem; }
 	inline GHI::SwapChain* GetSwapChain(void) const { return mSwapChain; }
 
 public:
 	inline size_t GetViewportCount(void) const { return mViewports.size(); }
-	inline size_t GetRenderableCount(void) const { return mRenderables.size(); }
 
 public:
 	inline Viewport* GetViewport(size_t index) const { return mViewports.at(index); }
-	inline Renderable* GetRenderable(size_t index) const { return mRenderables.at(index); }
 
 protected:
+	Node* mRoot = nullptr;
 	System* mSystem = nullptr;
 	GHI::SwapChain* mSwapChain = nullptr;
 
 protected:
 	std::vector<Viewport*> mViewports;
-	std::vector<Renderable*> mRenderables;
 };
 
 } /* namespace Core */

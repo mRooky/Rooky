@@ -28,13 +28,4 @@ void Camera::UpdateUniform(void)
 	}
 }
 
-void Camera::AppendRenderable(Renderable* renderable)
-{
-	auto iterator = Utility::Find(mRenderables, renderable);
-	if (iterator == mRenderables.end())
-	{
-		mRenderables.push_back(renderable);
-	}
-}
-
 } /* namespace Core */

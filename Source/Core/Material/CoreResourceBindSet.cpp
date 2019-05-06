@@ -19,6 +19,16 @@ ResourceBindSet::~ResourceBindSet(void)
 {
 }
 
+void ResourceBindSet::Append(const ResourceBindSet& other)
+{
+	const size_t count = other.GetBindingCount();
+	for (size_t index = 0; index < count; ++index)
+	{
+		const GHI::Binding& binding = other.GetBinding(index);
+		PushBinding(binding);
+	}
+}
+
 void ResourceBindSet::PushBinding(const GHI::Binding& binding)
 {
 	auto iterator = Utility::Find(mBindings, binding);
@@ -33,17 +43,6 @@ void ResourceBindSet::PushResource(GHI::Resource* resource, GHI::ShaderStage sta
 	GHI::Binding binding;
 	binding.SetResource(resource, stage);
 	PushBinding(binding);
-}
-
-ResourceBindSet& ResourceBindSet::operator+=(const ResourceBindSet& other)
-{
-	const size_t count = other.GetBindingCount();
-	for (size_t index = 0; index < count; ++index)
-	{
-		const GHI::Binding& binding = other.GetBinding(index);
-		PushBinding(binding);
-	}
-	return *this;
 }
 
 } /* namespace Core */

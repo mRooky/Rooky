@@ -14,7 +14,6 @@
 
 namespace Core
 {
-
 class Thread : public Interface
 {
 public:
@@ -34,6 +33,8 @@ public:
 
 protected:
 	GHI::CommandPool* mCommandPool = nullptr;
+
+public:
 	std::vector<GHI::CommandList*> mCommandLists;
 };
 

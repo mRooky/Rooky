@@ -13,7 +13,7 @@
 
 namespace Core
 {
-
+class Object;
 class Node: public Movable
 {
 public:
@@ -22,6 +22,13 @@ public:
 
 public:
 	void AppendChild(Node* node);
+
+public:
+	void AttachObject(Object* object);
+	Object* DetachObject(void);
+
+public:
+	const Object* GetAttachObject(void) const { return mObject; }
 
 public:
 	inline size_t GetChildrenCount(void) const { return mChildren.size(); }
@@ -33,6 +40,7 @@ public:
 
 protected:
 	Node* mParent = nullptr;
+	Object* mObject = nullptr;
 	std::vector<Node*> mChildren;
 };
 

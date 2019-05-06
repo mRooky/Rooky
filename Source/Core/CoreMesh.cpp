@@ -12,6 +12,7 @@
 #include "CoreBufferManager.h"
 
 #include "UtilityRelease.h"
+#include <cassert>
 
 namespace Core
 {
@@ -28,6 +29,11 @@ Mesh::~Mesh(void)
 	mStream = nullptr;
 	Utility::Release(mSubMeshes);
 	mManager = nullptr;
+}
+
+void Mesh::Render(Thread& thread)
+{
+	assert(false);
 }
 
 SubMesh* Mesh::CreateSubMesh(void)

@@ -35,7 +35,6 @@ Scene::~Scene(void)
 	Utility::Release(mViewports);
 	delete mSystem;
 	mSystem = nullptr;
-	mRenderables.clear();
 }
 
 void Scene::CreateSwapChain(Platform::Window* window)
@@ -52,27 +51,9 @@ Viewport* Scene::CreateViewport(void)
 	return viewport;
 }
 
-void Scene::AddRenderable(Renderable* renderable)
-{
-	auto iterator = Utility::Find(mRenderables, renderable);
-	if (iterator == mRenderables.end())
-	{
-		mRenderables.push_back(renderable);
-	}
-}
-
 void Scene::Draw(Camera& camera)
 {
-	camera.ClearRenderable();
-	const auto& frustum = camera.GetFrustum();
-	for (auto renderable : mRenderables)
-	{
-		bool visible = renderable->IsVisible(frustum);
-		if (true == visible)
-		{
-			camera.AppendRenderable(renderable);
-		}
-	}
+	assert(false);
 }
 
 } /* namespace Core */

@@ -12,7 +12,6 @@
 #include "CoreBase.h"
 #include "CoreMaterialUniform.h"
 #include <array>
-#include <vector>
 
 namespace Core
 {
