@@ -159,7 +159,7 @@ void CommandList::SetPipeline(GHI::Pipeline* pipeline)
 void CommandList::SetBindingSet(uint32_t slot, GHI::BindingSet* set)
 {
 	assert(mBindingLayout != nullptr);
-	mBindingLayout->SetBindingSet(slot, set);
+	mBindingLayout->PushBindingSet(slot, set);
 	assert(false);
 }
 

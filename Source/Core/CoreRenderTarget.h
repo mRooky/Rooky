@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORERENDERTARGET_H_
 #define SOURCE_CORE_CORERENDERTARGET_H_
 
-#include <GHIImageLayout.h>
+#include "GHIImageLayout.h"
 #include "GHIClasses.h"
 #include "GHIUsageType.h"
 #include "CoreResource.h"
@@ -19,17 +19,9 @@ class TextureManager;
 class RenderTarget : public Resource
 {
 public:
-	explicit RenderTarget(TextureManager* manager);
+	RenderTarget(void);
 	virtual ~RenderTarget(void);
 
-public:
-	void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage);
-
-public:
-	inline TextureManager* GetManager(void) const { return mManager; }
-
-protected:
-	TextureManager* mManager = nullptr;
 };
 
 } /* namespace Core */

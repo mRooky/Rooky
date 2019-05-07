@@ -14,6 +14,7 @@
 #include "CoreSystem.h"
 #include "CoreThread.h"
 #include "CoreScene.h"
+#include "CoreCamera.h"
 
 #include <cassert>
 
@@ -28,15 +29,16 @@ Viewport::Viewport(Scene* scene):
 
 Viewport::~Viewport(void)
 {
+	delete mCamera;
+	mCamera = nullptr;
 	delete mThread;
 	mThread = nullptr;
-	delete mDepthStencil;
-	mDepthStencil = nullptr;
 }
 
 void Viewport::Create(const Math::Rect2Di& rect)
 {
 	mViewport = rect;
+	mCamera = new Camera;
 	assert(rect.IsValid());
 }
 
@@ -58,25 +60,13 @@ void Viewport::Draw(void)
 	command->Begin();
 	command->SetScissor(0, 1, &scissor);
 	command->SetViewport(0, 1, &mViewport);
+	DrawScene();
 	command->End();
 }
 
-void Viewport::CreateDepthStencil(const Math::Extent2Di& extent)
+void Viewport::DrawScene(void)
 {
-	assert(mDepthStencil == nullptr);
-	System* system = mParent->GetSystem();
-	GHI::Device* device = system->GetDevice();
-	GHI::ImageLayout image_layout = {};
-	image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
-	image_layout.SetExtent(extent);
-	image_layout.SetFormat(device->GetBestDepthStencilFormat());
 
-	GHI::UsageType image_usage = {};
-	image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;
-	image_usage.depthStencil = TRUE;
-
-	mDepthStencil = device->GetFactory()->CreateImage();
-	mDepthStencil->Create(image_layout, image_usage);
 }
 
 } /* namespace Core */

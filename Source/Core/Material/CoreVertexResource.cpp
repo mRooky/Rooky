@@ -6,6 +6,7 @@
  */
 
 #include "CoreVertexResource.h"
+#include "CoreUniform.h"
 
 namespace Core
 {
@@ -18,10 +19,15 @@ VertexResource::~VertexResource(void)
 {
 }
 
-ResourceBindSet VertexResource::GetBindingSet(void) const
+void VertexResource::SetUniform(Uniform* uniform, size_t offset)
 {
-	ResourceBindSet binding_set;
-	return binding_set;
+	mOffset = offset;
+	mUniform = uniform;
+	auto resource = uniform->GetRenderResource();
+	auto stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
+	GHI::Binding binding;
+	binding.SetResource(resource, stage);
+	mBindings.push_back(binding);
 }
 
 } /* namespace Core */

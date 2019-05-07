@@ -20,10 +20,9 @@ public:
 	virtual ~FragmentResource(void);
 
 public:
-	virtual ResourceBindSet GetBindingSet(void) const override;
+	void AppendTexture(Texture* texture);
 
 public:
-	inline void AppendTexture(Texture* texture) { mTextures.push_back(texture); }
 	inline size_t GetTextureCount(void) const { return mTextures.size(); }
 	inline Texture* GetTexture(size_t index) const { return mTextures.at(index); }
 

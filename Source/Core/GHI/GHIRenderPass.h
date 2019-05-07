@@ -25,7 +25,7 @@ public:
 	virtual ~RenderPass(void) override;
 
 public:
-	virtual void Create(void) = 0;
+	virtual void Create(size_t count) = 0;
 
 public:
 	virtual FrameBuffer* CreateFrameBuffer(void) = 0;

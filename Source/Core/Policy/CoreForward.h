@@ -16,7 +16,7 @@ namespace Core
 class Forward: public Policy
 {
 public:
-	Forward(void);
+	Forward(System* system);
 	virtual ~Forward(void) override;
 };
 

@@ -31,6 +31,11 @@ void SubPolicy::Create(size_t index)
 	CreateFrameBuffer();
 }
 
+void SubPolicy::Render(GHI::CommandList* command, const std::vector<Renderable*>& renderables)
+{
+
+}
+
 void SubPolicy::CreatePipeline(void)
 {
 

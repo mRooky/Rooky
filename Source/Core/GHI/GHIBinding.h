@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_GHI_GHIBINDING_HPP_
-#define SOURCE_CORE_GHI_GHIBINDING_HPP_
+#ifndef SOURCE_CORE_GHI_GHIBINDING_H_
+#define SOURCE_CORE_GHI_GHIBINDING_H_
 
 #include "GHIEnum.h"
 #include <cstddef>
@@ -64,4 +64,4 @@ protected:
 
 } /* namespace Render */
 
-#endif /* SOURCE_CORE_GHI_GHIBINDING_HPP_ */
+#endif /* SOURCE_CORE_GHI_GHIBINDING_H_ */

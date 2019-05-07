@@ -15,7 +15,6 @@
 namespace Core
 {
 class Node;
-class Camera;
 class System;
 class Viewport;
 class Scene
@@ -23,9 +22,6 @@ class Scene
 public:
 	Scene(void);
 	virtual ~Scene(void);
-
-public:
-	void Draw(Camera& camera);
 
 public:
 	void CreateSwapChain(Platform::Window* window);

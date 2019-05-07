@@ -16,7 +16,7 @@ namespace Core
 class Deferred: public Policy
 {
 public:
-	Deferred(void);
+	Deferred(System* system);
 	virtual ~Deferred(void) override;
 };
 

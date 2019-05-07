@@ -51,9 +51,4 @@ Viewport* Scene::CreateViewport(void)
 	return viewport;
 }
 
-void Scene::Draw(Camera& camera)
-{
-	assert(false);
-}
-
 } /* namespace Core */

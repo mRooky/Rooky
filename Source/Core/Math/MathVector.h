@@ -12,4 +12,11 @@
 #include "MathVector3.h"
 #include "MathVector4.h"
 
+namespace Math
+{
+
+typedef Vector4_t<float> Vector4f, ColorValue;
+
+}
+
 #endif /* SOURCE_CORE_RENDER_RENDERVECTOR_HPP_ */

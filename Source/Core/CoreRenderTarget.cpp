@@ -6,11 +6,6 @@
  */
 
 #include "CoreRenderTarget.h"
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHIImage.h"
-#include "CoreTextureManager.h"
-#include "CoreSystem.h"
 
 #include <cassert>
 #include <iostream>
@@ -18,28 +13,12 @@
 namespace Core
 {
 
-RenderTarget::RenderTarget(TextureManager* manager):
-		mManager(manager)
+RenderTarget::RenderTarget(void)
 {
-	assert(mManager != nullptr);
 }
 
 RenderTarget::~RenderTarget(void)
 {
-	mManager = nullptr;
-}
-
-void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
-{
-	assert(mResource == nullptr);
-	auto system = mManager->GetSystem();
-	auto device = system->GetDevice();
-	auto factory = device->GetFactory();
-	mResource = factory->CreateImage();
-	static_cast<GHI::Image*>(mResource)->Create(layout, usage);
-	const Math::Extent3Di& extent = layout.GetExtent();
-	std::cout << "Image Width " << extent.width << std::endl;
-	std::cout << "Image Height " << extent.height << std::endl;
 }
 
 } /* namespace Core */

@@ -21,7 +21,7 @@ public:
 	virtual ~RenderPass(void) override;
 
 public:
-	virtual void Create(void) override;
+	virtual void Create(size_t count) override;
 
 public:
 	virtual GHI::FrameBuffer* CreateFrameBuffer(void) override;
@@ -30,7 +30,20 @@ public:
 	inline Vulkan::RenderPass* GetVulkanRenderPass(void) const { return mRenderPass; }
 
 protected:
+	void CreateReference(void);
+	void CreateDescription(void);
+	void CreateSubDependency(size_t count);
+	void CreateSubDescription(size_t count);
+
+protected:
 	Vulkan::RenderPass* mRenderPass = nullptr;
+
+protected:
+	VkAttachmentReference mDepthReference = {};
+	std::vector<VkAttachmentReference> mReferences;
+	std::vector<VkAttachmentDescription> mDescriptions;
+	std::vector<VkSubpassDependency> mSubDependencies;
+	std::vector<VkSubpassDescription> mSubDescriptions;
 };
 
 } /* namespace VK */

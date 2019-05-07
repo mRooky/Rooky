@@ -31,7 +31,7 @@ void BindingLayout::AppendBindingSet(const BindingSet* set)
 	mBindingSets.push_back(set);
 }
 
-void BindingLayout::SetBindingSet(size_t index, const BindingSet* set)
+void BindingLayout::PushBindingSet(size_t index, const BindingSet* set)
 {
 	assert(index < MAX_BINDING_PER_SET);
 	assert(index < mBindingSets.size());

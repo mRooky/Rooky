@@ -20,7 +20,15 @@ public:
 	virtual ~VertexResource(void) override;
 
 public:
-	virtual ResourceBindSet GetBindingSet(void) const override;
+	void SetUniform(Uniform* uniform, size_t offset);
+
+public:
+	inline size_t GetOffset(void) const { return mOffset; }
+	inline Uniform* GetUniform(void) const { return mUniform; }
+
+protected:
+	size_t mOffset = 0;
+	Uniform* mUniform = nullptr;
 };
 
 } /* namespace Core */

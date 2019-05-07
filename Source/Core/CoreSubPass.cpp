@@ -39,7 +39,7 @@ void SubPass::CreateRenderPass(const std::vector<GHI::Format>& formats)
 	{
 		mRenderPass->AppendFormat(format);
 	}
-	mRenderPass->Create();
+	mRenderPass->Create(1);
 }
 
 } /* namespace Core */

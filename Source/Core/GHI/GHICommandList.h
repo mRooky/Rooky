@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_GHI_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_GHI_RENDERCOMMANDLIST_H_
 
+#include <GHIBinding.h>
 #include <MathRect.h>
-#include "GHIBinding.hpp"
 #include "GHIBindingLayout.h"
 #include "GHIClasses.h"
 #include "GHIEnum.h"

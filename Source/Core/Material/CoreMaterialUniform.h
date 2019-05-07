@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 #define SOURCE_CORE_MATERIAL_COREMATERIALUNIFORM_H_
 
-#include "GHIBinding.hpp"
+#include <GHIBinding.h>
 #include "CoreMaterialData.h"
 #include <array>
 

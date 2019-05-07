@@ -16,6 +16,8 @@ ShaderResource::ShaderResource(void)
 
 ShaderResource::~ShaderResource(void)
 {
+	mShader = nullptr;
+	mBindings.clear();
 }
 
 } /* namespace Core */

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERBINDINGSET_H_
 #define SOURCE_CORE_GHI_RENDERBINDINGSET_H_
 
-#include "GHIBinding.hpp"
+#include "GHIBinding.h"
 #include "GHIObject.h"
 #include <vector>
 

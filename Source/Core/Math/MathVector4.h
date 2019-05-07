@@ -17,8 +17,24 @@ template<typename T>
 class Vector4_t
 {
 public:
+	Vector4_t(void) = default;
+	~Vector4_t(void) = default;
+
+public:
+	Vector4_t(T x, T y, T z, T w) { Set(x, y, z, w); }
+
+public:
 	inline T& operator[](size_t index) { return *(&x + index); }
 	inline const T& operator[](size_t index) const { return *(&x + index); }
+
+public:
+	inline void Set(T x, T y, T z, T w)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+		this->w = w;
+	}
 
 public:
 	union
@@ -34,8 +50,6 @@ public:
 		};
 	};
 };
-
-typedef Vector4_t<float> Vector4f, ColorValue;
 
 } /* namespace Math */
 

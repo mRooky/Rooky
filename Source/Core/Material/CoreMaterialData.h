@@ -46,11 +46,11 @@ protected:
 	bool mDirty = false;
 
 protected:
-	Math::Real mShininess = 0.0f;
-	Math::ColorValue mAmbient = {};
-	Math::ColorValue mDiffuse = {};
-	Math::ColorValue mSpecular = {};
-	Math::ColorValue mEmissive = {};
+	Math::Real mShininess;
+	Math::ColorValue mAmbient;
+	Math::ColorValue mDiffuse;
+	Math::ColorValue mSpecular;
+	Math::ColorValue mEmissive;
 
 private:
 	static constexpr size_t MaterialDataSize = 256;

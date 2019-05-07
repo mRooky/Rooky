@@ -22,8 +22,8 @@ public:
 	virtual ~BindingLayout(void);
 
 public:
-	virtual void AppendBindingSet(const BindingSet* set);
-	virtual void SetBindingSet(size_t index, const BindingSet* set);
+	void AppendBindingSet(const BindingSet* set);
+	void PushBindingSet(size_t index, const BindingSet* set);
 
 public:
 	inline size_t GetSetCount(void) const { return mBindingSets.size(); }

@@ -30,17 +30,15 @@ public:
 
 public:
 	void CreateThread(uint32_t count);
-	void CreateDepthStencil(const Math::Extent2Di& extent);
-
-public:
-	inline GHI::Image* GetDepthStencil(void) const { return mDepthStencil; }
 
 public:
 	inline Camera* GetCamera(void) const { return mCamera; }
-	inline void SetCamera(Camera* camera) { mCamera = camera; }
 
 public:
 	inline Thread* GetThread(void) const { return mThread; }
+
+protected:
+	void DrawScene(void);
 
 protected:
 	Scene* mParent = nullptr;
@@ -51,7 +49,6 @@ protected:
 
 protected:
 	Math::Viewport mViewport;
-	GHI::Image* mDepthStencil = nullptr;
 
 };
 

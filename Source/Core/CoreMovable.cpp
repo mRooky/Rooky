@@ -5,20 +5,17 @@
  *      Author: rookyma
  */
 
-#include <CoreMovable.h>
+#include "CoreMovable.h"
 
 namespace Core
 {
 
-Movable::Movable()
+Movable::Movable(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 Movable::~Movable()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

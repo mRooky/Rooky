@@ -10,16 +10,13 @@
 namespace Core
 {
 
-Forward::Forward():
-		Policy(PolicyType::DEFERRED)
+Forward::Forward(System* system):
+		Policy(system)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Forward::~Forward()
+Forward::~Forward(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

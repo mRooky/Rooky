@@ -20,16 +20,14 @@ FragmentResource::~FragmentResource(void)
 	mTextures.clear();
 }
 
-ResourceBindSet FragmentResource::GetBindingSet(void) const
+void FragmentResource::AppendTexture(Texture* texture)
 {
-	ResourceBindSet binding_set;
-	for (auto texture : mTextures)
-	{
-		auto render_resource = texture->GetRenderResource();
-		auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
-		binding_set.PushResource(render_resource, shader_stage);
-	}
-	return binding_set;
+	mTextures.push_back(texture);
+	auto resource = texture->GetRenderResource();
+	auto stage = GHI::ShaderStage::SHADER_STAGE_FRAGMENT;
+	GHI::Binding binding;
+	binding.SetResource(resource, stage);
+	mBindings.push_back(binding);
 }
 
 } /* namespace Core */

@@ -8,7 +8,7 @@
 #include "ExampleTexture.h"
 
 #include <CoreSubPass.h>
-#include "GHIBinding.hpp"
+#include <GHIBinding.h>
 #include "GHIBindingLayout.h"
 #include "GHIBindingSet.h"
 #include "GHIBuffer.h"

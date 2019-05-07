@@ -10,8 +10,8 @@
 namespace Core
 {
 
-Deferred::Deferred(void):
-		Policy(PolicyType::FORWARD)
+Deferred::Deferred(System* system):
+		Policy(system)
 {
 }
 
