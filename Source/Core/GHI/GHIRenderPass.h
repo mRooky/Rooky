@@ -10,12 +10,14 @@
 
 #include "GHIFormat.h"
 #include "GHIObject.h"
+#include "GHISubPass.h"
 #include <vector>
 
 namespace GHI
 {
 class Attachment;
 class FrameBuffer;
+
 class RenderPass: public Object
 {
 protected:

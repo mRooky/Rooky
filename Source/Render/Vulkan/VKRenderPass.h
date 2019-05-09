@@ -28,6 +28,7 @@ public:
 
 public:
 	inline Vulkan::RenderPass* GetVulkanRenderPass(void) const { return mRenderPass; }
+	inline const VkRenderPassCreateInfo& GetCreateInfo(void) const { return mRenderpassCreateInfo; }
 
 protected:
 	void CreateReference(void);
@@ -40,6 +41,7 @@ protected:
 
 protected:
 	VkAttachmentReference mDepthReference = {};
+	VkRenderPassCreateInfo mRenderpassCreateInfo = {};
 	std::vector<VkAttachmentReference> mReferences;
 	std::vector<VkAttachmentDescription> mDescriptions;
 	std::vector<VkSubpassDependency> mSubDependencies;

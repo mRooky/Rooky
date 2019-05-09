@@ -17,4 +17,9 @@ static const uint8_t TRUE = 1;
 static const uint8_t FALSE = 0;
 #endif
 
+namespace GHI
+{
+
+}
+
 #endif /* SOURCE_CORE_GHI_RENDERDEFINE_H_ */

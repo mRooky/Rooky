@@ -22,6 +22,7 @@ namespace VK
 RenderPass::RenderPass(Device* device):
 		GHI::RenderPass(device)
 {
+	mRenderpassCreateInfo = Vulkan::RenderPass::CreateInfo();
 }
 
 RenderPass::~RenderPass(void)
@@ -37,17 +38,16 @@ void RenderPass::Create(size_t count)
 	CreateSubDependency(count);
 	CreateSubDescription(count);
 
-	VkRenderPassCreateInfo renderpass_create_info = Vulkan::RenderPass::CreateInfo();
-	renderpass_create_info.attachmentCount = mDescriptions.size();
-	renderpass_create_info.pAttachments = mDescriptions.data();
-	renderpass_create_info.subpassCount = mSubDescriptions.size();
-	renderpass_create_info.pSubpasses = mSubDescriptions.data();
-	renderpass_create_info.dependencyCount = mSubDependencies.size();
-	renderpass_create_info.pDependencies = mSubDependencies.data();
+	mRenderpassCreateInfo.attachmentCount = mDescriptions.size();
+	mRenderpassCreateInfo.pAttachments = mDescriptions.data();
+	mRenderpassCreateInfo.subpassCount = mSubDescriptions.size();
+	mRenderpassCreateInfo.pSubpasses = mSubDescriptions.data();
+	mRenderpassCreateInfo.dependencyCount = mSubDependencies.size();
+	mRenderpassCreateInfo.pDependencies = mSubDependencies.data();
 
 	auto device = static_cast<Device*>(mDevice)->GetVulkanDevice();
 	mRenderPass = Vulkan::RenderPass::New(device);
-	mRenderPass->Create(&renderpass_create_info);
+	mRenderPass->Create(&mRenderpassCreateInfo);
 }
 
 void RenderPass::CreateReference(void)
