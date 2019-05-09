@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELHASHOBJECT_H_
 #define SOURCE_CORE_KERNEL_KERNELHASHOBJECT_H_
 
-#include <cstddef>
+#include "KernelHash.h"
 
 namespace Kernel
 {
@@ -20,13 +20,13 @@ public:
 	virtual ~HashObject(void) = default;
 
 public:
-	virtual void CalcHash(void) = 0;
-
-public:
-	inline size_t GetHash(void) const { return mHash; }
+	inline Hash GetHash(void) const { return mHash; }
 
 protected:
-	size_t mHash = 0;
+	virtual void CalcHash(void) = 0;
+
+protected:
+	Hash mHash = {};
 };
 
 } /* namespace Kernel */

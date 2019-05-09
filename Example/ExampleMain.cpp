@@ -8,13 +8,14 @@
 #include "OpenALDevice.h"
 
 #include "ExampleTexture.h"
-#include "KernelCompile.h"
+#include "KernelString.h"
 
 int main(void)
 {
 	OpenAL::Device device;
 	device.Init();
-	Kernel::StringHash("Rook Win");
+	Kernel::HashString str("Rook Win");
+	str.Print();
 	Example::Texture texture;
 	texture.Initialize();
 	texture.RecordCommands();

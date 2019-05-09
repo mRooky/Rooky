@@ -14,50 +14,50 @@
 namespace Kernel
 {
 
-class String : public HashObject
+class HashString : public HashObject
 {
 public:
-	String(void) = default;
-	String(const char* chars) { Set(chars); }
-	String(const String& other) { Set(other); }
-	String(const std::string& string) { Set(string); }
+	HashString(void) = default;
+	virtual ~HashString(void) override = default;
 
 public:
-	virtual ~String(void) override = default;
+	HashString(const char* chars) { Set(chars); }
+	HashString(const HashString& other) { Set(other); }
+	HashString(const std::string& string) { Set(string); }
+
+public:
+	void Print(void);
 
 public:
 	virtual void CalcHash(void) override
 	{
-		if (mHash == 0)
-		{
-			mHash = std::hash<std::string>()(mString);
-		}
+		mHash.CalcHash(mString);
 	}
 
 public:
 	inline const char* Char(void) const { return mString.c_str(); }
 
 public:
-	inline String& operator=(const char* chars)
+	inline HashString& operator=(const char* chars)
 	{
 		Set(chars);
 		return *this;
 	}
 
-	inline String& operator=(const String& other)
+	inline HashString& operator=(const HashString& other)
 	{
 		Set(other);
 		return *this;
 	}
 
-	inline String& operator=(const std::string& string)
+	inline HashString& operator=(const std::string& string)
 	{
 		Set(string);
 		return *this;
 	}
 
 public:
-	inline bool operator==(const String& other) const
+	inline bool operator==(const HashString& other) const
 	{
 		return (mHash == other.mHash) ? (mString == other.mString) : false;
 	}
@@ -69,7 +69,7 @@ public:
 		CalcHash();
 	}
 
-	inline void Set(const String& other)
+	inline void Set(const HashString& other)
 	{
 		mHash = other.mHash;
 		mString = other.mString;
@@ -82,7 +82,7 @@ public:
 	}
 
 protected:
-	std::string mString;
+	std::string mString = "";
 };
 
 } /* namespace Kernel */
