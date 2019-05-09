@@ -4,6 +4,9 @@ Rooky
 
 This repository is mainly for myself learning Vulkan and graphics game engine.
 
+**Architecture**
+![Architecture](https://github.com/mRooky/Rooky/blob/master/Resource/Architecture.png)  
+
 **FrameBuffer**
 ![FrameBuffer](https://github.com/mRooky/Rooky/blob/master/Resource/FrameBuffer.png)  
 
