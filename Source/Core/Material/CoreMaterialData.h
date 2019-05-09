@@ -46,7 +46,7 @@ protected:
 	bool mDirty = false;
 
 protected:
-	Math::Real mShininess;
+	Math::Real mShininess = 0.0f;
 	Math::ColorValue mAmbient;
 	Math::ColorValue mDiffuse;
 	Math::ColorValue mSpecular;

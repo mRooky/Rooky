@@ -13,26 +13,29 @@
 namespace Kernel
 {
 
-#ifdef MULTI_THREAD_REFERENCE_COUNT
-	typedef std::atomic<uint32_t> RefCountType;
-#else
-	typedef uint32_t RefCountType;
-#endif
-
-class SafeRefCount
+template<typename T>
+class RefCount
 {
+	typedef T CountType;
 public:
-	SafeRefCount(void) = default;
-	~SafeRefCount(void) = default;
+	RefCount(void) = default;
+	~RefCount(void) = default;
 
 public:
 	inline uint32_t IncRef(void) { return ++mRefCount; }
 	inline uint32_t DecRef(void) { return --mRefCount; }
 
 protected:
-	RefCountType mRefCount = 0u;
+	CountType mRefCount = 0u;
 
 };
+
+// Common
+typedef RefCount<uint32_t> LockFreeRefCount;
+
+// Thread Safety
+typedef std::atomic<uint32_t> AtomicCountType;
+typedef RefCount<AtomicCountType> SafeRefCount;
 
 } /* namespace Kernel */
 

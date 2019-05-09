@@ -10,7 +10,7 @@
 #include "VulkanInline.h"
 #include "VKDevice.h"
 
-#include "UtilityString.h"
+#include "KernelFileUtility.h"
 
 #include <iostream>
 #include <cassert>
@@ -34,7 +34,7 @@ void Shader::Create(const char* file)
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file);
 	if (code.size() > 0)
 	{
-		mName = Utility::GetFileName(file);
+		mName = Kernel::GetFileName(file);
 		mType = GHI::Shader::GetShaderType(file);
 		mStage = GHI::Shader::GetShaderStage(file);
 		std::cout << "Create Shader File : " << file << std::endl;

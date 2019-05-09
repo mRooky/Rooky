@@ -7,7 +7,7 @@
 
 #include "CoreMaterialData.h"
 #include "CoreUniform.h"
-#include "UtilityMemory.h"
+#include "KernelMemory.h"
 #include <cassert>
 
 namespace Core
@@ -59,11 +59,11 @@ void MaterialData::UpdateUniform(Uniform* uniform, size_t offset)
 		std::memset(buffer, 0, MaterialDataSize);
 		{
 			uint8_t* write_ptr = buffer;
-			write_ptr += Utility::Memcpy(write_ptr, mShininess);
-			write_ptr += Utility::Memcpy(write_ptr, mAmbient);
-			write_ptr += Utility::Memcpy(write_ptr, mDiffuse);
-			write_ptr += Utility::Memcpy(write_ptr, mSpecular);
-			write_ptr += Utility::Memcpy(write_ptr, mEmissive);
+			write_ptr += Kernel::Memcpy(write_ptr, mShininess);
+			write_ptr += Kernel::Memcpy(write_ptr, mAmbient);
+			write_ptr += Kernel::Memcpy(write_ptr, mDiffuse);
+			write_ptr += Kernel::Memcpy(write_ptr, mSpecular);
+			write_ptr += Kernel::Memcpy(write_ptr, mEmissive);
 		}
 		uniform->Write(buffer, offset, MaterialDataSize);
 		mDirty = false;

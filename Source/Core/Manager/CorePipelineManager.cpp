@@ -11,10 +11,13 @@
 #include "GHIPipelineLayout.h"
 #include "GHIPipelineState.h"
 #include "GHIShader.h"
-#include "UtilityRelease.h"
-#include "UtilityString.h"
+
+#include "KernelFileUtility.h"
+
 #include "CorePipelineManager.h"
 #include "CoreSystem.h"
+
+#include "UtilityRelease.h"
 
 #include <string>
 #include <iostream>
@@ -54,7 +57,7 @@ PipelineManager::~PipelineManager(void)
 GHI::Shader* PipelineManager::GetShader(const char* file)
 {
 	std::string shader_file = file;
-	auto current_name = Utility::GetFileName(shader_file);
+	auto current_name = Kernel::GetFileName(shader_file);
 	for (auto shader : mShaders)
 	{
 		auto shader_name = shader->GetName();

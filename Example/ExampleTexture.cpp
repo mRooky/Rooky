@@ -28,7 +28,7 @@
 #include "CoreBindingManager.h"
 #include "CorePipelineManager.h"
 
-#include "UtilityString.h"
+#include "KernelFileUtility.h"
 
 #include <iostream>
 #include <cassert>
@@ -100,7 +100,7 @@ void Texture::RecordCommands(void)
 
 void Texture::CreateTexture(const char* file)
 {
-	assert(Utility::DoesFileExist(file));
+	assert(Kernel::DoesFileExist(file));
 	int width, height, channels;
 	uint8_t * bitmap = SOIL_load_image(file, &width, &height, &channels, SOIL_LOAD_RGBA);
 	if (bitmap != nullptr)

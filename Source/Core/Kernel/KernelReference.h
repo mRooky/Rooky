@@ -13,14 +13,16 @@
 namespace Kernel
 {
 
+template<typename T>
 class Reference
 {
+	typedef T RefCountType;
 public:
 	Reference(void);
 	~Reference(void);
 
 protected:
-	SafeRefCount mRefCount = {};
+	RefCountType mRefCount = {};
 };
 
 } /* namespace Kernel */

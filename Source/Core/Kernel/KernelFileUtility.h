@@ -1,17 +1,16 @@
 /*
- * UtilString.h
+ * KernelFileUtility.h
  *
- *  Created on: Mar 28, 2019
+ *  Created on: May 9, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTILITY_UTILITYSTRING_H_
-#define SOURCE_CORE_UTILITY_UTILITYSTRING_H_
+#ifndef SOURCE_CORE_KERNEL_KERNELFILEUTILITY_H_
+#define SOURCE_CORE_KERNEL_KERNELFILEUTILITY_H_
 
-#include <string>
 #include <fstream>
 
-namespace Utility
+namespace Kernel
 {
 
 static inline bool DoesFileExist(const std::string& file)
@@ -35,6 +34,6 @@ static inline std::string GetFilePath(const std::string& file)
 	return file.substr(0, file.find_last_of("/\\") + 1);
 }
 
-} /* namespace Util */
+} /* namespace Kernel */
 
-#endif /* SOURCE_CORE_UTILITY_UTILITYSTRING_H_ */
+#endif /* SOURCE_CORE_KERNEL_KERNELFILEUTILITY_H_ */

@@ -9,6 +9,7 @@
 
 #include "ExampleTexture.h"
 #include "KernelString.h"
+#include "KernelFile.h"
 
 int main(void)
 {

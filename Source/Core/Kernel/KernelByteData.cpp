@@ -1,35 +1,33 @@
 /*
- * UtilData.cpp
+ * KernelByteData.cpp
  *
- *  Created on: Jan 18, 2019
+ *  Created on: May 9, 2019
  *      Author: rookyma
  */
 
-#include "UtilityByteBuffer.h"
-#include <memory>
-#include <cassert>
-#include <cstring>
+#include "KernelByteData.h"
+#include "KernelMemory.h"
 
-namespace Utility
+namespace Kernel
 {
 
-ByteBuffer::ByteBuffer(void)
+ByteData::ByteData(void)
 {
 }
 
-ByteBuffer::~ByteBuffer(void)
+ByteData::~ByteData(void)
 {
 	Clear();
 }
 
-void ByteBuffer::Clear(void)
+void ByteData::Clear(void)
 {
 	std::free(m_bytes);
 	m_size = 0;
 	m_bytes = nullptr;
 }
 
-void ByteBuffer::Move(ByteBuffer& other)
+void ByteData::Move(ByteData& other)
 {
 	Clear();
 	if (other.m_size > 0)
@@ -41,7 +39,7 @@ void ByteBuffer::Move(ByteBuffer& other)
 	}
 }
 
-void ByteBuffer::Copy(const ByteBuffer& other)
+void ByteData::Copy(const ByteData& other)
 {
 	Clear();
 	if (other.m_size > 0)
@@ -52,7 +50,7 @@ void ByteBuffer::Copy(const ByteBuffer& other)
 	}
 }
 
-uint8_t* ByteBuffer::Allocate(size_t size)
+uint8_t* ByteData::Allocate(size_t size)
 {
 	assert(size > 0);
 	assert(m_bytes == nullptr);
@@ -61,4 +59,4 @@ uint8_t* ByteBuffer::Allocate(size_t size)
 	return m_bytes;
 }
 
-} /* namespace Util */
+} /* namespace Kernel */

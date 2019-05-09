@@ -1,19 +1,19 @@
 /*
- * UtilByteAlignment.hpp
+ * KernelAlignment.h
  *
- *  Created on: Mar 13, 2019
+ *  Created on: May 9, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_
-#define SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_
+#ifndef SOURCE_CORE_KERNEL_KERNELALIGNMENT_H_
+#define SOURCE_CORE_KERNEL_KERNELALIGNMENT_H_
 
 #include <cstddef>
 #include <type_traits>
 #include <cassert>
 #include <cstdlib>
 
-namespace Utility
+namespace Kernel
 {
 
 template<typename T>
@@ -36,6 +36,6 @@ static inline void* AlignAllocate(size_t size, size_t alignment)
 	return std::malloc(align_size);
 }
 
-}
+} /* namespace Kernel */
 
-#endif /* SOURCE_CORE_UTILITY_UTILITYBYTEALIGN_HPP_ */
+#endif /* SOURCE_CORE_KERNEL_KERNELALIGNMENT_H_ */

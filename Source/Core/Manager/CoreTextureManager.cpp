@@ -10,7 +10,7 @@
 #include "GHIFactory.h"
 #include "GHISampler.h"
 #include "UtilityRelease.h"
-#include "UtilityString.h"
+#include "KernelFileUtility.h"
 #include "CoreTextureManager.h"
 #include "CoreTexture.h"
 #include "CoreSystem.h"
@@ -50,7 +50,7 @@ Texture* TextureManager::CreateTexture1D(const char* name, const Math::Extent3Di
 Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di& extent, GHI::Format format)
 {
 	std::string file_string = name;
-	std::string file_name = Utility::GetFileName(file_string);
+	std::string file_name = Kernel::GetFileName(file_string);
 	Texture* texture = GetTexture(file_name.c_str());
 	if (texture == nullptr)
 	{
