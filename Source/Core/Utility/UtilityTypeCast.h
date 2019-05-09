@@ -36,8 +36,26 @@ static inline O* SafeCast(I* in)
    return nullptr;
 }
 
+template<class O, typename I>
+static inline O* FastCast(I* in)
+{
+   if(in != nullptr)
+   {
+      O* out = static_cast<O*>(in);
+      return out;
+   }
+   return nullptr;
+}
+
+//
 template<>
-static inline void* SafeCast<void>(void* in)
+static inline constexpr void* SafeCast<void>(void* in)
+{
+   return in;
+}
+
+template<>
+static inline constexpr void* FastCast<void>(void* in)
 {
    return in;
 }

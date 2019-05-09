@@ -32,7 +32,7 @@ public:
 	inline GHI::Resource* GetVertexBuffer(void) const { return mVertexBuffer; }
 
 public:
-	inline void PushBindingSet(const GHI::BindingSet* set) { mBindingSets.Append(set); }
+	inline void PushBindingSet(const GHI::BindingSet* set) { mBindingSets.PushElement(set); }
 	inline size_t GetBindingSetCount(void) const { return mBindingSets.GetElementCount(); }
 	inline const GHI::BindingSet* GetBindingSet(size_t index) const { return mBindingSets.GetElementAt(index); }
 

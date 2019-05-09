@@ -18,27 +18,48 @@ namespace Kernel
 template<typename T, size_t N>
 class Array
 {
+	typedef T ElementType;
 public:
 	Array(void) = default;
 	~Array(void) = default;
 
 public:
-	inline void Set(size_t index, const T& element)
+	inline bool Find(const ElementType& element) const
+	{
+		for (size_t index = 0; index < m_count; ++index)
+		{
+			const ElementType& exist = m_elements.at(index);
+			if (element == exist)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+public:
+	inline void SetElement(size_t index, const T& element)
 	{
 		ThrowIfOutOfRange(index);
 		m_elements.at(index) = element;
 	}
 
-	inline void Append(const T& element)
+	inline void PushElement(const T& element)
 	{
 		ThrowIfFull();
 		m_elements.at(m_count) = element;
 		++m_count;
 	}
 
-	inline void Clear(void) { m_count = 0; }
+	inline void ClearElement(void) { m_count = 0; }
 
 public:
+	inline T& GetElementAt(size_t index)
+	{
+		ThrowIfOutOfRange(index);
+		return m_elements.at(index);
+	}
+
 	inline const T& GetElementAt(size_t index) const
 	{
 		ThrowIfOutOfRange(index);
@@ -48,7 +69,7 @@ public:
 	inline size_t GetElementCount(void) const { return m_count; }
 
 public:
-	inline constexpr size_t Capability(void) const { return N; }
+	inline constexpr size_t Capability(void) const noexcept { return N; }
 
 private:
 	inline void ThrowIfFull(void) const
@@ -69,7 +90,7 @@ private:
 
 private:
 	size_t m_count = 0;
-	std::array<T, N> m_elements;
+	std::array<ElementType, N> m_elements;
 };
 
 } /* namespace Kernel */

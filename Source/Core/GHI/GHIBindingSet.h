@@ -10,13 +10,16 @@
 
 #include "GHIBinding.h"
 #include "GHIObject.h"
+
+#include "KernelArray.h"
 #include <vector>
 
-static const size_t MAX_BINDING_PER_SET = 8;
 namespace GHI
 {
 class BindingSet : public Object
 {
+	friend class BindingLayout;
+	static const size_t MAX_BINDING_COUNT = 8;
 protected:
 	explicit BindingSet(Device* device);
 
@@ -34,12 +37,12 @@ public:
 	inline bool IsValid(void) const { return mValid; }
 
 public:
-	inline size_t GetBindingCount(void) const { return mBindings.size(); }
-	inline const Binding& GetBinding(size_t index) const { return mBindings.at(index); }
+	inline size_t GetBindingCount(void) const { return mBindings.GetElementCount(); }
+	inline const Binding& GetBinding(size_t index) const { return mBindings.GetElementAt(index); }
 
 protected:
 	bool mValid = false;
-	std::vector<Binding> mBindings;
+	Kernel::Array<Binding, MAX_BINDING_COUNT> mBindings;
 };
 
 } /* namespace Render */

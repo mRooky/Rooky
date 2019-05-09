@@ -8,7 +8,6 @@
 #include "GHIBindingSet.h"
 #include "GHIResource.h"
 #include <cassert>
-#include "UtilitySearch.h"
 
 namespace GHI
 {
@@ -24,22 +23,23 @@ BindingSet::~BindingSet(void)
 
 void BindingSet::AppendBinding(const Binding& binding)
 {
-	auto iterator = Utility::Find(mBindings, binding);
-	if (iterator == mBindings.end())
+	bool exist = mBindings.Find(binding);
+	if (!exist)
 	{
-		mBindings.push_back(binding);
+		mBindings.PushElement(binding);
 	}
 }
 
 void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 {
-	assert(index < mBindings.size());
+	assert(index < mBindings.GetElementCount());
 	GHI::Resource* new_resource = binding.GetResource();
-	GHI::Resource* old_resource = mBindings.at(index).GetResource();
+	const GHI::Binding& old_binding = mBindings.GetElementAt(index);
+	GHI::Resource* old_resource = old_binding.GetResource();
 	assert(old_resource->GetUsage() == new_resource->GetUsage());
 	if (old_resource->GetUsage() == new_resource->GetUsage())
 	{
-		mBindings.at(index) = binding;
+		mBindings.SetElement(index, binding);
 	}
 }
 

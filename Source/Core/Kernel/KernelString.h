@@ -14,6 +14,8 @@
 namespace Kernel
 {
 
+typedef std::string String;
+
 class HashString : public HashObject
 {
 public:

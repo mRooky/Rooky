@@ -16,7 +16,7 @@ namespace GHI
 
 BindingLayout::BindingLayout(void)
 {
-	mBindingSets.reserve(MAX_BINDING_PER_SET);
+	mBindingSets.reserve(BindingSet::MAX_BINDING_COUNT);
 }
 
 BindingLayout::~BindingLayout(void)
@@ -26,14 +26,14 @@ BindingLayout::~BindingLayout(void)
 
 void BindingLayout::AppendBindingSet(const BindingSet* set)
 {
-	assert(mBindingSets.size() < MAX_BINDING_PER_SET - 1);
+	assert(mBindingSets.size() < BindingSet::MAX_BINDING_COUNT - 1);
 	assert(set->IsValid());
 	mBindingSets.push_back(set);
 }
 
 void BindingLayout::PushBindingSet(size_t index, const BindingSet* set)
 {
-	assert(index < MAX_BINDING_PER_SET);
+	assert(index < BindingSet::MAX_BINDING_COUNT);
 	assert(index < mBindingSets.size());
 	if (true)
 	{
