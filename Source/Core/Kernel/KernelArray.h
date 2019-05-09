@@ -24,7 +24,7 @@ public:
 	~Array(void) = default;
 
 public:
-	inline bool Find(const ElementType& element) const
+	inline bool FindElement(const ElementType& element) const
 	{
 		for (size_t index = 0; index < m_count; ++index)
 		{
@@ -37,7 +37,6 @@ public:
 		return false;
 	}
 
-public:
 	inline void SetElement(size_t index, const T& element)
 	{
 		ThrowIfOutOfRange(index);
@@ -84,7 +83,7 @@ private:
 	{
 		if(index >= m_count)
 		{
-			throw "Array Out Of Range !";
+			throw "Index Out Of Range !";
 		}
 	}
 

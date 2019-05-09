@@ -20,13 +20,10 @@ public:
 	virtual ~HashObject(void) = default;
 
 public:
-	inline Hash GetHash(void) const { return mHash; }
+	inline const Hash& GetHash(void) const { return mHash; }
 
 protected:
-	virtual void CalcHash(void) = 0;
-
-protected:
-	Hash mHash = {};
+	mutable Hash mHash = 0;
 };
 
 } /* namespace Kernel */

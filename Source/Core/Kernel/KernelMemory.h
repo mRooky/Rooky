@@ -21,9 +21,9 @@ static inline void ZeroMemory(T& value, size_t count = 1)
 }
 
 template<typename T>
-static inline size_t Memcpy(void* dest, const T& value, size_t count = 1)
+static inline size_t Memcpy(void* dest, const T& value)
 {
-	size_t size = sizeof(T) * count;
+	size_t size = sizeof(T);
 	std::memcpy(dest, &value, size);
 	return size;
 }

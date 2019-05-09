@@ -19,7 +19,14 @@ public:
 	~Hash(void) = default;
 
 public:
-	inline operator size_t(void) const { return mCode; }
+	Hash(size_t code) : mCode(code) {}
+	Hash(const Hash& other) : mCode(other.mCode) {}
+
+public:
+	inline operator size_t(void) const
+	{
+		return mCode;
+	}
 
 public:
 	template<typename T>
@@ -29,13 +36,29 @@ public:
 	}
 
 public:
+	inline Hash& operator=(size_t code)
+	{
+		mCode = code;
+		return *this;
+	}
+
+	inline Hash& operator=(const Hash& other)
+	{
+		mCode = other.mCode;
+		return *this;
+	}
+
+public:
 	inline bool operator==(const Hash& other) const
 	{
 		return mCode == other.mCode;
 	}
 
 public:
-	inline size_t GetCode(void) const { return mCode; }
+	inline size_t GetCode(void) const
+	{
+		return mCode;
+	}
 
 protected:
 	size_t mCode = 0;

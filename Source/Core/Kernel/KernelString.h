@@ -28,16 +28,7 @@ public:
 	HashString(const std::string& string) { Set(string); }
 
 public:
-	void Print(void);
-
-public:
-	virtual void CalcHash(void) override
-	{
-		mHash.CalcHash(mString);
-	}
-
-public:
-	inline const char* Char(void) const { return mString.c_str(); }
+	inline operator const char*(void) const { return mString.c_str(); }
 
 public:
 	inline HashString& operator=(const char* chars)
@@ -81,6 +72,19 @@ public:
 	{
 		mString = string;
 		CalcHash();
+	}
+
+protected:
+	inline void CalcHash(void)
+	{
+		if (mString != "")
+		{
+			mHash.CalcHash(mString);
+		}
+		else
+		{
+			mHash = 0;
+		}
 	}
 
 protected:

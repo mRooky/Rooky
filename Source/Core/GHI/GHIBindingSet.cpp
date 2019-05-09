@@ -23,7 +23,7 @@ BindingSet::~BindingSet(void)
 
 void BindingSet::AppendBinding(const Binding& binding)
 {
-	bool exist = mBindings.Find(binding);
+	bool exist = mBindings.FindElement(binding);
 	if (!exist)
 	{
 		mBindings.PushElement(binding);
