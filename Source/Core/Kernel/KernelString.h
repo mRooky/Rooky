@@ -70,8 +70,7 @@ public:
 
 	inline void Set(const std::string& string)
 	{
-		mString = string;
-		CalcHash();
+		Set(string.c_str());
 	}
 
 protected:
