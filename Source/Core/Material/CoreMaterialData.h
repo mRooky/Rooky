@@ -8,7 +8,6 @@
 #ifndef SOURCE_CORE_MATERIAL_COREMATERIALDATA_H_
 #define SOURCE_CORE_MATERIAL_COREMATERIALDATA_H_
 
-#include "MathDefine.h"
 #include "MathVector.h"
 
 namespace Core
@@ -24,14 +23,14 @@ public:
 	void UpdateUniform(Uniform* uniform, size_t offset);
 
 public:
-	void SetShininess(Math::Real shininess);
+	void SetShininess(float shininess);
 	void SetAmbient(const Math::ColorValue& color);
 	void SetDiffuse(const Math::ColorValue& color);
 	void SetSpecular(const Math::ColorValue& color);
 	void SetEmissive(const Math::ColorValue& color);
 
 public:
-	inline Math::Real GetShininess(void) const { return mShininess; }
+	inline float GetShininess(void) const { return mShininess; }
 	inline const Math::ColorValue& GetAmbient(void) const { return mAmbient; }
 	inline const Math::ColorValue& GetDiffuse(void) const { return mDiffuse; }
 	inline const Math::ColorValue& GetSpecular(void) const { return mSpecular; }
@@ -46,7 +45,7 @@ protected:
 	bool mDirty = false;
 
 protected:
-	Math::Real mShininess = 0.0f;
+	float mShininess = 0.0f;
 	Math::ColorValue mAmbient;
 	Math::ColorValue mDiffuse;
 	Math::ColorValue mSpecular;

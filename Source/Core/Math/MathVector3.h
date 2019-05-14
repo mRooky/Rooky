@@ -49,8 +49,6 @@ public:
 
 };
 
-typedef Vector3_t<float> Vector3f;
-
 // Non-Member Static Functions
 template<typename T>
 static inline Vector3_t<T> operator+(const Vector3_t<T>& vector, T value)

@@ -21,7 +21,7 @@ MaterialData::~MaterialData(void)
 {
 }
 
-void MaterialData::SetShininess(Math::Real shininess)
+void MaterialData::SetShininess(float shininess)
 {
 	mDirty = true;
 	mShininess = shininess;

@@ -55,9 +55,6 @@ public:
 
 };
 
-typedef Vector2_t<float> Offset2Df, Vector2f;
-typedef Vector2_t<int32_t> Point2, Offset2Di, Vector2i;
-
 } /* namespace Math */
 
 #endif /* SOURCE_CORE_MATH_MATHVECTOR2_H_ */

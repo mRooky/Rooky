@@ -11,7 +11,6 @@
 #include "GHIEnum.h"
 #include "GHIFormat.h"
 #include "MathExtent3.h"
-#include "MathDefine.h"
 #include <vector>
 
 namespace GHI

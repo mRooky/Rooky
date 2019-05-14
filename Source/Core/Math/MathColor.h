@@ -8,10 +8,18 @@
 #ifndef SOURCE_CORE_MATH_RENDERCOLOR_HPP_
 #define SOURCE_CORE_MATH_RENDERCOLOR_HPP_
 
-#include "MathDefine.h"
+#include <cstdint>
 
 namespace Math
 {
+
+struct ColorComponent
+{
+	uint8_t red = 0;
+	uint8_t green = 0;
+	uint8_t blue = 0;
+	uint8_t alpha = 255;
+};
 
 class Color
 {

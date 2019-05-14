@@ -8,12 +8,10 @@
 #ifndef SOURCE_CORE_GHI_RENDERCOMMANDLIST_H_
 #define SOURCE_CORE_GHI_RENDERCOMMANDLIST_H_
 
-#include <GHIBinding.h>
-#include <MathRect.h>
+#include "GHIBinding.h"
 #include "GHIBindingLayout.h"
 #include "GHIClasses.h"
 #include "GHIEnum.h"
-#include "MathDefine.h"
 #include "MathViewport.h"
 
 namespace GHI

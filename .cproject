@@ -51,6 +51,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source}&quot;"/>
                                     									
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/Core/Number}&quot;"/>
+                                    									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/Core/Math}&quot;"/>
                                     									
                                     <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/Core/Kernel}&quot;"/>
@@ -142,26 +144,6 @@
                                 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.399337077" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
                                 							
                             </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <folderInfo id="cdt.managedbuild.config.gnu.exe.debug.525733081.1323380736" name="/" resourcePath="Source/Third/tinyxml2">
-                        						
-                        <toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.1619521665" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug" unusedChildren="">
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.1306428053" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.563744009"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1687150605" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1693946900"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.962713791" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.533428231"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1183534839" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1749279972"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.828234182" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1541453231"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.801678078" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug.477301727"/>
                             						
                         </toolChain>
                         					

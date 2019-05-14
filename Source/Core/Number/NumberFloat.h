@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 #define SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 
-#include "MathDefine.h"
+#include "NumberDefine.h"
 
-namespace Math
+namespace Number
 {
 
 class Float
@@ -44,6 +44,7 @@ static inline bool CloseEnough(const float& v1, const float& v2)
 {
 	return std::abs(v1 - v2) < std::numeric_limits<float>::epsilon();
 }
+
 }
 
 #endif /* SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_ */

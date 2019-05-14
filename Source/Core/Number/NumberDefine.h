@@ -26,7 +26,7 @@
 
 #endif
 
-namespace Math
+namespace Number
 {
 
 typedef struct Float16Components
@@ -67,14 +67,6 @@ typedef struct Float64Components
 	uint64_t mantissa :52;
 #endif
 } Float64Components;
-
-struct ColorComponent
-{
-	uint8_t red = 0;
-	uint8_t green = 0;
-	uint8_t blue = 0;
-	uint8_t alpha = 255;
-};
 
 typedef float Real;
 

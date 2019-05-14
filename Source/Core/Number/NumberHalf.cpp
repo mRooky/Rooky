@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include "MathHalf.h"
+#include "NumberHalf.h"
 
-namespace Math
+namespace Number
 {
 
 float Half::GetFloat(void) const

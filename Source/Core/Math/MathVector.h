@@ -15,7 +15,11 @@
 namespace Math
 {
 
+typedef Vector2_t<float> Vector2f, Offset2Df;
+typedef Vector3_t<float> Vector3f;
 typedef Vector4_t<float> Vector4f, ColorValue;
+
+typedef Vector2_t<int32_t> Point2i, Offset2Di, Vector2i;
 
 }
 

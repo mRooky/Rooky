@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
+#include "NumberFloat.h"
 #include "GHIDepthStencil.h"
-#include "MathFloat.h"
 
 namespace GHI
 {
@@ -20,8 +20,8 @@ bool DepthStencil::operator==(const DepthStencil& other) const
 
 	if (true == equal)
 	{
-		return Math::CloseEnough(minDepthBounds, other.minDepthBounds)
-				&& Math::CloseEnough(maxDepthBounds, other.maxDepthBounds);
+		return Number::CloseEnough(minDepthBounds, other.minDepthBounds)
+				&& Number::CloseEnough(maxDepthBounds, other.maxDepthBounds);
 	}
 	return false;
 }

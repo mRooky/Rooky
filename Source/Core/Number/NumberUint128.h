@@ -1,17 +1,17 @@
 /*
- * KernelType.h
+ * NumberUint128.h
  *
- *  Created on: May 10, 2019
+ *  Created on: May 14, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_KERNEL_KERNELTYPE_H_
-#define SOURCE_CORE_KERNEL_KERNELTYPE_H_
+#ifndef SOURCE_CORE_NUMBER_NUMBERUINT128_H_
+#define SOURCE_CORE_NUMBER_NUMBERUINT128_H_
 
 #include <cstdint>
 #include <cstddef>
 
-namespace Kernel
+namespace Number
 {
 
 class Uint128
@@ -49,11 +49,17 @@ public:
 	}
 
 private:
-	uint64_t m_buffer[2] = {};
+	union
+	{
+		struct
+		{
+			uint64_t upper;
+			uint64_t lower;
+		};
+		uint64_t m_buffer[2] = {};
+	};
 };
 
-static_assert(sizeof(Uint128) == 2 * sizeof(uint64_t), "Uint128 size 16");
+} /* namespace Number */
 
-} /* namespace Kernel */
-
-#endif /* SOURCE_CORE_KERNEL_KERNELTYPE_H_ */
+#endif /* SOURCE_CORE_NUMBER_NUMBERUINT128_H_ */

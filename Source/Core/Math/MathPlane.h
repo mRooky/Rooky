@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATH_MATHPLANE_H_
 #define SOURCE_CORE_MATH_MATHPLANE_H_
 
-#include "MathFloat.h"
 #include "MathVector.h"
+#include <cstdint>
 
 namespace Math
 {
@@ -33,15 +33,15 @@ public:
 	~Plane(void);
 
 public:
-	inline void SetDistance(Float distance) { mDistance = distance; }
+	inline void SetDistance(float distance) { mDistance = distance; }
 	inline void GetDirection(const Vector3f& direction) { mDirection = direction; }
 
 public:
-	inline Float GetDistance(void) const { return mDistance; }
+	inline float GetDistance(void) const { return mDistance; }
 	inline const Vector3f& GetDirection(void) const { return mDirection; }
 
 public:
-	Float mDistance = 0.0f;
+	float mDistance = 0.0f;
 	Vector3f mDirection = {};
 };
 

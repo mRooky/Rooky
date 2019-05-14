@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "MathFloat.h"
+#include "NumberFloat.h"
 #include "GHIRasterization.h"
 
 namespace GHI
@@ -21,10 +21,10 @@ bool Rasterization::operator==(const Rasterization& other) const
 				&& rasterizerDiscardEnable == other.rasterizerDiscardEnable;
 		if (true == equal)
 		{
-			return Math::CloseEnough(depthBiasConstantFactor, other.depthBiasConstantFactor)
-					&& Math::CloseEnough(depthBiasClamp, other.depthBiasClamp)
-					&& Math::CloseEnough(depthBiasSlopeFactor, other.depthBiasSlopeFactor)
-					&& Math::CloseEnough(lineWidth, other.lineWidth);
+			return Number::CloseEnough(depthBiasConstantFactor, other.depthBiasConstantFactor)
+					&& Number::CloseEnough(depthBiasClamp, other.depthBiasClamp)
+					&& Number::CloseEnough(depthBiasSlopeFactor, other.depthBiasSlopeFactor)
+					&& Number::CloseEnough(lineWidth, other.lineWidth);
 		}
 		return false;
 }
