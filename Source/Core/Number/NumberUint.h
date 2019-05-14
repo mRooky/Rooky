@@ -23,8 +23,8 @@ public:
 public:
 	Uint128(const Uint128& other)
 	{
-		m_buffer[0] = other.m_buffer[0];
-		m_buffer[1] = other.m_buffer[1];
+		upper = other.upper;
+		lower = other.lower;
 	}
 
 public:
@@ -37,15 +37,15 @@ public:
 public:
 	inline Uint128& operator=(const Uint128& other)
 	{
-		m_buffer[0] = other.m_buffer[0];
-		m_buffer[1] = other.m_buffer[1];
+		upper = other.upper;
+		lower = other.lower;
 		return *this;
 	}
 
 public:
 	inline bool operator==(const Uint128& other) const
 	{
-		return (m_buffer[0] == other.m_buffer[0]) && (m_buffer[1] == other.m_buffer[1]);
+		return (upper == other.upper) && (lower == other.lower);
 	}
 
 private:

@@ -25,6 +25,12 @@ public:
 	inline operator float (void) const { return m_floatValue; }
 
 public:
+	inline bool operator==(const Float& other) const
+	{
+		return CloseEnough(m_floatValue, other.m_floatValue);
+	}
+
+public:
 	inline const Float32Components& GetComponets(void) const { return m_components; }
 
 public:
@@ -39,11 +45,6 @@ private:
 	};
 
 };
-
-static inline bool CloseEnough(const float& v1, const float& v2)
-{
-	return std::abs(v1 - v2) < std::numeric_limits<float>::epsilon();
-}
 
 }
 

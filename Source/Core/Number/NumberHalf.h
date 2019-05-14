@@ -29,17 +29,11 @@ public:
 	inline operator uint16_t (void) const { return m_encoded; }
 
 public:
-	inline Half& operator =(float value)
-	{
-		SetFloat(value);
-		return *this;
-	}
+	inline bool operator==(const Half& other) const { return m_encoded == other.m_encoded; }
 
-	inline Half& operator =(const Half& other)
-	{
-		m_encoded = other.m_encoded;
-		return *this;
-	}
+public:
+	inline Half& operator=(float value) { SetFloat(value); return *this; }
+	inline Half& operator=(const Half& other) { m_encoded = other.m_encoded; return *this; }
 
 private:
 	union
