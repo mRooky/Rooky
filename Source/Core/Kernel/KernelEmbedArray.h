@@ -16,12 +16,12 @@ namespace Kernel
 {
 
 template<typename T, size_t N>
-class Array
+class EmbedArray
 {
 	typedef T ElementType;
 public:
-	Array(void) = default;
-	~Array(void) = default;
+	EmbedArray(void) = default;
+	~EmbedArray(void) = default;
 
 public:
 	inline bool FindElement(const ElementType& element) const

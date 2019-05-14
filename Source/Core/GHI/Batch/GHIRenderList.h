@@ -1,18 +1,18 @@
 /*
- * CoreRenderList.h
+ * GHIRenderList.h
  *
- *  Created on: May 9, 2019
+ *  Created on: May 14, 2019
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_CORERENDERLIST_H_
-#define SOURCE_CORE_CORERENDERLIST_H_
+#ifndef SOURCE_CORE_GHI_BATCH_GHIRENDERLIST_H_
+#define SOURCE_CORE_GHI_BATCH_GHIRENDERLIST_H_
 
-#include "CoreRenderItem.h"
+#include "GHIRenderItem.h"
 #include <vector>
 #include <cstdint>
 
-namespace Core
+namespace GHI
 {
 
 enum class RenderListType : uint32_t
@@ -45,6 +45,6 @@ protected:
 	RenderListType mType = RenderListType::UNKNOWN;
 };
 
-} /* namespace Core */
+} /* namespace GHI */
 
-#endif /* SOURCE_CORE_CORERENDERLIST_H_ */
+#endif /* SOURCE_CORE_GHI_BATCH_GHIRENDERLIST_H_ */
