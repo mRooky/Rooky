@@ -16,12 +16,12 @@ namespace Kernel
 {
 
 template<typename T, size_t N>
-class EmbedArray
+class FixedVector
 {
 	typedef T ElementType;
 public:
-	EmbedArray(void) = default;
-	~EmbedArray(void) = default;
+	FixedVector(void) = default;
+	~FixedVector(void) = default;
 
 public:
 	inline bool FindElement(const ElementType& element) const

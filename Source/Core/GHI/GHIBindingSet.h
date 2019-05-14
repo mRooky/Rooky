@@ -11,7 +11,7 @@
 #include "GHIBinding.h"
 #include "GHIObject.h"
 
-#include "KernelEmbedArray.h"
+#include "KernelFixedVector.h"
 #include <vector>
 
 namespace GHI
@@ -42,7 +42,7 @@ public:
 
 protected:
 	bool mValid = false;
-	Kernel::EmbedArray<Binding, MAX_BINDING_COUNT> mBindings;
+	Kernel::FixedVector<Binding, MAX_BINDING_COUNT> mBindings;
 };
 
 } /* namespace Render */

@@ -11,11 +11,11 @@
 namespace Utility
 {
 
-class NonCopyable
+class NonCopy
 {
 private:
-	NonCopyable(const NonCopyable&) = delete;
-	const NonCopyable& operator=(const NonCopyable&) = delete;
+	NonCopy(const NonCopy&) = delete;
+	const NonCopy& operator=(const NonCopy&) = delete;
 };
 
 }

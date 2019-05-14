@@ -9,7 +9,9 @@
 #define SOURCE_CORE_GHI_BATCH_GHIRENDERITEM_H_
 
 #include "GHIClasses.h"
-#include "KernelEmbedArray.h"
+#include "KernelFixedVector.h"
+#include "GHIRenderElement.h"
+#include <vector>
 
 namespace GHI
 {
@@ -22,12 +24,13 @@ public:
 	~RenderItem(void);
 
 public:
-	inline void SetPipeline(Pipeline* pipeline) { mPipeline = pipeline; }
+	RenderElement* CreateElement(Draw* draw);
+
+public:
 	inline void SetIndexBuffer(Resource* buffer) { mIndexBuffer = buffer; }
 	inline void SetVertexBuffer(Resource* buffer) { mVertexBuffer = buffer; }
 
 public:
-	inline Pipeline* GetPipeline(void) const { return mPipeline; }
 	inline Resource* GetIndexBuffer(void) const { return mIndexBuffer; }
 	inline Resource* GetVertexBuffer(void) const { return mVertexBuffer; }
 
@@ -37,12 +40,12 @@ public:
 	inline const BindingSet* GetBindingSet(size_t index) const { return mBindingSets.GetElementAt(index); }
 
 protected:
-	Pipeline* mPipeline = nullptr;
 	Resource* mIndexBuffer = nullptr;
 	Resource* mVertexBuffer = nullptr;
 
 protected:
-	Kernel::EmbedArray<const BindingSet*, MAX_SET_COUNT> mBindingSets;
+	std::vector<RenderElement> mRenderElements = {};
+	Kernel::FixedVector<const BindingSet*, MAX_SET_COUNT> mBindingSets;
 };
 
 } /* namespace GHI */

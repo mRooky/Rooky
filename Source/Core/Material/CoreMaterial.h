@@ -11,7 +11,7 @@
 #include "CoreShaderResource.h"
 #include "CoreBase.h"
 #include "CoreMaterialUniform.h"
-#include "KernelEmbedArray.h"
+#include "KernelFixedVector.h"
 
 namespace Core
 {
@@ -46,7 +46,7 @@ protected:
 
 protected:
 	MaterialUniform mMaterialUniform = {};
-	Kernel::EmbedArray<ShaderResource*, 5> mShaderResources;
+	Kernel::FixedVector<ShaderResource*, 5> mShaderResources;
 };
 
 } /* namespace Core */
