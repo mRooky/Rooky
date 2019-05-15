@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 #define SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 
-#include "NumberDefine.h"
+#include "NumberComponent.h"
 
 namespace Number
 {
@@ -25,6 +25,11 @@ public:
 	inline operator float (void) const { return m_floatValue; }
 
 public:
+	inline bool operator==(const float& value) const
+	{
+		return CloseEnough(m_floatValue, value);
+	}
+
 	inline bool operator==(const Float& other) const
 	{
 		return CloseEnough(m_floatValue, other.m_floatValue);

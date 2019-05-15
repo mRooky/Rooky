@@ -57,7 +57,7 @@ public:
 
 class VertexAttribute
 {
-	constexpr static const size_t MAX_ATTRIBUTE_COUNT = 32;
+	constexpr static const size_t MAX_ATTRIBUTE_COUNT = 16;
 public:
 	VertexAttribute(void) = default;
 	~VertexAttribute(void) = default;

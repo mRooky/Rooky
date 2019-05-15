@@ -47,8 +47,9 @@ void RenderItem::BindingIndexBuffer(CommandList* command)
 	const Buffer* index = mIndexBuffer.GetBuffer();
 	if (index != nullptr)
 	{
+		size_t offset = mIndexBuffer.GetOffset();
 		IndexType type = mIndexBuffer.GetType();
-		command->SetIndex(index, 0, type);
+		command->SetIndex(index, offset, type);
 	}
 }
 
@@ -58,7 +59,7 @@ void RenderItem::BindingVertexBuffer(CommandList* command)
 	assert(count > 0);
 	for (size_t index = 0; index < count; ++index)
 	{
-		const VertexBuffer& vertex = mVertexAttribute.GetBuffer(index);
+		const auto& vertex = mVertexAttribute.GetBuffer(index);
 		size_t offset = vertex.GetOffset();
 		const Resource* resource = vertex.GetBuffer();
 		command->SetVertex(resource, index, offset);
