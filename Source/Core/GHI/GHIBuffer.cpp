@@ -15,7 +15,7 @@ namespace GHI
 Buffer::Buffer(Device* device):
 		Memory(device)
 {
-	mType = ResourceType::RESOURCE_TYPE_BUFFER;
+	mType = ResourceType::BUFFER;
 }
 
 Buffer::~Buffer(void)

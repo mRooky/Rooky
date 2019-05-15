@@ -13,7 +13,7 @@ namespace GHI
 Sampler::Sampler(Device* device):
 		Resource(device)
 {
-	mType = ResourceType::RESOURCE_TYPE_SAMPLER;
+	mType = ResourceType::SAMPLER;
 }
 
 Sampler::~Sampler(void)

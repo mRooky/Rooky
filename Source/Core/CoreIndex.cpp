@@ -34,7 +34,7 @@ void Index::Create(GHI::IndexType type, uint32_t count)
 	GHI::UsageType usage;
 	usage.source = TRUE;
 	usage.destination = TRUE;
-	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
+	usage.type = GHI::ResourceType::BUFFER;
 	Create(type, count, usage);
 }
 

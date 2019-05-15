@@ -190,7 +190,7 @@ void Image::CopyFrom(const GHI::Resource* other)
 	auto command_buffer = command_pool->GetCommandBuffer(0);
 
 	GHI::ResourceType type = other->GetType();
-	if (type == GHI::ResourceType::RESOURCE_TYPE_BUFFER)
+	if (type == GHI::ResourceType::BUFFER)
 	{
 		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
 		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
@@ -307,7 +307,7 @@ GHI::ImageType Image::ConverType(const VkImageViewType& type)
 
 VkImageUsageFlags Image::ConvertUsageFlag(GHI::UsageType usage)
 {
-	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_IMAGE);
+	assert(usage.type == GHI::ResourceType::IMAGE);
 	VkImageUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;

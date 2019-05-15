@@ -15,10 +15,10 @@ namespace GHI
 
 enum ResourceType : uint8_t
 {
-	RESOURCE_TYPE_IMAGE,
-	RESOURCE_TYPE_BUFFER,
-	RESOURCE_TYPE_SAMPLER,
-	RESOURCE_TYPE_UNKNOWN
+	IMAGE,
+	BUFFER,
+	SAMPLER,
+	UNKNOWN
 };
 
 class UsageType
@@ -68,7 +68,7 @@ public:
 		};
 		uint32_t allUsageFlags = 0;
 	};
-	ResourceType type = ResourceType::RESOURCE_TYPE_UNKNOWN;
+	ResourceType type = ResourceType::UNKNOWN;
 };
 
 } /* namespace Render */

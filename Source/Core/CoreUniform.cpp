@@ -37,7 +37,7 @@ void Uniform::Create(size_t size, GHI::UsageType usage)
 void Uniform::CreateRenderBuffer(GHI::UsageType usage)
 {
 	usage.uniformBuffer = TRUE;
-	usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
+	usage.type = GHI::ResourceType::BUFFER;
 	System* system = mCreator->GetSystem();
 	GHI::Device* device = system->GetDevice();
 	GHI::Factory* factory = device->GetFactory();

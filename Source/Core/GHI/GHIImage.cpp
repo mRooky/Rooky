@@ -14,7 +14,7 @@ namespace GHI
 Image::Image(Device* device):
 		Memory(device)
 {
-	mType = ResourceType::RESOURCE_TYPE_IMAGE;
+	mType = ResourceType::IMAGE;
 }
 
 Image::~Image(void)

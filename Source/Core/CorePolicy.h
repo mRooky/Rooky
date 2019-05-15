@@ -34,12 +34,12 @@ public:
 
 public:
 	void CreateDepthStencil(const Math::Extent2Di& extent);
-	GHI::Image* CreateAttachment(void);
+	RenderTarget* CreateRenderTarget(void);
 
 public:
-	inline GHI::Image* GetDepthStencil(void) const { return mDepthStencil; }
-	inline size_t GetAttachmentCount(void) const { return mAttachments.size(); }
-	inline GHI::Image* GetAttachment(size_t index) const { return mAttachments.at(index); }
+	inline RenderTarget* GetDepthStencil(void) const { return mDepthStencil; }
+	inline size_t GetRenderTargetCount(void) const { return mRenderTargets.size(); }
+	inline RenderTarget* GetRenderTarget(size_t index) const { return mRenderTargets.at(index); }
 
 public:
 	inline GHI::RenderPass* GetRenderPass(void) const { return mRenderPass; }
@@ -55,8 +55,8 @@ protected:
 	std::vector<SubPolicy*> mSubPolicies = {};
 
 protected:
-	GHI::Image* mDepthStencil = nullptr;
-	std::vector<GHI::Image*> mAttachments;
+	RenderTarget* mDepthStencil = nullptr;
+	std::vector<RenderTarget*> mRenderTargets;
 
 protected:
 	GHI::RenderPass* mRenderPass = nullptr;

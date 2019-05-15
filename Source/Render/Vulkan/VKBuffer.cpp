@@ -160,7 +160,7 @@ void Buffer::CopyFrom(const GHI::Resource* other)
 
 	GHI::ResourceType type = other->GetType();
 
-	if (type == GHI::ResourceType::RESOURCE_TYPE_BUFFER)
+	if (type == GHI::ResourceType::BUFFER)
 	{
 		const Buffer* vk_buffer = static_cast<const Buffer*>(other);
 		Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
@@ -196,7 +196,7 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 
 VkBufferUsageFlags Buffer::ConvertUsageFlag(GHI::UsageType usage)
 {
-	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_BUFFER);
+	assert(usage.type == GHI::ResourceType::BUFFER);
 	VkBufferUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;

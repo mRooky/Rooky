@@ -8,6 +8,7 @@
 #include "CorePolicy.h"
 #include "CoreSubPolicy.h"
 #include "CoreSystem.h"
+#include "CoreRenderTarget.h"
 #include "UtilityRelease.h"
 
 #include "GHIDevice.h"
@@ -42,9 +43,9 @@ void Policy::Create(void)
 	auto device = mSystem->GetDevice();
 	GHI::Factory* factory = device->GetFactory();
 	mRenderPass = factory->CreateRenderPass();
-	for (auto attachment : mAttachments)
+	for (auto target : mRenderTargets)
 	{
-		const auto& layout = attachment->GetLayout();
+		const auto& layout = target->GetLayout();
 		mRenderPass->AppendFormat(layout.GetFormat());
 	}
 
@@ -70,20 +71,17 @@ void Policy::RenderSub(GHI::CommandList* command, const std::vector<Renderable*>
 	}
 }
 
-GHI::Image* Policy::CreateAttachment(void)
+RenderTarget* Policy::CreateRenderTarget(void)
 {
-	GHI::Device* device = mSystem->GetDevice();
-	GHI::Factory* factory = device->GetFactory();
-	GHI::Image* attachment = factory->CreateImage();
-	mAttachments.push_back(attachment);
-	return attachment;
+	RenderTarget* target = new RenderTarget(*mSystem);
+	mRenderTargets.push_back(target);
+	return target;
 }
 
 void Policy::CreateDepthStencil(const Math::Extent2Di& extent)
 {
 	assert(mDepthStencil == nullptr);
 	GHI::Device* device = mSystem->GetDevice();
-	GHI::Factory* factory = device->GetFactory();
 	GHI::Format depth_format = device->GetBestDepthStencilFormat();
 
 	GHI::ImageLayout image_layout = {};
@@ -92,10 +90,10 @@ void Policy::CreateDepthStencil(const Math::Extent2Di& extent)
 	image_layout.SetFormat(depth_format);
 
 	GHI::UsageType image_usage = {};
-	image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;
+	image_usage.type = GHI::ResourceType::IMAGE;
 	image_usage.depthStencil = TRUE;
 
-	mDepthStencil = factory->CreateImage();
+	mDepthStencil = new RenderTarget(*mSystem);
 	mDepthStencil->Create(image_layout, image_usage);
 }
 

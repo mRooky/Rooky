@@ -25,7 +25,7 @@ static inline GHI::UsageType CreateStageBufferUsageType(void)
 	stage_usage_type.cpuAccess = TRUE;
 	stage_usage_type.source = TRUE;
 	stage_usage_type.destination = TRUE;
-	stage_usage_type.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
+	stage_usage_type.type = GHI::ResourceType::BUFFER;
 	return stage_usage_type;
 }
 
@@ -43,7 +43,7 @@ static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::UsageType usage)
 
 static inline VkBufferUsageFlags ConvertBufferUsageFlags(const GHI::UsageType& usage)
 {
-	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_BUFFER);
+	assert(usage.type == GHI::ResourceType::BUFFER);
 	VkBufferUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
@@ -57,7 +57,7 @@ static inline VkBufferUsageFlags ConvertBufferUsageFlags(const GHI::UsageType& u
 
 static inline VkImageUsageFlags ConvertImageUsageFlags(const GHI::UsageType&  usage)
 {
-	assert(usage.type == GHI::ResourceType::RESOURCE_TYPE_IMAGE);
+	assert(usage.type == GHI::ResourceType::IMAGE);
 	VkImageUsageFlags flags = 0;
 	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
 	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
@@ -73,7 +73,7 @@ static inline VkImageUsageFlags ConvertImageUsageFlags(const GHI::UsageType&  us
 static inline GHI::UsageType ConvertBufferUsageFlags(VkBufferUsageFlags flags)
 {
 	GHI::UsageType resource_usage = {};
-	resource_usage.type = GHI::ResourceType::RESOURCE_TYPE_BUFFER;
+	resource_usage.type = GHI::ResourceType::BUFFER;
 	resource_usage.source = (flags & VK_BUFFER_USAGE_TRANSFER_SRC_BIT) ? 1 : 0;
 	resource_usage.destination = (flags & VK_BUFFER_USAGE_TRANSFER_DST_BIT) ? 1 : 0;
 	resource_usage.indexBuffer = (flags & VK_BUFFER_USAGE_INDEX_BUFFER_BIT) ? 1 : 0;

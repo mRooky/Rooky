@@ -29,7 +29,7 @@ public:
 
 protected:
 	UsageType mUsage = {};
-	ResourceType mType = ResourceType::RESOURCE_TYPE_UNKNOWN;
+	ResourceType mType = ResourceType::UNKNOWN;
 };
 
 } /* namespace Render */

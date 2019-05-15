@@ -70,17 +70,17 @@ void BindingSet::WriteDescriptorSet(void)
 
 		switch(resource_type)
 		{
-		case GHI::ResourceType::RESOURCE_TYPE_IMAGE:
+		case GHI::ResourceType::IMAGE:
 			image_infos.at(bind) = static_cast<Image*>(resource)->GetVulkanImage()->GetDescriptorInfo();;
 			write.pImageInfo = &image_infos.at(bind);
 			write.descriptorType = Image::GetDescriptorType(resource_usage);
 			break;
-		case GHI::ResourceType::RESOURCE_TYPE_BUFFER:
+		case GHI::ResourceType::BUFFER:
 			buffer_infos.at(bind) = static_cast<Buffer*>(resource)->GetVulkanBuffer()->GetDescriptorInfo();
 			write.pBufferInfo = &buffer_infos.at(bind);
 			write.descriptorType = Buffer::GetDescriptorType(resource_usage);
 			break;
-		case GHI::ResourceType::RESOURCE_TYPE_SAMPLER:
+		case GHI::ResourceType::SAMPLER:
 			image_infos.at(bind) = static_cast<Sampler*>(resource)->GetVulkanSampler()->GetDescriptorInfo();
 			write.pImageInfo = &image_infos.at(bind);
 			write.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
@@ -129,13 +129,13 @@ VkDescriptorType BindingSet::GetDescriptorType(GHI::ResourceType type, const GHI
 	VkDescriptorType descriptor_type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	switch(type)
 	{
-	case GHI::ResourceType::RESOURCE_TYPE_IMAGE:
+	case GHI::ResourceType::IMAGE:
 		descriptor_type = Image::GetDescriptorType(usage);
 		break;
-	case GHI::ResourceType::RESOURCE_TYPE_BUFFER:
+	case GHI::ResourceType::BUFFER:
 		descriptor_type = Buffer::GetDescriptorType(usage);
 		break;
-	case GHI::ResourceType::RESOURCE_TYPE_SAMPLER:
+	case GHI::ResourceType::SAMPLER:
 		descriptor_type = VK_DESCRIPTOR_TYPE_SAMPLER;
 		break;
 	default:

@@ -62,7 +62,7 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 		GHI::UsageType image_usage = {};
 		image_usage.destination = TRUE;
 		image_usage.sampledImage = TRUE;
-		image_usage.type = GHI::ResourceType::RESOURCE_TYPE_IMAGE;
+		image_usage.type = GHI::ResourceType::IMAGE;
 
 		texture = CreateTexture();
 		texture->SetName(file_name.c_str());

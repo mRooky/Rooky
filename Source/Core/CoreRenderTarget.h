@@ -8,19 +8,29 @@
 #ifndef SOURCE_CORE_CORERENDERTARGET_H_
 #define SOURCE_CORE_CORERENDERTARGET_H_
 
-#include "GHIImageLayout.h"
-#include "GHIClasses.h"
-#include "GHIUsageType.h"
 #include "CoreResource.h"
+#include "GHIUsageType.h"
 
 namespace Core
 {
-class TextureManager;
+class System;
 class RenderTarget : public Resource
 {
 public:
-	RenderTarget(void);
-	virtual ~RenderTarget(void);
+	explicit RenderTarget(System& system);
+	virtual ~RenderTarget(void) override;
+
+public:
+	void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage);
+
+public:
+	const GHI::ImageLayout& GetLayout(void) const;
+
+public:
+	inline System* GetSystem(void) const { return mSystem; }
+
+protected:
+	System* mSystem = nullptr;
 
 };
 

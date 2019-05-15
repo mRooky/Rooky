@@ -8,12 +8,15 @@
 #ifndef SOURCE_CORE_CORETEXTURE_H_
 #define SOURCE_CORE_CORETEXTURE_H_
 
-#include "CoreRenderTarget.h"
+#include "GHIImageLayout.h"
+#include "GHIUsageType.h"
+#include "CoreResource.h"
 #include <string>
 
 namespace Core
 {
-class Texture : public RenderTarget
+class TextureManager;
+class Texture : public Resource
 {
 public:
 	explicit Texture(TextureManager* manager);
