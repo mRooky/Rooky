@@ -14,31 +14,18 @@
 
 namespace GHI
 {
-
-enum class RenderListType : uint32_t
-{
-	ZPREPASS,
-	FORWARD,
-	MAX_COUNT,
-	UNKNOWN = ~0U
-};
-
-static inline uint32_t RenderListIndex(RenderListType type)
-{
-	return static_cast<uint32_t>(type);
-}
-
+class Pipeline;
 class RenderList
 {
 public:
-	RenderList(void);
-	virtual ~RenderList(void);
+	RenderList(Pipeline* pipeline) { SetPipeline(pipeline); }
+	~RenderList(void) = default;
 
 public:
-	RenderItem* CreateRenderItem(void);
+	void Render(CommandList* command);
 
 public:
-	inline RenderListType GetType(void) const { return mType; }
+	void AppendItem(const RenderItem& item);
 
 public:
 	inline Pipeline* GetPipeline(void) const { return mPipeline; }
@@ -52,7 +39,6 @@ public:
 protected:
 	Pipeline* mPipeline = nullptr;
 	std::vector<RenderItem> mRenderItems;
-	RenderListType mType = RenderListType::UNKNOWN;
 };
 
 } /* namespace GHI */

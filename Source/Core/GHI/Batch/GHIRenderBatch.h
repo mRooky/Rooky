@@ -12,23 +12,29 @@
 
 namespace GHI
 {
-
+class Pipeline;
 class RenderBatch
 {
-	static const size_t MAX_LIST_COUNT = static_cast<size_t>(RenderListType::MAX_COUNT);
 public:
 	RenderBatch(void);
 	~RenderBatch(void);
 
 public:
-	RenderList* GetList(RenderListType type)
-	{
-		uint32_t index = RenderListIndex(type);
-		return &mRenderLists.GetElementAt(index);
-	}
+	void Render(CommandList* command);
+
+public:
+	RenderList* GetList(Pipeline* pipeline);
+
+public:
+	inline void ClearList(void) { mRenderLists.clear(); }
+	inline size_t GetListCount(void) const { return mRenderLists.size(); }
+	inline const RenderList& GetList(size_t index) const { return mRenderLists.at(index); }
 
 protected:
-	Kernel::FixedVector<RenderList, MAX_LIST_COUNT> mRenderLists;
+	RenderList* Search(Pipeline* pipeline);
+
+protected:
+	std::vector<RenderList> mRenderLists;
 };
 
 } /* namespace GHI */

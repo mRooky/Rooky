@@ -1,21 +1,25 @@
 /*
  * GHIRenderList.cpp
  *
- *  Created on: May 14, 2019
+ *  Created on: May 15, 2019
  *      Author: rookyma
  */
 
+
 #include "GHIRenderList.h"
+#include "GHICommandList.h"
+#include <cassert>
 
 namespace GHI
 {
 
-RenderList::RenderList(void)
+void RenderList::Render(CommandList* command)
 {
+	command->SetPipeline(mPipeline);
+	for (auto& Item : mRenderItems)
+	{
+		Item.Render(command);
+	}
 }
 
-RenderList::~RenderList(void)
-{
 }
-
-} /* namespace GHI */

@@ -40,8 +40,8 @@ public:
 	// Resource Setup
 	virtual void SetPipeline(Pipeline* pipeline) = 0;
 	virtual void SetBindingSet(uint32_t slot, BindingSet* set) = 0;
-	virtual void SetVertex(Resource* buffer, uint32_t binding, size_t offset) = 0;
-	virtual void SetIndex(Resource* buffer, size_t offset, IndexType type) = 0;
+	virtual void SetVertex(const Resource* buffer, uint32_t binding, size_t offset) = 0;
+	virtual void SetIndex(const Resource* buffer, size_t offset, IndexType type) = 0;
 	virtual void Draw(Draw* draw) = 0;
 	// End Resource Setup
 	virtual void EndPass(void) = 0;

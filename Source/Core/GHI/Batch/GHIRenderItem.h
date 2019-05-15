@@ -8,44 +8,51 @@
 #ifndef SOURCE_CORE_GHI_BATCH_GHIRENDERITEM_H_
 #define SOURCE_CORE_GHI_BATCH_GHIRENDERITEM_H_
 
-#include "GHIClasses.h"
-#include "KernelFixedVector.h"
+#include "GHIRenderBuffer.h"
 #include "GHIRenderElement.h"
+
+#include "KernelFixedVector.h"
+
 #include <vector>
 
 namespace GHI
 {
-
+class BindingSet;
 class RenderItem
 {
-	constexpr static size_t MAX_SET_COUNT = 32;
+	constexpr static const size_t MAX_SET_COUNT = 32;
 public:
 	RenderItem(void);
 	~RenderItem(void);
 
 public:
-	RenderElement* CreateElement(Draw* draw);
+	void Render(CommandList* command);
 
 public:
-	inline void SetIndexBuffer(Resource* buffer) { mIndexBuffer = buffer; }
-	inline void SetVertexBuffer(Resource* buffer) { mVertexBuffer = buffer; }
+	void AppendElement(Draw* draw);
+	void AppendElement(const RenderElement& element) { mRenderElements.push_back(element); }
 
 public:
-	inline Resource* GetIndexBuffer(void) const { return mIndexBuffer; }
-	inline Resource* GetVertexBuffer(void) const { return mVertexBuffer; }
+	inline IndexBuffer* GetIndexBuffer(void) { return &mIndexBuffer; }
+	inline VertexAttribute* GetVertexAttribute(void) { return &mVertexAttribute; }
 
 public:
-	inline void PushBindingSet(const BindingSet* set) { mBindingSets.PushElement(set); }
+	inline void PushBindingSet(BindingSet* set) { mBindingSets.PushElement(set); }
 	inline size_t GetBindingSetCount(void) const { return mBindingSets.GetElementCount(); }
 	inline const BindingSet* GetBindingSet(size_t index) const { return mBindingSets.GetElementAt(index); }
 
 protected:
-	Resource* mIndexBuffer = nullptr;
-	Resource* mVertexBuffer = nullptr;
+	void BindingBindingSet(CommandList* command);
+	void BindingIndexBuffer(CommandList* command);
+	void BindingVertexBuffer(CommandList* command);
+
+protected:
+	IndexBuffer mIndexBuffer = {};
+	VertexAttribute mVertexAttribute = {};
 
 protected:
 	std::vector<RenderElement> mRenderElements = {};
-	Kernel::FixedVector<const BindingSet*, MAX_SET_COUNT> mBindingSets;
+	Kernel::FixedVector<BindingSet*, MAX_SET_COUNT> mBindingSets;
 };
 
 } /* namespace GHI */

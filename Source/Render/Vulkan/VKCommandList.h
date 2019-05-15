@@ -34,8 +34,8 @@ public:
 	// Resource Setting
 	virtual void SetPipeline(GHI::Pipeline* pipeline) override;
 	virtual void SetBindingSet(uint32_t slot, GHI::BindingSet* set) override;
-	virtual void SetVertex(GHI::Resource* buffer, uint32_t binding, size_t offset) override;
-	virtual void SetIndex(GHI::Resource* buffer, size_t offset, GHI::IndexType type) override;
+	virtual void SetVertex(const GHI::Resource* buffer, uint32_t binding, size_t offset) override;
+	virtual void SetIndex(const GHI::Resource* buffer, size_t offset, GHI::IndexType type) override;
 	// End Resource Setting
 	virtual void Draw(GHI::Draw* draw) override;
 	virtual void EndPass(void) override;

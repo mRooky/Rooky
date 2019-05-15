@@ -163,20 +163,20 @@ void CommandList::SetBindingSet(uint32_t slot, GHI::BindingSet* set)
 	assert(false);
 }
 
-void CommandList::SetVertex(GHI::Resource* buffer, uint32_t binding, size_t offset)
+void CommandList::SetVertex(const GHI::Resource* buffer, uint32_t binding, size_t offset)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);
-	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+	const Buffer* vk_buffer = static_cast<const Buffer*>(buffer);
 	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
 	mCommandBuffer->BindVertexBuffers(vulkan_buffer, binding, offset);
 }
 
-void CommandList::SetIndex(GHI::Resource* buffer, size_t offset, GHI::IndexType type)
+void CommandList::SetIndex(const GHI::Resource* buffer, size_t offset, GHI::IndexType type)
 {
 	assert(buffer != nullptr);
 	assert(mCommandBuffer != nullptr);
-	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+	const Buffer* vk_buffer = static_cast<const Buffer*>(buffer);
 	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
 	VkIndexType index_type = Convert(type);
 	mCommandBuffer->BindIndexBuffer(vulkan_buffer, offset, index_type);

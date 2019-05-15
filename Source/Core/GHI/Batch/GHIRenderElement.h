@@ -14,11 +14,15 @@ namespace GHI
 {
 class Draw;
 class RenderItem;
+class CommandList;
 class RenderElement
 {
 public:
 	RenderElement(RenderItem* parent, Draw* draw);
 	~RenderElement(void);
+
+public:
+	void Render(CommandList* command);
 
 public:
 	inline RenderElement& operator=(const RenderElement& other)
@@ -30,7 +34,7 @@ public:
 
 	inline bool operator==(const RenderElement& other) const
 	{
-			return (mDraw == other.mDraw);
+		return (mDraw == other.mDraw);
 	}
 
 public:
