@@ -11,6 +11,8 @@
 #include "CoreInterface.h"
 #include "MathExtent2.h"
 #include "GHIClasses.h"
+#include "GHIFormat.h"
+#include "GHIUsageType.h"
 #include <cstdint>
 #include <vector>
 
@@ -33,8 +35,8 @@ public:
 	void Render(GHI::CommandList* command, const std::vector<Renderable*>& renderables);
 
 public:
-	void CreateDepthStencil(const Math::Extent2Di& extent);
-	RenderTarget* CreateRenderTarget(void);
+	void CreateDepthStencil(GHI::Format format, const Math::Extent2Di& extent);
+	RenderTarget* CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::UsageType& usage);
 
 public:
 	inline RenderTarget* GetDepthStencil(void) const { return mDepthStencil; }

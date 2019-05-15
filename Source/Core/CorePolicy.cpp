@@ -71,23 +71,14 @@ void Policy::RenderSub(GHI::CommandList* command, const std::vector<Renderable*>
 	}
 }
 
-RenderTarget* Policy::CreateRenderTarget(void)
-{
-	RenderTarget* target = new RenderTarget(*mSystem);
-	mRenderTargets.push_back(target);
-	return target;
-}
-
-void Policy::CreateDepthStencil(const Math::Extent2Di& extent)
+void Policy::CreateDepthStencil(GHI::Format format, const Math::Extent2Di& extent)
 {
 	assert(mDepthStencil == nullptr);
-	GHI::Device* device = mSystem->GetDevice();
-	GHI::Format depth_format = device->GetBestDepthStencilFormat();
 
 	GHI::ImageLayout image_layout = {};
 	image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
 	image_layout.SetExtent(extent);
-	image_layout.SetFormat(depth_format);
+	image_layout.SetFormat(format);
 
 	GHI::UsageType image_usage = {};
 	image_usage.type = GHI::ResourceType::IMAGE;
@@ -95,6 +86,14 @@ void Policy::CreateDepthStencil(const Math::Extent2Di& extent)
 
 	mDepthStencil = new RenderTarget(*mSystem);
 	mDepthStencil->Create(image_layout, image_usage);
+}
+
+RenderTarget* Policy::CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+{
+	RenderTarget* target = new RenderTarget(*mSystem);
+	mRenderTargets.push_back(target);
+	target->Create(layout, usage);
+	return target;
 }
 
 } /* namespace Core */

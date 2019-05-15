@@ -9,6 +9,7 @@
 #define SOURCE_CORE_COREVIEWPORT_H_
 
 #include "GHIClasses.h"
+#include "CorePipeline.h"
 #include "MathViewport.h"
 
 namespace Core
@@ -46,6 +47,10 @@ protected:
 protected:
 	Camera* mCamera = nullptr;
 	Thread* mThread = nullptr;
+
+protected:
+	ComputePipeline mComputePipeline = {};
+	GraphicsPipeline mGraphicsPipeline = {};
 
 protected:
 	Math::Viewport mViewport;

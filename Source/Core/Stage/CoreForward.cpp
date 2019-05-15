@@ -10,8 +10,7 @@
 namespace Core
 {
 
-Forward::Forward(System* system):
-		Policy(system)
+Forward::Forward(void)
 {
 }
 
