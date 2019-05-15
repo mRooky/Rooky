@@ -21,7 +21,7 @@ public:
 
 public:
 	void PushVertexLayout(uint32_t binding, const VertexLayout& element);
-	void PushVertexLayout(uint32_t binding, Semantic semantic, SemanticType type);
+	void PushVertexLayout(uint32_t binding, SemanticUsage semantic, SemanticType type);
 
 public:
 	inline InputLayout& operator=(const InputLayout& other)

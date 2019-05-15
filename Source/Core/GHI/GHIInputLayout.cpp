@@ -27,11 +27,11 @@ namespace GHI
 		for (size_t index = 0; index < count; ++index)
 		{
 			const auto& semantic = layout.GetSemantic(index);
-			exist->PushSemantic(semantic.semantic, semantic.type);
+			exist->PushSemantic(semantic.usage, semantic.type);
 		}
 	}
 
-	void InputLayout::PushVertexLayout(uint32_t binding, Semantic semantic, SemanticType type)
+	void InputLayout::PushVertexLayout(uint32_t binding, SemanticUsage semantic, SemanticType type)
 	{
 		VertexLayout* layout = GetVertexLayoutBinding(binding);
 		layout->PushSemantic(semantic, type);

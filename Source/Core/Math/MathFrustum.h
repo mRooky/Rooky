@@ -10,10 +10,28 @@
 
 #include "MathMatrix.h"
 #include "MathPlane.h"
+#include "MathSphere.h"
+#include <array>
 
 namespace Math
 {
 class AABB;
+
+enum class PlaneType : uint32_t
+{
+	FRONT,
+	BACK,
+	LEFT,
+	RIGHT,
+	TOP,
+	BOTTOM,
+};
+
+static inline uint32_t PlaneTypeIndex(PlaneType type)
+{
+	return static_cast<uint32_t>(type);
+}
+
 class Frustum
 {
 public:
@@ -21,30 +39,34 @@ public:
 	~Frustum(void);
 
 public:
-	Plane GetPlane(FrustumPlane type);
+	bool Contain(const AABB& aabb) const;
+	bool Contain(const Sphere& sphere) const;
 
 public:
-	bool Contain(const AABB& aabb) const { return true; }
+	inline const Plane& GetPlane(PlaneType type) const
+	{
+		uint32_t index = PlaneTypeIndex(type);
+		return mPlanes.at(index);
+	}
 
 public:
-	inline void SetFov(float fov) { mFov = fov; }
-	inline void SetNear(float near) { mNear = near; }
-	inline void SetFar(float far) { mFar = far; }
+	inline void SetFov(float fov, float near, float far)
+	{
+		mFov = fov;
+		mFar = far;
+		mNear = near;
+	}
 
 public:
 	inline float GetFov(void) const { return mFov; }
 	inline float GetNear(void) const { return mNear; }
 	inline float GetFar(void) const { return mFar; }
 
-public:
-	inline const Matrix& GetMatrax(void) const { return mMatrix; }
-	inline void GetMatrax(const Matrix& matrix) { mMatrix = matrix; }
-
 protected:
 	float mFov = 45.0f;
 	float mNear = 0.1f;
 	float mFar = 100.0f;
-	Matrix mMatrix = {};
+	std::array<Plane, 6> mPlanes = {};
 };
 
 } /* namespace Core */

@@ -23,13 +23,13 @@ public:
 public:
 	inline void PushSemantic(const VertexSemantic& element)
 	{
-		PushSemantic(element.GetSemantic(), element.GetSemanticType());
+		PushSemantic(element.GetSemanticUsage(), element.GetSemanticType());
 	}
 
-	inline void PushSemantic(Semantic semantic, SemanticType type)
+	inline void PushSemantic(SemanticUsage usage, SemanticType type)
 	{
 		mStride += GetTypeSize(type);
-		mVertexSemantics.push_back(VertexSemantic(semantic, type));
+		mVertexSemantics.push_back(VertexSemantic(usage, type));
 	}
 
 public:

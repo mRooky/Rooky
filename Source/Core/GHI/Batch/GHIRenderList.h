@@ -23,7 +23,10 @@ enum class RenderListType : uint32_t
 	UNKNOWN = ~0U
 };
 
-static inline uint32_t RenderListIndex(RenderListType type) { return static_cast<uint32_t>(type); }
+static inline uint32_t RenderListIndex(RenderListType type)
+{
+	return static_cast<uint32_t>(type);
+}
 
 class RenderList
 {

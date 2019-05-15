@@ -19,7 +19,7 @@ static inline constexpr uint16_t EnumCast(T semantic)
 	return static_cast<uint16_t>(semantic);
 }
 
-enum class Semantic : uint16_t
+enum class SemanticUsage : uint16_t
 {
 	POSITION,
 	TEXCOORD,
@@ -78,14 +78,14 @@ static inline const char* GetTypeName(SemanticType type)
 class VertexSemantic
 {
 public:
-	VertexSemantic(Semantic semantic, SemanticType type) { Set(semantic, type); }
+	VertexSemantic(SemanticUsage usage, SemanticType type) { Set(usage, type); }
 	~VertexSemantic(void) = default;
 
 public:
-	inline void Set(Semantic semantic, SemanticType type)
+	inline void Set(SemanticUsage usage, SemanticType type)
 	{
 		this->type = type;
-		this->semantic = semantic;
+		this->usage = usage;
 	}
 
 public:
@@ -95,16 +95,16 @@ public:
 	}
 
 public:
-	inline Semantic GetSemantic(void) const { return semantic; }
 	inline SemanticType GetSemanticType(void) const { return type; }
+	inline SemanticUsage GetSemanticUsage(void) const { return usage; }
 
 public:
 	union
 	{
 		struct
 		{
-			Semantic semantic;
 			SemanticType type;
+			SemanticUsage usage;
 		};
 		uint32_t element = 0;
 	};

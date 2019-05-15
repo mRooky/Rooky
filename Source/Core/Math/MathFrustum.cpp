@@ -19,11 +19,14 @@ Frustum::~Frustum(void)
 {
 }
 
-Plane Frustum::GetPlane(FrustumPlane type)
+bool Frustum::Contain(const AABB& aabb) const
 {
-	Plane plane = {};
-	assert(false);
-	return plane;
+	return true;
+}
+
+bool Frustum::Contain(const Sphere& sphere) const
+{
+	return true;
 }
 
 } /* namespace Core */

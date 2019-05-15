@@ -35,16 +35,16 @@ public:
 	inline uint32_t GetClearColor(void) const { return mClearColor; }
 	inline const Math::Extent3Di& GetExtent(void) const { return mExtent; }
 
-public:
-	uint32_t array = 1;
-	uint32_t mipmap = 1;
-	uint32_t samples = 1;
+protected:
+	uint32_t mArray = 1;
+	uint32_t mMipmap = 1;
+	uint32_t mSamples = 1;
 	Math::Extent3Di mExtent = {};
 
-public:
+protected:
 	uint32_t mClearColor = 0;
 
-public:
+protected:
 	Format mFormat = Format::FORMAT_UNDEFINED;
 	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
 };
