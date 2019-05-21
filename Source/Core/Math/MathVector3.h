@@ -18,7 +18,7 @@ class Vector3_t
 {
 public:
 	Vector3_t(void) = default;
-	Vector3_t(T x, T y, T z) { Set(x, y, z); }
+	explicit Vector3_t(T x, T y, T z) { Set(x, y, z); }
 	~Vector3_t(void) = default;
 
 public:

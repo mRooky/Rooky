@@ -5,11 +5,12 @@
  *      Author: rookyma
  */
 
-#include "GHIBuffer.h"
-#include "GHIDevice.h"
 #include "GHIDrawIndirect.h"
-#include "GHIFactory.h"
-#include "GHIUsageType.h"
+
+#include "../GHIBuffer.h"
+#include "../GHIDevice.h"
+#include "../GHIFactory.h"
+#include "../GHIUsageType.h"
 #include <cassert>
 
 namespace GHI

@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 #define SOURCE_CORE_MATERIAL_CORESHADERRESOURCE_H_
 
-#include "GHIBinding.h"
-#include "GHIClasses.h"
+#include "../GHI/GHIBinding.h"
+#include "../GHI/GHIClasses.h"
 #include <vector>
 
 namespace Core

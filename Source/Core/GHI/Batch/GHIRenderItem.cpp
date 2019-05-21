@@ -6,8 +6,8 @@
  */
 
 #include "GHIRenderItem.h"
-#include "GHICommandList.h"
-#include "GHIBuffer.h"
+#include "../GHICommandList.h"
+#include "../GHIBuffer.h"
 #include <cassert>
 
 namespace GHI

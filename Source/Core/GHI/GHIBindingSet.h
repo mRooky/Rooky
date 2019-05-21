@@ -11,7 +11,7 @@
 #include "GHIBinding.h"
 #include "GHIObject.h"
 
-#include "KernelFixedVector.h"
+#include "../Kernel/KernelFixedVector.h"
 #include <vector>
 
 namespace GHI

@@ -7,7 +7,7 @@
 
 #include "GHIBindingLayout.h"
 #include "GHIBindingSet.h"
-#include "UtilityRelease.h"
+#include "../Utility/UtilityRelease.h"
 #include <cassert>
 #include <algorithm>
 

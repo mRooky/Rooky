@@ -10,11 +10,11 @@
 
 #include "GHIObject.h"
 #include "GHIShaderState.h"
-#include "GHIBlendState.h"
-#include "GHIDepthStencil.h"
-#include "GHIInputAssembly.h"
-#include "GHIMultisample.h"
-#include "GHIRasterization.h"
+#include "State/GHIBlendState.h"
+#include "State/GHIDepthStencil.h"
+#include "State/GHIInputAssembly.h"
+#include "State/GHIMultisample.h"
+#include "State/GHIRasterization.h"
 
 namespace GHI
 {

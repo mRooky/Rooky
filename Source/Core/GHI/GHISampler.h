@@ -8,9 +8,11 @@
 #ifndef SOURCE_CORE_GHI_RENDERSAMPLER_H_
 #define SOURCE_CORE_GHI_RENDERSAMPLER_H_
 
-#include "MathColor.h"
 #include "GHIResource.h"
 #include "GHISamplerState.h"
+
+
+#include "../Math/MathColor.h"
 
 namespace GHI
 {

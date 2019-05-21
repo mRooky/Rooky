@@ -9,9 +9,10 @@
 #define SOURCE_CORE_GHI_RENDERIMAGE_H_
 
 #include "GHIImageLayout.h"
-#include "MathColor.h"
 #include "GHIMemory.h"
-#include "GHIColorBlend.h"
+#include "State/GHIColorBlend.h"
+
+#include "../Math/MathColor.h"
 
 namespace GHI
 {

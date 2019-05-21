@@ -6,7 +6,7 @@
  */
 
 #include "GHIRenderElement.h"
-#include "GHICommandList.h"
+#include "../GHICommandList.h"
 #include <cassert>
 
 namespace GHI

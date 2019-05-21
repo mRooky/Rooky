@@ -8,7 +8,7 @@
 #include "GHIDevice.h"
 #include "GHIFactory.h"
 #include "GHIQueue.h"
-#include "UtilityRelease.h"
+#include "../Utility/UtilityRelease.h"
 
 namespace GHI
 {

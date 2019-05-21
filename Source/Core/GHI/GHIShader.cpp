@@ -6,7 +6,7 @@
  */
 
 #include "GHIShader.h"
-#include "KernelFileUtility.h"
+#include "../Kernel/KernelFileUtility.h"
 #include <cassert>
 #include <map>
 

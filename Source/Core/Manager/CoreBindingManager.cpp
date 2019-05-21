@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
+#include "CoreBindingManager.h"
+#include "CoreSystem.h"
 #include "GHIBindingLayout.h"
 #include "GHIBindingSet.h"
 #include "GHIDevice.h"
 #include "GHIFactory.h"
 #include "UtilityRelease.h"
-#include "CoreBindingManager.h"
-#include "CoreSystem.h"
 
 
 namespace Core

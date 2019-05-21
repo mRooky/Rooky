@@ -12,7 +12,8 @@
 #include "GHIBindingLayout.h"
 #include "GHIClasses.h"
 #include "GHIEnum.h"
-#include "MathViewport.h"
+
+#include "../Math/MathViewport.h"
 
 namespace GHI
 {

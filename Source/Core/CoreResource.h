@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORERESOURCE_H_
 #define SOURCE_CORE_CORERESOURCE_H_
 
-#include "GHIClasses.h"
+#include "GHI/GHIClasses.h"
 #include "CoreBase.h"
 
 namespace Core

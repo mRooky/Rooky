@@ -10,7 +10,8 @@
 
 #include "GHIEnum.h"
 #include "GHIFormat.h"
-#include "MathExtent3.h"
+
+#include "../Math/MathExtent3.h"
 #include <vector>
 
 namespace GHI

@@ -10,9 +10,10 @@
 
 #include "GHIFormat.h"
 #include "GHIObject.h"
-#include "GHIColorBlend.h"
-#include "PlatformWindow.h"
-#include "MathExtent2.h"
+#include "State/GHIColorBlend.h"
+
+#include "../Platform/PlatformWindow.h"
+#include "../Math/MathExtent2.h"
 
 #include <cstdint>
 #include <vector>

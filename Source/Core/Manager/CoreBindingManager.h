@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREBINDINGMANAGER_H_
 
-#include "CoreInterface.h"
-#include "GHIClasses.h"
+#include "../CoreInterface.h"
+#include "../GHI/GHIClasses.h"
 #include <vector>
 
 namespace Core

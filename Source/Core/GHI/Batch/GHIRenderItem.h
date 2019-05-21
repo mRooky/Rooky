@@ -11,7 +11,7 @@
 #include "GHIRenderBuffer.h"
 #include "GHIRenderElement.h"
 
-#include "KernelFixedVector.h"
+#include "../../Kernel/KernelFixedVector.h"
 
 #include <vector>
 
