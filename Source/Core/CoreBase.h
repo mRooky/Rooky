@@ -24,6 +24,7 @@ public:
 	inline const char* GetName(void) const { return mName.c_str(); }
 
 protected:
+	uint32_t mID = 0;
 	std::string mName;
 };
 

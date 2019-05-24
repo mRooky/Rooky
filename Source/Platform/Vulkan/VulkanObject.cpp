@@ -11,8 +11,13 @@
 namespace Vulkan
 {
 
-Object::Object(void) = default;
-Object::~Object(void) = default;
+Object::Object(void)
+{
+}
+
+Object::~Object(void)
+{
+}
 
 const char* Object::GetResultName(VkResult result)
 {

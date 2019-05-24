@@ -33,6 +33,7 @@ static inline auto Find(const std::vector<T>& container, const V& value)
 	return std::find(container.begin(), container.end(), value);
 }
 
+
 }
 
 #endif /* SOURCE_CORE_UTILITY_UTILITYSEARCH_H_ */

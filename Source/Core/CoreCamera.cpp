@@ -22,6 +22,7 @@ Camera::~Camera(void)
 
 void Camera::UpdateUniform(void)
 {
+	assert(mUniform != nullptr);
 	if (mUniform != nullptr)
 	{
 

@@ -7,7 +7,7 @@
 
 #include "GHIAttachment.h"
 #include "GHIImage.h"
-#include "../Utillity/UtilitySearch.h"
+#include "../Utility/UtilitySearch.h"
 #include <cassert>
 #include <iostream>
 
