@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#include "GHIBuffer.h"
 #include "CoreBuffer.h"
+#include "GHI/GHIBuffer.h"
 #include <cassert>
 #include <cstring>
 

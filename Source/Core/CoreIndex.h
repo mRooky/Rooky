@@ -8,11 +8,11 @@
 #ifndef SOURCE_CORE_COREINDEX_H_
 #define SOURCE_CORE_COREINDEX_H_
 
-#include "GHIClasses.h"
-#include "GHIDrawIndexed.h"
-#include "GHIEnum.h"
-#include "GHIUsageType.h"
 #include "CoreBuffer.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIEnum.h"
+#include "GHI/GHIUsageType.h"
+#include "GHI/Draw/GHIDrawIndexed.h"
 #include <cstddef>
 
 namespace Core

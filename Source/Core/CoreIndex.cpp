@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
+#include "CoreIndex.h"
+#include "CoreBufferManager.h"
+#include "CoreSystem.h"
 #include "GHIBuffer.h"
 #include "GHIDevice.h"
 #include "GHIFactory.h"
 #include "GHIInline.h"
-#include "CoreIndex.h"
-#include "CoreBufferManager.h"
-#include "CoreSystem.h"
 
 #include <iostream>
 
