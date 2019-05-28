@@ -8,11 +8,11 @@
 #ifndef SOURCE_CORE_COREVERTEX_H_
 #define SOURCE_CORE_COREVERTEX_H_
 
-#include <GHIVertexLayout.h>
-#include "GHIClasses.h"
-#include "GHIFormat.h"
-#include "GHIUsageType.h"
 #include "CoreBuffer.h"
+#include "GHI/GHIVertexLayout.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIFormat.h"
+#include "GHI/GHIUsageType.h"
 #include <cstdint>
 #include <vector>
 

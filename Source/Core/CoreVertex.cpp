@@ -5,13 +5,13 @@
  *      Author: rookyma
  */
 
-#include "GHIImageLayout.h"
-#include "GHIBuffer.h"
-#include "GHIDevice.h"
-#include "GHIFactory.h"
 #include "CoreVertex.h"
 #include "CoreBufferManager.h"
 #include "CoreSystem.h"
+#include "GHI/GHIImageLayout.h"
+#include "GHI/GHIBuffer.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
 
 #include <cassert>
 #include <iostream>
