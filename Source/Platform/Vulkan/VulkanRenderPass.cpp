@@ -81,14 +81,14 @@ VkSubpassDependency RenderPass::SubpassDenpendency(uint32_t from, uint32_t to)
 		sub_pass_dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 		sub_pass_dependency.dstStageMask = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
 		sub_pass_dependency.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-		sub_pass_dependency.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+		sub_pass_dependency.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
 	}
 	else
 	{
 		sub_pass_dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
 		sub_pass_dependency.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
 		sub_pass_dependency.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-		sub_pass_dependency.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
+		sub_pass_dependency.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
 	}
 
 	return sub_pass_dependency;

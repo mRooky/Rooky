@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKRENDER_H_
 #define SOURCE_RENDER_VK_VKRENDER_H_
 
-#include "VulkanClasses.h"
+#include "../../Platform/Vulkan/VulkanClasses.h"
 
 #define VK_EXPORT_API
 

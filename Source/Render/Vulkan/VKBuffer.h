@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKBUFFER_H_
 #define SOURCE_RENDER_VK_VKBUFFER_H_
 
-#include "GHIBuffer.h"
+#include "../../Core/GHI/GHIBuffer.h"
 #include "VKRender.h"
 
 namespace VK

@@ -6,7 +6,7 @@
 TARGET = Debug/Rooky
 CC = g++
 DFLAGS = -MM
-CFLAGS = -g -c
+CFLAGS = -g -c -Wall
 RM = -rm
 LIBS = -lvulkan -lxcb -lpng -lGLU -lGL -lGLEW -lopenal -lSOIL
 

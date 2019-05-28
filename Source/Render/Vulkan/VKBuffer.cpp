@@ -68,6 +68,7 @@ void Buffer::AllocateVulkanMemory(void)
 
 void* Buffer::Map(size_t offset, size_t size)
 {
+	std::cout << "Memory Ptr " << mMemory << std::endl;
 	assert(mMemory != nullptr);
 	if (mUsage.CPUAccessable())
 	{
