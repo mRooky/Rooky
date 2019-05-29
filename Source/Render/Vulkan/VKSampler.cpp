@@ -6,11 +6,10 @@
  */
 
 #include "VKSampler.h"
-#include "VulkanSampler.h"
-#include "VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanSampler.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanSampler.h"
 #include "VKDevice.h"
-
-#include "VulkanSampler.h"
 
 #include <cassert>
 

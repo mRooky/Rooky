@@ -14,17 +14,17 @@
 #include "VKOperator.h"
 #include "VKDevice.h"
 
-#include "MathBits.h"
+#include "../../Core/Math/MathBits.h"
 
-#include "VulkanImage.h"
-#include "VulkanImageView.h"
-#include "VulkanSampler.h"
-#include "VulkanInline.h"
-#include "VulkanDeviceMemory.h"
-#include "VulkanCommandPool.h"
-#include "VulkanCommandBuffer.h"
-#include "VulkanDevice.h"
-#include "VulkanQueue.h"
+#include "../../Platform/Vulkan/VulkanImage.h"
+#include "../../Platform/Vulkan/VulkanImageView.h"
+#include "../../Platform/Vulkan/VulkanSampler.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanDeviceMemory.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanCommandBuffer.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanQueue.h"
 
 #include <cstring>
 #include <iostream>

@@ -13,15 +13,15 @@
 #include "VKFactory.h"
 #include "VKQueue.h"
 
-#include "VulkanVendor.h"
-#include "VulkanInstance.h"
-#include "VulkanDebug.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanQueue.h"
-#include "VulkanDevice.h"
-#include "VulkanCommon.h"
-#include "VulkanInline.h"
-#include "VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanVendor.h"
+#include "../../Platform/Vulkan/VulkanInstance.h"
+#include "../../Platform/Vulkan/VulkanDebug.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanQueue.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanCommon.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
 
 #include <cassert>
 

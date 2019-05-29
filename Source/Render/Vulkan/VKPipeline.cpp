@@ -9,8 +9,8 @@
 #include "VKDevice.h"
 #include "VKPipelineState.h"
 
-#include "VulkanPipeline.h"
-#include "VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanPipeline.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
 
 #include <cassert>
 #include <iostream>

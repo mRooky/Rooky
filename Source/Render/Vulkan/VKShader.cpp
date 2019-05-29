@@ -6,11 +6,10 @@
  */
 
 #include "VKShader.h"
-#include "VulkanShaderModule.h"
-#include "VulkanInline.h"
 #include "VKDevice.h"
-
-#include "KernelFileUtility.h"
+#include "../../Platform/Vulkan/VulkanShaderModule.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Core/Kernel/KernelFileUtility.h"
 
 #include <iostream>
 #include <cassert>

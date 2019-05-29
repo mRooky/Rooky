@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKSAMPLER_H_
 #define SOURCE_RENDER_VK_VKSAMPLER_H_
 
-#include "GHISampler.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHISampler.h"
 
 namespace VK
 {

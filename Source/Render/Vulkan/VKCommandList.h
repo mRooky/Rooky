@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKCOMMANDLIST_H_
 #define SOURCE_RENDER_VK_VKCOMMANDLIST_H_
 
-#include "GHICommandList.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHICommandList.h"
 
 namespace VK
 {

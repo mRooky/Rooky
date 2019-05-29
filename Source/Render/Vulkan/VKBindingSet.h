@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 #define SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 
-#include "GHIBindingSet.h"
-#include "GHIUsageType.h"
+#include "../../Core/GHI/GHIBindingSet.h"
+#include "../../Core/GHI/GHIUsageType.h"
 #include "VKRender.h"
 
 namespace VK

@@ -10,15 +10,15 @@
 #include "VKBuffer.h"
 #include "VKInline.h"
 
-#include "VulkanInline.h"
-#include "VulkanDescriptorPool.h"
-#include "VulkanDescriptorSet.h"
-#include "VulkanCommandPool.h"
-#include "VulkanDevice.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanBuffer.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanDescriptorPool.h"
+#include "../../Platform/Vulkan/VulkanDescriptorSet.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanBuffer.h"
 
-#include "UtilityRelease.h"
+#include "../../Core/Utility/UtilityRelease.h"
 
 #include <cassert>
 #include <iostream>

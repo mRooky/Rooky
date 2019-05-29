@@ -9,9 +9,9 @@
 #include "VKCommandPool.h"
 #include "VKCommandList.h"
 
-#include "VulkanPhysicalDevice.h"
-#include "VulkanCommandPool.h"
-#include "VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
 
 #include <cassert>
 

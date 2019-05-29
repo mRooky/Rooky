@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKFACTORY_H_
 #define SOURCE_RENDER_VK_VKFACTORY_H_
 
-#include "GHIFactory.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIFactory.h"
 
 namespace VK
 {

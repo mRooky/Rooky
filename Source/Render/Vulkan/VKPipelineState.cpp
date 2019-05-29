@@ -14,9 +14,9 @@
 #include "VKShader.h"
 #include "VKInputLayout.h"
 
-#include "GHIPipelineState.h"
+#include "../../Core/GHI/GHIPipelineState.h"
 
-#include "VulkanShaderModule.h"
+#include "../../Platform/Vulkan/VulkanShaderModule.h"
 
 #include <cassert>
 

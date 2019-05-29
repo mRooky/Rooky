@@ -52,7 +52,7 @@ release_dir :
 
 # Create Project DIR
 debug : OUT_DIR = Debug
-debug : debug_dir depend_build $(TARGET)
+debug : debug_dir $(TARGET)
 	@echo "Debug Build..."
 
 #$(DEBUG_OBJECTS) : %.o : %.d
@@ -66,11 +66,11 @@ $(TARGET) : $(DEBUG_OBJECTS)
 	@echo "Build Debug/Rooky"
 	$(CC) $(DEBUG_OBJECTS) $(LIBS) -o $(TARGET)
 
-depend_build: $(SOURCE_FILES)
-	$(RM) $(DEPEND_FILE)
-	$(CC) $(INCLUDE_DIRS) $^ $(DFLAGS) >> $(DEPEND_FILE)
+# depend_build: $(SOURCE_FILES)
+#	$(RM) $(DEPEND_FILE)
+#	$(CC) $(INCLUDE_DIRS) $^ $(DFLAGS) >> $(DEPEND_FILE)
 
-include $(DEPEND_FILE)
+# include $(DEPEND_FILE)
 
 #$(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
 #	@echo "D : $@ form $<"
@@ -94,5 +94,6 @@ clean :
 	@echo "Clear Project..."
 	$(RM) -rf $(DEBUG_DEPEND_FILES)
 	$(RM) -rf $(DEBUG_OBJECTS)
+	$(RM) -rf $(TARGET)
 	@echo "Clear Project Done !"
 

@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKDEVICE_H_
 #define SOURCE_RENDER_VK_VKDEVICE_H_
 
-#include "GHIDevice.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIDevice.h"
 #include <string>
 #include <vector>
 

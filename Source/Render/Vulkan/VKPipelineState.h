@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 #define SOURCE_RENDER_VK_VKPIPELINESTATE_H_
 
-#include "GHIClasses.h"
-#include "Pipeline/VulkanGraphicsPipelineInfo.h"
+#include "../../Core/GHI/GHIClasses.h"
+#include "../../Platform/Vulkan/Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {

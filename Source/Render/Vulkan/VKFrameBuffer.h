@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKFRAMEBUFFER_H_
 #define SOURCE_RENDER_VK_VKFRAMEBUFFER_H_
 
-#include "GHIFrameBuffer.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIFrameBuffer.h"
 
 namespace VK
 {

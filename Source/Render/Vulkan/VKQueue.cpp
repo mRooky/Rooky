@@ -9,11 +9,11 @@
 #include "VKCommandList.h"
 #include "VKDevice.h"
 
-#include "VulkanCommandBuffer.h"
-#include "VulkanSemaphore.h"
-#include "VulkanQueue.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanCommandBuffer.h"
+#include "../../Platform/Vulkan/VulkanSemaphore.h"
+#include "../../Platform/Vulkan/VulkanQueue.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
 
 #include <cassert>
 

@@ -9,14 +9,14 @@
 #include "VKImage.h"
 #include "VKDevice.h"
 
-#include "VulkanInline.h"
-#include "VulkanSurface.h"
-#include "VulkanSwapChain.h"
-#include "VulkanSemaphore.h"
-#include "VulkanDevice.h"
-#include "VulkanImage.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanQueue.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanSurface.h"
+#include "../../Platform/Vulkan/VulkanSwapChain.h"
+#include "../../Platform/Vulkan/VulkanSemaphore.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanImage.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanQueue.h"
 
 #ifdef VK_USE_PLATFORM_XCB_KHR
 #include "Platform/XCB/XCBWindow.h"

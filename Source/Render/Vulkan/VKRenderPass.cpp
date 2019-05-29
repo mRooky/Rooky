@@ -10,9 +10,9 @@
 #include "VKFormat.h"
 #include "VKDevice.h"
 
-#include "VulkanRenderPass.h"
-#include "VulkanInline.h"
-#include "VulkanImage.h"
+#include "../../Platform/Vulkan/VulkanRenderPass.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanImage.h"
 
 #include <cassert>
 

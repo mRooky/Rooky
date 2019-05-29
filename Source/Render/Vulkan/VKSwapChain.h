@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 #define SOURCE_RENDER_VK_VKSWAPCHAIN_H_
 
-#include "GHISwapChain.h"
+#include "../../Core/GHI/GHISwapChain.h"
 #include "VKRender.h"
 
 namespace VK

@@ -21,10 +21,10 @@
 #include "VKPipelineState.h"
 #include "VKPipelineLayout.h"
 
-#include "VulkanCommandPool.h"
-#include "VulkanInline.h"
-#include "VulkanDevice.h"
-#include "VulkanPhysicalDevice.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
 
 #include <cassert>
 

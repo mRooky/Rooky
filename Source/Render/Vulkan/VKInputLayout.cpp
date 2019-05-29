@@ -7,7 +7,7 @@
 
 
 #include "VKInputLayout.h"
-#include "GHIInputLayout.h"
+#include "../../Core/GHI/GHIInputLayout.h"
 #include <cassert>
 #include <iostream>
 

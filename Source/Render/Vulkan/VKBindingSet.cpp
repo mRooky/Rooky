@@ -14,12 +14,12 @@
 #include "VKPool.h"
 #include "VKSampler.h"
 
-#include "VulkanImage.h"
-#include "VulkanImageView.h"
-#include "VulkanSampler.h"
-#include "VulkanBuffer.h"
-#include "VulkanDescriptorSet.h"
-#include "VulkanDescriptorPool.h"
+#include "../../Platform/Vulkan/VulkanImage.h"
+#include "../../Platform/Vulkan/VulkanImageView.h"
+#include "../../Platform/Vulkan/VulkanSampler.h"
+#include "../../Platform/Vulkan/VulkanBuffer.h"
+#include "../../Platform/Vulkan/VulkanDescriptorSet.h"
+#include "../../Platform/Vulkan/VulkanDescriptorPool.h"
 
 #include <cassert>
 #include <iostream>

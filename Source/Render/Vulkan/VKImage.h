@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKIMAGE_H_
 #define SOURCE_RENDER_VK_VKIMAGE_H_
 
-#include "GHIImage.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIImage.h"
 
 namespace VK
 {

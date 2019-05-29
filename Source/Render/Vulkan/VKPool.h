@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKPOOL_H_
 #define SOURCE_RENDER_VK_VKPOOL_H_
 
-#include "GHIUsageType.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIUsageType.h"
 #include <vector>
 
 namespace VK

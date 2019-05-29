@@ -5,15 +5,16 @@
  *      Author: rookyma
  */
 
-#include "GHIBindingLayout.h"
 #include "VKDevice.h"
 #include "VKPipelineLayout.h"
 #include "VKBindingSet.h"
 
-#include "VulkanInline.h"
-#include "VulkanPipelineLayout.h"
-#include "VulkanDescriptorSet.h"
-#include "VulkanDescriptorSetLayout.h"
+#include "../../Core/GHI/GHIBindingLayout.h"
+
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanPipelineLayout.h"
+#include "../../Platform/Vulkan/VulkanDescriptorSet.h"
+#include "../../Platform/Vulkan/VulkanDescriptorSetLayout.h"
 
 #include <cassert>
 

@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINELAYOUT_H_
 #define SOURCE_RENDER_VK_VKPIPELINELAYOUT_H_
 
-#include "GHIPipelineLayout.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIPipelineLayout.h"
 #include <vector>
 
 namespace VK

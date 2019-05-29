@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_VK_VKSHADER_H_
 #define SOURCE_RENDER_VK_VKSHADER_H_
 
-#include "GHIShader.h"
+#include "../../Core/GHI/GHIShader.h"
 #include "VKPipelineState.h"
 #include "VKRender.h"
 

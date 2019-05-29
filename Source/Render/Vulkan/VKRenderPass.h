@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKRENDERPASS_H_
 #define SOURCE_RENDER_VK_VKRENDERPASS_H_
 
-#include "GHIRenderPass.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIRenderPass.h"
 
 namespace VK
 {

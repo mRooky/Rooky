@@ -8,9 +8,9 @@
 #ifndef SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 #define SOURCE_RENDER_VK_VKVERTEXLAYOUT_H_
 
-#include "GHIInputLayout.h"
-#include "GHIClasses.h"
-#include "Pipeline/VulkanGraphicsPipelineInfo.h"
+#include "../../Core/GHI/GHIInputLayout.h"
+#include "../../Core/GHI/GHIClasses.h"
+#include "../../Platform/Vulkan/Pipeline/VulkanGraphicsPipelineInfo.h"
 
 namespace VK
 {

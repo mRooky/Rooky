@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKFORMAT_H_
 #define SOURCE_RENDER_VK_VKFORMAT_H_
 
-#include "GHIFormat.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIFormat.h"
 
 namespace VK
 {

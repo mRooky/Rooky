@@ -8,9 +8,9 @@
 #ifndef SOURCE_RENDER_VK_VKPIPELINE_H_
 #define SOURCE_RENDER_VK_VKPIPELINE_H_
 
-#include "GHIPipeline.h"
 #include "VKPipelineState.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIPipeline.h"
 
 namespace VK
 {

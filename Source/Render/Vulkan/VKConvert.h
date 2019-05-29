@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKCONVERT_H_
 #define SOURCE_RENDER_VK_VKCONVERT_H_
 
-#include "GHIStateEnum.h"
 #include "VKInline.h"
+#include "../../Core/GHI/State/GHIStateEnum.h"
 #include <cassert>
 
 namespace VK

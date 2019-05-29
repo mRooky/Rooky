@@ -11,13 +11,13 @@
 #include "VKDevice.h"
 #include "VKPool.h"
 
-#include "VulkanBuffer.h"
-#include "VulkanInline.h"
-#include "VulkanCommandPool.h"
-#include "VulkanCommandBuffer.h"
-#include "VulkanDevice.h"
-#include "VulkanQueue.h"
-#include "VulkanDeviceMemory.h"
+#include "../../Platform/Vulkan/VulkanBuffer.h"
+#include "../../Platform/Vulkan/VulkanInline.h"
+#include "../../Platform/Vulkan/VulkanCommandPool.h"
+#include "../../Platform/Vulkan/VulkanCommandBuffer.h"
+#include "../../Platform/Vulkan/VulkanDevice.h"
+#include "../../Platform/Vulkan/VulkanQueue.h"
+#include "../../Platform/Vulkan/VulkanDeviceMemory.h"
 
 #include <cassert>
 #include <cstring>

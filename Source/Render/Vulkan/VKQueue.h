@@ -8,8 +8,8 @@
 #ifndef SOURCE_RENDER_VK_VKQUEUE_H_
 #define SOURCE_RENDER_VK_VKQUEUE_H_
 
-#include "GHIQueue.h"
 #include "VKRender.h"
+#include "../../Core/GHI/GHIQueue.h"
 
 namespace VK
 {
