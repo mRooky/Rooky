@@ -7,9 +7,9 @@
 
 #include "GHIAttachment.h"
 #include "GHIImage.h"
-#include "../Utility/UtilitySearch.h"
 #include <cassert>
 #include <iostream>
+#include <algorithm>
 
 namespace GHI
 {

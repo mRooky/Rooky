@@ -6,7 +6,7 @@
  */
 
 #include "VulkanInputAssemblyStateInfo.h"
-#include "VulkanPipeline.h"
+#include "../VulkanPipeline.h"
 
 #include <cassert>
 

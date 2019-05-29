@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_CORESUBPASS_H_
 #define SOURCE_CORE_CORESUBPASS_H_
 
-#include "GHIClasses.h"
-#include "GHIFormat.h"
-#include "GHIShaderState.h"
-#include "GHIDepthStencil.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIFormat.h"
+#include "GHI/GHIShaderState.h"
+#include "GHI/State/GHIDepthStencil.h"
 #include <vector>
 
 namespace Core

@@ -8,7 +8,7 @@
 #ifndef DIRECTUI_SHAPE_DIRECTARC_H_
 #define DIRECTUI_SHAPE_DIRECTARC_H_
 
-#include "DirectShape.h"
+#include "../DirectShape.h"
 
 namespace Direct
 {

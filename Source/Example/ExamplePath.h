@@ -8,7 +8,7 @@
 #ifndef EXAMPLE_EXAMPLEPATH_H_
 #define EXAMPLE_EXAMPLEPATH_H_
 
-#include <CorePass.h>
+#include "../Core/CorePass.h"
 
 #include "ExampleBase.h"
 

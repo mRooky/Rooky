@@ -11,14 +11,14 @@
 #include "DirectTarget.h"
 #include "DirectWidget.h"
 #include "DirectWindow.h"
-#include "VulkanImage.h"
-#include "VulkanDevice.h"
-#include "VulkanRenderPass.h"
-#include "VulkanCommandPool.h"
-#include "VulkanFrameBuffer.h"
-#include "VulkanCommandBuffer.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanInline.h"
+#include "../Platform/Vulkan/VulkanImage.h"
+#include "../Platform/Vulkan/VulkanDevice.h"
+#include "../Platform/Vulkan/VulkanRenderPass.h"
+#include "../Platform/Vulkan/VulkanCommandPool.h"
+#include "../Platform/Vulkan/VulkanFrameBuffer.h"
+#include "../Platform/Vulkan/VulkanCommandBuffer.h"
+#include "../Platform/Vulkan/VulkanPhysicalDevice.h"
+#include "../Platform/Vulkan/VulkanInline.h"
 #include <cassert>
 
 namespace Direct

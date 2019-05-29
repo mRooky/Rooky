@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORETEXTURE_H_
 #define SOURCE_CORE_CORETEXTURE_H_
 
-#include "GHIImageLayout.h"
-#include "GHIUsageType.h"
+#include "GHI/GHIImageLayout.h"
+#include "GHI/GHIUsageType.h"
 #include "CoreResource.h"
 #include <string>
 

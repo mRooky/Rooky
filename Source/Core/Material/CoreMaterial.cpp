@@ -6,7 +6,7 @@
  */
 
 #include "CoreMaterial.h"
-#include "CoreUniform.h"
+#include "../CoreUniform.h"
 #include <cassert>
 
 namespace Core

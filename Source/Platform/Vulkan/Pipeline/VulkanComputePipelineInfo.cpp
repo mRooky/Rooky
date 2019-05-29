@@ -6,8 +6,8 @@
  */
 
 #include "VulkanComputePipelineInfo.h"
-#include "VulkanPipelineLayout.h"
-#include "VulkanShaderModule.h"
+#include "../VulkanPipelineLayout.h"
+#include "../VulkanShaderModule.h"
 #include <cassert>
 
 namespace Vulkan

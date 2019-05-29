@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_COREVIEWPORT_H_
 #define SOURCE_CORE_COREVIEWPORT_H_
 
-#include "GHIClasses.h"
 #include "CorePipeline.h"
-#include "MathViewport.h"
+#include "GHI/GHIClasses.h"
+#include "Math/MathViewport.h"
 
 namespace Core
 {

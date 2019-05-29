@@ -5,17 +5,16 @@
  *      Author: rookyma
  */
 
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHISwapChain.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
+#include "GHI/GHISwapChain.h"
 #include "CoreScene.h"
 #include "CoreSystem.h"
 #include "CoreViewport.h"
 #include "CoreCamera.h"
 #include "CoreRenderable.h"
 
-#include "UtilityRelease.h"
-#include "UtilitySearch.h"
+#include "Utility/UtilityRelease.h"
 
 #include <cassert>
 

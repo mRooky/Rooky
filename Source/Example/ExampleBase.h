@@ -8,9 +8,9 @@
 #ifndef EXAMPLE_EXAMPLEBASE_H_
 #define EXAMPLE_EXAMPLEBASE_H_
 
-#include "CoreScene.h"
-#include "CoreViewport.h"
-#include "PlatformWindow.h"
+#include "../Core/CoreScene.h"
+#include "../Core/CoreViewport.h"
+#include "../Core/Platform/PlatformWindow.h"
 #include <cstdint>
 
 namespace Example

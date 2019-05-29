@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_MANAGER_COREMESHMANAGER_H_
 #define SOURCE_CORE_MANAGER_COREMESHMANAGER_H_
 
-#include "CoreInterface.h"
+#include "../CoreInterface.h"
 #include <vector>
 
 namespace Core

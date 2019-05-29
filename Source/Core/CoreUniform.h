@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_COREUNIFORM_H_
 #define SOURCE_CORE_COREUNIFORM_H_
 
-#include "GHIClasses.h"
-#include "GHIUsageType.h"
 #include "CoreBuffer.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIUsageType.h"
 #include <cstddef>
 
 namespace Core

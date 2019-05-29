@@ -7,9 +7,9 @@
 
 #include "DirectContext.h"
 #include "DirectTarget.h"
-#include "VulkanImage.h"
-#include "VulkanDeviceMemory.h"
-#include "VulkanInline.h"
+#include "../Platform/Vulkan/VulkanImage.h"
+#include "../Platform/Vulkan/VulkanDeviceMemory.h"
+#include "../Platform/Vulkan/VulkanInline.h"
 #include <cassert>
 
 namespace Direct

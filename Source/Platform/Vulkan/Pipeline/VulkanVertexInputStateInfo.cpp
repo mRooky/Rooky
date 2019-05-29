@@ -6,7 +6,7 @@
  */
 
 #include "VulkanVertexInputStateInfo.h"
-#include "VulkanPipeline.h"
+#include "../VulkanPipeline.h"
 
 #include <cassert>
 #include <algorithm>

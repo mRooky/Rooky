@@ -7,7 +7,7 @@
 
 #include "ExamplePath.h"
 
-#include <CoreSubPass.h>
+#include "../Core/CoreSubPass.h"
 #include <cassert>
 
 namespace Example

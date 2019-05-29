@@ -6,11 +6,11 @@
  */
 
 #include "DirectCanvas.h"
-#include "DirectArc.h"
-#include "DirectEllipse.h"
-#include "DirectLine.h"
-#include "DirectPoint.h"
-#include "DirectRectangle.h"
+#include "Shape/DirectArc.h"
+#include "Shape/DirectEllipse.h"
+#include "Shape/DirectLine.h"
+#include "Shape/DirectPoint.h"
+#include "Shape/DirectRectangle.h"
 #include <cassert>
 
 namespace Direct

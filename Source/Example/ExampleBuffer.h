@@ -8,9 +8,9 @@
 #ifndef EXAMPLE_EXAMPLEBUFFER_H_
 #define EXAMPLE_EXAMPLEBUFFER_H_
 
-#include "CoreIndex.h"
-#include "CoreVertex.h"
-#include "CoreUniform.h"
+#include "../Core/CoreIndex.h"
+#include "../Core/CoreVertex.h"
+#include "../Core/CoreUniform.h"
 
 #include "ExamplePath.h"
 

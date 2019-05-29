@@ -9,10 +9,10 @@
 #define SOURCE_CORE_COREPOLICY_H_
 
 #include "CoreInterface.h"
-#include "MathExtent2.h"
-#include "GHIClasses.h"
-#include "GHIFormat.h"
-#include "GHIUsageType.h"
+#include "Math/MathExtent2.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIFormat.h"
+#include "GHI/GHIUsageType.h"
 #include <cstdint>
 #include <vector>
 

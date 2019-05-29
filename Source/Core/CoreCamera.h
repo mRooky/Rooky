@@ -10,7 +10,7 @@
 
 #include "CoreBase.h"
 #include "CoreCameraData.h"
-#include "MathFrustum.h"
+#include "Math/MathFrustum.h"
 #include <vector>
 
 namespace Core

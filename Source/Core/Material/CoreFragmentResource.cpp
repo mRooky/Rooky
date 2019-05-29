@@ -6,7 +6,7 @@
  */
 
 #include "CoreFragmentResource.h"
-#include "CoreTexture.h"
+#include "../CoreTexture.h"
 
 namespace Core
 {

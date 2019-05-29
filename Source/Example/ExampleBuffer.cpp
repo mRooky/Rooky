@@ -7,22 +7,22 @@
 
 #include "ExampleBuffer.h"
 
-#include "GHIBuffer.h"
-#include "GHICommandList.h"
-#include "GHIEnum.h"
-#include "GHIFrameBuffer.h"
-#include "GHIImage.h"
-#include "GHIRenderPass.h"
-#include "GHISwapChain.h"
+#include "../Core/GHI/GHIBuffer.h"
+#include "../Core/GHI/GHICommandList.h"
+#include "../Core/GHI/GHIEnum.h"
+#include "../Core/GHI/GHIFrameBuffer.h"
+#include "../Core/GHI/GHIImage.h"
+#include "../Core/GHI/GHIRenderPass.h"
+#include "../Core/GHI/GHISwapChain.h"
 
-#include "CoreSubPass.h"
-#include "CoreIndex.h"
-#include "CoreVertex.h"
-#include "CoreUniform.h"
-#include "CoreSystem.h"
-#include "CoreMeshManager.h"
-#include "CoreBufferManager.h"
-#include "CoreThread.h"
+#include "../Core/CoreSubPass.h"
+#include "../Core/CoreIndex.h"
+#include "../Core/CoreVertex.h"
+#include "../Core/CoreUniform.h"
+#include "../Core/CoreSystem.h"
+#include "../Core/Manager/CoreMeshManager.h"
+#include "../Core/Manager/CoreBufferManager.h"
+#include "../Core/CoreThread.h"
 
 #include <cassert>
 #include <array>

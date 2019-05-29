@@ -5,9 +5,9 @@
  *      Author: rookyma
  */
 
-#include <Utility/VulkanDumpFormat.h>
-#include "VulkanPhysicalDevice.h"
-#include "VulkanFormat.h"
+#include "VulkanDumpFormat.h"
+#include "../VulkanPhysicalDevice.h"
+#include "../VulkanFormat.h"
 #include <cassert>
 
 namespace Vulkan

@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORESCENE_H_
 #define SOURCE_CORE_CORESCENE_H_
 
-#include "GHIClasses.h"
-#include "PlatformWindow.h"
+#include "GHI/GHIClasses.h"
+#include "Platform/PlatformWindow.h"
 #include <vector>
 
 namespace Core

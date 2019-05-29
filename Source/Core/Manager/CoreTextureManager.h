@@ -8,10 +8,10 @@
 #ifndef SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 #define SOURCE_CORE_MANAGER_CORETEXTUREMANAGER_H_
 
-#include "GHIFormat.h"
-#include "MathExtent3.h"
-#include "GHISampler.h"
-#include "CoreInterface.h"
+#include "../GHI/GHIFormat.h"
+#include "../Math/MathExtent3.h"
+#include "../GHI/GHISampler.h"
+#include "../CoreInterface.h"
 #include <vector>
 
 namespace Core

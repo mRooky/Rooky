@@ -6,7 +6,7 @@
  */
 
 #include "VulkanDepthStencilStateInfo.h"
-#include "VulkanPipeline.h"
+#include "../VulkanPipeline.h"
 #include <cassert>
 
 namespace Vulkan

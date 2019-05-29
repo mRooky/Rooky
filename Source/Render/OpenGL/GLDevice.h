@@ -8,7 +8,7 @@
 #ifndef SOURCE_RENDER_OPENGL_GLDEVICE_H_
 #define SOURCE_RENDER_OPENGL_GLDEVICE_H_
 
-#include "GHIDevice.h"
+#include "../../Core/GHI/GHIDevice.h"
 
 namespace GL
 {

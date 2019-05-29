@@ -6,9 +6,9 @@
  */
 
 #include "VulkanGraphicsPipelineInfo.h"
-#include "VulkanPipeline.h"
-#include "VulkanRenderPass.h"
-#include "VulkanPipelineLayout.h"
+#include "../VulkanPipeline.h"
+#include "../VulkanRenderPass.h"
+#include "../VulkanPipelineLayout.h"
 
 #include <cassert>
 

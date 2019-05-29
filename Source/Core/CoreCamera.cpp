@@ -6,7 +6,6 @@
  */
 
 #include "CoreCamera.h"
-#include "UtilitySearch.h"
 #include <cassert>
 
 namespace Core

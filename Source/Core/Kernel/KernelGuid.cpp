@@ -35,10 +35,10 @@ String Guid::GetString(void) const
 void Guid::Generate(void)
 {
 	RandomBytes(&mCode, sizeof(mCode));
-	mCode[0] &= 0xffffffff'ffff0fffULL;
-	mCode[0] |= 0x00000000'00004000ULL;
-	mCode[1] &= 0x3fffffff'ffffffffULL;
-	mCode[1] |= 0x80000000'00000000ULL;
+	mCode[0] &= 0xffffffffffff0fffULL;
+	mCode[0] |= 0x0000000000004000ULL;
+	mCode[1] &= 0x3fffffffffffffffULL;
+	mCode[1] |= 0x8000000000000000ULL;
 }
 
 }

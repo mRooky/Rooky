@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORERENDERABLE_H_
 #define SOURCE_CORE_CORERENDERABLE_H_
 
-#include "MathFrustum.h"
+#include "Math/MathFrustum.h"
 #include "CoreBase.h"
 
 namespace Core

@@ -10,7 +10,6 @@
 
 #include "DirectVertex.h"
 #include "DirectWidget.h"
-#include "VulkanClasses.h"
 #include <array>
 
 namespace Direct

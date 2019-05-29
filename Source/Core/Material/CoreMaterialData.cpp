@@ -6,8 +6,8 @@
  */
 
 #include "CoreMaterialData.h"
-#include "CoreUniform.h"
-#include "KernelMemory.h"
+#include "../CoreUniform.h"
+#include "../Kernel/KernelMemory.h"
 #include <cassert>
 
 namespace Core

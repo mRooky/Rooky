@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include <PlatformEvent.h>
+#include "PlatformEvent.h"
 
 namespace Platform
 {

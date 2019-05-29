@@ -8,7 +8,7 @@
 #ifndef DIRECTUI_DIRECTCONTEXT_H_
 #define DIRECTUI_DIRECTCONTEXT_H_
 
-#include "VulkanClasses.h"
+#include "../Platform/Vulkan/VulkanClasses.h"
 #include <array>
 
 namespace Direct

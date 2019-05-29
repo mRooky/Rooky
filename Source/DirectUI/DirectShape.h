@@ -9,7 +9,7 @@
 #define DIRECTUI_DIRECTSHAPE_H_
 
 #include "DirectMath.h"
-#include "VulkanClasses.h"
+#include "../Platform/Vulkan/VulkanClasses.h"
 
 namespace Direct
 {

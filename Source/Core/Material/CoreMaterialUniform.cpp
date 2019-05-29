@@ -6,7 +6,7 @@
  */
 
 #include "CoreMaterialUniform.h"
-#include "CoreUniform.h"
+#include "../CoreUniform.h"
 #include <cstring>
 #include <cassert>
 

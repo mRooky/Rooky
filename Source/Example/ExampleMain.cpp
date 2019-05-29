@@ -5,12 +5,12 @@
  *      Author: rookyma
  */
 
-#include "OpenALDevice.h"
 
 #include "ExampleTexture.h"
-#include "KernelString.h"
-#include "KernelFile.h"
-#include "KernelGuid.h"
+#include "../Platform/OpenAL/OpenALDevice.h"
+#include "../Core/Kernel/KernelString.h"
+#include "../Core/Kernel/KernelFile.h"
+#include "../Core/Kernel/KernelGuid.h"
 
 #include <iostream>
 

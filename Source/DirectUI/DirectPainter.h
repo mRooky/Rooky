@@ -8,7 +8,7 @@
 #ifndef DIRECTUI_DIRECTPAINTER_H_
 #define DIRECTUI_DIRECTPAINTER_H_
 
-#include "VulkanClasses.h"
+#include "../Platform/Vulkan/VulkanClasses.h"
 #include <vector>
 
 namespace Direct

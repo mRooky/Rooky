@@ -6,7 +6,7 @@
  */
 
 #include "CoreVertexResource.h"
-#include "CoreUniform.h"
+#include "../CoreUniform.h"
 
 namespace Core
 {

@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_COREBUFFERMANAGER_H_
 #define SOURCE_CORE_COREBUFFERMANAGER_H_
 
-#include "GHIClasses.h"
-#include "GHIFormat.h"
-#include "CoreInterface.h"
+#include "../GHI/GHIClasses.h"
+#include "../GHI/GHIFormat.h"
+#include "../CoreInterface.h"
 #include <vector>
 
 namespace Core

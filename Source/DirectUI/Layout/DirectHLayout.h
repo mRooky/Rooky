@@ -8,7 +8,7 @@
 #ifndef DIRECTUI_DIRECTHLAYOUT_H_
 #define DIRECTUI_DIRECTHLAYOUT_H_
 
-#include "DirectLayout.h"
+#include "../DirectLayout.h"
 
 namespace Direct
 {

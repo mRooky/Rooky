@@ -6,7 +6,7 @@
  */
 
 #include "VulkanMultisampleStateInfo.h"
-#include <VulkanPipeline.h>
+#include "../VulkanPipeline.h"
 #include <cassert>
 
 namespace Vulkan

@@ -9,9 +9,9 @@
 #define SOURCE_CORE_MATERIAL_COREMATERIAL_H_
 
 #include "CoreShaderResource.h"
-#include "CoreBase.h"
 #include "CoreMaterialUniform.h"
-#include "KernelFixedVector.h"
+#include "../CoreBase.h"
+#include "../Kernel/KernelFixedVector.h"
 
 namespace Core
 {

@@ -10,7 +10,7 @@
 
 #include "ExampleBuffer.h"
 
-#include "CoreTexture.h"
+#include "../Core/CoreTexture.h"
 
 namespace Example
 {

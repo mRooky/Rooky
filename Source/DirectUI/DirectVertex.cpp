@@ -6,7 +6,7 @@
  */
 
 #include "DirectVertex.h"
-#include <VulkanFormat.h>
+#include "../Platform/Vulkan/VulkanFormat.h"
 #include <cassert>
 
 namespace Direct

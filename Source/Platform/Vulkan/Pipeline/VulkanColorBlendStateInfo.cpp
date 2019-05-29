@@ -6,7 +6,7 @@
  */
 
 #include "VulkanColorBlendStateInfo.h"
-#include "VulkanPipeline.h"
+#include "../VulkanPipeline.h"
 
 #include <cassert>
 

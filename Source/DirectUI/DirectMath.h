@@ -8,10 +8,10 @@
 #ifndef DIRECTUI_DIRECTMATH_H_
 #define DIRECTUI_DIRECTMATH_H_
 
-#include "MathRect.h"
-#include "MathColor.h"
-#include "MathExtent3.h"
-#include "MathVector.h"
+#include "../Core/Math/MathRect.h"
+#include "../Core/Math/MathColor.h"
+#include "../Core/Math/MathExtent3.h"
+#include "../Core/Math/MathVector.h"
 
 namespace Direct
 {

@@ -8,7 +8,7 @@
 #ifndef VULKAN_COMMON_VULKANDUMPFORMAT_H_
 #define VULKAN_COMMON_VULKANDUMPFORMAT_H_
 
-#include "VulkanClasses.h"
+#include "../VulkanClasses.h"
 
 namespace Vulkan
 {

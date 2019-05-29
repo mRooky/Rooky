@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_CORESYSTEM_H_
 #define SOURCE_CORE_CORESYSTEM_H_
 
-#include "GHIClasses.h"
-#include "GHIFormat.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIFormat.h"
 
 namespace Core
 {

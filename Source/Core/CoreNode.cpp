@@ -7,7 +7,6 @@
 
 #include "CoreNode.h"
 #include "CoreObject.h"
-#include "UtilitySearch.h"
 #include <algorithm>
 #include <cassert>
 
@@ -46,7 +45,7 @@ void Node::AppendChild(Node* node)
 	assert(mObject == nullptr);
 	if (nullptr == node->GetParent())
 	{
-		auto iterator = Utility::Find(mChildren, node);
+		auto iterator = std::find(mChildren.begin(), mChildren.end(), node);
 		if (iterator == mChildren.end())
 		{
 			node->SetParent(this);

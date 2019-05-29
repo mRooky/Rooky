@@ -8,9 +8,9 @@
 #include "DirectContext.h"
 #include "DirectSurface.h"
 #include "DirectWindow.h"
-#include "VulkanImage.h"
-#include "VulkanDevice.h"
-#include "VulkanPhysicalDevice.h"
+#include "../Platform/Vulkan/VulkanImage.h"
+#include "../Platform/Vulkan/VulkanDevice.h"
+#include "../Platform/Vulkan/VulkanPhysicalDevice.h"
 
 #include <cassert>
 

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORETHREAD_H_
 #define SOURCE_CORE_CORETHREAD_H_
 
-#include "GHIClasses.h"
+#include "GHI/GHIClasses.h"
 #include "CoreInterface.h"
 #include <vector>
 

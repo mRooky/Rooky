@@ -8,7 +8,7 @@
 #ifndef DIRECTUI_DIRECTWINDOW_H_
 #define DIRECTUI_DIRECTWINDOW_H_
 
-#include "VulkanClasses.h"
+#include "../Platform/Vulkan/VulkanClasses.h"
 #include <vector>
 
 namespace Direct
