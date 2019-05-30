@@ -9,13 +9,12 @@ DFLAGS = -MM
 CFLAGS = -g -c -Wall
 RM = -rm
 LIBS = -lvulkan -lxcb -lpng -lGLU -lGL -lGLEW -lopenal -lSOIL
-
+MACROS = -DVK_USE_PLATFORM_XCB_KHR
 # All project dirs
 OUT_DIR = Debug
 SOURCE_DIR = Source
 DEBUG_DIR = Debug
 RELEASE_DIR = Release
-DEPEND_FILE = $(OUT_DIR)/.depend
 
 # Tags
 PHONY : clean debug release FORCE
@@ -35,15 +34,17 @@ RELEASE_SUB_DIRS = $(subst Source/, Release/, $(SOURCE_SUB_DIRS))
 RELEASE_OBJECTS = $(subst Source/, Release/, $(SOURCE_FILES:%.cpp=%.o))
 RELEASE_DEPEND_FILES = $(RELEASE_OBJECTS:%.o=%.d)
 
+# Make Dir Function
+MAKE_DIR = mkdir
+MAKE_FLAGS = -p
+
+################ TEST ################
 test :
 	@echo $(SOURCE_FILES)
 	@echo $(DEBUG_OBJECTS)
 	@echo $(DEBUG_DEPEND_FILES)
 
-# Make Dir Function
-MAKE_DIR = mkdir
-MAKE_FLAGS = -p
-
+################ DEBUG ################
 debug_dir :
 	@$(MAKE_DIR) $(MAKE_FLAGS) $(DEBUG_SUB_DIRS)
 
@@ -54,33 +55,28 @@ release_dir :
 debug : OUT_DIR = Debug
 debug : debug_dir debug_depend $(TARGET)
 
+# Make object
 %.o : %.d
-# $(DEBUG_OBJECTS) : %.o : %.d
 	@echo "OBJ : $@ form $<"
-	@$(CC) $(CFLAGS) -DVK_USE_PLATFORM_XCB_KHR $(INCLUDE_DIRS)  $(subst Debug/, Source/, $(<:%.d=%.cpp)) -o $@
+	@$(CC) $(CFLAGS) $(MACROS) $(INCLUDE_DIRS)  $(subst Debug/, Source/, $(<:%.d=%.cpp)) -o $@
 
-# $(OUT_DIR)/%.o : $(SOURCE_DIR)/%.cpp
-#	@echo "O CPP : $@ form $<"
-#	$(CC) $(CFLAGS) -DVK_USE_PLATFORM_XCB_KHR $(INCLUDE_DIRS)  $< -o $@
-
+# Build target
 $(TARGET) : $(DEBUG_OBJECTS)
 	@echo "Build Debug/Rooky"
 	@$(CC) $(DEBUG_OBJECTS) $(LIBS) -o $(TARGET)
 
-# depend_build: $(SOURCE_FILES)
-#	$(RM) $(DEPEND_FILE)
-#	$(CC) $(INCLUDE_DIRS) $^ $(DFLAGS) >> $(DEPEND_FILE)
-
-#-include $(DEPEND_FILE)
-
+# Make depend
 $(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
 	@echo "DEP : $@ form $<"
 	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MF $@
 
+# Depend flag
 debug_depend : $(DEBUG_DEPEND_FILES)
 
+# Update context
 -include $(DEBUG_DEPEND_FILES)
 
+################# RELEASE ###############
 release : release_dir
 	@echo "Release Build..."
 
@@ -88,7 +84,7 @@ release_rooky : OUT_DIR = Release
 release_rooky : $(RELEASE_OBJECTS)
 	@echo "Build Release/Rooky"
 
-# Process
+################ CLEAN ################
 clean :
 	@echo "Clear Project..."
 	$(RM) -rf $(DEBUG_DEPEND_FILES)
