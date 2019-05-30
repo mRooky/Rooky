@@ -33,6 +33,14 @@ public:
 	}
 
 public:
+	inline void Set(T width, T height, T depth)
+	{
+		this->width = width;
+		this->height = height;
+		this->depth = depth;
+	}
+
+public:
 	T width = static_cast<T>(0);
 	T height = static_cast<T>(0);
 	T depth = static_cast<T>(0);

@@ -57,7 +57,7 @@ public:
 	}
 
 public:
-	inline bool IsValid(void) const { return extent.GetArea() > 0; }
+	inline bool IsValid(void) const { return extent.IsValid(); }
 
 public:
 	Vector2_t<F> offset = {};

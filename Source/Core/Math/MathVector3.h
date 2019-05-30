@@ -18,8 +18,10 @@ class Vector3_t
 {
 public:
 	Vector3_t(void) = default;
-	explicit Vector3_t(T x, T y, T z) { Set(x, y, z); }
 	~Vector3_t(void) = default;
+
+public:
+	explicit Vector3_t(T x, T y, T z) { Set(x, y, z); }
 
 public:
 	inline T& operator[](size_t index) { return *(&x + index); }

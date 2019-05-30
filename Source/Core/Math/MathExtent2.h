@@ -29,11 +29,14 @@ public:
 
 public:
 	template<typename O>
-	void Set(O width, O height)
+	inline void Set(O width, O height)
 	{
 		this->width = static_cast<T>(width);
 		this->height = static_cast<T>(height);
 	}
+
+public:
+	inline bool IsValid(void) const { return width * height > 0; }
 
 public:
 	T width = static_cast<T>(0);
