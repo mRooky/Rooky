@@ -2,3 +2,5 @@
 /Release/
 tags
 *.swp
+.gitignore
+/.settings
