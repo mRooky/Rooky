@@ -27,16 +27,16 @@ vpath %.h SOURCE_SUB_DIRS
 SOURCE_FILES += $(foreach var, $(SOURCE_SUB_DIRS), $(wildcard $(var)/*.cpp))
 INCLUDE_DIRS += $(foreach var, $(SOURCE_SUB_DIRS), -I$(var))
 
-DEBUG_SUB_DIRS += $(subst Source, Debug, $(SOURCE_SUB_DIRS))
-DEBUG_OBJECTS += $(subst Source, Debug, $(SOURCE_FILES:%.cpp=%.o))
+DEBUG_SUB_DIRS += $(subst Source/, Debug/, $(SOURCE_SUB_DIRS))
+DEBUG_OBJECTS += $(subst Source/, Debug/, $(SOURCE_FILES:%.cpp=%.o))
 DEBUG_DEPEND_FILES += $(DEBUG_OBJECTS:%.o=%.d)
 
-RELEASE_SUB_DIRS = $(subst Source, Release, $(SOURCE_SUB_DIRS))
-RELEASE_OBJECTS = $(subst Source, Release, $(SOURCE_FILES:%.cpp=%.o))
+RELEASE_SUB_DIRS = $(subst Source/, Release/, $(SOURCE_SUB_DIRS))
+RELEASE_OBJECTS = $(subst Source/, Release/, $(SOURCE_FILES:%.cpp=%.o))
 RELEASE_DEPEND_FILES = $(RELEASE_OBJECTS:%.o=%.d)
 
-all :
-#	@echo $(SOURCE_FILES)
+test :
+	@echo $(SOURCE_FILES)
 	@echo $(DEBUG_OBJECTS)
 	@echo $(DEBUG_DEPEND_FILES)
 
@@ -52,35 +52,34 @@ release_dir :
 
 # Create Project DIR
 debug : OUT_DIR = Debug
-debug : debug_dir $(TARGET)
-	@echo "Debug Build..."
+debug : debug_dir debug_depend $(TARGET)
 
-#$(DEBUG_OBJECTS) : %.o : %.d
-#	@echo "O : $@ form $<"
+%.o : %.d
+# $(DEBUG_OBJECTS) : %.o : %.d
+	@echo "OBJ : $@ form $<"
+	@$(CC) $(CFLAGS) -DVK_USE_PLATFORM_XCB_KHR $(INCLUDE_DIRS)  $(subst Debug/, Source/, $(<:%.d=%.cpp)) -o $@
 
-$(OUT_DIR)/%.o : $(SOURCE_DIR)/%.cpp
-	@echo "O CPP : $@ form $<"
-	$(CC) $(CFLAGS) -DVK_USE_PLATFORM_XCB_KHR $(INCLUDE_DIRS)  $< -o $@
+# $(OUT_DIR)/%.o : $(SOURCE_DIR)/%.cpp
+#	@echo "O CPP : $@ form $<"
+#	$(CC) $(CFLAGS) -DVK_USE_PLATFORM_XCB_KHR $(INCLUDE_DIRS)  $< -o $@
 
 $(TARGET) : $(DEBUG_OBJECTS)
 	@echo "Build Debug/Rooky"
-	$(CC) $(DEBUG_OBJECTS) $(LIBS) -o $(TARGET)
+	@$(CC) $(DEBUG_OBJECTS) $(LIBS) -o $(TARGET)
 
 # depend_build: $(SOURCE_FILES)
 #	$(RM) $(DEPEND_FILE)
 #	$(CC) $(INCLUDE_DIRS) $^ $(DFLAGS) >> $(DEPEND_FILE)
 
-# include $(DEPEND_FILE)
+#-include $(DEPEND_FILE)
 
-#$(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
-#	@echo "D : $@ form $<"
-#	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) $< -o $@
-#	$(CC) $(DFLAGS) $(INCLUDE_DIRS) $< > $@.$$$$; sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; $(RM) $@.$$$$
+$(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
+	@echo "DEP : $@ form $<"
+	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MF $@
 
-#debug_depend : $(DEBUG_DEPEND_FILES)
-#	@echo "Make Depend Files..."
+debug_depend : $(DEBUG_DEPEND_FILES)
 
-#-include $(DEBUG_DEPEND_FILES)
+-include $(DEBUG_DEPEND_FILES)
 
 release : release_dir
 	@echo "Release Build..."

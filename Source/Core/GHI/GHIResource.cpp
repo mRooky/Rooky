@@ -19,4 +19,4 @@ Resource::~Resource(void)
 {
 }
 
-} /* namespace Render */
+} /* namespace GHI */

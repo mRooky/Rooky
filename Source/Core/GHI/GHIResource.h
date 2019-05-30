@@ -32,6 +32,6 @@ protected:
 	ResourceType mType = ResourceType::UNKNOWN;
 };
 
-} /* namespace Render */
+} /* namespace GHI */
 
 #endif /* SOURCE_CORE_GHI_RENDERRESOURCE_H_ */
