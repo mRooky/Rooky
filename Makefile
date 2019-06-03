@@ -57,7 +57,7 @@ debug : debug_dir debug_depend $(TARGET)
 
 # Make object
 %.o : %.d
-	@echo "OBJ : $@ form $<"
+	@echo "OBJ : $@ form $(subst Debug/, Source/, $(<:%.d=%.cpp))"
 	@$(CC) $(CFLAGS) $(MACROS) $(INCLUDE_DIRS)  $(subst Debug/, Source/, $(<:%.d=%.cpp)) -o $@
 
 # Build target

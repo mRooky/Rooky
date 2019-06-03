@@ -16,7 +16,6 @@
 
 namespace GHI
 {
-class SwapChain;
 class Image : public Memory
 {
 protected:

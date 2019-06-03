@@ -14,8 +14,7 @@
 #include "VKOperator.h"
 #include "VKDevice.h"
 
-#include "../../Core/Math/MathBits.h"
-
+#include "../../Core/Kernel/KernelAlignment.h"
 #include "../../Platform/Vulkan/VulkanImage.h"
 #include "../../Platform/Vulkan/VulkanImageView.h"
 #include "../../Platform/Vulkan/VulkanSampler.h"
@@ -227,8 +226,8 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	const auto& extent = mLayout.GetExtent();
 	if (mipmap > 0)
 	{
-		bool width_pow2 = Math::IsPowerOfTow(extent.width);
-		bool height_pow2 = Math::IsPowerOfTow(extent.height);
+		bool width_pow2 = Kernel::IsPowerOfTow(extent.width);
+		bool height_pow2 = Kernel::IsPowerOfTow(extent.height);
 		assert(width_pow2 == true);
 		assert(height_pow2 == true);
 		if (!width_pow2 || !height_pow2)
@@ -336,12 +335,10 @@ void SwapChainImage::Create(Vulkan::Image* image)
 	assert(image != nullptr);
 	mImage = image;
 	VkExtent2D vk_extent = image->GetExtent();
-	Math::Extent3Di extent =
-	{
-		static_cast<int32_t>(vk_extent.width),
-		static_cast<int32_t>(vk_extent.height),
-		1
-	};
+	Math::Extent3Di extent = {};
+	extent.width = static_cast<int32_t>(vk_extent.width);
+	extent.height = static_cast<int32_t>(vk_extent.height);
+	extent.depth = 1;
 	mLayout.SetExtent(extent);
 	VkFormat vk_format = image->GetFormat();
 	GHI::Format format = ConvertFormat(vk_format);

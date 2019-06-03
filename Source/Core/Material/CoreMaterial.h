@@ -11,7 +11,7 @@
 #include "CoreShaderResource.h"
 #include "CoreMaterialUniform.h"
 #include "../CoreBase.h"
-#include "../Kernel/KernelFixedVector.h"
+#include "../Kernel/KernelVector.h"
 
 namespace Core
 {

@@ -43,7 +43,7 @@ public:
 public:
 	T width = static_cast<T>(0);
 	T height = static_cast<T>(0);
-	T depth = static_cast<T>(0);
+	T depth = static_cast<T>(1);
 };
 
 typedef Extent3_t<int32_t> Extent3Di;

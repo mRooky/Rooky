@@ -9,7 +9,7 @@
 #define SOURCE_CORE_GHI_BATCH_GHIRENDERBUFFER_H_
 
 #include "../GHIEnum.h"
-#include "../../Kernel/KernelFixedVector.h"
+#include "../../Kernel/KernelVector.h"
 #include <cstddef>
 
 namespace GHI
