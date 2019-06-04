@@ -22,7 +22,7 @@ FORCE:
 # Find all sub DIR
 SOURCE_SUB_DIRS = $(shell find $(SOURCE_DIR) -type d)
 VPATH = SOURCE_SUB_DIRS
-vpath %.h SOURCE_SUB_DIRS
+# vpath %.h SOURCE_SUB_DIRS
 SOURCE_FILES += $(foreach var, $(SOURCE_SUB_DIRS), $(wildcard $(var)/*.cpp))
 INCLUDE_DIRS += $(foreach var, $(SOURCE_SUB_DIRS), -I$(var))
 
@@ -47,7 +47,13 @@ test :
 ################ DEBUG ################
 # Create Project DIR
 debug : OUT_DIR = Debug
-debug : debug_depend $(TARGET)
+debug : $(TARGET)
+
+# Make depend
+$(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
+	@echo "DEP : $@ form $<"
+	@$(MAKE_DIR) $(MAKE_FLAGS) $(dir $@)
+	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MM -MF $@
 
 # Make object
 %.o : %.d
@@ -56,26 +62,15 @@ debug : debug_depend $(TARGET)
 
 # Build target
 $(TARGET) : $(DEBUG_OBJECTS)
-	@echo "Build Debug/Rooky"
+	@echo "Out Dir $(OUT_DIR)"
+	@echo "Build... Rooky"
 	@$(CC) $(DEBUG_OBJECTS) $(LIBS) -o $(TARGET)
-
-# Make depend
-$(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
-	@echo "DEP : $@ form $<"
-	@$(MAKE_DIR) $(MAKE_FLAGS) $(dir $@)
-	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MM -MF $@
-
-# Depend flag
-debug_depend : $(DEBUG_DEPEND_FILES)
 
 # Update context
 -include $(DEBUG_DEPEND_FILES)
 
 ################# RELEASE ###############
-release_dir :
-	@$(MAKE_DIR) $(MAKE_FLAGS) $(RELEASE_SUB_DIRS)
-
-release : release_dir
+release :
 	@echo "Release Build..."
 
 release_rooky : OUT_DIR = Release

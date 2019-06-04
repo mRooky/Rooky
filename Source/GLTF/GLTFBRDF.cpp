@@ -4,6 +4,7 @@
  */
 
 #include "GLTFBRDF.h"
+#include "../Core/GHI/GHIShader.h"
 
 namespace GLTF
 {
@@ -18,12 +19,7 @@ BRDF::~BRDF(void)
 
 }
 
-void BRDF::Create(const char* vert, const char* frag, uint32_t dimmon)
-{
-
-}
-
-void BRDF::Generate(GHI::CommandList* command)
+void BRDF::Create(GHI::CommandList* command, const char* vert, const char* frag, uint32_t dimmon)
 {
 
 }
