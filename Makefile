@@ -45,15 +45,9 @@ test :
 	@echo $(DEBUG_DEPEND_FILES)
 
 ################ DEBUG ################
-debug_dir :
-	@$(MAKE_DIR) $(MAKE_FLAGS) $(DEBUG_SUB_DIRS)
-
-release_dir :
-	@$(MAKE_DIR) $(MAKE_FLAGS) $(RELEASE_SUB_DIRS)
-
 # Create Project DIR
 debug : OUT_DIR = Debug
-debug : debug_dir debug_depend $(TARGET)
+debug : debug_depend $(TARGET)
 
 # Make object
 %.o : %.d
@@ -68,7 +62,8 @@ $(TARGET) : $(DEBUG_OBJECTS)
 # Make depend
 $(OUT_DIR)/%.d : $(SOURCE_DIR)/%.cpp
 	@echo "DEP : $@ form $<"
-	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MF $@
+	@$(MAKE_DIR) $(MAKE_FLAGS) $(dir $@)
+	@$(CC) $(DFLAGS) $(INCLUDE_DIRS) -MT $@ -MT $(@:%.d=%.o) $< -MM -MF $@
 
 # Depend flag
 debug_depend : $(DEBUG_DEPEND_FILES)
@@ -77,6 +72,9 @@ debug_depend : $(DEBUG_DEPEND_FILES)
 -include $(DEBUG_DEPEND_FILES)
 
 ################# RELEASE ###############
+release_dir :
+	@$(MAKE_DIR) $(MAKE_FLAGS) $(RELEASE_SUB_DIRS)
+
 release : release_dir
 	@echo "Release Build..."
 

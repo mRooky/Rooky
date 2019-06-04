@@ -19,8 +19,8 @@ class AABB;
 
 enum class PlaneType : uint32_t
 {
-	FRONT,
-	BACK,
+	NEAR,
+	FAR,
 	LEFT,
 	RIGHT,
 	TOP,
@@ -61,11 +61,13 @@ public:
 	inline float GetFov(void) const { return mFov; }
 	inline float GetNear(void) const { return mNear; }
 	inline float GetFar(void) const { return mFar; }
+	inline const Matrix& GetMatrix(void) const { return mMatrix; }
 
 protected:
 	float mFov = 45.0f;
 	float mNear = 0.1f;
 	float mFar = 100.0f;
+	Matrix mMatrix = {};
 	std::array<Plane, 6> mPlanes = {};
 };
 

@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include <CoreCameraData.h>
+#include "CoreCameraData.h"
 
 namespace Core
 {

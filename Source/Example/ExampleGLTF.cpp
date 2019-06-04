@@ -35,5 +35,30 @@ void GLTF::CreateBRDF(void)
 
 }
 
+void GLTF::CreateBaseColor(const char* file)
+{
+
+}
+
+void GLTF::CreateMetallicRoughness(const char* file)
+{
+
+}
+
+void GLTF::CreateNormal(const char* file)
+{
+
+}
+
+void GLTF::CreateOcclusion(const char* file)
+{
+
+}
+
+void GLTF::CreateEmissive(const char* file)
+{
+
+}
+
 }
 
