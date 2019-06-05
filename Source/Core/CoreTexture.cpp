@@ -6,12 +6,12 @@
  */
 
 #include "CoreTexture.h"
-#include "CoreTextureManager.h"
+#include "Manager/CoreTextureManager.h"
 #include "CoreSystem.h"
 
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHIImage.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
+#include "GHI/GHIImage.h"
 
 #include <cassert>
 #include <iostream>

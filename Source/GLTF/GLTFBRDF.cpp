@@ -19,7 +19,7 @@ BRDF::~BRDF(void)
 
 }
 
-void BRDF::Create(GHI::CommandList* command, const char* vert, const char* frag, uint32_t dimmon)
+void BRDF::Create(GHI::CommandList* command, const char* vert, const char* frag, uint32_t dimension)
 {
 
 }

@@ -6,7 +6,7 @@
  */
 
 #include "CoreResource.h"
-#include "GHIResource.h"
+#include "GHI/GHIResource.h"
 
 namespace Core
 {

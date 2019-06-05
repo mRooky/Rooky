@@ -8,9 +8,9 @@
 #ifndef SOURCE_CORE_CORETEXTURE_H_
 #define SOURCE_CORE_CORETEXTURE_H_
 
+#include "CoreResource.h"
 #include "GHI/GHIImageLayout.h"
 #include "GHI/GHIUsageType.h"
-#include "CoreResource.h"
 #include <string>
 
 namespace Core

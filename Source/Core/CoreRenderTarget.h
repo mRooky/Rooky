@@ -9,7 +9,7 @@
 #define SOURCE_CORE_CORERENDERTARGET_H_
 
 #include "CoreResource.h"
-#include "GHIUsageType.h"
+#include "GHI/GHIUsageType.h"
 
 namespace Core
 {
