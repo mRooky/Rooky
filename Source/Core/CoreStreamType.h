@@ -8,29 +8,15 @@
 #ifndef SOURCE_CORE_CORESTREAMTYPE_H_
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
-#include "MathColor.h"
-#include "MathVector.h"
+#include "GHI/GHIVertexSemantic.h"
+#include "Math/MathColor.h"
+#include "Math/MathVector.h"
 #include <cstdint>
 #include <vector>
 #include <cstring>
 
 namespace Core
 {
-
-enum class StreamType : uint32_t
-{
-	STREAM_TYPE_POSITION,
-	STREAM_TYPE_COLOR,
-	STREAM_TYPE_NORMAL,
-	STREAM_TYPE_TANGENT,
-	STREAM_TYPE_TEXCOORD,
-	STREAM_TYPE_WEIGHT,
-	STREAM_TYPE_UNKONWN = ~0U
-};
-
-static constexpr uint32_t STREAM_TYPE_COUNT = 6;
-static inline uint32_t CastStream(StreamType type) { return static_cast<uint32_t>(type); }
-static inline StreamType CastIndex(uint32_t index) { return static_cast<StreamType>(index); }
 
 template<class T>
 class StreamBase

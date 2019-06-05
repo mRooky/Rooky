@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREMESH_H_
 #define SOURCE_CORE_COREMESH_H_
 
-#include "MathAABB.h"
 #include "CoreObject.h"
+#include "Math/MathAABB.h"
 #include <array>
 #include <vector>
 

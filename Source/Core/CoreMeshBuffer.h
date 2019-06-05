@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREMESHBUFFER_H_
 #define SOURCE_CORE_COREMESHBUFFER_H_
 
-#include "GHIClasses.h"
-#include "GHIEnum.h"
+#include "GHI/GHIClasses.h"
+#include "GHI/GHIEnum.h"
 #include <cstddef>
 
 namespace Core

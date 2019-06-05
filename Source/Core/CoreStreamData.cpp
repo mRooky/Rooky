@@ -20,24 +20,10 @@ StreamData::~StreamData(void)
 	FreeAllBuffer();
 }
 
-const void* StreamData::GetSemanticBuffer(StreamType type) const
+const void* StreamData::GetSemanticBuffer(GHI::SemanticUsage usage) const
 {
-	switch(type)
+	switch(usage)
 	{
-	case StreamType::STREAM_TYPE_POSITION:
-		return mStreamPosition.GetDataMemory();
-	case StreamType::STREAM_TYPE_COLOR:
-		return mStreamColor.GetDataMemory();
-	case StreamType::STREAM_TYPE_NORMAL:
-		return mStreamNormal.GetDataMemory();
-	case StreamType::STREAM_TYPE_TANGENT:
-		assert(false);
-		return nullptr;
-	case StreamType::STREAM_TYPE_TEXCOORD:
-		return mStreamTexCoord.GetDataMemory();
-	case StreamType::STREAM_TYPE_WEIGHT:
-		assert(false);
-		return nullptr;
 	default:
 		assert(false);
 		return nullptr;
@@ -51,24 +37,10 @@ Data* StreamData::AllocateIndexBuffer(size_t size)
 	return &mIndexBuffer;
 }
 
-void* StreamData::AllocateSemanticBuffer(StreamType type, size_t count)
+void* StreamData::AllocateSemanticBuffer(GHI::SemanticUsage usage, size_t count)
 {
-	switch(type)
+	switch(usage)
 	{
-	case StreamType::STREAM_TYPE_POSITION:
-		return mStreamPosition.Create(count);
-	case StreamType::STREAM_TYPE_COLOR:
-		return mStreamColor.Create(count);
-	case StreamType::STREAM_TYPE_NORMAL:
-		return mStreamNormal.Create(count);
-	case StreamType::STREAM_TYPE_TANGENT:
-		assert(false);
-		return nullptr;
-	case StreamType::STREAM_TYPE_TEXCOORD:
-		return mStreamTexCoord.Create(count);
-	case StreamType::STREAM_TYPE_WEIGHT:
-		assert(false);
-		return nullptr;
 	default:
 		assert(false);
 		return nullptr;
@@ -84,28 +56,10 @@ void StreamData::FreeAllBuffer(void)
 	mStreamPosition.ClearSemanticData();
 }
 
-void StreamData::FreeSemanticBuffer(StreamType type)
+void StreamData::FreeSemanticBuffer(GHI::SemanticUsage usage)
 {
-	switch(type)
+	switch(usage)
 	{
-	case StreamType::STREAM_TYPE_POSITION:
-		mStreamPosition.ClearSemanticData();
-		break;
-	case StreamType::STREAM_TYPE_COLOR:
-		mStreamColor.ClearSemanticData();
-		break;
-	case StreamType::STREAM_TYPE_NORMAL:
-		mStreamNormal.ClearSemanticData();
-		break;
-	case StreamType::STREAM_TYPE_TANGENT:
-		assert(false);
-		break;
-	case StreamType::STREAM_TYPE_TEXCOORD:
-		mStreamTexCoord.ClearSemanticData();
-		break;
-	case StreamType::STREAM_TYPE_WEIGHT:
-		assert(false);
-		break;
 	default:
 		assert(false);
 	}

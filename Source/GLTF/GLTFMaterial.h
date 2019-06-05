@@ -23,10 +23,10 @@ public:
 	~Material(void);
 
 public:
-	inline void SetAlpthCutoff(float cutoff) { mAplhaCutoff = cutoff; }
+	inline void SetAlphaCutoff(float cutoff) { mAplhaCutoff = cutoff; }
 	inline void SetMetallicFactor(float factor) { mMetallicFactor = factor; }
 	inline void SetRoughnessFactor(float factor) { mRoughnessFactor = factor; }
-	inline float GetAlpthCutoff(void) const { return mAplhaCutoff; }
+	inline float GetAlphaCutoff(void) const { return mAplhaCutoff; }
 	inline float GetMetallicFactor(void) const { return mMetallicFactor; }
 	inline float GetRoughnessFactor(void) const { return mRoughnessFactor; }
 

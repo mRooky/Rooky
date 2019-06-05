@@ -23,10 +23,10 @@ public:
 
 public:
 	Data* AllocateIndexBuffer(size_t size);
-	void* AllocateSemanticBuffer(StreamType type, size_t count);
+	void* AllocateSemanticBuffer(GHI::SemanticUsage usage, size_t count);
 
 public:
-	const void* GetSemanticBuffer(StreamType type) const;
+	const void* GetSemanticBuffer(GHI::SemanticUsage usage) const;
 
 public:
 	size_t GetValidCount(void) const;
@@ -40,7 +40,7 @@ public:
 
 protected:
 	void FreeAllBuffer(void);
-	void FreeSemanticBuffer(StreamType type);
+	void FreeSemanticBuffer(GHI::SemanticUsage usage);
 
 protected:
 	Data mIndexBuffer = {};
