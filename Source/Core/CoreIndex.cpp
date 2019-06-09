@@ -6,12 +6,12 @@
  */
 
 #include "CoreIndex.h"
-#include "CoreBufferManager.h"
+#include "Manager/CoreBufferManager.h"
 #include "CoreSystem.h"
-#include "GHIBuffer.h"
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHIInline.h"
+#include "GHI/GHIBuffer.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
+#include "GHI/GHIInline.h"
 
 #include <iostream>
 
@@ -32,8 +32,8 @@ Index::~Index(void)
 void Index::Create(GHI::IndexType type, uint32_t count)
 {
 	GHI::UsageType usage;
-	usage.source = TRUE;
-	usage.destination = TRUE;
+	usage.read = TRUE;
+	usage.write = TRUE;
 	usage.type = GHI::ResourceType::BUFFER;
 	Create(type, count, usage);
 }

@@ -308,8 +308,8 @@ VkImageUsageFlags Image::ConvertUsageFlag(GHI::UsageType usage)
 {
 	assert(usage.type == GHI::ResourceType::IMAGE);
 	VkImageUsageFlags flags = 0;
-	flags |= (usage.source == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.destination == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
 	flags |= (usage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
 	flags |= (usage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
 	flags |= (usage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;

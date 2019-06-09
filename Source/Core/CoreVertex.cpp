@@ -6,7 +6,7 @@
  */
 
 #include "CoreVertex.h"
-#include "CoreBufferManager.h"
+#include "Manager/CoreBufferManager.h"
 #include "CoreSystem.h"
 #include "GHI/GHIImageLayout.h"
 #include "GHI/GHIBuffer.h"
@@ -32,8 +32,8 @@ Vertex::~Vertex(void)
 void Vertex::Create(GHI::VertexLayout* layout, uint32_t count)
 {
 	GHI::UsageType usage;
-	usage.source = TRUE;
-	usage.destination = TRUE;
+	usage.read = TRUE;
+	usage.write = TRUE;
 	usage.type = GHI::ResourceType::BUFFER;
 	Create(layout, count, usage);
 }

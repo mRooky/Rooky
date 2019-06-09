@@ -46,8 +46,8 @@ public:
 		struct
 		{
 			uint16_t cpuAccess 		: 1;
-			uint16_t source 		: 1;
-			uint16_t destination 	: 1;
+			uint16_t read           : 1;
+			uint16_t write          : 1;
 			// Buffer Flags
 			uint16_t indexBuffer	: 1;
 			uint16_t vertexBuffer	: 1;

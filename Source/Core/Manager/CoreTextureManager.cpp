@@ -4,16 +4,15 @@
  *  Created on: Mar 12, 2019
  *      Author: rookyma
  */
-
-#include "GHIDefine.h"
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHISampler.h"
-#include "UtilityRelease.h"
-#include "KernelFileUtility.h"
 #include "CoreTextureManager.h"
-#include "CoreTexture.h"
-#include "CoreSystem.h"
+#include "../GHI/GHIDefine.h"
+#include "../GHI/GHIDevice.h"
+#include "../GHI/GHIFactory.h"
+#include "../GHI/GHISampler.h"
+#include "../Utility/UtilityRelease.h"
+#include "../Kernel/KernelFileUtility.h"
+#include "../CoreTexture.h"
+#include "../CoreSystem.h"
 
 #include <cstring>
 #include <cassert>
@@ -60,7 +59,7 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 		image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
 
 		GHI::UsageType image_usage = {};
-		image_usage.destination = TRUE;
+		image_usage.write = TRUE;
 		image_usage.sampledImage = TRUE;
 		image_usage.type = GHI::ResourceType::IMAGE;
 

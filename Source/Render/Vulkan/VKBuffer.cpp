@@ -199,8 +199,8 @@ VkBufferUsageFlags Buffer::ConvertUsageFlag(GHI::UsageType usage)
 {
 	assert(usage.type == GHI::ResourceType::BUFFER);
 	VkBufferUsageFlags flags = 0;
-	flags |= (usage.source == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.destination == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
 	flags |= (usage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
 	flags |= (usage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
 	flags |= (usage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
