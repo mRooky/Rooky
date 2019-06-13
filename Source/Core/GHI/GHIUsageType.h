@@ -24,8 +24,8 @@ enum ResourceType : uint8_t
 class UsageType
 {
 public:
-	UsageType(void) = default;
-	~UsageType(void) = default;
+	UsageType(void) {};
+	~UsageType(void) {};
 
 public:
 	inline bool CPUAccessable(void) const { return (cpuAccess == TRUE); }

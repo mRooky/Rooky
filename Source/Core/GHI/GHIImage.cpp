@@ -7,6 +7,8 @@
 
 #include "GHIImage.h"
 #include <array>
+#include <cassert>
+#include <algorithm>
 
 namespace GHI
 {
@@ -21,9 +23,23 @@ Image::~Image(void)
 {
 }
 
+size_t Image::GetLevelOffset(uint32_t level) const
+{
+	size_t offset = 0;
+	assert(false);
+	return offset;
+}
+
+Math::Extent3Di Image::GetLevelExtent(uint32_t level) const
+{
+	Math::Extent3Di extent = {};
+	assert(false);
+	return extent;
+}
+
 bool Image::IsDepthStencilFormat(Format format)
 {
-	static const std::array<Format, 7> depth_stencil_formats =
+	static const std::array<Format, 7> ds_formats =
 	{
 			Format::FORMAT_D16_UNORM,
 			Format::FORMAT_X8_D24_UNORM_PACK32,
@@ -34,14 +50,8 @@ bool Image::IsDepthStencilFormat(Format format)
 			Format::FORMAT_D32_SFLOAT_S8_UINT
 	};
 
-	for (auto element : depth_stencil_formats)
-	{
-		if (element == format)
-		{
-			return true;
-		}
-	}
-	return false;
+	auto it = std::find(ds_formats.begin(), ds_formats.end(), format);
+	return it != ds_formats.end();
 }
 
 } /* namespace Render */

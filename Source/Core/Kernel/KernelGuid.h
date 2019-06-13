@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELGUID_H_
 #define SOURCE_CORE_KERNEL_KERNELGUID_H_
 
-#include "../Number/NumberUint.h"
 #include "KernelString.h"
+#include "../Number/NumberUint.h"
 
 namespace Kernel
 {

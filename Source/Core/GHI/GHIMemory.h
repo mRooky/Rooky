@@ -28,10 +28,10 @@ public:
 	virtual void CopyFrom(const Resource* other) = 0;
 
 public:
-	inline size_t GetHeapSize(void) const { return mHeapSize; }
+	inline size_t GetAlignSize(void) const { return mAlignSize; }
 
 protected:
-	size_t mHeapSize = 0;
+	size_t mAlignSize = 0;
 };
 
 } /* namespace Render */

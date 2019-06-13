@@ -1,19 +1,20 @@
 /*
  * =====================================================================================
  *
- *       Filename:  KernelString.h
+ *       Filename:  KernelUnicode.h
  *
  * =====================================================================================
  */
-#ifndef SOURCE_CORE_KERNEL_STRING_H
-#define SOURCE_CORE_KERNEL_STRING_H
+#ifndef SOURCE_CORE_KERNEL_UNICODE_H
+#define SOURCE_CORE_KERNEL_UNICODE_H
 
 #include <string>
 
 namespace Kernel
 {
-	typedef std::string String;
-	typedef std::wstring WString;
+
+	typedef std::u32string UString;
+
 }
 
 #endif

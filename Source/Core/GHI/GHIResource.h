@@ -16,8 +16,10 @@ namespace GHI
 
 class Resource: public Object
 {
-public:
+protected:
 	explicit Resource(Device* device);
+
+public:
 	virtual ~Resource(void) override;
 
 public:

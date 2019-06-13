@@ -27,6 +27,16 @@ public:
 	virtual void Create(void) = 0;
 
 public:
+	inline void SetFilterType(FilterType type) { mFilterType = type; }
+	inline void SetMipmapMode(MipmapMode mode) { mMipmapMode = mode; }
+	inline void SetAddressMode(AddressMode mode) { mAddressMode = mode; }
+
+public:
+	inline FilterType GetFilterType(void) const { return mFilterType; }
+	inline MipmapMode GetMipmapMode(void) const { return mMipmapMode; }
+	inline AddressMode GetAddressMode(void) const { return mAddressMode; }
+
+public:
 	inline bool IsValid(void) const { return mValid; }
 	inline Math::Color GetBorderColor(void) const { return mBorderColor; }
 

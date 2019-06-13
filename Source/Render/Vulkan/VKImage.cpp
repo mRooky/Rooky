@@ -78,7 +78,7 @@ void Image::AllocateMemory(void)
 	Vulkan::Device* device = mImage->GetDevice();
 
 	auto& requirements = mImage->GetMemoryRequirements();
-	mHeapSize = requirements.size;
+	mAlignSize = requirements.size;
 
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(requirements, flags);

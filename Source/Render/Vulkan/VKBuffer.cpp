@@ -60,7 +60,7 @@ void Buffer::AllocateVulkanMemory(void)
 	auto flags = GetMemoryPropertyFlags(mUsage);
 	Vulkan::Device* device = mBuffer->GetDevice();
 	const auto& requires = mBuffer->GetMemoryRequirements();
-	mHeapSize = requires.size;
+	mAlignSize = requires.size;
 	mMemory = Vulkan::DeviceMemory::New(device);
 	mMemory->Allocate(requires, flags);
 	mBuffer->BindMemory(mMemory, 0);

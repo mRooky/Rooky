@@ -8,9 +8,9 @@
 
 #include "ExampleTexture.h"
 #include "../Platform/OpenAL/OpenALDevice.h"
-#include "../Core/Kernel/KernelString.h"
 #include "../Core/Kernel/KernelFile.h"
 #include "../Core/Kernel/KernelGuid.h"
+#include "../Core/Kernel/KernelHashString.h"
 
 #include <iostream>
 

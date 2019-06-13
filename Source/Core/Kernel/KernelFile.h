@@ -8,8 +8,6 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELFILE_H_
 #define SOURCE_CORE_KERNEL_KERNELFILE_H_
 
-#include "KernelString.h"
-
 namespace Kernel
 {
 
