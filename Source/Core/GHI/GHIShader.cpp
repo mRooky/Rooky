@@ -22,7 +22,7 @@ Shader::~Shader(void)
 {
 }
 
-ShaderType Shader::GetShaderType(const char* file)
+ShaderType Shader::GetShaderType(const Kernel::String& file)
 {
 	static const std::map<std::string, ShaderType> stage_map =
 	{
@@ -41,7 +41,7 @@ ShaderType Shader::GetShaderType(const char* file)
 	return type;
 }
 
-ShaderStage Shader::GetShaderStage(const char* file)
+ShaderStage Shader::GetShaderStage(const Kernel::String& file)
 {
 	static const std::map<std::string, ShaderStage> stage_map =
 	{

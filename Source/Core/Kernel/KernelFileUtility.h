@@ -17,7 +17,7 @@ namespace Kernel
 
 static inline bool DoesFileExist(const String& file)
 {
-	std::ifstream f(file.c_str());
+	std::ifstream f(file);
 	return f.good();
 }
 

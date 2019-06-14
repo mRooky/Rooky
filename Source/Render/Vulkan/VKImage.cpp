@@ -14,7 +14,7 @@
 #include "VKOperator.h"
 #include "VKDevice.h"
 
-#include "../../Core/Kernel/KernelAlignment.h"
+#include "../../Core/Kernel/KernelAlign.h"
 #include "../../Platform/Vulkan/VulkanImage.h"
 #include "../../Platform/Vulkan/VulkanImageView.h"
 #include "../../Platform/Vulkan/VulkanSampler.h"

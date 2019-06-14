@@ -36,6 +36,11 @@ static inline void* AlignAllocate(size_t size, size_t alignment)
 	return std::malloc(align_size);
 }
 
+static inline void AlignFree(void* memory)
+{
+	std::free(memory);
+}
+
 } /* namespace Kernel */
 
 #endif /* SOURCE_CORE_KERNEL_KERNELALIGNMENT_H_ */

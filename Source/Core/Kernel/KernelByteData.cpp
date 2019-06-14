@@ -7,6 +7,7 @@
 
 #include "KernelByteData.h"
 #include "KernelMemory.h"
+#include "KernelAlign.h"
 
 namespace Kernel
 {

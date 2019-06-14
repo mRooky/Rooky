@@ -12,8 +12,16 @@
 
 namespace Kernel
 {
+class UString
+{
+public:
+	UString(void) {}
+	~UString(void) {}
 
-	typedef std::u32string UString;
+private:
+	std::u32string m_string;
+};
+//typedef std::u32string UString;
 
 }
 

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELBYTEDATA_H_
 #define SOURCE_CORE_KERNEL_KERNELBYTEDATA_H_
 
-#include "KernelAlignment.h"
+#include <cstddef>
 #include <cstdint>
 
 namespace Kernel

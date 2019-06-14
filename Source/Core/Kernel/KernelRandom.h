@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELRANDOM_H_
 #define SOURCE_CORE_KERNEL_KERNELRANDOM_H_
 
-#include "KernelAlignment.h"
+#include "KernelAlign.h"
 #include <random>
 #include <iostream>
 

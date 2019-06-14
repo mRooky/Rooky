@@ -23,7 +23,7 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(const char* file) override;
+	virtual void Create(const Kernel::String& file) override;
 
 public:
 	inline Vulkan::ShaderModule* GetVulkanModule(void) const { return mShader; }
