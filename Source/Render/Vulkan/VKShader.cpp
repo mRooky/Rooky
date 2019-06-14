@@ -58,17 +58,17 @@ VkShaderStageFlagBits Shader::ConvertStage(GHI::ShaderStage stage)
 {
 	switch(stage)
 	{
-	case GHI::ShaderStage::SHADER_STAGE_VERTEX:
+	case GHI::ShaderStage::VERTEX:
 		return VK_SHADER_STAGE_VERTEX_BIT;
-	case GHI::ShaderStage::SHADER_STAGE_HULL:
+	case GHI::ShaderStage::HULL:
 		return VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT;
-	case GHI::ShaderStage::SHADER_STAGE_DOMAIN:
+	case GHI::ShaderStage::DOMAIN:
 		return VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT;
-	case GHI::ShaderStage::SHADER_STAGE_GEOMETRY:
+	case GHI::ShaderStage::GEOMETRY:
 		return VK_SHADER_STAGE_GEOMETRY_BIT;
-	case GHI::ShaderStage::SHADER_STAGE_FRAGMENT:
+	case GHI::ShaderStage::FRAGMENT:
 		return VK_SHADER_STAGE_FRAGMENT_BIT;
-	case GHI::ShaderStage::SHADER_STAGE_COMPUTE:
+	case GHI::ShaderStage::COMPUTE:
 		return VK_SHADER_STAGE_COMPUTE_BIT;
 	default:
 		assert(false);

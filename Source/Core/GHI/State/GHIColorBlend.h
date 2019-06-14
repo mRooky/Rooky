@@ -53,12 +53,12 @@ public:
 
 public:
 	bool blendEnable = false;
-	BlendFactor srcColorBlendFactor = BlendFactor::BLEND_FACTOR_SRC_COLOR;
-	BlendFactor dstColorBlendFactor = BlendFactor::BLEND_FACTOR_DST_COLOR;
-	BlendOperation colorBlendOp = BlendOperation::BLEND_OPERATION_ADD;
-	BlendFactor srcAlphaBlendFactor = BlendFactor::BLEND_FACTOR_SRC_ALPHA;
-	BlendFactor dstAlphaBlendFactor = BlendFactor::BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-	BlendOperation alphaBlendOp = BlendOperation::BLEND_OPERATION_ADD;
+	BlendFactor srcColorBlendFactor = BlendFactor::SRC_COLOR;
+	BlendFactor dstColorBlendFactor = BlendFactor::DST_COLOR;
+	BlendOperation colorBlendOp = BlendOperation::ADD;
+	BlendFactor srcAlphaBlendFactor = BlendFactor::SRC_ALPHA;
+	BlendFactor dstAlphaBlendFactor = BlendFactor::ONE_MINUS_SRC_ALPHA;
+	BlendOperation alphaBlendOp = BlendOperation::ADD;
 	uint32_t colorWriteMask = 0xF;
 };
 

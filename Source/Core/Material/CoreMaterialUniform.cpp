@@ -28,7 +28,7 @@ GHI::Binding MaterialUniform::GetBinding(void) const
 	assert(IsValid());
 	GHI::Binding binding;
 	auto render_resource = mUniform->GetRenderResource();
-	auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
+	auto shader_stage = GHI::ShaderStage::VERTEX;
 	binding.SetResource(render_resource, shader_stage);
 	return binding;
 }

@@ -88,7 +88,7 @@ void Image::AllocateMemory(void)
 void Image::CreateView(void)
 {
 	GHI::ImageType type = mLayout.GetType();
-	assert(type != GHI::ImageType::IMAGE_TYPE_UNKNOWN);
+	assert(type != GHI::ImageType::IT_UNKNOWN);
 	assert(mMemory != nullptr);
 	VkImageViewType vulkan_type = ConverType(type);
 	mImage->CreateView(vulkan_type);
@@ -260,19 +260,19 @@ VkImageViewType Image::ConverType(const GHI::ImageType& type)
 {
 	switch (type)
 	{
-	case GHI::ImageType::IMAGE_TYPE_1D:
+	case GHI::ImageType::IT_1D:
 		return VK_IMAGE_VIEW_TYPE_1D;
-	case GHI::ImageType::IMAGE_TYPE_2D:
+	case GHI::ImageType::IT_2D:
 		return VK_IMAGE_VIEW_TYPE_2D;
-	case GHI::ImageType::IMAGE_TYPE_3D:
+	case GHI::ImageType::IT_3D:
 		return VK_IMAGE_VIEW_TYPE_3D;
-	case GHI::ImageType::IMAGE_TYPE_CUBE:
+	case GHI::ImageType::IT_CUBE:
 		return VK_IMAGE_VIEW_TYPE_CUBE;
-	case GHI::ImageType::IMAGE_TYPE_1D_ARRAY:
+	case GHI::ImageType::IT_1D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_1D_ARRAY;
-	case GHI::ImageType::IMAGE_TYPE_2D_ARRAY:
+	case GHI::ImageType::IT_2D_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_2D_ARRAY;
-	case GHI::ImageType::IMAGE_TYPE_CUBE_ARRAY:
+	case GHI::ImageType::IT_CUBE_ARRAY:
 		return VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
 	default:
 		assert(false);
@@ -285,22 +285,22 @@ GHI::ImageType Image::ConverType(const VkImageViewType& type)
 	switch (type)
 	{
 	case VK_IMAGE_VIEW_TYPE_1D:
-		return GHI::ImageType::IMAGE_TYPE_1D;
+		return GHI::ImageType::IT_1D;
 	case VK_IMAGE_VIEW_TYPE_2D:
-		return GHI::ImageType::IMAGE_TYPE_2D;
+		return GHI::ImageType::IT_2D;
 	case VK_IMAGE_VIEW_TYPE_3D:
-		return GHI::ImageType::IMAGE_TYPE_3D;
+		return GHI::ImageType::IT_3D;
 	case VK_IMAGE_VIEW_TYPE_CUBE:
-		return GHI::ImageType::IMAGE_TYPE_CUBE;
+		return GHI::ImageType::IT_CUBE;
 	case VK_IMAGE_VIEW_TYPE_1D_ARRAY:
-		return GHI::ImageType::IMAGE_TYPE_1D_ARRAY;
+		return GHI::ImageType::IT_1D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_2D_ARRAY:
-		return GHI::ImageType::IMAGE_TYPE_2D_ARRAY;
+		return GHI::ImageType::IT_2D_ARRAY;
 	case VK_IMAGE_VIEW_TYPE_CUBE_ARRAY:
-		return GHI::ImageType::IMAGE_TYPE_CUBE_ARRAY;
+		return GHI::ImageType::IT_CUBE_ARRAY;
 	default:
 		assert(false);
-		return GHI::ImageType::IMAGE_TYPE_UNKNOWN;
+		return GHI::ImageType::IT_UNKNOWN;
 	}
 }
 
@@ -343,7 +343,7 @@ void SwapChainImage::Create(Vulkan::Image* image)
 	VkFormat vk_format = image->GetFormat();
 	GHI::Format format = ConvertFormat(vk_format);
 	mLayout.SetFormat(format);
-	mLayout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
+	mLayout.SetType(GHI::ImageType::IT_2D);
 }
 
 } /* namespace VK */

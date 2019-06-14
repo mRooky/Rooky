@@ -11,7 +11,7 @@
 #include "GHIBinding.h"
 #include "GHIBindingLayout.h"
 #include "GHIClasses.h"
-#include "GHIEnum.h"
+#include "GHIIndexType.h"
 
 #include "../Math/MathViewport.h"
 

@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_GHIBINDING_H_
 #define SOURCE_CORE_GHI_GHIBINDING_H_
 
-#include "GHIEnum.h"
+#include "GHIShaderTypes.h"
 #include <cstddef>
 #include <cstdint>
 
@@ -25,7 +25,7 @@ public:
 public:
 	bool IsValid(void) const
 	{
-		return (mResource != nullptr && mStage!= ShaderStage::SHADER_STAGE_UNKNOWN);
+		return (mResource != nullptr && mStage!= ShaderStage::UNKNOWN);
 	}
 
 	inline void SetResource(Resource* resource, ShaderStage stage)
@@ -58,7 +58,7 @@ public:
 
 protected:
 	Resource* mResource = nullptr;
-	ShaderStage mStage = ShaderStage::SHADER_STAGE_UNKNOWN;
+	ShaderStage mStage = ShaderStage::UNKNOWN;
 
 };
 

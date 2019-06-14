@@ -5,8 +5,8 @@
  *      Author: rookyma
  */
 
-#include "GHIInline.h"
-#include "GHIImageLayout.h"
+#include "GHI/GHIInline.h"
+#include "GHI/GHIImageLayout.h"
 #include "CoreStream.h"
 #include "CoreIndex.h"
 #include "CoreVertex.h"
@@ -47,7 +47,7 @@ void Stream::UploadIndex(void)
 		assert(index_data->IsValid());
 		const size_t index_count = mParent->GetIndexCount();
 		GHI::IndexType index_type = index->GetType();
-		assert(index_type != GHI::IndexType::INDEX_TYPE_UNKNOWN);
+		assert(index_type != GHI::IndexType::UNKNOWN);
 		const size_t buffer_offset = mIndexBuffer.GetOffset();
 		const size_t buffer_size = index_count * GHI::GetIndexTypeSize(index_type);
 		const void* index_buffer = index_data->GetMemory();

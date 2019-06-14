@@ -24,7 +24,7 @@ void FragmentResource::AppendTexture(Texture* texture)
 {
 	mTextures.push_back(texture);
 	auto resource = texture->GetRenderResource();
-	auto stage = GHI::ShaderStage::SHADER_STAGE_FRAGMENT;
+	auto stage = GHI::ShaderStage::FRAGMENT;
 	GHI::Binding binding;
 	binding.SetResource(resource, stage);
 	mBindings.push_back(binding);

@@ -106,8 +106,8 @@ void Texture::CreateTexture(const char* file)
 	if (bitmap != nullptr)
 	{
 		//assert(channels == 4);
-		Math::Extent3Di extent = { width, height, 1 };
-		GHI::Format format = GHI::Format::FORMAT_R8G8B8A8_UNORM;
+		Math::Extent3Di extent(width, height, 1);
+		GHI::Format format = GHI::Format::R8G8B8A8_UNORM;
 
 		auto manager = mSystem->GetTextureManager();
 		mTexture = manager->CreateTexture2D(file, extent, format);
@@ -158,7 +158,7 @@ void Texture::CreatePipeline(void)
 			assert(mUniform != nullptr);
 			GHI::Resource* resource = mUniform->GetRenderResource();
 			GHI::Binding binding = {};
-			auto shader_stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
+			auto shader_stage = GHI::ShaderStage::VERTEX;
 			binding.SetResource(resource, shader_stage);
 			binding_set->AppendBinding(binding);
 		}
@@ -167,7 +167,7 @@ void Texture::CreatePipeline(void)
 		assert(count > 0);
 		for (size_t index = 0; index < count; ++index)
 		{
-			GHI::ShaderStage shader_stage = GHI::ShaderStage::SHADER_STAGE_FRAGMENT;
+			GHI::ShaderStage shader_stage = GHI::ShaderStage::FRAGMENT;
 			Core::Texture* texture = mSubPass->GetTexture(index);
 			{
 				GHI::Resource* resource = texture->GetRenderResource();

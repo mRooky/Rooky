@@ -61,7 +61,7 @@ void RenderPass::CreateReference(void)
 		mReferences.push_back(reference);
 	}
 
-	if (mDepthStencil != GHI::Format::FORMAT_UNDEFINED)
+	if (mDepthStencil != GHI::Format::UNDEFINED)
 	{
 		VkFormat depth_stencil = ConvertFormat(mDepthStencil);
 		mDepthReference = Vulkan::Image::GetReference(depth_stencil);
@@ -80,7 +80,7 @@ void RenderPass::CreateDescription(void)
 		mDescriptions.push_back(description);
 	}
 
-	if (mDepthStencil != GHI::Format::FORMAT_UNDEFINED)
+	if (mDepthStencil != GHI::Format::UNDEFINED)
 	{
 		VkFormat depth_stencil = ConvertFormat(mDepthStencil);
 
@@ -118,7 +118,7 @@ void RenderPass::CreateSubDescription(size_t count)
 		description.colorAttachmentCount = mReferences.size();
 		description.pColorAttachments = mReferences.data();
 
-		if (mDepthStencil != GHI::Format::FORMAT_UNDEFINED)
+		if (mDepthStencil != GHI::Format::UNDEFINED)
 		{
 			//assert(mDepthReference.layout != ?);
 			description.pDepthStencilAttachment = &mDepthReference;

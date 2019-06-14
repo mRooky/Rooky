@@ -10,7 +10,7 @@
 
 #include "CoreBuffer.h"
 #include "GHI/GHIClasses.h"
-#include "GHI/GHIEnum.h"
+#include "GHI/GHIIndexType.h"
 #include "GHI/GHIUsageType.h"
 #include "GHI/Draw/GHIDrawIndexed.h"
 #include <cstddef>
@@ -48,7 +48,7 @@ public:
 protected:
 	uint32_t mCount = 0;
 	GHI::DrawIndexed mDrawIndexed = {};
-	GHI::IndexType mType = GHI::IndexType::INDEX_TYPE_UNKNOWN;
+	GHI::IndexType mType = GHI::IndexType::UNKNOWN;
 };
 
 } /* namespace Core */

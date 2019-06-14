@@ -26,7 +26,7 @@ Index::Index(BufferManager* creator):
 Index::~Index(void)
 {
 	mCount = 0;
-	mType = GHI::IndexType::INDEX_TYPE_UNKNOWN;
+	mType = GHI::IndexType::UNKNOWN;
 }
 
 void Index::Create(GHI::IndexType type, uint32_t count)

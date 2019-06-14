@@ -42,11 +42,11 @@ VkFilter Sampler::GetFilter(GHI::FilterType type)
 {
 	switch(type)
 	{
-	case GHI::FilterType::FILTER_TYPE_NEAREST:
+	case GHI::FilterType::NEAREST:
 		return VK_FILTER_NEAREST;
-	case GHI::FilterType::FILTER_TYPE_LINEAR:
+	case GHI::FilterType::LINEAR:
 		return VK_FILTER_LINEAR;
-	case GHI::FilterType::FILTER_TYPE_CUBIC_IMG:
+	case GHI::FilterType::CUBIC_IMG:
 		return VK_FILTER_CUBIC_IMG;
 	default:
 		assert(false);
@@ -58,9 +58,9 @@ VkSamplerMipmapMode Sampler::GetMipmapMode(GHI::MipmapMode mode)
 {
 	switch(mode)
 	{
-	case GHI::MipmapMode::MIPMAP_MODE_NEAREST:
+	case GHI::MipmapMode::NEAREST:
 		return VK_SAMPLER_MIPMAP_MODE_NEAREST;
-	case GHI::MipmapMode::MIPMAP_MODE_LINEAR:
+	case GHI::MipmapMode::LINEAR:
 		return VK_SAMPLER_MIPMAP_MODE_LINEAR;
 	default:
 		assert(false);
@@ -72,15 +72,15 @@ VkSamplerAddressMode Sampler::GetAddressMode(GHI::AddressMode mode)
 {
 	switch(mode)
 	{
-	case GHI::AddressMode::ADDRESS_MODE_REPEAT:
+	case GHI::AddressMode::REPEAT:
 		return VK_SAMPLER_ADDRESS_MODE_REPEAT;
-	case GHI::AddressMode::ADDRESS_MODE_MIRRORED_REPEAT:
+	case GHI::AddressMode::MIRRORED_REPEAT:
 		return VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
-	case GHI::AddressMode::ADDRESS_MODE_CLAMP_TO_EDGE:
+	case GHI::AddressMode::CLAMP_TO_EDGE:
 		return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-	case GHI::AddressMode::ADDRESS_MODE_CLAMP_TO_BORDER:
+	case GHI::AddressMode::CLAMP_TO_BORDER:
 		return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
-	case GHI::AddressMode::ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE:
+	case GHI::AddressMode::MIRROR_CLAMP_TO_EDGE:
 		return VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE;
 	default:
 		assert(false);

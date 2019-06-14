@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERINLINE_H_
 #define SOURCE_CORE_GHI_RENDERINLINE_H_
 
-#include "GHIEnum.h"
+#include "GHIIndexType.h"
 #include <cstddef>
 #include <cassert>
 
@@ -19,9 +19,9 @@ static inline size_t GetIndexTypeSize(IndexType type)
 {
 	switch(type)
 	{
-	case IndexType::INDEX_TYPE_U16:
+	case IndexType::U16:
 		return 2;
-	case IndexType::INDEX_TYPE_U32:
+	case IndexType::U32:
 		return 4;
 	default:
 		assert(false);
@@ -33,9 +33,9 @@ static inline const char* GetIndexTypeName(IndexType type)
 {
 	switch(type)
 	{
-	case IndexType::INDEX_TYPE_U16:
+	case IndexType::U16:
 		return "INDEX_TYPE_U16";
-	case IndexType::INDEX_TYPE_U32:
+	case IndexType::U32:
 		return "INDEX_TYPE_U32";
 	default:
 		assert(false);

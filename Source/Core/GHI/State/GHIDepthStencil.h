@@ -47,7 +47,7 @@ public:
 	float maxDepthBounds = 0.0f;
 
 public:
-	CompareOperation depthCompareOp = CompareOperation::COMPARE_OP_LESS_OR_EQUAL;
+	CompareOperation depthCompareOp = CompareOperation::LESS_OR_EQUAL;
 };
 
 } /* namespace Render */

@@ -26,7 +26,7 @@ public:
 	}
 
 public:
-	PrimitiveTopology topology = PrimitiveTopology::PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+	PrimitiveTopology topology = PrimitiveTopology::TRIANGLE_LIST;
 };
 
 } /* namespace Render */

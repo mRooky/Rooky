@@ -13,12 +13,12 @@
 namespace GHI
 {
 
-enum ResourceType : uint8_t
+enum ResourceType : uint32_t
 {
-	IMAGE,
-	BUFFER,
-	SAMPLER,
-	UNKNOWN
+	IMAGE   = 0,
+	BUFFER  = 1,
+	SAMPLER = 2,
+	UNKNOWN = ~0u
 };
 
 class UsageType
@@ -35,6 +35,7 @@ public:
 	{
 		return !(*this == other);
 	}
+
 	inline bool operator==(const UsageType& other) const
 	{
 		return (allUsageFlags == other.allUsageFlags);

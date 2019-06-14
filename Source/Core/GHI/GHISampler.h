@@ -48,9 +48,9 @@ protected:
 	Math::Color mBorderColor = {};
 
 protected:
-	FilterType mFilterType = FilterType::FILTER_TYPE_LINEAR;
-	MipmapMode mMipmapMode = MipmapMode::MIPMAP_MODE_LINEAR;
-	AddressMode mAddressMode = AddressMode::ADDRESS_MODE_REPEAT;
+	FilterType mFilterType = FilterType::LINEAR;
+	MipmapMode mMipmapMode = MipmapMode::LINEAR;
+	AddressMode mAddressMode = AddressMode::REPEAT;
 };
 
 } /* namespace Render */

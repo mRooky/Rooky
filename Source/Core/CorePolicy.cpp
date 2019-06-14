@@ -9,15 +9,15 @@
 #include "CoreSubPolicy.h"
 #include "CoreSystem.h"
 #include "CoreRenderTarget.h"
-#include "UtilityRelease.h"
+#include "Utility/UtilityRelease.h"
 
-#include "GHIDevice.h"
-#include "GHIRenderPass.h"
-#include "GHICommandList.h"
-#include "GHIImageLayout.h"
-#include "GHIUsageType.h"
-#include "GHIFactory.h"
-#include "GHIImage.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIRenderPass.h"
+#include "GHI/GHICommandList.h"
+#include "GHI/GHIImageLayout.h"
+#include "GHI/GHIUsageType.h"
+#include "GHI/GHIFactory.h"
+#include "GHI/GHIImage.h"
 
 #include <cassert>
 
@@ -76,7 +76,7 @@ void Policy::CreateDepthStencil(GHI::Format format, const Math::Extent2Di& exten
 	assert(mDepthStencil == nullptr);
 
 	GHI::ImageLayout image_layout = {};
-	image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
+	image_layout.SetType(GHI::ImageType::IT_2D);
 	image_layout.SetExtent(extent);
 	image_layout.SetFormat(format);
 

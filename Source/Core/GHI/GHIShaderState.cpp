@@ -39,8 +39,8 @@ Shader* ShaderState::GetShader(ShaderType type) const
 {
 	for (auto shader : mShaders)
 	{
-		bool result = (type == shader->GetType());
-		if (true == result)
+		auto current = shader->GetType();
+		if (current == type)
 		{
 			return shader;
 		}
@@ -51,11 +51,7 @@ Shader* ShaderState::GetShader(ShaderType type) const
 bool ShaderState::operator==(const ShaderState& other) const
 {
 	assert(mShaders.size() > 0);
-	if (mShaders.size() == other.mShaders.size())
-	{
-		return mShaders == other.mShaders;
-	}
-	return false;
+	return mShaders == other.mShaders;
 }
 
 ShaderState& ShaderState::operator=(const ShaderState& other)

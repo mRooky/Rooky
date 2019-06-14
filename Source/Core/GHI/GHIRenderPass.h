@@ -51,7 +51,7 @@ public:
 protected:
 	std::vector<Format> mFormats;
 	std::vector<FrameBuffer*> mFrameBuffers;
-	Format mDepthStencil = Format::FORMAT_UNDEFINED;
+	Format mDepthStencil = Format::UNDEFINED;
 };
 
 } /* namespace Render */

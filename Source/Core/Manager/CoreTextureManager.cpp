@@ -56,7 +56,7 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 		GHI::ImageLayout image_layout = {};
 		image_layout.SetExtent(extent);
 		image_layout.SetFormat(format);
-		image_layout.SetType(GHI::ImageType::IMAGE_TYPE_2D);
+		image_layout.SetType(GHI::ImageType::IT_2D);
 
 		GHI::UsageType image_usage = {};
 		image_usage.write = TRUE;

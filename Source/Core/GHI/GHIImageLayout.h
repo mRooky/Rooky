@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERLAYOUT_H_
 #define SOURCE_CORE_GHI_RENDERLAYOUT_H_
 
-#include "GHIEnum.h"
+#include "GHIImageType.h"
 #include "GHIFormat.h"
 
 #include "../Math/MathExtent3.h"
@@ -20,8 +20,8 @@ namespace GHI
 class ImageLayout
 {
 public:
-	ImageLayout(void) = default;
-	~ImageLayout(void) = default;
+	ImageLayout(void) {};
+	~ImageLayout(void) {};
 
 public:
 	inline void SetType(ImageType type) { mType = type; }
@@ -46,8 +46,8 @@ protected:
 	uint32_t mClearColor = 0;
 
 protected:
-	Format mFormat = Format::FORMAT_UNDEFINED;
-	ImageType mType = ImageType::IMAGE_TYPE_UNKNOWN;
+	Format mFormat = Format::UNDEFINED;
+	ImageType mType = ImageType::IT_UNKNOWN;
 };
 
 }

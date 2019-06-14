@@ -26,12 +26,12 @@ ShaderType Shader::GetShaderType(const char* file)
 {
 	static const std::map<std::string, ShaderType> stage_map =
 	{
-		{"vert", ShaderType::SHADER_TYPE_VERTEX},
-		{"tesc", ShaderType::SHADER_TYPE_HULL},
-		{"tese", ShaderType::SHADER_TYPE_DOMAIN},
-		{"geom", ShaderType::SHADER_TYPE_GEOMETRY},
-		{"frag", ShaderType::SHADER_TYPE_FRAGMENT},
-		{"comp", ShaderType::SHADER_TYPE_COMPUTE}
+		{"vert", ShaderType::VERTEX},
+		{"tesc", ShaderType::HULL},
+		{"tese", ShaderType::DOMAIN},
+		{"geom", ShaderType::GEOMETRY},
+		{"frag", ShaderType::FRAGMENT},
+		{"comp", ShaderType::COMPUTE}
 	};
 	std::string file_name = file;
 	std::string file_type = Kernel::GetFileType(file);
@@ -45,12 +45,12 @@ ShaderStage Shader::GetShaderStage(const char* file)
 {
 	static const std::map<std::string, ShaderStage> stage_map =
 	{
-		{"vert", ShaderStage::SHADER_STAGE_VERTEX},
-		{"tesc", ShaderStage::SHADER_STAGE_HULL},
-		{"tese", ShaderStage::SHADER_STAGE_DOMAIN},
-		{"geom", ShaderStage::SHADER_STAGE_GEOMETRY},
-		{"frag", ShaderStage::SHADER_STAGE_FRAGMENT},
-		{"comp", ShaderStage::SHADER_STAGE_COMPUTE}
+		{"vert", ShaderStage::VERTEX},
+		{"tesc", ShaderStage::HULL},
+		{"tese", ShaderStage::DOMAIN},
+		{"geom", ShaderStage::GEOMETRY},
+		{"frag", ShaderStage::FRAGMENT},
+		{"comp", ShaderStage::COMPUTE}
 	};
 	std::string file_name = file;
 	std::string file_type = Kernel::GetFileType(file);

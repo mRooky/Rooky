@@ -24,7 +24,7 @@ void VertexResource::SetUniform(Uniform* uniform, size_t offset)
 	mOffset = offset;
 	mUniform = uniform;
 	auto resource = uniform->GetRenderResource();
-	auto stage = GHI::ShaderStage::SHADER_STAGE_VERTEX;
+	auto stage = GHI::ShaderStage::VERTEX;
 	GHI::Binding binding;
 	binding.SetResource(resource, stage);
 	mBindings.push_back(binding);

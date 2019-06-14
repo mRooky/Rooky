@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERSHADER_H_
 #define SOURCE_CORE_GHI_RENDERSHADER_H_
 
-#include "GHIEnum.h"
+#include "GHIShaderTypes.h"
 #include "GHIObject.h"
 #include <string>
 
@@ -44,8 +44,8 @@ public:
 
 protected:
 	std::string mName;
-	ShaderType mType = ShaderType::SHADER_TYPE_UNKNOWN;
-	ShaderStage mStage = ShaderStage::SHADER_STAGE_UNKNOWN;
+	ShaderType mType = ShaderType::UNKNOWN;
+	ShaderStage mStage = ShaderStage::UNKNOWN;
 };
 
 } /* namespace Render */

@@ -9,7 +9,7 @@
 #define SOURCE_CORE_COREMESHBUFFER_H_
 
 #include "GHI/GHIClasses.h"
-#include "GHI/GHIEnum.h"
+#include "GHI/GHIIndexType.h"
 #include <cstddef>
 
 namespace Core

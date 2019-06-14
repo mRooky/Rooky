@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_CORESUBPOLICY_H_
 #define SOURCE_CORE_CORESUBPOLICY_H_
 
-#include "GHIClasses.h"
+#include "GHI/GHIClasses.h"
 
 #include <vector>
 

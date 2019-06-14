@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_BATCH_GHIRENDERBUFFER_H_
 #define SOURCE_CORE_GHI_BATCH_GHIRENDERBUFFER_H_
 
-#include "../GHIEnum.h"
+#include "../GHIIndexType.h"
 #include "../../Kernel/KernelVector.h"
 #include <cstddef>
 
@@ -45,7 +45,7 @@ public:
 	inline IndexType GetType(void) const { return mType; }
 
 protected:
-	IndexType mType = IndexType::INDEX_TYPE_UNKNOWN;
+	IndexType mType = IndexType::UNKNOWN;
 };
 
 class VertexBuffer : public BaseBuffer

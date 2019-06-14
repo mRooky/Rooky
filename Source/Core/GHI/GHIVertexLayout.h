@@ -17,8 +17,8 @@ namespace GHI
 class VertexLayout
 {
 public:
-	VertexLayout(void) = default;
-	~VertexLayout(void) = default;
+	VertexLayout(void) {};
+	~VertexLayout(void) {};
 
 public:
 	inline void PushSemantic(const VertexSemantic& element)

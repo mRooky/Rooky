@@ -9,7 +9,7 @@
 
 #include "../Core/GHI/GHIBuffer.h"
 #include "../Core/GHI/GHICommandList.h"
-#include "../Core/GHI/GHIEnum.h"
+#include "../Core/GHI/GHIIndexType.h"
 #include "../Core/GHI/GHIFrameBuffer.h"
 #include "../Core/GHI/GHIImage.h"
 #include "../Core/GHI/GHIRenderPass.h"
@@ -140,7 +140,7 @@ void Buffer::CreateIndexBuffer(void)
 	const size_t size = sizeof(uint16_t) * count;
 
 	mIndex = buffer_manager->CreateIndex();
-	GHI::IndexType index_type = GHI::IndexType::INDEX_TYPE_U16;
+	GHI::IndexType index_type = GHI::IndexType::U16;
 	mIndex->Create(index_type, count);
 	assert(mIndex->GetSizeInByte() == size);
 	mIndex->Write(indexes.data(), 0, size);

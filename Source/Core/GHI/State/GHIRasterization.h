@@ -32,9 +32,9 @@ public:
 	float lineWidth = 1.0f;
 
 public:
-	FrontFace frontFace = FrontFace::FRONT_FACE_CCW;
-	PolygonMode polygonMode = PolygonMode::POLYGON_MODE_FILL;
-	CullFaceSide cullMode = CullFaceSide::CULL_FACE_SIDE_NONE;
+	FrontFace frontFace = FrontFace::CCW;
+	PolygonMode polygonMode = PolygonMode::FILL;
+	CullFaceSide cullMode = CullFaceSide::NONE;
 };
 
 } /* namespace Render */
