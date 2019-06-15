@@ -14,11 +14,11 @@
 namespace GLTF
 {
 
-class Normal
+class Normal : public Texture
 {
 public:
 	Normal(void);
-	~Normal(void);
+	~Normal(void) override;
 
 public:
 	inline void SetScale(float scale) { mScale = scale; }

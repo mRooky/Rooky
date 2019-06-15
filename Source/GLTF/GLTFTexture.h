@@ -17,8 +17,8 @@ namespace GLTF
 class Texture
 {
 public:
-	Texture(void);
-	~Texture(void);
+	Texture(void) {}
+	virtual ~Texture(void) {}
 
 public:
 	inline Core::Texture* GetTexture(void) const { return mTexture; }

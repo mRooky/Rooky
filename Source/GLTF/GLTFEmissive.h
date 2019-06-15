@@ -19,7 +19,7 @@ class Emissive : public Texture
 {
 public:
 	Emissive(void);
-	~Emissive(void);
+	~Emissive(void) override;
 
 public:
 	inline void SetFactor(Math::Vector3f& factor) { mFactor = factor; }

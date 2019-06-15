@@ -18,7 +18,7 @@ class Occlusion : public Texture
 {
 public:
 	Occlusion(void);
-	~Occlusion(void);
+	~Occlusion(void) override;
 
 protected:
 

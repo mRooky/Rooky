@@ -14,11 +14,11 @@
 namespace GLTF
 {
 
-class MetalRough
+class MetalRough : public Texture
 {
 public:
 	MetalRough(void);
-	~MetalRough(void);
+	~MetalRough(void) override;
 
 public:
 	inline void SetMetalFactor(float factor) { mMetalFactor = factor; }

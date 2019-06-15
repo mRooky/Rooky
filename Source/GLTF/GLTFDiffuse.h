@@ -1,26 +1,27 @@
 /*
  * =====================================================================================
  *
- *       Filename:  GLTFSpecGloss.h
+ *       Filename:  GlTFDiffuse.h
  *
  * =====================================================================================
  */
 
-#ifndef SOURCE_GLTF_SPEC_GLOSS_TEXTURE_H
-#define SOURCE_GLTF_SPEC_GLOSS_TEXTURE_H
+#ifndef SOURCE_GLTF_DIFFUSE_TEXTURE_H
+#define SOURCE_GLTF_DIFFUSE_TEXTURE_H
 
 #include "GLTFTexture.h"
 
 namespace GLTF
 {
 
-class SpecGloss : public Texture
+class Diffuse : public Texture
 {
 public:
-	SpecGloss(void);
-	~SpecGloss(void) override;
+	Diffuse(void);
+	~Diffuse(void) override;
 
 protected:
+
 
 };
 

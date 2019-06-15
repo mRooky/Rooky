@@ -1,29 +1,25 @@
 /*
  * =====================================================================================
  *
- *       Filename:  GlTFDiffuse.h
+ *       Filename:  GLTFClasses.h
  *
  * =====================================================================================
  */
 
-#ifndef SOURCE_GLTF_DIFFUSE_TEXTURE_H
-#define SOURCE_GLTF_DIFFUSE_TEXTURE_H
-
-#include "GLTFTexture.h"
+#ifndef SOURCE_GLTF_CLASSES_H
+#define SOURCE_GLTF_CLASSES_H
 
 namespace GLTF
 {
 
-class Diffuse
-{
-public:
-	Diffuse(void);
-	~Diffuse(void);
-
-protected:
-
-
-};
+class BaseColor;
+class BRDF;
+class Diffuse;
+class Emissive;
+class Normal;
+class Occlusion;
+class SpecGloss;
+class MetalRough;
 
 }
 

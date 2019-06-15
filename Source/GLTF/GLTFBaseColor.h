@@ -19,7 +19,7 @@ class BaseColor : public Texture
 {
 public:
 	BaseColor(void);
-	~BaseColor(void);
+	~BaseColor(void) override;
 
 public:
 	inline void SetFactor(const Math::Vector4f& factor) { mFactor = factor; }
