@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_NUMBER_NUMBERDOUBLE_H_
 #define SOURCE_CORE_NUMBER_NUMBERDOUBLE_H_
 
-#include "NumberComponent.h"
+#include "NumberTypes.h"
 
 namespace Number
 {

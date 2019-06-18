@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 #define SOURCE_CORE_GHI_RENDERMATH_RENDERFLOAT_HPP_
 
-#include "NumberComponent.h"
+#include "NumberTypes.h"
 
 namespace Number
 {
