@@ -41,6 +41,7 @@ void Index::Create(GHI::IndexType type, uint32_t count, GHI::UsageType usage)
 	size_t size = GHI::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
 	usage.indexBuffer = TRUE;
+	mHostMemory.Allocate(size);
 	CreateRenderBuffer(size, usage);
 	mDrawIndexed.SetIndexCount(mCount);
 	std::cout << "Create Index Type : " << GHI::GetIndexTypeName(mType) << std::endl;

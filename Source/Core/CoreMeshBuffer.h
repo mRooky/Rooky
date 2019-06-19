@@ -14,13 +14,14 @@
 
 namespace Core
 {
+
 class Index;
 class Vertex;
-class BaseBuffer
+class MeshBuffer
 {
 public:
-	BaseBuffer(void) = default;
-	~BaseBuffer(void) = default;
+	MeshBuffer(void) = default;
+	~MeshBuffer(void) = default;
 
 public:
 	inline size_t GetOffset(void) const { return mOffset; }
@@ -30,7 +31,7 @@ protected:
 	size_t mOffset = 0;
 };
 
-class IndexBuffer : public BaseBuffer
+class IndexBuffer : public MeshBuffer
 {
 public:
 	IndexBuffer(void) = default;
@@ -46,7 +47,7 @@ protected:
 	Index* mIndex = nullptr;
 };
 
-class VertexBuffer : public BaseBuffer
+class VertexBuffer : public MeshBuffer
 {
 public:
 	VertexBuffer(void) = default;

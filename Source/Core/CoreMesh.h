@@ -29,10 +29,10 @@ public:
 	virtual ~Mesh(void) override;
 
 public:
-	virtual void Render(Thread& thread) override;
+	bool Create(void);
 
 public:
-	bool Compile(void);
+	virtual void Render(Thread& thread) override;
 
 public:
 	size_t GetIndexCount(void);

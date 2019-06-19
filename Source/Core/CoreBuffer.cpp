@@ -27,6 +27,28 @@ Buffer::~Buffer(void)
 	mCreator = nullptr;
 }
 
+void Buffer::Upload(bool merge)
+{
+	const size_t count = mHostMemory.GetDirtyCount();
+	if(count > 0)
+	{
+		if(merge)
+		{
+
+		}
+		else
+		{
+			for(size_t index = 0; index < count; ++index)
+			{
+				const auto& range = mHostMemory.GetDirtyRange(index);
+				const uint8_t* src = mHostMemory.GetOffsetMemory(index);
+				Write(src, range.offset, range.size);
+			}
+		}
+		mHostMemory.ClearDirty();
+	}
+}
+
 void Buffer::Read(void* dst, size_t offset, size_t size)
 {
 	assert(mResource != nullptr);

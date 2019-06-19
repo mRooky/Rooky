@@ -27,6 +27,7 @@ void Uniform::Create(size_t size, GHI::UsageType usage)
 	mSize = size;
 	usage.uniformBuffer = TRUE;
 	usage.type = GHI::ResourceType::BUFFER;
+	mHostMemory.Allocate(size);
 	CreateRenderBuffer(mSize, usage);
 }
 

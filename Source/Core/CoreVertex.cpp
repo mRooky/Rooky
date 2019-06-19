@@ -39,6 +39,7 @@ void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType us
 	size_t size = mLayout.GetStride() * mCount;
 	assert(size > 0);
 	usage.vertexBuffer = TRUE;
+	mHostMemory.Allocate(size);
 	CreateRenderBuffer(size, usage);
 	std::cout << "Create Vertex Count : " << mCount << std::endl;
 }

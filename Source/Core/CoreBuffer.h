@@ -9,6 +9,7 @@
 #define SOURCE_CORE_COREBUFFER_H_
 
 #include "CoreResource.h"
+#include "CoreHostMemory.h"
 #include "GHI/GHIUsageType.h"
 
 namespace Core
@@ -22,8 +23,14 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
+	void Upload(bool merge);
+
+public:
 	void Read(void* dst, size_t offset, size_t size);
 	void Write(const void* src, size_t offset, size_t size);
+
+public:
+	inline HostMemory* GetHostMemory(void) { return &mHostMemory; }
 
 public:
 	inline BufferManager* GetManager(void) const { return mCreator; }
@@ -32,6 +39,7 @@ protected:
 	void CreateRenderBuffer(size_t size, GHI::UsageType usage);
 
 protected:
+	HostMemory mHostMemory = {};
 	BufferManager* mCreator = nullptr;
 };
 

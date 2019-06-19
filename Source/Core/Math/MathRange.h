@@ -30,8 +30,17 @@ public:
 	inline bool IsInside(T value) const { return start >= value && value >= end; }
 
 public:
-	T start = std::numeric_limits<T>::max();
-	T end = std::numeric_limits<T>::lowest();
+	union
+	{
+		T start;
+		T offset = std::numeric_limits<T>::max();
+	};
+
+	union
+	{
+		T end;
+		T size = std::numeric_limits<T>::lowest();
+	};
 };
 
 typedef Range_t<float> Rangef;

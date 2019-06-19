@@ -6,7 +6,6 @@
  */
 
 #include "CoreMesh.h"
-#include "CoreStream.h"
 #include "CoreSubMesh.h"
 #include "Manager/CoreMeshManager.h"
 #include "Manager/CoreBufferManager.h"
@@ -40,13 +39,14 @@ SubMesh* Mesh::CreateSubMesh(void)
 	return sub;
 }
 
-bool Mesh::Compile(void)
+bool Mesh::Create(void)
 {
 	BufferManager* buffer_manager = mManager->GetBufferManager();
 	Index* index = buffer_manager->CreateIndex();
 	mIndexBuffer.SetIndex(index);
 	Vertex* vertex = buffer_manager->CreateVertex();
 	mVertexBuffer.SetAttribute(vertex);
+	return true;
 }
 
 size_t Mesh::GetIndexCount(void)
