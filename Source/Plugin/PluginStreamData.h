@@ -8,11 +8,10 @@
 #ifndef SOURCE_CORE_CORESTREAMDATA_H_
 #define SOURCE_CORE_CORESTREAMDATA_H_
 
-#include "CoreData.h"
-#include "CoreStreamType.h"
+#include "PluginStreamType.h"
 #include <cstddef>
 
-namespace Core
+namespace Plugin
 {
 
 class StreamData
@@ -22,7 +21,6 @@ public:
 	virtual ~StreamData(void);
 
 public:
-	Data* AllocateIndexBuffer(size_t size);
 	void* AllocateSemanticBuffer(GHI::SemanticUsage usage, size_t count);
 
 public:
@@ -35,15 +33,9 @@ public:
 public:
 	void ReadSemanticData(void* dst, size_t index);
 
-public:
-	inline const Data* GetIndexBuffer(void) const { return &mIndexBuffer; }
-
 protected:
 	void FreeAllBuffer(void);
 	void FreeSemanticBuffer(GHI::SemanticUsage usage);
-
-protected:
-	Data mIndexBuffer = {};
 
 protected:
 	StreamColor mStreamColor = {};

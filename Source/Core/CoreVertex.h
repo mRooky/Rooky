@@ -10,15 +10,12 @@
 
 #include "CoreBuffer.h"
 #include "GHI/GHIVertexLayout.h"
-#include "GHI/GHIClasses.h"
-#include "GHI/GHIFormat.h"
-#include "GHI/GHIUsageType.h"
 #include <cstdint>
 #include <vector>
 
 namespace Core
 {
-class BufferManager;
+
 class Vertex : public Buffer
 {
 	friend class BufferManager;
@@ -35,12 +32,6 @@ public:
 public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline const GHI::VertexLayout& GetLayout(void) const { return mLayout; }
-
-private:
-	void CreateRenderBuffer(GHI::UsageType usage);
-
-protected:
-	BufferManager* mCreator = nullptr;
 
 protected:
 	uint32_t mCount = 0;

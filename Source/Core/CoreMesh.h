@@ -9,13 +9,14 @@
 #define SOURCE_CORE_COREMESH_H_
 
 #include "CoreObject.h"
+#include "CoreMeshBuffer.h"
 #include "Math/MathAABB.h"
 #include <array>
 #include <vector>
 
 namespace Core
 {
-class Stream;
+
 class SubMesh;
 class MeshManager;
 class Mesh : public Object
@@ -45,13 +46,17 @@ public:
 	inline SubMesh* GetSubMesh(size_t index) const { return mSubMeshes.at(index); }
 
 public:
-	inline Stream* GetStream(void) { return mStream; }
+	inline IndexBuffer* GetIndexBuffer(void) { return &mIndexBuffer; }
+	inline VertexBuffer* GetVertexBuffer(void) { return &mVertexBuffer; }
+
+public:
 	inline Math::AABB* GetAABB(void) { return &mAABB; }
 	inline const Math::AABB& GetAABB(void) const { return mAABB; }
 
 protected:
 	Math::AABB mAABB = {};
-	Stream* mStream = nullptr;
+	IndexBuffer mIndexBuffer = {};
+	VertexBuffer mVertexBuffer = {};
 
 protected:
 	MeshManager* mManager = nullptr;

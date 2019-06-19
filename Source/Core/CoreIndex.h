@@ -9,15 +9,13 @@
 #define SOURCE_CORE_COREINDEX_H_
 
 #include "CoreBuffer.h"
-#include "GHI/GHIClasses.h"
 #include "GHI/GHIIndexType.h"
-#include "GHI/GHIUsageType.h"
 #include "GHI/Draw/GHIDrawIndexed.h"
 #include <cstddef>
 
 namespace Core
 {
-class BufferManager;
+
 class Index : public Buffer
 {
 	friend class BufferManager;
@@ -38,12 +36,6 @@ public:
 	inline uint32_t GetCount(void) const { return mCount; }
 	inline GHI::IndexType GetType(void) const { return mType; }
 	inline GHI::DrawIndexed* GetDraw(void) { return &mDrawIndexed; }
-
-private:
-	void CreateRenderBuffer(GHI::UsageType usage);
-
-public:
-	BufferManager* mCreator = nullptr;
 
 protected:
 	uint32_t mCount = 0;

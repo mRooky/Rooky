@@ -8,14 +8,14 @@
 #ifndef SOURCE_CORE_CORESTREAMTYPE_H_
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
-#include "GHI/GHIVertexSemantic.h"
-#include "Math/MathColor.h"
-#include "Math/MathVector.h"
+#include "../Core/GHI/GHIVertexSemantic.h"
+#include "../Core/Math/MathColor.h"
+#include "../Core/Math/MathVector.h"
 #include <cstdint>
 #include <vector>
 #include <cstring>
 
-namespace Core
+namespace Plugin
 {
 
 template<class T>

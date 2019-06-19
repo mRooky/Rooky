@@ -6,19 +6,25 @@
  */
 
 #include "CoreBuffer.h"
+#include "CoreSystem.h"
 #include "GHI/GHIBuffer.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
+#include "Manager/CoreBufferManager.h"
 #include <cassert>
 #include <cstring>
 
 namespace Core
 {
 
-Buffer::Buffer(void)
+Buffer::Buffer(BufferManager* creator) :
+	mCreator(creator)
 {
 }
 
 Buffer::~Buffer(void)
 {
+	mCreator = nullptr;
 }
 
 void Buffer::Read(void* dst, size_t offset, size_t size)
@@ -33,6 +39,16 @@ void Buffer::Write(const void* src, size_t offset, size_t size)
 	assert(mResource != nullptr);
 	auto buffer = static_cast<GHI::Buffer*>(mResource);
 	buffer->Write(src, offset, size);
+}
+
+void Buffer::CreateRenderBuffer(size_t size, GHI::UsageType usage)
+{
+	assert(size > 0);
+	System* system = mCreator->GetSystem();
+	GHI::Device* device = system->GetDevice();
+	GHI::Factory* factory = device->GetFactory();
+	mResource = factory->CreateBuffer();
+	static_cast<GHI::Buffer*>(mResource)->Create(size, usage);
 }
 
 } /* namespace Core */

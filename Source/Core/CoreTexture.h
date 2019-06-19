@@ -15,6 +15,7 @@
 
 namespace Core
 {
+
 class TextureManager;
 class Texture : public Resource
 {

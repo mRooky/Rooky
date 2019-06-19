@@ -13,6 +13,7 @@
 
 namespace Core
 {
+
 class System;
 class RenderTarget : public Resource
 {

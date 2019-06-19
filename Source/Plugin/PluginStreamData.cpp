@@ -5,10 +5,10 @@
  *      Author: rookyma
  */
 
-#include "CoreStreamData.h"
+#include "PluginStreamData.h"
 #include <cassert>
 
-namespace Core
+namespace Plugin
 {
 
 StreamData::StreamData(void)
@@ -30,13 +30,6 @@ const void* StreamData::GetSemanticBuffer(GHI::SemanticUsage usage) const
 	}
 }
 
-Data* StreamData::AllocateIndexBuffer(size_t size)
-{
-	mIndexBuffer.FreeMemory();
-	mIndexBuffer.AllocateMemory(size);
-	return &mIndexBuffer;
-}
-
 void* StreamData::AllocateSemanticBuffer(GHI::SemanticUsage usage, size_t count)
 {
 	switch(usage)
@@ -49,7 +42,6 @@ void* StreamData::AllocateSemanticBuffer(GHI::SemanticUsage usage, size_t count)
 
 void StreamData::FreeAllBuffer(void)
 {
-	mIndexBuffer.FreeMemory();
 	mStreamColor.ClearSemanticData();
 	mStreamTexCoord.ClearSemanticData();
 	mStreamNormal.ClearSemanticData();

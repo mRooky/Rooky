@@ -8,10 +8,10 @@
 #include "CoreMesh.h"
 #include "CoreStream.h"
 #include "CoreSubMesh.h"
-#include "CoreMeshManager.h"
-#include "CoreBufferManager.h"
+#include "Manager/CoreMeshManager.h"
+#include "Manager/CoreBufferManager.h"
 
-#include "UtilityRelease.h"
+#include "Utility/UtilityRelease.h"
 #include <cassert>
 
 namespace Core
@@ -20,13 +20,10 @@ namespace Core
 Mesh::Mesh(MeshManager* manager):
 		mManager(manager)
 {
-	mStream = new Stream(this);
 }
 
 Mesh::~Mesh(void)
 {
-	delete mStream;
-	mStream = nullptr;
 	Utility::Release(mSubMeshes);
 	mManager = nullptr;
 }
@@ -47,10 +44,9 @@ bool Mesh::Compile(void)
 {
 	BufferManager* buffer_manager = mManager->GetBufferManager();
 	Index* index = buffer_manager->CreateIndex();
-	mStream->GetIndexBuffer()->SetIndex(index);
+	mIndexBuffer.SetIndex(index);
 	Vertex* vertex = buffer_manager->CreateVertex();
-	mStream->GetVertexBuffer()->SetAttribute(vertex);
-	return mStream->UploadData();
+	mVertexBuffer.SetAttribute(vertex);
 }
 
 size_t Mesh::GetIndexCount(void)

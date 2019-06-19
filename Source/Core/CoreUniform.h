@@ -9,13 +9,11 @@
 #define SOURCE_CORE_COREUNIFORM_H_
 
 #include "CoreBuffer.h"
-#include "GHI/GHIClasses.h"
-#include "GHI/GHIUsageType.h"
 #include <cstddef>
 
 namespace Core
 {
-class BufferManager;
+
 class Uniform : public Buffer
 {
 	friend class BufferManager;
@@ -27,9 +25,6 @@ public:
 
 public:
 	void Create(size_t size, GHI::UsageType usage);
-
-protected:
-	void CreateRenderBuffer(GHI::UsageType usage);
 
 protected:
 	size_t mSize = 0;
