@@ -30,18 +30,20 @@ Buffer::~Buffer(void)
 void Buffer::Upload(bool merge)
 {
 	const size_t count = mHostMemory.GetDirtyCount();
-	if(count > 0)
+	if (count > 0)
 	{
-		if(merge)
+		if (true == merge)
 		{
-
+			auto range = mHostMemory.GetMergeRange();
+			const uint8_t* src = mHostMemory.GetOffsetMemory(range.offset);
+			Write(src, range.offset, range.size);
 		}
 		else
 		{
-			for(size_t index = 0; index < count; ++index)
+			for (size_t index = 0; index < count; ++index)
 			{
 				const auto& range = mHostMemory.GetDirtyRange(index);
-				const uint8_t* src = mHostMemory.GetOffsetMemory(index);
+				const uint8_t* src = mHostMemory.GetOffsetMemory(range.offset);
 				Write(src, range.offset, range.size);
 			}
 		}

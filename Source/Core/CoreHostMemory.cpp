@@ -53,4 +53,21 @@ bool HostMemory::Update(const uint8_t* src, size_t offset, size_t size)
 	return false;
 }
 
+RangeSize HostMemory::GetMergeRange(void) const
+{
+	RangeSize range = {};
+	const size_t count = mDirtyRanges.size();
+	if (count > 0)
+	{
+		range = mDirtyRanges.at(0);
+		for (size_t index = 1; index < count; ++index)
+		{
+			const auto& element = mDirtyRanges.at(index);
+			range.size = std::max(range.size, element.size);
+			range.offset = std::min(range.offset, element.offset);
+		}
+	}
+	return range;
+}
+
 }

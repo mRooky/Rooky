@@ -29,6 +29,7 @@ public:
 
 public:
 	bool Update(const uint8_t* src, size_t offset, size_t size);
+	RangeSize GetMergeRange(void) const;
 
 public:
 	inline bool IsValid(void) const { return mMemory != nullptr; }
@@ -39,7 +40,7 @@ public:
 
 public:
 	inline const RangeSize& GetDirtyRange(size_t index) const { return mDirtyRanges.at(index); }
-	inline const uint8_t* GetOffsetMemory(size_t index) const { return mMemory + mDirtyRanges.at(index).offset; }
+	inline const uint8_t* GetOffsetMemory(size_t offset) const { return mMemory + offset; }
 
 protected:
 	size_t mSize = 0;

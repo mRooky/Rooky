@@ -17,6 +17,7 @@ template<typename T>
 class Range_t
 {
 public:
+	Range_t(void) = default;
 	Range_t(T s, T e) : start(s), end(e) {}
 	Range_t(T value) : start(value), end(value) {}
 	~Range_t(void) = default;
@@ -27,7 +28,7 @@ public:
 public:
 	inline bool IsValid(void) const { return start <= end; }
 	inline bool IsEmpty(void) const { return start >= end; }
-	inline bool IsInside(T value) const { return start >= value && value >= end; }
+	inline bool IsInside(T value) const { return start <= value && value <= end; }
 
 public:
 	union
