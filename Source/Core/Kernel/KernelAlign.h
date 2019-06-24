@@ -23,7 +23,7 @@ static inline bool IsPowerOfTow(T value)
 	return value > 0 && (value & (value - 1)) == 0;
 }
 
-static inline size_t GetAlignSize(size_t size, size_t alignment)
+static inline size_t GetAlignSize(size_t size, size_t alignment = 2)
 {
 	assert(IsPowerOfTow(alignment));
 	return (size + alignment - 1) & ~(alignment - 1);

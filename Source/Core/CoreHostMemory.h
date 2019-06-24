@@ -8,8 +8,8 @@
 #ifndef SOURCE_CORE_COREDATA_H_
 #define SOURCE_CORE_COREDATA_H_
 
+#include "Kernel/KernelMemory.h"
 #include "Math/MathRange.h"
-#include <cstdint>
 #include <vector>
 
 namespace Core
@@ -24,27 +24,23 @@ public:
 	~HostMemory(void);
 
 public:
-	void Free(void);
 	void Allocate(size_t size);
 
 public:
 	bool Update(const uint8_t* src, size_t offset, size_t size);
 	RangeSize GetMergeRange(void) const;
+	const void* GetMemoryRange(size_t index) const;
+	const void* GetMemoryRange(size_t offset, size_t size) const;
 
 public:
-	inline bool IsValid(void) const { return mMemory != nullptr; }
-
-public:
-	inline void ClearDirty(void) { mDirtyRanges.clear(); }
+	inline void ClearDirtyRange(void) { mDirtyRanges.clear(); }
 	inline size_t GetDirtyCount(void) const { return mDirtyRanges.size(); }
 
 public:
 	inline const RangeSize& GetDirtyRange(size_t index) const { return mDirtyRanges.at(index); }
-	inline const uint8_t* GetOffsetMemory(size_t offset) const { return mMemory + offset; }
 
 protected:
-	size_t mSize = 0;
-	uint8_t* mMemory = nullptr;
+	Kernel::Memory mMemory = {};
 
 protected:
 	std::vector<RangeSize> mDirtyRanges;

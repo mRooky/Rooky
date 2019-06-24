@@ -19,37 +19,28 @@ HostMemory::HostMemory(void)
 
 HostMemory::~HostMemory(void)
 {
-	Free();
-}
-
-void HostMemory::Free(void)
-{
-	mSize = 0;
-	delete[] mMemory;
-	mMemory = nullptr;
+	mMemory.Free();
 }
 
 void HostMemory::Allocate(size_t size)
 {
 	assert(size > 0);
-	mSize = size;
-	mMemory = new uint8_t[size];
+	mMemory.Free();
+	mMemory.Allocate(size);
 }
 
 bool HostMemory::Update(const uint8_t* src, size_t offset, size_t size)
 {
-	assert(mSize > 0 && mMemory != nullptr);
+	assert(mMemory.IsValid());
 	if(size > 0)
 	{
-		bool contain = (offset + size) < mSize;
-		if(contain)
-		{
-			uint8_t* dst = mMemory + offset;
-			std::memcpy(dst, src, size);
-			mDirtyRanges.push_back(RangeSize(offset, size));
-			return true;
-		}
+		uint8_t* dest = mMemory.Map(offset, size);
+		assert(dest != nullptr);
+		std::memcpy(dest, src, size);
+		mDirtyRanges.push_back(RangeSize(offset, size));
+		return true;
 	}
+
 	return false;
 }
 
@@ -68,6 +59,17 @@ RangeSize HostMemory::GetMergeRange(void) const
 		}
 	}
 	return range;
+}
+
+const void* HostMemory::GetMemoryRange(size_t index) const
+{
+	const auto& range = mDirtyRanges.at(index);
+	return mMemory.Map(range.offset, range.size);
+}
+
+const void* HostMemory::GetMemoryRange(size_t offset, size_t size) const
+{
+	return mMemory.Map(offset, size);
 }
 
 }

@@ -35,7 +35,7 @@ void Buffer::Upload(bool merge)
 		if (true == merge)
 		{
 			auto range = mHostMemory.GetMergeRange();
-			const uint8_t* src = mHostMemory.GetOffsetMemory(range.offset);
+			const void* src = mHostMemory.GetMemoryRange(range.offset, range.size);
 			Write(src, range.offset, range.size);
 		}
 		else
@@ -43,11 +43,11 @@ void Buffer::Upload(bool merge)
 			for (size_t index = 0; index < count; ++index)
 			{
 				const auto& range = mHostMemory.GetDirtyRange(index);
-				const uint8_t* src = mHostMemory.GetOffsetMemory(range.offset);
+				const void* src = mHostMemory.GetMemoryRange(index);
 				Write(src, range.offset, range.size);
 			}
 		}
-		mHostMemory.ClearDirty();
+		mHostMemory.ClearDirtyRange();
 	}
 }
 
