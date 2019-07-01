@@ -61,13 +61,13 @@ RangeSize HostMemory::GetMergeRange(void) const
 	return range;
 }
 
-const void* HostMemory::GetMemoryRange(size_t index) const
+const void* HostMemory::MapRange(size_t index) const
 {
 	const auto& range = mDirtyRanges.at(index);
 	return mMemory.Map(range.offset, range.size);
 }
 
-const void* HostMemory::GetMemoryRange(size_t offset, size_t size) const
+const void* HostMemory::MapRange(size_t offset, size_t size) const
 {
 	return mMemory.Map(offset, size);
 }

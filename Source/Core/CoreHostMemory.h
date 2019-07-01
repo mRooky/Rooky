@@ -29,8 +29,8 @@ public:
 public:
 	bool Update(const uint8_t* src, size_t offset, size_t size);
 	RangeSize GetMergeRange(void) const;
-	const void* GetMemoryRange(size_t index) const;
-	const void* GetMemoryRange(size_t offset, size_t size) const;
+	const void* MapRange(size_t index) const;
+	const void* MapRange(size_t offset, size_t size) const;
 
 public:
 	inline void ClearDirtyRange(void) { mDirtyRanges.clear(); }

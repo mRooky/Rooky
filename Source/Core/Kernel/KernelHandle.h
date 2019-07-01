@@ -12,7 +12,7 @@ namespace Kernel
 {
 
 template<class T>
-class Handle
+class Handle final
 {
 public:
 	Handle(void);

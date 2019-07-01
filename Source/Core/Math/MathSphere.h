@@ -30,6 +30,10 @@ public:
 	}
 
 public:
+	inline void SetRadius(float radius) { mRadius = radius; }
+	inline void SetCenter(const Vector3f& center) { mCenter = center; }
+
+public:
 	inline float GetRadius(void) const { return mRadius; }
 	inline const Vector3f& GetCenter(void) const { return mCenter; }
 
