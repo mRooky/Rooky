@@ -13,14 +13,6 @@
 namespace GHI
 {
 
-enum ResourceType : uint32_t
-{
-	IMAGE   = 0,
-	BUFFER  = 1,
-	SAMPLER = 2,
-	UNKNOWN = ~0u
-};
-
 class MemoryUsage
 {
 public:
@@ -94,6 +86,14 @@ public:
 	};
 };
 
+enum ResourceType : uint32_t
+{
+	IMAGE   = 0,
+	BUFFER  = 1,
+	SAMPLER = 2,
+	UNKNOWN = ~0u
+};
+
 class ResourceUsage
 {
 public:
@@ -112,13 +112,18 @@ public:
 	}
 
 public:
+	inline ImageUsage& GetImageUsage(void) { return imageUsage; }
+	inline BufferUsage& GetBufferUsage(void) { return bufferUsage; }
+	inline MemoryUsage& GetMemoryUsage(void) { return memoryUsage; }
+
+public:
 	union
 	{
 		uint8_t allFlags = 0;
 		ImageUsage imageUsage;
 		BufferUsage bufferUsage;
 	};
-	MemoryUsage memoryUsage;
+	MemoryUsage memoryUsage = {};
 };
 
 } /* namespace Render */

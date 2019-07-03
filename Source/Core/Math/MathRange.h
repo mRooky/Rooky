@@ -18,30 +18,25 @@ class Range_t
 {
 public:
 	Range_t(void) = default;
-	Range_t(T s, T e) : start(s), end(e) {}
-	Range_t(T value) : start(value), end(value) {}
+	Range_t(const T& offset, const T& size) { Set(offset, size); }
 	~Range_t(void) = default;
 
 public:
-	inline T Length(void) const { return end - start; }
+	inline void Set(const T& offset, const T& size)
+	{
+		this->offset = offset;
+		this->size = size;
+	}
 
 public:
-	inline bool IsValid(void) const { return start <= end; }
-	inline bool IsEmpty(void) const { return start >= end; }
-	inline bool IsInside(T value) const { return start <= value && value <= end; }
+	inline T GetOffset(void) const { return offset; }
+	inline T GetSize(void) const { return size; }
+	inline bool IsValid(void) const { return size > 0; }
 
 public:
-	union
-	{
-		T start;
-		T offset = std::numeric_limits<T>::max();
-	};
+	T offset = static_cast<T>(0);
+	T size = static_cast<T>(0);
 
-	union
-	{
-		T end;
-		T size = std::numeric_limits<T>::lowest();
-	};
 };
 
 typedef Range_t<float> Rangef;
