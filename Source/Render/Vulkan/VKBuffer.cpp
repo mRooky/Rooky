@@ -37,7 +37,7 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, const GHI::UsageType& usage)
+void Buffer::Create(size_t size, const GHI::ResourceUsage& usage)
 {
 	mSize = size;
 	mUsage = usage;
@@ -50,8 +50,9 @@ void Buffer::CreateVulkanBuffer(void)
 	assert(mBuffer == nullptr);
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	auto flags = ConvertUsageFlag();
 	mBuffer = Vulkan::Buffer::New(vulkan_device);
-	mBuffer->Create(mSize, Buffer::ConvertUsageFlag(mUsage));
+	mBuffer->Create(mSize, flags);
 }
 
 void Buffer::AllocateVulkanMemory(void)
@@ -70,7 +71,7 @@ void* Buffer::Map(size_t offset, size_t size)
 {
 	std::cout << "Memory Ptr " << mMemory << std::endl;
 	assert(mMemory != nullptr);
-	if (mUsage.CPUAccessable())
+	if (mUsage.memoryUsage.CPUAccessable())
 	{
 		return mMemory->Map(offset, size);
 	}
@@ -95,7 +96,7 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	GHI::UsageType usage = CreateStageBufferUsageType();
+	GHI::ResourceUsage usage = CreateStageBufferUsageType();
 
 	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
@@ -115,7 +116,7 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
 	queue->FlushCommandBuffer(command_buffer);
 
-	assert(stage_buffer->GetUsage().CPUAccessable());
+	assert(stage_buffer->GetUsage().memoryUsage.CPUAccessable());
 	stage_buffer->Read(dst, 0, size);
 }
 
@@ -131,7 +132,7 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
-	assert(stage_buffer->GetUsage().CPUAccessable());
+	assert(stage_buffer->GetUsage().memoryUsage.CPUAccessable());
 	stage_buffer->Write(src, 0, size);
 
 	VkBufferCopy copy_region = {};
@@ -195,27 +196,26 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 	return descriptor_info;
 }
 
-VkBufferUsageFlags Buffer::ConvertUsageFlag(GHI::UsageType usage)
+VkBufferUsageFlags Buffer::ConvertUsageFlag(void)
 {
-	assert(usage.type == GHI::ResourceType::BUFFER);
 	VkBufferUsageFlags flags = 0;
-	flags |= (usage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
-	flags |= (usage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
-	flags |= (usage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
-	flags |= (usage.storageBuffer == TRUE) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
-	flags |= (usage.indirectBuffer == TRUE) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
+	flags |= (mUsage.memoryUsage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (mUsage.memoryUsage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (mUsage.bufferUsage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
+	flags |= (mUsage.bufferUsage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
+	flags |= (mUsage.bufferUsage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
+	flags |= (mUsage.bufferUsage.storageBuffer == TRUE) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
+	flags |= (mUsage.bufferUsage.indirectBuffer == TRUE) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
 	return flags;
 }
 
-VkDescriptorType Buffer::GetDescriptorType(const GHI::UsageType& usage)
+VkDescriptorType Buffer::GetDescriptorType(void)
 {
 	VkDescriptorType descriptor_type =
-	(usage.uniformBuffer == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER :
-	(usage.storageBuffer == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_BUFFER :
-	(usage.uniformTexel == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER :
-	(usage.storageTexel == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER: VK_DESCRIPTOR_TYPE_MAX_ENUM;
+	(mUsage.bufferUsage.uniformBuffer == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER :
+	(mUsage.bufferUsage.storageBuffer == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_BUFFER :
+	(mUsage.bufferUsage.uniformTexel == 1) ? VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER :
+	(mUsage.bufferUsage.storageTexel == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER: VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
 	return descriptor_type;
 }

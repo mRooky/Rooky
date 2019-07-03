@@ -12,6 +12,7 @@
 namespace GLTF
 {
 
+class Mesh;
 class BaseColor;
 class BRDF;
 class Diffuse;
@@ -20,6 +21,7 @@ class Normal;
 class Occlusion;
 class SpecGloss;
 class MetalRough;
+class Material;
 
 }
 

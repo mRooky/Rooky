@@ -33,14 +33,7 @@ void BindingSet::AppendBinding(const Binding& binding)
 void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 {
 	assert(index < mBindings.GetElementCount());
-	GHI::Resource* new_resource = binding.GetResource();
-	const GHI::Binding& old_binding = mBindings.GetElementAt(index);
-	GHI::Resource* old_resource = old_binding.GetResource();
-	assert(old_resource->GetUsage() == new_resource->GetUsage());
-	if (old_resource->GetUsage() == new_resource->GetUsage())
-	{
-		mBindings.SetElement(index, binding);
-	}
+	mBindings.SetElement(index, binding);
 }
 
 } /* namespace Render */

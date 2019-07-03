@@ -58,10 +58,9 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 		image_layout.SetFormat(format);
 		image_layout.SetType(GHI::ImageType::IT_2D);
 
-		GHI::UsageType image_usage = {};
-		image_usage.write = TRUE;
-		image_usage.sampledImage = TRUE;
-		image_usage.type = GHI::ResourceType::IMAGE;
+		GHI::ResourceUsage image_usage = {};
+		image_usage.memoryUsage.write = TRUE;
+		image_usage.imageUsage.sampledImage = TRUE;
 
 		texture = CreateTexture();
 		texture->SetName(file_name.c_str());

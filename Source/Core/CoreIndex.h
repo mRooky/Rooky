@@ -27,7 +27,7 @@ public:
 
 public:
 	void Create(GHI::IndexType type, uint32_t count);
-	void Create(GHI::IndexType type, uint32_t count, GHI::UsageType usage);
+	void Create(GHI::IndexType type, uint32_t count, GHI::ResourceUsage& usage);
 
 public:
 	size_t GetSizeInByte(void);

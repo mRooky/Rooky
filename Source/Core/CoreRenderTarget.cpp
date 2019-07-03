@@ -8,9 +8,9 @@
 #include "CoreRenderTarget.h"
 #include "CoreSystem.h"
 
-#include "GHIDevice.h"
-#include "GHIFactory.h"
-#include "GHIImage.h"
+#include "GHI/GHIDevice.h"
+#include "GHI/GHIFactory.h"
+#include "GHI/GHIImage.h"
 
 #include <cassert>
 #include <iostream>
@@ -27,7 +27,7 @@ RenderTarget::~RenderTarget(void)
 {
 }
 
-void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	assert(mResource == nullptr);
 	auto device = mSystem->GetDevice();

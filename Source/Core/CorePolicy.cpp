@@ -15,7 +15,6 @@
 #include "GHI/GHIRenderPass.h"
 #include "GHI/GHICommandList.h"
 #include "GHI/GHIImageLayout.h"
-#include "GHI/GHIUsageType.h"
 #include "GHI/GHIFactory.h"
 #include "GHI/GHIImage.h"
 
@@ -80,15 +79,14 @@ void Policy::CreateDepthStencil(GHI::Format format, const Math::Extent2Di& exten
 	image_layout.SetExtent(extent);
 	image_layout.SetFormat(format);
 
-	GHI::UsageType image_usage = {};
-	image_usage.type = GHI::ResourceType::IMAGE;
-	image_usage.depthStencil = TRUE;
+	GHI::ResourceUsage image_usage = {};
+	image_usage.imageUsage.depthStencil = TRUE;
 
 	mDepthStencil = new RenderTarget(*mSystem);
 	mDepthStencil->Create(image_layout, image_usage);
 }
 
-RenderTarget* Policy::CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+RenderTarget* Policy::CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	RenderTarget* target = new RenderTarget(*mSystem);
 	mRenderTargets.push_back(target);

@@ -9,7 +9,6 @@
 #define SOURCE_RENDER_VK_VKBINDINGSTATE_H_
 
 #include "../../Core/GHI/GHIBindingSet.h"
-#include "../../Core/GHI/GHIUsageType.h"
 #include "VKRender.h"
 
 namespace VK
@@ -27,9 +26,6 @@ public:
 
 public:
 	inline Vulkan::DescriptorSet* GetDescriptorSet(void) const { return mDescriptorSet; }
-
-public:
-	static VkDescriptorType GetDescriptorType(GHI::ResourceType type, const GHI::UsageType& usage);
 
 protected:
 	void WriteDescriptorSet(void);

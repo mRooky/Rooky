@@ -31,7 +31,7 @@ Texture::~Texture(void)
 	std::cout << "Destroy Texture : " << mName << std::endl;
 }
 
-void Texture::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+void Texture::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	assert(mResource == nullptr);
 	auto system = mManager->GetSystem();

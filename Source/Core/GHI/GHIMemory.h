@@ -30,8 +30,13 @@ public:
 public:
 	inline size_t GetAlignSize(void) const { return mAlignSize; }
 
+public:
+	inline const ResourceUsage& GetUsage(void) const { return mUsage; }
+	inline bool operator==(const ResourceUsage& usage) const { return mUsage == usage; }
+
 protected:
 	size_t mAlignSize = 0;
+	ResourceUsage mUsage = {};
 };
 
 } /* namespace Render */

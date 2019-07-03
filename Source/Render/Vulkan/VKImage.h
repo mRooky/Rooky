@@ -21,7 +21,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage) override;
+	virtual void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage) override;
 
 public:
 	virtual void Download(void* dst) override;
@@ -43,12 +43,12 @@ public:
 	VkDescriptorImageInfo GetDescriptorInfo(void) const;
 
 public:
-	static VkImageViewType ConverType(const GHI::ImageType& type);
-	static GHI::ImageType ConverType(const VkImageViewType& type);
+	VkImageUsageFlags ConvertUsageFlag(void);
+	VkDescriptorType GetDescriptorType(void);
 
 public:
-	static VkImageUsageFlags ConvertUsageFlag(GHI::UsageType usage);
-	static VkDescriptorType GetDescriptorType(const GHI::UsageType& usage);
+	static VkImageViewType ConverType(const GHI::ImageType& type);
+	static GHI::ImageType ConverType(const VkImageViewType& type);
 
 protected:
 	void CreateImage(void);

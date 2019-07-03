@@ -9,7 +9,7 @@
 #define SOURCE_RENDER_VK_VKINLINE_H_
 
 #include "VKDefine.h"
-#include "../../Core/GHI/GHIUsageType.h"
+#include "../../Core/GHI/GHIResourceUsage.h"
 
 #include <vulkan/vulkan.h>
 #include <cassert>
@@ -22,19 +22,18 @@ static inline void NotImplemented(void)
 	assert(false);
 }
 
-static inline GHI::UsageType CreateStageBufferUsageType(void)
+static inline GHI::ResourceUsage CreateStageBufferUsageType(void)
 {
-	GHI::UsageType stage_usage_type = {};
-	stage_usage_type.cpuAccess = TRUE;
-	stage_usage_type.read = TRUE;
-	stage_usage_type.write = TRUE;
-	stage_usage_type.type = GHI::ResourceType::BUFFER;
-	return stage_usage_type;
+	GHI::ResourceUsage usage = {};
+	usage.memoryUsage.cpuAccess = TRUE;
+	usage.memoryUsage.read = TRUE;
+	usage.memoryUsage.write = TRUE;
+	return usage;
 }
 
-static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::UsageType usage)
+static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::ResourceUsage& usage)
 {
-	if (usage.cpuAccess == 1)
+	if (usage.memoryUsage.cpuAccess == 1)
 	{
 		return VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
 	}
@@ -44,46 +43,43 @@ static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::UsageType usage)
 	}
 }
 
-static inline VkBufferUsageFlags ConvertBufferUsageFlags(const GHI::UsageType& usage)
+static inline VkBufferUsageFlags ConvertBufferUsageFlags(const GHI::ResourceUsage& usage)
 {
-	assert(usage.type == GHI::ResourceType::BUFFER);
 	VkBufferUsageFlags flags = 0;
-	flags |= (usage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
-	flags |= (usage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
-	flags |= (usage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
-	flags |= (usage.storageBuffer == TRUE) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
-	flags |= (usage.indirectBuffer == TRUE) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
+	flags |= (usage.memoryUsage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.memoryUsage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.bufferUsage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.storageBuffer == TRUE) ? VK_BUFFER_USAGE_STORAGE_BUFFER_BIT : 0;
+	flags |= (usage.bufferUsage.indirectBuffer == TRUE) ? VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT : 0;
 	return flags;
 }
 
-static inline VkImageUsageFlags ConvertImageUsageFlags(const GHI::UsageType&  usage)
+static inline VkImageUsageFlags ConvertImageUsageFlags(const GHI::ResourceUsage& usage)
 {
-	assert(usage.type == GHI::ResourceType::IMAGE);
 	VkImageUsageFlags flags = 0;
-	flags |= (usage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
-	flags |= (usage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
-	flags |= (usage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
-	flags |= (usage.depthStencil == TRUE) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
-	flags |= (usage.transientImage == TRUE) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
-	flags |= (usage.inputImage == TRUE) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
+	flags |= (usage.memoryUsage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (usage.memoryUsage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (usage.imageUsage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
+	flags |= (usage.imageUsage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
+	flags |= (usage.imageUsage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.depthStencil == TRUE) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.transientImage == TRUE) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
+	flags |= (usage.imageUsage.inputImage == TRUE) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
 	return flags;
 }
 
-static inline GHI::UsageType ConvertBufferUsageFlags(VkBufferUsageFlags flags)
+static inline GHI::ResourceUsage ConvertBufferUsageFlags(VkBufferUsageFlags flags)
 {
-	GHI::UsageType resource_usage = {};
-	resource_usage.type = GHI::ResourceType::BUFFER;
-	resource_usage.read = (flags & VK_BUFFER_USAGE_TRANSFER_SRC_BIT) ? 1 : 0;
-	resource_usage.write = (flags & VK_BUFFER_USAGE_TRANSFER_DST_BIT) ? 1 : 0;
-	resource_usage.indexBuffer = (flags & VK_BUFFER_USAGE_INDEX_BUFFER_BIT) ? 1 : 0;
-	resource_usage.vertexBuffer = (flags & VK_BUFFER_USAGE_VERTEX_BUFFER_BIT) ? 1 : 0;
-	resource_usage.uniformBuffer = (flags & VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT) ? 1 : 0;
-	resource_usage.storageBuffer = (flags & VK_BUFFER_USAGE_STORAGE_BUFFER_BIT) ? 1 : 0;
-	resource_usage.indirectBuffer = (flags & VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT) ? 1 : 0;
+	GHI::ResourceUsage resource_usage = {};
+	resource_usage.memoryUsage.read = (flags & VK_BUFFER_USAGE_TRANSFER_SRC_BIT) ? 1 : 0;
+	resource_usage.memoryUsage.write = (flags & VK_BUFFER_USAGE_TRANSFER_DST_BIT) ? 1 : 0;
+	resource_usage.bufferUsage.indexBuffer = (flags & VK_BUFFER_USAGE_INDEX_BUFFER_BIT) ? 1 : 0;
+	resource_usage.bufferUsage.vertexBuffer = (flags & VK_BUFFER_USAGE_VERTEX_BUFFER_BIT) ? 1 : 0;
+	resource_usage.bufferUsage.uniformBuffer = (flags & VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT) ? 1 : 0;
+	resource_usage.bufferUsage.storageBuffer = (flags & VK_BUFFER_USAGE_STORAGE_BUFFER_BIT) ? 1 : 0;
+	resource_usage.bufferUsage.indirectBuffer = (flags & VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT) ? 1 : 0;
 	return resource_usage;
 }
 

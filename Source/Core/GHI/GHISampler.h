@@ -29,12 +29,20 @@ public:
 public:
 	inline void SetFilterType(FilterType type) { mFilterType = type; }
 	inline void SetMipmapMode(MipmapMode mode) { mMipmapMode = mode; }
-	inline void SetAddressMode(AddressMode mode) { mAddressMode = mode; }
+
+public:
+	inline void SetAddressModeU(AddressMode mode) { mAddressModeU = mode; }
+	inline void SetAddressModeV(AddressMode mode) { mAddressModeV = mode; }
+	inline void SetAddressModeW(AddressMode mode) { mAddressModeW = mode; }
 
 public:
 	inline FilterType GetFilterType(void) const { return mFilterType; }
 	inline MipmapMode GetMipmapMode(void) const { return mMipmapMode; }
-	inline AddressMode GetAddressMode(void) const { return mAddressMode; }
+
+public:
+	inline AddressMode GetAddressModeU(void) const { return mAddressModeU; }
+	inline AddressMode GetAddressModeV(void) const { return mAddressModeV; }
+	inline AddressMode GetAddressModeW(void) const { return mAddressModeW; }
 
 public:
 	inline bool IsValid(void) const { return mValid; }
@@ -50,7 +58,9 @@ protected:
 protected:
 	FilterType mFilterType = FilterType::LINEAR;
 	MipmapMode mMipmapMode = MipmapMode::LINEAR;
-	AddressMode mAddressMode = AddressMode::REPEAT;
+	AddressMode mAddressModeU = AddressMode::REPEAT;
+	AddressMode mAddressModeV = AddressMode::REPEAT;
+	AddressMode mAddressModeW = AddressMode::REPEAT;
 };
 
 } /* namespace Render */

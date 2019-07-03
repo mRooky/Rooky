@@ -53,14 +53,15 @@ void BindingSet::WriteDescriptorSet(void)
 	std::vector<VkWriteDescriptorSet> descriptor_writes;
 	descriptor_writes.reserve(size);
 
-	std::vector<VkDescriptorImageInfo> image_infos(size);
-	std::vector<VkDescriptorBufferInfo> buffer_infos(size);
+	std::vector<VkDescriptorImageInfo> image_infos;
+	image_infos.reserve(size);
+	std::vector<VkDescriptorBufferInfo> buffer_infos;
+	buffer_infos.reserve(size);
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
 		auto& binding = mBindings.GetElementAt(bind);
 		auto resource = binding.GetResource();
-		auto resource_usage = resource->GetUsage();
 		auto resource_type = resource->GetType();
 
 		VkWriteDescriptorSet write = Vulkan::DescriptorSet::WriteDescriptorSet();
@@ -68,26 +69,28 @@ void BindingSet::WriteDescriptorSet(void)
 		write.dstBinding = bind;
 		write.descriptorCount = 1;
 
-		switch(resource_type)
+		if (resource_type == GHI::ResourceType::IMAGE)
 		{
-		case GHI::ResourceType::IMAGE:
-			image_infos.at(bind) = static_cast<Image*>(resource)->GetVulkanImage()->GetDescriptorInfo();;
-			write.pImageInfo = &image_infos.at(bind);
-			write.descriptorType = Image::GetDescriptorType(resource_usage);
-			break;
-		case GHI::ResourceType::BUFFER:
-			buffer_infos.at(bind) = static_cast<Buffer*>(resource)->GetVulkanBuffer()->GetDescriptorInfo();
-			write.pBufferInfo = &buffer_infos.at(bind);
-			write.descriptorType = Buffer::GetDescriptorType(resource_usage);
-			break;
-		case GHI::ResourceType::SAMPLER:
-			image_infos.at(bind) = static_cast<Sampler*>(resource)->GetVulkanSampler()->GetDescriptorInfo();
-			write.pImageInfo = &image_infos.at(bind);
-			write.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
-			break;
-		default:
-			assert(false);
+			auto image = static_cast<Image*>(resource);
+			image_infos.push_back(image->GetVulkanImage()->GetDescriptorInfo());
+			write.pImageInfo = &image_infos.back();
+			write.descriptorType = image->GetDescriptorType();
 		}
+		else if (resource_type == GHI::ResourceType::BUFFER)
+		{
+			auto buffer = static_cast<Buffer*>(resource);
+			buffer_infos.push_back(buffer->GetVulkanBuffer()->GetDescriptorInfo());
+			write.pBufferInfo = &buffer_infos.back();
+			write.descriptorType = buffer->GetDescriptorType();
+		}
+		else
+		{
+			auto sampler = static_cast<Sampler*>(resource);
+			image_infos.push_back(sampler->GetVulkanSampler()->GetDescriptorInfo());
+			write.pImageInfo = &image_infos.back();
+			write.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
+		}
+
 		descriptor_writes.push_back(write);
 	}
 	assert(descriptor_writes.size() > 0);
@@ -108,42 +111,34 @@ void BindingSet::AllocateDescriptorSet(void)
 		GHI::ShaderStage stage = binding.GetShaderStage();
 
 		GHI::Resource* resource = binding.GetResource();
-		GHI::UsageType resource_usage = resource->GetUsage();
 		GHI::ResourceType resource_type = resource->GetType();
 
 		VkDescriptorSetLayoutBinding layout_bind = {};
 		layout_bind.binding = bind;
 		layout_bind.descriptorCount = 1;
 		layout_bind.stageFlags = Shader::ConvertStage(stage);
-		layout_bind.descriptorType = BindingSet::GetDescriptorType(resource_type, resource_usage);
+
+		if (resource_type == GHI::ResourceType::IMAGE)
+		{
+			auto image = static_cast<Image*>(resource);
+			layout_bind.descriptorType = image->GetDescriptorType();
+		}
+		else if (resource_type == GHI::ResourceType::BUFFER)
+		{
+			auto buffer = static_cast<Buffer*>(resource);
+			layout_bind.descriptorType = buffer->GetDescriptorType();
+		}
+		else
+		{
+			layout_bind.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
+		}
+
 		layout_bindings.push_back(layout_bind);
 	}
 
 	auto factory = mDevice->GetFactory();
 	auto vk_pool = static_cast<Factory*>(factory)->GetPool();
 	mDescriptorSet = vk_pool->AllocateDescriptorSet(layout_bindings.size(), layout_bindings.data());
-}
-
-VkDescriptorType BindingSet::GetDescriptorType(GHI::ResourceType type, const GHI::UsageType& usage)
-{
-	VkDescriptorType descriptor_type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
-	switch(type)
-	{
-	case GHI::ResourceType::IMAGE:
-		descriptor_type = Image::GetDescriptorType(usage);
-		break;
-	case GHI::ResourceType::BUFFER:
-		descriptor_type = Buffer::GetDescriptorType(usage);
-		break;
-	case GHI::ResourceType::SAMPLER:
-		descriptor_type = VK_DESCRIPTOR_TYPE_SAMPLER;
-		break;
-	default:
-		assert(false);
-		break;
-	}
-	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
-	return descriptor_type;
 }
 
 } /* namespace VK */

@@ -29,7 +29,7 @@ void Attachment::SetDepthStencil(Image* image)
 	if(image != nullptr)
 	{
 		auto& usage = image->GetUsage();
-		bool for_depth_stencil = usage.depthStencil == TRUE;
+		bool for_depth_stencil = usage.imageUsage.depthStencil == TRUE;
 		assert(true == for_depth_stencil);
 		if (true == for_depth_stencil)
 		{

@@ -24,21 +24,20 @@ Vertex::~Vertex(void)
 
 void Vertex::Create(GHI::VertexLayout* layout, uint32_t count)
 {
-	GHI::UsageType usage;
-	usage.read = TRUE;
-	usage.write = TRUE;
-	usage.type = GHI::ResourceType::BUFFER;
+	GHI::ResourceUsage usage;
+	usage.memoryUsage.read = TRUE;
+	usage.memoryUsage.write = TRUE;
 	Create(layout, count, usage);
 }
 
-void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::UsageType usage)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::ResourceUsage& usage)
 {
 	mCount = count;
 	mLayout = *layout;
 	assert(mLayout.IsValid());
 	size_t size = mLayout.GetStride() * mCount;
 	assert(size > 0);
-	usage.vertexBuffer = TRUE;
+	usage.bufferUsage.vertexBuffer = TRUE;
 	mHostMemory.Allocate(size);
 	CreateRenderBuffer(size, usage);
 	std::cout << "Create Vertex Count : " << mCount << std::endl;

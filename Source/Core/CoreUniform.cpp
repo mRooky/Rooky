@@ -21,12 +21,11 @@ Uniform::~Uniform(void)
 {
 }
 
-void Uniform::Create(size_t size, GHI::UsageType usage)
+void Uniform::Create(size_t size, GHI::ResourceUsage& usage)
 {
 	assert(size > 0);
 	mSize = size;
-	usage.uniformBuffer = TRUE;
-	usage.type = GHI::ResourceType::BUFFER;
+	usage.bufferUsage.uniformBuffer = TRUE;
 	mHostMemory.Allocate(size);
 	CreateRenderBuffer(mSize, usage);
 }

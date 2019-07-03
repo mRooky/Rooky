@@ -10,7 +10,7 @@
 
 #include "CoreResource.h"
 #include "CoreHostMemory.h"
-#include "GHI/GHIUsageType.h"
+#include "GHI/GHIResourceUsage.h"
 
 namespace Core
 {
@@ -36,7 +36,7 @@ public:
 	inline BufferManager* GetManager(void) const { return mCreator; }
 
 protected:
-	void CreateRenderBuffer(size_t size, GHI::UsageType usage);
+	void CreateRenderBuffer(size_t size, GHI::ResourceUsage& usage);
 
 protected:
 	HostMemory mHostMemory = {};

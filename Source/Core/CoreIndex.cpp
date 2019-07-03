@@ -27,20 +27,19 @@ Index::~Index(void)
 
 void Index::Create(GHI::IndexType type, uint32_t count)
 {
-	GHI::UsageType usage;
-	usage.read = TRUE;
-	usage.write = TRUE;
-	usage.type = GHI::ResourceType::BUFFER;
+	GHI::ResourceUsage usage;
+	usage.memoryUsage.read = TRUE;
+	usage.memoryUsage.write = TRUE;
 	Create(type, count, usage);
 }
 
-void Index::Create(GHI::IndexType type, uint32_t count, GHI::UsageType usage)
+void Index::Create(GHI::IndexType type, uint32_t count, GHI::ResourceUsage& usage)
 {
 	mType = type;
 	mCount = count;
 	size_t size = GHI::GetIndexTypeSize(mType) * mCount;
 	assert(size > 0);
-	usage.indexBuffer = TRUE;
+	usage.bufferUsage.indexBuffer = TRUE;
 	mHostMemory.Allocate(size);
 	CreateRenderBuffer(size, usage);
 	mDrawIndexed.SetIndexCount(mCount);

@@ -42,7 +42,7 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(const GHI::ImageLayout& layout, const GHI::UsageType& usage)
+void Image::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	mUsage = usage;
 	mLayout = layout;
@@ -66,7 +66,7 @@ void Image::CreateImage(void)
 		static_cast<uint32_t>(extent.depth)
 	};
 
-	VkImageUsageFlags usage = Image::ConvertUsageFlag(mUsage);
+	VkImageUsageFlags usage = ConvertUsageFlag();
 	mImage = Vulkan::Image::New(vulkan_device);
 	mImage->Create(vulkan_format, vulkan_extent, usage);
 }
@@ -245,12 +245,12 @@ VkExtent2D Image::GetMipmapExtent(uint32_t mipmap) const
 	return vk_extent;
 }
 
-VkDescriptorType Image::GetDescriptorType(const GHI::UsageType& usage)
+VkDescriptorType Image::GetDescriptorType(void)
 {
 	VkDescriptorType descriptor_type =
-	(usage.sampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
-	(usage.storageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
-	(usage.inputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT :
+	(mUsage.imageUsage.sampledImage == 1) ? VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE :
+	(mUsage.imageUsage.storageImage == 1) ? VK_DESCRIPTOR_TYPE_STORAGE_IMAGE :
+	(mUsage.imageUsage.inputImage == 1) ? VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT :
 			VK_DESCRIPTOR_TYPE_MAX_ENUM;
 	assert(descriptor_type != VK_DESCRIPTOR_TYPE_MAX_ENUM);
 	return descriptor_type;
@@ -304,18 +304,17 @@ GHI::ImageType Image::ConverType(const VkImageViewType& type)
 	}
 }
 
-VkImageUsageFlags Image::ConvertUsageFlag(GHI::UsageType usage)
+VkImageUsageFlags Image::ConvertUsageFlag(void)
 {
-	assert(usage.type == GHI::ResourceType::IMAGE);
 	VkImageUsageFlags flags = 0;
-	flags |= (usage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (usage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
-	flags |= (usage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
-	flags |= (usage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
-	flags |= (usage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
-	flags |= (usage.depthStencil == TRUE) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
-	flags |= (usage.transientImage == TRUE) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
-	flags |= (usage.inputImage == TRUE) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
+	flags |= (mUsage.memoryUsage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (mUsage.memoryUsage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (mUsage.imageUsage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
+	flags |= (mUsage.imageUsage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
+	flags |= (mUsage.imageUsage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;
+	flags |= (mUsage.imageUsage.depthStencil == TRUE) ? VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT : 0;
+	flags |= (mUsage.imageUsage.transientImage == TRUE) ? VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT : 0;
+	flags |= (mUsage.imageUsage.inputImage == TRUE) ? VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT : 0;
 	return flags;
 }
 

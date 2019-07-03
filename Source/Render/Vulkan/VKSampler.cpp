@@ -32,9 +32,9 @@ void Sampler::Create(void)
 	auto vulkan_device = vk_device->GetVulkanDevice();
 	mSampler = Vulkan::Sampler::New(vulkan_device);
 	VkFilter filter = Sampler::GetFilter(mFilterType);
-	VkSamplerAddressMode address = Sampler::GetAddressMode(mAddressMode);
+	VkSamplerAddressMode address_u = Sampler::GetAddressMode(mAddressModeU);
 	VkSamplerMipmapMode mipmap = Sampler::GetMipmapMode(mMipmapMode);
-	mSampler->Create(filter, address, mipmap);
+	mSampler->Create(filter, address_u, mipmap);
 	mValid = true;
 }
 
