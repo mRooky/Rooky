@@ -18,8 +18,8 @@ namespace GLTF
 class BaseColor : public Texture
 {
 public:
-	BaseColor(void);
-	~BaseColor(void) override;
+	BaseColor(Manager* manager);
+	virtual ~BaseColor(void) override;
 
 public:
 	inline void SetFactor(const Math::Vector4f& factor) { mFactor = factor; }

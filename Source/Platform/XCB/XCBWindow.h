@@ -8,7 +8,7 @@
 #ifndef SOURCE_PLATFORM_XCB_XCBWINDOW_H_
 #define SOURCE_PLATFORM_XCB_XCBWINDOW_H_
 
-#include "PlatformWindow.h"
+#include "../Core/Platform/PlatformWindow.h"
 #include <xcb/xcb.h>
 
 namespace XCB

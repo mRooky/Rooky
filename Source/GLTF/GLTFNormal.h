@@ -17,8 +17,8 @@ namespace GLTF
 class Normal : public Texture
 {
 public:
-	Normal(void);
-	~Normal(void) override;
+	Normal(Manager* manager);
+	virtual ~Normal(void) override;
 
 public:
 	inline void SetScale(float scale) { mScale = scale; }

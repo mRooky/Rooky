@@ -18,8 +18,8 @@ namespace GLTF
 class Emissive : public Texture
 {
 public:
-	Emissive(void);
-	~Emissive(void) override;
+	Emissive(Manager* manager);
+	virtual ~Emissive(void) override;
 
 public:
 	inline void SetFactor(Math::Vector3f& factor) { mFactor = factor; }

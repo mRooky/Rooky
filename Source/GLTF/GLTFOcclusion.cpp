@@ -11,7 +11,8 @@
 namespace GLTF
 {
 
-Occlusion::Occlusion(void)
+Occlusion::Occlusion(Manager* manager):
+	Texture(manager)
 {
 
 }

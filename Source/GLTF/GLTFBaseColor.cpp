@@ -10,7 +10,8 @@
 namespace GLTF
 {
 
-BaseColor::BaseColor(void)
+BaseColor::BaseColor(Manager* manager):
+	Texture(manager)
 {
 
 }

@@ -12,7 +12,8 @@
 namespace GLTF
 {
 
-Diffuse::Diffuse(void)
+Diffuse::Diffuse(Manager* manager):
+	Texture(manager)
 {
 
 }

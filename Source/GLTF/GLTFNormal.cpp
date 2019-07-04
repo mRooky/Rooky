@@ -11,7 +11,8 @@
 namespace GLTF
 {
 
-Normal::Normal(void)
+Normal::Normal(Manager* manager):
+	Texture(manager)
 {
 
 }

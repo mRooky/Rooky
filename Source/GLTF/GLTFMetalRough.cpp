@@ -11,7 +11,8 @@
 namespace GLTF
 {
 
-MetalRough::MetalRough(void)
+MetalRough::MetalRough(Manager* manager):
+	Texture(manager)
 {
 
 }

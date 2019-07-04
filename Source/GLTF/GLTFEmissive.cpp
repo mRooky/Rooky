@@ -13,7 +13,8 @@
 namespace GLTF
 {
 
-Emissive::Emissive(void)
+Emissive::Emissive(Manager* manager):
+	Texture(manager)
 {
 
 }

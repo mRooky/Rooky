@@ -11,7 +11,8 @@
 namespace GLTF
 {
 
-SpecGloss::SpecGloss(void)
+SpecGloss::SpecGloss(Manager* manager):
+	Texture(manager)
 {
 
 }

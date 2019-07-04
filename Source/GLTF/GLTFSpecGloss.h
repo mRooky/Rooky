@@ -17,8 +17,8 @@ namespace GLTF
 class SpecGloss : public Texture
 {
 public:
-	SpecGloss(void);
-	~SpecGloss(void) override;
+	SpecGloss(Manager* manager);
+	virtual ~SpecGloss(void) override;
 
 protected:
 

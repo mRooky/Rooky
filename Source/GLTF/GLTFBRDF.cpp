@@ -9,7 +9,8 @@
 namespace GLTF
 {
 
-BRDF::BRDF(void)
+BRDF::BRDF(Manager* manager):
+	Texture(manager)
 {
 
 }

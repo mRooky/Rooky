@@ -17,8 +17,8 @@ namespace GLTF
 class Diffuse : public Texture
 {
 public:
-	Diffuse(void);
-	~Diffuse(void) override;
+	Diffuse(Manager* manager);
+	virtual ~Diffuse(void) override;
 
 protected:
 

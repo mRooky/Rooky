@@ -17,8 +17,8 @@ namespace GLTF
 class Occlusion : public Texture
 {
 public:
-	Occlusion(void);
-	~Occlusion(void) override;
+	Occlusion(Manager* manager);
+	virtual ~Occlusion(void) override;
 
 protected:
 

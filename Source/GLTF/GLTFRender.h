@@ -9,9 +9,8 @@
 #ifndef SOURCE_GLTF_RENDER_H
 #define SOURCE_GLTF_RENDER_H
 
-#include "../Core/CoreSystem.h"
 #include "../Core/Platform/PlatformWindow.h"
-#include <cstdint>
+#include "GLTFManager.h"
 
 namespace GLTF
 {
@@ -26,11 +25,17 @@ public:
 	Platform::Window* Init(uint32_t width, uint32_t height, const char* title);
 
 public:
-
+	inline Manager* GetManager(void) const { return mManager; }
+	inline Platform::Window* GetWindow(void) const { return mWindow; }
 
 private:
-	Core::System* m_system = nullptr;
-	Platform::Window* m_window = nullptr;
+	void CreateWindow(uint32_t width, uint32_t height, const char* title);
+	void CreateSwapChain(void);
+
+protected:
+	Manager* mManager = nullptr;
+	GHI::SwapChain* mSwapChain = nullptr;
+	Platform::Window* mWindow = nullptr;
 };
 
 }
