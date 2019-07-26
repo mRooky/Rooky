@@ -12,8 +12,6 @@
 #include "GHIMemory.h"
 #include "State/GHIColorBlend.h"
 
-#include "../Math/MathColor.h"
-
 namespace GHI
 {
 class Image : public Memory

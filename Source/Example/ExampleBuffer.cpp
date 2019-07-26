@@ -23,6 +23,7 @@
 #include "../Core/Manager/CoreMeshManager.h"
 #include "../Core/Manager/CoreBufferManager.h"
 #include "../Core/CoreThread.h"
+#include "../Core/Math/MathColorValue.h"
 
 #include <cassert>
 #include <array>
@@ -75,7 +76,7 @@ void Buffer::CreateFrameBuffer(void)
 {
 	assert(mPass->GetSubPassCount() > 0);
 	GHI::SwapChain* swap_chain = mScene->GetSwapChain();
-	Math::Color clear_color = Math::Color(10, 10, 10);
+	Math::ColorI clear_color = Math::ColorI(10, 10, 10, 255);
 	GHI::RenderPass* pass = mPass->GetSubPass(0)->GetRenderPass();
 	for (size_t index = 0; index < 2; ++index)
 	{

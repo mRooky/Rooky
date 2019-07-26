@@ -12,7 +12,7 @@
 #include "GHISamplerState.h"
 
 
-#include "../Math/MathColor.h"
+#include "../Math/MathColorValue.h"
 
 namespace GHI
 {
@@ -46,14 +46,14 @@ public:
 
 public:
 	inline bool IsValid(void) const { return mValid; }
-	inline Math::Color GetBorderColor(void) const { return mBorderColor; }
+	inline Math::ColorI GetBorderColor(void) const { return mBorderColor; }
 
 public:
 	inline void SetBorderColor(uint32_t color) { mBorderColor.Set(color); }
 
 protected:
 	bool mValid = false;
-	Math::Color mBorderColor = {};
+	Math::ColorI mBorderColor = {};
 
 protected:
 	FilterType mFilterType = FilterType::LINEAR;

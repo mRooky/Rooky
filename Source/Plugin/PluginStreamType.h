@@ -9,7 +9,7 @@
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
 #include "../Core/GHI/GHIVertexSemantic.h"
-#include "../Core/Math/MathColor.h"
+#include "../Core/Math/MathColorValue.h"
 #include "../Core/Math/MathVector.h"
 #include <cstdint>
 #include <vector>
@@ -60,7 +60,7 @@ protected:
 	std::vector<T> mPositionData;
 };
 
-typedef StreamBase<Math::ColorValue> StreamColor;
+typedef StreamBase<Math::ColorI> StreamColor;
 typedef StreamBase<Math::Vector2f> StreamTexCoord;
 typedef StreamBase<Math::Vector3f> StreamPosition, StreamNormal;
 

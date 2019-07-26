@@ -9,14 +9,14 @@
 #define DIRECTUI_DIRECTMATH_H_
 
 #include "../Core/Math/MathRect.h"
-#include "../Core/Math/MathColor.h"
+#include "../Core/Math/MathColorValue.h"
 #include "../Core/Math/MathExtent3.h"
 #include "../Core/Math/MathVector.h"
 
 namespace Direct
 {
 
-typedef Math::Color ColorI;
+typedef Math::ColorI ColorI;
 typedef Math::Rect2Di RectI;
 typedef Math::Vector2i Vector2I;
 typedef Math::Vector2f Vector2F;
