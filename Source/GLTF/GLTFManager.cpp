@@ -15,9 +15,6 @@ namespace GLTF
 
 Manager::Manager(void)
 {
-	mDevice = GHI::CreateDevice();
-	assert(mDevice != nullptr);
-	mDevice->Create();
 }
 
 Manager::~Manager(void)
@@ -28,6 +25,14 @@ Manager::~Manager(void)
 	}
 	mTextures.clear();
 	GHI::DestroyDevice(mDevice);
+}
+
+void Manager::Init(Render* render)
+{
+	mRender = render;
+	mDevice = GHI::CreateDevice();
+	assert(mDevice != nullptr);
+	mDevice->Create();
 }
 
 }

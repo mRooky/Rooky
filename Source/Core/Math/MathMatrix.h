@@ -18,17 +18,21 @@ template<typename T>
 class Matrix_t
 {
 public:
-	Matrix_t(void) { Identity(); }
+	Matrix_t(void)
+	{
+		Identity();
+	}
+
 	~Matrix_t(void) = default;
 
 public:
 	inline void Identity(void)
 	{
 		std::memset(data, 0, sizeof(data));
-		array[0][0] = static_cast<T>(0);
-		array[1][1] = static_cast<T>(0);
-		array[2][2] = static_cast<T>(0);
-		array[3][3] = static_cast<T>(0);
+		array[0][0] = static_cast<T>(1);
+		array[1][1] = static_cast<T>(1);
+		array[2][2] = static_cast<T>(1);
+		array[3][3] = static_cast<T>(1);
 	}
 
 public:

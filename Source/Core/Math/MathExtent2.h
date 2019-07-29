@@ -19,7 +19,10 @@ class Extent2_t
 public:
 	Extent2_t(void) = default;
 	template<typename O>
-	Extent2_t(O width, O height) { Set(width, height); }
+	Extent2_t(O width, O height)
+	{
+		Set(width, height);
+	}
 
 public:
 	inline T GetArea(void) const

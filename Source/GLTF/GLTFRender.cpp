@@ -23,7 +23,8 @@ Render::Render(void)
 
 Render::~Render(void)
 {
-
+	delete mManager;
+	mManager = nullptr;
 }
 
 Platform::Window* Render::Init(uint32_t width, uint32_t height, const char* title)
@@ -40,6 +41,12 @@ void Render::CreateWindow(uint32_t width, uint32_t height, const char* title)
 	mWindow = new XCB::Window;
 	mWindow->Create(width, height);
 	mWindow->SetTitle(title);
+}
+
+void Render::CreateManager(void)
+{
+	mManager = new Manager;
+	mManager->Init(this);
 }
 
 void Render::CreateSwapChain(void)

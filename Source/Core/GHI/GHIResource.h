@@ -9,6 +9,7 @@
 #define SOURCE_CORE_GHI_RENDERRESOURCE_H_
 
 #include "GHIObject.h"
+#include "GHIResourceType.h"
 #include "GHIResourceUsage.h"
 
 namespace GHI

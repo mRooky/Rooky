@@ -20,7 +20,10 @@ public:
 	~Sphere(void);
 
 public:
-	Sphere(float radius, const Vector3f& center) { Set(radius, center); }
+	Sphere(float radius, const Vector3f& center)
+	{
+		Set(radius, center);
+	}
 
 public:
 	inline void Set(float radius, const Vector3f& center)

@@ -54,7 +54,7 @@ namespace Math
 		component.alpha = static_cast<uint8_t>(alpha);
 	}
 
-	template<typename C>
+	template<typename C, typename T = float>
 	static inline void SetColor(C& component, float red, float green, float blue, float alpha)
 	{
 		component.red = static_cast<uint8_t>(red * 255);

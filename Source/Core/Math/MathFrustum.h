@@ -8,6 +8,7 @@
 #ifndef SOURCE_CORE_MATH_MATHFRUSTUM_H_
 #define SOURCE_CORE_MATH_MATHFRUSTUM_H_
 
+#include "MathAABB.h"
 #include "MathMatrix.h"
 #include "MathPlane.h"
 #include "MathSphere.h"
@@ -15,7 +16,6 @@
 
 namespace Math
 {
-class AABB;
 
 enum class PlaneType : uint32_t
 {
@@ -24,7 +24,7 @@ enum class PlaneType : uint32_t
 	LEFT,
 	RIGHT,
 	TOP,
-	BOTTOM,
+	BOTTOM
 };
 
 static inline uint32_t PlaneTypeIndex(PlaneType type)

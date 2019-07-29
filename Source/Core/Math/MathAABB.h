@@ -13,38 +13,44 @@
 namespace Math
 {
 
-class AABB
+template<typename T>
+class AABB_t
 {
 public:
-	AABB(void) = default;
-	~AABB(void) = default;
+	AABB_t(void) = default;
+	~AABB_t(void) = default;
 
 public:
-	AABB(const Vector3f& min, const Vector3f& max) { Set(min, max); }
+	AABB_t(const Vector3_t<T>& min, const Vector3_t<T>& max)
+	{
+		Set(min, max);
+	}
 
 public:
-	inline void Set(const Vector3f& min, const Vector3f& max)
+	inline void Set(const Vector3_t<T>& min, const Vector3_t<T>& max)
 	{
 		this->min = min;
 		this->max = max;
 	}
 
 public:
-	inline Vector3f GetCenter(void) const { return (min + max) * 0.5f; }
+	inline Vector3_t<T> GetCenter(void) const { return (min + max) * 0.5f; }
 	inline float GetRadius(void) const { return (min - max).Length() * 0.5f; }
 
 public:
-	inline void SetMin(const Vector3f& min) { this->min = min; }
-	inline void SetMax(const Vector3f& max) { this->max = max; }
+	inline void SetMin(const Vector3_t<T>& min) { this->min = min; }
+	inline void SetMax(const Vector3_t<T>& max) { this->max = max; }
 
 public:
-	inline const Vector3f& GetMin(void) const { return min; }
-	inline const Vector3f& GetMax(void) const { return max; }
+	inline const Vector3_t<T>& GetMin(void) const { return min; }
+	inline const Vector3_t<T>& GetMax(void) const { return max; }
 
 public:
-	Vector3f min = {};
-	Vector3f max = {};
+	Vector3_t<T> min = {};
+	Vector3_t<T> max = {};
 };
+
+typedef AABB_t<float> AABB;
 
 } /* namespace Render */
 

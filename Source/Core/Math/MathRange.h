@@ -18,7 +18,12 @@ class Range_t
 {
 public:
 	Range_t(void) = default;
-	Range_t(const T& offset, const T& size) { Set(offset, size); }
+	Range_t(const T& offset, const T& size)
+	{
+		Set(offset, size);
+	}
+
+public:
 	~Range_t(void) = default;
 
 public:

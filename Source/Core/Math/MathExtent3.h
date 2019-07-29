@@ -18,7 +18,10 @@ class Extent3_t
 {
 public:
 	Extent3_t(void) {}
-	Extent3_t(T width, T height, T depth) { Set(width, height, depth); }
+	Extent3_t(T width, T height, T depth)
+	{
+		Set(width, height, depth);
+	}
 
 public:
 	inline T GetVolume(void) const

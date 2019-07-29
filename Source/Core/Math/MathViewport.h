@@ -26,8 +26,16 @@ public:
 		SetOffset(rect.offset);
 		SetExtent(rect.extent);
 	}
-	inline Viewport(const Extent2Di& extent) { SetExtent(extent); }
-	inline Viewport(const Extent3Di& extent) { SetExtent(extent.width, extent.height); }
+
+	inline Viewport(const Extent2Di& extent)
+	{
+		SetExtent(extent);
+	}
+
+	inline Viewport(const Extent3Di& extent)
+	{
+		SetExtent(extent.width, extent.height);
+	}
 
 public:
 	inline void SetOffset(const Vector2i& offset)

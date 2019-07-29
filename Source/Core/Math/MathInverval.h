@@ -22,7 +22,10 @@ public:
 	~Interval_t(void) {}
 
 public:
-	Interval_t(T start, T end) { Set(start, end); }
+	Interval_t(T start, T end)
+	{
+		Set(start, end);
+	}
 
 public:
 	inline void Set(const T& start, const T& end)
