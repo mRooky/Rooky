@@ -9,7 +9,6 @@
 #define SOURCE_CORE_COREMESH_H_
 
 #include "CoreObject.h"
-#include "CoreMeshBuffer.h"
 #include "Math/MathAABB.h"
 #include <array>
 #include <vector>
@@ -17,6 +16,8 @@
 namespace Core
 {
 
+class Index;
+class Vertex;
 class SubMesh;
 class MeshManager;
 class Mesh : public Object
@@ -46,8 +47,8 @@ public:
 	inline SubMesh* GetSubMesh(size_t index) const { return mSubMeshes.at(index); }
 
 public:
-	inline IndexBuffer* GetIndexBuffer(void) { return &mIndexBuffer; }
-	inline VertexBuffer* GetVertexBuffer(void) { return &mVertexBuffer; }
+	inline Index* GetIndexBuffer(void) { return mIndexBuffer; }
+	inline Vertex* GetVertexBuffer(void) { return mVertexBuffer; }
 
 public:
 	inline Math::AABB* GetAABB(void) { return &mAABB; }
@@ -55,8 +56,8 @@ public:
 
 protected:
 	Math::AABB mAABB = {};
-	IndexBuffer mIndexBuffer = {};
-	VertexBuffer mVertexBuffer = {};
+	Index* mIndexBuffer = nullptr;
+	Vertex* mVertexBuffer = nullptr;
 
 protected:
 	MeshManager* mManager = nullptr;

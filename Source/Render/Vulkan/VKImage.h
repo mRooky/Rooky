@@ -25,7 +25,11 @@ public:
 
 public:
 	virtual void Download(void* dst) override;
-	virtual void Upload(uint32_t index, uint32_t mipmap, const void* src) override;
+	virtual void Upload(uint32_t layer, uint32_t levle, const void* src) override;
+
+public:
+	virtual void Update(GHI::Buffer* buffer) override;
+	virtual void Update(uint32_t layer, uint32_t level, GHI::Buffer* buffer) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;

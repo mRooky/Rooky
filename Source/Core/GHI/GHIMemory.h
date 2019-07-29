@@ -9,6 +9,7 @@
 #define SOURCE_CORE_GHI_RENDERMEMORY_H_
 
 #include "GHIResource.h"
+#include "GHIResourceUsage.h"
 #include <cstddef>
 
 namespace GHI

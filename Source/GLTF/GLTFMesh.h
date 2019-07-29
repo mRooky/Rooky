@@ -9,7 +9,8 @@
 #ifndef SOURCE_GLTF_MESH_H
 #define SOURCE_GLTF_MESH_H
 
-#include "../Core/CoreMeshBuffer.h"
+#include "../Core/CoreIndex.h"
+#include "../Core/CoreVertex.h"
 
 namespace GLTF
 {
@@ -21,12 +22,12 @@ public:
 	~Mesh(void);
 
 public:
-	inline Core::IndexBuffer* GetIndex(void) { return &m_index; }
-	inline Core::VertexBuffer* GetVertex(void) { return &m_vertex; }
+	inline Core::Index* GetIndex(void) { return m_index; }
+	inline Core::Vertex* GetVertex(void) { return m_vertex; }
 
 private:
-	Core::IndexBuffer m_index = {};
-	Core::VertexBuffer m_vertex = {};
+	Core::Index* m_index = nullptr;
+	Core::Vertex* m_vertex = nullptr;
 
 };
 

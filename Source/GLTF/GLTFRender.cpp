@@ -30,6 +30,7 @@ Render::~Render(void)
 Platform::Window* Render::Init(uint32_t width, uint32_t height, const char* title)
 {
 	CreateWindow(width, height, title);
+	CreateManager();
 	CreateSwapChain();
 	assert(mWindow != nullptr);
 	return mWindow;

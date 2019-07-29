@@ -42,10 +42,8 @@ SubMesh* Mesh::CreateSubMesh(void)
 bool Mesh::Create(void)
 {
 	BufferManager* buffer_manager = mManager->GetBufferManager();
-	Index* index = buffer_manager->CreateIndex();
-	mIndexBuffer.SetIndex(index);
-	Vertex* vertex = buffer_manager->CreateVertex();
-	mVertexBuffer.SetAttribute(vertex);
+	mIndexBuffer = buffer_manager->CreateIndex();
+	mVertexBuffer = buffer_manager->CreateVertex();
 	return true;
 }
 

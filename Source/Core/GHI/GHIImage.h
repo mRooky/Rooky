@@ -14,6 +14,8 @@
 
 namespace GHI
 {
+
+class Buffer;
 class Image : public Memory
 {
 protected:
@@ -27,7 +29,11 @@ public:
 
 public:
 	virtual void Download(void* dst) = 0;
-	virtual void Upload(uint32_t index, uint32_t mipmap, const void* src) = 0;
+	virtual void Upload(uint32_t layer, uint32_t level, const void* src) = 0;
+
+public:
+	virtual void Update(Buffer* buffer) = 0;
+	virtual void Update(uint32_t layer, uint32_t level, Buffer* buffer) = 0;
 
 public:
 	size_t GetLevelOffset(uint32_t level) const;

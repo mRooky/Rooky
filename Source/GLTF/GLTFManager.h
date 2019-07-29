@@ -10,7 +10,6 @@
 #define SOURCE_GLTF_MANAGER_H
 
 #include "../Core/GHI/GHIClasses.h"
-#include <cstdint>
 #include <vector>
 
 namespace GLTF

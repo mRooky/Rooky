@@ -10,7 +10,6 @@
 
 #include "GHIObject.h"
 #include "GHIResourceType.h"
-#include "GHIResourceUsage.h"
 
 namespace GHI
 {

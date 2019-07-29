@@ -110,32 +110,113 @@ void Image::Download(void* dst)
 	assert(false);
 }
 
-void Image::Upload(uint32_t index, uint32_t mipmap, const void* src)
+void Image::Upload(uint32_t layer, uint32_t level, const void* src)
 {
-	assert(index == 0 && mipmap == 0);
+	assert(layer == 0 && level == 0);
 	GHI::Factory* factory = mDevice->GetFactory();
 	Factory* vk_factory = static_cast<Factory*>(factory);
 	Pool* vk_pool = vk_factory->GetPool();
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	size_t buffer_size = GetMipmapSize(mipmap);
-	Buffer* stage_buffer = vk_pool->GetStageBuffer(buffer_size);
-	void* dst = stage_buffer->Map(0, buffer_size);
-	std::memcpy(dst, src, buffer_size);
-	stage_buffer->Unmap(0, buffer_size);
+	size_t level_size = GetMipmapSize(level);
+	Buffer* stage_buffer = vk_pool->GetStageBuffer(level_size);
+	void* dst = stage_buffer->Map(0, level_size);
+	std::memcpy(dst, src, level_size);
+	stage_buffer->Unmap(0, level_size);
 
-	VkExtent2D extent = GetMipmapExtent(mipmap);
+	VkExtent2D extent = GetMipmapExtent(level);
 
 	VkBufferImageCopy copy_region = {};
 	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-	copy_region.imageSubresource.mipLevel = 0;
-	copy_region.imageSubresource.baseArrayLayer = mipmap;
+	copy_region.imageSubresource.mipLevel = level;
+	copy_region.imageSubresource.baseArrayLayer = layer;
 	copy_region.imageSubresource.layerCount = 1;
 	copy_region.imageExtent = { extent.width, extent.height, 1 };
 	copy_region.bufferOffset = 0;
 
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
+
+	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);
+	command_buffer->End();
+
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
+	queue->FlushCommandBuffer(command_buffer);
+}
+
+void Image::Update(GHI::Buffer* buffer)
+{
+	GHI::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
+	Pool* vk_pool = vk_factory->GetPool();
+	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+
+	Vulkan::Buffer* vulkan_buffer = vk_buffer->GetVulkanBuffer();
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
+
+	uint32_t layers = mLayout.GetArray();
+	uint32_t levels = mLayout.GetMipmap();
+	std::vector<VkBufferImageCopy> copy_regions;
+	copy_regions.reserve(layers * levels);
+	uint32_t buffer_offset = 0;
+
+	VkBufferImageCopy copy_region = {};
+	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	copy_region.imageSubresource.layerCount = 1;
+
+	for (size_t layer = 0; layer < layers; ++layer)
+	{
+		for (size_t level = 0; level < levels; ++level)
+		{
+			VkExtent2D extent = GetMipmapExtent(level);
+			copy_region.imageSubresource.mipLevel = level;
+			copy_region.imageSubresource.baseArrayLayer = layer;
+			copy_region.imageExtent = { extent.width, extent.height, 1 };
+			copy_region.bufferOffset = buffer_offset;
+			copy_regions.push_back(copy_region);
+			buffer_offset += GetMipmapSize(level);
+		}
+	}
+
+	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+	command_buffer->CopyResource(vulkan_buffer, mImage, copy_regions.size(), copy_regions.data());
+	command_buffer->End();
+
+	auto vk_device = static_cast<Device*>(mDevice);
+	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
+	uint32_t queue_family = command_pool->GetFamily();
+	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
+	queue->FlushCommandBuffer(command_buffer);
+
+}
+
+void Image::Update(uint32_t layer, uint32_t level, GHI::Buffer* buffer)
+{
+	assert(layer == 0 && level == 0);
+	GHI::Factory* factory = mDevice->GetFactory();
+	Factory* vk_factory = static_cast<Factory*>(factory);
+	Pool* vk_pool = vk_factory->GetPool();
+	Buffer* vk_buffer = static_cast<Buffer*>(buffer);
+
+	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
+	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
+
+	VkExtent2D extent = GetMipmapExtent(level);
+
+	VkBufferImageCopy copy_region = {};
+	copy_region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	copy_region.imageSubresource.mipLevel = level;
+	copy_region.imageSubresource.baseArrayLayer = layer;
+	copy_region.imageSubresource.layerCount = 1;
+	copy_region.imageExtent = { extent.width, extent.height, 1 };
+	copy_region.bufferOffset = 0;
+
+	auto vulkan_buffer = vk_buffer->GetVulkanBuffer();
 
 	command_buffer->Begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
 	command_buffer->CopyResource(vulkan_buffer, mImage, 1, &copy_region);

@@ -31,6 +31,10 @@ public:
 	inline void SetExtent(const Math::Extent3Di& extent) { mExtent = extent; }
 
 public:
+	inline uint32_t GetArray(void) const { return mArray; }
+	inline uint32_t GetMipmap(void) const { return mMipmap; }
+
+public:
 	inline ImageType GetType(void) const { return mType; }
 	inline Format GetFormat(void) const { return mFormat; }
 	inline uint32_t GetClearColor(void) const { return mClearColor; }

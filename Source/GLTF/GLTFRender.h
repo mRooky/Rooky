@@ -11,6 +11,7 @@
 
 #include "../Core/Platform/PlatformWindow.h"
 #include "GLTFManager.h"
+#include <cstdint>
 
 namespace GLTF
 {

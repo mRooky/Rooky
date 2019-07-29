@@ -10,8 +10,6 @@
 
 #include "GHIResource.h"
 #include "GHISamplerState.h"
-
-
 #include "../Math/MathColorValue.h"
 
 namespace GHI
