@@ -46,8 +46,8 @@ void Render::CreateWindow(uint32_t width, uint32_t height, const char* title)
 
 void Render::CreateManager(void)
 {
-	mManager = new Manager;
-	mManager->Init(this);
+	mManager = new Manager(this);
+	mManager->Init();
 }
 
 void Render::CreateSwapChain(void)

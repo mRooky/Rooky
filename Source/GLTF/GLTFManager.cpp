@@ -13,12 +13,14 @@
 namespace GLTF
 {
 
-Manager::Manager(void)
+Manager::Manager(Render* render):
+	mRender(render)
 {
 }
 
 Manager::~Manager(void)
 {
+	mRender = nullptr;
 	for (auto texture : mTextures)
 	{
 		delete texture;
@@ -27,9 +29,8 @@ Manager::~Manager(void)
 	GHI::DestroyDevice(mDevice);
 }
 
-void Manager::Init(Render* render)
+void Manager::Init(void)
 {
-	mRender = render;
 	mDevice = GHI::CreateDevice();
 	assert(mDevice != nullptr);
 	mDevice->Create();

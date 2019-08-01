@@ -18,7 +18,10 @@ class Object
 {
 protected:
 	Object(void) = default;
-	~Object(void) = default;
+	virtual ~Object(void) = default;
+
+public:
+	inline bool IsValid(void) const { return mValid; }
 
 public:
 	inline void SetName(const char* name) { mName = name; }
@@ -26,6 +29,7 @@ public:
 
 protected:
 	std::string mName;
+	bool mValid = false;
 };
 
 }

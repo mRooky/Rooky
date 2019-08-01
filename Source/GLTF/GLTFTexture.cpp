@@ -17,9 +17,8 @@ namespace GLTF
 {
 
 Texture::Texture(Manager* manager):
-	mManager(manager)
+	Resource(manager)
 {
-	assert(manager != nullptr);
 }
 
 Texture::~Texture(void)
