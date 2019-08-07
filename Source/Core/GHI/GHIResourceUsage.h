@@ -33,9 +33,20 @@ public:
 	}
 
 public:
-	inline ImageUsage& GetImageUsage(void) { return imageUsage; }
-	inline BufferUsage& GetBufferUsage(void) { return bufferUsage; }
-	inline MemoryUsage& GetMemoryUsage(void) { return memoryUsage; }
+	inline ImageUsage& GetImageUsage(void)
+	{
+		return imageUsage;
+	}
+
+	inline BufferUsage& GetBufferUsage(void)
+	{
+		return bufferUsage;
+	}
+
+	inline MemoryUsage& GetMemoryUsage(void)
+	{
+		return memoryUsage;
+	}
 
 public:
 	union

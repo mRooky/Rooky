@@ -11,7 +11,6 @@
 #include "GHIBinding.h"
 #include "GHIObject.h"
 
-#include "../Kernel/KernelVector.h"
 #include <vector>
 
 namespace GHI
@@ -34,15 +33,24 @@ public:
 	void SetBinding(uint32_t index, const Binding& binding);
 
 public:
-	inline bool IsValid(void) const { return mValid; }
+	inline bool IsValid(void) const
+	{
+		return mValid;
+	}
 
-public:
-	inline size_t GetBindingCount(void) const { return mBindings.GetElementCount(); }
-	inline const Binding& GetBinding(size_t index) const { return mBindings.GetElementAt(index); }
+	inline size_t GetBindingCount(void) const
+	{
+		return mBindings.size();
+	}
+
+	inline const Binding& GetBinding(size_t index) const
+	{
+		return mBindings.at(index);
+	}
 
 protected:
 	bool mValid = false;
-	Kernel::FixedVector<Binding, MAX_BINDING_COUNT> mBindings;
+	std::vector<Binding> mBindings;
 };
 
 } /* namespace Render */

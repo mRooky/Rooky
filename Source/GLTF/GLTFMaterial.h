@@ -7,7 +7,7 @@
 #ifndef SOURCE_GLTF_MATERIAL_H
 #define SOURCE_GLTF_MATERIAL_H
 
-#include "GLTFUsageType.h"
+#include "GLTFMaterialUsage.h"
 #include "GLTFClasses.h"
 
 namespace GLTF
@@ -20,7 +20,7 @@ public:
 	~Material(void);
 
 public:
-	void Create(const UsageType& usage);
+	void Create(const MaterialUsage& usage);
 
 public:
 	inline void SetAlphaCutoff(float cutoff) { mAlphaCutoff = cutoff; }
@@ -58,7 +58,7 @@ protected:
 	Occlusion* mOcclusion = nullptr;
 
 protected:
-	UsageType mUsageType = {};
+	MaterialUsage mUsage = {};
 	AlphaMode mAlphaMode = AlphaMode::MASK;
 	WorkFlow mWorkFlow = WorkFlow::METALLIC_ROUGHNESS;
 

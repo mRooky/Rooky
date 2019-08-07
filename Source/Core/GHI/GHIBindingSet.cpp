@@ -23,17 +23,13 @@ BindingSet::~BindingSet(void)
 
 void BindingSet::AppendBinding(const Binding& binding)
 {
-	bool exist = mBindings.FindElement(binding);
-	if (!exist)
-	{
-		mBindings.PushElement(binding);
-	}
+	mBindings.push_back(binding);
 }
 
 void BindingSet::SetBinding(uint32_t index, const Binding& binding)
 {
-	assert(index < mBindings.GetElementCount());
-	mBindings.SetElement(index, binding);
+	assert(index < mBindings.size());
+	mBindings.at(index) = binding;
 }
 
 } /* namespace Render */

@@ -11,7 +11,6 @@
 #include "CoreShaderResource.h"
 #include "CoreMaterialUniform.h"
 #include "../CoreBase.h"
-#include "../Kernel/KernelVector.h"
 
 namespace Core
 {
@@ -28,14 +27,14 @@ public:
 public:
 	inline void SetShaderResource(size_t index, ShaderResource* resource)
 	{
-		mShaderResources.SetElement(index, resource);
+		mShaderResources.at(index) = resource;
 	}
 
 public:
 	inline MaterialUniform* GetUniform(void) { return &mMaterialUniform; }
 	inline ShaderResource* GetShaderResource(size_t index)
 	{
-		return mShaderResources.GetElementAt(index);
+		return mShaderResources.at(index);
 	}
 
 public:
@@ -46,7 +45,7 @@ protected:
 
 protected:
 	MaterialUniform mMaterialUniform = {};
-	Kernel::FixedVector<ShaderResource*, 5> mShaderResources;
+	std::vector<ShaderResource*> mShaderResources;
 };
 
 } /* namespace Core */

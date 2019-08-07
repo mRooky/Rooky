@@ -10,9 +10,6 @@
 
 #include "GHIRenderBuffer.h"
 #include "GHIRenderElement.h"
-
-#include "../../Kernel/KernelVector.h"
-
 #include <vector>
 
 namespace GHI
@@ -20,7 +17,6 @@ namespace GHI
 class BindingSet;
 class RenderItem
 {
-	constexpr static const size_t MAX_SET_COUNT = 32;
 public:
 	RenderItem(void);
 	~RenderItem(void);
@@ -37,9 +33,20 @@ public:
 	inline VertexAttribute* GetVertexAttribute(void) { return &mVertexAttribute; }
 
 public:
-	inline void PushBindingSet(BindingSet* set) { mBindingSets.PushElement(set); }
-	inline size_t GetBindingSetCount(void) const { return mBindingSets.GetElementCount(); }
-	inline const BindingSet* GetBindingSet(size_t index) const { return mBindingSets.GetElementAt(index); }
+	inline void PushBindingSet(BindingSet* set)
+	{
+		mBindingSets.push_back(set);
+	}
+
+	inline size_t GetBindingSetCount(void) const
+	{
+		return mBindingSets.size();
+	}
+
+	inline const BindingSet* GetBindingSet(size_t index) const
+	{
+		return mBindingSets.at(index);
+	}
 
 protected:
 	void BindingBindingSet(CommandList* command);
@@ -51,8 +58,8 @@ protected:
 	VertexAttribute mVertexAttribute = {};
 
 protected:
+	std::vector<BindingSet*> mBindingSets;
 	std::vector<RenderElement> mRenderElements = {};
-	Kernel::FixedVector<BindingSet*, MAX_SET_COUNT> mBindingSets;
 };
 
 } /* namespace GHI */

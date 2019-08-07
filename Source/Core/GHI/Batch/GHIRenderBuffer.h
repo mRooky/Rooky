@@ -9,8 +9,8 @@
 #define SOURCE_CORE_GHI_BATCH_GHIRENDERBUFFER_H_
 
 #include "../GHIIndexType.h"
-#include "../../Kernel/KernelVector.h"
 #include <cstddef>
+#include <vector>
 
 namespace GHI
 {
@@ -73,22 +73,22 @@ public:
 
 	inline void AppendBuffer(const VertexBuffer& vertex)
 	{
-		mAttributes.PushElement(vertex);
+		mAttributes.push_back(vertex);
 	}
 
 public:
 	inline size_t GetBufferCount(void) const
 	{
-		return mAttributes.GetElementCount();
+		return mAttributes.size();
 	}
 
 	inline const VertexBuffer& GetBuffer(size_t index) const
 	{
-		return mAttributes.GetElementAt(index);
+		return mAttributes.at(index);
 	}
 
 protected:
-	Kernel::FixedVector<VertexBuffer, MAX_ATTRIBUTE_COUNT> mAttributes;
+	std::vector<VertexBuffer> mAttributes;
 };
 
 } /* namespace GHI */

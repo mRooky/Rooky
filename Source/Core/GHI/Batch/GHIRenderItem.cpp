@@ -34,10 +34,10 @@ void RenderItem::Render(CommandList* command)
 
 void RenderItem::BindingBindingSet(CommandList* command)
 {
-	const size_t count = mBindingSets.GetElementCount();
+	const size_t count = mBindingSets.size();
 	for (size_t index = 0; index < count; ++index)
 	{
-		BindingSet* set = mBindingSets.GetElementAt(index);
+		BindingSet* set = mBindingSets.at(index);
 		command->SetBindingSet(index, set);
 	}
 }

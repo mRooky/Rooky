@@ -13,6 +13,7 @@
 
 namespace GHI
 {
+
 class CommandList;
 class Queue : public Object
 {

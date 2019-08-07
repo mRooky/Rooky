@@ -47,7 +47,7 @@ void BindingSet::Create(void)
 
 void BindingSet::WriteDescriptorSet(void)
 {
-	const size_t size = mBindings.GetElementCount();
+	const size_t size = mBindings.size();
 	assert(size > 0);
 
 	std::vector<VkWriteDescriptorSet> descriptor_writes;
@@ -60,7 +60,7 @@ void BindingSet::WriteDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& binding = mBindings.GetElementAt(bind);
+		auto& binding = mBindings.at(bind);
 		auto resource = binding.GetResource();
 		auto resource_type = resource->GetType();
 
@@ -99,7 +99,7 @@ void BindingSet::WriteDescriptorSet(void)
 
 void BindingSet::AllocateDescriptorSet(void)
 {
-	const size_t size = mBindings.GetElementCount();
+	const size_t size = mBindings.size();
 	assert(size > 0);
 
 	std::vector<VkDescriptorSetLayoutBinding> layout_bindings;
@@ -107,7 +107,7 @@ void BindingSet::AllocateDescriptorSet(void)
 
 	for (size_t bind = 0; bind < size; ++bind)
 	{
-		auto& binding = mBindings.GetElementAt(bind);
+		auto& binding = mBindings.at(bind);
 		GHI::ShaderStage stage = binding.GetShaderStage();
 
 		GHI::Resource* resource = binding.GetResource();

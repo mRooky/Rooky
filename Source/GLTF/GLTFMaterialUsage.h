@@ -14,11 +14,11 @@
 namespace GLTF
 {
 
-class UsageType
+class MaterialUsage
 {
 public:
-	UsageType(void) {}
-	~UsageType(void) {}
+	MaterialUsage(void) {}
+	~MaterialUsage(void) {}
 
 public:
 	union
