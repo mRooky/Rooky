@@ -15,10 +15,10 @@
 
 namespace GHI
 {
+
 class BindingSet : public Object
 {
 	friend class BindingLayout;
-	static const size_t MAX_BINDING_COUNT = 8;
 protected:
 	explicit BindingSet(Device* device);
 

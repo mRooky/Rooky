@@ -39,7 +39,10 @@ public:
 	}
 
 public:
-	inline bool IsValid(void) const { return width * height > 0; }
+	inline bool IsValid(void) const
+	{
+		return width * height > 0;
+	}
 
 public:
 	T width = static_cast<T>(0);

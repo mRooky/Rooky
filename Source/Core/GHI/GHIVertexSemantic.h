@@ -13,11 +13,6 @@
 
 namespace GHI
 {
-template<typename T>
-static inline constexpr uint16_t EnumCast(T semantic)
-{
-	return static_cast<uint16_t>(semantic);
-}
 
 enum class SemanticUsage : uint16_t
 {
@@ -75,10 +70,20 @@ static inline const char* GetTypeName(SemanticType type)
 	}
 }
 
+template<typename T>
+static inline constexpr uint16_t EnumCast(T semantic)
+{
+	return static_cast<uint16_t>(semantic);
+}
+
 class VertexSemantic
 {
 public:
-	VertexSemantic(SemanticUsage usage, SemanticType type) { Set(usage, type); }
+	VertexSemantic(SemanticUsage usage, SemanticType type)
+	{
+		Set(usage, type);
+	}
+
 	~VertexSemantic(void) = default;
 
 public:
@@ -95,8 +100,15 @@ public:
 	}
 
 public:
-	inline SemanticType GetSemanticType(void) const { return type; }
-	inline SemanticUsage GetSemanticUsage(void) const { return usage; }
+	inline SemanticType GetSemanticType(void) const
+	{
+		return type;
+	}
+
+	inline SemanticUsage GetSemanticUsage(void) const
+	{
+		return usage;
+	}
 
 public:
 	union

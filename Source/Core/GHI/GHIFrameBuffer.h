@@ -25,8 +25,15 @@ public:
 	virtual void Create(const Attachment& attachment) = 0;
 
 public:
-	inline RenderPass* GetRenderPass(void) const { return mPass; }
-	inline const Attachment& GetAttachment(void) const { return mAttachment; }
+	inline RenderPass* GetRenderPass(void) const
+	{
+		return mPass;
+	}
+
+	inline const Attachment& GetAttachment(void) const
+	{
+		return mAttachment;
+	}
 
 protected:
 	RenderPass* mPass = nullptr;

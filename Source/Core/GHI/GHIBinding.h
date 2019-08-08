@@ -25,7 +25,8 @@ public:
 public:
 	bool IsValid(void) const
 	{
-		return (mResource != nullptr && mStage!= ShaderStage::UNKNOWN);
+		return mResource != nullptr
+			&& mStage!= ShaderStage::UNKNOWN;
 	}
 
 	inline void SetResource(Resource* resource, ShaderStage stage)
@@ -37,14 +38,18 @@ public:
 public:
 	inline Binding& operator=(const Binding& other)
 	{
-		mResource = other.mResource;
-		mStage = other.mStage;
+		if (this != &other)
+		{
+			mResource = other.mResource;
+			mStage = other.mStage;
+		}
 		return *this;
 	}
 
 	inline bool operator==(const Binding& other) const
 	{
-		return (mResource == other.mResource && mStage == other.mStage);
+		return mResource == other.mResource
+			&& mStage == other.mStage;
 	}
 
 	inline bool operator!=(const Binding& other) const
@@ -53,8 +58,15 @@ public:
 	}
 
 public:
-	inline Resource* GetResource(void) const { return mResource; }
-	inline ShaderStage GetShaderStage(void) const { return mStage; }
+	inline Resource* GetResource(void) const
+	{
+		return mResource;
+	}
+
+	inline ShaderStage GetShaderStage(void) const
+	{
+		return mStage;
+	}
 
 protected:
 	Resource* mResource = nullptr;

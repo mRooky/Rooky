@@ -29,14 +29,18 @@ public:
 	inline void PushSemantic(SemanticUsage usage, SemanticType type)
 	{
 		mStride += GetTypeSize(type);
-		mVertexSemantics.push_back(VertexSemantic(usage, type));
+		auto semantic = VertexSemantic(usage, type);
+		mVertexSemantics.push_back(semantic);
 	}
 
 public:
 	inline VertexLayout& operator=(const VertexLayout& other)
 	{
-		mStride = other.mStride;
-		mVertexSemantics = other.mVertexSemantics;
+		if (this != &other)
+		{
+			mStride = other.mStride;
+			mVertexSemantics = other.mVertexSemantics;
+		}
 		return *this;
 	}
 
@@ -47,15 +51,26 @@ public:
 	}
 
 public:
-	inline size_t GetStride(void) const { return mStride; }
-	inline size_t GetSemanticCount(void) const { return mVertexSemantics.size(); }
+	inline size_t GetStride(void) const
+	{
+		return mStride;
+	}
+
+	inline size_t GetSemanticCount(void) const
+	{
+		return mVertexSemantics.size();
+	}
+
 	inline const VertexSemantic& GetSemantic(size_t index) const
 	{
 		return mVertexSemantics.at(index);
 	}
 
 public:
-	inline bool IsValid(void) const { return mVertexSemantics.size() > 0; }
+	inline bool IsValid(void) const
+	{
+		return mVertexSemantics.size() > 0;
+	}
 
 protected:
 	size_t mStride = 0;

@@ -9,11 +9,12 @@
 #define SOURCE_CORE_GHI_RENDERMEMORY_H_
 
 #include "GHIResource.h"
-#include "GHIResourceUsage.h"
+#include "GHIMemoryUsage.h"
 #include <cstddef>
 
 namespace GHI
 {
+
 class Buffer;
 class Memory: public Resource
 {
@@ -29,15 +30,19 @@ public:
 	virtual void CopyFrom(const Resource* other) = 0;
 
 public:
-	inline size_t GetAlignSize(void) const { return mAlignSize; }
+	inline size_t GetAlignSize(void) const
+	{
+		return mAlignSize;
+	}
 
-public:
-	inline const ResourceUsage& GetUsage(void) const { return mUsage; }
-	inline bool operator==(const ResourceUsage& usage) const { return mUsage == usage; }
+	inline const MemoryUsage& GetUsage(void)
+	{
+		return mUsage;
+	}
 
 protected:
 	size_t mAlignSize = 0;
-	ResourceUsage mUsage = {};
+	MemoryUsage mUsage = {};
 };
 
 } /* namespace Render */

@@ -74,7 +74,10 @@ public:
 	}
 
 public:
-	inline operator uint32_t(void) const { return color; }
+	inline operator uint32_t(void) const
+	{
+		return color;
+	}
 
 public:
 	union

@@ -22,8 +22,15 @@ public:
 	~RefCount(void) = default;
 
 public:
-	inline uint32_t IncRef(void) { return ++mRefCount; }
-	inline uint32_t DecRef(void) { return --mRefCount; }
+	inline uint32_t IncRef(void)
+	{
+		return ++mRefCount;
+	}
+
+	inline uint32_t DecRef(void)
+	{
+		return --mRefCount;
+	}
 
 protected:
 	CountType mRefCount = 0u;

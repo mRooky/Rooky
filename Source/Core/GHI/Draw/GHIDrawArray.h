@@ -20,12 +20,26 @@ public:
 	virtual ~DrawArray(void) override;
 
 public:
-	inline uint32_t GetVertexCount(void) const { return mVertexCount; }
-	inline uint32_t GetFirstVertex(void) const { return mFirstVertex; }
+	inline uint32_t GetVertexCount(void) const
+	{
+		return mVertexCount;
+	}
+
+	inline uint32_t GetFirstVertex(void) const
+	{
+		return mFirstVertex;
+	}
 
 public:
-	inline void SetVertexCount(uint32_t count) { mVertexCount = count; }
-	inline void SetFirstVertex(uint32_t first) { mFirstVertex = first; }
+	inline void SetVertexCount(uint32_t count)
+	{
+		mVertexCount = count;
+	}
+
+	inline void SetFirstVertex(uint32_t first)
+	{
+		mFirstVertex = first;
+	}
 
 protected:
 	uint32_t mVertexCount = 0;

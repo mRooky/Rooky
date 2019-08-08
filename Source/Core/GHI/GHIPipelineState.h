@@ -18,9 +18,9 @@
 
 namespace GHI
 {
+
 class RenderPass;
 class PipelineLayout;
-class VertexLayout;
 class PipelineState
 {
 public:

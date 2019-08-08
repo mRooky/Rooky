@@ -10,15 +10,12 @@
 namespace Math
 {
 
-Plane::Plane()
+Plane::Plane(void)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-Plane::~Plane()
+Plane::~Plane(void)
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Core */

@@ -6,13 +6,24 @@
  */
 
 #include "KernelGuid.h"
-#include "KernelRandom.h"
 #include <sstream>
 #include <iomanip>
-
+#include <random>
 
 namespace Kernel
 {
+
+void Guid::Generate(void)
+{
+	std::random_device rd;
+	std::uniform_int_distribution<uint64_t> dist(0, (uint64_t)(~0));
+	mCode[0] = dist(rd);
+	mCode[1] = dist(rd);
+	mCode[0] &= 0xFFFFFFFFFFFF0FFFULL;
+	mCode[0] |= 0x0000000000004000ULL;
+	mCode[1] &= 0x3FFFFFFFFFFFFFFFULL;
+	mCode[1] |= 0x8000000000000000ULL;
+}
 
 String Guid::GetString(void) const
 {
@@ -30,15 +41,6 @@ String Guid::GetString(void) const
 		}
 	}
 	return ss.str();
-}
-
-void Guid::Generate(void)
-{
-	RandomBytes(&mCode, sizeof(mCode));
-	mCode[0] &= 0xffffffffffff0fffULL;
-	mCode[0] |= 0x0000000000004000ULL;
-	mCode[1] &= 0x3fffffffffffffffULL;
-	mCode[1] |= 0x8000000000000000ULL;
 }
 
 }

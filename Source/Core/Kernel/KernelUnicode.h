@@ -16,8 +16,8 @@ namespace Kernel
 class UString
 {
 public:
-	UString(void) {}
-	~UString(void) {}
+	UString(void) = default;
+	~UString(void) = default;
 
 private:
 	std::u32string m_string;

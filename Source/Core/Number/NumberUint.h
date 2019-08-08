@@ -28,11 +28,25 @@ public:
 	}
 
 public:
-	inline operator uint64_t*(void) { return m_buffer; }
-	inline operator const uint64_t*(void) const { return m_buffer; }
+	inline operator uint64_t*(void)
+	{
+		return m_buffer;
+	}
 
-	inline uint64_t& operator[](size_t index) { return m_buffer[index]; }
-	inline const uint64_t& operator[](size_t index) const { return m_buffer[index]; }
+	inline operator const uint64_t*(void) const
+	{
+		return m_buffer;
+	}
+
+	inline uint64_t& operator[](size_t index)
+	{
+		return m_buffer[index];
+	}
+
+	inline const uint64_t& operator[](size_t index) const
+	{
+		return m_buffer[index];
+	}
 
 public:
 	inline Uint128& operator=(const Uint128& other)

@@ -19,8 +19,15 @@ public:
 	~Handle(void);
 
 public:
-	inline bool IsNull(void) const { return mReference == nullptr; }
-	inline bool IsValid(void) const { return mReference != nullptr; }
+	inline bool IsNull(void) const
+	{
+		return mReference == nullptr;
+	}
+
+	inline bool IsValid(void) const
+	{
+		return mReference != nullptr;
+	}
 
 protected:
 	T* mReference = nullptr;

@@ -17,8 +17,39 @@ namespace GHI
 class ImageUsage
 {
 public:
-	ImageUsage(void) {}
-	~ImageUsage(void) {}
+	ImageUsage(void) = default;
+	~ImageUsage(void) = default;
+
+public:
+	inline bool ForSampler(void) const
+	{
+		return sampledImage == TRUE;
+	}
+
+	inline bool ForStorage(void) const
+	{
+		return storageImage == TRUE;
+	}
+
+	inline bool ForColor(void) const
+	{
+		return colorImage == TRUE;
+	}
+
+	inline bool ForDepthStencil(void) const
+	{
+		return depthStencil == TRUE;
+	}
+
+	inline bool ForTransient(void) const
+	{
+		return transientImage == TRUE;
+	}
+
+	inline bool ForInput(void) const
+	{
+		return inputImage == TRUE;
+	}
 
 public:
 	union

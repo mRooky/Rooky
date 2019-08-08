@@ -28,27 +28,17 @@ void Attachment::SetDepthStencil(Image* image)
 {
 	if(image != nullptr)
 	{
-		auto& usage = image->GetUsage();
-		bool for_depth_stencil = usage.imageUsage.depthStencil == TRUE;
+		bool for_depth_stencil = image->IsDepthStencil();
 		assert(true == for_depth_stencil);
-		if (true == for_depth_stencil)
-		{
-			const GHI::ImageLayout& layout = image->GetLayout();
-			Format format = layout.GetFormat();
-			bool format_depth_stencil = Image::IsDepthStencilFormat(format);
-			assert(true == format_depth_stencil);
-			mDepthStencil = (true == format_depth_stencil) ? image : nullptr;
-		}
+		mDepthStencil = (true == for_depth_stencil) ? image : nullptr;
 	}
 }
 
 void Attachment::AppendImage(Image* image)
 {
 	assert(image != nullptr);
-	const GHI::ImageLayout& layout = image->GetLayout();
-	Format format = layout.GetFormat();
-	bool is_depth = Image::IsDepthStencilFormat(format);
-	if (is_depth == false)
+	bool for_depth_stencil = image->IsDepthStencil();
+	if (false == for_depth_stencil)
 	{
 		auto iterator = std::find(mImages.begin(), mImages.end(), image);
 		if (iterator == mImages.end())
@@ -66,13 +56,6 @@ void Attachment::AppendImage(Image* image)
 		std::cout << "Attachment Format for DepthStencil !" << std::endl;
 		assert(false);
 	}
-}
-
-Attachment& Attachment::operator=(const Attachment& other)
-{
-	mImages = other.mImages;
-	mDepthStencil = other.mDepthStencil;
-	return *this;
 }
 
 } /* namespace Render */

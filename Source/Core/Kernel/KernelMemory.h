@@ -17,7 +17,7 @@ namespace Kernel
 class Memory
 {
 public:
-	Memory(void) {}
+	Memory(void) = default;
 	~Memory(void) { Free(); }
 
 public:
@@ -29,12 +29,26 @@ public:
 	const uint8_t* Map(size_t offset, size_t size) const;
 
 public:
-	inline operator void* (void) { return m_memory; }
-	inline operator const void* (void) const { return m_memory; }
+	inline operator void* (void)
+	{
+		return m_memory;
+	}
+
+	inline operator const void* (void) const
+	{
+		return m_memory;
+	}
 
 public:
-	inline size_t GetSize(void) const { return m_size; }
-	inline bool IsValid(void) const { return m_memory != nullptr; }
+	inline size_t GetSize(void) const
+	{
+		return m_size;
+	}
+
+	inline bool IsValid(void) const
+	{
+		return m_memory != nullptr;
+	}
 
 private:
 	size_t m_size = 0;

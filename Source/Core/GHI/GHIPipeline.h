@@ -27,7 +27,10 @@ public:
 	bool IsValid(void) const;
 
 public:
-	inline PipelineState* GetState(void) const { return mPipelineState; }
+	inline PipelineState* GetState(void) const
+	{
+		return mPipelineState;
+	}
 
 protected:
 	PipelineState* mPipelineState = nullptr;

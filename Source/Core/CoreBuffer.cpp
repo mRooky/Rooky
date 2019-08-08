@@ -65,7 +65,7 @@ void Buffer::Write(const void* src, size_t offset, size_t size)
 	buffer->Write(src, offset, size);
 }
 
-void Buffer::CreateRenderBuffer(size_t size, GHI::ResourceUsage& usage)
+void Buffer::CreateRenderBuffer(size_t size, GHI::MemoryUsage& usage)
 {
 	assert(size > 0);
 	System* system = mCreator->GetSystem();

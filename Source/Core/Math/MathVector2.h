@@ -24,8 +24,15 @@ public:
 	Vector2_t(T x, T y) { Set(x, y); }
 
 public:
-	inline T& operator[](size_t index) { return *(&x + index); }
-	inline const T& operator[](size_t index) const { return *(&x + index); }
+	inline T& operator[](size_t index)
+	{
+		return *(&x + index);
+	}
+
+	inline const T& operator[](size_t index) const
+	{
+		return *(&x + index);
+	}
 
 public:
 	inline void Set(T x, T y)

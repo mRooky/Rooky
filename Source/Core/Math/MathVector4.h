@@ -21,11 +21,21 @@ public:
 	~Vector4_t(void) = default;
 
 public:
-	Vector4_t(T x, T y, T z, T w) { Set(x, y, z, w); }
+	Vector4_t(T x, T y, T z, T w)
+	{
+		Set(x, y, z, w);
+	}
 
 public:
-	inline T& operator[](size_t index) { return *(&x + index); }
-	inline const T& operator[](size_t index) const { return *(&x + index); }
+	inline T& operator[](size_t index)
+	{
+		return *(&x + index);
+	}
+
+	inline const T& operator[](size_t index) const
+	{
+		return *(&x + index);
+	}
 
 public:
 	inline void Set(T x, T y, T z, T w)

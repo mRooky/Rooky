@@ -20,12 +20,26 @@ protected:
 	virtual ~DrawDirect(void) override;
 
 public:
-	inline uint32_t GetInstanceCount(void) const { return mInstanceCount; }
-	inline uint32_t GetFirstInstance(void) const { return mFirstInstance; }
+	inline uint32_t GetInstanceCount(void) const
+	{
+		return mInstanceCount;
+	}
+
+	inline uint32_t GetFirstInstance(void) const
+	{
+		return mFirstInstance;
+	}
 
 public:
-	inline void SetInstanceCount(uint32_t count) { mInstanceCount = count; }
-	inline void SetFirstInstance(uint32_t first) { mFirstInstance = first; }
+	inline void SetInstanceCount(uint32_t count)
+	{
+		mInstanceCount = count;
+	}
+
+	inline void SetFirstInstance(uint32_t first)
+	{
+		mFirstInstance = first;
+	}
 
 protected:
 	uint32_t mInstanceCount = 1;

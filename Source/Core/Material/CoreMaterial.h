@@ -31,14 +31,21 @@ public:
 	}
 
 public:
-	inline MaterialUniform* GetUniform(void) { return &mMaterialUniform; }
+	inline MaterialUniform* GetUniform(void)
+	{
+		return &mMaterialUniform;
+	}
+
 	inline ShaderResource* GetShaderResource(size_t index)
 	{
 		return mShaderResources.at(index);
 	}
 
 public:
-	inline MaterialManager* GetManager(void) const { return mManager; }
+	inline MaterialManager* GetManager(void) const
+	{
+		return mManager;
+	}
 
 protected:
 	MaterialManager* mManager = nullptr;

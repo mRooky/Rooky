@@ -11,6 +11,8 @@
 namespace Kernel
 {
 
+static const double ClockPerSec = static_cast<double>(CLOCKS_PER_SEC);
+
 Timer::Timer(void)
 {
 	m_time = std::clock();

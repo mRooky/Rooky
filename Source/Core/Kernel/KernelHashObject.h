@@ -20,7 +20,10 @@ public:
 	virtual ~HashObject(void) = default;
 
 public:
-	inline const Hash& GetHash(void) const { return mHash; }
+	inline const Hash& GetHash(void) const
+	{
+		return mHash;
+	}
 
 protected:
 	mutable Hash mHash = 0;

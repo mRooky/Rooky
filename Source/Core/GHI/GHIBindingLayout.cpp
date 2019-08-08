@@ -7,7 +7,6 @@
 
 #include "GHIBindingLayout.h"
 #include "GHIBindingSet.h"
-#include "../Utility/UtilityRelease.h"
 #include <cassert>
 #include <algorithm>
 
@@ -16,7 +15,7 @@ namespace GHI
 
 BindingLayout::BindingLayout(void)
 {
-	mBindingSets.reserve(BindingSet::MAX_BINDING_COUNT);
+	mBindingSets.reserve(8);
 }
 
 BindingLayout::~BindingLayout(void)
@@ -26,14 +25,14 @@ BindingLayout::~BindingLayout(void)
 
 void BindingLayout::AppendBindingSet(const BindingSet* set)
 {
-	assert(mBindingSets.size() < BindingSet::MAX_BINDING_COUNT - 1);
+	assert(mBindingSets.size() < 8 - 1);
 	assert(set->IsValid());
 	mBindingSets.push_back(set);
 }
 
 void BindingLayout::PushBindingSet(size_t index, const BindingSet* set)
 {
-	assert(index < BindingSet::MAX_BINDING_COUNT);
+	assert(index < 8);
 	assert(index < mBindingSets.size());
 	if (true)
 	{

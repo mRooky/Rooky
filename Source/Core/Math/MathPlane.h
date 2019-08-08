@@ -21,12 +21,26 @@ public:
 	~Plane(void);
 
 public:
-	inline void SetDistance(float distance) { mDistance = distance; }
-	inline void GetDirection(const Vector3f& direction) { mDirection = direction; }
+	inline void SetDistance(float distance)
+	{
+		mDistance = distance;
+	}
+
+	inline void GetDirection(const Vector3f& direction)
+	{
+		mDirection = direction;
+	}
 
 public:
-	inline float GetDistance(void) const { return mDistance; }
-	inline const Vector3f& GetDirection(void) const { return mDirection; }
+	inline float GetDistance(void) const
+	{
+		return mDistance;
+	}
+
+	inline const Vector3f& GetDirection(void) const
+	{
+		return mDirection;
+	}
 
 public:
 	float mDistance = 0.0f;

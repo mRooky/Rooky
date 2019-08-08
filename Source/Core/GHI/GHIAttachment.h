@@ -24,25 +24,47 @@ public:
 	void SetDepthStencil(Image* image);
 
 public:
-	inline bool IsValid(void) const { return mImages.size() > 0; }
+	inline bool IsValid(void) const
+	{
+		return mImages.size() > 0;
+	}
 
 public:
-	inline Image* GetDepthStencil(void) const { return mDepthStencil; }
-	inline size_t GetImageCount(void) const { return mImages.size(); }
-	inline Image* GetImage(size_t index) const { return mImages.at(index); }
+	inline Image* GetDepthStencil(void) const
+	{
+		return mDepthStencil;
+	}
+
+	inline size_t GetImageCount(void) const
+	{
+		return mImages.size();
+	}
+
+	inline Image* GetImage(size_t index) const
+	{
+		return mImages.at(index);
+	}
 
 public:
 	inline bool operator==(const Attachment& other)
 	{
-		return (mDepthStencil == other.mDepthStencil) && (mImages == other.mImages);
+		return (mDepthStencil == other.mDepthStencil)
+			&& (mImages == other.mImages);
 	}
 
-public:
-	Attachment& operator=(const Attachment& other);
+	inline Attachment& operator=(const Attachment& other)
+	{
+		if (this != &other)
+		{
+			mImages = other.mImages;
+			mDepthStencil = other.mDepthStencil;
+		}
+		return *this;
+	}
 
 protected:
-	Image* mDepthStencil = nullptr;
 	std::vector<Image*> mImages;
+	Image* mDepthStencil = nullptr;
 };
 
 } /* namespace Render */

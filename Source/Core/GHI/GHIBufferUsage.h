@@ -21,6 +21,42 @@ public:
 	~BufferUsage(void) {}
 
 public:
+	inline bool ForIndex(void) const
+	{
+		return indexBuffer == TRUE;
+	}
+
+	inline bool ForVertex(void) const
+	{
+		return vertexBuffer == TRUE;
+	}
+
+	inline bool ForUniform(void) const
+	{
+		return uniformBuffer == TRUE;
+	}
+
+	inline bool ForStorage(void) const
+	{
+		return storageBuffer == TRUE;
+	}
+
+	inline bool ForIndirect(void) const
+	{
+		return indirectBuffer == TRUE;
+	}
+
+	inline bool ForUniformTexel(void) const
+	{
+		return uniformTexel == TRUE;
+	}
+
+	inline bool ForStorageTexel(void) const
+	{
+		return storageTexel == TRUE;
+	}
+
+public:
 	union
 	{
 		struct

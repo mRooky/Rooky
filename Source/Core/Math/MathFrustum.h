@@ -58,10 +58,25 @@ public:
 	}
 
 public:
-	inline float GetFov(void) const { return mFov; }
-	inline float GetNear(void) const { return mNear; }
-	inline float GetFar(void) const { return mFar; }
-	inline const Matrix& GetMatrix(void) const { return mMatrix; }
+	inline float GetFov(void) const
+	{
+		return mFov;
+	}
+
+	inline float GetNear(void) const
+	{
+		return mNear;
+	}
+
+	inline float GetFar(void) const
+	{
+		return mFar;
+	}
+
+	inline const Matrix& GetMatrix(void) const
+	{
+		return mMatrix;
+	}
 
 protected:
 	float mFov = 45.0f;

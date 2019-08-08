@@ -21,12 +21,26 @@ public:
 	~Vector3_t(void) = default;
 
 public:
-	explicit Vector3_t(T x, T y, T z) { Set(x, y, z); }
+	explicit Vector3_t(T x, T y, T z)
+	{
+		Set(x, y, z);
+	}
 
 public:
-	inline T& operator[](size_t index) { return *(&x + index); }
-	inline const T& operator[](size_t index) const { return *(&x + index); }
-	inline T Length(void) const { return std::sqrt(x * x + y * y + z * z); }
+	inline T& operator[](size_t index)
+	{
+		return *(&x + index);
+	}
+
+	inline const T& operator[](size_t index) const
+	{
+		return *(&x + index);
+	}
+
+	inline T Length(void) const
+	{
+		return std::sqrt(x * x + y * y + z * z);
+	}
 
 public:
 	inline void Set(T x, T y, T z)

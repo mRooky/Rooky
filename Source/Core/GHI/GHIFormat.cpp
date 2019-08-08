@@ -7,6 +7,8 @@
 
 #include "GHIFormat.h"
 #include <cassert>
+#include <array>
+#include <algorithm>
 
 namespace GHI
 {
@@ -28,6 +30,23 @@ size_t GetFormatSize(Format format)
 		break;
 	}
 	return 4;
+}
+
+bool IsDepthStencilFormat(Format format)
+{
+	static const std::array<Format, 7> ds_formats =
+	{
+			Format::D16_UNORM,
+			Format::X8_D24_UNORM_PACK32,
+			Format::D32_SFLOAT,
+			Format::S8_UINT,
+			Format::D16_UNORM_S8_UINT,
+			Format::D24_UNORM_S8_UINT,
+			Format::D32_SFLOAT_S8_UINT
+	};
+
+	auto it = std::find(ds_formats.begin(), ds_formats.end(), format);
+	return it != ds_formats.end();
 }
 
 }

@@ -25,7 +25,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const ImageLayout& layout, const ResourceUsage& usage) = 0;
+	virtual void Create(const ImageLayout& layout, const MemoryUsage& usage) = 0;
 
 public:
 	virtual void Download(void* dst) = 0;
@@ -36,19 +36,31 @@ public:
 	virtual void Update(uint32_t layer, uint32_t level, Buffer* buffer) = 0;
 
 public:
+	bool IsDepthStencil(void) const;
 	size_t GetLevelOffset(uint32_t level) const;
 	Math::Extent3Di GetLevelExtent(uint32_t level) const;
 
 public:
-	inline void SetClearColor(uint32_t color) { mLayout.SetClearColor(color); }
-	inline void SetColorBlend(const ColorBlend& blend) { mColorBlend = blend; }
+	inline void SetClearColor(uint32_t color)
+	{
+		mLayout.SetClearColor(color);
+	}
+
+	inline void SetColorBlend(const ColorBlend& blend)
+	{
+		mColorBlend = blend;
+	}
 
 public:
-	inline const ImageLayout& GetLayout(void) const { return mLayout; }
-	inline const ColorBlend& GetColorBlend(void) const { return mColorBlend; }
+	inline const ImageLayout& GetLayout(void) const
+	{
+		return mLayout;
+	}
 
-public:
-	static bool IsDepthStencilFormat(Format format);
+	inline const ColorBlend& GetColorBlend(void) const
+	{
+		return mColorBlend;
+	}
 
 protected:
 	ImageLayout mLayout = {};

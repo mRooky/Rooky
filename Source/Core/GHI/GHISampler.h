@@ -25,29 +25,75 @@ public:
 	virtual void Create(void) = 0;
 
 public:
-	inline void SetFilterType(FilterType type) { mFilterType = type; }
-	inline void SetMipmapMode(MipmapMode mode) { mMipmapMode = mode; }
+	inline void SetFilterType(FilterType type)
+	{
+		mFilterType = type;
+	}
+
+	inline void SetMipmapMode(MipmapMode mode)
+	{
+		mMipmapMode = mode;
+	}
 
 public:
-	inline void SetAddressModeU(AddressMode mode) { mAddressModeU = mode; }
-	inline void SetAddressModeV(AddressMode mode) { mAddressModeV = mode; }
-	inline void SetAddressModeW(AddressMode mode) { mAddressModeW = mode; }
+	inline void SetAddressModeU(AddressMode mode)
+	{
+		mAddressModeU = mode;
+	}
+
+	inline void SetAddressModeV(AddressMode mode)
+	{
+		mAddressModeV = mode;
+	}
+
+	inline void SetAddressModeW(AddressMode mode)
+	{
+		mAddressModeW = mode;
+	}
 
 public:
-	inline FilterType GetFilterType(void) const { return mFilterType; }
-	inline MipmapMode GetMipmapMode(void) const { return mMipmapMode; }
+	inline FilterType GetFilterType(void) const
+	{
+		return mFilterType;
+	}
+
+	inline MipmapMode GetMipmapMode(void) const
+	{
+		return mMipmapMode;
+	}
 
 public:
-	inline AddressMode GetAddressModeU(void) const { return mAddressModeU; }
-	inline AddressMode GetAddressModeV(void) const { return mAddressModeV; }
-	inline AddressMode GetAddressModeW(void) const { return mAddressModeW; }
+	inline AddressMode GetAddressModeU(void) const
+	{
+		return mAddressModeU;
+	}
+
+	inline AddressMode GetAddressModeV(void) const
+	{
+		return mAddressModeV;
+	}
+
+	inline AddressMode GetAddressModeW(void) const
+	{
+		return mAddressModeW;
+	}
 
 public:
-	inline bool IsValid(void) const { return mValid; }
-	inline Math::ColorI GetBorderColor(void) const { return mBorderColor; }
+	inline bool IsValid(void) const
+	{
+		return mValid;
+	}
+
+	inline Math::ColorI GetBorderColor(void) const
+	{
+		return mBorderColor;
+	}
 
 public:
-	inline void SetBorderColor(uint32_t color) { mBorderColor.Set(color); }
+	inline void SetBorderColor(uint32_t color)
+	{
+		mBorderColor.Set(color);
+	}
 
 protected:
 	bool mValid = false;

@@ -9,6 +9,7 @@
 #define SOURCE_CORE_NUMBER_NUMBERDOUBLE_H_
 
 #include "NumberTypes.h"
+#include "NumberUtility.h"
 
 namespace Number
 {
@@ -16,12 +17,23 @@ namespace Number
 class Double
 {
 public:
-	Double(double value = 0.0) : m_doubleValue(value) {}
-	Double(const Double& other) : m_doubleValue(other.m_doubleValue) {}
+	Double(double value = 0.0) :
+		m_doubleValue(value)
+	{
+	}
+
+	Double(const Double& other) :
+		m_doubleValue(other.m_doubleValue)
+	{
+	}
+
 	~Double(void) = default;
 
 public:
-	inline operator double (void) const { return m_doubleValue; }
+	inline operator double (void) const
+	{
+		return m_doubleValue;
+	}
 
 public:
 	inline Double& operator=(double value)
@@ -48,7 +60,10 @@ public:
 	}
 
 public:
-	inline const Float64Components& GetComponets(void) const { return m_components; }
+	inline const Float64Components& GetComponets(void) const
+	{
+		return m_components;
+	}
 
 private:
 	union

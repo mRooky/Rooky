@@ -247,6 +247,7 @@ enum class Format : uint32_t
 };
 
 size_t GetFormatSize(Format format);
+bool IsDepthStencilFormat(Format format);
 
 }
 

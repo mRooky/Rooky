@@ -24,21 +24,62 @@ public:
 	~ImageLayout(void) {};
 
 public:
-	inline void SetType(ImageType type) { mType = type; }
-	inline void SetFormat(Format format) { mFormat = format; }
-	inline void SetClearColor(uint32_t color) { mClearColor = color; }
-	inline void SetExtent(const Math::Extent2Di& extent) { mExtent = extent; }
-	inline void SetExtent(const Math::Extent3Di& extent) { mExtent = extent; }
+	inline void SetType(ImageType type)
+	{
+		mType = type;
+	}
+
+	inline void SetFormat(Format format)
+	{
+		mFormat = format;
+	}
+
+	inline void SetClearColor(uint32_t color)
+	{
+		mClearColor = color;
+	}
+
+	inline void SetExtent(const Math::Extent2Di& extent)
+	{
+		mExtent = extent;
+	}
+
+	inline void SetExtent(const Math::Extent3Di& extent)
+	{
+		mExtent = extent;
+	}
 
 public:
-	inline uint32_t GetArray(void) const { return mArray; }
-	inline uint32_t GetMipmap(void) const { return mMipmap; }
+	inline uint32_t GetArray(void) const
+	{
+		return mArray;
+	}
+
+	inline uint32_t GetMipmap(void) const
+	{
+		return mMipmap;
+	}
 
 public:
-	inline ImageType GetType(void) const { return mType; }
-	inline Format GetFormat(void) const { return mFormat; }
-	inline uint32_t GetClearColor(void) const { return mClearColor; }
-	inline const Math::Extent3Di& GetExtent(void) const { return mExtent; }
+	inline ImageType GetType(void) const
+	{
+		return mType;
+	}
+
+	inline Format GetFormat(void) const
+	{
+		return mFormat;
+	}
+
+	inline uint32_t GetClearColor(void) const
+	{
+		return mClearColor;
+	}
+
+	inline const Math::Extent3Di& GetExtent(void) const
+	{
+		return mExtent;
+	}
 
 protected:
 	uint32_t mArray = 1;

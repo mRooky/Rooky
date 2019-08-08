@@ -23,6 +23,7 @@ public:
 	~StackArray(void) = default;
 
 private:
+	size_t m_current = 0;
 	std::array<T, N> m_elements;
 };
 

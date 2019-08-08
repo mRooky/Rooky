@@ -24,7 +24,7 @@ public:
 	virtual ~Uniform(void) override;
 
 public:
-	void Create(size_t size, GHI::ResourceUsage& usage);
+	void Create(size_t size, GHI::MemoryUsage& usage);
 
 protected:
 	size_t mSize = 0;

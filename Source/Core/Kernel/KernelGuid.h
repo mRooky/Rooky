@@ -17,11 +17,17 @@ namespace Kernel
 class Guid
 {
 public:
-	Guid(void) { Generate(); }
+	Guid(void)
+	{
+		Generate();
+	}
+
 	~Guid(void) = default;
 
 public:
-	Guid(const Guid& other) : mCode(other.mCode) {}
+	Guid(const Guid& other) : mCode(other.mCode)
+	{
+	}
 
 public:
 	String GetString(void) const;

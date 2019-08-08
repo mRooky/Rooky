@@ -10,7 +10,7 @@
 
 #include "CoreResource.h"
 #include "CoreHostMemory.h"
-#include "GHI/GHIResourceUsage.h"
+#include "GHI/GHIMemoryUsage.h"
 
 namespace Core
 {
@@ -40,7 +40,7 @@ public:
 	inline BufferManager* GetManager(void) const { return mCreator; }
 
 protected:
-	void CreateRenderBuffer(size_t size, GHI::ResourceUsage& usage);
+	void CreateRenderBuffer(size_t size, GHI::MemoryUsage& usage);
 
 protected:
 	size_t mOffset = 0;

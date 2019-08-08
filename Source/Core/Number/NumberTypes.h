@@ -8,10 +8,19 @@
 #ifndef SOURCE_CORE_NUMBER_NUMBERCOMPONENT_H_
 #define SOURCE_CORE_NUMBER_NUMBERCOMPONENT_H_
 
-#include "NumberDefine.h"
+#include <cstdint>
 
 namespace Number
 {
+
+typedef int8_t Int8;
+typedef uint8_t Uint8;
+
+typedef int16_t Int16;
+typedef uint16_t Uint16;
+
+typedef int32_t Int32;
+typedef uint32_t Uint32;
 
 typedef struct Float16Components
 {

@@ -9,7 +9,7 @@
 #define SOURCE_CORE_CORERENDERTARGET_H_
 
 #include "CoreResource.h"
-#include "GHI/GHIResourceUsage.h"
+#include "GHI/GHIMemoryUsage.h"
 
 namespace Core
 {
@@ -22,7 +22,7 @@ public:
 	virtual ~RenderTarget(void) override;
 
 public:
-	void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage);
+	void Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage);
 
 public:
 	const GHI::ImageLayout& GetLayout(void) const;

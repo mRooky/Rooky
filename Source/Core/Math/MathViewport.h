@@ -70,8 +70,15 @@ public:
 	}
 
 public:
-	inline Vector2i GetOffset(void) const { return Vector2i(x, y); }
-	inline Extent2Di GetExtent(void) const { return Extent2Di(width, height); }
+	inline Vector2i GetOffset(void) const
+	{
+		return Vector2i(x, y);
+	}
+
+	inline Extent2Di GetExtent(void) const
+	{
+		return Extent2Di(width, height);
+	}
 
 public:
     float x = 0.0f;

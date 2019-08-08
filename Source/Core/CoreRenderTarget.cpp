@@ -27,7 +27,7 @@ RenderTarget::~RenderTarget(void)
 {
 }
 
-void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
+void RenderTarget::Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage)
 {
 	assert(mResource == nullptr);
 	auto device = mSystem->GetDevice();

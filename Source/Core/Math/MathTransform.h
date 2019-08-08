@@ -20,14 +20,36 @@ public:
 	~Transform(void);
 
 public:
-	inline void SetScale(const Vector3f& scale) { mScale = scale; }
-	inline void SetPosition(const Vector3f& position) { mPosition = position; }
-	inline void SetOrientation(const Vector4f& orientation) { mOrientation = orientation; }
+	inline void SetScale(const Vector3f& scale)
+	{
+		mScale = scale;
+	}
+
+	inline void SetPosition(const Vector3f& position)
+	{
+		mPosition = position;
+	}
+
+	inline void SetOrientation(const Vector4f& orientation)
+	{
+		mOrientation = orientation;
+	}
 
 public:
-	inline const Vector3f& GetScale(void) const { return mScale; }
-	inline const Vector3f& GetPosition(void) const { return mPosition; }
-	inline const Vector4f& GetOrientation(void) const { return mOrientation; }
+	inline const Vector3f& GetScale(void) const
+	{
+		return mScale;
+	}
+
+	inline const Vector3f& GetPosition(void) const
+	{
+		return mPosition;
+	}
+
+	inline const Vector4f& GetOrientation(void) const
+	{
+		return mOrientation;
+	}
 
 public:
 	Vector3f mScale = {};

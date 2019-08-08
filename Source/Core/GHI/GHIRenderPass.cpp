@@ -35,10 +35,7 @@ void RenderPass::RemoveFormat(size_t index)
 {
 	assert(index < mFormats.size());
 	auto iterator = mFormats.begin();
-	for (size_t i = 0; i < index; ++i)
-	{
-		++iterator;
-	}
+	iterator += index;
 	mFormats.erase(iterator);
 }
 

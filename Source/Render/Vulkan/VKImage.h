@@ -21,7 +21,7 @@ public:
 	virtual ~Image(void) override;
 
 public:
-	virtual void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage) override;
+	virtual void Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage) override;
 
 public:
 	virtual void Download(void* dst) override;

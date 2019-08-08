@@ -28,8 +28,15 @@ public:
 	void PushVertexLayout(uint32_t binding, const VertexLayout& layout);
 
 public:
-	inline BindingLayout* GetBindingLayout(void) const { return mBindingLayout; }
-	inline const InputLayout& GetInputLayout(void) const { return mInputLayout; }
+	inline BindingLayout* GetBindingLayout(void) const
+	{
+		return mBindingLayout;
+	}
+
+	inline const InputLayout& GetInputLayout(void) const
+	{
+		return mInputLayout;
+	}
 
 protected:
 	InputLayout mInputLayout = {};

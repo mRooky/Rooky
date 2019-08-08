@@ -26,8 +26,15 @@ public:
 	virtual CommandList* Allocate(bool primary) = 0;
 
 public:
-	inline size_t GetCommandListCount(void) const { return mCommandLists.size(); }
-	inline CommandList* GetCommandList(size_t index) const { return mCommandLists.at(index); }
+	inline size_t GetCommandListCount(void) const
+	{
+		return mCommandLists.size();
+	}
+
+	inline CommandList* GetCommandList(size_t index) const
+	{
+		return mCommandLists.at(index);
+	}
 
 protected:
 	std::vector<CommandList*> mCommandLists;

@@ -26,7 +26,10 @@ public:
 public:
 	inline InputLayout& operator=(const InputLayout& other)
 	{
-		mVertexLayouts = other.mVertexLayouts;
+		if (this != &other)
+		{
+			mVertexLayouts = other.mVertexLayouts;
+		}
 		return *this;
 	}
 
@@ -47,7 +50,10 @@ public:
 	}
 
 public:
-	inline bool IsValid(void) const { return mVertexLayouts.size() > 0; }
+	inline bool IsValid(void) const
+	{
+		return mVertexLayouts.size() > 0;
+	}
 
 protected:
 	VertexLayout* GetVertexLayoutBinding(uint32_t binding);

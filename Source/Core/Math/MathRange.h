@@ -34,9 +34,20 @@ public:
 	}
 
 public:
-	inline T GetOffset(void) const { return offset; }
-	inline T GetSize(void) const { return size; }
-	inline bool IsValid(void) const { return size > 0; }
+	inline T GetOffset(void) const
+	{
+		return offset;
+	}
+
+	inline T GetSize(void) const
+	{
+		return size;
+	}
+
+	inline bool IsValid(void) const
+	{
+		return size > 0;
+	}
 
 public:
 	T offset = static_cast<T>(0);

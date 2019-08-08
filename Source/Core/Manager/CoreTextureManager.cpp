@@ -53,18 +53,18 @@ Texture* TextureManager::CreateTexture2D(const char* name, const Math::Extent3Di
 	Texture* texture = GetTexture(file_name.c_str());
 	if (texture == nullptr)
 	{
-		GHI::ImageLayout image_layout = {};
-		image_layout.SetExtent(extent);
-		image_layout.SetFormat(format);
-		image_layout.SetType(GHI::ImageType::IT_2D);
+		GHI::ImageLayout layout = {};
+		layout.SetExtent(extent);
+		layout.SetFormat(format);
+		layout.SetType(GHI::ImageType::IT_2D);
 
-		GHI::ResourceUsage image_usage = {};
-		image_usage.memoryUsage.write = TRUE;
-		image_usage.imageUsage.sampledImage = TRUE;
+		GHI::MemoryUsage usage = {};
+		usage.write = TRUE;
+		usage.imageUsage.sampledImage = TRUE;
 
 		texture = CreateTexture();
 		texture->SetName(file_name.c_str());
-		texture->Create(image_layout, image_usage);
+		texture->Create(layout, usage);
 	}
 	assert(texture != nullptr);
 	return texture;

@@ -34,16 +34,37 @@ public:
 	}
 
 public:
-	inline Vector3_t<T> GetCenter(void) const { return (min + max) * 0.5f; }
-	inline float GetRadius(void) const { return (min - max).Length() * 0.5f; }
+	inline Vector3_t<T> GetCenter(void) const
+	{
+		return (min + max) * 0.5f;
+	}
+
+	inline float GetRadius(void) const
+	{
+		return (min - max).Length() * 0.5f;
+	}
 
 public:
-	inline void SetMin(const Vector3_t<T>& min) { this->min = min; }
-	inline void SetMax(const Vector3_t<T>& max) { this->max = max; }
+	inline void SetMin(const Vector3_t<T>& min)
+	{
+		this->min = min;
+	}
+
+	inline void SetMax(const Vector3_t<T>& max)
+	{
+		this->max = max;
+	}
 
 public:
-	inline const Vector3_t<T>& GetMin(void) const { return min; }
-	inline const Vector3_t<T>& GetMax(void) const { return max; }
+	inline const Vector3_t<T>& GetMin(void) const
+	{
+		return min;
+	}
+
+	inline const Vector3_t<T>& GetMax(void) const
+	{
+		return max;
+	}
 
 public:
 	Vector3_t<T> min = {};

@@ -23,7 +23,10 @@ public:
 	virtual ~Resource(void) override;
 
 public:
-	inline ResourceType GetType(void) const { return mType; }
+	inline ResourceType GetType(void) const
+	{
+		return mType;
+	}
 
 protected:
 	ResourceType mType = {};

@@ -189,8 +189,8 @@ void Buffer::CreateUniformBuffer(void)
 	auto mesh_manager = mSystem->GetMeshManager();
 	auto buffer_manager = mesh_manager->GetBufferManager();
 
-	GHI::ResourceUsage usage;
-	usage.memoryUsage.cpuAccess = 1;
+	GHI::MemoryUsage usage;
+	usage.cpuAccess = 1;
 
 	mUniform = buffer_manager->CreateUniform();
 	glm::mat4 matrix = glm::mat4(1.0f);

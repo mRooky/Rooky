@@ -13,12 +13,15 @@
 namespace Math
 {
 
-class Quaternion : public Vector4_t<float>
+template<typename T>
+class Quaternion_t : public Vector4_t<T>
 {
 public:
-	Quaternion(void);
-	~Quaternion(void);
+	Quaternion_t(void);
+	~Quaternion_t(void);
 };
+
+typedef Quaternion_t<float> Quaternion;
 
 } /* namespace Math */
 

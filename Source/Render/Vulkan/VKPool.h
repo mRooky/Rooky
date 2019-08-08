@@ -9,7 +9,7 @@
 #define SOURCE_RENDER_VK_VKPOOL_H_
 
 #include "VKRender.h"
-#include "../../Core/GHI/GHIResourceUsage.h"
+#include "../../Core/GHI/GHIMemoryUsage.h"
 #include <vector>
 
 namespace VK
@@ -24,7 +24,7 @@ public:
 
 public:
 	Buffer* GetStageBuffer(size_t size);
-	Buffer* GetBuffer(size_t size, GHI::ResourceUsage& usage);
+	Buffer* GetBuffer(size_t size, GHI::MemoryUsage& usage);
 
 public:
 	Vulkan::DescriptorSet* AllocateDescriptorSet(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
@@ -42,7 +42,7 @@ protected:
 	void CreateDescriptorPool(size_t max);
 
 protected:
-	Buffer* SearchBuffer(size_t size, GHI::ResourceUsage& usage);
+	Buffer* SearchBuffer(size_t size, GHI::MemoryUsage& usage);
 
 protected:
 	Device& mDevice;

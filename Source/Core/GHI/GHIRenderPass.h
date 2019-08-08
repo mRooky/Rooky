@@ -37,16 +37,37 @@ public:
 	void RemoveFormat(size_t index);
 
 public:
-	inline void SetDepthStencilFormat(Format format) { mDepthStencil = format; }
+	inline void SetDepthStencilFormat(Format format)
+	{
+		mDepthStencil = format;
+	}
 
 public:
-	inline Format GetDepthStencilFormat(void) const { return mDepthStencil; }
-	inline size_t GetAttachmentFormatCount(void) const { return mFormats.size(); }
-	inline Format GetAttachmentFormat(size_t index) const { return mFormats.at(index); }
+	inline Format GetDepthStencilFormat(void) const
+	{
+		return mDepthStencil;
+	}
+
+	inline size_t GetAttachmentFormatCount(void) const
+	{
+		return mFormats.size();
+	}
+
+	inline Format GetAttachmentFormat(size_t index) const
+	{
+		return mFormats.at(index);
+	}
 
 public:
-	inline size_t GetFrameBufferCount(void) const { return mFrameBuffers.size(); }
-	inline FrameBuffer* GetFrameBuffer(size_t index) const { return mFrameBuffers.at(index); }
+	inline size_t GetFrameBufferCount(void) const
+	{
+		return mFrameBuffers.size();
+	}
+
+	inline FrameBuffer* GetFrameBuffer(size_t index) const
+	{
+		return mFrameBuffers.at(index);
+	}
 
 protected:
 	std::vector<Format> mFormats;

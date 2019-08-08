@@ -25,14 +25,36 @@ public:
 	void Create(Device* device, size_t size);
 
 public:
-	inline size_t GetSize(void) const { return mSize; }
-	inline Buffer* GetBuffer(void) const { return mBuffer; }
-	inline uint32_t GetOffset(void) const { return mOffset; }
-	inline uint32_t GetDrawCount(void) const { return mDrawCount; }
+	inline size_t GetSize(void) const
+	{
+		return mSize;
+	}
+
+	inline Buffer* GetBuffer(void) const
+	{
+		return mBuffer;
+	}
+
+	inline uint32_t GetOffset(void) const
+	{
+		return mOffset;
+	}
+
+	inline uint32_t GetDrawCount(void) const
+	{
+		return mDrawCount;
+	}
 
 public:
-	inline void SetOffset(uint32_t offset) { mOffset = offset; }
-	inline void SetDrawCount(uint32_t count) { mDrawCount = count; }
+	inline void SetOffset(uint32_t offset)
+	{
+		mOffset = offset;
+	}
+
+	inline void SetDrawCount(uint32_t count)
+	{
+		mDrawCount = count;
+	}
 
 protected:
 	Buffer* mBuffer = nullptr;

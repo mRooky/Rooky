@@ -29,12 +29,26 @@ public:
 	virtual Format GetBestDepthStencilFormat(void) = 0;
 
 public:
-	inline Factory* GetFactory(void) const { return mFactory; }
-	inline const Vendor* GetVendor(void) const { return mVendor; }
+	inline Factory* GetFactory(void) const
+	{
+		return mFactory;
+	}
+
+	inline const Vendor* GetVendor(void) const
+	{
+		return mVendor;
+	}
 
 public:
-	inline size_t GetQueueCount(void) const { return mQueues.size(); }
-	inline Queue* GetQueue(size_t index) const { return mQueues.at(index); }
+	inline size_t GetQueueCount(void) const
+	{
+		return mQueues.size();
+	}
+
+	inline Queue* GetQueue(size_t index) const
+	{
+		return mQueues.at(index);
+	}
 
 protected:
 	Vendor* mVendor = nullptr;

@@ -10,7 +10,7 @@
 
 #include "CoreResource.h"
 #include "GHI/GHIImageLayout.h"
-#include "GHI/GHIResourceUsage.h"
+#include "GHI/GHIMemoryUsage.h"
 #include <string>
 
 namespace Core
@@ -24,7 +24,7 @@ public:
 	virtual ~Texture(void) override;
 
 public:
-	void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage);
+	void Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage);
 
 public:
 	void Update(uint32_t index, uint32_t mipmap, const void* src);

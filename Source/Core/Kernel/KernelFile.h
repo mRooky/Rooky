@@ -20,7 +20,10 @@ public:
 	~File(void) = default;
 
 public:
-	inline const StringType& GetString(void) const { return m_file; }
+	inline const StringType& GetString(void) const
+	{
+		return m_file;
+	}
 
 private:
 	StringType m_file;

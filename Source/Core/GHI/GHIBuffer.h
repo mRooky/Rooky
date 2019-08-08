@@ -22,7 +22,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, const ResourceUsage& usage) = 0;
+	virtual void Create(size_t size, const MemoryUsage& usage) = 0;
 
 public:
 	void Read(void* dst, size_t offset, size_t size);
@@ -33,7 +33,10 @@ public:
 	virtual void Upload(const void* src, size_t offset, size_t size) = 0;
 
 public:
-	inline size_t GetSize(void) const { return mSize; }
+	inline size_t GetSize(void) const
+	{
+		return mSize;
+	}
 
 protected:
 	size_t mSize = 0;

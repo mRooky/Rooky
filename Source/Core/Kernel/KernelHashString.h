@@ -21,12 +21,26 @@ public:
 	virtual ~HashString(void) override = default;
 
 public:
-	HashString(const char* chars) { Set(chars); }
-	HashString(const HashString& other) { Set(other); }
-	HashString(const String& string) { Set(string); }
+	HashString(const char* chars)
+	{
+		Set(chars);
+	}
+
+	HashString(const HashString& other)
+	{
+		Set(other);
+	}
+
+	HashString(const String& string)
+	{
+		Set(string);
+	}
 
 public:
-	inline operator const char*(void) const { return mString.c_str(); }
+	inline operator const char*(void) const
+	{
+		return mString.c_str();
+	}
 
 public:
 	inline HashString& operator=(const char* chars)

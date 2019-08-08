@@ -19,8 +19,13 @@ public:
 	~Hash(void) = default;
 
 public:
-	Hash(size_t code) : mCode(code) {}
-	Hash(const Hash& other) : mCode(other.mCode) {}
+	Hash(size_t code) : mCode(code)
+	{
+	}
+
+	Hash(const Hash& other) : mCode(other.mCode)
+	{
+	}
 
 public:
 	inline operator size_t(void) const
