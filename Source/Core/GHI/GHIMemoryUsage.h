@@ -9,9 +9,9 @@
 #ifndef SOURCE_CORE_GHI_MEMORY_H
 #define SOURCE_CORE_GHI_MEMORY_H
 
-#include "GHIDefine.h"
 #include "GHIImageUsage.h"
 #include "GHIBufferUsage.h"
+#include "GHIMemoryType.h"
 
 namespace GHI
 {
@@ -28,14 +28,27 @@ public:
 		return cpuAccess == TRUE;
 	}
 
-	inline ImageUsage& GetImageUsage(void)
+	inline const ImageUsage& GetImageUsage(void)
 	{
 		return imageUsage;
 	}
 
-	inline BufferUsage& GetBufferUsage(void)
+	inline const BufferUsage& GetBufferUsage(void)
 	{
 		return bufferUsage;
+	}
+
+public:
+	inline MemoryUsage& operator=(const ImageUsage& usage)
+	{
+		imageUsage = usage;
+		return *this;
+	}
+
+	inline MemoryUsage& operator=(const BufferUsage& usage)
+	{
+		bufferUsage = usage;
+		return *this;
 	}
 
 public:
