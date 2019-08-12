@@ -17,10 +17,6 @@ namespace GHI
 class BufferUsage
 {
 public:
-	BufferUsage(void) {}
-	~BufferUsage(void) {}
-
-public:
 	inline bool ForIndex(void) const
 	{
 		return indexBuffer == TRUE;

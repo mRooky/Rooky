@@ -9,7 +9,7 @@
 #define SOURCE_RENDER_VK_VKINLINE_H_
 
 #include "VKDefine.h"
-#include "../../Core/GHI/GHIMemoryUsage.h"
+#include "../../Core/GHI/GHIResourceUsage.h"
 
 #include <vulkan/vulkan.h>
 #include <cassert>
@@ -22,9 +22,9 @@ static inline void NotImplemented(void)
 	assert(false);
 }
 
-static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::MemoryUsage& usage)
+static inline VkMemoryPropertyFlags GetMemoryPropertyFlags(GHI::ResourceUsage& usage)
 {
-	if (usage.cpuAccess == 1)
+	if (usage.memoryType.cpuAccess == 1)
 	{
 		return VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
 			| VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;

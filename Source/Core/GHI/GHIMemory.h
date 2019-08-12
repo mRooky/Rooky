@@ -9,7 +9,6 @@
 #define SOURCE_CORE_GHI_RENDERMEMORY_H_
 
 #include "GHIResource.h"
-#include "GHIMemoryUsage.h"
 #include <cstddef>
 
 namespace GHI
@@ -35,14 +34,8 @@ public:
 		return mAlignSize;
 	}
 
-	inline const MemoryUsage& GetUsage(void)
-	{
-		return mUsage;
-	}
-
 protected:
 	size_t mAlignSize = 0;
-	MemoryUsage mUsage = {};
 };
 
 } /* namespace Render */

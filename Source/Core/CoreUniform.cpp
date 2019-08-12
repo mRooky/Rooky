@@ -21,7 +21,7 @@ Uniform::~Uniform(void)
 {
 }
 
-void Uniform::Create(size_t size, GHI::MemoryUsage& usage)
+void Uniform::Create(size_t size, GHI::ResourceUsage& usage)
 {
 	assert(size > 0);
 	mSize = size;

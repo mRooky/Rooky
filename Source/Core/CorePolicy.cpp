@@ -79,14 +79,14 @@ void Policy::CreateDepthStencil(GHI::Format format, const Math::Extent2Di& exten
 	layout.SetExtent(extent);
 	layout.SetFormat(format);
 
-	GHI::MemoryUsage usage = {};
+	GHI::ResourceUsage usage = {};
 	usage.imageUsage.depthStencil = TRUE;
 
 	mDepthStencil = new RenderTarget(*mSystem);
 	mDepthStencil->Create(layout, usage);
 }
 
-RenderTarget* Policy::CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage)
+RenderTarget* Policy::CreateRenderTarget(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	RenderTarget* target = new RenderTarget(*mSystem);
 	mRenderTargets.push_back(target);

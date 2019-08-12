@@ -17,10 +17,6 @@ namespace GHI
 class ImageUsage
 {
 public:
-	ImageUsage(void) = default;
-	~ImageUsage(void) = default;
-
-public:
 	inline bool ForSampler(void) const
 	{
 		return sampledImage == TRUE;

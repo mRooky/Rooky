@@ -27,13 +27,13 @@ Index::~Index(void)
 
 void Index::Create(GHI::IndexType type, uint32_t count)
 {
-	GHI::MemoryUsage usage;
-	usage.read = TRUE;
-	usage.write = TRUE;
+	GHI::ResourceUsage usage;
+	usage.memoryType.read = TRUE;
+	usage.memoryType.write = TRUE;
 	Create(type, count, usage);
 }
 
-void Index::Create(GHI::IndexType type, uint32_t count, GHI::MemoryUsage& usage)
+void Index::Create(GHI::IndexType type, uint32_t count, GHI::ResourceUsage& usage)
 {
 	mType = type;
 	mCount = count;

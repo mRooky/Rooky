@@ -10,7 +10,7 @@
 #include "../GHIBuffer.h"
 #include "../GHIDevice.h"
 #include "../GHIFactory.h"
-#include "../GHIMemoryUsage.h"
+#include "../GHIResourceUsage.h"
 #include <cassert>
 
 namespace GHI
@@ -31,8 +31,8 @@ void DrawIndirect::Create(Device* device, size_t size)
 {
 	assert(mBuffer == nullptr);
 	mSize = size;
-	MemoryUsage usage;
-	usage.cpuAccess = TRUE;
+	ResourceUsage usage;
+	usage.memoryType.cpuAccess = TRUE;
 	usage.bufferUsage.indirectBuffer = TRUE;
 	mBuffer = device->GetFactory()->CreateBuffer();
 	mBuffer->Create(size, usage);

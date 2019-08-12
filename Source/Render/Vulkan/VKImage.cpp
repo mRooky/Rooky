@@ -43,7 +43,7 @@ Image::~Image(void)
 	Vulkan::Release(mMemory);
 }
 
-void Image::Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage)
+void Image::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	mUsage = usage;
 	mLayout = layout;
@@ -389,8 +389,8 @@ GHI::ImageType Image::ConverType(const VkImageViewType& type)
 VkImageUsageFlags Image::ConvertUsageFlag(void)
 {
 	VkImageUsageFlags flags = 0;
-	flags |= (mUsage.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (mUsage.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (mUsage.memoryType.read == TRUE) ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (mUsage.memoryType.write == TRUE) ? VK_IMAGE_USAGE_TRANSFER_DST_BIT : 0;
 	flags |= (mUsage.imageUsage.sampledImage == TRUE) ? VK_IMAGE_USAGE_SAMPLED_BIT : 0;
 	flags |= (mUsage.imageUsage.storageImage == TRUE) ? VK_IMAGE_USAGE_STORAGE_BIT : 0;
 	flags |= (mUsage.imageUsage.colorImage == TRUE) ? VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT : 0;

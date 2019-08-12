@@ -27,7 +27,7 @@ public:
 
 public:
 	void Create(GHI::VertexLayout* layout, uint32_t count);
-	void Create(GHI::VertexLayout* layout, uint32_t count, GHI::MemoryUsage& usage);
+	void Create(GHI::VertexLayout* layout, uint32_t count, GHI::ResourceUsage& usage);
 
 public:
 	inline uint32_t GetCount(void) const { return mCount; }

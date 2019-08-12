@@ -27,7 +27,7 @@ Texture::~Texture(void)
 	mImage = nullptr;
 }
 
-void Texture::Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage)
+void Texture::Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage)
 {
 	assert(mImage == nullptr);
 	auto device = mManager->GetDevice();

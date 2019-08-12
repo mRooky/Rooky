@@ -88,14 +88,14 @@ Vulkan::DescriptorSet* Pool::AllocateDescriptorSet(uint32_t count, const VkDescr
 
 Buffer* Pool::GetStageBuffer(size_t size)
 {
-	GHI::MemoryUsage usage = {};
-	usage.cpuAccess = TRUE;
-	usage.read = TRUE;
-	usage.write = TRUE;
+	GHI::ResourceUsage usage = {};
+	usage.memoryType.cpuAccess = TRUE;
+	usage.memoryType.read = TRUE;
+	usage.memoryType.write = TRUE;
 	return GetBuffer(size, usage);
 }
 
-Buffer* Pool::GetBuffer(size_t size, GHI::MemoryUsage& usage)
+Buffer* Pool::GetBuffer(size_t size, GHI::ResourceUsage& usage)
 {
 	Buffer* buffer = SearchBuffer(size, usage);
 	if (buffer == nullptr)
@@ -108,7 +108,7 @@ Buffer* Pool::GetBuffer(size_t size, GHI::MemoryUsage& usage)
 	return buffer;
 }
 
-Buffer* Pool::SearchBuffer(size_t size, GHI::MemoryUsage& usage)
+Buffer* Pool::SearchBuffer(size_t size, GHI::ResourceUsage& usage)
 {
 	for (auto buffer : mBuffers)
 	{

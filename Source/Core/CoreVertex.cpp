@@ -24,13 +24,13 @@ Vertex::~Vertex(void)
 
 void Vertex::Create(GHI::VertexLayout* layout, uint32_t count)
 {
-	GHI::MemoryUsage usage;
-	usage.read = TRUE;
-	usage.write = TRUE;
+	GHI::ResourceUsage usage;
+	usage.memoryType.read = TRUE;
+	usage.memoryType.write = TRUE;
 	Create(layout, count, usage);
 }
 
-void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::MemoryUsage& usage)
+void Vertex::Create(GHI::VertexLayout* layout, uint32_t count, GHI::ResourceUsage& usage)
 {
 	mCount = count;
 	mLayout = *layout;

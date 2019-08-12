@@ -37,7 +37,7 @@ Buffer::~Buffer(void)
 	Vulkan::Release(mMemory);
 }
 
-void Buffer::Create(size_t size, const GHI::MemoryUsage& usage)
+void Buffer::Create(size_t size, const GHI::ResourceUsage& usage)
 {
 	mSize = size;
 	mUsage = usage;
@@ -71,7 +71,7 @@ void* Buffer::Map(size_t offset, size_t size)
 {
 	std::cout << "Memory Ptr " << mMemory << std::endl;
 	assert(mMemory != nullptr);
-	if (mUsage.CPUAccessable())
+	if (mUsage.memoryType.CPUAccessable())
 	{
 		return mMemory->Map(offset, size);
 	}
@@ -96,10 +96,10 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::CommandPool* command_pool = vk_pool->GetVulkanCommandPool();
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
-	GHI::MemoryUsage usage = {};
-	usage.cpuAccess = TRUE;
-	usage.read = TRUE;
-	usage.write = TRUE;
+	GHI::ResourceUsage usage = {};
+	usage.memoryType.cpuAccess = TRUE;
+	usage.memoryType.read = TRUE;
+	usage.memoryType.write = TRUE;
 
 	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
 	auto vulkan_buffer = stage_buffer->GetVulkanBuffer();
@@ -119,7 +119,7 @@ void Buffer::Download(void* dst, size_t offset, size_t size)
 	Vulkan::Queue* queue = vulkan_device->GetQueue(queue_family, 0);
 	queue->FlushCommandBuffer(command_buffer);
 
-	assert(stage_buffer->GetUsage().CPUAccessable());
+	assert(stage_buffer->GetUsage().GetMemoryType().CPUAccessable());
 	stage_buffer->Read(dst, 0, size);
 }
 
@@ -135,7 +135,7 @@ void Buffer::Upload(const void* src, size_t offset, size_t size)
 	Vulkan::CommandBuffer* command_buffer = command_pool->GetCommandBuffer(0);
 
 	Buffer* stage_buffer = vk_pool->GetStageBuffer(size);
-	assert(stage_buffer->GetUsage().CPUAccessable());
+	assert(stage_buffer->GetUsage().GetMemoryType().CPUAccessable());
 	stage_buffer->Write(src, 0, size);
 
 	VkBufferCopy copy_region = {};
@@ -202,8 +202,8 @@ VkDescriptorBufferInfo Buffer::GetDescriptorInfo(void) const
 VkBufferUsageFlags Buffer::ConvertUsageFlag(void)
 {
 	VkBufferUsageFlags flags = 0;
-	flags |= (mUsage.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
-	flags |= (mUsage.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
+	flags |= (mUsage.memoryType.read == TRUE) ? VK_BUFFER_USAGE_TRANSFER_SRC_BIT : 0;
+	flags |= (mUsage.memoryType.write == TRUE) ? VK_BUFFER_USAGE_TRANSFER_DST_BIT : 0;
 	flags |= (mUsage.bufferUsage.indexBuffer == TRUE) ? VK_BUFFER_USAGE_INDEX_BUFFER_BIT : 0;
 	flags |= (mUsage.bufferUsage.vertexBuffer == TRUE) ? VK_BUFFER_USAGE_VERTEX_BUFFER_BIT : 0;
 	flags |= (mUsage.bufferUsage.uniformBuffer == TRUE) ? VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT : 0;

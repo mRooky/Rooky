@@ -17,13 +17,27 @@ namespace GHI
 class MemoryType
 {
 public:
-	MemoryType(void) = default;
-	~MemoryType(void) = default;
+	MemoryType(void) {};
+	~MemoryType(void) {};
 
 public:
 	inline bool CPUAccessable(void) const
 	{
 		return cpuAccess == TRUE;
+	}
+
+	inline MemoryType& operator=(const MemoryType& other)
+	{
+		if (this != & other)
+		{
+			memoryFlags = other.memoryFlags;
+		}
+		return *this;
+	}
+
+	inline bool operator==(const MemoryType& other) const
+	{
+		return memoryFlags == other.memoryFlags;
 	}
 
 public:

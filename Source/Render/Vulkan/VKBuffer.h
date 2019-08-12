@@ -21,7 +21,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, const GHI::MemoryUsage& usage) override;
+	virtual void Create(size_t size, const GHI::ResourceUsage& usage) override;
 
 public:
 	virtual void* Map(size_t offset, size_t size) override;

@@ -12,7 +12,7 @@
 #include "GLTFResource.h"
 #include "../Core/GHI/GHIClasses.h"
 #include "../Core/GHI/GHIImageLayout.h"
-#include "../Core/GHI/GHIMemoryUsage.h"
+#include "../Core/GHI/GHIResourceUsage.h"
 
 namespace GLTF
 {
@@ -24,7 +24,7 @@ public:
 	virtual ~Texture(void);
 
 public:
-	void Create(const GHI::ImageLayout& layout, const GHI::MemoryUsage& usage);
+	void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage);
 
 public:
 	inline GHI::Image* GetImage(void) const { return mImage; }

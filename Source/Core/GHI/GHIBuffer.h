@@ -22,7 +22,7 @@ public:
 	virtual ~Buffer(void) override;
 
 public:
-	virtual void Create(size_t size, const MemoryUsage& usage) = 0;
+	virtual void Create(size_t size, const ResourceUsage& usage) = 0;
 
 public:
 	void Read(void* dst, size_t offset, size_t size);

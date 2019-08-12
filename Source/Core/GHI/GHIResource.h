@@ -10,6 +10,7 @@
 
 #include "GHIObject.h"
 #include "GHIResourceType.h"
+#include "GHIResourceUsage.h"
 
 namespace GHI
 {
@@ -23,13 +24,20 @@ public:
 	virtual ~Resource(void) override;
 
 public:
-	inline ResourceType GetType(void) const
+	inline const ResourceType& GetType(void) const
 	{
 		return mType;
 	}
 
+	inline const ResourceUsage& GetUsage(void) const
+	{
+		return mUsage;
+	}
+
 protected:
-	ResourceType mType = {};
+	ResourceType mType;
+	ResourceUsage mUsage;
+
 };
 
 } /* namespace GHI */
