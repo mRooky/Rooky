@@ -21,11 +21,27 @@ protected:
 	virtual ~Object(void) = default;
 
 public:
-	inline bool IsValid(void) const { return mValid; }
+	inline bool IsValid(void) const
+	{
+		return mValid;
+	}
 
 public:
-	inline void SetName(const char* name) { mName = name; }
-	inline const char* GetName(void) const { return mName.c_str(); }
+	inline void SetName(const char* name)
+	{
+		mName = name;
+	}
+
+	inline const char* GetName(void) const
+	{
+		return mName.c_str();
+	}
+
+public:
+	inline bool operator==(const char* name) const
+	{
+		return mName == name;
+	}
 
 protected:
 	std::string mName;

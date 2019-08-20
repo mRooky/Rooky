@@ -53,6 +53,7 @@ public:
 public:
 	union
 	{
+		T data[3];
 		struct{	T r; T g; T b; };
 		struct{	T s; T t; T p; };
 		struct

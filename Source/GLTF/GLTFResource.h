@@ -29,7 +29,10 @@ public:
 	}
 
 public:
-	inline Manager* GetManager(void) const { return mManager; }
+	inline Manager* GetManager(void) const
+	{
+		return mManager;
+	}
 
 protected:
 	Manager* mManager = nullptr;

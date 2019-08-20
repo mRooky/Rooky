@@ -27,12 +27,30 @@ public:
 	void Create(const GHI::ImageLayout& layout, const GHI::ResourceUsage& usage);
 
 public:
-	inline GHI::Image* GetImage(void) const { return mImage; }
-	inline bool IsValid(void) const { return mImage != nullptr; }
+	inline GHI::Image* GetImage(void) const
+	{
+		return mImage;
+	}
+
+	inline bool IsValid(void) const
+	{
+		return mImage != nullptr;
+	}
+
+	inline GHI::Sampler* GetSamper(void) const
+	{
+		return mSampler;
+	}
+
+	inline void SetSampler(GHI::Sampler* sampler)
+	{
+		mSampler = sampler;
+	}
 
 protected:
 	Manager* mManager = nullptr;
 	GHI::Image* mImage = nullptr;
+	GHI::Sampler* mSampler = nullptr;
 
 };
 

@@ -21,7 +21,10 @@ public:
 	~Vector2_t(void) = default;
 
 public:
-	Vector2_t(T x, T y) { Set(x, y); }
+	Vector2_t(T x, T y)
+	{
+		Set(x, y);
+	}
 
 public:
 	inline T& operator[](size_t index)
@@ -51,6 +54,7 @@ public:
 public:
 	union
 	{
+		T data[2];
 		struct{	T r; T g; };
 		struct{	T s; T t; };
 		struct

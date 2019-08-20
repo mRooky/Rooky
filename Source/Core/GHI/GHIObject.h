@@ -20,10 +20,16 @@ public:
 	virtual ~Object(void);
 
 public:
-	inline Device* GetDevice(void) const { return mDevice; }
+	inline Device* GetDevice(void) const
+	{
+		return mDevice;
+	}
 
 public:
-	virtual inline void Destroy(void) { delete this; }
+	virtual inline void Destroy(void)
+	{
+		delete this;
+	}
 
 protected:
 	Device* mDevice = nullptr;

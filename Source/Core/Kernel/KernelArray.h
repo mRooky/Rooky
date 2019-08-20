@@ -16,11 +16,11 @@ namespace Kernel
 {
 
 template<typename T, size_t N>
-class StackArray
+class Array
 {
 public:
-	StackArray(void) = default;
-	~StackArray(void) = default;
+	Array(void) = default;
+	~Array(void) = default;
 
 private:
 	size_t m_current = 0;

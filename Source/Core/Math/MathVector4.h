@@ -49,6 +49,7 @@ public:
 public:
 	union
 	{
+		T data[4];
 		struct{	T r; T g; T b; T a; };
 		struct{	T s; T t; T p; T q; };
 		struct

@@ -22,10 +22,16 @@ public:
 	virtual ~BaseColor(void) override;
 
 public:
-	inline void SetFactor(const Math::Vector4f& factor) { mFactor = factor; }
+	inline void SetFactor(const Math::Vector4f& factor)
+	{
+		mFactor = factor;
+	}
 
 public:
-	inline const Math::Vector4f& GetFactor(void) const { return mFactor; }
+	inline const Math::Vector4f& GetFactor(void) const
+	{
+		return mFactor;
+	}
 
 protected:
 	Math::Vector4f mFactor = {};
