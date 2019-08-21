@@ -9,6 +9,7 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
+#include <iostream>
 
 namespace Kernel
 {
@@ -27,20 +28,22 @@ void Guid::Generate(void)
 
 String Guid::GetString(void) const
 {
-	std::stringstream ss;
+	std::wstringstream ss;
 	ss.width(2);
 	auto data = reinterpret_cast<const uint8_t*>(&mCode);
 	for (size_t i = 0; i < sizeof(mCode); ++i)
 	{
-		ss << std::hex << std::setw(2) << std::setfill('0');
+		ss << std::hex << std::setw(2) << std::setfill(L'0');
 		ss << static_cast<unsigned int>(*(data + i));
 		bool separator = (i == 3 || i == 5 || i == 7 || i == 9);
 		if (separator)
 		{
-			ss << ss.widen('-');
+			ss << ss.widen(L'-');
 		}
 	}
-	return ss.str();
+
+	std::wcout << ss.str() << std::endl;
+	return String(ss.str());
 }
 
 }

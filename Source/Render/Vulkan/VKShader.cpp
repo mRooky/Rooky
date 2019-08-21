@@ -28,7 +28,7 @@ Shader::~Shader(void)
 	std::cout << "Destroy Shader : " << mName << std::endl;
 }
 
-void Shader::Create(const Kernel::String& file)
+void Shader::Create(const std::string& file)
 {
 	std::vector<char> code = Vulkan::ShaderModule::GetSpirVString(file.c_str());
 	if (code.size() > 0)

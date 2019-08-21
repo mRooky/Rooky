@@ -12,16 +12,31 @@
 #include "../Core/CoreIndex.h"
 #include "../Core/CoreVertex.h"
 #include "../Core/Math/MathAABB.h"
+#include <vector>
 
 namespace GLTF
 {
 
-class Material;
+class SubMesh;
 class Mesh
 {
 public:
 	Mesh(void);
 	~Mesh(void);
+
+public:
+	SubMesh* CreateSubMesh(void);
+
+public:
+	inline size_t GetSubMeshCount(void) const
+	{
+		return mSubMeshes.size();
+	}
+
+	inline SubMesh* GetSubMesh(size_t index) const
+	{
+		return mSubMeshes.at(index);
+	}
 
 public:
 	inline Core::Index* GetIndex(void)
@@ -34,22 +49,14 @@ public:
 		return m_vertex;
 	}
 
-public:
-	inline Material* GetMaterial(void)
-	{
-		return m_material;
-	}
-
-	inline void SetMaterial(Material* material)
-	{
-		m_material = material;
-	}
-
 private:
 	Math::AABB m_aabb = {};
 	Core::Index* m_index = nullptr;
 	Core::Vertex* m_vertex = nullptr;
-	Material* m_material = nullptr;
+
+private:
+	GHI::VertexLayout mLayout = {};
+	std::vector<SubMesh*> mSubMeshes;
 };
 
 }

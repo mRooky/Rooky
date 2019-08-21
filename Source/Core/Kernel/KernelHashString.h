@@ -37,9 +37,9 @@ public:
 	}
 
 public:
-	inline operator const char*(void) const
+	inline operator const wchar_t*(void) const
 	{
-		return mString.c_str();
+		return static_cast<const wchar_t*>(mString);
 	}
 
 public:
@@ -55,16 +55,20 @@ public:
 		return *this;
 	}
 
-	inline HashString& operator=(const String& string)
+	inline HashString& operator=(const String& str)
 	{
-		Set(string);
+		Set(str);
 		return *this;
 	}
 
 public:
 	inline bool operator==(const HashString& other) const
 	{
-		return (mHash == other.mHash) ? (mString == other.mString) : false;
+		if (mHash == other.mHash)
+		{
+			return mString == other.mString;
+		}
+		return false;
 	}
 
 public:
@@ -80,26 +84,19 @@ public:
 		mString = other.mString;
 	}
 
-	inline void Set(const String& string)
+	inline void Set(const String& str)
 	{
-		Set(string.c_str());
+		mString = str;
 	}
 
 protected:
 	inline void CalcHash(void)
 	{
-		if (mString != "")
-		{
-			mHash.CalcHash(mString);
-		}
-		else
-		{
-			mHash = 0;
-		}
+		mHash = mString.GetHash();
 	}
 
 protected:
-	String mString = "";
+	String mString = {};
 };
 
 } /* namespace Kernel */

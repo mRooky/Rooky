@@ -10,7 +10,7 @@
 
 #include "GHIShaderTypes.h"
 #include "GHIObject.h"
-#include "../Kernel/KernelString.h"
+#include <string>
 
 namespace GHI
 {
@@ -22,7 +22,7 @@ public:
 	virtual ~Shader(void) override;
 
 public:
-	virtual void Create(const Kernel::String& file) = 0;
+	virtual void Create(const std::string& file) = 0;
 
 public:
 	inline ShaderType GetType(void) const { return mType; }
@@ -30,7 +30,7 @@ public:
 
 public:
 	inline void SetName(const char* name) { mName = name; }
-	inline const Kernel::String& GetName(void) const { return mName; }
+	inline const std::string& GetName(void) const { return mName; }
 
 public:
 	inline bool operator==(const Shader& other) const
@@ -39,11 +39,11 @@ public:
 	}
 
 public:
-	static ShaderType GetShaderType(const Kernel::String& file);
-	static ShaderStage GetShaderStage(const Kernel::String& file);
+	static ShaderType GetShaderType(const std::string& file);
+	static ShaderStage GetShaderStage(const std::string& file);
 
 protected:
-	Kernel::String mName;
+	std::string mName;
 	ShaderType mType = ShaderType::UNKNOWN;
 	ShaderStage mStage = ShaderStage::UNKNOWN;
 };

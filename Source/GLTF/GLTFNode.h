@@ -10,6 +10,7 @@
 #define SOURCE_GLTF_NODE_H
 
 #include "../Core/GHI/GHIClasses.h"
+#include "../Core/Math/MathTransform.h"
 #include <vector>
 
 namespace GLTF
@@ -26,12 +27,13 @@ public:
 public:
 	void Draw(GHI::CommandList* cmdList);
 
-private:
-	Node* m_parent = nullptr;
-	std::vector<Node*> m_children;
+protected:
+	Node* mParent = nullptr;
+	std::vector<Node*> mChildren;
 
-private:
-	Mesh* m_mesh = nullptr;
+protected:
+	Mesh* mMesh = nullptr;
+	Math::Transform mTransform;
 
 };
 

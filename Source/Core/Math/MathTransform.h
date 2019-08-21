@@ -51,7 +51,7 @@ public:
 		return mOrientation;
 	}
 
-public:
+protected:
 	Vector3f mScale = {};
 	Vector3f mPosition = {};
 	Vector4f mOrientation = {};

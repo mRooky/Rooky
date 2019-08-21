@@ -10,30 +10,31 @@
 
 namespace GHI
 {
-	VertexLayout* InputLayout::GetVertexLayoutBinding(uint32_t binding)
+VertexLayout* InputLayout::GetVertexLayoutBinding(uint32_t binding)
+{
+	if (binding == mVertexLayouts.size())
 	{
-		if (binding == mVertexLayouts.size())
-		{
-			VertexLayout layout;
-			mVertexLayouts.push_back(layout);
-		}
-		return &mVertexLayouts.at(binding);
+		VertexLayout layout;
+		mVertexLayouts.push_back(layout);
 	}
+	return &mVertexLayouts.at(binding);
+}
 
-	void InputLayout::PushVertexLayout(uint32_t binding, const VertexLayout& layout)
+void InputLayout::PushVertexLayout(uint32_t binding, const VertexLayout& layout)
+{
+	VertexLayout* exist = GetVertexLayoutBinding(binding);
+	const size_t count = layout.GetSemanticCount();
+	for (size_t index = 0; index < count; ++index)
 	{
-		VertexLayout* exist = GetVertexLayoutBinding(binding);
-		const size_t count = layout.GetSemanticCount();
-		for (size_t index = 0; index < count; ++index)
-		{
-			const auto& semantic = layout.GetSemantic(index);
-			exist->PushSemantic(semantic.usage, semantic.type);
-		}
+		const auto& semantic = layout.GetSemantic(index);
+		exist->PushSemantic(semantic.usage, semantic.type);
 	}
+}
 
-	void InputLayout::PushVertexLayout(uint32_t binding, SemanticUsage semantic, SemanticType type)
-	{
-		VertexLayout* layout = GetVertexLayoutBinding(binding);
-		layout->PushSemantic(semantic, type);
-	}
+void InputLayout::PushVertexLayout(uint32_t binding, SemanticUsage semantic, SemanticType type)
+{
+	VertexLayout* layout = GetVertexLayoutBinding(binding);
+	layout->PushSemantic(semantic, type);
+}
+
 }
