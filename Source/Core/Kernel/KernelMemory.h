@@ -18,7 +18,10 @@ class Memory
 {
 public:
 	Memory(void) = default;
-	~Memory(void) { Free(); }
+	~Memory(void)
+	{
+		Free();
+	}
 
 public:
 	void Free(void);

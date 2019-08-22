@@ -12,18 +12,6 @@
 namespace Kernel
 {
 
-String::String(const char* str)
-{
-	std::string buffer(str);
-	m_data = std::wstring(buffer.begin(), buffer.end());
-}
-
-
-String::String(const std::string& str)
-{
-	m_data = std::wstring(str.begin(), str.end());
-}
-
 void String::Set(const char* str)
 {
 	std::string buffer(str);

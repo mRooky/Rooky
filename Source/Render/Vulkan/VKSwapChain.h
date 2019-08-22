@@ -28,8 +28,15 @@ public:
 	virtual uint32_t AcquireNextImage(void) override;
 
 public:
-	inline Vulkan::Surface* GetVulkanSurface(void) const { return mSurface; }
-	inline Vulkan::SwapChain* GetVulkanSwapChain(void) const { return mSwapChain; }
+	inline Vulkan::Surface* GetVulkanSurface(void) const
+	{
+		return mSurface;
+	}
+
+	inline Vulkan::SwapChain* GetVulkanSwapChain(void) const
+	{
+		return mSwapChain;
+	}
 
 private:
 	void GetSwapChainRenderBuffer(void);

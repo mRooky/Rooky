@@ -10,12 +10,13 @@
 #define SOURCE_GLTF_RENDER_H
 
 #include "../Core/Platform/PlatformWindow.h"
-#include "GLTFManager.h"
 #include <cstdint>
 
 namespace GLTF
 {
 
+class Manager;
+class Viewport;
 class Render
 {
 public:
@@ -32,11 +33,11 @@ public:
 private:
 	void CreateWindow(uint32_t width, uint32_t height, const char* title);
 	void CreateManager(void);
-	void CreateSwapChain(void);
+	void CreateViewport(void);
 
 protected:
 	Manager* mManager = nullptr;
-	GHI::SwapChain* mSwapChain = nullptr;
+	Viewport* mViewport = nullptr;
 	Platform::Window* mWindow = nullptr;
 };
 

@@ -30,17 +30,30 @@ public:
 	void Write(const void* src, size_t offset, size_t size);
 
 public:
-	inline void SetOffset(size_t offset) { mOffset = offset; }
-	inline size_t GetOffset(void) const { return mOffset; }
+	inline void SetOffset(size_t offset)
+	{
+		mOffset = offset;
+	}
+
+	inline size_t GetOffset(void) const
+	{
+		return mOffset;
+	}
 
 public:
-	inline HostMemory* GetHostMemory(void) { return &mHostMemory; }
+	inline HostMemory* GetHostMemory(void)
+	{
+		return &mHostMemory;
+	}
 
 public:
-	inline BufferManager* GetManager(void) const { return mCreator; }
+	inline BufferManager* GetManager(void) const
+	{
+		return mCreator;
+	}
 
 protected:
-	void CreateRenderBuffer(size_t size, GHI::ResourceUsage& usage);
+	void CreateGHIBuffer(size_t size, GHI::ResourceUsage& usage);
 
 protected:
 	size_t mOffset = 0;

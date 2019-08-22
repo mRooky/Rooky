@@ -38,6 +38,7 @@ protected:
 	GHI::Device* mDevice = nullptr;
 	std::vector<Texture*> mTextures;
 	std::vector<Material*> mMaterials;
+	std::vector<GHI::Sampler*> mSamplers;
 };
 
 }

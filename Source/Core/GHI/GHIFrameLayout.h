@@ -5,19 +5,19 @@
  *      Author: rookyma
  */
 
-#ifndef SOURCE_CORE_GHI_GHIATTACHMENT_H_
-#define SOURCE_CORE_GHI_GHIATTACHMENT_H_
+#ifndef SOURCE_CORE_GHI_FRAME_LAYPUT_H
+#define SOURCE_CORE_GHI_FRAME_LAYPUT_H
 
 #include <vector>
 
 namespace GHI
 {
 class Image;
-class Attachment
+class FrameLayout
 {
 public:
-	Attachment(void);
-	~Attachment(void);
+	FrameLayout(void);
+	~FrameLayout(void);
 
 public:
 	void AppendImage(Image* image);
@@ -26,7 +26,7 @@ public:
 public:
 	inline bool IsValid(void) const
 	{
-		return mImages.size() > 0;
+		return mAttachments.size() > 0;
 	}
 
 public:
@@ -37,34 +37,37 @@ public:
 
 	inline size_t GetImageCount(void) const
 	{
-		return mImages.size();
+		return mAttachments.size();
 	}
 
 	inline Image* GetImage(size_t index) const
 	{
-		return mImages.at(index);
+		return mAttachments.at(index);
 	}
 
 public:
-	inline bool operator==(const Attachment& other)
+	inline bool operator==(const FrameLayout& other)
 	{
-		return (mDepthStencil == other.mDepthStencil)
-			&& (mImages == other.mImages);
+		if (mDepthStencil == other.mDepthStencil)
+		{
+			return (mAttachments == other.mAttachments);
+		}
+		return false;
 	}
 
-	inline Attachment& operator=(const Attachment& other)
+	inline FrameLayout& operator=(const FrameLayout& other)
 	{
 		if (this != &other)
 		{
-			mImages = other.mImages;
+			mAttachments = other.mAttachments;
 			mDepthStencil = other.mDepthStencil;
 		}
 		return *this;
 	}
 
 protected:
-	std::vector<Image*> mImages;
 	Image* mDepthStencil = nullptr;
+	std::vector<Image*> mAttachments;
 };
 
 } /* namespace Render */

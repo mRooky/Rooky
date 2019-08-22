@@ -5,7 +5,7 @@
  *      Author: rookyma
  */
 
-#include "GHIAttachment.h"
+#include "GHIFrameLayout.h"
 #include "GHIImage.h"
 #include <cassert>
 #include <iostream>
@@ -14,17 +14,17 @@
 namespace GHI
 {
 
-Attachment::Attachment(void)
+FrameLayout::FrameLayout(void)
 {
 }
 
-Attachment::~Attachment(void)
+FrameLayout::~FrameLayout(void)
 {
-	mImages.clear();
+	mAttachments.clear();
 	mDepthStencil = nullptr;
 }
 
-void Attachment::SetDepthStencil(Image* image)
+void FrameLayout::SetDepthStencil(Image* image)
 {
 	if(image != nullptr)
 	{
@@ -34,26 +34,26 @@ void Attachment::SetDepthStencil(Image* image)
 	}
 }
 
-void Attachment::AppendImage(Image* image)
+void FrameLayout::AppendImage(Image* image)
 {
 	assert(image != nullptr);
 	bool for_depth_stencil = image->IsDepthStencil();
 	if (false == for_depth_stencil)
 	{
-		auto iterator = std::find(mImages.begin(), mImages.end(), image);
-		if (iterator == mImages.end())
+		auto iterator = std::find(mAttachments.begin(), mAttachments.end(), image);
+		if (iterator == mAttachments.end())
 		{
-			mImages.push_back(image);
+			mAttachments.push_back(image);
 		}
 		else
 		{
-			std::cout << "Attachment exist !" << std::endl;
+			std::cout << "FrameLayout exist !" << std::endl;
 			assert(false);
 		}
 	}
 	else
 	{
-		std::cout << "Attachment Format for DepthStencil !" << std::endl;
+		std::cout << "FrameLayout Format for DepthStencil !" << std::endl;
 		assert(false);
 	}
 }

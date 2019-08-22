@@ -21,7 +21,7 @@ public:
 	virtual ~FrameBuffer(void) override;
 
 public:
-	virtual void Create(const GHI::Attachment& attachment) override;
+	virtual void Create(const GHI::FrameLayout& layout) override;
 
 public:
 	bool CheckAttachmentFormat(void);

@@ -7,10 +7,10 @@
  */
 #include "GLTFRender.h"
 #include "GLTFManager.h"
-#include "../Platform/XCB/XCBWindow.h"
+#include "GLTFViewport.h"
 #include "../Core/GHI/GHIDevice.h"
 #include "../Core/GHI/GHIFactory.h"
-#include "../Core/GHI/GHISwapChain.h"
+#include "../Platform/XCB/XCBWindow.h"
 #include <cassert>
 
 namespace GLTF
@@ -23,6 +23,8 @@ Render::Render(void)
 
 Render::~Render(void)
 {
+	delete mViewport;
+	mViewport = nullptr;
 	delete mManager;
 	mManager = nullptr;
 }
@@ -30,9 +32,9 @@ Render::~Render(void)
 Platform::Window* Render::Init(uint32_t width, uint32_t height, const char* title)
 {
 	CreateWindow(width, height, title);
-	CreateManager();
-	CreateSwapChain();
 	assert(mWindow != nullptr);
+	CreateManager();
+	CreateViewport();
 	return mWindow;
 }
 
@@ -50,12 +52,11 @@ void Render::CreateManager(void)
 	mManager->Init();
 }
 
-void Render::CreateSwapChain(void)
+void Render::CreateViewport(void)
 {
-	auto device = mManager->GetDevice();
-	auto factory = device->GetFactory();
-	mSwapChain = factory->CreateSwapChain();
-	mSwapChain->Create(mWindow);
+	assert(nullptr != mWindow);
+	mViewport = new Viewport(this);
+	mViewport->Init(mWindow);
 }
 
 }

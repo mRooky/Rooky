@@ -82,10 +82,10 @@ void Buffer::CreateFrameBuffer(void)
 	{
 		GHI::Image* image = swap_chain->GetRenderBuffer(index);
 		image->SetClearColor(clear_color);
-		GHI::Attachment attachment = {};
-		attachment.AppendImage(image);
+		GHI::FrameLayout layout = {};
+		layout.AppendImage(image);
 		GHI::FrameBuffer* frame = pass->CreateFrameBuffer();
-		frame->Create(attachment);
+		frame->Create(layout);
 	}
 }
 

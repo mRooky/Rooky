@@ -23,7 +23,7 @@
 
 #include "../../Core/GHI/GHIBindingLayout.h"
 #include "../../Core/GHI/GHIPipelineState.h"
-#include "../../Core/GHI/GHIAttachment.h"
+#include "../../Core/GHI/GHIFrameLayout.h"
 #include "../../Core/GHI/Draw/GHIDrawIndexed.h"
 
 #include "../../Platform/Vulkan/VulkanCommandPool.h"
@@ -80,14 +80,14 @@ void CommandList::BeginPass(GHI::RenderPass* pass, GHI::FrameBuffer* frame, cons
 	auto vulkan_frame = vk_frame->GetVulkanFrameBuffer();
 
 	std::vector<VkClearValue> clear_values;
-	const auto& attachment = frame->GetAttachment();
-	const size_t count = attachment.GetImageCount();
+	const auto& layout = frame->GetLayout();
+	const size_t count = layout.GetImageCount();
 	assert(count > 0);
 	clear_values.reserve(count);
 
 	for(size_t index = 0; index < count; ++index)
 	{
-		auto vk_image = static_cast<Image*>(attachment.GetImage(index));
+		auto vk_image = static_cast<Image*>(layout.GetImage(index));
 		VkClearValue clear_value = vk_image->GetClearValue();
 		clear_values.push_back(clear_value);
 	}

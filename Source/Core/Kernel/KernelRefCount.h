@@ -16,7 +16,6 @@ namespace Kernel
 template<typename T>
 class RefCount
 {
-	typedef T CountType;
 public:
 	RefCount(void) = default;
 	~RefCount(void) = default;
@@ -33,6 +32,7 @@ public:
 	}
 
 protected:
+	typedef T CountType;
 	CountType mRefCount = 0u;
 
 };

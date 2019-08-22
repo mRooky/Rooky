@@ -30,9 +30,9 @@ FrameBuffer::~FrameBuffer(void)
 	Vulkan::Release(mFrameBuffer);
 }
 
-void FrameBuffer::Create(const GHI::Attachment& attachment)
+void FrameBuffer::Create(const GHI::FrameLayout& layout)
 {
-	mAttachment = attachment;
+	mFrameLayout = layout;
 	bool result = CheckAttachmentFormat();
 	assert(true == result);
 	if (true == result)
@@ -44,9 +44,9 @@ void FrameBuffer::Create(const GHI::Attachment& attachment)
 
 void FrameBuffer::CreateVulkanFrameBuffer(void)
 {
-	assert(mAttachment.IsValid());
+	assert(mFrameLayout.IsValid());
 
-	GHI::Image* attachment = mAttachment.GetImage(0);
+	GHI::Image* attachment = mFrameLayout.GetImage(0);
 	const GHI::ImageLayout& layout = attachment->GetLayout();
 	const Math::Extent3Di& extent = layout.GetExtent();
 
@@ -60,17 +60,17 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 	};
 
 	std::vector<Vulkan::Image*> attachments;
-	const size_t count = mAttachment.GetImageCount();
+	const size_t count = mFrameLayout.GetImageCount();
 	attachments.reserve(count + 1);
 	for (size_t index = 0; index < count; ++index)
 	{
-		attachment = mAttachment.GetImage(index);
+		attachment = mFrameLayout.GetImage(index);
 		Image* vk_image = static_cast<Image*>(attachment);
 		auto vulkan_image = vk_image->GetVulkanImage();
 		attachments.push_back(vulkan_image);
 	}
 
-	auto depth_stencil = mAttachment.GetDepthStencil();
+	auto depth_stencil = mFrameLayout.GetDepthStencil();
 	if (depth_stencil != nullptr)
 	{
 		Image* vk_image = static_cast<Image*>(depth_stencil);
@@ -86,7 +86,7 @@ void FrameBuffer::CreateVulkanFrameBuffer(void)
 
 bool FrameBuffer::CheckAttachmentFormat(void)
 {
-	GHI::Image* depth_stencil = mAttachment.GetDepthStencil();
+	GHI::Image* depth_stencil = mFrameLayout.GetDepthStencil();
 	if (nullptr != depth_stencil)
 	{
 		const GHI::ImageLayout& layout = depth_stencil->GetLayout();
@@ -98,7 +98,7 @@ bool FrameBuffer::CheckAttachmentFormat(void)
 		}
 	}
 
-	size_t count = mAttachment.GetImageCount();
+	size_t count = mFrameLayout.GetImageCount();
 	if (count != mPass->GetAttachmentFormatCount())
 	{
 		return false;
@@ -107,7 +107,7 @@ bool FrameBuffer::CheckAttachmentFormat(void)
 	{
 		for (size_t index = 0; index < count; ++index)
 		{
-			GHI::Image* image = mAttachment.GetImage(index);
+			GHI::Image* image = mFrameLayout.GetImage(index);
 			const GHI::ImageLayout& layout = image->GetLayout();
 			GHI::Format attach_format = layout.GetFormat();
 			GHI::Format pass_format = mPass->GetAttachmentFormat(index);

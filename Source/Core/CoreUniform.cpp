@@ -27,7 +27,7 @@ void Uniform::Create(size_t size, GHI::ResourceUsage& usage)
 	mSize = size;
 	usage.bufferUsage.uniformBuffer = TRUE;
 	mHostMemory.Allocate(size);
-	CreateRenderBuffer(mSize, usage);
+	CreateGHIBuffer(mSize, usage);
 }
 
 } /* namespace Core */

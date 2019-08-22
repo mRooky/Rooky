@@ -8,7 +8,7 @@
 #ifndef SOURCE_CORE_GHI_RENDERFRAMEBUFFER_H_
 #define SOURCE_CORE_GHI_RENDERFRAMEBUFFER_H_
 
-#include "GHIAttachment.h"
+#include "GHIFrameLayout.h"
 
 namespace GHI
 {
@@ -22,7 +22,7 @@ public:
 	virtual ~FrameBuffer(void);
 
 public:
-	virtual void Create(const Attachment& attachment) = 0;
+	virtual void Create(const FrameLayout& layout) = 0;
 
 public:
 	inline RenderPass* GetRenderPass(void) const
@@ -30,14 +30,14 @@ public:
 		return mPass;
 	}
 
-	inline const Attachment& GetAttachment(void) const
+	inline const FrameLayout& GetLayout(void) const
 	{
-		return mAttachment;
+		return mFrameLayout;
 	}
 
 protected:
 	RenderPass* mPass = nullptr;
-	Attachment mAttachment = {};
+	FrameLayout mFrameLayout = {};
 };
 
 } /* namespace Render */

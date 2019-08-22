@@ -18,18 +18,23 @@ class String
 {
 public:
 	inline String(void) = default;
-	inline ~String(void) = default;
-
-public:
-	explicit String(const char* str);
-	explicit String(const std::string& str);
-
-public:
 	inline String(const String& str):
 		m_data(str.m_data)
 	{}
+	inline ~String(void) = default;
 
-	inline String(const std::wstring& str):
+public:
+	explicit String(const char* str)
+	{
+		Set(str);
+	}
+
+	explicit String(const std::string& str)
+	{
+		Set(str.c_str());
+	}
+
+	explicit String(const std::wstring& str) :
 		m_data(str)
 	{}
 

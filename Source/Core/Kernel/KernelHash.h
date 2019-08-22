@@ -8,7 +8,8 @@
 #ifndef SOURCE_CORE_KERNEL_KERNELCOMPILE_H_
 #define SOURCE_CORE_KERNEL_KERNELCOMPILE_H_
 
-#include <functional>
+#include <cstdint>
+#include <cstddef>
 
 namespace Kernel
 {
@@ -19,11 +20,13 @@ public:
 	~Hash(void) = default;
 
 public:
-	Hash(size_t code) : mCode(code)
+	Hash(size_t code) :
+		mCode(code)
 	{
 	}
 
-	Hash(const Hash& other) : mCode(other.mCode)
+	Hash(const Hash& other) :
+		mCode(other.mCode)
 	{
 	}
 
@@ -31,13 +34,6 @@ public:
 	inline operator size_t(void) const
 	{
 		return mCode;
-	}
-
-public:
-	template<typename T>
-	inline void CalcHash(const T& source)
-	{
-		mCode = std::hash<T>()(source);
 	}
 
 public:

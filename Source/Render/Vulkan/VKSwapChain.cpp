@@ -9,6 +9,10 @@
 #include "VKImage.h"
 #include "VKDevice.h"
 
+#ifdef VK_USE_PLATFORM_XCB_KHR
+#include "Platform/XCB/XCBWindow.h"
+#endif
+
 #include "../../Platform/Vulkan/VulkanInline.h"
 #include "../../Platform/Vulkan/VulkanSurface.h"
 #include "../../Platform/Vulkan/VulkanSwapChain.h"
@@ -17,10 +21,6 @@
 #include "../../Platform/Vulkan/VulkanImage.h"
 #include "../../Platform/Vulkan/VulkanPhysicalDevice.h"
 #include "../../Platform/Vulkan/VulkanQueue.h"
-
-#ifdef VK_USE_PLATFORM_XCB_KHR
-#include "Platform/XCB/XCBWindow.h"
-#endif
 
 #include <cassert>
 
@@ -42,16 +42,20 @@ void SwapChain::Create(Platform::Window* window)
 {
 	Device* vk_device = static_cast<Device*>(mDevice);
 	Vulkan::Device* vulkan_device = vk_device->GetVulkanDevice();
-	mSurface = Vulkan::Surface::New(vulkan_device->GetPhysicalDevice());
+	Vulkan::PhysicalDevice* gpu = vulkan_device->GetPhysicalDevice();
+	mSurface = Vulkan::Surface::New(gpu);
 
 #ifdef VK_USE_PLATFORM_XCB_KHR
 	auto xcb_window = static_cast<XCB::Window*>(window);
-	mSurface->Create(xcb_window->GetConnection(), xcb_window->GetWindow());
+	auto connection = xcb_window->GetConnection();
+	auto handle = xcb_window->GetWindow();
+	mSurface->Create(connection, handle);
 #endif
 
 	const auto& capabilities = mSurface->GetCapabilities();
-	mExtent.width = static_cast<int32_t>(capabilities.currentExtent.width);
-	mExtent.height = static_cast<int32_t>(capabilities.currentExtent.height);
+	const auto& current_extent = capabilities.currentExtent;
+	mExtent.width = static_cast<int32_t>(current_extent.width);
+	mExtent.height = static_cast<int32_t>(current_extent.height);
 
 	mSwapChain = Vulkan::SwapChain::New(vulkan_device);
 	mSwapChain->Create(mSurface);
