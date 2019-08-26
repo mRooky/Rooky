@@ -9,7 +9,7 @@
 #define DIRECTUI_DIRECTMATH_H_
 
 #include "../Core/Math/MathRect.h"
-#include "../Core/Math/MathColorValue.h"
+#include "../Core/Math/MathColorInt.h"
 #include "../Core/Math/MathExtent3.h"
 #include "../Core/Math/MathVector.h"
 

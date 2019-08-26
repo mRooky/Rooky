@@ -15,7 +15,7 @@
 #include "VKDevice.h"
 
 #include "../../Core/Kernel/KernelAlign.h"
-#include "../../Core/Math/MathColorValue.h"
+#include "../../Core/Math/MathColorRGBA.h"
 #include "../../Platform/Vulkan/VulkanImage.h"
 #include "../../Platform/Vulkan/VulkanImageView.h"
 #include "../../Platform/Vulkan/VulkanSampler.h"
@@ -240,11 +240,15 @@ VkClearValue Image::GetClearValue(void) const
 	}
 	else
 	{
-		Math::ColorI clear_color = mLayout.GetClearColor();
-		clear_value.color.float32[0] = clear_color.GetRed();
-		clear_value.color.float32[1] = clear_color.GetGreen();
-		clear_value.color.float32[2] = clear_color.GetBlue();
-		clear_value.color.float32[3] = clear_color.GetAlpha();
+		Math::ColorRGBA clear_color(mLayout.GetClearColor());
+		std::cout << "Clear Color:";
+		std::cout << clear_color.ToString();
+		std::cout << std::endl;
+
+		clear_value.color.float32[0] = clear_color.rgb.red;
+		clear_value.color.float32[1] = clear_color.rgb.green;
+		clear_value.color.float32[2] = clear_color.rgb.blue;
+		clear_value.color.float32[3] = clear_color.alpha;
 	}
 	return clear_value;
 }

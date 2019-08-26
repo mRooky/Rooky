@@ -10,7 +10,7 @@
 
 #include "GHIResource.h"
 #include "GHISamplerState.h"
-#include "../Math/MathColorValue.h"
+#include "../Math/MathColorInt.h"
 
 namespace GHI
 {
@@ -92,7 +92,7 @@ public:
 public:
 	inline void SetBorderColor(uint32_t color)
 	{
-		mBorderColor.Set(color);
+		mBorderColor = color;
 	}
 
 protected:

@@ -9,7 +9,7 @@
 #define SOURCE_CORE_CORESTREAMTYPE_H_
 
 #include "../Core/GHI/GHIVertexSemantic.h"
-#include "../Core/Math/MathColorValue.h"
+#include "../Core/Math/MathColorInt.h"
 #include "../Core/Math/MathVector.h"
 #include <cstdint>
 #include <vector>

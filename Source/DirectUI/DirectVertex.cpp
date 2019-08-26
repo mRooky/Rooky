@@ -35,7 +35,7 @@ void Vertex::SetTexCoord(float u, float v)
 
 void Vertex::SetColor(float r, float g, float b, float a)
 {
-	color = ColorI(r, g, b, a);
+	color.SetARGB(r, g, b, a);
 }
 
 VkVertexInputBindingDescription Vertex::GetInputBindingDescription(void)

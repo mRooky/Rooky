@@ -8,7 +8,7 @@ CC = g++
 DFLAGS = -MM
 CFLAGS = -g -c -Wall
 RM = -rm
-LIBS = -lvulkan -lxcb -lpng -lGLU -lGL -lGLEW -lopenal -lSOIL
+LIBS = -lvulkan -lxcb -lpng -lGLU -lGL -lGLEW -lopenal -lSOIL -lfmt
 MACROS = -DVK_USE_PLATFORM_XCB_KHR
 # All project dirs
 OUT_DIR = Debug
