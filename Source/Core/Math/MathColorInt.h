@@ -67,7 +67,6 @@ namespace Math
 		}
 
 	public:
-			public:
 		union
 		{
 			union
